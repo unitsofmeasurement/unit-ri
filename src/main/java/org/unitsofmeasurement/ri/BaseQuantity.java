@@ -37,7 +37,7 @@ import org.unitsofmeasurement.ri.function.AbstractConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 1.5, $Date: 2014-04-03 $
+ * @version 1.6, $Date: 2014-04-08 $
  */
 public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		implements Quantity<Q>, Comparable<BaseQuantity<Q>> {
@@ -244,6 +244,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 
 	@Override
 	public Measurement<?, Number> divide(Number that) {
+		// TODO may use isBig() here, too
 		if (value instanceof BigDecimal && that instanceof BigDecimal) {
 			return of(((BigDecimal)value).divide((BigDecimal)that), 
                                 getUnit());

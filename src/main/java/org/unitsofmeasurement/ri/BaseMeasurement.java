@@ -39,7 +39,7 @@ import org.unitsofmeasurement.ri.function.AbstractConverter;
  *            The type of the quantity.
  * @version 1.4.3 ($Revision: 212 $), $Date: 2013-12-25 $
  */
-public class BaseMeasurement<Q extends Quantity<Q>> extends AbstractQuantity<Q>
+public class BaseMeasurement<Q extends Quantity<Q>> extends AbstractMeasurement<Q>
 		implements Measurement<Q, Number>, Comparable<BaseMeasurement<Q>> {
 //FIXME Bug 338334 overwrite equals()
     

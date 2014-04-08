@@ -90,7 +90,7 @@ import org.unitsofmeasurement.ri.util.SI;
  */
 public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement<Q, Number>,
         Serializable {
-// TODO as it specializes using Number AbstractQuantity (like enum version) seems better
+// TODO do we want to restrict Measurement to Number here? 
 	
     /**
 	 * 
@@ -410,26 +410,24 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 
 		@Override
 		public Measurement<T, Number> add(Measurement<T, Number> that) {
-			// TODO Auto-generated method stub
-			return null;
+			return of(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 		}
 
 		@Override
-		public IntegerMeasurement<T> substract(Measurement<T, Number> that) {
-			// TODO Auto-generated method stub
-			return null;
+		public Measurement<T, Number> substract(Measurement<T, Number> that) {
+			return of(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 		}
 
 		@Override
 		public Measurement<?, Number> multiply(Measurement<?, Number> that) {
-			// TODO Auto-generated method stub
-			return null;
+			return of(value * that.getValue().intValue(), 
+					getUnit().multiply(that.getUnit()));
 		}
 
 		@Override
 		public Measurement<?, Number> multiply(Number that) {
-			// TODO Auto-generated method stub
-			return null;
+			return of(value * that.intValue(), 
+					getUnit().multiply(that.intValue()));
 		}
 
 		@Override
@@ -450,8 +448,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 
 		@Override
 		public Measurement<?, Number> divide(Number that) {
-			// TODO Auto-generated method stub
-			return null;
+			return of(value / that.intValue(), getUnit());
 		}
 
     }
@@ -528,13 +525,12 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 		@Override
 		public Measurement<?, Number> multiply(Number that) {
 			return of(value * that.floatValue(), 
-					getUnit().multiply(that.doubleValue()));
+					getUnit().multiply(that.floatValue()));
 		}
 
 		@Override
 		public Measurement<?, Number> divide(Measurement<?, Number> that) {
-			// TODO Auto-generated method stub
-			return null;
+			return of(value / that.getValue().floatValue(), getUnit().divide(that.getUnit()));
 		}
 
 		@SuppressWarnings("unchecked")

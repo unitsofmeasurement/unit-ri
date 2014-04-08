@@ -86,11 +86,10 @@ import org.unitsofmeasurement.ri.util.SI;
  * <p> All instances of this class shall be immutable.</p>
  * 
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, $Date: 2014-04-03 $
+ * @version 1.1, $Date: 2014-04-08 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q>,
         Serializable {
-// TODO as it specializes using Number AbstractQuantity (like enum version) seems better
 	
     /**
 	 * 
@@ -532,14 +531,13 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 		}
 
 		@Override
-		public Measurement<?, Number> divide(Measurement<?, Number> that) {
-			// TODO Auto-generated method stub
-			return null;
+		public Quantity<?> divide(Measurement<?, Number> that) {
+			return of(value / that.getValue().floatValue(), getUnit().divide(that.getUnit()));
 		}
 
 		@SuppressWarnings("unchecked")
 		@Override
-		public AbstractQuantity<T> inverse() {
+		public Quantity<T> inverse() {
 			return (AbstractQuantity<T>) of(value, getUnit().inverse());
 		}
 
