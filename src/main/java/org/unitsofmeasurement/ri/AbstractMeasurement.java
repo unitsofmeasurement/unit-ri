@@ -100,12 +100,12 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 	private final Unit<Q> unit;
 	
 	/**
-	 * Holds a dimensionless measure of none (exact).
+	 * Holds a dimensionless measurement of none (exact).
 	 */
 	public static final AbstractMeasurement<Dimensionless> NONE = of(0, SI.ONE);
 	
 	/**
-	 * Holds a dimensionless measure of one (exact).
+	 * Holds a dimensionless measurement of one (exact).
 	 */
 	public static final AbstractMeasurement<Dimensionless> ONE = of(1, SI.ONE);
 	
