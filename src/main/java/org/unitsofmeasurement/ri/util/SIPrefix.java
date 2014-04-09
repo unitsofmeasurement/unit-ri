@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright 2013-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
+ *  Copyright 2010-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
  *  contributors by the @author tag.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,11 +40,11 @@ import org.unitsofmeasurement.ri.function.RationalConverter;
  * @see <a href="http://en.wikipedia.org/wiki/SI_prefix">Wikipedia: SI Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.3, $Date: 2014-04-06 22:44:42 +0200 (So, 06 Apr 2014) $
+ * @version 5.4, $Date: 2014-04-09 $
  */
 public enum SIPrefix implements ConverterSupplier {
 
-    YOTTA(new RationalConverter(BigInteger.TEN.pow(24), BigInteger.ONE)),
+    YOTTA(new RationalConverter(10^24L, 1L)), // TODO if this works, we could avoid BigInteger for a "normal" range from ATTO to YOCTO
     ZETTA(new RationalConverter(BigInteger.TEN.pow(21), BigInteger.ONE)),
     EXA(new RationalConverter(BigInteger.TEN.pow(18), BigInteger.ONE)),
     PETA(new RationalConverter(BigInteger.TEN.pow(15), BigInteger.ONE)),
