@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright 2013-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
+ *  Copyright 2010-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
  *  contributors by the @author tag.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,18 +17,9 @@
  * This package provides supports for physics units, in conformity with the
  * <a href="http://www.unitsofmeasurement.org/">Units of Measurement API</a>.
  *
- * <h3> Standard / Non Standard Units</h3>
- * <ul>
- *    <li> The class {@link SI} contains standard units as defined by the 
- *       <a href="http://physics.nist.gov/Pubs/SP330/sp330.pdf">
- *      "The International System of Units"</a>.</li>
- *    <li> The class {@link UCUM} contains standard and non-standard units 
- *      as defined by the <a href="http://unitsofmeasure.org/">
- *      "Uniform Code for Units of Measure"</a>.</li>
- * </ul>
  *
  * <h3>Usage:</h3>
- * [code]
+ * <code>
  *
  * import javax.measure.quantity.*; // Holds quantity types.
  * 
@@ -67,7 +58,7 @@
  * > rad/s
  * > true
  * > [L]²·[M]/[T]²
- * [/code]
+ * </code>
  *
  * <h3>Unit Parameterization</h3>
  *
@@ -99,7 +90,7 @@
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.1
+ * @version 0.2
  */
 package org.unitsofmeasurement.ri;
 

@@ -11,19 +11,19 @@
 		<url>http://www.unitsofmeasurement.org</url>
 	</organization>
 	<description>Unit Standard (JSR 363) Reference Implementation.</description>
-	   <parent>
-        <groupId>org.unitsofmeasurement</groupId>
-        <artifactId>unitsofmeasurement-parent</artifactId>
-        <version>0.5-SNAPSHOT</version>
-    </parent>
-    
+	<parent>
+		<groupId>org.unitsofmeasurement</groupId>
+		<artifactId>unitsofmeasurement-parent</artifactId>
+		<version>0.5-SNAPSHOT</version>
+	</parent>
+
 	<licenses>
 		<license>
 			<name>Apache 2.0</name>
 			<url>LICENSE</url>
 		</license>
 	</licenses>
-    
+
 	<!-- ======================================================= -->
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
@@ -32,6 +32,83 @@
 		<maven.compile.targetLevel>${jdkVersion}</maven.compile.targetLevel>
 		<maven.compile.sourceLevel>${jdkVersion}</maven.compile.sourceLevel>
 	</properties>
+
+	<!-- Developers and Contributors -->
+	<developers>
+		<developer>
+			<id>dautelle</id>
+			<name>Jean-Marie Dautelle</name>
+			<email>jean-marie@dautelle.com</email>
+			<organization>Airbus</organization>
+			<organizationUrl>http://www.airbus.com</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Architect</role>
+				<role>Java Developer</role>
+				<role>Spec Lead</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>werner.keil</id>
+			<name>Werner Keil</name>
+			<email>werner@catmedia.us</email>
+			<organization>Creative Arts &amp; Technologies</organization>
+			<organizationUrl>http://www.catmedia.us</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Architect</role>
+				<role>Java Developer</role>
+				<role>Spec Lead</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Leonardo de Moura Rocha Lima</name>
+			<email>llima@v2com.mobi</email>
+			<organization>V2COM</organization>
+			<organizationUrl>http://www.v2com.mobi/</organizationUrl>
+			<timezone>-5</timezone>
+			<roles>
+				<role>Architect</role>
+				<role>Java Developer</role>
+				<role>Spec Lead</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>desruisseaux</id>
+			<name>Martin Desruisseaux</name>
+			<email>desruisseaux@users.sourceforge.net</email>
+			<organization>Geomatys</organization>
+			<organizationUrl>http://www.geomatys.com</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Expert</role>
+				<role>Java Developer</role>
+				<role>Jenkins Admin</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>karen_legrand</id>
+			<name>Karen Legrand</name>
+			<email>karen.legrand@iem.com</email>
+			<organization>Innovation Emergency Management (IEM)</organization>
+			<organizationUrl>http://www.iem.com</organizationUrl>
+			<timezone>-5</timezone>
+			<roles>
+				<role>Expert</role>
+				<role>Java Developer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>christopher.senior</id>
+			<name>Chris Senior</name>
+			<email>christopher.senior@gmail.com</email>
+			<organization>Snap-on Inc.</organization>
+			<roles>
+				<role>Expert</role>
+				<role>Java Developer</role>
+			</roles>
+		</developer>
+	</developers>
 
 	<dependencies>
 		<dependency>
@@ -43,9 +120,9 @@
 			<artifactId>unit-api-format</artifactId>
 		</dependency>
 		<dependency>
-            <groupId>javax.measure</groupId>
-            <artifactId>unit-api-util</artifactId>
-        </dependency>
+			<groupId>javax.measure</groupId>
+			<artifactId>unit-api-util</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>javax.measure</groupId>
 			<artifactId>unit-api-quantity</artifactId>
@@ -81,10 +158,10 @@
 				<version>${jsr.version}</version>
 			</dependency>
 			<dependency>
-                <groupId>javax.measure</groupId>
-                <artifactId>unit-api-util</artifactId>
-                <version>${jsr.version}</version>
-            </dependency>
+				<groupId>javax.measure</groupId>
+				<artifactId>unit-api-util</artifactId>
+				<version>${jsr.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>javax.measure</groupId>
 				<artifactId>unit-api-format</artifactId>
@@ -147,6 +224,119 @@
 						<Export-Package>org.unitsofmeasurement.ri.*</Export-Package>
 						<Private-Package>org.unitsofmeasurement.ri.format.internal.*</Private-Package>
 					</instructions>
+				</configuration>
+			</plugin>
+
+			<!-- ======================================================= -->
+			<!-- Maven web site -->
+			<!-- ======================================================= -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<locales>en</locales>
+					<inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+					<outputEncoding>UTF-8</outputEncoding>
+					<reportPlugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-project-info-reports-plugin</artifactId>
+							<version>2.7</version>
+							<reportSets>
+								<reportSet>
+									<reports>
+										<report>index</report>
+										<report>summary</report>
+										<report>license</report>
+										<report>scm</report>
+										<report>cim</report>
+										<report>project-team</report>
+										<report>mailing-list</report>
+										<report>issue-tracking</report>
+									</reports>
+								</reportSet>
+							</reportSets>
+						</plugin>
+
+						<!-- ======================================================= -->
+						<!-- Javadoc generation -->
+						<!-- -->
+						<!-- Do not set <docfilessubdirs> to true, since this -->
+						<!-- cause the unwanted copy of .svn sub-directories. -->
+						<!-- ======================================================= -->
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-javadoc-plugin</artifactId>
+							<version>2.9.1</version>
+							<configuration>
+								<source>${project.build.javaVersion}</source>             <!-- Enables javadoc to handle assertions present in J2SE 1.4. -->
+								<encoding>${project.build.sourceEncoding}</encoding>       <!-- The encoding of the source files. -->
+								<docencoding>${project.build.sourceEncoding}</docencoding> <!-- The encoding of the generated HTML files. -->
+								<charset>${sourceEncoding}</charset>         <!-- Specifies the HTML character set for this document. -->
+								<locale>en</locale>              <!-- Locale that javadoc uses when generating documentation. -->
+								<noqualifier>all</noqualifier>   <!-- Omit qualifying package name before class names in output. -->
+								<quiet>true</quiet>              <!-- Shuts off non-error and non-warning messages. -->
+								<keywords>true</keywords>        <!-- Adds HTML meta keyword tags to the generated files. -->
+								<!-- Creates links to existing javadoc-generated documentation of 
+									external referenced classes. -->
+								<links>
+									<link>http://docs.oracle.com/javase/7/docs/api/</link>
+								</links>
+							</configuration>
+						</plugin>
+
+						<!-- ======================================================= -->
+						<!-- Code analysis -->
+						<!-- ======================================================= -->
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-pmd-plugin</artifactId>
+							<version>3.0.1</version>
+							<configuration>
+								<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+								<targetJdk>${project.build.javaVersion}</targetJdk>
+							</configuration>
+						</plugin>
+
+						<!-- ======================================================= -->
+						<!-- Report on test results -->
+						<!-- ======================================================= -->
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-surefire-report-plugin</artifactId>
+							<version>2.16</version>
+						</plugin>
+
+						<!-- ======================================================= -->
+						<!-- Report on test coverage -->
+						<!-- ======================================================= -->
+						<plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>emma-maven-plugin</artifactId>
+							<version>1.0-alpha-3</version>
+							<reportSets>
+								<reportSet></reportSet>
+								<reportSet></reportSet>
+							</reportSets>
+						</plugin>
+
+						<!-- ======================================================= -->
+						<!-- Static analysis for occurences of bug patterns -->
+						<!-- ======================================================= -->
+						<!--  plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>findbugs-maven-plugin</artifactId>
+							<version>2.5.2</version>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-checkstyle-plugin</artifactId>
+							<version>2.11</version>
+							<configuration>
+								<configLocation>src/etc/checkstyle.xml</configLocation>
+							</configuration>
+						</plugin -->
+					</reportPlugins>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -212,4 +402,11 @@
 			</build>
 		</profile>
 	</profiles>
+	<scm>
+		<url>https://github.com/unitsofmeasurement/unit-ri.git</url>
+	</scm>
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/unitsofmeasurement/unit-ri/issues</url>
+	</issueManagement>
 </project>

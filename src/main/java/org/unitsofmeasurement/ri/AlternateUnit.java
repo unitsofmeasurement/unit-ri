@@ -22,17 +22,20 @@ import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.function.UnitConverter;
 
-import org.unitsofmeasurement.ri.model.QuantityDimension;
-
 
 /**
  * <p> This class represents units used in expressions to distinguish
  *     between quantities of a different nature but of the same dimensions.</p>
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 5.0, October 12, 2010
+ * @version 5.1, April 15, 2014
  */
 public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4696690756456282705L;
 
 	/**
      * Holds the parent unit (a system unit).

@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright 2013-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
+ *  Copyright 2010-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
  *  contributors by the @author tag.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,6 @@ package org.unitsofmeasurement.ri;
 import static org.unitsofmeasurement.ri.format.UCUMFormat.Variant.CASE_INSENSITIVE;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Map;
 
@@ -54,14 +53,14 @@ import org.unitsofmeasurement.ri.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.3, Mar 19, 2014
+ * @version 5.4, Apr 15, 2014
  */
-public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Serializable {//, XMLSerializable {
+public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -4344589505537030204L;
+//	private static final long serialVersionUID = -4344589505537030204L;
 
 	/**
 	 * Holds the name.
