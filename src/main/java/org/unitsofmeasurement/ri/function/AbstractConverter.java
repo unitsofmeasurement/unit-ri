@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright 2013-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
+ *  Copyright 2010-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
  *  contributors by the @author tag.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,6 @@
  */
 package org.unitsofmeasurement.ri.function;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
@@ -27,15 +26,15 @@ import javax.measure.function.UnitConverter;
  * <p> The base class for our {@link UnitConverter} physics implementations.</p>
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @author Werner Keil
- * @version 5.2, December 26, 2013
+ * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 5.3, April 16, 2014
  */
-public abstract class AbstractConverter implements UnitConverter, Serializable { //, XMLSerializable {
+public abstract class AbstractConverter implements UnitConverter {
 	
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 5790242858468427131L;
+//	private static final long serialVersionUID = 5790242858468427131L;
 
 	/**
      * The ratio of the circumference of a circle to its diameter.

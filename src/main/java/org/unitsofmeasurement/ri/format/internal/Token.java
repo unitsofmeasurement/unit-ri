@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright 2013-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
+ *  Copyright 2010-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
  *  contributors by the @author tag.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,17 +20,17 @@ package org.unitsofmeasurement.ri.format.internal;
 /**
  * Describes the input token stream.
  *
- * @version 5.1, December 25, 2013
+ * @version 5.2, April 16, 2014
  */
 
-public final class Token implements java.io.Serializable {
+public final class Token {
 
 	 /**
-      * The version identifier for this Serializable class.
+      * The Serialization identifier for this class.
 	  * Increment only if the <i>serialized</i> form of the
 	  * class changes.
 	  */
-	private static final long serialVersionUID = 2188279658897600591L;
+//	private static final long serialVersionUID = 2188279658897600591L;
 
   /**
    * An integer that describes the kind of this token.  This numbering

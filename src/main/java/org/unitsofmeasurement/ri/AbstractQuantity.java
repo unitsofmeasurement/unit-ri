@@ -17,7 +17,6 @@ package org.unitsofmeasurement.ri;
 
 import static javax.measure.format.FormatStyle.LOCALE_NEUTRAL;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.ParsePosition;
@@ -86,15 +85,14 @@ import org.unitsofmeasurement.ri.util.SI;
  * <p> All instances of this class shall be immutable.</p>
  * 
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.1, $Date: 2014-04-08 $
+ * @version 1.2, $Date: 2014-04-16 $
  */
-public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q>,
-        Serializable {
+public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q> {
 	
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -4993173119977931016L;
+//	private static final long serialVersionUID = -4993173119977931016L;
     
 	private final Unit<Q> unit;
 	

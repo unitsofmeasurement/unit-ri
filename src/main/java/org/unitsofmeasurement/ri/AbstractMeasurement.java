@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright 2013-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
+ *  Copyright 2010-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
  *  contributors by the @author tag.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,6 @@ package org.unitsofmeasurement.ri;
 
 import static javax.measure.format.FormatStyle.LOCALE_NEUTRAL;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.ParsePosition;
@@ -86,16 +85,15 @@ import org.unitsofmeasurement.ri.util.SI;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.1, $Date: 2014-04-03 03:38:25 +0200 (Do, 03 Apr 2014) $
+ * @version 1.2, $Date: 2014-04-16 $
  */
-public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement<Q, Number>,
-        Serializable {
+public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement<Q, Number> {
 // TODO do we want to restrict Measurement to Number here? 
 	
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -4993173119977931016L;
+//	private static final long serialVersionUID = -4993173119977931016L;
     
 	private final Unit<Q> unit;
 	

@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright 2013-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
+ *  Copyright 2010-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
  *  contributors by the @author tag.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,7 +37,7 @@ import org.unitsofmeasurement.ri.function.AbstractConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 1.4.3 ($Revision: 212 $), $Date: 2013-12-25 $
+ * @version 1.4.4, $Date: 2014-04-16 $
  */
 public class BaseMeasurement<Q extends Quantity<Q>> extends AbstractMeasurement<Q>
 		implements Measurement<Q, Number>, Comparable<BaseMeasurement<Q>> {
@@ -46,7 +46,7 @@ public class BaseMeasurement<Q extends Quantity<Q>> extends AbstractMeasurement<
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1794798190459768561L;
+//	private static final long serialVersionUID = 1794798190459768561L;
 
 	private final Number value;
 	

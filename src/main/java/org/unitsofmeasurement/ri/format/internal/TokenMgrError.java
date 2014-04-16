@@ -22,7 +22,7 @@ public class TokenMgrError extends Error
 {
 
   /**
-   * The version identifier for this Serializable class.
+   * The Serialization identifier for this class.
    * Increment only if the <i>serialized</i> form of the
    * class changes.
    */
