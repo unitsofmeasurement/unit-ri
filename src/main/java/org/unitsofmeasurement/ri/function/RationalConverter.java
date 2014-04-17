@@ -36,7 +36,7 @@ public final class RationalConverter extends AbstractConverter { //implements Im
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+//	private static final long serialVersionUID = 1L;
 
 	/**
      * Holds the converter dividend.
