@@ -370,7 +370,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 5355395476874521709L;
+//		private static final long serialVersionUID = 5355395476874521709L;
 		
 		final int value;
 
@@ -471,7 +471,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 7857472738562215118L;
+//		private static final long serialVersionUID = 7857472738562215118L;
 		
 		final float value;
 
@@ -588,8 +588,6 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
             BigDecimal decimal = BigDecimal.valueOf(value); // TODO check value if it is a BD, otherwise use different converter
             return (super.unit.equals(unit)) ? decimal : ((AbstractConverter)super.unit.getConverterTo(unit)).convert(decimal, ctx);
         }
-        private static final long serialVersionUID = 1L;
-
 
 		@Override
 		public long longValue(Unit<T> unit) {
@@ -654,13 +652,13 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
             BigDecimal decimalValue, Unit<Q> unit) {
         return new DecimalQuantity<Q>(decimalValue, unit);
     }
-
+    
     private static final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 6504081836032983882L;
+//		private static final long serialVersionUID = 6504081836032983882L;
 		final BigDecimal value;
 
         public DecimalQuantity(BigDecimal value, Unit<T> unit) {

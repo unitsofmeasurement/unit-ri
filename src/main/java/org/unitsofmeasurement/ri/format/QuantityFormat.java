@@ -241,13 +241,13 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	// Holds default implementation.
 	private static final class NumberSpaceUnit extends QuantityFormat {
 
-		private final NumberFormat _numberFormat;
+		private final NumberFormat numberFormat;
 
-		private final UnitFormat _unitFormat;
+		private final UnitFormat unitFormat;
 
 		private NumberSpaceUnit(NumberFormat numberFormat, UnitFormat unitFormat) {
-			_numberFormat = numberFormat;
-			_unitFormat = unitFormat;
+			this.numberFormat = numberFormat;
+			this.unitFormat = unitFormat;
 		}
 
 		@Override
@@ -258,11 +258,11 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 //				return formatCompound(measure.doubleValue(unit),
 //						(CompoundUnit) unit, dest);
 //			else {
-				dest.append(_numberFormat.format(measure.getValue()));
+				dest.append(numberFormat.format(measure.getValue()));
 				if (measure.getUnit().equals(SI.ONE))
 					return dest;
 				dest.append(' ');
-				return _unitFormat.format(measure.getUnit(), dest);
+				return unitFormat.format(measure.getUnit(), dest);
 //			}
 		}
 
@@ -271,16 +271,18 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 		public AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
 				throws IllegalArgumentException, ParserException {
 			String str = csq.toString();
-			Number number = _numberFormat.parse(str, cursor);
+			Number number = numberFormat.parse(str, cursor);
 			if (number == null)
 				throw new IllegalArgumentException("Number cannot be parsed");
-			Unit unit = _unitFormat.parse(csq);
-			if (number instanceof BigDecimal)
-				return AbstractQuantity.of((BigDecimal) number, unit);
-			else if (number instanceof Long)
-				return AbstractQuantity.of(((Long) number).longValue(), unit);
+			Unit unit = unitFormat.parse(csq);
+//			if (number instanceof BigDecimal)
+//				return AbstractQuantity.of((BigDecimal) number, unit);
+			if (number instanceof Long)
+				return AbstractQuantity.of(number.longValue(), unit);
 			else if (number instanceof Double)
-				return AbstractQuantity.of(((Double) number).doubleValue(), unit);
+				return AbstractQuantity.of(number.doubleValue(), unit);
+			else if (number instanceof Integer)
+				return AbstractQuantity.of(number.intValue(), unit);
 			else
 				throw new UnsupportedOperationException("Number of type "
 						+ number.getClass() + " are not supported");

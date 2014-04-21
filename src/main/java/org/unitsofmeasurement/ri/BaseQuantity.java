@@ -47,7 +47,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7312161895652321241L;
+//	private static final long serialVersionUID = 7312161895652321241L;
 
 	private final Number value;
 	
