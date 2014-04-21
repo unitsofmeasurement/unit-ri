@@ -18,6 +18,8 @@ package org.unitsofmeasurement.ri.function;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+import javax.measure.function.ValueSupplier;
+
 /**
  * <p> This class represents a exponential converter of limited precision.
  *     Such converter is used to create inverse of logarithmic unit.
@@ -27,14 +29,15 @@ import java.math.MathContext;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.2, April 3, 2014
+ * @version 5.3, April 22, 2014
  */
-final class ExpConverter extends AbstractConverter { //implements Immutable {
+final class ExpConverter extends AbstractConverter 
+	implements ValueSupplier<String> { //implements Immutable {
 
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -8851436813812059827L;
+//	private static final long serialVersionUID = -8851436813812059827L;
 
 	/**
      * Holds the logarithmic base.
@@ -110,10 +113,8 @@ final class ExpConverter extends AbstractConverter { //implements Immutable {
         return false;
     }
 
-	public Object value() {
-		// TODO Auto-generated method stub
-		return null;
+    @Override
+	public String getValue() {
+		return toString();
 	}
-
-
 }

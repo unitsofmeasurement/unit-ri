@@ -18,6 +18,8 @@ package org.unitsofmeasurement.ri.function;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+import javax.measure.function.ValueSupplier;
+
 /**
  * <p> This class represents a logarithmic converter of limited precision.
  *     Such converter  is typically used to create logarithmic unit.
@@ -27,14 +29,15 @@ import java.math.MathContext;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.1, April 3, 2014
+ * @version 5.2, April 3, 2014
  */
-public final class LogConverter extends AbstractConverter { //implements Immutable<String> {
+public final class LogConverter extends AbstractConverter 
+	implements ValueSupplier<String> { //implements Immutable<String> {
 
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -7584688290961460870L;
+//	private static final long serialVersionUID = -7584688290961460870L;
 	
 	/**
      * Holds the logarithmic base.
@@ -109,7 +112,8 @@ public final class LogConverter extends AbstractConverter { //implements Immutab
         return false;
     }
 
-	public String value() {
+    @Override
+	public String getValue() {
 		return toString();
 	}
 }

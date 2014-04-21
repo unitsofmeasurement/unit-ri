@@ -27,7 +27,8 @@ package org.unitsofmeasurement.ri.function;
  *
  * @see <a href="http://download.java.net/jdk8/docs/api/java/util/function/DoubleSupplier.html">DoubleSupplier</a>
  * @author Werner Keil
- * @version 0.3, $Date: 2014-03-18 23:55:19 +0100 (Di, 18 Mär 2014) $
+ * @version 0.4, $Date: 2014-03-18 23:55:19 +0100 (Di, 18 Mär 2014) $
+ * @deprecated So far only used by Enum impl, consider removing
  */
 //equivalent to @FunctionalInterface
 public interface DoubleFactorSupplier {
