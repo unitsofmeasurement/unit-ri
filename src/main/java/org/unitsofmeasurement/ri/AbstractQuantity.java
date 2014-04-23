@@ -59,8 +59,8 @@ import org.unitsofmeasurement.ri.util.SI;
  * 
  * <p> Applications may sub-class {@link AbstractQuantity} for particular measurements
  *     types.<br/><code>
- *         // Measurement of type Mass based on <code>double</code> primitive types.
- *         public class MassAmount extends AbstractMeasurement<Mass> { 
+ *         // Quantity of type Mass based on <code>double</code> primitive types.
+ *         public class MassAmount extends AbstractQuantity<Mass> { 
  *             private final double _kilograms; // Internal SI representation. 
  *             private Mass(double kilograms) { _kilograms = kilograms; }
  *             public static Mass of(double value, Unit<Mass> unit) {
@@ -72,20 +72,20 @@ import org.unitsofmeasurement.ri.util.SI;
  *         }
  * 
  *         // Complex numbers measurements.
- *         public class ComplexMeasurement<Q extends Quantity> extends AbstractMeasurement<Q> {
+ *         public class ComplexQuantity<Q extends Quantity> extends AbstractQuantity<Q> {
  *             public Complex getValue() { ... } // Assuming Complex is a Number.
  *             ... 
  *         }
  * 
  *         // Specializations of complex numbers measurements.
- *         public class Current extends ComplexMeasurement<ElectricCurrent> {...} 
- *         public class Tension extends ComplexMeasurement<ElectricPotential> {...}
+ *         public class Current extends ComplexQuantity<ElectricCurrent> {...} 
+ *         public class Tension extends ComplexQuantity<ElectricPotential> {...}
  *         </code></p>
  * 
  * <p> All instances of this class shall be immutable.</p>
  * 
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.2, $Date: 2014-04-16 $
+ * @version 1.3, $Date: 2014-04-23 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q> {
 	

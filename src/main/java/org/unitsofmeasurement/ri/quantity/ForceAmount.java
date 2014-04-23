@@ -16,28 +16,22 @@
 package org.unitsofmeasurement.ri.quantity;
 
 import javax.measure.Unit;
-import javax.measure.quantity.Mass;
+import javax.measure.quantity.Force;
 
 import org.unitsofmeasurement.ri.BaseQuantity;
 
 /**
- * Represents the measure of the quantity of matter that a body or an object contains.
- * The mass of the body is not dependent on gravity and therefore is different from but
- * proportional to its weight.
- * The metric system unit for this quantity is "kg" (kilogram).
- *
- * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.7, $Date: 2013-12-26 $
+ * Represents a quantity that tends to produce an acceleration of a body in the
+ * direction of its application. The metric system unit for this quantity is "N"
+ * (Newton).
+ * 
+ * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 1.3, $Date: 2013-05-21 $
  */
-public final class MassAmount extends BaseQuantity<Mass> implements Mass {
+public final class ForceAmount extends BaseQuantity<Force> implements Force {
 
-	/**
-	 * 
-	 */
-//	private static final long serialVersionUID = -3190275944382844647L;
-
-	public MassAmount(Number number, Unit<Mass> unit) {
+	public ForceAmount(Number number, Unit<Force> unit) {
 		super(number, unit);
 	}
 }
