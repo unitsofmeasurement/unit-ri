@@ -15,7 +15,6 @@
  */
 package org.unitsofmeasurement.ri.model;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -44,15 +43,15 @@ import org.unitsofmeasurement.ri.util.SI;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.3, $Date: 2014-04-07 03:41:49 +0200 (Mo, 07 Apr 2014) $
+ * @version 5.4, $Date: 2014-05-09 $
  */
-public class QuantityDimension implements Dimension, Serializable {//, XMLSerializable {
+public class QuantityDimension implements Dimension {
 	private static final Logger logger = Logger.getLogger(Dimension.class.getName());
 	
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 123289037718650030L;
+//	private static final long serialVersionUID = 123289037718650030L;
 
 	/**
      * Holds dimensionless.
@@ -119,10 +118,21 @@ public class QuantityDimension implements Dimension, Serializable {//, XMLSerial
      *
      * @param symbol the associated symbol.
      */
-    public QuantityDimension(char symbol) {
+    @SuppressWarnings("rawtypes")
+	QuantityDimension(char symbol) {
         final StringBuilder label = new StringBuilder();
         label.append('[').append(symbol).append(']');
         pseudoUnit = new BaseUnit(label.toString(), NONE);
+    }
+    
+    /**
+     * Returns the dimension for the specified symbol.
+     *
+     * @param sambol the quantity symbol.
+     * @return the dimension for the given symbol.
+     */
+    static final QuantityDimension getInstance(char symbol) {
+    	return new QuantityDimension(symbol);
     }
 
     /**
@@ -205,7 +215,8 @@ public class QuantityDimension implements Dimension, Serializable {//, XMLSerial
      *
      * @return the mapping between the fundamental dimensions and their exponent.
      */
-    public Map<? extends QuantityDimension, Integer> getProductDimensions() {
+    @SuppressWarnings("rawtypes")
+	public Map<? extends QuantityDimension, Integer> getProductDimensions() {
         Map<? extends AbstractUnit, Integer> pseudoUnits = pseudoUnit.getProductUnits();
         if (pseudoUnit == null) return null;
         Map<QuantityDimension, Integer> fundamentalDimensions = new HashMap<QuantityDimension, Integer>();

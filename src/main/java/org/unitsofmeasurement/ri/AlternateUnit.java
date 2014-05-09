@@ -15,7 +15,6 @@
  */
 package org.unitsofmeasurement.ri;
 
-import java.io.Serializable;
 import java.util.Map;
 
 import javax.measure.Dimension;
@@ -28,14 +27,15 @@ import javax.measure.function.UnitConverter;
  *     between quantities of a different nature but of the same dimensions.</p>
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 5.1, April 15, 2014
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 5.2, May 9, 2014
  */
-public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements Serializable {
+public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4696690756456282705L;
+//	private static final long serialVersionUID = 4696690756456282705L;
 
 	/**
      * Holds the parent unit (a system unit).

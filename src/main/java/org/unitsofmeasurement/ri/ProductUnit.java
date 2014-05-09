@@ -15,8 +15,6 @@
  */
 package org.unitsofmeasurement.ri;
 
-
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,14 +39,14 @@ import org.unitsofmeasurement.ri.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.2, January 23, 2014
+ * @version 5.3, May 9, 2014
  */
 public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 962983585531030093L;
+//	private static final long serialVersionUID = 962983585531030093L;
 
 	/**
      * Holds the units composing this product unit.
@@ -410,12 +408,12 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     /**
      * Inner product element represents a rational power of a single unit.
      */
-    private final static class Element implements Serializable {
+    private final static class Element {
 
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 452938412398890507L;
+//		private static final long serialVersionUID = 452938412398890507L;
 
 		/**
          * Holds the single unit.

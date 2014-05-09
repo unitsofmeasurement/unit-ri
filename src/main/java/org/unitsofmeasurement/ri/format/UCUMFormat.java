@@ -17,7 +17,6 @@ package org.unitsofmeasurement.ri.format;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.text.*;
 import java.util.Arrays;
@@ -64,12 +63,12 @@ import org.unitsofmeasurement.ri.util.SIPrefix;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 5.5.1, 20 March 2014
  */
-public abstract class UCUMFormat implements UnitFormat, Serializable {
+public abstract class UCUMFormat implements UnitFormat {
 
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 8586656823290135155L;
+//	private static final long serialVersionUID = 8586656823290135155L;
 	
 	// A helper to declare bundle names for all instances
     private static final String BUNDLE_BASE = UCUMFormat.class.getName();
@@ -352,7 +351,7 @@ public abstract class UCUMFormat implements UnitFormat, Serializable {
         /**
          *
          */
-        private static final long serialVersionUID = 2990875526976721414L;
+//        private static final long serialVersionUID = 2990875526976721414L;
         private static final SymbolMap PRINT_SYMBOLS = SymbolMap.of(
                 ResourceBundle.getBundle(BUNDLE_BASE + "_Print"));
         private static final Print DEFAULT = new Print(PRINT_SYMBOLS);
@@ -395,7 +394,7 @@ public abstract class UCUMFormat implements UnitFormat, Serializable {
 	 */
     private static final class Parsing extends UCUMFormat {
 
-        private static final long serialVersionUID = -922531801940132715L;
+//        private static final long serialVersionUID = -922531801940132715L;
         private static final SymbolMap CASE_SENSITIVE_SYMBOLS = SymbolMap.of(
                 ResourceBundle.getBundle(BUNDLE_BASE + "_CS", new Locale("", "CS"),
                	     new ResourceBundle.Control() {
