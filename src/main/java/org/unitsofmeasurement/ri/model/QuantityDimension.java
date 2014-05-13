@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
+import javax.measure.Unit;
 
 import org.unitsofmeasurement.ri.AbstractUnit;
 import org.unitsofmeasurement.ri.BaseUnit;
@@ -108,7 +109,7 @@ public class QuantityDimension implements Dimension {
      */
     public static final <Q extends Quantity<Q>> Dimension getInstance(Class<Q> quantityType) {
         // TODO: Track OSGi services and aggregate results.
-        AbstractUnit<Q> siUnit = SI.getInstance().getUnit(quantityType);
+        Unit<Q> siUnit = SI.getInstance().getUnit(quantityType);
         if (siUnit == null) logger.warning("Quantity type: " + quantityType + " unknown");
         return (siUnit != null) ? siUnit.getDimension() : null;
     }

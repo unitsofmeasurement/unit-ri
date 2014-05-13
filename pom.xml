@@ -28,9 +28,10 @@
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
 	<properties>
+	   <jdkVersion>1.8</jdkVersion>
 		<project.build.javaVersion>1.7</project.build.javaVersion>
-		<maven.compile.targetLevel>${jdkVersion}</maven.compile.targetLevel>
-		<maven.compile.sourceLevel>${jdkVersion}</maven.compile.sourceLevel>
+		<maven.compile.targetLevel>1.8</maven.compile.targetLevel>
+		<maven.compile.sourceLevel>1.7</maven.compile.sourceLevel>
 	</properties>
 
 	<!-- Developers and Contributors -->

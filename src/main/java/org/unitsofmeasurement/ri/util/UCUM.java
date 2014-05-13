@@ -623,10 +623,10 @@ public final class UCUM extends AbstractSystemOfUnits {
      * @param quantityType
      * @return <code>SI.getInstance().getUnit(quantityType)</code>
      */
-    @Override
-    public <Q extends Quantity<Q>> AbstractUnit<Q> getUnit(Class<Q> quantityType) {
-        return SI.getInstance().getUnit(quantityType);
-    }
+//    @Override
+//    public <Q extends Quantity<Q>> Unit<Q> getUnit(Class<Q> quantityType) {
+//        return SI.getInstance().getUnit(quantityType);
+//    }
 
 
     /**
