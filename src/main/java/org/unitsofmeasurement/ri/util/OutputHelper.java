@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.unitsofmeasurement.ri.format;
+package org.unitsofmeasurement.ri.util;
 
 /**
  * A static helper class, checking e.g. if some tests require optional console
