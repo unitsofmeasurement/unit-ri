@@ -15,7 +15,7 @@
  */
 package org.unitsofmeasurement.ri;
 
-import static javax.measure.format.FormatStyle.LOCALE_NEUTRAL;
+import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
 
 import java.math.BigDecimal;
 import java.math.MathContext;

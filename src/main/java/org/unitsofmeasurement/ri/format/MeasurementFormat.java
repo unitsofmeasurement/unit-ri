@@ -25,7 +25,7 @@ import java.math.MathContext;
 
 import javax.measure.Measurement;
 import javax.measure.Unit;
-import javax.measure.format.FormatStyle;
+import javax.measure.format.FormatBehavior;
 import javax.measure.format.Parser;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
@@ -102,7 +102,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	 * @param style the format style to apply.
 	 * @return the desired format.
 	 */
-	public static MeasurementFormat getInstance(FormatStyle style) {
+	public static MeasurementFormat getInstance(FormatBehavior style) {
 		switch (style) {
 		case LOCALE_NEUTRAL:
 			return STANDARD;

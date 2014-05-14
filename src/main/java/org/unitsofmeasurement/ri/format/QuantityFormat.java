@@ -25,7 +25,7 @@ import java.math.MathContext;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.format.FormatStyle;
+import javax.measure.format.FormatBehavior;
 import javax.measure.format.Parser;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
@@ -102,7 +102,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 * @param style the format style to apply.
 	 * @return the desired format.
 	 */
-	public static QuantityFormat getInstance(FormatStyle style) {
+	public static QuantityFormat getInstance(FormatBehavior style) {
 		switch (style) {
 		case LOCALE_NEUTRAL:
 			return STANDARD;
