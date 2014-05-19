@@ -46,7 +46,7 @@ public class UnitFormatTest {
 
 	@Before
 	public void init() {
-		sut = new LengthAmount(Integer.valueOf(10), METRE);
+		sut = new LengthAmount(10, METRE);
 	}
 
 	@Test

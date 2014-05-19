@@ -111,7 +111,7 @@ public final class AddConverter extends AbstractConverter {
     }
 
 	public Double value() {
-		return Double.valueOf(offset);
+		return offset;
 	}
     
 }

@@ -119,6 +119,6 @@ public final class MultiplyConverter extends AbstractConverter implements
 
 	@Override
 	public Double getValue() {
-		return Double.valueOf(factor);
+		return factor;
 	}
 }

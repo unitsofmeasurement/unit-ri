@@ -480,7 +480,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 
         @Override
         public Float getValue() {
-            return Float.valueOf(value);
+            return value;
         }
 
         // Implements AbstractMeasurement
@@ -572,7 +572,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 
         @Override
         public Double getValue() {
-            return Double.valueOf(value);
+            return value;
         }
 
 

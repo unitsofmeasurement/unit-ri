@@ -162,6 +162,6 @@ public final class RationalConverter extends AbstractConverter
 
     @Override
 	public Double getValue() {
-		return Double.valueOf(toDouble(dividend) / toDouble(divisor));
+		return toDouble(dividend) / toDouble(divisor);
 	}
 }
