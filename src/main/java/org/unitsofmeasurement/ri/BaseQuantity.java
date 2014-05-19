@@ -113,8 +113,8 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		super(unit);
 		value = number;
 		isExact = false;
-		isBig = false;;
-	}
+		isBig = false;
+    }
 
 	/*
 	 * (non-Javadoc)
