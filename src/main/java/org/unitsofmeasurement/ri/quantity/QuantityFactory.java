@@ -260,8 +260,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
             } else if (name.equals("getUnit")) {
                 return unit;
             } else if (name.equals("toString")) {
-                final StringBuilder buffer = new StringBuilder();
-                return buffer.append(value).append(' ').append(unit).toString();
+                return String.valueOf(value) + ' ' + unit;
             } else if (name.equals("hashCode")) {
                 return value.hashCode() * 31 + unit.hashCode();
             } else if (name.equals("equals")) {
