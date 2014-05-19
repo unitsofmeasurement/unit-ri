@@ -152,7 +152,7 @@ private int jjMoveNfa_0(int startState, int curPos)
       }
       else if (curChar < 128)
       {
-         long l = 1L << (curChar & 077);
+         long l = 1L << (curChar & 63);
          do
          {
             switch(jjstateSet[--i])
@@ -231,7 +231,7 @@ private int jjMoveNfa_0(int startState, int curPos)
       else
       {
          int i2 = (curChar & 0xff) >> 6;
-         long l2 = 1L << (curChar & 077);
+         long l2 = 1L << (curChar & 63);
          do
          {
             switch(jjstateSet[--i])
