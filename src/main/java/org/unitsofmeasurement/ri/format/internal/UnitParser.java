@@ -718,8 +718,8 @@ public final class UnitParser implements UnitParserConstants {
             jj_gen++;
             if (++jj_gc > 100) {
                 jj_gc = 0;
-                for (int i = 0; i < jj_2_rtns.length; i++) {
-                    JJCalls c = jj_2_rtns[i];
+                for (JJCalls jj_2_rtn : jj_2_rtns) {
+                    JJCalls c = jj_2_rtn;
                     while (c != null) {
                         if (c.gen < jj_gen)
                             c.first = null;
@@ -814,8 +814,8 @@ public final class UnitParser implements UnitParserConstants {
             jj_expentry = new int[jj_endpos];
             System.arraycopy(jj_lasttokens, 0, jj_expentry, 0, jj_endpos);
             jj_entries_loop:
-            for (java.util.Iterator<?> it = jj_expentries.iterator(); it.hasNext();) {
-                int[] oldentry = (int[]) (it.next());
+            for (int[] jj_expentry1 : jj_expentries) {
+                int[] oldentry = (int[]) (jj_expentry1);
                 if (oldentry.length == jj_expentry.length) {
                     for (int i = 0; i < jj_expentry.length; i++) {
                         if (oldentry[i] != jj_expentry[i]) {

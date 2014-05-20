@@ -193,8 +193,7 @@ public final class SymbolMap {
      * @return the corresponding prefix or <code>null</code> if none.
      */
     public SIPrefix getPrefix(String symbol) {
-        for (Iterator<String> i = symbolToPrefix.keySet().iterator(); i.hasNext();) {
-            String pfSymbol = i.next();
+        for (String pfSymbol : symbolToPrefix.keySet()) {
             if (symbol.startsWith(pfSymbol)) {
                 return (SIPrefix) symbolToPrefix.get(pfSymbol);
             }

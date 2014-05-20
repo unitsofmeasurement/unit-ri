@@ -251,12 +251,12 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
         Element[] elems = ((ProductUnit<?>) that).elements;
         if (elements.length != elems.length)
             return false;
-        for (int i = 0; i < elements.length; i++) {
+        for (Element element : elements) {
             boolean unitFound = false;
-            Element e = elements[i];
-            for (int j = 0; j < elems.length; j++) {
-                if (e.unit.equals(elems[j].unit))
-                    if ((e.pow != elems[j].pow) || (e.root != elems[j].root))
+            Element e = element;
+            for (Element elem : elems) {
+                if (e.unit.equals(elem.unit))
+                    if ((e.pow != elem.pow) || (e.root != elem.root))
                         return false;
                     else {
                         unitFound = true;
@@ -274,8 +274,8 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
         if (this.hashCode != 0)
             return this.hashCode;
         int code = 0;
-        for (int i = 0; i < elements.length; i++) {
-            code += elements[i].unit.hashCode() * (elements[i].pow * 3 - elements[i].root * 2);
+        for (Element element : elements) {
+            code += element.unit.hashCode() * (element.pow * 3 - element.root * 2);
         }
         this.hashCode = code;
         return code;
@@ -285,10 +285,10 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 	@Override
     public AbstractUnit<Q> toSI() {
         Unit<?> systemUnit = SI.ONE;
-        for (int i = 0; i < elements.length; i++) {
-            Unit<?> unit = elements[i].unit.toSI();
-            unit = unit.pow(elements[i].pow);
-            unit = unit.root(elements[i].root);
+        for (Element element : elements) {
+            Unit<?> unit = element.unit.toSI();
+            unit = unit.pow(element.pow);
+            unit = unit.root(element.root);
             systemUnit = systemUnit.multiply(unit);
         }
         return (AbstractUnit<Q>) systemUnit;
@@ -296,8 +296,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
     public UnitConverter getConverterToSI() {
         UnitConverter converter = AbstractConverter.IDENTITY;
-        for (int i = 0; i < elements.length; i++) {
-            Element e = elements[i];
+        for (Element e : elements) {
             UnitConverter cvtr = e.unit.getConverterToSI();
             if (!(cvtr.isLinear()))
                 throw new UnsupportedOperationException(e.unit + " is non-linear, cannot convert");
@@ -341,16 +340,16 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
         // Merges left elements with right elements.
         Element[] result = new Element[leftElems.length + rightElems.length];
         int resultIndex = 0;
-        for (int i = 0; i < leftElems.length; i++) {
-            AbstractUnit<?> unit = leftElems[i].unit;
-            int p1 = leftElems[i].pow;
-            int r1 = leftElems[i].root;
+        for (Element leftElem : leftElems) {
+            AbstractUnit<?> unit = leftElem.unit;
+            int p1 = leftElem.pow;
+            int r1 = leftElem.root;
             int p2 = 0;
             int r2 = 1;
-            for (int j = 0; j < rightElems.length; j++) {
-                if (unit.equals(rightElems[j].unit)) {
-                    p2 = rightElems[j].pow;
-                    r2 = rightElems[j].root;
+            for (Element rightElem : rightElems) {
+                if (unit.equals(rightElem.unit)) {
+                    p2 = rightElem.pow;
+                    r2 = rightElem.root;
                     break; // No duplicate.
                 }
             }
@@ -363,17 +362,17 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
         }
 
         // Appends remaining right elements not merged.
-        for (int i = 0; i < rightElems.length; i++) {
-            AbstractUnit<?> unit = rightElems[i].unit;
+        for (Element rightElem : rightElems) {
+            AbstractUnit<?> unit = rightElem.unit;
             boolean hasBeenMerged = false;
-            for (int j = 0; j < leftElems.length; j++) {
-                if (unit.equals(leftElems[j].unit)) {
+            for (Element leftElem : leftElems) {
+                if (unit.equals(leftElem.unit)) {
                     hasBeenMerged = true;
                     break;
                 }
             }
             if (!hasBeenMerged)
-                result[resultIndex++] = rightElems[i];
+                result[resultIndex++] = rightElem;
         }
 
         // Returns or creates instance.
