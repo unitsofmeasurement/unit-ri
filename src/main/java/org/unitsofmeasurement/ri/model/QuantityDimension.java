@@ -121,9 +121,7 @@ public class QuantityDimension implements Dimension {
      */
     @SuppressWarnings("rawtypes")
 	QuantityDimension(char symbol) {
-        final StringBuilder label = new StringBuilder();
-        label.append('[').append(symbol).append(']');
-        pseudoUnit = new BaseUnit(label.toString(), NONE);
+        pseudoUnit = new BaseUnit("[" + symbol + ']', NONE);
     }
     
     /**
