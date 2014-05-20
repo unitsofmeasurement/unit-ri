@@ -112,8 +112,8 @@ public class BaseMeasurement<Q extends Quantity<Q>> extends AbstractMeasurement<
 		super(unit);
 		value = number;
 		isExact = false;
-		isBig = false;;
-	}
+		isBig = false;
+    }
 
 	/*
 	 * (non-Javadoc)

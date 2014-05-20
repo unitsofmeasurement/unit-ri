@@ -71,7 +71,6 @@ public final class UnitParser implements UnitParserConstants {
             n1 = NumberExpr();
             sign1 = Sign();
         } else {
-            ;
         }
         result = MulExpr();
         switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
@@ -82,7 +81,6 @@ public final class UnitParser implements UnitParserConstants {
                 break;
             default:
                 jj_la1[1] = jj_gen;
-                ;
         }
         if (n1 != null) {
             if (sign1.image.equals("-")) {
@@ -114,7 +112,6 @@ public final class UnitParser implements UnitParserConstants {
                 case ASTERISK:
                 case MIDDLE_DOT:
                 case SOLIDUS:
-                    ;
                     break;
                 default:
                     jj_la1[2] = jj_gen;
@@ -200,7 +197,6 @@ public final class UnitParser implements UnitParserConstants {
                             break;
                         default:
                             jj_la1[6] = jj_gen;
-                            ;
                     }
                     if (exponent != null) {
                         if (exponent.pow != 1) {
@@ -225,7 +221,6 @@ public final class UnitParser implements UnitParserConstants {
                                     break;
                                 default:
                                     jj_la1[7] = jj_gen;
-                                    ;
                             }
                             break;
                         case NAT_LOG:
@@ -386,7 +381,6 @@ public final class UnitParser implements UnitParserConstants {
                                 break;
                             default:
                                 jj_la1[13] = jj_gen;
-                                ;
                         }
                         powToken = jj_consume_token(INTEGER);
                         int pow = Integer.parseInt(powToken.image);
@@ -406,7 +400,6 @@ public final class UnitParser implements UnitParserConstants {
                                 break;
                             default:
                                 jj_la1[14] = jj_gen;
-                                ;
                         }
                         powToken = jj_consume_token(INTEGER);
                         switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
@@ -419,13 +412,11 @@ public final class UnitParser implements UnitParserConstants {
                                         break;
                                     default:
                                         jj_la1[15] = jj_gen;
-                                        ;
                                 }
                                 rootToken = jj_consume_token(INTEGER);
                                 break;
                             default:
                                 jj_la1[16] = jj_gen;
-                                ;
                         }
                         jj_consume_token(CLOSE_PAREN);
                         pow = Integer.parseInt(powToken.image);

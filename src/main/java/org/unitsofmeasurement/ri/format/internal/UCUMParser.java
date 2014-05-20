@@ -65,7 +65,6 @@ public class UCUMParser {
             switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
                 case DOT:
                 case SOLIDUS:
-                    ;
                     break;
                 default:
                     jj_la1[0] = jj_gen;
@@ -162,7 +161,6 @@ public class UCUMParser {
                     break;
                 default:
                     jj_la1[3] = jj_gen;
-                    ;
             }
             token2 = jj_consume_token(FACTOR);
             int exponent = Integer.parseInt(token2.image);
