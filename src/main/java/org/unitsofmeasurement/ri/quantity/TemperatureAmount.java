@@ -39,24 +39,24 @@ public final class TemperatureAmount extends BaseQuantity<Temperature>
 
 	public TemperatureAmount(Number number, Unit<Temperature> unit) {
 		super(number, unit);
-		scalar = Double.valueOf(0);
-		value = Double.valueOf(0);
+		scalar = (double) 0;
+		value = (double) 0;
 	}
 
 	public boolean isZero() {
-		return (value != null) && 0d == (value.doubleValue());
+		return (value != null) && 0d == (value);
 	}
 
 	public TemperatureAmount add(TemperatureAmount d1) {
 		final TemperatureAmount dn = new TemperatureAmount(
-				Double.valueOf(this.value.doubleValue()
-						+ d1.value.doubleValue()), getUnit());
+                this.value
+                        + d1.value, getUnit());
 		return dn;
 	}
 
 	public TemperatureAmount subtract(TemperatureAmount d1) {
 		final TemperatureAmount dn = new TemperatureAmount(
-				this.value.doubleValue() - d1.value.doubleValue(), getUnit());
+                this.value - d1.value, getUnit());
 		return dn;
 	}
 
@@ -87,7 +87,7 @@ public final class TemperatureAmount extends BaseQuantity<Temperature>
 	}
 
 	public TemperatureAmount divide(Double v) {
-		return new TemperatureAmount(value.doubleValue() / v.doubleValue(),
+		return new TemperatureAmount(value / v,
 				getUnit());
 	}
 
@@ -131,7 +131,7 @@ public final class TemperatureAmount extends BaseQuantity<Temperature>
 
 	@Override
 	public BaseQuantity<?> multiply(Number that) {
-		return new TemperatureAmount(value.doubleValue() * that.doubleValue(),
+		return new TemperatureAmount(value * that.doubleValue(),
 				getUnit());
 	}
 
