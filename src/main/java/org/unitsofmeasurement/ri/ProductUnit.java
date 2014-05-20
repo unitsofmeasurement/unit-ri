@@ -383,9 +383,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
             return result[0].unit;
         else {
             Element[] elems = new Element[resultIndex];
-            for (int i = 0; i < resultIndex; i++) {
-                elems[i] = result[i];
-            }
+            System.arraycopy(result, 0, elems, 0, resultIndex);
             return new ProductUnit(elems);
         }
     }
