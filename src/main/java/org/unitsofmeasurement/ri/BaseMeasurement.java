@@ -37,7 +37,7 @@ import org.unitsofmeasurement.ri.function.AbstractConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 1.4.4, $Date: 2014-04-16 $
+ * @version 0.4.4, $Date: 2014-05-22 $
  */
 public class BaseMeasurement<Q extends Quantity<Q>> extends AbstractMeasurement<Q>
 		implements Measurement<Q, Number>, Comparable<BaseMeasurement<Q>> {

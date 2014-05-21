@@ -32,12 +32,12 @@ import org.unitsofmeasurement.ri.function.AbstractConverter;
  * An amount of quantity, consisting of a Number and a Unit. BaseMeasurement
  * objects are immutable.
  * 
- * @see java.lang.Number
- * @see MeasureUnit
+ * @see AbstractQuantity
+ * @see Quantity
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 1.6, $Date: 2014-04-08 $
+ * @version 0.6, $Date: 2014-05-22 $
  */
 public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		implements Quantity<Q>, Comparable<BaseQuantity<Q>> {

@@ -21,8 +21,6 @@ import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.function.UnitConverter;
 
-import org.unitsofmeasurement.ri.model.QuantityDimension;
-
 /**
  * <p> This class represents an annotated unit.</p>
  * 
@@ -32,7 +30,8 @@ import org.unitsofmeasurement.ri.model.QuantityDimension;
  * @param <Q> The type of the quantity measured by this unit.
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 5.0, October 12, 2010
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 0.2, May 22, 2014
  */
 public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
