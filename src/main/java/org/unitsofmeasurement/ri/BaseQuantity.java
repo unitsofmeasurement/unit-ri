@@ -109,7 +109,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	 */
 	// private double maximum;
 
-	protected BaseQuantity(Number number, Unit<Q> unit) {
+	public BaseQuantity(Number number, Unit<Q> unit) {
 		super(unit);
 		value = number;
 		isExact = false;

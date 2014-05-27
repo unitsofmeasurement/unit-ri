@@ -17,9 +17,6 @@ package org.unitsofmeasurement.ri.quantity;
 
 import static org.unitsofmeasurement.ri.util.SI.*;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -31,7 +28,7 @@ import javax.measure.function.BiFactory;
 import javax.measure.quantity.*;
 
 import org.unitsofmeasurement.ri.AbstractMeasurement;
-import org.unitsofmeasurement.ri.AbstractUnit;
+import org.unitsofmeasurement.ri.BaseQuantity;
 import org.unitsofmeasurement.ri.util.SI;
 
 
@@ -214,9 +211,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
         @Override
         @SuppressWarnings("unchecked")
         public Q create(final Number value, final Unit<Q> unit) {
-            //System.out.println("Type: " + type);
-            return (Q) Proxy.newProxyInstance(type.getClassLoader(),
-                    new Class<?>[]{type}, new GenericHandler<Q>(value, unit));
+            return (Q) new BaseQuantity<Q>(value, unit);
         }
 
         @Override
@@ -225,58 +220,4 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
         }
     }
 
-    /**
-     * The method invocation handler for implementation backed by any kind of {@link Number}.
-     * This is a fall back used when no specialized handler is available for the number type.
-     */
-    private static final class GenericHandler<Q extends Quantity<Q>>  implements InvocationHandler {
-        final Unit<Q> unit;
-        final Number value;
-
-        GenericHandler(final Number value, final Unit<Q> unit) {
-            this.unit = unit;
-            this.value = value;
-        }
-
-        @SuppressWarnings("unchecked")
-        @Override
-        public Object invoke(final Object proxy, final Method method, final Object[] args) {
-            final String name = method.getName();
-            if (name.equals("doubleValue")) { // Most frequent.
-	          final Unit<Q> toUnit = (Unit<Q>) args[0];
-	          if ((toUnit == unit) || (toUnit.equals(unit)))
-	                return value.doubleValue(); // Returns value directly.
-                  return unit.getConverterTo(toUnit).convert(value.doubleValue());
-            } else if (name.equals("longValue")) { 
-	          final Unit<Q> toUnit = (Unit<Q>) args[0];
-	          if ((toUnit == unit) || (toUnit.equals(unit)))
-	                return value.longValue(); // Returns value directly.
-                  double doubleValue = unit.getConverterTo(toUnit).convert(value.doubleValue());
-                  if ((doubleValue < Long.MIN_VALUE) || (doubleValue > Long.MAX_VALUE))
-                      throw new ArithmeticException("Overflow: " + doubleValue + " cannot be represented as a long");
-                  return (long) doubleValue;                
-            } else if (name.equals("getValue")) {
-                 return value;
-            } else if (name.equals("getUnit")) {
-                return unit;
-            } else if (name.equals("toString")) {
-                return String.valueOf(value) + ' ' + unit;
-            } else if (name.equals("hashCode")) {
-                return value.hashCode() * 31 + unit.hashCode();
-            } else if (name.equals("equals")) {
-                final Object obj = args[0];
-                if (!(obj instanceof AbstractMeasurement))
-                    return false;
-                final AbstractMeasurement<Q> that = (AbstractMeasurement<Q>) obj;
-                if (!unit.isCompatible((AbstractUnit<?>) that.getUnit()))
-                    return false;
-                return value.doubleValue() == (that).doubleValue(unit);
-            } else if (name.equals("compareTo")) {
-                final AbstractMeasurement<Q> that = (AbstractMeasurement<Q>) args[0];
-                return Double.compare(value.doubleValue(), that.doubleValue(unit));
-            } else {
-                throw new UnsupportedOperationException(name);
-            }
-        }
-    }
 }
