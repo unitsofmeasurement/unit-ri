@@ -15,11 +15,41 @@
  */
 package org.unitsofmeasurement.ri.quantity;
 
-import static org.unitsofmeasurement.ri.util.SI.*;
+import static org.unitsofmeasurement.ri.util.SI.AMPERE;
+import static org.unitsofmeasurement.ri.util.SI.AMPERE_TURN;
+import static org.unitsofmeasurement.ri.util.SI.BECQUEREL;
+import static org.unitsofmeasurement.ri.util.SI.BIT;
+import static org.unitsofmeasurement.ri.util.SI.CANDELA;
+import static org.unitsofmeasurement.ri.util.SI.COULOMB;
+import static org.unitsofmeasurement.ri.util.SI.CUBIC_METRE;
+import static org.unitsofmeasurement.ri.util.SI.FARAD;
+import static org.unitsofmeasurement.ri.util.SI.GRAY;
+import static org.unitsofmeasurement.ri.util.SI.HENRY;
+import static org.unitsofmeasurement.ri.util.SI.HERTZ;
+import static org.unitsofmeasurement.ri.util.SI.JOULE;
+import static org.unitsofmeasurement.ri.util.SI.KATAL;
+import static org.unitsofmeasurement.ri.util.SI.KELVIN;
+import static org.unitsofmeasurement.ri.util.SI.KILOGRAM;
+import static org.unitsofmeasurement.ri.util.SI.LUMEN;
+import static org.unitsofmeasurement.ri.util.SI.LUX;
+import static org.unitsofmeasurement.ri.util.SI.METRE;
+import static org.unitsofmeasurement.ri.util.SI.METRES_PER_SECOND;
+import static org.unitsofmeasurement.ri.util.SI.METRES_PER_SQUARE_SECOND;
+import static org.unitsofmeasurement.ri.util.SI.MOLE;
+import static org.unitsofmeasurement.ri.util.SI.NEWTON;
+import static org.unitsofmeasurement.ri.util.SI.OHM;
+import static org.unitsofmeasurement.ri.util.SI.PASCAL;
+import static org.unitsofmeasurement.ri.util.SI.RADIAN;
+import static org.unitsofmeasurement.ri.util.SI.SECOND;
+import static org.unitsofmeasurement.ri.util.SI.SIEMENS;
+import static org.unitsofmeasurement.ri.util.SI.SIEVERT;
+import static org.unitsofmeasurement.ri.util.SI.SQUARE_METRE;
+import static org.unitsofmeasurement.ri.util.SI.STERADIAN;
+import static org.unitsofmeasurement.ri.util.SI.TESLA;
+import static org.unitsofmeasurement.ri.util.SI.VOLT;
+import static org.unitsofmeasurement.ri.util.SI.WATT;
+import static org.unitsofmeasurement.ri.util.SI.WEBER;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -28,10 +58,44 @@ import java.util.logging.Logger;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.function.BiFactory;
-import javax.measure.quantity.*;
+import javax.measure.quantity.Acceleration;
+import javax.measure.quantity.AmountOfSubstance;
+import javax.measure.quantity.Angle;
+import javax.measure.quantity.Area;
+import javax.measure.quantity.CatalyticActivity;
+import javax.measure.quantity.Dimensionless;
+import javax.measure.quantity.ElectricCapacitance;
+import javax.measure.quantity.ElectricCharge;
+import javax.measure.quantity.ElectricConductance;
+import javax.measure.quantity.ElectricCurrent;
+import javax.measure.quantity.ElectricInductance;
+import javax.measure.quantity.ElectricPotential;
+import javax.measure.quantity.ElectricResistance;
+import javax.measure.quantity.Energy;
+import javax.measure.quantity.Force;
+import javax.measure.quantity.Frequency;
+import javax.measure.quantity.Illuminance;
+import javax.measure.quantity.Information;
+import javax.measure.quantity.Length;
+import javax.measure.quantity.LuminousFlux;
+import javax.measure.quantity.LuminousIntensity;
+import javax.measure.quantity.MagneticFlux;
+import javax.measure.quantity.MagneticFluxDensity;
+import javax.measure.quantity.MagnetomotiveForce;
+import javax.measure.quantity.Mass;
+import javax.measure.quantity.Power;
+import javax.measure.quantity.Pressure;
+import javax.measure.quantity.RadiationDoseAbsorbed;
+import javax.measure.quantity.RadiationDoseEffective;
+import javax.measure.quantity.Radioactivity;
+import javax.measure.quantity.SolidAngle;
+import javax.measure.quantity.Speed;
+import javax.measure.quantity.Temperature;
+import javax.measure.quantity.Time;
+import javax.measure.quantity.Volume;
 
 import org.unitsofmeasurement.ri.AbstractMeasurement;
-import org.unitsofmeasurement.ri.AbstractUnit;
+import org.unitsofmeasurement.ri.BaseQuantity;
 import org.unitsofmeasurement.ri.util.SI;
 
 
@@ -214,7 +278,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
         @Override
         @SuppressWarnings("unchecked")
         public Q create(final Number value, final Unit<Q> unit) {
-            return (Q) new DefaultQuantity<Q>(value, unit);
+            return (Q) new BaseQuantity<Q>(value, unit);
         }
 
         @Override
