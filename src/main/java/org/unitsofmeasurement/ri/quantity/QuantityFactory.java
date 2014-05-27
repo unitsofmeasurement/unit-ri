@@ -18,6 +18,7 @@ package org.unitsofmeasurement.ri.quantity;
 import static org.unitsofmeasurement.ri.util.SI.*;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,7 +53,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
      * Holds the current instances.
      */
     @SuppressWarnings("rawtypes")
-	private static final ConcurrentHashMap<Class, QuantityFactory> INSTANCES = new ConcurrentHashMap<Class, QuantityFactory>();
+	private static final Map<Class, QuantityFactory> INSTANCES = new ConcurrentHashMap<>();
     
     private static final Logger logger = Logger.getLogger(QuantityFactory.class.getName());
     
@@ -150,7 +151,8 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
         /**
          * The type of the quantities created by this factory.
          */
-        private final Class<Q> type;
+        @SuppressWarnings("unused")
+		private final Class<Q> type;
 
         /**
          * The metric unit for quantities created by this factory.
@@ -207,7 +209,6 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
             CLASS_TO_METRIC_UNIT.put(Volume.class, CUBIC_METRE);
         }
  
-
         @Override
         @SuppressWarnings("unchecked")
         public Q create(final Number value, final Unit<Q> unit) {
