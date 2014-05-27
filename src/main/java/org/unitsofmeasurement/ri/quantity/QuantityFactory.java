@@ -44,7 +44,7 @@ import org.unitsofmeasurement.ri.util.SI;
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 5.3 ($Revision: 458 $), $Date: 2014-04-07 21:20:00 +0200 (Mo, 07 Apr 2014) $
+ * @version 1.3, $Date: 2014-05-28 $
  */
 public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactory<Number, Unit<Q>, Q> {
 	
