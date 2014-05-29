@@ -21,8 +21,6 @@ import java.text.Format;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.io.IOException;
-import java.math.MathContext;
-
 import javax.measure.Measurement;
 import javax.measure.Unit;
 import javax.measure.format.FormatBehavior;
@@ -45,7 +43,7 @@ import org.unitsofmeasurement.ri.util.SI;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.3, $Date: 2014-04-03 03:38:25 +0200 (Do, 03 Apr 2014) $
+ * @version 0.3, $Date: 2014-05-29 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class MeasurementFormat extends Format implements Parser<CharSequence, Measurement> {
@@ -275,12 +273,14 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 			if (number == null)
 				throw new IllegalArgumentException("Number cannot be parsed");
 			Unit unit = _unitFormat.parse(csq);
-			if (number instanceof BigDecimal)
-				return AbstractMeasurement.of((BigDecimal) number, unit);
-			else if (number instanceof Long)
+//			if (number instanceof BigDecimal)
+//				return AbstractMeasurement.of((BigDecimal) number, unit);
+			if (number instanceof Long)
 				return AbstractMeasurement.of(((Long) number).longValue(), unit);
 			else if (number instanceof Double)
-				return AbstractMeasurement.of(((Double) number).doubleValue(), unit);
+				return AbstractMeasurement.of(number.doubleValue(), unit);
+			else if (number instanceof Integer)
+				return AbstractMeasurement.of(number.intValue(), unit);
 			else
 				throw new UnsupportedOperationException("Number of type "
 						+ number.getClass() + " are not supported");
@@ -312,14 +312,14 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 //						(CompoundUnit) unit, dest);
 //			else {
 				
-				if (measure.isBig()) { // TODO SE only
-					BigDecimal decimal = measure.decimalValue(unit,
-						MathContext.UNLIMITED);
-					dest.append(decimal.toString());
-				} else {
+//				if (measure.isBig()) { // TODO SE only
+//					BigDecimal decimal = measure.decimalValue(unit,
+//						MathContext.UNLIMITED);
+//					dest.append(decimal.toString());
+//				} else {
 					Number number = measure.getValue();
 					dest.append(number.toString());
-				}
+//				}
 				if (measure.getUnit().equals(SI.ONE))
 					return dest;
 				dest.append(' ');
@@ -331,7 +331,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 		@Override
 		public AbstractMeasurement<?> parse(CharSequence csq, ParsePosition cursor)
 				throws ParserException {
-			int startDecimal = cursor.getIndex();
+			int startDecimal = cursor.getIndex(); // FIXME get rid of BigDecimal here
 			while ((startDecimal < csq.length())
 					&& Character.isWhitespace(csq.charAt(startDecimal))) {
 				startDecimal++;
@@ -345,7 +345,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 					endDecimal).toString());
 			cursor.setIndex(endDecimal + 1);
 			Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
-			return AbstractMeasurement.of(decimal, unit);
+			return AbstractMeasurement.of(decimal.doubleValue(), unit);
 		}
 		
 		public AbstractMeasurement<?> parse(CharSequence csq)

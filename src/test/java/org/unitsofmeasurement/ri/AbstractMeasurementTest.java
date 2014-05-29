@@ -15,8 +15,6 @@
  */
 package org.unitsofmeasurement.ri;
 
-import java.math.BigDecimal;
-
 import javax.measure.quantity.Pressure;
 
 import org.junit.AfterClass;
@@ -46,7 +44,7 @@ public class AbstractMeasurementTest {
 
     @Test
     public void testOf() {
-    	AbstractMeasurement<Pressure> pressure = AbstractMeasurement.of(BigDecimal.ONE, PASCAL); 
+    	AbstractMeasurement<Pressure> pressure = AbstractMeasurement.of(1d, PASCAL); 
         assertEquals(PASCAL, pressure.getUnit()); // TODO: Problem with kg...
     }
 

@@ -85,7 +85,7 @@ import org.unitsofmeasurement.ri.util.SI;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.2, $Date: 2014-04-16 $
+ * @version 0.2, $Date: 2014-05-29 $
  */
 public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement<Q, Number> {
 // TODO do we want to restrict Measurement to Number here? 
@@ -160,8 +160,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
         if (unit.equals(this.getUnit())) {
             return this;
         }
-        //return AbstractMeasurement.of(doubleValue(unit), unit);
-        return AbstractMeasurement.of(decimalValue(unit, MathContext.UNLIMITED), unit);
+        return AbstractMeasurement.of(doubleValue(unit), unit);
     }
 
     /**
@@ -184,7 +183,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
         if (unit.equals(this.getUnit())) {
             return this;
         }
-        return AbstractMeasurement.of(decimalValue(unit, ctx), unit);
+        return AbstractMeasurement.of(doubleValue(unit), unit);
     }
 
     /**
@@ -639,100 +638,4 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 			return false;
 		}
     }
-
-    /**
-     * Returns the scalar measure for the specified <code>BigDecimal</code>
-     * stated in the specified unit.
-     *
-     * @param decimalValue the measurement value.
-     * @param unit the measurement unit.
-     * @return the corresponding <code>BigDecimal</code> measure.
-     */
-    public static <Q extends Quantity<Q>> AbstractMeasurement<Q> of(
-            BigDecimal decimalValue, Unit<Q> unit) {
-        return new DecimalMeasurement<Q>(decimalValue, unit);
-    }
-
-    private static final class DecimalMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
-
-        /**
-		 * 
-		 */
-		private static final long serialVersionUID = 6504081836032983882L;
-		final BigDecimal value;
-
-        public DecimalMeasurement(BigDecimal value, Unit<T> unit) {
-        	super(unit);
-        	this.value = value;
-        }
-
-        @Override
-        public BigDecimal getValue() {
-            return value;
-        }
-
-        // Implements AbstractMeasurement
-        public double doubleValue(Unit<T> unit) {
-            return (unit.equals(unit)) ? value.doubleValue() : unit.getConverterTo(unit).convert(value.doubleValue());
-        }
-
-        // Implements AbstractMeasurement
-        public BigDecimal decimalValue(Unit<T> unit, MathContext ctx)
-                throws ArithmeticException {
-            return (super.unit.equals(unit)) ? value :
-            	((AbstractConverter)unit.getConverterTo(unit)).convert(value, ctx);
-        }
-
-		@Override
-		public Measurement<T, Number> add(Measurement<T, Number> that) {
-			return of(value.add((BigDecimal)that.getValue()), getUnit()); // TODO use shift of the unit?
-		}
-
-		@Override
-		public Measurement<T, Number> substract(Measurement<T, Number> that) {
-			return of(value.subtract((BigDecimal)that.getValue()), getUnit()); // TODO use shift of the unit?
-		}
-
-		@Override
-		public AbstractMeasurement<?> multiply(Measurement<?, Number> that) {
-			return of(value.multiply((BigDecimal)that.getValue()), 
-					getUnit().multiply(that.getUnit()));
-		}
-
-		@Override
-		public Measurement<?, Number> multiply(Number that) {
-			return of(value.multiply((BigDecimal)that), getUnit());
-		}
-
-		@Override
-		public Measurement<?, Number> divide(Measurement<?, Number> that) {
-			return of(value.divide((BigDecimal)that.getValue()), getUnit());
-		}
-
-		@Override
-		public Measurement<?, Number> divide(Number that) {
-			return of(value.divide((BigDecimal)that), getUnit());
-		}
-		
-		@SuppressWarnings("unchecked")
-		@Override
-		public AbstractMeasurement<T> inverse() {
-			//return of(value.negate(), getUnit());
-			return (AbstractMeasurement<T>) of(value, getUnit().inverse());
-		}
-
-		protected long longValue(Unit<T> unit) {
-	        double result = doubleValue(unit);
-	        if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
-	            throw new ArithmeticException("Overflow (" + result + ")");
-	        }
-	        return (long) result;
-		}
-
-		@Override
-		public boolean isBig() {
-			return false;
-		}
-    }   
-
 }

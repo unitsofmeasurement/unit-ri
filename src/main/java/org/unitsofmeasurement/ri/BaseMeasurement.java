@@ -243,10 +243,10 @@ public class BaseMeasurement<Q extends Quantity<Q>> extends AbstractMeasurement<
 
 	@Override
 	public Measurement<?, Number> divide(Number that) {
-		if (value instanceof BigDecimal && that instanceof BigDecimal) {
-			return of(((BigDecimal)value).divide((BigDecimal)that), 
-                                getUnit());
-		}
+//		if (value instanceof BigDecimal && that instanceof BigDecimal) {
+//			return of(((BigDecimal)value).divide((BigDecimal)that), 
+//                                getUnit());
+//		}
 		return of(getValue().doubleValue() / that.doubleValue(), 
                         getUnit());	
 	}
