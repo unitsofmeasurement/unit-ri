@@ -245,10 +245,10 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	@Override
 	public Measurement<?, Number> divide(Number that) {
 		// TODO may use isBig() here, too
-		if (value instanceof BigDecimal && that instanceof BigDecimal) {
-			return of(((BigDecimal)value).divide((BigDecimal)that), 
-                                getUnit());
-		}
+//		if (value instanceof BigDecimal && that instanceof BigDecimal) {
+//			return of(((BigDecimal)value).divide((BigDecimal)that), 
+//                                getUnit());
+//		}
 		return of(getValue().doubleValue() / that.doubleValue(), 
                         getUnit());	
 	}
@@ -261,17 +261,17 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		return m;
 	}
 
-	@Override
-	public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
-			throws ArithmeticException {
-		if (value instanceof BigDecimal) {
-                    return (BigDecimal)value;
-                }
-                if (value instanceof BigInteger) {
-                    return new BigDecimal((BigInteger)value);
-                }
-		return BigDecimal.valueOf(value.doubleValue());
-	}
+//	@Override
+//	public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
+//			throws ArithmeticException {
+//		if (value instanceof BigDecimal) {
+//                    return (BigDecimal)value;
+//                }
+//                if (value instanceof BigInteger) {
+//                    return new BigDecimal((BigInteger)value);
+//                }
+//		return BigDecimal.valueOf(value.doubleValue());
+//	}
 
 	@Override
 	public int compareTo(BaseQuantity<Q> o) {

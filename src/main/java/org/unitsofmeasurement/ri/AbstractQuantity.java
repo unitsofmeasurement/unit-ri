@@ -17,8 +17,6 @@ package org.unitsofmeasurement.ri;
 
 import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
 import java.text.ParsePosition;
 
 import javax.measure.Measurement;
@@ -160,30 +158,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
             return this;
         }
         //return AbstractMeasurement.of(doubleValue(unit), unit);
-        return AbstractQuantity.of(decimalValue(unit, MathContext.UNLIMITED), unit);
-    }
-
-    /**
-     * Returns this measure after conversion to specified unit. The default
-     * implementation returns
-     * <code>Measure.valueOf(decimalValue(unit, ctx), unit)</code>. If this
-     * measure is already stated in the specified unit, then this measure is
-     * returned and no conversion is performed.
-     *
-     * @param unit the unit in which the returned measure is stated.
-     * @param ctx the math context to use for conversion.
-     * @return this measure or a new measure equivalent to this measure but
-     *         stated in the specified unit.
-     * @throws ArithmeticException if the result is inexact but the rounding
-     *         mode is <code>UNNECESSARY</code> or
-     *         <code>mathContext.precision == 0</code> and the quotient has
-     *         a non-terminating decimal expansion.
-     */
-    public AbstractQuantity<Q> to(Unit<Q> unit, MathContext ctx) {
-        if (unit.equals(this.getUnit())) {
-            return this;
-        }
-        return AbstractQuantity.of(decimalValue(unit, ctx), unit);
+        return AbstractQuantity.of(doubleValue(unit), unit);
     }
 
     /**
@@ -274,9 +249,6 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
         //return MeasureFormat.getStandard().format(this); TODO improve MeasureFormat
     	return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
     }
-
-    public abstract BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
-            throws ArithmeticException;
     
     public abstract  double doubleValue(Unit<Q> unit)
             throws ArithmeticException;
@@ -389,13 +361,6 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
             return (super.unit.equals(unit)) ? value : super.unit.getConverterTo(unit).convert(value);
         }
 
-        // Implements Measurement
-        public BigDecimal decimalValue(Unit<T> unit, MathContext ctx)
-                throws ArithmeticException {
-            BigDecimal decimal = BigDecimal.valueOf(value);
-            return (super.unit.equals(unit)) ? decimal : ((AbstractConverter)super.unit.getConverterTo(unit)).convert(decimal, ctx);
-        }
-
 		@Override
 		public long longValue(Unit<T> unit) {
 	        double result = doubleValue(unit);
@@ -490,13 +455,6 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
             return (super.unit.equals(unit)) ? value : super.unit.getConverterTo(unit).convert(value);
         }
 
-        // Implements AbstractMeasurement
-        public BigDecimal decimalValue(Unit<T> unit, MathContext ctx)
-                throws ArithmeticException {
-            BigDecimal decimal = BigDecimal.valueOf(value); // TODO check value if it is a BD, otherwise use different converter
-            return (super.unit.equals(unit)) ? decimal : ((AbstractConverter)super.unit.getConverterTo(unit)).convert(decimal, ctx);
-        }
-
 		public long longValue(Unit<T> unit) {
 	        double result = doubleValue(unit);
 	        if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
@@ -582,13 +540,6 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
             return (super.unit.equals(unit)) ? value : super.unit.getConverterTo(unit).convert(value);
         }
 
-        @Override
-        public BigDecimal decimalValue(Unit<T> unit, MathContext ctx)
-                throws ArithmeticException {
-            BigDecimal decimal = BigDecimal.valueOf(value); // TODO check value if it is a BD, otherwise use different converter
-            return (super.unit.equals(unit)) ? decimal : ((AbstractConverter)super.unit.getConverterTo(unit)).convert(decimal, ctx);
-        }
-
 		@Override
 		public long longValue(Unit<T> unit) {
 	        double result = doubleValue(unit);
@@ -639,100 +590,4 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 			return false;
 		}
     }
-
-    /**
-     * Returns the scalar measure for the specified <code>BigDecimal</code>
-     * stated in the specified unit.
-     *
-     * @param decimalValue the measurement value.
-     * @param unit the measurement unit.
-     * @return the corresponding <code>BigDecimal</code> measure.
-     */
-    public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(
-            BigDecimal decimalValue, Unit<Q> unit) {
-        return new DecimalQuantity<Q>(decimalValue, unit);
-    }
-    
-    private static final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
-
-        /**
-		 * 
-		 */
-//		private static final long serialVersionUID = 6504081836032983882L;
-		final BigDecimal value;
-
-        public DecimalQuantity(BigDecimal value, Unit<T> unit) {
-        	super(unit);
-        	this.value = value;
-        }
-
-        @Override
-        public BigDecimal getValue() {
-            return value;
-        }
-
-        // Implements AbstractMeasurement
-        public double doubleValue(Unit<T> unit) {
-            return (unit.equals(unit)) ? value.doubleValue() : unit.getConverterTo(unit).convert(value.doubleValue());
-        }
-
-        // Implements AbstractMeasurement
-        public BigDecimal decimalValue(Unit<T> unit, MathContext ctx)
-                throws ArithmeticException {
-            return (super.unit.equals(unit)) ? value :
-            	((AbstractConverter)unit.getConverterTo(unit)).convert(value, ctx);
-        }
-
-		@Override
-		public Measurement<T, Number> add(Measurement<T, Number> that) {
-			return of(value.add((BigDecimal)that.getValue()), getUnit()); // TODO use shift of the unit?
-		}
-
-		@Override
-		public Measurement<T, Number> substract(Measurement<T, Number> that) {
-			return of(value.subtract((BigDecimal)that.getValue()), getUnit()); // TODO use shift of the unit?
-		}
-
-		@Override
-		public AbstractQuantity<?> multiply(Measurement<?, Number> that) {
-			return of(value.multiply((BigDecimal)that.getValue()), 
-					getUnit().multiply(that.getUnit()));
-		}
-
-		@Override
-		public Measurement<?, Number> multiply(Number that) {
-			return of(value.multiply((BigDecimal)that), getUnit());
-		}
-
-		@Override
-		public Measurement<?, Number> divide(Measurement<?, Number> that) {
-			return of(value.divide((BigDecimal)that.getValue()), getUnit());
-		}
-
-		@Override
-		public Measurement<?, Number> divide(Number that) {
-			return of(value.divide((BigDecimal)that), getUnit());
-		}
-		
-		@SuppressWarnings("unchecked")
-		@Override
-		public AbstractQuantity<T> inverse() {
-			//return of(value.negate(), getUnit());
-			return (AbstractQuantity<T>) of(value, getUnit().inverse());
-		}
-
-		protected long longValue(Unit<T> unit) {
-	        double result = doubleValue(unit);
-	        if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
-	            throw new ArithmeticException("Overflow (" + result + ")");
-	        }
-	        return (long) result;
-		}
-
-		@Override
-		public boolean isBig() {
-			return true;
-		}
-    }   
-
 }

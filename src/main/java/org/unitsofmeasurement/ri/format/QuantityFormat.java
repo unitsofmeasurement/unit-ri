@@ -21,8 +21,6 @@ import java.text.Format;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.io.IOException;
-import java.math.MathContext;
-
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.FormatBehavior;
@@ -45,7 +43,7 @@ import org.unitsofmeasurement.ri.util.SI;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, $Date: 2014-02-07 22:28:20 +0100 (Fr, 07 Feb 2014) $
+ * @version 0.2, $Date: 2014-02-07 22:28:20 +0100 (Fr, 07 Feb 2014) $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat extends Format implements Parser<CharSequence, Quantity> {
@@ -314,14 +312,14 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 //						(CompoundUnit) unit, dest);
 //			else {
 				
-				if (measure.isBig()) { // TODO SE only
-					BigDecimal decimal = measure.decimalValue(unit,
-						MathContext.UNLIMITED);
-					dest.append(decimal.toString());
-				} else {
+//				if (measure.isBig()) { // TODO SE only
+//					BigDecimal decimal = measure.decimalValue(unit,
+//						MathContext.UNLIMITED);
+//					dest.append(decimal.toString());
+//				} else {
 					Number number = measure.getValue();
 					dest.append(number.toString());
-				}
+//				}
 				if (measure.getUnit().equals(SI.ONE))
 					return dest;
 				dest.append(' ');
@@ -333,7 +331,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 		@Override
 		public AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
 				throws ParserException {
-			int startDecimal = cursor.getIndex();
+			int startDecimal = cursor.getIndex(); // FIXME get rid of BigDecimal here
 			while ((startDecimal < csq.length())
 					&& Character.isWhitespace(csq.charAt(startDecimal))) {
 				startDecimal++;
@@ -347,7 +345,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 					endDecimal).toString());
 			cursor.setIndex(endDecimal + 1);
 			Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
-			return AbstractQuantity.of(decimal, unit);
+			return AbstractQuantity.of(decimal.doubleValue(), unit);
 		}
 		
 		public AbstractQuantity<?> parse(CharSequence csq)
