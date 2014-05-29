@@ -83,9 +83,11 @@ import org.unitsofmeasurement.ri.util.SI;
  * <p> All instances of this class shall be immutable.</p>
  * 
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.3, $Date: 2014-04-23 $
+ * @version 0.3, $Date: 2014-05-29 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q> {
+	
+	// TODO should we add LongQuantity?
 	
     /**
 	 * 
