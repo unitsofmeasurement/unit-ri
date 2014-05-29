@@ -731,7 +731,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 
 		@Override
 		public boolean isBig() {
-			return false;
+			return true;
 		}
     }   
 
