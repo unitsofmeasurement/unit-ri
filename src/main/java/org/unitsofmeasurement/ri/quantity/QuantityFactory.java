@@ -28,7 +28,7 @@ import javax.measure.Unit;
 import javax.measure.function.BiFactory;
 import javax.measure.quantity.*;
 
-import org.unitsofmeasurement.ri.AbstractMeasurement;
+import org.unitsofmeasurement.ri.AbstractQuantity;
 import org.unitsofmeasurement.ri.BaseQuantity;
 import org.unitsofmeasurement.ri.util.SI;
 
@@ -78,7 +78,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
 	
 	            factory = INSTANCES.get(type2);
 	            if (factory != null) return factory;
-	            if (!AbstractMeasurement.class.isAssignableFrom(type2))
+	            if (!AbstractQuantity.class.isAssignableFrom(type2))
 	                // This exception is not documented because it should never happen if the
 	                // user don't try to trick the Java generic types system with unsafe cast.
 	                throw new ClassCastException();
@@ -87,7 +87,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
         	 } else {
                  factory = INSTANCES.get(type);
                  if (factory != null) return factory;
-                 if (!AbstractMeasurement.class.isAssignableFrom(type))
+                 if (!AbstractQuantity.class.isAssignableFrom(type))
                      // This exception is not documented because it should never happen if the
                      // user don't try to trick the Java generic types system with unsafe cast.
                      throw new ClassCastException();
@@ -116,7 +116,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
      * @param factory the quantity factory
      */
     protected static <Q extends Quantity<Q>>  void setInstance(final Class<Q> type, QuantityFactory<Q> factory) {
-        if (!AbstractMeasurement.class.isAssignableFrom(type))
+        if (!AbstractQuantity.class.isAssignableFrom(type))
             // This exception is not documented because it should never happen if the
             // user don't try to trick the Java generic types system with unsafe cast.
             throw new ClassCastException();
@@ -142,7 +142,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
     
     /**
      * The default factory implementation. This factory uses reflection for providing
-     * a default implementation for every {@link AbstractMeasurement} sub-types.
+     * a default implementation for every {@link AbstractQuantity} sub-types.
      *
      * @param <Q> The type of the quantity
      */

@@ -29,7 +29,7 @@ import javax.measure.function.UnitConverter;
 import org.unitsofmeasurement.ri.function.AbstractConverter;
 
 /**
- * An amount of quantity, consisting of a Number and a Unit. BaseMeasurement
+ * An amount of quantity, consisting of a Number and a Unit. BaseQuantity
  * objects are immutable.
  * 
  * @see AbstractQuantity
@@ -198,8 +198,8 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public BaseQuantity<Q> add(AbstractMeasurement<Q> that) {
-		final AbstractMeasurement<Q> thatToUnit = that.to(getUnit());
+	public BaseQuantity<Q> add(AbstractQuantity<Q> that) {
+		final AbstractQuantity<Q> thatToUnit = that.to(getUnit());
 		return new BaseQuantity(this.getValue().doubleValue()
 				+ thatToUnit.getValue().doubleValue(), 
                                   getUnit());
