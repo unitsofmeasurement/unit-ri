@@ -230,25 +230,21 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	}
         
         @Override
-	public BaseQuantity<?> multiply(Number that) {
+	public BaseQuantity<Q> multiply(Number that) {
 		return (BaseQuantity<Q>) of((getValue().doubleValue() * that
 				.doubleValue()), getUnit());	
 	}
         
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Measurement<?, Number> divide(Measurement<?, Number> that) {
+	public Quantity<Q> divide(Quantity<?> that) {
 		final Unit<?> unit = getUnit().divide(that.getUnit());
-		return of((getValue().doubleValue() / that.getValue()
+		return new BaseQuantity((getValue().doubleValue() / that.getValue()
 				.doubleValue()), unit);	
 	}
 
 	@Override
-	public Measurement<?, Number> divide(Number that) {
-		// TODO may use isBig() here, too
-//		if (value instanceof BigDecimal && that instanceof BigDecimal) {
-//			return of(((BigDecimal)value).divide((BigDecimal)that), 
-//                                getUnit());
-//		}
+	public Quantity<Q> divide(Number that) {
 		return of(getValue().doubleValue() / that.doubleValue(), 
                         getUnit());	
 	}

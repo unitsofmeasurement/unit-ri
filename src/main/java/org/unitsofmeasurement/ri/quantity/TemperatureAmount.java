@@ -130,19 +130,19 @@ public final class TemperatureAmount extends BaseQuantity<Temperature>
 	// }
 
 	@Override
-	public BaseQuantity<?> multiply(Number that) {
+	public TemperatureAmount multiply(Number that) {
 		return new TemperatureAmount(value * that.doubleValue(),
 				getUnit());
 	}
 
 	@Override
-	public Measurement<?, Number> divide(Number that) {
+	public TemperatureAmount divide(Number that) {
 		return divide((Double) that);
 	}
 
 	@Override
 	public boolean isBig() {
-		return true;
+		return false;
 	}
 
 //	@Override

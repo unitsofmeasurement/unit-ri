@@ -63,17 +63,18 @@ class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 
 	@Override
-	public Measurement<?, Number> multiply(Number that) {
+	public Quantity<T> multiply(Number that) {
 		return of(value * that.doubleValue(), getUnit());
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Measurement<?, Number> divide(Measurement<?, Number> that) {
-		return of(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
+	public Quantity<?> divide(Quantity<?> that) {
+		return new DoubleQuantity(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
 	}
 	
 	@Override
-	public Measurement<?, Number> divide(Number that) {
+	public Quantity<T> divide(Number that) {
 		return of(value / that.doubleValue(), getUnit());
 	}
 

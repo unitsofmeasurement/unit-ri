@@ -422,12 +422,11 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 		}
 
 		@Override
-		public Measurement<?, Number> multiply(Number that) {
+		public Measurement<T, Number> multiply(Number that) {
 			return of(value * that.intValue(), 
 					getUnit().multiply(that.intValue()));
 		}
 
-		@Override
 		public Measurement<?, Number> divide(Measurement<?, Number> that) {
 			return of((double)value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
 		}
@@ -444,7 +443,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 		}
 
 		@Override
-		public Measurement<?, Number> divide(Number that) {
+		public Measurement<T, Number> divide(Number that) {
 			return of(value / that.intValue(), getUnit());
 		}
 
@@ -520,12 +519,11 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 		}
 
 		@Override
-		public Measurement<?, Number> multiply(Number that) {
+		public Measurement<T, Number> multiply(Number that) {
 			return of(value * that.floatValue(), 
 					getUnit().multiply(that.floatValue()));
 		}
 
-		@Override
 		public Measurement<?, Number> divide(Measurement<?, Number> that) {
 			return of(value / that.getValue().floatValue(), getUnit().divide(that.getUnit()));
 		}
@@ -542,7 +540,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 		}
 
 		@Override
-		public Measurement<?, Number> divide(Number that) {
+		public Measurement<T, Number> divide(Number that) {
 			return of(value / that.floatValue(), getUnit());
 		}
     }
@@ -613,17 +611,16 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 		}
 
 		@Override
-		public Measurement<?, Number> multiply(Number that) {
+		public Measurement<T, Number> multiply(Number that) {
 			return of(value * that.doubleValue(), getUnit());
 		}
 
-		@Override
 		public Measurement<?, Number> divide(Measurement<?, Number> that) {
 			return of(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
 		}
 		
 		@Override
-		public Measurement<?, Number> divide(Number that) {
+		public Measurement<T, Number> divide(Number that) {
 			return of(value / that.doubleValue(), getUnit());
 		}
 

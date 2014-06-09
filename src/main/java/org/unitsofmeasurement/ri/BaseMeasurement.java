@@ -229,12 +229,11 @@ public class BaseMeasurement<Q extends Quantity<Q>> extends AbstractMeasurement<
 	}
         
         @Override
-	public BaseMeasurement<?> multiply(Number that) {
+	public BaseMeasurement<Q> multiply(Number that) {
 		return (BaseMeasurement<Q>) of((getValue().doubleValue() * that
 				.doubleValue()), getUnit());	
 	}
         
-	@Override
 	public Measurement<?, Number> divide(Measurement<?, Number> that) {
 		final Unit<?> unit = getUnit().divide(that.getUnit());
 		return of((getValue().doubleValue() / that.getValue()
@@ -242,7 +241,7 @@ public class BaseMeasurement<Q extends Quantity<Q>> extends AbstractMeasurement<
 	}
 
 	@Override
-	public Measurement<?, Number> divide(Number that) {
+	public Measurement<Q, Number> divide(Number that) {
 //		if (value instanceof BigDecimal && that instanceof BigDecimal) {
 //			return of(((BigDecimal)value).divide((BigDecimal)that), 
 //                                getUnit());

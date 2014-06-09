@@ -53,7 +53,7 @@ class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 
 	@Override
-	public IntegerQuantity<T> substract(Measurement<T, Number> that) {
+	public Quantity<T> substract(Measurement<T, Number> that) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -65,13 +65,13 @@ class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 
 	@Override
-	public Measurement<?, Number> multiply(Number that) {
+	public Quantity<T> multiply(Number that) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Measurement<?, Number> divide(Measurement<?, Number> that) {
+	public Quantity<?> divide(Quantity<?> that) {
 		return of((double)value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
 	}
 
@@ -87,7 +87,7 @@ class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 
 	@Override
-	public Measurement<?, Number> divide(Number that) {
+	public Quantity<T> divide(Number that) {
 		// TODO Auto-generated method stub
 		return null;
 	}
