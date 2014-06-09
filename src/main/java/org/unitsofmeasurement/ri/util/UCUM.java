@@ -15,7 +15,6 @@
  */
 package org.unitsofmeasurement.ri.util;
 
-import org.unitsofmeasurement.ri.AbstractUnit;
 import org.unitsofmeasurement.ri.function.PiMultiplierConverter;
 
 import javax.measure.Quantity;
@@ -37,7 +36,7 @@ import static org.unitsofmeasurement.ri.util.SIPrefix.*;
  * @author  <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @see <a href="http://www.unitsofmeasure.org">UCUM</a>
- * @version 2.4, $Date: 2014-04-06 22:44:42 +0200 (So, 06 Apr 2014) $
+ * @version 0.4, $Date: 2014-06-09 $
  */
 public final class UCUM extends AbstractSystemOfUnits {
 
@@ -628,17 +627,6 @@ public final class UCUM extends AbstractSystemOfUnits {
 //        return SI.getInstance().getUnit(quantityType);
 //    }
 
-
-    /**
-     * Adds a new unit not mapped to any specified quantity type.
-     *
-     * @param  unit the unit being added.
-     * @return <code>unit</code>.
-     */
-    private static <U extends AbstractUnit<?>>  U addUnit(U unit) {
-        INSTANCE.units.add(unit);
-        return unit;
-    }
     
     /**
      * Adds a new unit not mapped to any specified quantity type.
