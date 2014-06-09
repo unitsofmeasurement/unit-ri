@@ -15,23 +15,23 @@
  */
 package org.unitsofmeasurement.ri;
 
-import javax.measure.quantity.Pressure;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.unitsofmeasurement.ri.AbstractMeasurement;
 
-import static org.unitsofmeasurement.ri.util.SI.*;
+import javax.measure.quantity.Pressure;
+
 import static org.junit.Assert.*;
+import static org.unitsofmeasurement.ri.util.SI.PASCAL;
 
 /**
  *
  * @author Werner Keil
+ * @version 0.1
  */
-public class AbstractMeasurementTest {
+public class AbstractQuantityTest {
 
-    public AbstractMeasurementTest() {
+    public AbstractQuantityTest() {
     }
 
     @BeforeClass
@@ -44,7 +44,7 @@ public class AbstractMeasurementTest {
 
     @Test
     public void testOf() {
-    	AbstractMeasurement<Pressure> pressure = AbstractMeasurement.of(1d, PASCAL); 
+    	AbstractQuantity<Pressure> pressure = AbstractQuantity.of(Double.valueOf(1), PASCAL); 
         assertEquals(PASCAL, pressure.getUnit()); // TODO: Problem with kg...
     }
 
