@@ -33,22 +33,13 @@ import org.unitsofmeasurement.ri.util.SI;
  * <p> This class represents the immutable result of a scalar measurement stated
  *     in a known unit.</p>
  * 
- * <p> To avoid any lost of precision, known exact measure (e.g. physical 
- *     constants) should not be created from <code>double</code> constants but
- *     from their decimal representation.<br/><code>
+ * <p><code>
  *         public static final Measurement<Number, Velocity> C = AbstractMeasurement.of("299792458 m/s").asType(Velocity.class);
  *         // Speed of Light (exact).
  *    </code></p>
  * 
- * <p> Measures can be converted to different units, the conversion precision is
- *     determined by the specified {@link MathContext}.<br/><code>
- *         Measurement<Number, Velocity> milesPerHour = C.to(MILES_PER_HOUR, MathContext.DECIMAL128); // Use BigDecimal implementation.
- *         System.out.println(milesPerHour);
- * 
- *         > 670616629.3843951324266284896206156 [mi_i]/h
- *     </code>
- *     If no precision is specified <code>double</code> precision is assumed.<code>
- *         Measurement<Double, Velocity> milesPerHour = C.to(MILES_PER_HOUR); // Use double implementation (fast).
+ * <p> Quantities can be converted to different units.<br/>
+ *         Quantity<Velocity> milesPerHour = C.to(MILES_PER_HOUR); // Use double implementation (fast).
  *         System.out.println(milesPerHour);
  * 
  *         > 670616629.3843951 [mi_i]/h
@@ -82,7 +73,7 @@ import org.unitsofmeasurement.ri.util.SI;
  * <p> All instances of this class shall be immutable.</p>
  * 
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, $Date: 2014-05-29 $
+ * @version 0.4, $Date: 2014-06-10 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q> {
 	
