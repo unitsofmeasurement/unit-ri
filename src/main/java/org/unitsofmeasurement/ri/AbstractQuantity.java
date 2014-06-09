@@ -38,7 +38,7 @@ import org.unitsofmeasurement.ri.util.SI;
  *         // Speed of Light (exact).
  *    </code></p>
  * 
- * <p> Quantities can be converted to different units.<br/>
+ * <p> Quantities can be converted to different units.<br/><code>
  *         Quantity<Velocity> milesPerHour = C.to(MILES_PER_HOUR); // Use double implementation (fast).
  *         System.out.println(milesPerHour);
  * 
