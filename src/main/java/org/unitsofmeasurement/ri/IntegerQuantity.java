@@ -19,60 +19,58 @@ import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
-class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
+final class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
 	final int value;
 
-    public IntegerQuantity(int value, Unit<T> unit) {
-    	super(unit);
-    	this.value = value;
-    }
+	public IntegerQuantity(int value, Unit<T> unit) {
+		super(unit);
+		this.value = value;
+	}
 
-    @Override
-    public Integer getValue() {
-        return value;
-    }
+	@Override
+	public Integer getValue() {
+		return value;
+	}
 
-    public double doubleValue(Unit<T> unit) {
-        return (super.getUnit().equals(unit)) ? value : super.getUnit().getConverterTo(unit).convert(value);
-    }
+	public double doubleValue(Unit<T> unit) {
+		return (super.getUnit().equals(unit)) ? value : super.getUnit()
+				.getConverterTo(unit).convert(value);
+	}
 
 	@Override
 	public long longValue(Unit<T> unit) {
-        double result = doubleValue(unit);
-        if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
-            throw new ArithmeticException("Overflow (" + result + ")");
-        }
-        return (long) result;
+		double result = doubleValue(unit);
+		if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
+			throw new ArithmeticException("Overflow (" + result + ")");
+		}
+		return (long) result;
 	}
 
 	@Override
 	public Measurement<T, Number> add(Measurement<T, Number> that) {
-		// TODO Auto-generated method stub
-		return null;
+		return of(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
 	public Quantity<T> substract(Measurement<T, Number> that) {
-		// TODO Auto-generated method stub
-		return null;
+		return of(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
 	public Measurement<?, Number> multiply(Measurement<?, Number> that) {
-		// TODO Auto-generated method stub
-		return null;
+		return of(value * that.getValue().intValue(), getUnit());
 	}
 
 	@Override
 	public Quantity<T> multiply(Number that) {
-		// TODO Auto-generated method stub
-		return null;
+		return of(value * that.intValue(), getUnit());
 	}
 
 	@Override
 	public Quantity<?> divide(Quantity<?> that) {
-		return of((double)value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
+		return of((double) value / that.getValue().doubleValue(), getUnit()
+				.divide(that.getUnit()));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -88,8 +86,7 @@ class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
 	@Override
 	public Quantity<T> divide(Number that) {
-		// TODO Auto-generated method stub
-		return null;
+		return of(value / that.doubleValue(), getUnit());
 	}
 
 }

@@ -19,7 +19,7 @@ import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
-class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
+final class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
 	final float value;
 

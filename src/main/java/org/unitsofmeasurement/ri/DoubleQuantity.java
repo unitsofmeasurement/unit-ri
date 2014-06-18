@@ -19,7 +19,7 @@ import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
-class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
+final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
     final double value;
 
