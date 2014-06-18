@@ -75,18 +75,18 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 		return DEFAULT;
 	}
 
-	/**
-	 * Returns the measure format using the specified number format and unit
-	 * format (the number and unit are separated by one space).
-	 * 
-	 * @param numberFormat the number format.
-	 * @param unitFormat the unit format.
-	 * @return the corresponding format.
-	 */
-	public static QuantityFormat getInstance(NumberFormat numberFormat,
-			UnitFormat unitFormat) {
-		return new NumberSpaceUnit(numberFormat, unitFormat);
-	}
+//	/**
+//	 * Returns the measure format using the specified number format and unit
+//	 * format (the number and unit are separated by one space).
+//	 * 
+//	 * @param numberFormat the number format.
+//	 * @param unitFormat the unit format.
+//	 * @return the corresponding format.
+//	 */
+//	public static QuantityFormat getInstance(NumberFormat numberFormat,
+//			UnitFormat unitFormat) {
+//		return new NumberSpaceUnit(numberFormat, unitFormat);
+//	}
 
 	/**
 	 * Returns the culture invariant format based upon {@link BigDecimal}
@@ -249,18 +249,18 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 		}
 
 		@Override
-		public Appendable format(AbstractQuantity<?> measure, Appendable dest)
+		public Appendable format(AbstractQuantity<?> quantity, Appendable dest)
 				throws IOException {
 //			Unit unit = measure.getUnit();
 //			if (unit instanceof CompoundUnit)
 //				return formatCompound(measure.doubleValue(unit),
 //						(CompoundUnit) unit, dest);
 //			else {
-				dest.append(numberFormat.format(measure.getValue()));
-				if (measure.getUnit().equals(SI.ONE))
+				dest.append(numberFormat.format(quantity.getValue()));
+				if (quantity.getUnit().equals(SI.ONE))
 					return dest;
 				dest.append(' ');
-				return unitFormat.format(measure.getUnit(), dest);
+				return unitFormat.format(quantity.getUnit(), dest);
 //			}
 		}
 
