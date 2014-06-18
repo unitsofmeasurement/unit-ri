@@ -40,17 +40,16 @@ import org.unitsofmeasurement.ri.function.AbstractConverter;
  * @version 0.6, $Date: 2014-05-22 $
  */
 public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
-		implements Quantity<Q>, Comparable<BaseQuantity<Q>> {
-//FIXME Bug 338334 overwrite equals()
-    
+		implements Comparable<BaseQuantity<Q>> {
+	// FIXME Bug 338334 overwrite equals()
 
 	/**
 	 * 
 	 */
-//	private static final long serialVersionUID = 7312161895652321241L;
+	// private static final long serialVersionUID = 7312161895652321241L;
 
 	private final Number value;
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -91,7 +90,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	 * Indicates if this measure is big.
 	 */
 	private final boolean isBig;
-	
+
 	/**
 	 * Holds the exact value (when exact) stated in this measure unit.
 	 */
@@ -114,13 +113,12 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		value = number;
 		isExact = false;
 		isBig = false;
-    }
+	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * Measurement#doubleValue(javax.measure.Unit)
+	 * @see Measurement#doubleValue(javax.measure.Unit)
 	 */
 	public double doubleValue(Unit<Q> unit) {
 		Unit<Q> myUnit = getUnit();
@@ -130,32 +128,31 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		} catch (UnconvertibleException e) {
 			throw e;
 		} // catch (IncommensurableException e) {
-		// throw new IllegalArgumentException(e.getMessage());
-		// }
+			// throw new IllegalArgumentException(e.getMessage());
+			// }
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.eclipse.uomo.units.AbstractMeasurement#longValue(javax.measure
+	 * @see org.eclipse.uomo.units.AbstractMeasurement#longValue(javax.measure
 	 * .Unit)
 	 */
 	public long longValue(Unit<Q> unit) {
 		Unit<Q> myUnit = getUnit();
 		try {
 			UnitConverter converter = unit.getConverterToAny(myUnit);
-			if ((getValue() instanceof BigDecimal || getValue() instanceof BigInteger) 
+			if ((getValue() instanceof BigDecimal || getValue() instanceof BigInteger)
 					&& converter instanceof AbstractConverter) {
-				return (((AbstractConverter)converter).convert(
+				return (((AbstractConverter) converter).convert(
 						BigDecimal.valueOf(getValue().longValue()),
 						MathContext.DECIMAL128)).longValue();
 			} else {
-		        double result = doubleValue(unit);
-		        if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
-		            throw new ArithmeticException("Overflow (" + result + ")");
-		        }
-		        return (long) result;
+				double result = doubleValue(unit);
+				if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
+					throw new ArithmeticException("Overflow (" + result + ")");
+				}
+				return (long) result;
 			}
 		} catch (UnconvertibleException e) {
 			throw e;
@@ -185,10 +182,10 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	public boolean isExact() {
 		return isExact;
 	}
-	
+
 	/**
-	 * Indicates if this measured amount is a big number, i.E. BigDecimal or BigInteger.
-	 * In all other cases this would be false.
+	 * Indicates if this measured amount is a big number, i.E. BigDecimal or
+	 * BigInteger. In all other cases this would be false.
 	 * 
 	 * @return <code>true</code> if this measure is big; <code>false</code>
 	 *         otherwise.
@@ -196,18 +193,16 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	public boolean isBig() {
 		return isBig;
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public BaseQuantity<Q> add(AbstractQuantity<Q> that) {
 		final AbstractQuantity<Q> thatToUnit = that.to(getUnit());
 		return new BaseQuantity(this.getValue().doubleValue()
-				+ thatToUnit.getValue().doubleValue(), 
-                                  getUnit());
+				+ thatToUnit.getValue().doubleValue(), getUnit());
 	}
-	
+
 	public String toString() {
-		return  String.valueOf(getValue()) + " " 
-                        + String.valueOf(getUnit());
+		return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
 	}
 
 	@Override
@@ -225,49 +220,48 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	@Override
 	public Measurement<?, Number> multiply(Measurement<?, Number> that) {
 		final Unit<?> unit = getUnit().multiply(that.getUnit());
-		return of((getValue().doubleValue() * that.getValue()
-				.doubleValue()), unit);	
+		return of((getValue().doubleValue() * that.getValue().doubleValue()),
+				unit);
 	}
-        
-        @Override
+
+	@Override
 	public BaseQuantity<Q> multiply(Number that) {
-		return (BaseQuantity<Q>) of((getValue().doubleValue() * that
-				.doubleValue()), getUnit());	
+		return (BaseQuantity<Q>) of(
+				(getValue().doubleValue() * that.doubleValue()), getUnit());
 	}
-        
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Quantity<Q> divide(Quantity<?> that) {
 		final Unit<?> unit = getUnit().divide(that.getUnit());
 		return new BaseQuantity((getValue().doubleValue() / that.getValue()
-				.doubleValue()), unit);	
+				.doubleValue()), unit);
 	}
 
 	@Override
 	public Quantity<Q> divide(Number that) {
-		return of(getValue().doubleValue() / that.doubleValue(), 
-                        getUnit());	
+		return of(getValue().doubleValue() / that.doubleValue(), getUnit());
 	}
-	
+
 	@Override
 	public Measurement<Q, Number> inverse() {
 		@SuppressWarnings({ "rawtypes", "unchecked" })
-		final Measurement<Q, Number> m = new BaseQuantity(getValue(),
-				getUnit().inverse()); // TODO keep value same?
+		final Measurement<Q, Number> m = new BaseQuantity(getValue(), getUnit()
+				.inverse()); // TODO keep value same?
 		return m;
 	}
 
-//	@Override
-//	public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
-//			throws ArithmeticException {
-//		if (value instanceof BigDecimal) {
-//                    return (BigDecimal)value;
-//                }
-//                if (value instanceof BigInteger) {
-//                    return new BigDecimal((BigInteger)value);
-//                }
-//		return BigDecimal.valueOf(value.doubleValue());
-//	}
+	// @Override
+	// public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
+	// throws ArithmeticException {
+	// if (value instanceof BigDecimal) {
+	// return (BigDecimal)value;
+	// }
+	// if (value instanceof BigInteger) {
+	// return new BigDecimal((BigInteger)value);
+	// }
+	// return BigDecimal.valueOf(value.doubleValue());
+	// }
 
 	@Override
 	public int compareTo(BaseQuantity<Q> o) {
