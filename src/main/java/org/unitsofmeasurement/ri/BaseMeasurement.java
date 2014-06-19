@@ -36,7 +36,7 @@ import org.unitsofmeasurement.ri.function.AbstractConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.5, $Date: 2014-06-18 $
+ * @version 0.5.1, $Date: 2014-06-19 $
  */
 public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 		AbstractMeasurement<Q, V> implements Comparable<BaseMeasurement<Q, V>> {
@@ -94,18 +94,6 @@ public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 	 * Holds the exact value (when exact) stated in this measure unit.
 	 */
 	// private long exactValue;
-
-	/**
-	 * Holds the minimum value stated in this measure unit. For inexact
-	 * measures: minimum < maximum
-	 */
-	// private double minimum;
-
-	/**
-	 * Holds the maximum value stated in this measure unit. For inexact
-	 * measures: maximum > minimum
-	 */
-	// private double maximum;
 
 	protected BaseMeasurement(V number, Unit<Q> unit) {
 		super(unit);

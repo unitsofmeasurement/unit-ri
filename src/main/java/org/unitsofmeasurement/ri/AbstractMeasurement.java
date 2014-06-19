@@ -32,17 +32,10 @@ import org.unitsofmeasurement.ri.function.AbstractConverter;
 import org.unitsofmeasurement.ri.util.SI;
 
 /**
- * <p> This class represents the immutable result of a scalar measurement stated
+ * <p> This class represents the immutable result of a measurement stated
  *     in a known unit.</p>
  * 
- * <p> To avoid any lost of precision, known exact measure (e.g. physical 
- *     constants) should not be created from <code>double</code> constants but
- *     from their decimal representation.<br/><code>
- *         public static final Measurement<Number, Velocity> C = AbstractMeasurement.of("299792458 m/s").asType(Velocity.class);
- *         // Speed of Light (exact).
- *    </code></p>
- * 
- * <p> Measures can be converted to different units, the conversion precision is
+ * <p> Measurements can be converted to different units, the conversion precision is
  *     determined by the specified {@link MathContext}.<br/><code>
  *         Measurement<Number, Velocity> milesPerHour = C.to(MILES_PER_HOUR, MathContext.DECIMAL128); // Use BigDecimal implementation.
  *         System.out.println(milesPerHour);
@@ -85,10 +78,9 @@ import org.unitsofmeasurement.ri.util.SI;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, $Date: 2014-05-29 $
+ * @version 0.3, $Date: 2014-06-19 $
  */
 public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements Measurement<Q, V> {
-// TODO do we want to restrict Measurement to Number here? 
 	
     /**
 	 * 
