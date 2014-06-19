@@ -15,7 +15,7 @@
  */
 package org.unitsofmeasurement.ri;
 
-import static org.unitsofmeasurement.ri.format.UCUMFormat.Variant.CASE_INSENSITIVE;
+import static org.unitsofmeasurement.ri.format.UCUMFormat.Variant.CASE_SENSITIVE;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -154,7 +154,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
      *         cannot be correctly parsed (e.g. not UCUM compliant).
      */
     public static AbstractUnit<?> of(CharSequence charSequence) {
-        return UCUMFormat.getInstance(CASE_INSENSITIVE).parse(charSequence);
+        return UCUMFormat.getInstance(CASE_SENSITIVE).parse(charSequence);
     }
 
     /**
@@ -175,7 +175,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
     public String toString() {
         final Appendable tmp = new StringBuilder();
         try {
-            return UCUMFormat.getInstance(CASE_INSENSITIVE).format(this, tmp).toString();
+            return UCUMFormat.getInstance(CASE_SENSITIVE).format(this, tmp).toString();
 //        	return LocalUnitFormat.getInstance().format(this, tmp).toString();
         } catch (IOException ioException) {
              throw new Error(ioException); // Should never happen.
