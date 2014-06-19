@@ -175,8 +175,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
     public String toString() {
         final Appendable tmp = new StringBuilder();
         try {
-            //return UCUMFormat.getCaseSensitiveInstance().format(this, tmp).toString();
-        	return LocalUnitFormat.getInstance().format(this, tmp).toString();
+            return UCUMFormat.getInstance(CASE_INSENSITIVE).format(this, tmp).toString();
+//        	return LocalUnitFormat.getInstance().format(this, tmp).toString();
         } catch (IOException ioException) {
              throw new Error(ioException); // Should never happen.
         } finally {
