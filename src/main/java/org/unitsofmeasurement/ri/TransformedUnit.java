@@ -21,8 +21,6 @@ import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.function.UnitConverter;
 
-import org.unitsofmeasurement.ri.model.QuantityDimension;
-
 
 /**
  * <p> This class represents the units derived from other units using
@@ -44,14 +42,14 @@ import org.unitsofmeasurement.ri.model.QuantityDimension;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.3, March 20, 2014
+ * @version 0.3, June 19, 2014
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
   
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+//	private static final long serialVersionUID = 1L;
 
 	/**
      * Holds the parent unit (always a system unit).

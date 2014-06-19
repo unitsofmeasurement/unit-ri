@@ -1,19 +1,17 @@
-/**
- *  Unit-API - Units of Measurement API for Java
- *  Copyright 2013-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
- *  contributors by the @author tag.
+/*
+ * JScience - Java(TM) Tools and Libraries for the Advancement of Sciences.
+ * Copyright (C) 2010-2013 - JScience (http://jscience.org/)
+ * All rights reserved.
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *  http://www.apache.org/licenses/LICENSE-2.0
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Permission to use, copy, modify, and distribute this software is
+ * freely granted, provided that this notice is preserved.
  */
 package org.unitsofmeasurement.ri.util;
+
+import java.util.HashMap;
+
+import javax.measure.Quantity;
+import javax.measure.quantity.*;
 
 import org.unitsofmeasurement.ri.AbstractUnit;
 import org.unitsofmeasurement.ri.AlternateUnit;
@@ -27,8 +25,6 @@ import org.unitsofmeasurement.ri.function.PiMultiplierConverter;
 import org.unitsofmeasurement.ri.function.RationalConverter;
 import org.unitsofmeasurement.ri.model.QuantityDimension;
 
-import javax.measure.Quantity;
-import javax.measure.quantity.*;
 
 /**
  * <p> This class defines all SI (Système International d'Unités) base units and
@@ -41,8 +37,7 @@ import javax.measure.quantity.*;
  * @see SIPrefixOld
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.2, December 26, 2013
+ * @version 5.1, November 17, 2013
 */
 public final class SI extends AbstractSystemOfUnits {
 
@@ -51,7 +46,13 @@ public final class SI extends AbstractSystemOfUnits {
      */
     private static final SI INSTANCE = new SI();
 
-     /**
+    /**
+     * Holds the mapping quantity to unit.
+     */
+    private final HashMap<Class<? extends Quantity>, AbstractUnit>
+            quantityToUnit = new HashMap<Class<? extends Quantity>, AbstractUnit>();
+
+    /**
      * Default constructor (prevents this class from being instantiated).
      */
     private SI() {
@@ -158,8 +159,7 @@ public final class SI extends AbstractSystemOfUnits {
      * The SI derived unit for mass quantities (standard name <code>g</code>).
      * The base unit for mass quantity is {@link #KILOGRAM}.
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-	public static final TransformedUnit<Mass> GRAM
+    public static final TransformedUnit<Mass> GRAM
             = new TransformedUnit(KILOGRAM, SIPrefix.KILO.getConverter());
 
     /**
@@ -322,8 +322,7 @@ public final class SI extends AbstractSystemOfUnits {
      * (at one atmosphere of pressure) is 0 Cel, while the boiling point is
      * 100 Cel.
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-	public static final TransformedUnit<Temperature> CELSIUS
+    public static final TransformedUnit<Temperature> CELSIUS
             = addUnit(new TransformedUnit(KELVIN, new AddConverter(273.15)));
             // Not mapping to Temperature since temperature is mapped to Kelvin.
 
@@ -597,8 +596,8 @@ public final class SI extends AbstractSystemOfUnits {
     /**
      *  An angle unit accepted for use with SI units (standard name <code>ha</code>).
      */
-//    public static final TransformedUnit<Area> HECTAR
-//            = new TransformedUnit<Area>(SQUARE_METRE, new RationalConverter(10000, 1));
+    public static final TransformedUnit<Area> HECTARE
+            = new TransformedUnit<Area>(SQUARE_METRE, new RationalConverter(10000, 1));
 
     /////////////////////
     // Collection View //
@@ -607,6 +606,12 @@ public final class SI extends AbstractSystemOfUnits {
     @Override
     public String getName() {
         return "SI";
+    }
+    
+    @SuppressWarnings("unchecked")
+	@Override
+    public <Q extends Quantity<Q>> AbstractUnit<Q> getUnit(Class<Q> quantityType) {
+        return quantityToUnit.get(quantityType);
     }
 
     /**

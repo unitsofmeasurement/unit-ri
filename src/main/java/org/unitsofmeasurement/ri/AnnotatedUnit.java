@@ -38,7 +38,7 @@ public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
     /**
      * Holds the actual unit.
      */
-    private final AbstractUnit<Q> actualUnit;
+    private final AbstractUnit<?> actualUnit;
 
     /**
      * Holds the annotation.
@@ -52,7 +52,7 @@ public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
      * @param annotation the annotation.
      * @return the annotated unit.
      */
-    public AnnotatedUnit(AbstractUnit<Q> actualUnit, String annotation) {
+    public AnnotatedUnit(AbstractUnit<?> actualUnit, String annotation) {
         this.actualUnit = (actualUnit instanceof AnnotatedUnit) ?
             ((AnnotatedUnit<Q>)actualUnit).actualUnit : actualUnit;
         this.annotation = annotation;
@@ -64,7 +64,7 @@ public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
      *
      * @return the actual unit.
      */
-    public AbstractUnit<Q> getActualUnit() {
+    public AbstractUnit<?> getActualUnit() {
         return actualUnit;
     }
 
@@ -89,7 +89,7 @@ public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
 
     @Override
     public AbstractUnit<Q> toSI() {
-        return actualUnit.getSystemUnit();
+        return (AbstractUnit<Q>) actualUnit.getSystemUnit();
     }
 
     @Override

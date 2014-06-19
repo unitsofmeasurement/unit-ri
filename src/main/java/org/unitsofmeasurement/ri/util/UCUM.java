@@ -15,6 +15,8 @@
  */
 package org.unitsofmeasurement.ri.util;
 
+import org.unitsofmeasurement.ri.AlternateUnit;
+import org.unitsofmeasurement.ri.AnnotatedUnit;
 import org.unitsofmeasurement.ri.function.PiMultiplierConverter;
 
 import javax.measure.Quantity;
@@ -218,7 +220,7 @@ public final class UCUM extends AbstractSystemOfUnits {
     /** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
     public static final Unit<Pressure> BAR = addUnit(SI.PASCAL.multiply(100000));
     /** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-    public static final Unit<Mass> ATOMIC_MASS_UNIT = addUnit(SI.UNIFIED_ATOMIC_MASS);
+    public static final Unit<Mass> ATOMIC_MASS_UNIT = addUnit(new AnnotatedUnit<Mass>(SI.UNIFIED_ATOMIC_MASS, "u"));
     /** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
     public static final Unit<Energy> ELECTRON_VOLT = addUnit(SI.ELECTRON_VOLT);
     /** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
