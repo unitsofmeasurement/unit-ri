@@ -39,7 +39,7 @@ import org.unitsofmeasurement.ri.function.AbstractConverter;
  *     
   * <p> The default model is {@link StandardModel Standard}. Applications may
  *     use one of the predefined model or create their own.
- *     [code]
+ *     <code>
  *     DimensionalModel relativistic = new DimensionalModel() {
  *         public Dimension getFundamentalDimension(QuantityDimension dimension) {
  *             if (dimension.equals(QuantityDimension.LENGTH)) return QuantityDimension.TIME; // Consider length derived from time.
@@ -50,15 +50,14 @@ import org.unitsofmeasurement.ri.function.AbstractConverter;
  *                 return super.getDimensionalTransform(dimension);
  *             }
  *     };
- *     LocalContext.enter();
  *     try {
  *         DimensionalModel.setCurrent(relativistic); // Current thread use the relativistic model.
  *         SI.KILOGRAM.getConverterToAny(SI.JOULE); // Allowed.
  *         ...
  *     } finally {
- *         LocalContext.exit();
+ *         cleanup();
  *     }
- *     [/code]</p>
+ *     </code></p>
  *     
  * @see <a href="http://en.wikipedia.org/wiki/Dimensional_analysis">Wikipedia: Dimensional Analysis</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
@@ -73,13 +72,12 @@ public abstract class DimensionalModel {
     private static Reference<DimensionalModel> Current = new SoftReference<DimensionalModel>(new StandardModel());
 
     /**
-     * Returns the physics model used by the current thread
+     * Returns a dimensional model
      * (by default an instance of {@link StandardModel}).
      *
-     * @return the getCurrent physical model.
-     * @see LocalContext
+     * @return the current physical model.
      */
-    public static DimensionalModel getCurrent() {
+    public static DimensionalModel getInstance() {
         return DimensionalModel.Current.get();
     }
 

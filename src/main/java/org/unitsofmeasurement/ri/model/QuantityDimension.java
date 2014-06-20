@@ -32,21 +32,21 @@ import org.unitsofmeasurement.ri.util.SI;
  *     quantity).</p>
  *
  * <p> The dimension associated to any given quantity are given by the
- *     OSGi published {@link PhysicsDimensionService} instances.
+ *     OSGi published {@link DimensionService} instances.
  *     For convenience, a static method {@link QuantityDimension#getInstance(Class)
  *     aggregating the results of all {@link DimensionService} instances
  *     is provided.<br/><br/>
  *     <code>
  *        QuantityDimension velocityDimension
- *            = QuantityDimension.of(Velocity.class);
+ *            = QuantityDimension.getInstance(Velocity.class);
  *     </code>
  * </p>
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.4, $Date: 2014-05-09 $
+ * @version 0.4, $Date: 2014-06-20 $
  */
-public class QuantityDimension implements Dimension {
+public final class QuantityDimension implements Dimension {
 	private static final Logger logger = Logger.getLogger(Dimension.class.getName());
 	
     /**
@@ -162,7 +162,7 @@ public class QuantityDimension implements Dimension {
      * @param  that the dimension multiplicand.
      * @return <code>this * that</code>
      */
-    public QuantityDimension multiply(QuantityDimension that) {
+    QuantityDimension multiply(QuantityDimension that) {
         return new QuantityDimension(this.pseudoUnit.multiply(that.pseudoUnit));
     }
 
@@ -182,7 +182,7 @@ public class QuantityDimension implements Dimension {
      * @param  that the dimension divisor.
      * @return <code>this.multiply(that.pow(-1))</code>
      */
-    public QuantityDimension divide(QuantityDimension that) {
+    QuantityDimension divide(QuantityDimension that) {
         return this.multiply(that.pow(-1));
     }
 
