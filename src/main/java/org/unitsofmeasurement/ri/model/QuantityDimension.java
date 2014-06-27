@@ -32,7 +32,7 @@ import org.unitsofmeasurement.ri.util.SI;
  *     quantity).</p>
  *
  * <p> The dimension associated to any given quantity are given by the
- *     OSGi published {@link DimensionService} instances.
+ *     published {@link DimensionService} instances.
  *     For convenience, a static method {@link QuantityDimension#getInstance(Class)
  *     aggregating the results of all {@link DimensionService} instances
  *     is provided.<br/><br/>
@@ -44,10 +44,10 @@ import org.unitsofmeasurement.ri.util.SI;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, $Date: 2014-06-20 $
+ * @version 0.5, $Date: 2014-06-27 $
  */
 public final class QuantityDimension implements Dimension {
-	private static final Logger logger = Logger.getLogger(Dimension.class.getName());
+	private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
 	
     /**
 	 * 
