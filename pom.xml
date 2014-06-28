@@ -14,13 +14,13 @@
 	<parent>
 		<groupId>org.unitsofmeasurement</groupId>
 		<artifactId>unitsofmeasurement-parent</artifactId>
-		<version>0.5</version>
+		<version>0.6-SNAPSHOT</version>
 	</parent>
 
 	<licenses>
 		<license>
 			<name>Apache 2.0</name>
-			<url>LICENSE</url>
+			<url>LICENSE.txt</url>
 		</license>
 	</licenses>
 
@@ -34,99 +34,10 @@
 		<maven.compile.sourceLevel>${jdkVersion}</maven.compile.sourceLevel>
 	</properties>
 
-	<!-- Developers and Contributors -->
-	<developers>
-		<developer>
-			<id>dautelle</id>
-			<name>Jean-Marie Dautelle</name>
-			<email>jean-marie@dautelle.com</email>
-			<organization>Airbus</organization>
-			<organizationUrl>http://www.airbus.com</organizationUrl>
-			<timezone>+1</timezone>
-			<roles>
-				<role>Architect</role>
-				<role>Java Developer</role>
-				<role>Spec Lead</role>
-			</roles>
-		</developer>
-		<developer>
-			<id>werner.keil</id>
-			<name>Werner Keil</name>
-			<email>werner@catmedia.us</email>
-			<organization>Creative Arts &amp; Technologies</organization>
-			<organizationUrl>http://www.catmedia.us</organizationUrl>
-			<timezone>+1</timezone>
-			<roles>
-				<role>Architect</role>
-				<role>Java Developer</role>
-				<role>Spec Lead</role>
-			</roles>
-		</developer>
-		<developer>
-			<name>Leonardo de Moura Rocha Lima</name>
-			<email>llima@v2com.mobi</email>
-			<organization>V2COM</organization>
-			<organizationUrl>http://www.v2com.mobi/</organizationUrl>
-			<timezone>-5</timezone>
-			<roles>
-				<role>Architect</role>
-				<role>Java Developer</role>
-				<role>Spec Lead</role>
-			</roles>
-		</developer>
-		<developer>
-			<id>desruisseaux</id>
-			<name>Martin Desruisseaux</name>
-			<email>desruisseaux@users.sourceforge.net</email>
-			<organization>Geomatys</organization>
-			<organizationUrl>http://www.geomatys.com</organizationUrl>
-			<timezone>+1</timezone>
-			<roles>
-				<role>Expert</role>
-				<role>Java Developer</role>
-				<role>Jenkins Admin</role>
-			</roles>
-		</developer>
-		<developer>
-			<id>karen_legrand</id>
-			<name>Karen Legrand</name>
-			<email>karen.legrand@iem.com</email>
-			<organization>Innovation Emergency Management (IEM)</organization>
-			<organizationUrl>http://www.iem.com</organizationUrl>
-			<timezone>-5</timezone>
-			<roles>
-				<role>Expert</role>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-		<developer>
-			<id>christopher.senior</id>
-			<name>Chris Senior</name>
-			<email>christopher.senior@gmail.com</email>
-			<organization>Snap-on Inc.</organization>
-			<roles>
-				<role>Expert</role>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-	</developers>
-
 	<dependencies>
 		<dependency>
 			<groupId>javax.measure</groupId>
-			<artifactId>unit-api-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.measure</groupId>
-			<artifactId>unit-api-format</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.measure</groupId>
-			<artifactId>unit-api-util</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.measure</groupId>
-			<artifactId>unit-api-quantity</artifactId>
+			<artifactId>unit-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.hamcrest</groupId>
@@ -139,6 +50,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -152,26 +64,6 @@
 				<artifactId>junit</artifactId>
 				<version>4.11</version>
 				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.measure</groupId>
-				<artifactId>unit-api-core</artifactId>
-				<version>${jsr.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.measure</groupId>
-				<artifactId>unit-api-util</artifactId>
-				<version>${jsr.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.measure</groupId>
-				<artifactId>unit-api-format</artifactId>
-				<version>${jsr.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.measure</groupId>
-				<artifactId>unit-api-quantity</artifactId>
-				<version>${jsr.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
