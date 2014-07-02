@@ -30,7 +30,7 @@
 	<properties>
 	   <jdkVersion>1.7</jdkVersion>
 		<project.build.javaVersion>${jdkVersion}</project.build.javaVersion>
-		<maven.compile.targetLevel>1.5</maven.compile.targetLevel>
+		<maven.compile.targetLevel>1.7</maven.compile.targetLevel>
 		<maven.compile.sourceLevel>${jdkVersion}</maven.compile.sourceLevel>
 	</properties>
 
