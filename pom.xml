@@ -299,7 +299,7 @@
 		<url>https://github.com/unitsofmeasurement/unit-ri.git</url>
 	</scm>
 	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/unitsofmeasurement/unit-ri/issues</url>
+		<system>JIRA</system>
+		<url>https://java.net/jira/browse/UNITSOFMEASUREMENT</url>
 	</issueManagement>
 </project>
