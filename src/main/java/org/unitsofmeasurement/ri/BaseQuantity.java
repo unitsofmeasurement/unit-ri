@@ -19,7 +19,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 
-import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.IncommensurableException;
@@ -37,7 +36,7 @@ import org.unitsofmeasurement.ri.function.AbstractConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.6, $Date: 2014-05-22 $
+ * @version 0.7, $Date: 2014-08-02 $
  */
 public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		implements Comparable<BaseQuantity<Q>> {
@@ -206,19 +205,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	}
 
 	@Override
-	public Measurement<Q, Number> add(Measurement<Q, Number> that) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Measurement<Q, Number> substract(Measurement<Q, Number> that) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Measurement<?, Number> multiply(Measurement<?, Number> that) {
+	public Quantity<?> multiply(Quantity<?> that) {
 		final Unit<?> unit = getUnit().multiply(that.getUnit());
 		return of((getValue().doubleValue() * that.getValue().doubleValue()),
 				unit);
@@ -244,9 +231,9 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	}
 
 	@Override
-	public Measurement<Q, Number> inverse() {
+	public Quantity<Q> inverse() {
 		@SuppressWarnings({ "rawtypes", "unchecked" })
-		final Measurement<Q, Number> m = new BaseQuantity(getValue(), getUnit()
+		final Quantity<Q> m = new BaseQuantity(getValue(), getUnit()
 				.inverse()); // TODO keep value same?
 		return m;
 	}
@@ -267,5 +254,17 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	public int compareTo(BaseQuantity<Q> o) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Quantity<Q> subtract(Quantity<Q> that) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Quantity<Q> add(Quantity<Q> that) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

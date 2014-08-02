@@ -15,10 +15,21 @@
  */
 package org.unitsofmeasurement.ri;
 
-import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
+/**
+ * An amount of quantity, consisting of a double and a Unit. IntegerQuantity
+ * objects are immutable.
+ * 
+ * @see AbstractQuantity
+ * @see Quantity
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @author OtÃ¡vio GonÃ§alves de Santana
+ * @param <Q>
+ *            The type of the quantity.
+ * @version 0.2, $Date: 2014-08-02 $
+ */
 final class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
 	final int value;
@@ -48,17 +59,17 @@ final class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 
 	@Override
-	public Measurement<T, Number> add(Measurement<T, Number> that) {
+	public Quantity<T> add(Quantity<T> that) {
 		return of(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
-	public Quantity<T> substract(Measurement<T, Number> that) {
+	public Quantity<T> subtract(Quantity<T> that) {
 		return of(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
-	public Measurement<?, Number> multiply(Measurement<?, Number> that) {
+	public Quantity<?> multiply(Quantity<?> that) {
 		return of(value * that.getValue().intValue(), getUnit());
 	}
 

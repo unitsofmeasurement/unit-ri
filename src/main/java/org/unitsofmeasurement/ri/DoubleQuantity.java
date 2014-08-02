@@ -15,15 +15,26 @@
  */
 package org.unitsofmeasurement.ri;
 
-import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
-final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
+/**
+ * An amount of quantity, consisting of a double and a Unit. DoubleQuantity
+ * objects are immutable.
+ * 
+ * @see AbstractQuantity
+ * @see Quantity
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @author OtÃ¡vio GonÃ§alves de Santana
+ * @param <Q>
+ *            The type of the quantity.
+ * @version 0.2, $Date: 2014-08-02 $
+ */
+final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
     final double value;
 
-    public DoubleQuantity(double value, Unit<T> unit) {
+    public DoubleQuantity(double value, Unit<Q> unit) {
     	super(unit);
         this.value = value;
     }
@@ -34,12 +45,12 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
     }
 
 
-    public double doubleValue(Unit<T> unit) {
+    public double doubleValue(Unit<Q> unit) {
         return (super.getUnit().equals(unit)) ? value : super.getUnit().getConverterTo(unit).convert(value);
     }
 
 	@Override
-	public long longValue(Unit<T> unit) {
+	public long longValue(Unit<Q> unit) {
         double result = doubleValue(unit);
         if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
             throw new ArithmeticException("Overflow (" + result + ")");
@@ -48,22 +59,22 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 
 	@Override
-	public Measurement<T, Number> add(Measurement<T, Number> that) {
+	public Quantity<Q> add(Quantity<Q> that) {
 		return of(value + that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
-	public Measurement<T, Number> substract(Measurement<T, Number> that) {
+	public Quantity<Q> subtract(Quantity<Q> that) {
 		return of(value - that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
-	public Measurement<?, Number> multiply(Measurement<?, Number> that) {
+	public Quantity<?> multiply(Quantity<?> that) {
 		return of(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
 	}
 
 	@Override
-	public Quantity<T> multiply(Number that) {
+	public Quantity<Q> multiply(Number that) {
 		return of(value * that.doubleValue(), getUnit());
 	}
 
@@ -74,14 +85,14 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 	
 	@Override
-	public Quantity<T> divide(Number that) {
+	public Quantity<Q> divide(Number that) {
 		return of(value / that.doubleValue(), getUnit());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public AbstractQuantity<T> inverse() {
-		return (AbstractQuantity<T>) of(value, getUnit().inverse());
+	public AbstractQuantity<Q> inverse() {
+		return (AbstractQuantity<Q>) of(value, getUnit().inverse());
 	}
 
 	@Override

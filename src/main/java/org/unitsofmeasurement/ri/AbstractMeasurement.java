@@ -25,11 +25,8 @@ import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
-import javax.measure.quantity.Dimensionless;
 
 import org.unitsofmeasurement.ri.format.MeasurementFormat;
-import org.unitsofmeasurement.ri.function.AbstractConverter;
-import org.unitsofmeasurement.ri.util.SI;
 
 /**
  * <p> This class represents the immutable result of a measurement stated
@@ -233,8 +230,6 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
     public int hashCode() {
         return getUnit().hashCode() + getValue().hashCode();
     }
-
-    public abstract boolean isBig();
     
     /**
      * Returns the <code>String</code> representation of this measure. The
@@ -251,10 +246,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
         //return MeasureFormat.getStandard().format(this); TODO improve MeasureFormat
     	return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
     }
-
-    public abstract BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
-            throws ArithmeticException;
-    
+ 
     public abstract  double doubleValue(Unit<Q> unit)
             throws ArithmeticException;
     

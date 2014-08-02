@@ -193,66 +193,6 @@ public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 	}
 
 	@Override
-	public Measurement<Q, V> add(Measurement<Q, V> that) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Measurement<Q, V> substract(Measurement<Q, V> that) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-//	@Override
-//	public Measurement<?, Number> multiply(Measurement<?, ?> that) {
-//		final Unit<?> unit = getUnit().multiply(that.getUnit());
-//		return of((numberValue().doubleValue() * that.getValue().doubleValue()),
-//				unit);
-//	}
-//
-//	@Override
-//	public BaseMeasurement<Q, V> multiply(Number that) {
-//		return (BaseMeasurement<Q, V>) of(
-//				(numberValue().doubleValue() * that.doubleValue()), getUnit());
-//	}
-//
-//	public Measurement<?, Number> divide(Measurement<?, Number> that) {
-//		final Unit<?> unit = getUnit().divide(that.getUnit());
-//		return of((numberValue().doubleValue() / that.getValue().doubleValue()),
-//				unit);
-//	}
-//
-//	@Override
-//	public Measurement<Q, V> divide(Number that) {
-//		// if (value instanceof BigDecimal && that instanceof BigDecimal) {
-//		// return of(((BigDecimal)value).divide((BigDecimal)that),
-//		// getUnit());
-//		// }
-//		return new BaseMeasurement(numberValue().doubleValue() / that.doubleValue(), getUnit());
-//	}
-
-	@Override
-	public Measurement<Q, V> inverse() {
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		final Measurement<Q, V> m = new BaseMeasurement(numberValue(),
-				getUnit().inverse()); // TODO keep value same?
-		return m;
-	}
-
-	@Override
-	public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
-			throws ArithmeticException {
-		if (value instanceof BigDecimal) {
-			return (BigDecimal) value;
-		}
-		if (value instanceof BigInteger) {
-			return new BigDecimal((BigInteger) value);
-		}
-		return new BigDecimal(String.valueOf(value));
-	}
-
-	@Override
 	public int compareTo(BaseMeasurement<Q, V> o) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -260,23 +200,5 @@ public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 	
 	private final Number numberValue() {
 		return Double.valueOf(String.valueOf(value));
-	}
-
-	@Override
-	public Measurement<?, V> multiply(Measurement<?, V> that) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Measurement<Q, V> multiply(V that) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Measurement<Q, V> divide(V that) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

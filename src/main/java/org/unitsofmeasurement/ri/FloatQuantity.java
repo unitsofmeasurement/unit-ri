@@ -15,10 +15,21 @@
  */
 package org.unitsofmeasurement.ri;
 
-import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
+/**
+ * An amount of quantity, consisting of a double and a Unit. FloatQuantity
+ * objects are immutable.
+ * 
+ * @see AbstractQuantity
+ * @see Quantity
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @author OtÃ¡vio GonÃ§alves de Santana
+ * @param <Q>
+ *            The type of the quantity.
+ * @version 0.2, $Date: 2014-08-02 $
+ */
 final class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
 	final float value;
@@ -47,18 +58,18 @@ final class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 
 	@Override
-	public AbstractQuantity<T> add(Measurement<T, Number> that) {
+	public AbstractQuantity<T> add(Quantity<T> that) {
 		return of(value + that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
-	public AbstractQuantity<T> substract(Measurement<T, Number> that) {
+	public AbstractQuantity<T> subtract(Quantity<T> that) {
 		return of(value - that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public AbstractQuantity<T> multiply(Measurement<?, Number> that) {
+	public AbstractQuantity<T> multiply(Quantity<?> that) {
 		return (AbstractQuantity<T>) of(value * that.getValue().floatValue(), 
 				getUnit().multiply(that.getUnit()));
 	}
