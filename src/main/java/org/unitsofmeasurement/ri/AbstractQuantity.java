@@ -165,7 +165,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      * @return <code>Double.compare(this.doubleValue(getUnit()),
      *         that.doubleValue(getUnit()))</code>
      */
-    public int compareTo(Measurement<Q, Number> that) {
+    public int compareTo(Quantity<Q> that) {
         Unit<Q> unit = getUnit();
         return Double.compare(doubleValue(unit), that.getValue().doubleValue());
     }

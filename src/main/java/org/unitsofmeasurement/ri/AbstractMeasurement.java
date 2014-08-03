@@ -20,6 +20,8 @@ import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.ParsePosition;
+import java.util.Comparator;
+import java.util.Objects;
 
 import javax.measure.Measurement;
 import javax.measure.Quantity;
@@ -84,6 +86,28 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
 	 */
 //	private static final long serialVersionUID = -4993173119977931016L;
     
+	@SuppressWarnings("hiding")
+	private static final class OurComparator<Measurement> implements Comparator<Measurement> {
+		@SuppressWarnings("rawtypes")
+		private static Comparator instance = null;
+		
+		@Override
+		public int compare(Object o1, Object o2) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+		
+		@SuppressWarnings("rawtypes")
+		static Comparator getInstance() {
+			if (instance == null) {
+				instance = new OurComparator();
+			}
+			return instance;
+		}
+	}
+
+	private static final Comparator<Measurement> DEFAULT_COMPARATOR = OurComparator.getInstance();
+	
 	private final Unit<Q> unit;
 	
 	/**
@@ -176,20 +200,18 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
 //    }
 
     /**
-     * Compares this measure to the specified Measurement quantity. The default
-     * implementation compares the {@link Measurement#doubleValue(Unit)} of both
-     * this measure and the specified Measurement stated in the same unit (this
-     * measure's {@link #getUnit() unit}).
+     * Compares this measure to the specified Measurement quantity.
      *
      * @return a negative integer, zero, or a positive integer as this measure
      *         is less than, equal to, or greater than the specified Measurement
      *         quantity.
-     * @return <code>Double.compare(this.doubleValue(getUnit()),
-     *         that.doubleValue(getUnit()))</code>
+     * @return <code>Objects.compare(this)),
+     *         that, DEFAULT_COMPARATOR)</code>
      */
-    public int compareTo(Measurement<Q, Number> that) {
-        Unit<Q> unit = getUnit();
-        return Double.compare(doubleValue(unit), that.getValue().doubleValue());
+    @SuppressWarnings("unchecked")
+	public int compareTo(Measurement<Q, V> that) {
+//        Unit<Q> unit = getUnit();        
+        return Objects.compare(this, that, OurComparator.getInstance());
     }
 
     /**

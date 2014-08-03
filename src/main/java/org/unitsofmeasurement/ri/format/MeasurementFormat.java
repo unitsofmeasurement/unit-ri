@@ -249,19 +249,20 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 		}
 
 		@Override
-		public Appendable format(Measurement<?, ?> measure, Appendable dest)
+		public Appendable format(Measurement<?, ?> measurement, Appendable dest)
 				throws IOException {
 //			Unit unit = measure.getUnit();
 //			if (unit instanceof CompoundUnit)
 //				return formatCompound(measure.doubleValue(unit),
 //						(CompoundUnit) unit, dest);
 //			else {
-				dest.append(_numberFormat.format(measure.getValue()));
-				if (measure.getUnit().equals(SI.ONE))
-					return dest;
-				dest.append(' ');
-				return _unitFormat.format(measure.getUnit(), dest);
-//			}
+//				dest.append(_numberFormat.format(measure.getValue()));
+//				if (measure.getUnit().equals(SI.ONE))
+//					return dest;
+//				dest.append(' ');
+//				return _unitFormat.format(measure.getUnit(), dest);
+				dest.append(String.valueOf(measurement));
+				return dest;
 		}
 
 		@SuppressWarnings("unchecked")
@@ -303,9 +304,9 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 
 		@SuppressWarnings("unchecked")
 		@Override
-		public Appendable format(Measurement measure, Appendable dest)
+		public Appendable format(Measurement measurement, Appendable dest)
 				throws IOException {
-			Unit unit = measure.getUnit();
+			final Unit unit = measurement.getUnit();
 //			if (unit instanceof CompoundUnit)
 //				return formatCompound(measure.doubleValue(unit),
 //						(CompoundUnit) unit, dest);
@@ -316,10 +317,11 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 //						MathContext.UNLIMITED);
 //					dest.append(decimal.toString());
 //				} else {
-					Object o = measure.getValue();
-					dest.append(String.valueOf(o));
+					//Object o = measure.getValue();
+//					dest.append(String.valueOf(o));
+					dest.append(String.valueOf(measurement));
 //				}
-				if (measure.getUnit().equals(SI.ONE))
+				if (measurement.getUnit().equals(SI.ONE))
 					return dest;
 				dest.append(' ');
 				return LocalUnitFormat.getInstance().format(unit, dest);
