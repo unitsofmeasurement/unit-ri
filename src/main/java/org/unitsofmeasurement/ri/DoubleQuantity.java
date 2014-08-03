@@ -25,7 +25,7 @@ import javax.measure.Unit;
  * @see AbstractQuantity
  * @see Quantity
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @author OtÃ¡vio GonÃ§alves de Santana
+ * @author Otavio de Santana
  * @param <Q>
  *            The type of the quantity.
  * @version 0.2, $Date: 2014-08-02 $
