@@ -16,7 +16,6 @@
 package org.unitsofmeasurement.ri.function;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 
 import javax.measure.function.ValueSupplier;
@@ -29,7 +28,7 @@ import javax.measure.function.ValueSupplier;
  * @see <a href="http://en.wikipedia.org/wiki/Pi"> Wikipedia: Pi</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.1, April 22, 2014
+ * @version 0.2, August 3, 2014
  */
 public final class PiMultiplierConverter extends AbstractConverter implements
 		ValueSupplier<String> {
@@ -45,16 +44,16 @@ public final class PiMultiplierConverter extends AbstractConverter implements
 		return value * PI;
 	}
 
-	@Override
-	public BigDecimal convert(BigDecimal value, MathContext ctx)
-			throws ArithmeticException {
-		int nbrDigits = ctx.getPrecision();
-		if (nbrDigits == 0)
-			throw new ArithmeticException(
-					"Pi multiplication with unlimited precision");
-		BigDecimal pi = Pi.pi(nbrDigits);
-		return value.multiply(pi, ctx).scaleByPowerOfTen(1 - nbrDigits);
-	}
+//	@Override
+//	public BigDecimal convert(BigDecimal value, MathContext ctx)
+//			throws ArithmeticException {
+//		int nbrDigits = ctx.getPrecision();
+//		if (nbrDigits == 0)
+//			throw new ArithmeticException(
+//					"Pi multiplication with unlimited precision");
+//		BigDecimal pi = Pi.pi(nbrDigits);
+//		return value.multiply(pi, ctx).scaleByPowerOfTen(1 - nbrDigits);
+//	}
 
 	@Override
 	public AbstractConverter inverse() {

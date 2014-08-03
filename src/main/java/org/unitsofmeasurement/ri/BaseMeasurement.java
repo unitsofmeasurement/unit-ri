@@ -15,18 +15,11 @@
  */
 package org.unitsofmeasurement.ri;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.MathContext;
-
-import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.IncommensurableException;
 import javax.measure.UnconvertibleException;
 import javax.measure.function.UnitConverter;
-
-import org.unitsofmeasurement.ri.function.AbstractConverter;
 
 /**
  * An amount of measurement, consisting of a V and a Unit. BaseMeasurement
@@ -36,7 +29,7 @@ import org.unitsofmeasurement.ri.function.AbstractConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.5.1, $Date: 2014-06-19 $
+ * @version 0.6, $Date: 2014-08-03 $
  */
 public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 		AbstractMeasurement<Q, V> implements Comparable<BaseMeasurement<Q, V>> {
@@ -129,18 +122,18 @@ public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 		Unit<Q> myUnit = getUnit();
 		try {
 			UnitConverter converter = unit.getConverterToAny(myUnit);
-			if ((numberValue() instanceof BigDecimal || numberValue() instanceof BigInteger)
-					&& converter instanceof AbstractConverter) {
-				return (((AbstractConverter) converter).convert(
-						BigDecimal.valueOf(numberValue().longValue()),
-						MathContext.DECIMAL128)).longValue();
-			} else {
+//			if ((numberValue() instanceof BigDecimal || numberValue() instanceof BigInteger)
+//					&& converter instanceof AbstractConverter) {
+//				return (((AbstractConverter) converter).convert(
+//						BigDecimal.valueOf(numberValue().longValue()),
+//						MathContext.DECIMAL128)).longValue();
+//			} else {
 				double result = doubleValue(unit);
 				if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
 					throw new ArithmeticException("Overflow (" + result + ")");
 				}
 				return (long) result;
-			}
+//			}
 		} catch (UnconvertibleException e) {
 			throw e;
 		} catch (IncommensurableException e) {

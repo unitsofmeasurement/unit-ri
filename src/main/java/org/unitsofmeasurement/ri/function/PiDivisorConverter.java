@@ -15,9 +15,6 @@
  */
 package org.unitsofmeasurement.ri.function;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-
 import javax.measure.function.ValueSupplier;
 
 /**
@@ -28,7 +25,7 @@ import javax.measure.function.ValueSupplier;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.2, April 22, 2014
+ * @version 0.3, August 3, 2014
  */
 final class PiDivisorConverter extends AbstractConverter 
 	implements ValueSupplier<String> { //implements Immutable<String> {
@@ -50,13 +47,13 @@ final class PiDivisorConverter extends AbstractConverter
         return value / PI;
     }
 
-    @Override
-    public BigDecimal convert(BigDecimal value, MathContext ctx) throws ArithmeticException {
-        int nbrDigits = ctx.getPrecision();
-        if (nbrDigits == 0) throw new ArithmeticException("Pi multiplication with unlimited precision");
-        BigDecimal pi = PiMultiplierConverter.Pi.pi(nbrDigits);
-        return value.divide(pi, ctx).scaleByPowerOfTen(nbrDigits-1);
-    }
+//    @Override
+//    public BigDecimal convert(BigDecimal value, MathContext ctx) throws ArithmeticException {
+//        int nbrDigits = ctx.getPrecision();
+//        if (nbrDigits == 0) throw new ArithmeticException("Pi multiplication with unlimited precision");
+//        BigDecimal pi = PiMultiplierConverter.Pi.pi(nbrDigits);
+//        return value.divide(pi, ctx).scaleByPowerOfTen(nbrDigits-1);
+//    }
 
     @Override
     public AbstractConverter inverse() {

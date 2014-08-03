@@ -15,17 +15,10 @@
  */
 package org.unitsofmeasurement.ri;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.MathContext;
-
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.IncommensurableException;
 import javax.measure.UnconvertibleException;
 import javax.measure.function.UnitConverter;
-
-import org.unitsofmeasurement.ri.function.AbstractConverter;
 
 /**
  * An amount of quantity, consisting of a Number and a Unit. BaseQuantity
@@ -36,7 +29,7 @@ import org.unitsofmeasurement.ri.function.AbstractConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.7, $Date: 2014-08-02 $
+ * @version 0.7.1, $Date: 2014-08-03 $
  */
 public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		implements Comparable<BaseQuantity<Q>> {
@@ -138,26 +131,27 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	 * .Unit)
 	 */
 	public long longValue(Unit<Q> unit) {
-		Unit<Q> myUnit = getUnit();
+//		Unit<Q> myUnit = getUnit();
 		try {
-			UnitConverter converter = unit.getConverterToAny(myUnit);
-			if ((getValue() instanceof BigDecimal || getValue() instanceof BigInteger)
-					&& converter instanceof AbstractConverter) {
-				return (((AbstractConverter) converter).convert(
-						BigDecimal.valueOf(getValue().longValue()),
-						MathContext.DECIMAL128)).longValue();
-			} else {
+//			UnitConverter converter = unit.getConverterToAny(myUnit);
+//			if ((getValue() instanceof BigDecimal || getValue() instanceof BigInteger)
+//					&& converter instanceof AbstractConverter) {
+//				return (((AbstractConverter) converter).convert(
+//						BigDecimal.valueOf(getValue().longValue()),
+//						MathContext.DECIMAL128)).longValue();
+//			} else {
 				double result = doubleValue(unit);
 				if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
 					throw new ArithmeticException("Overflow (" + result + ")");
 				}
 				return (long) result;
-			}
+//			}
 		} catch (UnconvertibleException e) {
 			throw e;
-		} catch (IncommensurableException e) {
-			throw new IllegalArgumentException(e.getMessage());
-		}
+		} 
+//			catch (IncommensurableException e) {
+//			throw new IllegalArgumentException(e.getMessage());
+//		}
 	}
 
 	/*

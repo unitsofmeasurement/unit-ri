@@ -15,9 +15,6 @@
  */
 package org.unitsofmeasurement.ri.function;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-
 import javax.measure.function.UnitConverter;
 
 
@@ -27,14 +24,14 @@ import javax.measure.function.UnitConverter;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author Werner Keil
- * @version 5.1, March 18, 2014
+ * @version 0.2, August 03, 2014
  */
 public final class AddConverter extends AbstractConverter {
 
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -2981335308595652284L;
+//	private static final long serialVersionUID = -2981335308595652284L;
 	/**
      * Holds the offset.
      */
@@ -80,10 +77,10 @@ public final class AddConverter extends AbstractConverter {
         return value + offset;
     }
 
-    @Override
-    public BigDecimal convert(BigDecimal value, MathContext ctx) throws ArithmeticException {
-        return value.add(BigDecimal.valueOf(offset), ctx);
-    }
+//    @Override
+//    public BigDecimal convert(BigDecimal value, MathContext ctx) throws ArithmeticException {
+//        return value.add(BigDecimal.valueOf(offset), ctx);
+//    }
 
     @Override
     public final String toString() {

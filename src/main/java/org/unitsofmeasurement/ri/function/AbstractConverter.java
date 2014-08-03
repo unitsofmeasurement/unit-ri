@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright 2010-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
+ *  Copyright 2013-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
  *  contributors by the @author tag.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +15,6 @@
  */
 package org.unitsofmeasurement.ri.function;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,16 +23,15 @@ import javax.measure.function.UnitConverter;
 /**
  * <p> The base class for our {@link UnitConverter} physics implementations.</p>
  *
- * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.3, April 16, 2014
+ * @version 0.7, $Date: 2014-04-06 22:50:25 +0200 (So, 06 Apr 2014) $
  */
 public abstract class AbstractConverter implements UnitConverter {
 	
     /**
 	 * 
 	 */
-//	private static final long serialVersionUID = 5790242858468427131L;
+	//private static final long serialVersionUID = 5790242858468427131L;
 
 	/**
      * The ratio of the circumference of a circle to its diameter.
@@ -93,15 +90,12 @@ public abstract class AbstractConverter implements UnitConverter {
 
     @Override
     public Number convert(Number value) {
-        if (value instanceof BigDecimal) {
-        	return convert((BigDecimal)value, MathContext.UNLIMITED);
-        }
-        return convert(value.doubleValue());
+        return convert(Double.valueOf(value.doubleValue()));
     }
 
     public abstract double convert(double value);
     		
-    public abstract BigDecimal convert(BigDecimal value, MathContext ctx) throws ArithmeticException;
+    //public abstract Double convert(Double value, MathContext ctx) throws ArithmeticException;
     
     /**
      * This class represents the identity converter (singleton).
@@ -123,10 +117,6 @@ public abstract class AbstractConverter implements UnitConverter {
             return value;
         }
 
-        @Override
-        public BigDecimal convert(BigDecimal value, MathContext ctx) {
-            return value;
-        }
 
         @Override
         public UnitConverter concatenate(UnitConverter converter) {
@@ -205,14 +195,6 @@ public abstract class AbstractConverter implements UnitConverter {
         @Override
         public double convert(double value) {
             return left.convert(right.convert(value));
-        }
-
-        @Override
-        public BigDecimal convert(BigDecimal value, MathContext ctx) {
-        	if (right instanceof AbstractConverter) {
-        		return ((AbstractConverter)left).convert(((AbstractConverter)right).convert(value, ctx), ctx);
-        	}
-            return (BigDecimal)left.convert(right.convert(value));
         }
 
         @Override

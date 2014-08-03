@@ -15,9 +15,6 @@
  */
 package org.unitsofmeasurement.ri.function;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-
 import javax.measure.function.ValueSupplier;
 
 /**
@@ -29,7 +26,7 @@ import javax.measure.function.ValueSupplier;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.3, April 22, 2014
+ * @version 0.4, August 3, 2014
  */
 final class ExpConverter extends AbstractConverter 
 	implements ValueSupplier<String> { //implements Immutable {
@@ -103,10 +100,10 @@ final class ExpConverter extends AbstractConverter
             return Math.exp(logOfBase * amount);
     }
 
-    @Override
-    public BigDecimal convert(BigDecimal value, MathContext ctx) throws ArithmeticException {
-        return BigDecimal.valueOf(convert(value.doubleValue())); // Reverts to double conversion.
-    }
+//    @Override
+//    public BigDecimal convert(BigDecimal value, MathContext ctx) throws ArithmeticException {
+//        return BigDecimal.valueOf(convert(value.doubleValue())); // Reverts to double conversion.
+//    }
 
     @Override
     public boolean isLinear() {

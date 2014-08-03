@@ -15,9 +15,6 @@
  */
 package org.unitsofmeasurement.ri.function;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-
 import javax.measure.function.UnitConverter;
 import javax.measure.function.ValueSupplier;
 
@@ -29,7 +26,7 @@ import javax.measure.function.ValueSupplier;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.2, April 22, 2014
+ * @version 0.3, August 3, 2014
  */
 public final class MultiplyConverter extends AbstractConverter implements
 		ValueSupplier<Double> {
@@ -85,12 +82,6 @@ public final class MultiplyConverter extends AbstractConverter implements
 	@Override
 	public double convert(double value) {
 		return value * factor;
-	}
-
-	@Override
-	public BigDecimal convert(BigDecimal value, MathContext ctx)
-			throws ArithmeticException {
-		return value.multiply(BigDecimal.valueOf(factor), ctx);
 	}
 
 	@Override

@@ -15,10 +15,7 @@
  */
 package org.unitsofmeasurement.ri.function;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.MathContext;
-
 import javax.measure.function.UnitConverter;
 import javax.measure.function.ValueSupplier;
 
@@ -30,7 +27,7 @@ import javax.measure.function.ValueSupplier;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.2, April 22, 2014
+ * @version 0.3, August 3, 2014
  */
 public final class RationalConverter extends AbstractConverter 
 	implements ValueSupplier<Double> { //implements Immutable<Double> {
@@ -109,12 +106,12 @@ public final class RationalConverter extends AbstractConverter
         return (integer.bitLength() < 64) ? integer.longValue() : integer.doubleValue();
     }
 
-    @Override
-    public BigDecimal convert(BigDecimal value, MathContext ctx) throws ArithmeticException {
-        BigDecimal decimalDividend = new BigDecimal(dividend, 0);
-        BigDecimal decimalDivisor = new BigDecimal(divisor, 0);
-        return value.multiply(decimalDividend, ctx).divide(decimalDivisor, ctx);
-    }
+//    @Override
+//    public BigDecimal convert(BigDecimal value, MathContext ctx) throws ArithmeticException {
+//        BigDecimal decimalDividend = new BigDecimal(dividend, 0);
+//        BigDecimal decimalDivisor = new BigDecimal(divisor, 0);
+//        return value.multiply(decimalDividend, ctx).divide(decimalDivisor, ctx);
+//    }
 
     @Override
     public UnitConverter concatenate(UnitConverter converter) {
