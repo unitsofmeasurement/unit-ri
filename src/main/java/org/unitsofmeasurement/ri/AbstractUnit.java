@@ -56,7 +56,7 @@ import org.unitsofmeasurement.ri.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, June 20, 2014
+ * @version 0.6, Aug 4, 2014
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
@@ -140,8 +140,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * Returns the physics unit represented by the specified characters as per
 	 * standard <a href="http://www.unitsofmeasure.org/">UCUM</a> format.
 	 *
-	 * Locale-sensitive unit parsing should be handled using the OSGi
-	 * {@link org.unitsofmeasurement.service.UnitFormatService} or for non-OSGi
+	 * Locale-sensitive unit parsing may be handled using the OSGi
+	 * {@link javax.measure.service.UnitFormatService} or for non-OSGi
 	 * applications the {@link LocalUnitFormat} utility class.
 	 *
 	 * <p>
