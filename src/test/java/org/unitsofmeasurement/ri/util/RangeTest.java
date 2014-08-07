@@ -25,7 +25,6 @@ public class RangeTest {
 	@SuppressWarnings("rawtypes")
 	private Range range;
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Before
 	public void init() {
 		min = AbstractQuantity.of(1d, KILOGRAM);
