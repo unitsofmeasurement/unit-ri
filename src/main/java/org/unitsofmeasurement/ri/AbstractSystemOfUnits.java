@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.unitsofmeasurement.ri.util;
+package org.unitsofmeasurement.ri;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,8 +25,6 @@ import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.SystemOfUnits;
 import javax.measure.Unit;
-
-import org.unitsofmeasurement.ri.AbstractUnit;
 
 /**
  * <p>An abstract base class for unit systems.</p>

@@ -21,6 +21,7 @@ import javax.measure.SystemOfUnits;
 import javax.measure.Unit;
 import javax.measure.quantity.Speed;
 
+import org.unitsofmeasurement.ri.AbstractSystemOfUnits;
 import org.unitsofmeasurement.ri.AbstractUnit;
 
 

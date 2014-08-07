@@ -18,6 +18,7 @@ package org.unitsofmeasurement.ri.util;
 import static org.unitsofmeasurement.ri.util.SI.*;
 import static org.unitsofmeasurement.ri.util.SIPrefix.MICRO;
 
+import org.unitsofmeasurement.ri.AbstractSystemOfUnits;
 import org.unitsofmeasurement.ri.AbstractUnit;
 import org.unitsofmeasurement.ri.ProductUnit;
 import org.unitsofmeasurement.ri.TransformedUnit;

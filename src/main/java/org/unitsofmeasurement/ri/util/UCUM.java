@@ -15,6 +15,7 @@
  */
 package org.unitsofmeasurement.ri.util;
 
+import org.unitsofmeasurement.ri.AbstractSystemOfUnits;
 import org.unitsofmeasurement.ri.AlternateUnit;
 import org.unitsofmeasurement.ri.AnnotatedUnit;
 import org.unitsofmeasurement.ri.function.PiMultiplierConverter;

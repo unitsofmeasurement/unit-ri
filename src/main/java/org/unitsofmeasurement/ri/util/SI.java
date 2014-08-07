@@ -20,6 +20,7 @@ import java.util.HashMap;
 import javax.measure.Quantity;
 import javax.measure.quantity.*;
 
+import org.unitsofmeasurement.ri.AbstractSystemOfUnits;
 import org.unitsofmeasurement.ri.AbstractUnit;
 import org.unitsofmeasurement.ri.AlternateUnit;
 import org.unitsofmeasurement.ri.BaseUnit;
