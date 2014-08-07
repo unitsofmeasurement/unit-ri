@@ -23,8 +23,8 @@ import java.util.Set;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
+import javax.measure.SystemOfUnits;
 import javax.measure.Unit;
-import javax.measure.util.SystemOfUnits;
 
 import org.unitsofmeasurement.ri.AbstractUnit;
 

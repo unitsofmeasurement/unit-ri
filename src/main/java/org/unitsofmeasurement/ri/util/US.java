@@ -23,6 +23,7 @@ import org.unitsofmeasurement.ri.ProductUnit;
 import org.unitsofmeasurement.ri.TransformedUnit;
 import org.unitsofmeasurement.ri.function.RationalConverter;
 
+import javax.measure.SystemOfUnits;
 import javax.measure.Unit;
 import javax.measure.quantity.Angle;
 import javax.measure.quantity.Area;
@@ -35,7 +36,6 @@ import javax.measure.quantity.Temperature;
 import javax.measure.quantity.Time;
 import javax.measure.quantity.Speed;
 import javax.measure.quantity.Volume;
-import javax.measure.util.SystemOfUnits;
 
 /**
  * <p>

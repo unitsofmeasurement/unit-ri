@@ -17,9 +17,9 @@ package org.unitsofmeasurement.ri.util;
 
 import static org.unitsofmeasurement.ri.util.SI.METRES_PER_SECOND;
 
+import javax.measure.SystemOfUnits;
 import javax.measure.Unit;
 import javax.measure.quantity.Speed;
-import javax.measure.util.SystemOfUnits;
 
 import org.unitsofmeasurement.ri.AbstractUnit;
 
