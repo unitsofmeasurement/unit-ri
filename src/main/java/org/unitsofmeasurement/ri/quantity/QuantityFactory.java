@@ -141,7 +141,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
     public abstract Unit<Q> getMetricUnit();
     
     /**
-     * The default factory implementation. This factory uses reflection for providing
+     * The default factory implementation. This factory provides 
      * a default implementation for every {@link AbstractQuantity} sub-types.
      *
      * @param <Q> The type of the quantity

@@ -18,7 +18,6 @@ package org.unitsofmeasurement.ri.format;
 import java.lang.reflect.Field;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
