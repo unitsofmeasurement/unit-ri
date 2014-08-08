@@ -17,7 +17,6 @@ package org.unitsofmeasurement.ri;
 
 import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
 
-import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.ParsePosition;
 import java.util.Comparator;
@@ -218,7 +217,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
      * Compares this measure against the specified object for <b>strict</b>
      * equality (same unit and same amount).
      *
-     * <p> Similarly to the {@link BigDecimal#equals} method which consider 2.0
+     * <p> Similarly to the {@link Double#equals} method which consider 2.0
      *     and 2.00 as different objects because of different internal scales,
      *     measurements such as <code>Measure.valueOf(3.0, KILOGRAM)</code>
      *     <code>Measure.valueOf(3, KILOGRAM)</code> and
@@ -319,11 +318,9 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
     }
 
     /**
-     * Returns the
-     * {@link #valueOf(java.math.BigDecimal, javax.measure.unit.Unit) decimal}
-     * measure of unknown type corresponding to the specified representation.
+     * Returns the measurement of unknown type corresponding to the specified representation.
      * This method can be used to parse dimensionless quantities.<br/><code>
-     *     Measurement<Number, Dimensionless> proportion = Measure.valueOf("0.234").asType(Dimensionless.class);
+     *     Measurement<Number, Dimensionless> proportion = AbstractMeasurement.of("0.234").asType(Dimensionless.class);
      * </code>
      *
      * <p> Note: This method handles only
