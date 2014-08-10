@@ -38,11 +38,11 @@ import org.unitsofmeasurement.ri.function.RationalConverter;
  * @see <a href="http://en.wikipedia.org/wiki/SI_prefix">Wikipedia: SI Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, $Date: 2014-08-01 $
+ * @version 0.5, $Date: 2014-08-10 $
  */
 public enum SIPrefix implements ConverterSupplier {
 
-    YOTTA(new RationalConverter(10^24L, 1L)), // TODO if this works, we could avoid BigInteger for a "normal" range from ATTO to YOCTO
+    YOTTA(new RationalConverter(10^24L, 1L)),
     ZETTA(new RationalConverter(10^21L, 1L)),
     EXA(new RationalConverter(10^18L, 1L)),
     PETA(new RationalConverter(10^15L, 1L)),

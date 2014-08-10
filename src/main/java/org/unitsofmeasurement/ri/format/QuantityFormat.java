@@ -15,7 +15,6 @@
  */
 package org.unitsofmeasurement.ri.format;
 
-import java.math.BigDecimal;
 import java.text.FieldPosition;
 import java.text.Format;
 import java.text.NumberFormat;
@@ -43,7 +42,7 @@ import org.unitsofmeasurement.ri.util.SI;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, $Date: 2014-02-07 22:28:20 +0100 (Fr, 07 Feb 2014) $
+ * @version 0.3, $Date: 2014-08-10 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat extends Format implements Parser<CharSequence, Quantity> {
@@ -302,7 +301,6 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 		 */
 		private static final long serialVersionUID = 2758248665095734058L;
 
-		@SuppressWarnings("unchecked")
 		@Override
 		public Appendable format(AbstractQuantity measure, Appendable dest)
 				throws IOException {
@@ -331,7 +329,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 		@Override
 		public AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
 				throws ParserException {
-			int startDecimal = cursor.getIndex(); // FIXME get rid of BigDecimal here
+			int startDecimal = cursor.getIndex();
 			while ((startDecimal < csq.length())
 					&& Character.isWhitespace(csq.charAt(startDecimal))) {
 				startDecimal++;
@@ -341,7 +339,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 					&& !Character.isWhitespace(csq.charAt(endDecimal))) {
 				endDecimal++;
 			}
-			BigDecimal decimal = new BigDecimal(csq.subSequence(startDecimal,
+			Double decimal = new Double(csq.subSequence(startDecimal,
 					endDecimal).toString());
 			cursor.setIndex(endDecimal + 1);
 			Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);

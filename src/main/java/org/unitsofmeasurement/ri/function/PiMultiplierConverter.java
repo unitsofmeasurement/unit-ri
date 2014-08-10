@@ -15,9 +15,6 @@
  */
 package org.unitsofmeasurement.ri.function;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import javax.measure.function.ValueSupplier;
 
 /**
@@ -28,7 +25,7 @@ import javax.measure.function.ValueSupplier;
  * @see <a href="http://en.wikipedia.org/wiki/Pi"> Wikipedia: Pi</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, August 3, 2014
+ * @version 0.3, August 10, 2014
  */
 public final class PiMultiplierConverter extends AbstractConverter implements
 		ValueSupplier<String> {
@@ -93,39 +90,39 @@ public final class PiMultiplierConverter extends AbstractConverter implements
 		private Pi() {
 		}
 
-		public static BigDecimal pi(int numDigits) {
+		public static Double pi(int numDigits) {
 			int calcDigits = numDigits + 10;
-			return FOUR.multiply(
-					(FOUR.multiply(arccot(FIVE, calcDigits))).subtract(arccot(
-							TWO_THIRTY_NINE, calcDigits))).setScale(numDigits,
-					RoundingMode.DOWN);
+			return 4 * (
+					(4 * (arccot(5, calcDigits))) - arccot(
+							239, calcDigits)); /*).setScale(numDigits,
+					RoundingMode.DOWN);*/
 		}
 
-		private static BigDecimal arccot(BigDecimal x, int numDigits) {
-			BigDecimal unity = BigDecimal.ONE.setScale(numDigits,
-					RoundingMode.DOWN);
-			BigDecimal sum = unity.divide(x, RoundingMode.DOWN);
-			BigDecimal xpower = new BigDecimal(sum.toString());
-			BigDecimal term = null;
+		private static double arccot(double x, int numDigits) {
+			double unity = 1; /*BigDecimal.ONE.setScale(numDigits,
+					RoundingMode.DOWN);*/
+			double sum = unity / x;
+			double xpower = sum;
+			Double term = null;
 			boolean add = false;
-			for (BigDecimal n = new BigDecimal("3"); term == null
-					|| !term.equals(BigDecimal.ZERO); n = n.add(TWO)) {
-				xpower = xpower.divide(x.pow(2), RoundingMode.DOWN);
-				term = xpower.divide(n, RoundingMode.DOWN);
-				sum = add ? sum.add(term) : sum.subtract(term);
+			for (double n = 3; term == null
+					|| !term.equals(Double.valueOf(0)); n += 2) {
+				xpower = xpower / ((long)x^2);
+				term = xpower / n;
+				sum = add ? sum + term : sum - term;
 				add = !add;
 			}
 			return sum;
 		}
 	}
 
-	private static final BigDecimal TWO = new BigDecimal("2");
+	//private static final BigDecimal TWO = new BigDecimal("2");
 
-	private static final BigDecimal FOUR = new BigDecimal("4");
+	//private static final BigDecimal FOUR = new BigDecimal("4");
 
-	private static final BigDecimal FIVE = new BigDecimal("5");
+	//private static final BigDecimal FIVE = new BigDecimal("5");
 
-	private static final BigDecimal TWO_THIRTY_NINE = new BigDecimal("239");
+	//private static final BigDecimal TWO_THIRTY_NINE = new BigDecimal("239");
 
 	@Override
 	public String getValue() {

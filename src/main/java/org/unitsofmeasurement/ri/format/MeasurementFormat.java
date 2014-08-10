@@ -15,7 +15,6 @@
  */
 package org.unitsofmeasurement.ri.format;
 
-import java.math.BigDecimal;
 import java.text.FieldPosition;
 import java.text.Format;
 import java.text.NumberFormat;
@@ -332,7 +331,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 		@Override
 		public Measurement<?, ?> parse(CharSequence csq, ParsePosition cursor)
 				throws ParserException {
-			int startDecimal = cursor.getIndex(); // FIXME get rid of BigDecimal here
+			int startDecimal = cursor.getIndex();
 			while ((startDecimal < csq.length())
 					&& Character.isWhitespace(csq.charAt(startDecimal))) {
 				startDecimal++;
@@ -342,7 +341,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 					&& !Character.isWhitespace(csq.charAt(endDecimal))) {
 				endDecimal++;
 			}
-			BigDecimal decimal = new BigDecimal(csq.subSequence(startDecimal,
+			Double decimal = new Double(csq.subSequence(startDecimal,
 					endDecimal).toString());
 			cursor.setIndex(endDecimal + 1);
 			Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
