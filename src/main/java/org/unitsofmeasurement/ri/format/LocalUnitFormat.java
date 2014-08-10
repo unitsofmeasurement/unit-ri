@@ -17,7 +17,6 @@ package org.unitsofmeasurement.ri.format;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.math.BigInteger;
 import java.text.ParsePosition;
 import java.util.Locale;
 import java.util.Map;
@@ -87,7 +86,7 @@ import org.unitsofmeasurement.ri.util.SIPrefix;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.2, $Date$
+ * @version 0.3, Aug 10, 2014
  */
 public class LocalUnitFormat implements UnitFormat {
 
@@ -451,13 +450,13 @@ public class LocalUnitFormat implements UnitFormat {
                 buffer.append(')');
             }
             RationalConverter rationalConverter = (RationalConverter) converter;
-            if (!rationalConverter.getDividend().equals(BigInteger.ONE)) {
+            if (rationalConverter.getDividend() != 1) {
                 if (continued) {
                     buffer.append(MIDDLE_DOT);
                 }
                 buffer.append(rationalConverter.getDividend());
             }
-            if (!rationalConverter.getDivisor().equals(BigInteger.ONE)) {
+            if (rationalConverter.getDivisor() != 1) {
                 buffer.append('/');
                 buffer.append(rationalConverter.getDivisor());
             }

@@ -17,7 +17,6 @@ package org.unitsofmeasurement.ri;
 
 import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
 
-import java.math.MathContext;
 import java.text.ParsePosition;
 import java.util.Comparator;
 import java.util.Objects;
@@ -33,9 +32,8 @@ import org.unitsofmeasurement.ri.format.MeasurementFormat;
  * <p> This class represents the immutable result of a measurement stated
  *     in a known unit.</p>
  * 
- * <p> Measurements can be converted to different units, the conversion precision is
- *     determined by the specified {@link MathContext}.<br/><code>
- *         Measurement<Number, Velocity> milesPerHour = C.to(MILES_PER_HOUR, MathContext.DECIMAL128); // Use BigDecimal implementation.
+ * <p> Measurements can be converted to different units.<br/><code>
+ *         Measurement<Number, Velocity> milesPerHour = C.to(MILES_PER_HOUR);
  *         System.out.println(milesPerHour);
  * 
  *         > 670616629.3843951324266284896206156 [mi_i]/h

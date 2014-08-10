@@ -17,7 +17,6 @@ package org.unitsofmeasurement.ri.format;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.text.*;
 import java.util.Arrays;
 import java.util.List;
@@ -61,7 +60,7 @@ import org.unitsofmeasurement.ri.util.SIPrefix;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.5.1, 20 March 2014
+ * @version 0.5, 10 August 2014
  */
 public abstract class UCUMFormat implements UnitFormat {
 
@@ -287,13 +286,13 @@ public abstract class UCUMFormat implements UnitFormat {
                 buffer.append(')');
             }
             RationalConverter rationalConverter = (RationalConverter) converter;
-            if (!rationalConverter.getDividend().equals(BigInteger.ONE)) {
+            if (rationalConverter.getDividend() != 1) {
                 if (continued) {
                     buffer.append('.');
                 }
                 buffer.append(rationalConverter.getDividend());
             }
-            if (!rationalConverter.getDivisor().equals(BigInteger.ONE)) {
+            if (rationalConverter.getDivisor() != 1) {
                 buffer.append('/');
                 buffer.append(rationalConverter.getDivisor());
             }

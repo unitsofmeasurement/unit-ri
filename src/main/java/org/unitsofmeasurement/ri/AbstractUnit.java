@@ -18,7 +18,6 @@ package org.unitsofmeasurement.ri;
 import static org.unitsofmeasurement.ri.format.UCUMFormat.Variant.CASE_SENSITIVE;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.Map;
 
 import javax.measure.Dimension;
@@ -56,7 +55,7 @@ import org.unitsofmeasurement.ri.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, Aug 4, 2014
+ * @version 0.7, Aug 10, 2014
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
@@ -229,8 +228,10 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		Dimension thatDimension = that.getDimension();
 		if (thisDimension.equals(thatDimension))
 			return true;
-		DimensionalModel model = DimensionalModel.getInstance(); // Use dimensional
-																 // analysis model.
+		DimensionalModel model = DimensionalModel.getInstance(); // Use
+																	// dimensional
+																	// analysis
+																	// model.
 		return model.getFundamentalDimension(thisDimension).equals(
 				model.getFundamentalDimension(thatDimension));
 	}
@@ -298,7 +299,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 					+ " is not compatible with " + that);
 		AbstractUnit thatAbstr = (AbstractUnit) that; // Since both units are
 														// compatible they must
-														// be both abstract units.
+														// be both abstract
+														// units.
 		DimensionalModel model = DimensionalModel.getInstance();
 		AbstractUnit thisSystemUnit = this.getSystemUnit();
 		UnitConverter thisToDimension = model.getDimensionalTransform(
@@ -337,8 +339,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		if (factor == 1)
 			return this;
 		if (isLongValue(factor))
-			return transform(new RationalConverter(
-					BigInteger.valueOf((long) factor), BigInteger.ONE));
+			return transform(new RationalConverter((long) factor, 1));
 		return transform(new MultiplyConverter(factor));
 	}
 
@@ -413,8 +414,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		if (divisor == 1)
 			return this;
 		if (isLongValue(divisor))
-			return transform(new RationalConverter(BigInteger.ONE,
-					BigInteger.valueOf((long) divisor)));
+			return transform(new RationalConverter(1, (long) divisor));
 		return transform(new MultiplyConverter(1.0 / divisor));
 	}
 
