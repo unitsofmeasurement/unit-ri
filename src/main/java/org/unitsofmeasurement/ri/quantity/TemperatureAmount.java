@@ -48,16 +48,11 @@ public final class TemperatureAmount extends BaseQuantity<Temperature>
 	}
 
 	public TemperatureAmount add(TemperatureAmount d1) {
-		final TemperatureAmount dn = new TemperatureAmount(
-                this.value
-                        + d1.value, getUnit());
-		return dn;
+        return new TemperatureAmount(this.value + d1.value, getUnit());
 	}
 
 	public TemperatureAmount subtract(TemperatureAmount d1) {
-		final TemperatureAmount dn = new TemperatureAmount(
-                this.value - d1.value, getUnit());
-		return dn;
+        return new TemperatureAmount(this.value - d1.value, getUnit());
 	}
 
 	protected boolean eq(TemperatureAmount dq) {

@@ -344,10 +344,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	}
 
 	private static boolean isLongValue(double value) {
-		if ((value < Long.MIN_VALUE) || (value > Long.MAX_VALUE))
-			return false;
-		return Math.floor(value) == value;
-	}
+        return !((value < Long.MIN_VALUE) || (value > Long.MAX_VALUE)) && Math.floor(value) == value;
+    }
 
 	/**
 	 * Returns the product of this unit with the one specified.

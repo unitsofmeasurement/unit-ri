@@ -191,7 +191,7 @@ public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 		return 0;
 	}
 	
-	private final Number numberValue() {
+	private Number numberValue() {
 		return Double.valueOf(String.valueOf(value));
 	}
 }
