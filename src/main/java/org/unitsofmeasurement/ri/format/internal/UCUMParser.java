@@ -17,6 +17,8 @@ package org.unitsofmeasurement.ri.format.internal;
 
 import static org.unitsofmeasurement.ri.format.internal.UCUMParserConstants.*;
 
+import javax.measure.Unit;
+
 import org.unitsofmeasurement.ri.AbstractUnit;
 import org.unitsofmeasurement.ri.format.SymbolMap;
 import org.unitsofmeasurement.ri.util.SI;
@@ -31,7 +33,7 @@ import org.unitsofmeasurement.ri.util.SIPrefix;
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @see <a href="http://unitsofmeasure.org">UCUM</a>
- * @version 5.1, April 16, 2014
+ * @version 0.6, August 13, 2014
  */
 public class UCUMParser {
 
@@ -45,12 +47,13 @@ public class UCUMParser {
 //
 // Parser productions
 //
-    final public AbstractUnit parseUnit() throws ParseException {
+    final public Unit parseUnit() throws ParseException {
         AbstractUnit u;
         u = Term();
         jj_consume_token(0);
         {
-            return u;
+            if (true)
+                return u;
         }
         throw new Error("Missing return statement in function");
     }
@@ -87,7 +90,8 @@ public class UCUMParser {
             }
         }
         {
-            return result;
+            if (true)
+                return result;
         }
         throw new Error("Missing return statement in function");
     }
@@ -99,37 +103,43 @@ public class UCUMParser {
             result = Annotatable();
             token = jj_consume_token(ANNOTATION);
             {
-                return result.annotate(token.image.substring(1, token.image.length() - 1));
+                if (true)
+                    return result.annotate(token.image.substring(1, token.image.length() - 1));
             }
         } else {
             switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
                 case ATOM:
                     result = Annotatable(); {
-                    return result;
+                    if (true)
+                        return result;
                 }
                 break;
                 case ANNOTATION:
                     token = jj_consume_token(ANNOTATION); {
-                    return result.annotate(token.image.substring(1, token.image.length() - 1));
+                    if (true)
+                        return  result.annotate(token.image.substring(1, token.image.length() - 1));
                 }
                 break;
                 case FACTOR:
                     token = jj_consume_token(FACTOR);
                     long factor = Long.parseLong(token.image); {
-                    return result.multiply(factor);
+                    if (true)
+                        return result.multiply(factor);
                 }
                 break;
                 case SOLIDUS:
                     jj_consume_token(SOLIDUS);
                     result = Component(); {
-                    return SI.ONE.divide(result);
+                    if (true)
+                        return SI.ONE.divide(result);
                 }
                 break;
                 case 14:
                     jj_consume_token(14);
                     result = Term();
                     jj_consume_token(15); {
-                    return result;
+                    if (true)
+                        return result;
                 }
                 break;
                 default:
@@ -158,18 +168,21 @@ public class UCUMParser {
             int exponent = Integer.parseInt(token2.image);
             if ((token1 != null) && token1.image.equals("-")) {
                 {
-                    return result.pow(-exponent);
+                    if (true)
+                        return result.pow(-exponent);
                 }
             } else {
                 {
-                    return result.pow(exponent);
+                    if (true)
+                        return result.pow(exponent);
                 }
             }
         } else {
             switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
                 case ATOM:
                     result = SimpleUnit(); {
-                    return result;
+                    if (true)
+                        return result;
                 }
                 break;
                 default:
@@ -192,16 +205,19 @@ public class UCUMParser {
                 unit = symbols.getUnit(token.image.substring(prefixSymbol.length()));
                 if (unit != null) {
                     {
-                        return unit.transform(prefix.getConverter());
+                        if (true)
+                            return unit.transform(prefix.getConverter());
                     }
                 }
             }
             {
-                throw new ParseException();
+                if (true)
+                    throw new ParseException();
             }
         } else {
             {
-                return unit;
+                if (true)
+                    return unit;
             }
         }
         throw new Error("Missing return statement in function");
@@ -234,11 +250,15 @@ public class UCUMParser {
     private boolean jj_3_1() {
         if (jj_3R_2())
             return true;
-        return jj_scan_token(ANNOTATION);
+        if (jj_scan_token(ANNOTATION))
+            return true;
+        return false;
     }
 
     private boolean jj_3R_5() {
-        return jj_3R_3();
+        if (jj_3R_3())
+            return true;
+        return false;
     }
 
     private boolean jj_3R_4() {
@@ -248,7 +268,9 @@ public class UCUMParser {
         xsp = jj_scanpos;
         if (jj_scan_token(10))
             jj_scanpos = xsp;
-        return jj_scan_token(FACTOR);
+        if (jj_scan_token(FACTOR))
+            return true;
+        return false;
     }
 
     private boolean jj_3_2() {
@@ -258,11 +280,15 @@ public class UCUMParser {
         xsp = jj_scanpos;
         if (jj_scan_token(10))
             jj_scanpos = xsp;
-        return jj_scan_token(FACTOR);
+        if (jj_scan_token(FACTOR))
+            return true;
+        return false;
     }
 
     private boolean jj_3R_3() {
-        return jj_scan_token(ATOM);
+        if (jj_scan_token(ATOM))
+            return true;
+        return false;
     }
 
     private boolean jj_3R_2() {

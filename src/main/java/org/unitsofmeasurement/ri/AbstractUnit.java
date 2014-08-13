@@ -55,7 +55,7 @@ import org.unitsofmeasurement.ri.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, Aug 10, 2014
+ * @version 0.8, Aug 13, 2014
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
@@ -157,7 +157,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *             if the specified character sequence cannot be correctly
 	 *             parsed (e.g. not UCUM compliant).
 	 */
-	public static AbstractUnit<?> of(CharSequence charSequence) {
+	public static Unit<?> of(CharSequence charSequence) {
 		return UCUMFormat.getInstance(CASE_SENSITIVE).parse(charSequence);
 	}
 
