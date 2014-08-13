@@ -24,7 +24,7 @@ public class UnitParserTokenManager implements UnitParserConstants
   public  java.io.PrintStream debugStream = System.out;
   /** Set debug output. */
   public  void setDebugStream(java.io.PrintStream ds) { debugStream = ds; }
-private final int jjStopStringLiteralDfa_0(int pos, long active0)
+private int jjStopStringLiteralDfa_0(int pos, long active0)
 {
    switch (pos)
    {
@@ -32,7 +32,7 @@ private final int jjStopStringLiteralDfa_0(int pos, long active0)
          return -1;
    }
 }
-private final int jjStartNfa_0(int pos, long active0)
+private int jjStartNfa_0(int pos, long active0)
 {
    return jjMoveNfa_0(jjStopStringLiteralDfa_0(pos, active0), pos + 1);
 }
@@ -288,7 +288,7 @@ private int jjMoveNfa_0(int startState, int curPos)
 static final int[] jjnextStates = {
    9, 1, 2, 3, 10, 1, 2, 3, 10, 12, 14, 4, 5, 
 };
-private static final boolean jjCanMove_0(int hiByte, int i1, int i2, long l1, long l2)
+private static boolean jjCanMove_0(int hiByte, int i1, int i2, long l1, long l2)
 {
    switch(hiByte)
    {
@@ -300,7 +300,7 @@ private static final boolean jjCanMove_0(int hiByte, int i1, int i2, long l1, lo
          return false;
    }
 }
-private static final boolean jjCanMove_1(int hiByte, int i1, int i2, long l1, long l2)
+private static boolean jjCanMove_1(int hiByte, int i1, int i2, long l1, long l2)
 {
    switch(hiByte)
    {
@@ -309,9 +309,7 @@ private static final boolean jjCanMove_1(int hiByte, int i1, int i2, long l1, lo
       case 32:
          return ((jjbitVec5[i2] & l2) != 0L);
       default :
-         if ((jjbitVec2[i1] & l1) != 0L)
-            return true;
-         return false;
+          return (jjbitVec2[i1] & l1) != 0L;
    }
 }
 

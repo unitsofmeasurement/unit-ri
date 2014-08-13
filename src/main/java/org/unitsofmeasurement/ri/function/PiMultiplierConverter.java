@@ -64,7 +64,7 @@ public final class PiMultiplierConverter extends AbstractConverter implements
 
 	@Override
 	public boolean equals(Object obj) {
-		return (obj instanceof PiMultiplierConverter) ? true : false;
+		return (obj instanceof PiMultiplierConverter);
 	}
 
 	@Override
