@@ -114,8 +114,8 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Export-Package>org.unitsofmeasurement.ri.*</Export-Package>
-						<Private-Package>org.unitsofmeasurement.ri.format.internal.*</Private-Package>
+						<Export-Package>tec.uom.ri.*</Export-Package>
+						<Private-Package>tec.uom.ri.format.internal.*</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>
