@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>unit-ri</artifactId>
-	<version>0.4</version>
+	<artifactId>tec.uom-ri</artifactId>
+	<version>0.5-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>Units of Measurement Reference Implementation</name>
 	<url>http://github.com/unitsofmeasurement/unit-ri</url>
@@ -12,9 +12,9 @@
 	</organization>
 	<description>Unit Standard (JSR 363) Reference Implementation.</description>
 	<parent>
-		<groupId>org.unitsofmeasurement</groupId>
-		<artifactId>unitsofmeasurement-parent</artifactId>
-		<version>0.6.3</version>
+		<groupId>tec.uom</groupId>
+		<artifactId>tec.uom-parent</artifactId>
+		<version>0.8-SNAPSHOT</version>
 	</parent>
 
 	<licenses>
