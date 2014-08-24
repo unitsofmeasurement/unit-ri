@@ -79,11 +79,6 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	private final boolean isExact;
 
 	/**
-	 * Indicates if this measure is big.
-	 */
-	private final boolean isBig;
-
-	/**
 	 * Holds the exact value (when exact) stated in this measure unit.
 	 */
 	// private long exactValue;
@@ -104,7 +99,6 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		super(unit);
 		value = number;
 		isExact = false;
-		isBig = false;
 	}
 
 	/*
@@ -174,17 +168,6 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	 */
 	public boolean isExact() {
 		return isExact;
-	}
-
-	/**
-	 * Indicates if this measured amount is a big number, i.E. BigDecimal or
-	 * BigInteger. In all other cases this would be false.
-	 * 
-	 * @return <code>true</code> if this measure is big; <code>false</code>
-	 *         otherwise.
-	 */
-	public boolean isBig() {
-		return isBig;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

@@ -45,7 +45,7 @@ import tec.uom.ri.util.SI;
  *         > 670616629.3843951 [mi_i]/h
  *     </code></p>
  * 
- * <p> Applications may sub-class {@link AbstractQuantity} for particular measurements
+ * <p> Applications may sub-class {@link AbstractQuantity} for particular quantity
  *     types.<br/><code>
  *         // Quantity of type Mass based on <code>double</code> primitive types.
  *         public class MassAmount extends AbstractQuantity<Mass> { 
@@ -73,13 +73,11 @@ import tec.uom.ri.util.SI;
  * <p> All instances of this class shall be immutable.</p>
  * 
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, $Date: 2014-06-10 $
+ * @version 0.5, $Date: 2014-08-24 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q> {
-	
-	// TODO should we add LongQuantity?
-	
-    /**
+
+	/**
 	 * 
 	 */
 //	private static final long serialVersionUID = -4993173119977931016L;
@@ -224,7 +222,9 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
         return getUnit().hashCode() + getValue().hashCode();
     }
 
-    public abstract boolean isBig();
+    public final boolean isBig() {
+    	return false;
+    }
     
     /**
      * Returns the <code>String</code> representation of this measure. The
@@ -327,6 +327,19 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
         return new IntegerQuantity<Q>(intValue, unit);
     }
 
+    
+    /**
+     * Returns the scalar measure for the specified <code>long</code> stated in
+     * the specified unit.
+     *
+     * @param longValue the measurement value.
+     * @param unit the measurement unit.
+     * @return the corresponding <code>int</code> measure.
+     */
+    public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(long longValue,
+            Unit<Q> unit) {
+        return new LongQuantity<Q>(longValue, unit);
+    }
     
     
     /**

@@ -93,11 +93,6 @@ final class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 
 	@Override
-	public boolean isBig() {
-		return false;
-	}
-
-	@Override
 	public Quantity<T> divide(Number that) {
 		return of(value / that.floatValue(), getUnit());
 	}

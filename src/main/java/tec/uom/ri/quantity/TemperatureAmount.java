@@ -135,11 +135,6 @@ public final class TemperatureAmount extends BaseQuantity<Temperature>
 		return divide((Double) that);
 	}
 
-	@Override
-	public boolean isBig() {
-		return false;
-	}
-
 //	@Override
 //	public BigDecimal decimalValue(Unit<Temperature> unit, MathContext ctx)
 //			throws ArithmeticException {

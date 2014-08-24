@@ -94,9 +94,4 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	public AbstractQuantity<Q> inverse() {
 		return (AbstractQuantity<Q>) of(value, getUnit().inverse());
 	}
-
-	@Override
-	public boolean isBig() {
-		return false;
-	}
 }

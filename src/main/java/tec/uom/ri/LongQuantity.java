@@ -19,28 +19,27 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 
 /**
- * An amount of quantity, consisting of a double and a Unit. IntegerQuantity
+ * An amount of quantity, consisting of a double and a Unit. LongQuantity
  * objects are immutable.
  * 
  * @see AbstractQuantity
  * @see Quantity
- * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @author Otavio de Santana
+ * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.2, $Date: 2014-08-02 $
+ * @version 0.1, $Date: 2014-08-24 $
  */
-final class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
+final class LongQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
-	final int value;
+	final long value;
 
-	public IntegerQuantity(int value, Unit<T> unit) {
+	public LongQuantity(long value, Unit<T> unit) {
 		super(unit);
 		this.value = value;
 	}
 
 	@Override
-	public Integer getValue() {
+	public Long getValue() {
 		return value;
 	}
 
@@ -60,17 +59,17 @@ final class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
 	@Override
 	public Quantity<T> add(Quantity<T> that) {
-		return of(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
+		return of(value + that.getValue().longValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
 	public Quantity<T> subtract(Quantity<T> that) {
-		return of(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
+		return of(value - that.getValue().longValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
 	public Quantity<?> multiply(Quantity<?> that) {
-		return of(value * that.getValue().intValue(), getUnit());
+		return of(value * that.getValue().longValue(), getUnit());
 	}
 
 	@Override
