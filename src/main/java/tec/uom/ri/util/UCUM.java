@@ -16,7 +16,6 @@
 package tec.uom.ri.util;
 
 import tec.uom.ri.AbstractSystemOfUnits;
-import tec.uom.ri.AlternateUnit;
 import tec.uom.ri.AnnotatedUnit;
 import tec.uom.ri.function.PiMultiplierConverter;
 

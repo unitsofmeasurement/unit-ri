@@ -327,7 +327,6 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
         return new IntegerQuantity<Q>(intValue, unit);
     }
 
-    
     /**
      * Returns the scalar measure for the specified <code>long</code> stated in
      * the specified unit.
@@ -340,7 +339,6 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
             Unit<Q> unit) {
         return new LongQuantity<Q>(longValue, unit);
     }
-    
     
     /**
      * Returns the scalar measure for the specified <code>float</code> stated in
