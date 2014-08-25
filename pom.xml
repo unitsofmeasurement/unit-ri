@@ -1,6 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>tec.units</groupId>
 	<artifactId>unit-ri</artifactId>
 	<version>0.5-SNAPSHOT</version>
 	<packaging>bundle</packaging>
@@ -23,6 +24,14 @@
 			<url>LICENSE.txt</url>
 		</license>
 	</licenses>
+	
+	<scm>
+        <url>https://github.com/unitsofmeasurement/unit-ri.git</url>
+    </scm>
+    <issueManagement>
+        <system>JIRA</system>
+        <url>https://java.net/jira/browse/UNITSOFMEASUREMENT</url>
+    </issueManagement>
 
 	<!-- ======================================================= -->
 	<!-- Build Settings -->
@@ -114,8 +123,8 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Export-Package>tec.uom.ri.*</Export-Package>
-						<Private-Package>tec.uom.ri.format.internal.*</Private-Package>
+						<Export-Package>tec.units.ri.*</Export-Package>
+						<Private-Package>tec.units.ri.format.internal.*</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -295,11 +304,4 @@
 			</build>
 		</profile>
 	</profiles>
-	<scm>
-		<url>https://github.com/unitsofmeasurement/unit-ri.git</url>
-	</scm>
-	<issueManagement>
-		<system>JIRA</system>
-		<url>https://java.net/jira/browse/UNITSOFMEASUREMENT</url>
-	</issueManagement>
 </project>
