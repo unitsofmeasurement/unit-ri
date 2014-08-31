@@ -27,14 +27,14 @@ import tec.units.ri.BaseQuantity;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.6, $Date: 2013-12-25 $
+ * @version 0.6, $Date: 2014-08-31 $
  */
 public final class LengthAmount extends BaseQuantity<Length> implements Length {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1088138019909223368L;
+//	private static final long serialVersionUID = -1088138019909223368L;
 
 	public LengthAmount(Number number, Unit<Length> unit) {
 		super(number, unit);

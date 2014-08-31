@@ -29,7 +29,7 @@ import javax.measure.function.UnitConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.7.1, $Date: 2014-08-03 $
+ * @version 0.8, $Date: 2014-08-31 $
  */
 public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		implements Comparable<BaseQuantity<Q>> {
@@ -104,7 +104,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see Measurement#doubleValue(javax.measure.Unit)
+	 * @see AbstractQuantity#doubleValue(javax.measure.Unit)
 	 */
 	public double doubleValue(Unit<Q> unit) {
 		Unit<Q> myUnit = getUnit();
@@ -121,8 +121,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.uomo.units.AbstractMeasurement#longValue(javax.measure
-	 * .Unit)
+	 * @see AbstractQuantity#longValue(javax.measure.Unit)
 	 */
 	public long longValue(Unit<Q> unit) {
 //		Unit<Q> myUnit = getUnit();
@@ -215,33 +214,25 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		return m;
 	}
 
-	// @Override
-	// public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
-	// throws ArithmeticException {
-	// if (value instanceof BigDecimal) {
-	// return (BigDecimal)value;
-	// }
-	// if (value instanceof BigInteger) {
-	// return new BigDecimal((BigInteger)value);
-	// }
-	// return BigDecimal.valueOf(value.doubleValue());
-	// }
-
 	@Override
 	public int compareTo(BaseQuantity<Q> o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Quantity<Q> subtract(Quantity<Q> that) {
-		// TODO Auto-generated method stub
-		return null;
+		final Quantity<Q> thatToUnit = (Quantity<Q>) that.to(getUnit());
+		return new BaseQuantity(this.getValue().doubleValue()
+				- thatToUnit.getValue().doubleValue(), getUnit());
 	}
 
 	@Override
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Quantity<Q> add(Quantity<Q> that) {
-		// TODO Auto-generated method stub
-		return null;
+		final Quantity<Q> thatToUnit = (Quantity<Q>) that.to(getUnit());
+		return new BaseQuantity(this.getValue().doubleValue()
+				+ thatToUnit.getValue().doubleValue(), getUnit());
 	}
 }
