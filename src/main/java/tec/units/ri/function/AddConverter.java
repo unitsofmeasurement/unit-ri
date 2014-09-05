@@ -16,6 +16,7 @@
 package tec.units.ri.function;
 
 import javax.measure.function.UnitConverter;
+import javax.measure.function.ValueSupplier;
 
 
 /**
@@ -24,9 +25,9 @@ import javax.measure.function.UnitConverter;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author Werner Keil
- * @version 0.2, August 03, 2014
+ * @version 0.3, Sep 06, 2014
  */
-public final class AddConverter extends AbstractConverter {
+public final class AddConverter extends AbstractConverter implements ValueSupplier<Double> {
 
     /**
 	 * 
@@ -107,7 +108,7 @@ public final class AddConverter extends AbstractConverter {
         return false;
     }
 
-	public Double value() {
+	public Double getValue() {
 		return offset;
 	}
     
