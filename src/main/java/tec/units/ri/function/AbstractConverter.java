@@ -82,10 +82,10 @@ public abstract class AbstractConverter implements UnitConverter {
     }
 
     @Override
-    public List<? extends UnitConverter> getCompoundConverters() {
-        List<AbstractConverter> converters = new ArrayList<AbstractConverter>();
-        converters.add(this);
-        return converters;
+    public List<? extends UnitConverter> getConversionSteps() {
+        final List<AbstractConverter> steps = new ArrayList<AbstractConverter>();
+        steps.add(this);
+        return steps;
     }
 
     @Override
@@ -94,9 +94,7 @@ public abstract class AbstractConverter implements UnitConverter {
     }
 
     public abstract double convert(double value);
-    		
-    //public abstract Double convert(Double value, MathContext ctx) throws ArithmeticException;
-    
+    		    
     /**
      * This class represents the identity converter (singleton).
      */
@@ -178,10 +176,10 @@ public abstract class AbstractConverter implements UnitConverter {
         }
 
         @Override
-        public List<UnitConverter> getCompoundConverters() {
+        public List<UnitConverter> getConversionSteps() {
             List<UnitConverter> converters = new ArrayList<UnitConverter>();
-            List<? extends UnitConverter> leftCompound = left.getCompoundConverters();
-            List<? extends UnitConverter> rightCompound = right.getCompoundConverters();
+            List<? extends UnitConverter> leftCompound = left.getConversionSteps();
+            List<? extends UnitConverter> rightCompound = right.getConversionSteps();
             converters.addAll(leftCompound);
             converters.addAll(rightCompound);
             return converters;
@@ -209,7 +207,5 @@ public abstract class AbstractConverter implements UnitConverter {
         public int hashCode() {
             return left.hashCode() + right.hashCode();
         }
-
     }
-
 }
