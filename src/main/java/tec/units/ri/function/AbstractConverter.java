@@ -177,12 +177,12 @@ public abstract class AbstractConverter implements UnitConverter {
 
         @Override
         public List<UnitConverter> getConversionSteps() {
-            List<UnitConverter> converters = new ArrayList<UnitConverter>();
+            final List<UnitConverter> steps = new ArrayList<UnitConverter>();
             List<? extends UnitConverter> leftCompound = left.getConversionSteps();
             List<? extends UnitConverter> rightCompound = right.getConversionSteps();
-            converters.addAll(leftCompound);
-            converters.addAll(rightCompound);
-            return converters;
+            steps.addAll(leftCompound);
+            steps.addAll(rightCompound);
+            return steps;
         }
 
         @Override
