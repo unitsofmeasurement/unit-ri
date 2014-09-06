@@ -50,6 +50,12 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
      **/
     protected static final double E = 2.71828182845904523536028747135266;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see SystemOfUnits#getName()
+	 */
+    public abstract String getName();
     
 	// ///////////////////
 	// Collection View //

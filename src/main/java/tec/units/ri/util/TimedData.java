@@ -11,7 +11,7 @@ package tec.units.ri.util;
 
 import java.util.Objects;
 
-import javax.measure.function.Nameable;
+import tec.units.ri.function.Nameable;
 
 /**
  * TimedData is a container for a data value that keeps track of its age. This class keeps track of the birth time of a bit of data, i.e. time the object is instantiated.<br/>The TimedData MUST be immutable.
