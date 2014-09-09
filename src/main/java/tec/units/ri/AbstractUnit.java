@@ -140,7 +140,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * standard <a href="http://www.unitsofmeasure.org/">UCUM</a> format.
 	 *
 	 * Locale-sensitive unit parsing may be handled using the OSGi
-	 * {@link javax.measure.service.UnitFormatService} or for non-OSGi
+	 * {@link javax.measure.spi.UnitFormatService} or for non-OSGi
 	 * applications the {@link LocalUnitFormat} utility class.
 	 *
 	 * <p>
