@@ -58,6 +58,7 @@ import java.util.logging.Logger;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
+import javax.measure.function.QuantityFactory;
 import javax.measure.quantity.Acceleration;
 import javax.measure.quantity.AmountOfSubstance;
 import javax.measure.quantity.Angle;
@@ -113,15 +114,15 @@ import tec.units.ri.util.SI;
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @version 0.5.3, $Date: 2014-05-28 $
  */
-public abstract class QuantityFactory<Q extends Quantity<Q>>  {
+public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Number, Unit<Q>, Q>  {
 
     /**
      * Holds the current instances.
      */
     @SuppressWarnings("rawtypes")
-	private static final Map<Class, QuantityFactory> INSTANCES = new ConcurrentHashMap<>();
+	private static final Map<Class, AbstractQuantityFactory> INSTANCES = new ConcurrentHashMap<>();
 
-    private static final Logger logger = Logger.getLogger(QuantityFactory.class.getName());
+    private static final Logger logger = Logger.getLogger(AbstractQuantityFactory.class.getName());
 
     private static final Level LOG_LEVEL = Level.FINE;
 
@@ -133,10 +134,10 @@ public abstract class QuantityFactory<Q extends Quantity<Q>>  {
      * @return the quantity factory for the specified type
      */
     @SuppressWarnings("unchecked")
-	public static <Q extends Quantity<Q>>  QuantityFactory<Q> getInstance(final Class<Q> type) {
+	public static <Q extends Quantity<Q>>  AbstractQuantityFactory<Q> getInstance(final Class<Q> type) {
 
          logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
-         QuantityFactory<Q> factory;
+         AbstractQuantityFactory<Q> factory;
          if (!type.isInterface()) {
         	 if (type != null && type.getInterfaces() != null & type.getInterfaces().length > 0) {
 	        	 logger.log(LOG_LEVEL, "Type0: " + type.getInterfaces()[0]);
@@ -181,7 +182,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>>  {
      * @param type the quantity type
      * @param factory the quantity factory
      */
-    protected static <Q extends Quantity<Q>>  void setInstance(final Class<Q> type, QuantityFactory<Q> factory) {
+    protected static <Q extends Quantity<Q>>  void setInstance(final Class<Q> type, AbstractQuantityFactory<Q> factory) {
         if (!AbstractQuantity.class.isAssignableFrom(type))
             // This exception is not documented because it should never happen if the
             // user don't try to trick the Java generic types system with unsafe cast.
@@ -196,6 +197,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>>  {
      * @param unit the unit
      * @return the corresponding quantity
      */
+    @Override
     public abstract Q create(Number value, Unit<Q> unit);
 
     /**
@@ -212,7 +214,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>>  {
      *
      * @param <Q> The type of the quantity
      */
-    private static final class Default<Q extends Quantity<Q>>  extends QuantityFactory<Q> {
+    private static final class Default<Q extends Quantity<Q>>  extends AbstractQuantityFactory<Q> {
 
         /**
          * The type of the quantities created by this factory.
