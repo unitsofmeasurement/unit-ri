@@ -88,7 +88,6 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 		@SuppressWarnings("rawtypes")
 		private static Comparator instance = null;
 
-		@Override
 		public int compare(Object o1, Object o2) {
 			// TODO Auto-generated method stub
 			return 0;
@@ -167,7 +166,6 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      * @throws ArithmeticException if the result is inexact and the quotient has
      *         a non-terminating decimal expansion.
      */
-    @Override
     public Measurement<Q> to(Unit<Q> unit) {
         if (unit.equals(this.getUnit())) {
             return this;
