@@ -26,13 +26,12 @@ import javax.measure.function.UnitConverter;
  * 
  * @see AbstractQuantity
  * @see Quantity
- * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.8, $Date: 2014-08-31 $
+ * @version 0.9, $Date: 2014-09-17 $
  */
-public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
-		implements Comparable<BaseQuantity<Q>> {
+public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	// FIXME Bug 338334 overwrite equals()
 
 	/**
@@ -215,7 +214,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	}
 
 	@Override
-	public int compareTo(BaseQuantity<Q> o) {
+	public int compareTo(Quantity<Q> o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

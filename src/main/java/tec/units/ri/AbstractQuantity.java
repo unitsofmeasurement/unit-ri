@@ -34,7 +34,7 @@ import tec.units.ri.util.SI;
  *     in a known unit.</p>
  * 
  * <p><code>
- *         public static final Measurement<Number, Velocity> C = AbstractMeasurement.of("299792458 m/s").asType(Velocity.class);
+ *         public static final Quantity<Velocity> C = AbstractQuantity.of("299792458 m/s").asType(Velocity.class);
  *         // Speed of Light (exact).
  *    </code></p>
  * 
@@ -42,40 +42,41 @@ import tec.units.ri.util.SI;
  *         Quantity<Velocity> milesPerHour = C.to(MILES_PER_HOUR); // Use double implementation (fast).
  *         System.out.println(milesPerHour);
  * 
- *         > 670616629.3843951 [mi_i]/h
+ *         > 670616629.3843951 m/h
  *     </code></p>
  * 
  * <p> Applications may sub-class {@link AbstractQuantity} for particular quantity
  *     types.<br/><code>
- *         // Quantity of type Mass based on <code>double</code> primitive types.
- *         public class MassAmount extends AbstractQuantity<Mass> { 
- *             private final double _kilograms; // Internal SI representation. 
- *             private Mass(double kilograms) { _kilograms = kilograms; }
- *             public static Mass of(double value, Unit<Mass> unit) {
- *                 return new Mass(unit.getConverterTo(SI.KILOGRAM).convert(value));
- *             } 
- *             public Unit<Mass> getUnit() { return SI.KILOGRAM; } 
- *             public Double getValue() { return _kilograms; } 
- *             ...
- *         }
- * 
- *         // Complex numbers measurements.
- *         public class ComplexQuantity<Q extends Quantity> extends AbstractQuantity<Q> {
- *             public Complex getValue() { ... } // Assuming Complex is a Number.
- *             ... 
- *         }
- * 
- *         // Specializations of complex numbers measurements.
- *         public class Current extends ComplexQuantity<ElectricCurrent> {...} 
- *         public class Tension extends ComplexQuantity<ElectricPotential> {...}
+ *         // Quantity of type Mass based on <code>double</code> primitive types.<br>
+ *         public class MassAmount extends AbstractQuantity<Mass> {<br> 
+ *             private final double kilograms; // Internal SI representation.<br> 
+ *             private Mass(double kg) { kilograms = kg; }<br>
+ *             public static Mass of(double value, Unit<Mass> unit) {<br>
+ *                 return new Mass(unit.getConverterTo(SI.KILOGRAM).convert(value));<br>
+ *             }<br>
+ *             public Unit<Mass> getUnit() { return SI.KILOGRAM; }<br>
+ *             public Double getValue() { return _kilograms; }<br>
+ *             ...<br>
+ *         }<br>
+ * </p>
+ * <p>
+ *         // Complex numbers measurements.<br>
+ *         public class ComplexQuantity<Q extends Quantity> extends AbstractQuantity<Q> {<br>
+ *             public Complex getValue() { ... } // Assuming Complex is a Number.<br>
+ *             ...<br>
+ *         }<br>
+ * <br>
+ *         // Specializations of complex numbers measurements.<br>
+ *         public final class Current extends ComplexQuantity<ElectricCurrent> {...}<br> 
+ *         public final class Tension extends ComplexQuantity<ElectricPotential> {...}<br>
  *         </code></p>
  * 
  * <p> All instances of this class shall be immutable.</p>
  * 
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, $Date: 2014-08-24 $
+ * @version 0.6, $Date: 2014-09-17 $
  */
-public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q> {
+public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q>, Comparable<Quantity<Q>> { // TODO Comparable 
 
 	/**
 	 * 
@@ -85,12 +86,12 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 	private final Unit<Q> unit;
 	
 	/**
-	 * Holds a dimensionless measure of none (exact).
+	 * Holds a dimensionless quantity of none (exact).
 	 */
 	public static final AbstractQuantity<Dimensionless> NONE = of(0, SI.ONE);
 	
 	/**
-	 * Holds a dimensionless measure of one (exact).
+	 * Holds a dimensionless quantity of one (exact).
 	 */
 	public static final AbstractQuantity<Dimensionless> ONE = of(1, SI.ONE);
 	
@@ -147,7 +148,6 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
         if (unit.equals(this.getUnit())) {
             return this;
         }
-        //return AbstractMeasurement.of(doubleValue(unit), unit);
         return AbstractQuantity.of(doubleValue(unit), unit);
     }
 
@@ -245,7 +245,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
     public abstract  double doubleValue(Unit<Q> unit)
             throws ArithmeticException;
     
-    // Implements AbstractMeasurement
+    // Extends AbstractQuantity
     public final int intValue(Unit<Q> unit) throws ArithmeticException {
         long longValue = longValue(unit);
         if ((longValue < Integer.MIN_VALUE) || (longValue > Integer.MAX_VALUE)) {
