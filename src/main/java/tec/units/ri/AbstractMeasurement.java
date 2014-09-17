@@ -31,69 +31,69 @@ import tec.units.ri.format.MeasurementFormat;
 /**
  * <p> This class represents the immutable result of a measurement stated
  *     in a known unit.</p>
- * 
+ *
  * <p> Measurements can be converted to different units.<br/><code>
  *         Measurement<Number, Velocity> milesPerHour = C.to(MILES_PER_HOUR);
  *         System.out.println(milesPerHour);
- * 
+ *
  *         > 670616629.3843951324266284896206156 [mi_i]/h
  *     </code>
  *     If no precision is specified <code>double</code> precision is assumed.<code>
  *         Measurement<Double, Velocity> milesPerHour = C.to(MILES_PER_HOUR); // Use double implementation (fast).
  *         System.out.println(milesPerHour);
- * 
+ *
  *         > 670616629.3843951 [mi_i]/h
  *     </code></p>
- * 
+ *
  * <p> Applications may sub-class {@link AbstractMeasurement} for particular measurements
  *     types.<br/><code>
  *         // Measurement of type Mass based on <code>double</code> primitive types.
- *         public class MassAmount extends AbstractMeasurement<Mass> { 
- *             private final double _kilograms; // Internal SI representation. 
+ *         public class MassAmount extends AbstractMeasurement<Mass> {
+ *             private final double _kilograms; // Internal SI representation.
  *             private Mass(double kilograms) { _kilograms = kilograms; }
  *             public static Mass of(double value, Unit<Mass> unit) {
  *                 return new Mass(unit.getConverterTo(SI.KILOGRAM).convert(value));
- *             } 
- *             public Unit<Mass> getUnit() { return SI.KILOGRAM; } 
- *             public Double getValue() { return _kilograms; } 
+ *             }
+ *             public Unit<Mass> getUnit() { return SI.KILOGRAM; }
+ *             public Double getValue() { return _kilograms; }
  *             ...
  *         }
- * 
+ *
  *         // Complex numbers measurements.
  *         public class ComplexMeasurement<Q extends Quantity> extends Measurement<Q, V> {
  *             public Complex getValue() { ... } // Assuming Complex is a Number.
- *             ... 
+ *             ...
  *         }
- * 
+ *
  *         // Specializations of complex numbers measurements.
- *         public class Current extends ComplexMeasurement<ElectricCurrent> {...} 
+ *         public class Current extends ComplexMeasurement<ElectricCurrent> {...}
  *         public class Tension extends ComplexMeasurement<ElectricPotential> {...}
  *         </code></p>
- * 
+ *
  * <p> All instances of this class shall be immutable.</p>
- * 
+ *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.3, $Date: 2014-06-19 $
  */
-public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements Measurement<Q, V> {
-	
+public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement<Q> {
+
     /**
-	 * 
+	 *
 	 */
 //	private static final long serialVersionUID = -4993173119977931016L;
-    
+
 	@SuppressWarnings("hiding")
 	private static final class OurComparator<Measurement> implements Comparator<Measurement> {
 		@SuppressWarnings("rawtypes")
 		private static Comparator instance = null;
-		
+
 		@Override
 		public int compare(Object o1, Object o2) {
 			// TODO Auto-generated method stub
 			return 0;
 		}
-		
+
 		@SuppressWarnings("rawtypes")
 		static Comparator getInstance() {
 			if (instance == null) {
@@ -104,19 +104,19 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
 	}
 
 	private static final Comparator<Measurement> DEFAULT_COMPARATOR = OurComparator.getInstance();
-	
+
 	private final Unit<Q> unit;
-	
+
 	/**
 	 * Holds a dimensionless measurement of none (exact).
 	 */
 //	public static final AbstractMeasurement<Dimensionless, ?> NONE = of(0, SI.ONE);
-	
+
 	/**
 	 * Holds a dimensionless measurement of one (exact).
 	 */
 //	public static final AbstractMeasurement<Dimensionless, ?> ONE = of(1, SI.ONE);
-	
+
 	/**
      * constructor.
      */
@@ -129,13 +129,14 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
      *
      * @return the measurement value.
      */
-    public abstract V getValue();
+    public abstract Number getValue();
 
     /**
      * Returns the measurement unit.
      *
      * @return the measurement unit.
      */
+    @Override
     public Unit<Q> getUnit() {
     	return unit;
     }
@@ -149,7 +150,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
      * @throws ArithmeticException if the result is inexact and the quotient
      *         has a non-terminating decimal expansion.
      */
-    public Measurement<Q, V> toSI() {
+    public Measurement<Q> toSI() {
         return to(this.getUnit().getSystemUnit());
     }
 
@@ -166,7 +167,8 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
      * @throws ArithmeticException if the result is inexact and the quotient has
      *         a non-terminating decimal expansion.
      */
-    public Measurement<Q, V> to(Unit<Q> unit) {
+    @Override
+    public Measurement<Q> to(Unit<Q> unit) {
         if (unit.equals(this.getUnit())) {
             return this;
         }
@@ -206,8 +208,8 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
      *         that, DEFAULT_COMPARATOR)</code>
      */
     @SuppressWarnings("unchecked")
-	public int compareTo(Measurement<Q, V> that) {
-//        Unit<Q> unit = getUnit();        
+	public int compareTo(Measurement<Q> that) {
+//        Unit<Q> unit = getUnit();
         return Objects.compare(this, that, OurComparator.getInstance());
     }
 
@@ -233,10 +235,10 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
      */
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof AbstractMeasurement<?, ?>)) {
+        if (!(obj instanceof AbstractMeasurement<?>)) {
             return false;
         }
-        AbstractMeasurement<?, ?> that = (AbstractMeasurement<?, ?>) obj;
+        AbstractMeasurement<?> that = (AbstractMeasurement<?>) obj;
         return this.getUnit().equals(that.getUnit()) && this.getValue().equals(that.getValue());
     }
 
@@ -249,7 +251,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
     public int hashCode() {
         return getUnit().hashCode() + getValue().hashCode();
     }
-    
+
     /**
      * Returns the <code>String</code> representation of this measure. The
      * string produced for a given measure is always the same; it is not
@@ -265,10 +267,10 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
         //return MeasureFormat.getStandard().format(this); TODO improve MeasureFormat
     	return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
     }
- 
+
     public abstract  double doubleValue(Unit<Q> unit)
             throws ArithmeticException;
-    
+
     // Implements AbstractMeasurement
     public final int intValue(Unit<Q> unit) throws ArithmeticException {
         long longValue = longValue(unit);
@@ -308,11 +310,11 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
      * @see Unit#asType(Class)
      */
     @SuppressWarnings("unchecked")
-    public final <T extends Quantity<T>> AbstractMeasurement<T, V> asType(Class<T> type)
+    public final <T extends Quantity<T>> AbstractMeasurement<T> asType(Class<T> type)
             throws ClassCastException {
         this.getUnit().asType(type); // Raises ClassCastException is dimension
         // mismatches.
-        return (AbstractMeasurement<T, V>) this;
+        return (AbstractMeasurement<T>) this;
     }
 
     /**
@@ -347,7 +349,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
      * @param unit the measurement unit.
      * @return the corresponding <code>float</code> measure.
      */
-    public static <Q extends Quantity<Q>> Measurement<Q, ?> of(double value,
+    public static <Q extends Quantity<Q>> Measurement<Q> of(double value,
             Unit<Q> unit) {
         return new BaseMeasurement(value, unit);
     }

@@ -24,27 +24,27 @@ import javax.measure.function.UnitConverter;
 /**
  * An amount of measurement, consisting of a V and a Unit. BaseMeasurement
  * objects are immutable.
- * 
+ *
  * @see Unit
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
  * @version 0.6, $Date: 2014-08-03 $
  */
-public class BaseMeasurement<Q extends Quantity<Q>, V> extends
-		AbstractMeasurement<Q, V> implements Comparable<BaseMeasurement<Q, V>> {
+public class BaseMeasurement<Q extends Quantity<Q>> extends
+		AbstractMeasurement<Q> implements Comparable<BaseMeasurement<Q>> {
 	// FIXME Bug 338334 overwrite equals()
 
 	/**
-	 * 
+	 *
 	 */
 	// private static final long serialVersionUID = 1794798190459768561L;
 
-	private final V value;
+	private final Number value;
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see AbstractMeasurement#equals(java.lang.Object)
 	 */
 	@Override
@@ -88,7 +88,7 @@ public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 	 */
 	// private long exactValue;
 
-	protected BaseMeasurement(V number, Unit<Q> unit) {
+	protected BaseMeasurement(Number number, Unit<Q> unit) {
 		super(unit);
 		value = number;
 		isExact = false;
@@ -97,10 +97,11 @@ public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see Measurement#doubleValue(javax.measure.Unit)
 	 */
-	public double doubleValue(Unit<Q> unit) {
+	@Override
+    public double doubleValue(Unit<Q> unit) {
 		Unit<Q> myUnit = getUnit();
 		try {
 			UnitConverter converter = unit.getConverterTo(myUnit);
@@ -114,11 +115,12 @@ public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.uomo.units.AbstractMeasurement#longValue(javax.measure
 	 * .Unit)
 	 */
-	public long longValue(Unit<Q> unit) {
+	@Override
+    public long longValue(Unit<Q> unit) {
 		Unit<Q> myUnit = getUnit();
 		try {
 			UnitConverter converter = unit.getConverterToAny(myUnit);
@@ -143,10 +145,11 @@ public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see javax.measure.Quantity#numberValue()
 	 */
-	public V getValue() {
+	@Override
+    public Number getValue() {
 		return value;
 	}
 
@@ -155,7 +158,7 @@ public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 	 * exact only when stated in this measure unit (e.g.
 	 * <code>this.longValue()</code>); stating the amount in any other unit may
 	 * introduce conversion errors.
-	 * 
+	 *
 	 * @return <code>true</code> if this measure is exact; <code>false</code>
 	 *         otherwise.
 	 */
@@ -166,7 +169,7 @@ public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 	/**
 	 * Indicates if this measured amount is a big number, i.E. BigDecimal or
 	 * BigInteger. In all other cases this would be false.
-	 * 
+	 *
 	 * @return <code>true</code> if this measure is big; <code>false</code>
 	 *         otherwise.
 	 */
@@ -181,16 +184,17 @@ public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 //				+ thatToUnit.getValue().doubleValue(), getUnit());
 //	}
 
-	public String toString() {
+	@Override
+    public String toString() {
 		return String.valueOf(numberValue()) + " " + String.valueOf(getUnit());
 	}
 
 	@Override
-	public int compareTo(BaseMeasurement<Q, V> o) {
+	public int compareTo(BaseMeasurement<Q> o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	private Number numberValue() {
 		return Double.valueOf(String.valueOf(value));
 	}
