@@ -76,7 +76,7 @@ import tec.units.ri.util.SI;
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.6, $Date: 2014-09-17 $
  */
-public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q>, Comparable<Quantity<Q>> { // TODO Comparable 
+public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q> { // TODO Comparable 
 
 	/**
 	 * 
