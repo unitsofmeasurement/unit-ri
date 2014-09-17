@@ -109,7 +109,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	 * @return the specified <code>Appendable</code>.
 	 * @throws IOException if an I/O exception occurs.
 	 */
-	public abstract Appendable format(Measurement<  ?> measure, Appendable dest)
+	public abstract Appendable format(Measurement<?> measure, Appendable dest)
 			throws IOException;
 
 	/**
