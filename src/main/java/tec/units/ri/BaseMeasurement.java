@@ -47,7 +47,6 @@ public class BaseMeasurement<Q extends Quantity<Q>> extends
 	 *
 	 * @see AbstractMeasurement#equals(java.lang.Object)
 	 */
-	@Override
 	public boolean equals(Object obj) {
 		if (obj == null)
 			return false;
@@ -119,7 +118,6 @@ public class BaseMeasurement<Q extends Quantity<Q>> extends
 	 * @see org.eclipse.uomo.units.AbstractMeasurement#longValue(javax.measure
 	 * .Unit)
 	 */
-	@Override
     public long longValue(Unit<Q> unit) {
 		Unit<Q> myUnit = getUnit();
 		try {
@@ -148,7 +146,6 @@ public class BaseMeasurement<Q extends Quantity<Q>> extends
 	 *
 	 * @see javax.measure.Quantity#numberValue()
 	 */
-	@Override
     public Number getValue() {
 		return value;
 	}
@@ -184,12 +181,10 @@ public class BaseMeasurement<Q extends Quantity<Q>> extends
 //				+ thatToUnit.getValue().doubleValue(), getUnit());
 //	}
 
-	@Override
     public String toString() {
 		return String.valueOf(numberValue()) + " " + String.valueOf(getUnit());
 	}
 
-	@Override
 	public int compareTo(BaseMeasurement<Q> o) {
 		// TODO Auto-generated method stub
 		return 0;

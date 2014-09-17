@@ -15,11 +15,11 @@
  */
 package tec.units.ri.format;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.FieldPosition;
 import java.text.Format;
-import java.text.NumberFormat;
 import java.text.ParsePosition;
-import java.io.IOException;
 
 import javax.measure.Measurement;
 import javax.measure.Unit;
@@ -141,7 +141,6 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	 *             if any problem occurs while parsing the specified character
 	 *             sequence (e.g. illegal syntax).
 	 */
-	@Override
     public abstract Measurement<?> parse(CharSequence csq)
 			throws IllegalArgumentException, ParserException;
 
@@ -185,7 +184,6 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 //		return DEFAULT._unitFormat.format(low, dest);
 //	}
 
-	@Override
 	public final StringBuffer format(Object obj, final StringBuffer toAppendTo,
 			FieldPosition pos) {
 		if (!(obj instanceof AbstractMeasurement<?>))
@@ -201,7 +199,6 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 		}
 	}
 
-	@Override
 	public final Measurement<?> parseObject(String source, ParsePosition pos) {
 		try {
 			return parse(source, pos);
@@ -236,7 +233,6 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 		private static final long serialVersionUID = 2758248665095734058L;
 
 		@SuppressWarnings("unchecked")
-		@Override
 		public Appendable format(Measurement measurement, Appendable dest)
 				throws IOException {
 			final Unit unit = measurement.getUnit();
@@ -262,7 +258,6 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 		}
 
 		@SuppressWarnings("unchecked")
-		@Override
 		public Measurement<?> parse(CharSequence csq, ParsePosition cursor)
 				throws ParserException {
 			int startDecimal = cursor.getIndex();
@@ -282,7 +277,6 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 			return AbstractMeasurement.of(decimal.doubleValue(), unit);
 		}
 
-		@Override
         public Measurement<?> parse(CharSequence csq)
 				throws ParserException {
 			return parse(csq, new ParsePosition(0));

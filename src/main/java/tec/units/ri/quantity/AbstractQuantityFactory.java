@@ -197,7 +197,6 @@ public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements 
      * @param unit the unit
      * @return the corresponding quantity
      */
-    @Override
     public abstract Q create(Number value, Unit<Q> unit);
 
     /**
@@ -277,13 +276,11 @@ public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements 
             CLASS_TO_METRIC_UNIT.put(Volume.class, CUBIC_METRE);
         }
 
-        @Override
         @SuppressWarnings("unchecked")
         public Q create(final Number value, final Unit<Q> unit) {
             return (Q) new BaseQuantity<Q>(value, unit);
         }
 
-        @Override
         public Unit<Q> getMetricUnit() {
             return metricUnit;
         }
