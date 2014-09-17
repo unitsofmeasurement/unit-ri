@@ -15,7 +15,40 @@
  */
 package tec.units.ri.quantity;
 
-import static tec.units.ri.util.SI.*;
+import static tec.units.ri.util.SI.AMPERE;
+import static tec.units.ri.util.SI.AMPERE_TURN;
+import static tec.units.ri.util.SI.BECQUEREL;
+import static tec.units.ri.util.SI.BIT;
+import static tec.units.ri.util.SI.CANDELA;
+import static tec.units.ri.util.SI.COULOMB;
+import static tec.units.ri.util.SI.CUBIC_METRE;
+import static tec.units.ri.util.SI.FARAD;
+import static tec.units.ri.util.SI.GRAY;
+import static tec.units.ri.util.SI.HENRY;
+import static tec.units.ri.util.SI.HERTZ;
+import static tec.units.ri.util.SI.JOULE;
+import static tec.units.ri.util.SI.KATAL;
+import static tec.units.ri.util.SI.KELVIN;
+import static tec.units.ri.util.SI.KILOGRAM;
+import static tec.units.ri.util.SI.LUMEN;
+import static tec.units.ri.util.SI.LUX;
+import static tec.units.ri.util.SI.METRE;
+import static tec.units.ri.util.SI.METRES_PER_SECOND;
+import static tec.units.ri.util.SI.METRES_PER_SQUARE_SECOND;
+import static tec.units.ri.util.SI.MOLE;
+import static tec.units.ri.util.SI.NEWTON;
+import static tec.units.ri.util.SI.OHM;
+import static tec.units.ri.util.SI.PASCAL;
+import static tec.units.ri.util.SI.RADIAN;
+import static tec.units.ri.util.SI.SECOND;
+import static tec.units.ri.util.SI.SIEMENS;
+import static tec.units.ri.util.SI.SIEVERT;
+import static tec.units.ri.util.SI.SQUARE_METRE;
+import static tec.units.ri.util.SI.STERADIAN;
+import static tec.units.ri.util.SI.TESLA;
+import static tec.units.ri.util.SI.VOLT;
+import static tec.units.ri.util.SI.WATT;
+import static tec.units.ri.util.SI.WEBER;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,8 +58,42 @@ import java.util.logging.Logger;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.function.BiFactory;
-import javax.measure.quantity.*;
+import javax.measure.function.QuantityFactory;
+import javax.measure.quantity.Acceleration;
+import javax.measure.quantity.AmountOfSubstance;
+import javax.measure.quantity.Angle;
+import javax.measure.quantity.Area;
+import javax.measure.quantity.CatalyticActivity;
+import javax.measure.quantity.Dimensionless;
+import javax.measure.quantity.ElectricCapacitance;
+import javax.measure.quantity.ElectricCharge;
+import javax.measure.quantity.ElectricConductance;
+import javax.measure.quantity.ElectricCurrent;
+import javax.measure.quantity.ElectricInductance;
+import javax.measure.quantity.ElectricPotential;
+import javax.measure.quantity.ElectricResistance;
+import javax.measure.quantity.Energy;
+import javax.measure.quantity.Force;
+import javax.measure.quantity.Frequency;
+import javax.measure.quantity.Illuminance;
+import javax.measure.quantity.Information;
+import javax.measure.quantity.Length;
+import javax.measure.quantity.LuminousFlux;
+import javax.measure.quantity.LuminousIntensity;
+import javax.measure.quantity.MagneticFlux;
+import javax.measure.quantity.MagneticFluxDensity;
+import javax.measure.quantity.MagnetomotiveForce;
+import javax.measure.quantity.Mass;
+import javax.measure.quantity.Power;
+import javax.measure.quantity.Pressure;
+import javax.measure.quantity.RadiationDoseAbsorbed;
+import javax.measure.quantity.RadiationDoseEffective;
+import javax.measure.quantity.Radioactivity;
+import javax.measure.quantity.SolidAngle;
+import javax.measure.quantity.Speed;
+import javax.measure.quantity.Temperature;
+import javax.measure.quantity.Time;
+import javax.measure.quantity.Volume;
 
 import tec.units.ri.AbstractQuantity;
 import tec.units.ri.BaseQuantity;
@@ -47,18 +114,18 @@ import tec.units.ri.util.SI;
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @version 0.5.3, $Date: 2014-05-28 $
  */
-public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactory<Number, Unit<Q>, Q> {
-	
+public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Number, Unit<Q>, Q>  {
+
     /**
      * Holds the current instances.
      */
     @SuppressWarnings("rawtypes")
-	private static final Map<Class, QuantityFactory> INSTANCES = new ConcurrentHashMap<>();
-    
-    private static final Logger logger = Logger.getLogger(QuantityFactory.class.getName());
-    
+	private static final Map<Class, AbstractQuantityFactory> INSTANCES = new ConcurrentHashMap<>();
+
+    private static final Logger logger = Logger.getLogger(AbstractQuantityFactory.class.getName());
+
     private static final Level LOG_LEVEL = Level.FINE;
-    
+
     /**
      * Returns the default instance for the specified quantity type.
      *
@@ -67,15 +134,15 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
      * @return the quantity factory for the specified type
      */
     @SuppressWarnings("unchecked")
-	public static <Q extends Quantity<Q>>  QuantityFactory<Q> getInstance(final Class<Q> type) {
-        
+	public static <Q extends Quantity<Q>>  AbstractQuantityFactory<Q> getInstance(final Class<Q> type) {
+
          logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
-         QuantityFactory<Q> factory;
+         AbstractQuantityFactory<Q> factory;
          if (!type.isInterface()) {
         	 if (type != null && type.getInterfaces() != null & type.getInterfaces().length > 0) {
 	        	 logger.log(LOG_LEVEL, "Type0: " + type.getInterfaces()[0]);
 	             Class<?> type2 = type.getInterfaces()[0];
-	
+
 	            factory = INSTANCES.get(type2);
 	            if (factory != null) return factory;
 	            if (!AbstractQuantity.class.isAssignableFrom(type2))
@@ -115,7 +182,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
      * @param type the quantity type
      * @param factory the quantity factory
      */
-    protected static <Q extends Quantity<Q>>  void setInstance(final Class<Q> type, QuantityFactory<Q> factory) {
+    protected static <Q extends Quantity<Q>>  void setInstance(final Class<Q> type, AbstractQuantityFactory<Q> factory) {
         if (!AbstractQuantity.class.isAssignableFrom(type))
             // This exception is not documented because it should never happen if the
             // user don't try to trick the Java generic types system with unsafe cast.
@@ -130,6 +197,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
      * @param unit the unit
      * @return the corresponding quantity
      */
+    @Override
     public abstract Q create(Number value, Unit<Q> unit);
 
     /**
@@ -139,14 +207,14 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
      * @return the metric units for this factory quantities.
      */
     public abstract Unit<Q> getMetricUnit();
-    
+
     /**
-     * The default factory implementation. This factory provides 
+     * The default factory implementation. This factory provides
      * a default implementation for every {@link AbstractQuantity} sub-types.
      *
      * @param <Q> The type of the quantity
      */
-    private static final class Default<Q extends Quantity<Q>>  extends QuantityFactory<Q> {
+    private static final class Default<Q extends Quantity<Q>>  extends AbstractQuantityFactory<Q> {
 
         /**
          * The type of the quantities created by this factory.
@@ -208,7 +276,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
             CLASS_TO_METRIC_UNIT.put(Area.class, SQUARE_METRE);
             CLASS_TO_METRIC_UNIT.put(Volume.class, CUBIC_METRE);
         }
- 
+
         @Override
         @SuppressWarnings("unchecked")
         public Q create(final Number value, final Unit<Q> unit) {

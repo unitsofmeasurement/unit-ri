@@ -36,11 +36,11 @@ import tec.units.ri.util.SI;
 /**
  * <p> This class provides the interface for formatting and parsing {@link AbstractMeasurement
  *     measurements}.</p>
- * 
+ *
  * <p> Instances of this class should be able to format measurements stated in
  *     {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
  * </p>
- * 
+ *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.3, $Date: 2014-05-29 $
@@ -49,7 +49,7 @@ import tec.units.ri.util.SI;
 public abstract class MeasurementFormat extends Format implements Parser<CharSequence, Measurement> {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -4628006924354248662L;
 
@@ -62,7 +62,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	 * Returns the measure format for the default locale. The default format
 	 * assumes the measure is composed of a decimal number and a {@link Unit}
 	 * separated by whitespace(s).
-	 * 
+	 *
 	 * @return <code>MeasureFormat.getInstance(NumberFormat.getInstance(), UnitFormat.getInstance())</code>
 	 */
 	public static MeasurementFormat getInstance() {
@@ -72,7 +72,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 //	/**
 //	 * Returns the measure format using the specified number format and unit
 //	 * format (the number and unit are separated by one space).
-//	 * 
+//	 *
 //	 * @param numberFormat the number format.
 //	 * @param unitFormat the unit format.
 //	 * @return the corresponding format.
@@ -90,7 +90,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	 * units without loss of information. For example:
 	 * <code>"1.23456789 kg.m/s2"</code> returns
 	 * <code>Measure.valueOf(new BigDecimal("1.23456789"), Unit.valueOf("kg.m/s2")));</code>
-	 * 
+	 *
 	 * @param style the format style to apply.
 	 * @return the desired format.
 	 */
@@ -103,13 +103,13 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 
 	/**
 	 * Formats the specified measure into an <code>Appendable</code>.
-	 * 
+	 *
 	 * @param measure the measure to format.
 	 * @param dest the appendable destination.
 	 * @return the specified <code>Appendable</code>.
 	 * @throws IOException if an I/O exception occurs.
 	 */
-	public abstract Appendable format(Measurement<?,  ?> measure, Appendable dest)
+	public abstract Appendable format(Measurement<?> measure, Appendable dest)
 			throws IOException;
 
 	/**
@@ -117,7 +117,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	 * specified position to produce an object. If parsing succeeds, then the
 	 * index of the <code>cursor</code> argument is updated to the index after
 	 * the last character used.
-	 * 
+	 *
 	 * @param csq the <code>CharSequence</code> to parse.
 	 * @param cursor the cursor holding the current parsing index.
 	 * @return the object parsed from the specified character sub-sequence.
@@ -125,15 +125,15 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	 *             if any problem occurs while parsing the specified character
 	 *             sequence (e.g. illegal syntax).
 	 */
-	public abstract Measurement<?, ?> parse(CharSequence csq, ParsePosition cursor)
+	public abstract Measurement<?> parse(CharSequence csq, ParsePosition cursor)
 			throws IllegalArgumentException, ParserException;
-	
+
 	/**
 	 * Parses a portion of the specified <code>CharSequence</code> from the
 	 * specified position to produce an object. If parsing succeeds, then the
 	 * index of the <code>cursor</code> argument is updated to the index after
 	 * the last character used.
-	 * 
+	 *
 	 * @param csq the <code>CharSequence</code> to parse.
 	 * @param cursor the cursor holding the current parsing index.
 	 * @return the object parsed from the specified character sub-sequence.
@@ -141,7 +141,8 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	 *             if any problem occurs while parsing the specified character
 	 *             sequence (e.g. illegal syntax).
 	 */
-	public abstract Measurement<?, ?> parse(CharSequence csq)
+	@Override
+    public abstract Measurement<?> parse(CharSequence csq)
 			throws IllegalArgumentException, ParserException;
 
 	/**
@@ -151,16 +152,16 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	 *     Unit<Length> FOOT_INCH = FOOT.compound(INCH);
 	 *     Measure<Length> height = Measure.valueOf(1.81, METER);
 	 *     System.out.println(height.to(FOOT_INCH));
-	 * 
+	 *
 	 *     > 5ft11,26in // French Local
-	 * 
+	 *
 	 *     Unit<Angle> DMS = DEGREE_ANGLE.compound(MINUTE_ANGLE).compound(SECOND_ANGLE);
 	 *     Measure<Angle> rotation = Measure.valueOf(35.857497, DEGREE_ANGLE);
 	 *     System.out.println(rotation.to(DMS));
-	 * 
-	 *     > 35°51'26,989" // French Local 
+	 *
+	 *     > 35°51'26,989" // French Local
 	 * [/code]
-	 * 
+	 *
 	 * @param value the value to format using compound units.
 	 * @param unit the compound unit.
 	 * @param dest the appendable destination.
@@ -187,13 +188,13 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	@Override
 	public final StringBuffer format(Object obj, final StringBuffer toAppendTo,
 			FieldPosition pos) {
-		if (!(obj instanceof AbstractMeasurement<?, ?>))
+		if (!(obj instanceof AbstractMeasurement<?>))
 			throw new IllegalArgumentException(
 					"obj: Not an instance of Measure");
 		if ((toAppendTo == null) || (pos == null))
 			throw new NullPointerException();
 		try {
-			return (StringBuffer) format((AbstractMeasurement<?, ?>) obj,
+			return (StringBuffer) format((AbstractMeasurement<?>) obj,
 					(Appendable) toAppendTo);
 		} catch (IOException ex) {
 			throw new Error(ex); // Cannot happen.
@@ -201,7 +202,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	}
 
 	@Override
-	public final Measurement<?, ?> parseObject(String source, ParsePosition pos) {
+	public final Measurement<?> parseObject(String source, ParsePosition pos) {
 		try {
 			return parse(source, pos);
 		} catch (IllegalArgumentException | ParserException e) {
@@ -213,12 +214,12 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	/**
 	 * Convenience method equivalent to {@link #format(AbstractMeasurement, Appendable)}
 	 * except it does not raise an IOException.
-	 * 
+	 *
 	 * @param measure the measure to format.
 	 * @param dest the appendable destination.
 	 * @return the specified <code>StringBuilder</code>.
 	 */
-	public final StringBuilder format(AbstractMeasurement<?, ?> measure, StringBuilder dest) {
+	public final StringBuilder format(AbstractMeasurement<?> measure, StringBuilder dest) {
 		try {
 			return (StringBuilder) this.format(measure, (Appendable) dest);
 		} catch (IOException ex) {
@@ -230,7 +231,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	private static final class Standard extends MeasurementFormat {
 
 		/**
-		 * 
+		 *
 		 */
 		private static final long serialVersionUID = 2758248665095734058L;
 
@@ -243,7 +244,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 //				return formatCompound(measure.doubleValue(unit),
 //						(CompoundUnit) unit, dest);
 //			else {
-				
+
 //				if (measure.isBig()) { // TODO SE only
 //					BigDecimal decimal = measure.decimalValue(unit,
 //						MathContext.UNLIMITED);
@@ -262,7 +263,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 
 		@SuppressWarnings("unchecked")
 		@Override
-		public Measurement<?, ?> parse(CharSequence csq, ParsePosition cursor)
+		public Measurement<?> parse(CharSequence csq, ParsePosition cursor)
 				throws ParserException {
 			int startDecimal = cursor.getIndex();
 			while ((startDecimal < csq.length())
@@ -280,8 +281,9 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 			Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
 			return AbstractMeasurement.of(decimal.doubleValue(), unit);
 		}
-		
-		public Measurement<?, ?> parse(CharSequence csq)
+
+		@Override
+        public Measurement<?> parse(CharSequence csq)
 				throws ParserException {
 			return parse(csq, new ParsePosition(0));
 		}
