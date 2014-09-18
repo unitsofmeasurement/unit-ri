@@ -46,7 +46,7 @@ public class AbstractQuantityTest {
 
     @Test
     public void testOf() {
-    	AbstractQuantity<Pressure> pressure = AbstractQuantity.of(Double.valueOf(1), PASCAL); 
+    	AbstractQuantity<Pressure> pressure = BaseQuantity.of(Double.valueOf(1), PASCAL); 
         assertEquals(PASCAL, pressure.getUnit()); // TODO: Problem with kg...
     }
 

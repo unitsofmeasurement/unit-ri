@@ -15,11 +15,19 @@
  */
 package tec.units.ri;
 
+import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
+
+import java.text.ParsePosition;
+
+import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.IncommensurableException;
 import javax.measure.UnconvertibleException;
+import javax.measure.format.ParserException;
 import javax.measure.function.UnitConverter;
+
+import tec.units.ri.format.MeasurementFormat;
 
 /**
  * An amount of measurement, consisting of a V and a Unit. BaseMeasurement
@@ -174,13 +182,6 @@ public class BaseMeasurement<Q extends Quantity<Q>> extends
 		return isBig;
 	}
 
-//	@SuppressWarnings({ "rawtypes", "unchecked" })
-//	public BaseMeasurement<Q, V> add(AbstractMeasurement<Q, V> that) {
-//		final Measurement<Q, V> thatToUnit = that.to(getUnit());
-//		return new BaseMeasurement(this.getValue().doubleValue()
-//				+ thatToUnit.getValue().doubleValue(), getUnit());
-//	}
-
     public String toString() {
 		return String.valueOf(numberValue()) + " " + String.valueOf(getUnit());
 	}
@@ -189,7 +190,45 @@ public class BaseMeasurement<Q extends Quantity<Q>> extends
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+    /**
+     * Returns the measurement of unknown type corresponding to the specified representation.
+     * This method can be used to parse dimensionless quantities.<br/><code>
+     *     Measurement<Number, Dimensionless> proportion = AbstractMeasurement.of("0.234").asType(Dimensionless.class);
+     * </code>
+     *
+     * <p> Note: This method handles only
+     * {@link javax.measure.unit.UnitFormat#getStandard standard} unit format
+     * (<a href="http://unitsofmeasure.org/">UCUM</a> based). Locale-sensitive
+     * measure formatting and parsing are handled by the {@link MeasurementFormat}
+     * class and its subclasses.</p>
+     *
+     * @param csq the decimal value and its unit (if any) separated by space(s).
+     * @return <code>MeasureFormat.getStandard().parse(csq, new ParsePosition(0))</code>
+     */
+    @SuppressWarnings("rawtypes")
+	public static Measurement of(CharSequence csq) {
+        try {
+			return MeasurementFormat.getInstance(LOCALE_NEUTRAL).parse(csq, new ParsePosition(0));
+		} catch (IllegalArgumentException | ParserException e) {
+			throw new IllegalArgumentException(e); // TODO could we handle this differently?
+		}
+    }
 
+    /**
+     * Returns the scalar measure for the specified <code>float</code> stated in
+     * the specified unit.
+     *
+     * @param floatValue the measurement value.
+     * @param unit the measurement unit.
+     * @return the corresponding <code>float</code> measure.
+     */
+    public static <Q extends Quantity<Q>> Measurement<Q> of(double value,
+            Unit<Q> unit) {
+        return new BaseMeasurement(value, unit);
+    }
+    
+    // privates
 	private Number numberValue() {
 		return Double.valueOf(String.valueOf(value));
 	}

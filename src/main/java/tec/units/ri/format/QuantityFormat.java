@@ -29,6 +29,7 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.units.ri.AbstractQuantity;
+import tec.units.ri.BaseQuantity;
 import tec.units.ri.util.SI;
 
 
@@ -276,11 +277,11 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 //			if (number instanceof BigDecimal)
 //				return AbstractQuantity.of((BigDecimal) number, unit);
 			if (number instanceof Long)
-				return AbstractQuantity.of(number.longValue(), unit);
+				return BaseQuantity.of(number.longValue(), unit);
 			else if (number instanceof Double)
-				return AbstractQuantity.of(number.doubleValue(), unit);
+				return BaseQuantity.of(number.doubleValue(), unit);
 			else if (number instanceof Integer)
-				return AbstractQuantity.of(number.intValue(), unit);
+				return BaseQuantity.of(number.intValue(), unit);
 			else
 				throw new UnsupportedOperationException("Number of type "
 						+ number.getClass() + " are not supported");
@@ -344,7 +345,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 					endDecimal).toString());
 			cursor.setIndex(endDecimal + 1);
 			Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
-			return AbstractQuantity.of(decimal.doubleValue(), unit);
+			return BaseQuantity.of(decimal.doubleValue(), unit);
 		}
 		
 		public AbstractQuantity<?> parse(CharSequence csq)

@@ -15,10 +15,18 @@
  */
 package tec.units.ri;
 
+import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
+
+import java.text.ParsePosition;
+
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnconvertibleException;
+import javax.measure.format.ParserException;
 import javax.measure.function.UnitConverter;
+
+import tec.units.ri.format.MeasurementFormat;
+import tec.units.ri.format.QuantityFormat;
 
 /**
  * An amount of quantity, consisting of a Number and a Unit. BaseQuantity
@@ -29,7 +37,7 @@ import javax.measure.function.UnitConverter;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.9, $Date: 2014-09-17 $
+ * @version 0.9.1, $Date: 2014-09-18 $
  */
 public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	// FIXME Bug 338334 overwrite equals()
@@ -122,7 +130,8 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	 * 
 	 * @see AbstractQuantity#longValue(javax.measure.Unit)
 	 */
-	public long longValue(Unit<Q> unit) {
+	public final long longValue(Unit<Q> unit) {
+		// Extends AbstractQuantity
 //		Unit<Q> myUnit = getUnit();
 		try {
 //			UnitConverter converter = unit.getConverterToAny(myUnit);
@@ -146,6 +155,15 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 //		}
 	}
 
+	public final int intValue(Unit<Q> unit) throws ArithmeticException {
+		long longValue = longValue(unit);
+		if ((longValue < Integer.MIN_VALUE) || (longValue > Integer.MAX_VALUE)) {
+			throw new ArithmeticException("Cannot convert " + longValue
+					+ " to int (overflow)");
+		}
+		return (int) longValue;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -182,13 +200,13 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	@Override
 	public Quantity<?> multiply(Quantity<?> that) {
 		final Unit<?> unit = getUnit().multiply(that.getUnit());
-		return of((getValue().doubleValue() * that.getValue().doubleValue()),
+		return BaseQuantity.of((getValue().doubleValue() * that.getValue().doubleValue()),
 				unit);
 	}
 
 	@Override
 	public BaseQuantity<Q> multiply(Number that) {
-		return (BaseQuantity<Q>) of(
+		return (BaseQuantity<Q>) BaseQuantity.of(
 				(getValue().doubleValue() * that.doubleValue()), getUnit());
 	}
 
@@ -202,7 +220,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	@Override
 	public Quantity<Q> divide(Number that) {
-		return of(getValue().doubleValue() / that.doubleValue(), getUnit());
+		return BaseQuantity.of(getValue().doubleValue() / that.doubleValue(), getUnit());
 	}
 
 	@Override
@@ -233,5 +251,95 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 		final Quantity<Q> thatToUnit = (Quantity<Q>) that.to(getUnit());
 		return new BaseQuantity(this.getValue().doubleValue()
 				+ thatToUnit.getValue().doubleValue(), getUnit());
+	}
+
+	/**
+	 * Returns the scalar measure for the specified <code>long</code> stated in
+	 * the specified unit.
+	 *
+	 * @param longValue
+	 *            the measurement value.
+	 * @param unit
+	 *            the measurement unit.
+	 * @return the corresponding <code>int</code> measure.
+	 */
+	public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(
+			long longValue, Unit<Q> unit) {
+		return new LongQuantity<Q>(longValue, unit);
+	}
+
+	/**
+	 * Returns the scalar measure for the specified <code>int</code> stated in
+	 * the specified unit.
+	 *
+	 * @param intValue
+	 *            the measurement value.
+	 * @param unit
+	 *            the measurement unit.
+	 * @return the corresponding <code>int</code> measure.
+	 */
+	public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(int intValue,
+			Unit<Q> unit) {
+		return new IntegerQuantity<Q>(intValue, unit);
+	}
+
+	/**
+	 * Returns the scalar measure for the specified <code>float</code> stated in
+	 * the specified unit.
+	 *
+	 * @param floatValue
+	 *            the measurement value.
+	 * @param unit
+	 *            the measurement unit.
+	 * @return the corresponding <code>float</code> measure.
+	 */
+	public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(
+			float floatValue, Unit<Q> unit) {
+		return new FloatQuantity<Q>(floatValue, unit);
+	}
+
+	/**
+	 * Returns the scalar measure for the specified <code>double</code> stated
+	 * in the specified unit.
+	 *
+	 * @param doubleValue
+	 *            the measurement value.
+	 * @param unit
+	 *            the measurement unit.
+	 * @return the corresponding <code>double</code> measure.
+	 */
+	public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(
+			double doubleValue, Unit<Q> unit) {
+		return new DoubleQuantity<Q>(doubleValue, unit);
+	}
+
+	/**
+	 * Returns the decimal measure of unknown type corresponding to the
+	 * specified representation. This method can be used to parse dimensionless
+	 * quantities.<br/>
+	 * <code>
+	 *     Quatity<Dimensionless> proportion = AbstractQuantity.of("0.234").asType(Dimensionless.class);
+	 * </code>
+	 *
+	 * <p>
+	 * Note: This method handles only
+	 * {@link javax.measure.unit.UnitFormat#getStandard standard} unit format
+	 * (<a href="http://unitsofmeasure.org/">UCUM</a> based). Locale-sensitive
+	 * measure formatting and parsing are handled by the
+	 * {@link MeasurementFormat} class and its subclasses.
+	 * </p>
+	 *
+	 * @param csq
+	 *            the decimal value and its unit (if any) separated by space(s).
+	 * @return <code>MeasureFormat.getStandard().parse(csq, new ParsePosition(0))</code>
+	 */
+	public static AbstractQuantity<?> of(CharSequence csq) {
+		try {
+			return QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq,
+					new ParsePosition(0));
+		} catch (IllegalArgumentException | ParserException e) {
+			throw new IllegalArgumentException(e); // TODO could we handle this
+													// differently?
+		}
 	}
 }

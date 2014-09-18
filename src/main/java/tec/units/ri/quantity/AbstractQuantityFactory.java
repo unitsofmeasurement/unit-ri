@@ -114,7 +114,7 @@ import tec.units.ri.util.SI;
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @version 0.5.3, $Date: 2014-05-28 $
  */
-public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Number, Unit<Q>, Q>  {
+public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q>  {
 
     /**
      * Holds the current instances.
@@ -197,7 +197,7 @@ public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements 
      * @param unit the unit
      * @return the corresponding quantity
      */
-    public abstract Q create(Number value, Unit<Q> unit);
+    public abstract <N extends Number, U extends Unit<Q>> Q create(N number, U unit);
 
     /**
      * Returns the metric unit for quantities produced by this factory
@@ -277,8 +277,8 @@ public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements 
         }
 
         @SuppressWarnings("unchecked")
-        public Q create(final Number value, final Unit<Q> unit) {
-            return (Q) new BaseQuantity<Q>(value, unit);
+        public <N extends Number, U extends Unit<Q>> Q create(N number, U unit) {
+            return (Q) new BaseQuantity<Q>(number, unit);
         }
 
         public Unit<Q> getMetricUnit() {

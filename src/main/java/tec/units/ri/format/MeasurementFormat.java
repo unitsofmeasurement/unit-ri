@@ -29,9 +29,8 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.units.ri.AbstractMeasurement;
+import tec.units.ri.BaseMeasurement;
 import tec.units.ri.util.SI;
-
-
 
 /**
  * <p> This class provides the interface for formatting and parsing {@link AbstractMeasurement
@@ -43,7 +42,7 @@ import tec.units.ri.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, $Date: 2014-05-29 $
+ * @version 0.4, $Date: 2014-09-18 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class MeasurementFormat extends Format implements Parser<CharSequence, Measurement> {
@@ -274,7 +273,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 					endDecimal).toString());
 			cursor.setIndex(endDecimal + 1);
 			Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
-			return AbstractMeasurement.of(decimal.doubleValue(), unit);
+			return BaseMeasurement.of(decimal.doubleValue(), unit);
 		}
 
         public Measurement<?> parse(CharSequence csq)

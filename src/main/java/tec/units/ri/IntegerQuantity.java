@@ -60,39 +60,39 @@ final class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
 	@Override
 	public Quantity<T> add(Quantity<T> that) {
-		return of(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
+		return BaseQuantity.of(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
 	public Quantity<T> subtract(Quantity<T> that) {
-		return of(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
+		return BaseQuantity.of(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
 	public Quantity<?> multiply(Quantity<?> that) {
-		return of(value * that.getValue().intValue(), getUnit());
+		return BaseQuantity.of(value * that.getValue().intValue(), getUnit());
 	}
 
 	@Override
 	public Quantity<T> multiply(Number that) {
-		return of(value * that.intValue(), getUnit());
+		return BaseQuantity.of(value * that.intValue(), getUnit());
 	}
 
 	@Override
 	public Quantity<?> divide(Quantity<?> that) {
-		return of((double) value / that.getValue().doubleValue(), getUnit()
+		return BaseQuantity.of((double) value / that.getValue().doubleValue(), getUnit()
 				.divide(that.getUnit()));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public AbstractQuantity<T> inverse() {
-		return (AbstractQuantity<T>) of(value, getUnit().inverse());
+		return (AbstractQuantity<T>) BaseQuantity.of(value, getUnit().inverse());
 	}
 
 	@Override
 	public Quantity<T> divide(Number that) {
-		return of(value / that.doubleValue(), getUnit());
+		return BaseQuantity.of(value / that.doubleValue(), getUnit());
 	}
 
 }
