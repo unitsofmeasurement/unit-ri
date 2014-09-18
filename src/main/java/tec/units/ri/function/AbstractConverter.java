@@ -21,10 +21,10 @@ import java.util.List;
 import javax.measure.function.UnitConverter;
 
 /**
- * <p> The base class for our {@link UnitConverter} physics implementations.</p>
+ * <p> The base class for our {@link UnitConverter} implementations.</p>
  *
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, $Date: 2014-04-06 22:50:25 +0200 (So, 06 Apr 2014) $
+ * @version 0.7.1, $Date: 2014-09-18 $
  */
 public abstract class AbstractConverter implements UnitConverter {
 	

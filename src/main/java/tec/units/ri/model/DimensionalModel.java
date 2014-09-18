@@ -20,6 +20,7 @@ import java.lang.ref.SoftReference;
 import java.util.Map;
 
 import javax.measure.Dimension;
+import javax.measure.function.UnitConverter;
 
 import tec.units.ri.function.AbstractConverter;
 
@@ -130,13 +131,13 @@ public abstract class DimensionalModel {
      * @param dimension the dimension for which the dimensional transform is returned.
      * @return the dimensional transform (identity for fundamental dimensions).
      */
-    public AbstractConverter getDimensionalTransform(Dimension dimension) {
+    public UnitConverter getDimensionalTransform(Dimension dimension) {
         Map<? extends Dimension, Integer> dimensions = dimension.getProductDimensions();
         if (dimensions == null) return AbstractConverter.IDENTITY; // Fundamental dimension.
         // Dimensional Product.
-        AbstractConverter toFundamental = AbstractConverter.IDENTITY;
+        UnitConverter toFundamental = AbstractConverter.IDENTITY;
         for (Map.Entry<? extends Dimension, Integer> e : dimensions.entrySet()) {
-            AbstractConverter cvtr = this.getDimensionalTransform(e.getKey());
+            UnitConverter cvtr = this.getDimensionalTransform(e.getKey());
             if (!(cvtr.isLinear()))
                 throw new UnsupportedOperationException("Non-linear dimensional transform");
             int pow = e.getValue();
