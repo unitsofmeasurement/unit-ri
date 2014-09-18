@@ -237,7 +237,7 @@ public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements 
             metricUnit = CLASS_TO_METRIC_UNIT.get(type);
         }
         @SuppressWarnings("rawtypes")
-		static final HashMap<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<Class, Unit>();
+		static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<Class, Unit>();
         static {
             CLASS_TO_METRIC_UNIT.put(Dimensionless.class, SI.ONE);
             CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
