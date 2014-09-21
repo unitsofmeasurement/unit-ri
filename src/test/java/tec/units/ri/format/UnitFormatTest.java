@@ -36,7 +36,7 @@ import org.junit.Test;
 
 import tec.units.ri.format.LocalUnitFormat;
 import tec.units.ri.format.UCUMFormat;
-import tec.units.ri.quantity.LengthAmount;
+import tec.units.ri.quantity.AbstractQuantityFactory;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
@@ -47,7 +47,7 @@ public class UnitFormatTest {
 
 	@Before
 	public void init() {
-		sut = new LengthAmount(10, METRE);
+		sut = AbstractQuantityFactory.getInstance(Length.class).create(10, METRE);
 	}
 
 	@Test
