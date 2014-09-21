@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package tec.units.ri;
+package tec.units.ri.unit;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +23,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
 
+import tec.units.ri.AbstractUnit;
 import tec.units.ri.function.AbstractConverter;
 import tec.units.ri.model.QuantityDimension;
 import tec.units.ri.util.SI;

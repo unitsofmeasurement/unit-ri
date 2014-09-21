@@ -24,6 +24,7 @@ import static tec.units.ri.util.SI.SECOND;
 
 import java.io.IOException;
 
+import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
@@ -43,7 +44,7 @@ import tec.units.ri.quantity.AbstractQuantityFactory;
  *
  */
 public class UnitFormatTest {
-	private Length sut;
+	private Quantity<Length> sut;
 
 	@Before
 	public void init() {

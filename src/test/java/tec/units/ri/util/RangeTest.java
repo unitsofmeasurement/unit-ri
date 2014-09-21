@@ -16,7 +16,7 @@ import javax.measure.quantity.Mass;
 import org.junit.Before;
 import org.junit.Test;
 
-import tec.units.ri.BaseQuantity;
+import tec.units.ri.quantity.BaseQuantity;
 import tec.units.ri.util.Range;
 
 public class RangeTest {

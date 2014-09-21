@@ -27,6 +27,7 @@ import javax.measure.Unit;
 import javax.measure.format.ParserException;
 
 import tec.units.ri.format.MeasurementFormat;
+import tec.units.ri.model.BaseMeasurement;
 
 /**
  * <p> This class represents the immutable result of a measurement stated
@@ -170,7 +171,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
         if (unit.equals(this.getUnit())) {
             return this;
         }
-        return new BaseMeasurement(doubleValue(unit), unit);
+        return BaseMeasurement.of(doubleValue(unit), unit);
     }
 
 //    /**

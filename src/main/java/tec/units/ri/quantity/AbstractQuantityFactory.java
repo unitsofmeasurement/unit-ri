@@ -96,7 +96,6 @@ import javax.measure.quantity.Time;
 import javax.measure.quantity.Volume;
 
 import tec.units.ri.AbstractQuantity;
-import tec.units.ri.BaseQuantity;
 import tec.units.ri.util.SI;
 
 

@@ -31,13 +31,13 @@ import javax.measure.format.UnitFormat;
 import javax.measure.function.UnitConverter;
 
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.AnnotatedUnit;
 import tec.units.ri.format.internal.ParseException;
 import tec.units.ri.format.internal.TokenMgrError;
 import tec.units.ri.format.internal.UCUMParser;
 import tec.units.ri.function.AbstractConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
+import tec.units.ri.unit.AnnotatedUnit;
 import tec.units.ri.util.SI;
 import tec.units.ri.util.SIPrefix;
 

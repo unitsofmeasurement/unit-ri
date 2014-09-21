@@ -27,7 +27,7 @@ import org.junit.Test;
 
 public class ArithmeticTest {
 
-	private Length sut;
+	private Quantity<Length> sut;
 	
 	@Before
 	public void init() {

@@ -16,8 +16,8 @@
 package tec.units.ri.util;
 
 import tec.units.ri.AbstractSystemOfUnits;
-import tec.units.ri.AnnotatedUnit;
 import tec.units.ri.function.PiMultiplierConverter;
+import tec.units.ri.unit.AnnotatedUnit;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;

@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package tec.units.ri;
+package tec.units.ri.quantity;
 
 import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
 
@@ -25,6 +25,7 @@ import javax.measure.UnconvertibleException;
 import javax.measure.format.ParserException;
 import javax.measure.function.UnitConverter;
 
+import tec.units.ri.AbstractQuantity;
 import tec.units.ri.format.MeasurementFormat;
 import tec.units.ri.format.QuantityFormat;
 

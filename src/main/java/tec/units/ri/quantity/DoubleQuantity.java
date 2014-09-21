@@ -13,10 +13,12 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package tec.units.ri;
+package tec.units.ri.quantity;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
+
+import tec.units.ri.AbstractQuantity;
 
 /**
  * An amount of quantity, consisting of a double and a Unit. DoubleQuantity

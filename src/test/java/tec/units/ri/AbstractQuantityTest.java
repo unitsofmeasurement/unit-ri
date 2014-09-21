@@ -20,6 +20,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tec.units.ri.AbstractQuantity;
+import tec.units.ri.quantity.BaseQuantity;
 
 import javax.measure.quantity.Pressure;
 

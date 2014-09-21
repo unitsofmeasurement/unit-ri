@@ -13,33 +13,36 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package tec.units.ri;
+package tec.units.ri.quantity;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
+import tec.units.ri.AbstractQuantity;
+
 /**
- * An amount of quantity, consisting of a double and a Unit. LongQuantity
+ * An amount of quantity, consisting of a double and a Unit. IntegerQuantity
  * objects are immutable.
  * 
  * @see AbstractQuantity
  * @see Quantity
- * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @author Otavio de Santana
  * @param <Q>
  *            The type of the quantity.
- * @version 0.1, $Date: 2014-08-24 $
+ * @version 0.2, $Date: 2014-08-02 $
  */
-final class LongQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
+final class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
-	final long value;
+	final int value;
 
-	public LongQuantity(long value, Unit<T> unit) {
+	public IntegerQuantity(int value, Unit<T> unit) {
 		super(unit);
 		this.value = value;
 	}
 
 	@Override
-	public Long getValue() {
+	public Integer getValue() {
 		return value;
 	}
 
@@ -59,17 +62,17 @@ final class LongQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
 	@Override
 	public Quantity<T> add(Quantity<T> that) {
-		return BaseQuantity.of(value + that.getValue().longValue(), getUnit()); // TODO use shift of the unit?
+		return BaseQuantity.of(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
 	public Quantity<T> subtract(Quantity<T> that) {
-		return BaseQuantity.of(value - that.getValue().longValue(), getUnit()); // TODO use shift of the unit?
+		return BaseQuantity.of(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
 	public Quantity<?> multiply(Quantity<?> that) {
-		return BaseQuantity.of(value * that.getValue().longValue(), getUnit());
+		return BaseQuantity.of(value * that.getValue().intValue(), getUnit());
 	}
 
 	@Override

@@ -35,6 +35,10 @@ import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
 import tec.units.ri.model.DimensionalModel;
 import tec.units.ri.model.QuantityDimension;
+import tec.units.ri.unit.AlternateUnit;
+import tec.units.ri.unit.AnnotatedUnit;
+import tec.units.ri.unit.ProductUnit;
+import tec.units.ri.unit.TransformedUnit;
 import tec.units.ri.util.SI;
 
 /**

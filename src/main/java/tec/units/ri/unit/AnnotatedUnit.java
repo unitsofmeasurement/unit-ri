@@ -13,13 +13,15 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package tec.units.ri;
+package tec.units.ri.unit;
 
 import java.util.Map;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.function.UnitConverter;
+
+import tec.units.ri.AbstractUnit;
 
 /**
  * <p> This class represents an annotated unit.</p>

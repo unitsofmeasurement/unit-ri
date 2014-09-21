@@ -19,9 +19,9 @@ import static tec.units.ri.util.SI.*;
 import static tec.units.ri.util.SIPrefix.MICRO;
 import tec.units.ri.AbstractSystemOfUnits;
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.ProductUnit;
-import tec.units.ri.TransformedUnit;
 import tec.units.ri.function.RationalConverter;
+import tec.units.ri.unit.ProductUnit;
+import tec.units.ri.unit.TransformedUnit;
 
 import javax.measure.SystemOfUnits;
 import javax.measure.Unit;

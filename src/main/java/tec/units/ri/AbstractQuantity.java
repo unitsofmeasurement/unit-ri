@@ -21,6 +21,7 @@ import javax.measure.Unit;
 import javax.measure.quantity.Dimensionless;
 
 import tec.units.ri.format.MeasurementFormat;
+import tec.units.ri.quantity.BaseQuantity;
 import tec.units.ri.util.SI;
 
 /**

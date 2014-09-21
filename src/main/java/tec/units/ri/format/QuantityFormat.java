@@ -29,7 +29,7 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.units.ri.AbstractQuantity;
-import tec.units.ri.BaseQuantity;
+import tec.units.ri.quantity.BaseQuantity;
 import tec.units.ri.util.SI;
 
 
