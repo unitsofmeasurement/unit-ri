@@ -38,10 +38,9 @@ import tec.units.ri.format.QuantityFormat;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.9.1, $Date: 2014-09-18 $
+ * @version 0.9.2, $Date: 2014-10-01 $
  */
 public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
-	// FIXME Bug 338334 overwrite equals()
 
 	/**
 	 * 
