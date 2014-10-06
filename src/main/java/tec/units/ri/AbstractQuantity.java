@@ -302,7 +302,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	 * @see Unit#asType(Class)
 	 */
 	@SuppressWarnings("unchecked")
-	public final <T extends Quantity<T>> AbstractQuantity<T> asType(
+	final <T extends Quantity<T>> AbstractQuantity<T> asType(
 			Class<T> type) throws ClassCastException {
 		this.getUnit().asType(type); // Raises ClassCastException is dimension
 		// mismatches.
