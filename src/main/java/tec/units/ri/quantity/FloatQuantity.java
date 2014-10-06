@@ -46,7 +46,7 @@ final class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
         return value;
     }
 
-    // Implements AbstractMeasurement
+    // Implements AbstractQuantity
     public double doubleValue(Unit<T> unit) {
         return (super.getUnit().equals(unit)) ? value : super.getUnit().getConverterTo(unit).convert(value);
     }
