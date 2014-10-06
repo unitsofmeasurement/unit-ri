@@ -247,7 +247,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 		return getUnit().hashCode() + getValue().hashCode();
 	}
 
-	public final boolean isBig() {
+	final boolean isBig() {
 		return false;
 	}
 
