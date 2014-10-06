@@ -179,7 +179,7 @@ public class BaseMeasurement<Q extends Quantity<Q>> extends
 	 * @return <code>true</code> if this measure is big; <code>false</code>
 	 *         otherwise.
 	 */
-	public boolean isBig() {
+	boolean isBig() {
 		return isBig;
 	}
 

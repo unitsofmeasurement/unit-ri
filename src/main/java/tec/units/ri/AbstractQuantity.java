@@ -167,7 +167,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 
 	/**
 	 * Compares this measure to the specified Measurement quantity. The default
-	 * implementation compares the {@link Measurement#doubleValue(Unit)} of both
+	 * implementation compares the {@link AbstractQuantity#doubleValue(Unit)} of both
 	 * this measure and the specified Measurement stated in the same unit (this
 	 * measure's {@link #getUnit() unit}).
 	 *

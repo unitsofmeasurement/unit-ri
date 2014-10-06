@@ -271,7 +271,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
             throws ArithmeticException;
 
     // Implements AbstractMeasurement
-    public final int intValue(Unit<Q> unit) throws ArithmeticException {
+    final int intValue(Unit<Q> unit) throws ArithmeticException {
         long longValue = longValue(unit);
         if ((longValue < Integer.MIN_VALUE) || (longValue > Integer.MAX_VALUE)) {
             throw new ArithmeticException("Cannot convert " + longValue + " to int (overflow)");
@@ -287,7 +287,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
         return (long) result;
     }
 
-    protected final float floatValue(Unit<Q> unit) {
+    final float floatValue(Unit<Q> unit) {
         return (float) doubleValue(unit);
     }
 
