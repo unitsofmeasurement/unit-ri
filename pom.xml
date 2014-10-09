@@ -20,7 +20,7 @@
 
 	<licenses>
 		<license>
-			<name>Apache 2.0</name>
+			<name>BSD</name>
 			<url>LICENSE.txt</url>
 		</license>
 	</licenses>
