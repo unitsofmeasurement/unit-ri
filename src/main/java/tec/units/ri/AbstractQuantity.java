@@ -26,7 +26,6 @@
  */
 package tec.units.ri;
 
-import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Dimensionless;

@@ -43,11 +43,11 @@ import tec.units.ri.AbstractQuantity;
  *            The type of the quantity.
  * @version 0.2, $Date: 2014-08-02 $
  */
-final class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
+final class IntegerQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	final int value;
 
-	public IntegerQuantity(int value, Unit<T> unit) {
+	public IntegerQuantity(int value, Unit<Q> unit) {
 		super(unit);
 		this.value = value;
 	}
@@ -57,13 +57,13 @@ final class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 		return value;
 	}
 
-	public double doubleValue(Unit<T> unit) {
+	public double doubleValue(Unit<Q> unit) {
 		return (super.getUnit().equals(unit)) ? value : super.getUnit()
 				.getConverterTo(unit).convert(value);
 	}
 
 	@Override
-	public long longValue(Unit<T> unit) {
+	public long longValue(Unit<Q> unit) {
 		double result = doubleValue(unit);
 		if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
 			throw new ArithmeticException("Overflow (" + result + ")");
@@ -72,22 +72,23 @@ final class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 
 	@Override
-	public Quantity<T> add(Quantity<T> that) {
+	public Quantity<Q> add(Quantity<Q> that) {
 		return BaseQuantity.of(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
-	public Quantity<T> subtract(Quantity<T> that) {
+	public Quantity<Q> subtract(Quantity<Q> that) {
 		return BaseQuantity.of(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Quantity<?> multiply(Quantity<?> that) {
-		return BaseQuantity.of(value * that.getValue().intValue(), getUnit());
+	public <T extends Quantity<T>, R extends Quantity<R>> Quantity<R> multiply(Quantity<T> that) {
+		return new IntegerQuantity(value * that.getValue().intValue(), getUnit());
 	}
 
 	@Override
-	public Quantity<T> multiply(Number that) {
+	public Quantity<Q> multiply(Number that) {
 		return BaseQuantity.of(value * that.intValue(), getUnit());
 	}
 
@@ -99,12 +100,12 @@ final class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public AbstractQuantity<T> inverse() {
-		return (AbstractQuantity<T>) BaseQuantity.of(value, getUnit().inverse());
+	public AbstractQuantity<Q> inverse() {
+		return (AbstractQuantity<Q>) BaseQuantity.of(value, getUnit().inverse());
 	}
 
 	@Override
-	public Quantity<T> divide(Number that) {
+	public Quantity<Q> divide(Number that) {
 		return BaseQuantity.of(value / that.doubleValue(), getUnit());
 	}
 

@@ -41,7 +41,7 @@ import tec.units.ri.AbstractQuantity;
  * @author Otavio de Santana
  * @param <Q>
  *            The type of the quantity.
- * @version 0.2, $Date: 2014-08-02 $
+ * @version 0.3, $Date: 2014-10-10 $
  */
 final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -81,9 +81,10 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 		return BaseQuantity.of(value - that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Quantity<?> multiply(Quantity<?> that) {
-		return BaseQuantity.of(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
+	public <T extends Quantity<T>, R extends Quantity<R>> Quantity<R> multiply(Quantity<T> that) {
+		return new DoubleQuantity(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
 	}
 
 	@Override

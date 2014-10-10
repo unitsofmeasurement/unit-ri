@@ -208,10 +208,10 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 		return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
 	}
 
-	@Override
-	public Quantity<?> multiply(Quantity<?> that) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public <T extends Quantity<T>, R extends Quantity<R>> Quantity<R> multiply(Quantity<T> that) {
 		final Unit<?> unit = getUnit().multiply(that.getUnit());
-		return BaseQuantity.of((getValue().doubleValue() * that.getValue().doubleValue()),
+		return new BaseQuantity((getValue().doubleValue() * that.getValue().doubleValue()),
 				unit);
 	}
 
