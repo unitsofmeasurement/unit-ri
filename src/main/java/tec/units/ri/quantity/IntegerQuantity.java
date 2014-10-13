@@ -101,7 +101,7 @@ final class IntegerQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public AbstractQuantity<Q> inverse() {
-		return (AbstractQuantity<Q>) BaseQuantity.of(value, getUnit().inverse());
+		return (AbstractQuantity<Q>) BaseQuantity.of(1 / value, getUnit().inverse());
 	}
 
 	@Override

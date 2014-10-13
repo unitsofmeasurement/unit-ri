@@ -28,8 +28,6 @@ package tec.units.ri.quantity;
 
 import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
 
-import java.text.ParsePosition;
-
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnconvertibleException;
@@ -49,7 +47,7 @@ import tec.units.ri.format.QuantityFormat;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.9.2, $Date: 2014-10-01 $
+ * @version 0.9.3, $Date: 2014-10-13 $
  */
 public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -237,8 +235,8 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	@Override
 	public Quantity<Q> inverse() {
 		@SuppressWarnings({ "rawtypes", "unchecked" })
-		final Quantity<Q> m = new BaseQuantity(getValue(), getUnit()
-				.inverse()); // TODO keep value same?
+		final Quantity<Q> m = new BaseQuantity(1d / getValue().doubleValue(),
+				getUnit().inverse());
 		return m;
 	}
 
@@ -342,12 +340,11 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	 *
 	 * @param csq
 	 *            the decimal value and its unit (if any) separated by space(s).
-	 * @return <code>MeasureFormat.getStandard().parse(csq, new ParsePosition(0))</code>
+	 * @return <code>MeasureFormat.getStandard().parse(csq)</code>
 	 */
 	public static AbstractQuantity<?> of(CharSequence csq) {
 		try {
-			return QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq,
-					new ParsePosition(0));
+			return QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq);
 		} catch (IllegalArgumentException | ParserException e) {
 			throw new IllegalArgumentException(e); // TODO could we handle this
 													// differently?
