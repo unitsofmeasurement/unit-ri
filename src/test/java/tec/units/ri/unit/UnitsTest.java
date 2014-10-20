@@ -23,28 +23,24 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri;
+package tec.units.ri.unit;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tec.units.ri.AbstractQuantity;
-import tec.units.ri.quantity.BaseQuantity;
-
-import javax.measure.quantity.Pressure;
-
+import tec.units.ri.AbstractUnit;
 import static org.junit.Assert.*;
-import static tec.units.ri.util.SI.PASCAL;
+import static tec.units.ri.util.SI.GRAM;
+import static tec.units.ri.util.SIPrefix.KILO;
 
 /**
  *
  * @author Werner Keil
- * @version 0.1
  */
-public class AbstractQuantityTest {
+public class UnitsTest {
 
-    public AbstractQuantityTest() {
+    public UnitsTest() {
     }
 
     @BeforeClass
@@ -57,8 +53,7 @@ public class AbstractQuantityTest {
 
     @Test
     public void testOf() {
-    	AbstractQuantity<Pressure> pressure = BaseQuantity.of(Double.valueOf(1), PASCAL); 
-        assertEquals(PASCAL, pressure.getUnit()); // TODO: Problem with kg...
+        assertEquals(KILO(GRAM), AbstractUnit.of("kg")); // TODO: Problem with kg...
     }
 
     @Test

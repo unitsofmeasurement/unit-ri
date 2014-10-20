@@ -82,7 +82,7 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public <T extends Quantity<T>, R extends Quantity<R>> Quantity<R> multiply(Quantity<T> that) {
+	public Quantity<?> multiply(Quantity<?> that) {
 		return new DoubleQuantity(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
 	}
 
