@@ -292,7 +292,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	}
 
 	/**
-	 * Casts this measure to a parameterized unit of specified nature or throw a
+	 * Casts this quantity to a parameterized unit of specified nature or throw a
 	 * <code>ClassCastException</code> if the dimension of the specified
 	 * quantity and this measure unit's dimension do not match. For example:<br/>
 	 * <code>
@@ -300,8 +300,8 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	 * </code>
 	 *
 	 * @param type
-	 *            the quantity class identifying the nature of the measure.
-	 * @return this measure parameterized with the specified type.
+	 *            the quantity class identifying the nature of the quantity.
+	 * @return this quantity parameterized with the specified type.
 	 * @throws ClassCastException
 	 *             if the dimension of this unit is different from the specified
 	 *             quantity dimension.
@@ -311,10 +311,9 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	 * @see Unit#asType(Class)
 	 */
 	@SuppressWarnings("unchecked")
-	final <T extends Quantity<T>> AbstractQuantity<T> asType(
+	public final <T extends Quantity<T>> AbstractQuantity<T> asType(
 			Class<T> type) throws ClassCastException {
-		this.getUnit().asType(type); // Raises ClassCastException is dimension
-		// mismatches.
+		this.getUnit().asType(type); // Raises ClassCastException is dimension mismatches.
 		return (AbstractQuantity<T>) this;
 	}
 }
