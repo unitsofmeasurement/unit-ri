@@ -41,15 +41,15 @@ import tec.units.ri.format.QuantityFormat;
  * @author otaviojava
  */
 public final class Quantities {
-	/**
+    /**
      * Private singleton constructor.
      */
     private Quantities() {}
     
     /**
      * Returns the
-     * {@link #valueOf(java.math.BigDecimal, javax.measure.unit.Unit) decimal}
-     * measure of unknown type corresponding to the specified representation.
+     * {@link #of(Number, javax.measure.Unit) numeric}
+     * quantity of unknown type corresponding to the specified representation.
      * This method can be used to parse dimensionless quantities.<br/><code>
      *     Quantity<Dimensionless> proportion = BaseQuantity.of("0.234").asType(Dimensionless.class);
      * </code>
@@ -61,7 +61,7 @@ public final class Quantities {
      * class and its subclasses.</p>
      *
      * @param csq the decimal value and its unit (if any) separated by space(s).
-     * @return <code>QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq, new ParsePosition(0))</code>
+     * @return <code>QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq)</code>
      */
     public static Quantity<?> getQuantity(CharSequence csq) {
         try {
