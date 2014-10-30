@@ -25,44 +25,10 @@
  */
 package tec.units.ri.quantity;
 
-import static tec.units.ri.util.SI.AMPERE;
-import static tec.units.ri.util.SI.AMPERE_TURN;
-import static tec.units.ri.util.SI.BECQUEREL;
-import static tec.units.ri.util.SI.BIT;
-import static tec.units.ri.util.SI.CANDELA;
-import static tec.units.ri.util.SI.COULOMB;
-import static tec.units.ri.util.SI.CUBIC_METRE;
-import static tec.units.ri.util.SI.FARAD;
-import static tec.units.ri.util.SI.GRAY;
-import static tec.units.ri.util.SI.HENRY;
-import static tec.units.ri.util.SI.HERTZ;
-import static tec.units.ri.util.SI.JOULE;
-import static tec.units.ri.util.SI.KATAL;
-import static tec.units.ri.util.SI.KELVIN;
-import static tec.units.ri.util.SI.KILOGRAM;
-import static tec.units.ri.util.SI.LUMEN;
-import static tec.units.ri.util.SI.LUX;
-import static tec.units.ri.util.SI.METRE;
-import static tec.units.ri.util.SI.METRES_PER_SECOND;
-import static tec.units.ri.util.SI.METRES_PER_SQUARE_SECOND;
-import static tec.units.ri.util.SI.MOLE;
-import static tec.units.ri.util.SI.NEWTON;
-import static tec.units.ri.util.SI.OHM;
-import static tec.units.ri.util.SI.PASCAL;
-import static tec.units.ri.util.SI.RADIAN;
-import static tec.units.ri.util.SI.SECOND;
-import static tec.units.ri.util.SI.SIEMENS;
-import static tec.units.ri.util.SI.SIEVERT;
-import static tec.units.ri.util.SI.SQUARE_METRE;
-import static tec.units.ri.util.SI.STERADIAN;
-import static tec.units.ri.util.SI.TESLA;
-import static tec.units.ri.util.SI.VOLT;
-import static tec.units.ri.util.SI.WATT;
-import static tec.units.ri.util.SI.WEBER;
+import static tec.units.ri.util.SI.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -108,7 +74,6 @@ import javax.measure.quantity.Volume;
 import tec.units.ri.AbstractQuantity;
 import tec.units.ri.util.SI;
 
-
 /**
  * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}).
  *
@@ -121,7 +86,7 @@ import tec.units.ri.util.SI;
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.5.3, $Date: 2014-05-28 $
+ * @version 0.5.4, $Date: 2014-10-30 $
  */
 public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q>  {
 
@@ -129,7 +94,7 @@ public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements 
      * Holds the current instances.
      */
     @SuppressWarnings("rawtypes")
-	private static final Map<Class, AbstractQuantityFactory> INSTANCES = new ConcurrentHashMap<>();
+    private static final Map<Class, AbstractQuantityFactory> INSTANCES = new HashMap<>();
 
     private static final Logger logger = Logger.getLogger(AbstractQuantityFactory.class.getName());
 
@@ -228,7 +193,7 @@ public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements 
          * The type of the quantities created by this factory.
          */
         @SuppressWarnings("unused")
-		private final Class<Q> type;
+	private final Class<Q> type;
 
         /**
          * The metric unit for quantities created by this factory.
@@ -241,12 +206,13 @@ public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements 
          * @param type The type of the quantities created by this factory.
          */
         @SuppressWarnings("unchecked")
-		Default(final Class<Q> type) {
+	Default(final Class<Q> type) {
             this.type = type;
             metricUnit = CLASS_TO_METRIC_UNIT.get(type);
         }
+        
         @SuppressWarnings("rawtypes")
-		static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<Class, Unit>();
+	static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<>();
         static {
             CLASS_TO_METRIC_UNIT.put(Dimensionless.class, SI.ONE);
             CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
@@ -294,5 +260,4 @@ public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements 
             return metricUnit;
         }
     }
-
 }
