@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>tec.units</groupId>
 	<artifactId>unit-ri</artifactId>
-	<version>0.5-SNAPSHOT</version>
+	<version>0.5</version>
 	<packaging>bundle</packaging>
 	<name>Units of Measurement Reference Implementation</name>
 	<url>http://github.com/unitsofmeasurement/unit-ri</url>
@@ -37,6 +37,7 @@
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
 	<properties>
+	   <jsr.version>0.6.3</jsr.version>
 	   <jdkVersion>1.7</jdkVersion>
 		<project.build.javaVersion>${jdkVersion}</project.build.javaVersion>
 		<maven.compile.targetLevel>1.7</maven.compile.targetLevel>
