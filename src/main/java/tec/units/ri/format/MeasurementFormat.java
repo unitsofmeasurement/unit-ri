@@ -33,7 +33,6 @@ import java.text.ParsePosition;
 
 import javax.measure.Measurement;
 import javax.measure.Unit;
-import javax.measure.format.FormatBehavior;
 import javax.measure.format.Parser;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;

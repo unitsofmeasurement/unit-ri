@@ -25,7 +25,7 @@
  */
 package tec.units.ri.quantity;
 
-import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
+import static tec.units.ri.format.FormatBehavior.LOCALE_NEUTRAL;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;

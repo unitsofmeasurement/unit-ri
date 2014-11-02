@@ -25,7 +25,7 @@
  */
 package tec.units.ri.model;
 
-import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
+import static tec.units.ri.format.FormatBehavior.LOCALE_NEUTRAL;
 
 import java.text.ParsePosition;
 
