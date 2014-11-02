@@ -51,7 +51,7 @@ public final class Quantities {
      * {@link #of(Number, javax.measure.Unit) numeric}
      * quantity of unknown type corresponding to the specified representation.
      * This method can be used to parse dimensionless quantities.<br/><code>
-     *     Quantity<Dimensionless> proportion = BaseQuantity.of("0.234").asType(Dimensionless.class);
+     *     Quantity<Dimensionless> proportion = NumberQuantity.of("0.234").asType(Dimensionless.class);
      * </code>
      *
      * <p> Note: This method handles only
@@ -93,6 +93,6 @@ public final class Quantities {
         } else if (Float.class.isInstance(value)) {
             	return new FloatQuantity<>(Float.class.cast(value), unit);
         }
-        return new BaseQuantity<>(value, unit);
+        return new NumberQuantity<>(value, unit);
     }
 }

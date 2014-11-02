@@ -34,7 +34,7 @@ import javax.measure.quantity.Mass;
 import org.junit.Before;
 import org.junit.Test;
 
-import tec.units.ri.quantity.BaseQuantity;
+import tec.units.ri.quantity.NumberQuantity;
 import tec.units.ri.util.Range;
 
 public class RangeTest {
@@ -46,9 +46,9 @@ public class RangeTest {
 	
 	@Before
 	public void init() {
-		min = BaseQuantity.of(1d, KILOGRAM);
-		max = BaseQuantity.of(10d, KILOGRAM);
-		res = BaseQuantity.of(2d, KILOGRAM);
+		min = NumberQuantity.of(1d, KILOGRAM);
+		max = NumberQuantity.of(10d, KILOGRAM);
+		res = NumberQuantity.of(2d, KILOGRAM);
 		
 		range = Range.of(min, max, res);
 	}

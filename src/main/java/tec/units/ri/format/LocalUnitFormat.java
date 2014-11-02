@@ -96,7 +96,7 @@ import tec.units.ri.util.SIPrefix;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, Aug 10, 2014
+ * @version 0.4, Nov 2, 2014
  */
 public class LocalUnitFormat implements UnitFormat {
 
@@ -205,11 +205,11 @@ public class LocalUnitFormat implements UnitFormat {
         int start = cursor.getIndex();
         int end = csq.length();
         if (end <= start) {
-            return SI.ONE;
+            return AbstractUnit.ONE;
         }
         String source = csq.subSequence(start, end).toString().trim();
         if (source.length() == 0) {
-            return SI.ONE;
+            return AbstractUnit.ONE;
         }
         try {
             UnitParser parser = new UnitParser(symbolMap, new StringReader(source));
@@ -309,7 +309,7 @@ public class LocalUnitFormat implements UnitFormat {
                     converter = converter.concatenate(SIPrefix.KILO.getConverter());
                 }
                 unitPrecedence = formatInternal(parentUnit, temp);
-                printSeparator = !parentUnit.equals(SI.ONE);
+                printSeparator = !parentUnit.equals(AbstractUnit.ONE);
             }
             int result = formatConverter(converter, printSeparator, unitPrecedence, temp);
             buffer.append(temp);

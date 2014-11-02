@@ -36,6 +36,7 @@ import javax.measure.Unit;
 import javax.measure.IncommensurableException;
 import javax.measure.UnconvertibleException;
 import javax.measure.function.UnitConverter;
+import javax.measure.quantity.Dimensionless;
 
 import tec.units.ri.format.LocalUnitFormat;
 import tec.units.ri.format.UCUMFormat;
@@ -69,7 +70,7 @@ import tec.units.ri.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8, Aug 13, 2014
+ * @version 0.8.1, Nov 02, 2014
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
@@ -78,11 +79,17 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 */
 	// private static final long serialVersionUID = -4344589505537030204L;
 
+
+	/**
+	 * Holds the dimensionless unit <code>ONE</code>.
+	 */
+	public static final AbstractUnit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
+
 	/**
 	 * Holds the name.
 	 */
 	protected String name;
-
+	
 	/**
 	 * Default constructor.
 	 */
@@ -136,7 +143,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * units. For example: [code] AbstractUnit<Volume> PERCENT_VOL =
 	 * SI.PERCENT.annotate("vol"); // "%{vol}" AbstractUnit<Mass> KG_TOTAL =
 	 * SI.KILOGRAM.annotate("total"); // "kg{total}" AbstractUnit<Dimensionless>
-	 * RED_BLOOD_CELLS = SI.ONE.annotate("RBC"); // "{RBC}" [/code]
+	 * RED_BLOOD_CELLS = ONE.annotate("RBC"); // "{RBC}" [/code]
 	 *
 	 * Note: Annotation of system units are not considered themselves as system
 	 * units.
@@ -154,14 +161,13 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * standard <a href="http://www.unitsofmeasure.org/">UCUM</a> format.
 	 *
 	 * Locale-sensitive unit parsing may be handled using the OSGi
-	 * {@link javax.measure.spi.UnitFormatService} or for non-OSGi
-	 * applications the {@link LocalUnitFormat} utility class.
+	 * {@link javax.measure.spi.UnitFormatService} or for non-OSGi applications
+	 * the {@link LocalUnitFormat} utility class.
 	 *
 	 * <p>
 	 * Note: The standard UCUM format supports dimensionless units.[code]
 	 * AbstractUnit<Dimensionless> PERCENT =
-	 * AbstractUnit.valueOf("100").inverse().asType(Dimensionless.class);
-	 * [/code]
+	 * AbstractUnit.of("100").inverse().asType(Dimensionless.class); [/code]
 	 * </p>
 	 *
 	 * @param charSequence
@@ -306,6 +312,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		return thatToSI.inverse().concatenate(thisToSI);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public final UnitConverter getConverterToAny(Unit<?> that)
 			throws IncommensurableException, UnconvertibleException {
@@ -330,7 +337,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
 	@Override
 	public final Unit<Q> alternate(String symbol) {
-		return new AlternateUnit(this, symbol);
+		return new AlternateUnit<Q>(this, symbol);
 	}
 
 	@Override
@@ -359,8 +366,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	}
 
 	private static boolean isLongValue(double value) {
-        return !((value < Long.MIN_VALUE) || (value > Long.MAX_VALUE)) && Math.floor(value) == value;
-    }
+		return !((value < Long.MIN_VALUE) || (value > Long.MAX_VALUE))
+				&& Math.floor(value) == value;
+	}
 
 	/**
 	 * Returns the product of this unit with the one specified.
@@ -389,9 +397,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * @return <code>this * that</code>
 	 */
 	public final AbstractUnit<?> multiply(AbstractUnit<?> that) {
-		if (this.equals(SI.ONE))
+		if (this.equals(ONE))
 			return that;
-		if (that.equals(SI.ONE))
+		if (that.equals(ONE))
 			return this;
 		return ProductUnit.getProductInstance(this, that);
 	}
@@ -403,9 +411,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 */
 	@Override
 	public final AbstractUnit<?> inverse() {
-		if (this.equals(SI.ONE))
+		if (this.equals(ONE))
 			return this;
-		return ProductUnit.getQuotientInstance(SI.ONE, this);
+		return ProductUnit.getQuotientInstance(ONE, this);
 	}
 
 	/**
@@ -472,7 +480,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 			throw new ArithmeticException("Root's order of zero");
 		else
 			// n < 0
-			return SI.ONE.divide(this.root(-n));
+			return ONE.divide(this.root(-n));
 	}
 
 	/**
@@ -487,10 +495,10 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		if (n > 0)
 			return this.multiply(this.pow(n - 1));
 		else if (n == 0)
-			return SI.ONE;
+			return ONE;
 		else
 			// n < 0
-			return SI.ONE.divide(this.pow(-n));
+			return ONE.divide(this.pow(-n));
 	}
 
 	// //////////////////////////////////////////////////////////////

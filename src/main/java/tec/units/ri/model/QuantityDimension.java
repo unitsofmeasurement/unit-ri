@@ -54,7 +54,7 @@ import tec.units.ri.util.SI;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, $Date: 2014-06-27 $
+ * @version 0.5.1, $Date: 2014-11-02 $
  */
 public final class QuantityDimension implements Dimension {
 	private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
@@ -67,7 +67,7 @@ public final class QuantityDimension implements Dimension {
 	/**
      * Holds dimensionless.
      */
-    public static final Dimension NONE = new QuantityDimension(SI.ONE);
+    public static final Dimension NONE = new QuantityDimension(AbstractUnit.ONE);
 
     /**
      * Holds length dimension (L).

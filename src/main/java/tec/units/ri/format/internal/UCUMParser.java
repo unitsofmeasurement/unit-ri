@@ -31,7 +31,6 @@ import javax.measure.Unit;
 
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.format.SymbolMap;
-import tec.units.ri.util.SI;
 import tec.units.ri.util.SIPrefix;
 
 /**
@@ -43,7 +42,7 @@ import tec.units.ri.util.SIPrefix;
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @see <a href="http://unitsofmeasure.org">UCUM</a>
- * @version 0.6, August 13, 2014
+ * @version 0.6.1, November 02, 2014
  */
 public class UCUMParser {
 
@@ -69,8 +68,8 @@ public class UCUMParser {
     }
     
     final public AbstractUnit Term() throws ParseException {
-        AbstractUnit result = SI.ONE;
-        AbstractUnit temp = SI.ONE;
+        AbstractUnit result = AbstractUnit.ONE;
+        AbstractUnit temp = AbstractUnit.ONE;
         result = Component();
         label_1:
         while (true) {
@@ -107,7 +106,7 @@ public class UCUMParser {
     }
 
     final public AbstractUnit Component() throws ParseException {
-        AbstractUnit result = SI.ONE;
+        AbstractUnit result = AbstractUnit.ONE;
         Token token = null;
         if (jj_2_1(2147483647)) {
             result = Annotatable();
@@ -141,7 +140,7 @@ public class UCUMParser {
                     jj_consume_token(SOLIDUS);
                     result = Component(); {
                     if (true)
-                        return SI.ONE.divide(result);
+                        return AbstractUnit.ONE.divide(result);
                 }
                 break;
                 case 14:
@@ -162,7 +161,7 @@ public class UCUMParser {
     }
 
     final public AbstractUnit Annotatable() throws ParseException {
-        AbstractUnit result = SI.ONE;
+        AbstractUnit result = AbstractUnit.ONE;
         Token token1 = null;
         Token token2 = null;
         if (jj_2_2(2147483647)) {
@@ -666,14 +665,10 @@ public class UCUMParser {
     }
 
     static final class JJCalls {
-
         int gen;
-
         Token first;
-
         int arg;
 
         JJCalls next;
-
     }
 }

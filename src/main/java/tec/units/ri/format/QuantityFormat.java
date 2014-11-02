@@ -38,10 +38,8 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.units.ri.AbstractQuantity;
-import tec.units.ri.quantity.BaseQuantity;
-import tec.units.ri.util.SI;
-
-
+import tec.units.ri.AbstractUnit;
+import tec.units.ri.quantity.NumberQuantity;
 
 /**
  * <p> This class provides the interface for formatting and parsing {@link AbstractQuantity
@@ -53,7 +51,7 @@ import tec.units.ri.util.SI;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, $Date: 2014-08-10 $
+ * @version 0.4, $Date: 2014-11-02 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat extends Format implements Parser<CharSequence, Quantity> {
@@ -267,7 +265,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 //						(CompoundUnit) unit, dest);
 //			else {
 				dest.append(numberFormat.format(quantity.getValue()));
-				if (quantity.getUnit().equals(SI.ONE))
+				if (quantity.getUnit().equals(AbstractUnit.ONE))
 					return dest;
 				dest.append(' ');
 				return unitFormat.format(quantity.getUnit(), dest);
@@ -286,11 +284,11 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 //			if (number instanceof BigDecimal)
 //				return AbstractQuantity.of((BigDecimal) number, unit);
 			if (number instanceof Long)
-				return BaseQuantity.of(number.longValue(), unit);
+				return NumberQuantity.of(number.longValue(), unit);
 			else if (number instanceof Double)
-				return BaseQuantity.of(number.doubleValue(), unit);
+				return NumberQuantity.of(number.doubleValue(), unit);
 			else if (number instanceof Integer)
-				return BaseQuantity.of(number.intValue(), unit);
+				return NumberQuantity.of(number.intValue(), unit);
 			else
 				throw new UnsupportedOperationException("Number of type "
 						+ number.getClass() + " are not supported");
@@ -329,7 +327,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 					Number number = measure.getValue();
 					dest.append(number.toString());
 //				}
-				if (measure.getUnit().equals(SI.ONE))
+				if (measure.getUnit().equals(AbstractUnit.ONE))
 					return dest;
 				dest.append(' ');
 				return LocalUnitFormat.getInstance().format(unit, dest);
@@ -354,7 +352,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 					endDecimal).toString());
 			cursor.setIndex(endDecimal + 1);
 			Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
-			return BaseQuantity.of(decimal.doubleValue(), unit);
+			return NumberQuantity.of(decimal.doubleValue(), unit);
 		}
 		
 		public AbstractQuantity<?> parse(CharSequence csq)

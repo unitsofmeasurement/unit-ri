@@ -71,12 +71,12 @@ final class LongQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	@Override
 	public Quantity<Q> add(Quantity<Q> that) {
-		return BaseQuantity.of(value + that.getValue().longValue(), getUnit()); // TODO use shift of the unit?
+		return NumberQuantity.of(value + that.getValue().longValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
 	public Quantity<Q> subtract(Quantity<Q> that) {
-		return BaseQuantity.of(value - that.getValue().longValue(), getUnit()); // TODO use shift of the unit?
+		return NumberQuantity.of(value - that.getValue().longValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -87,24 +87,24 @@ final class LongQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	@Override
 	public Quantity<Q> multiply(Number that) {
-		return BaseQuantity.of(value * that.intValue(), getUnit());
+		return NumberQuantity.of(value * that.intValue(), getUnit());
 	}
 
 	@Override
 	public Quantity<?> divide(Quantity<?> that) {
-		return BaseQuantity.of((double) value / that.getValue().doubleValue(), getUnit()
+		return NumberQuantity.of((double) value / that.getValue().doubleValue(), getUnit()
 				.divide(that.getUnit()));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public AbstractQuantity<Q> inverse() {
-		return (AbstractQuantity<Q>) BaseQuantity.of(1 / value, getUnit().inverse());
+		return (AbstractQuantity<Q>) NumberQuantity.of(1 / value, getUnit().inverse());
 	}
 
 	@Override
 	public Quantity<Q> divide(Number that) {
-		return BaseQuantity.of(value / that.doubleValue(), getUnit());
+		return NumberQuantity.of(value / that.doubleValue(), getUnit());
 	}
 
 }

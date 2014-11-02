@@ -29,9 +29,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Dimensionless;
 
-import tec.units.ri.format.MeasurementFormat;
-import tec.units.ri.quantity.BaseQuantity;
-import tec.units.ri.util.SI;
+import tec.units.ri.quantity.NumberQuantity;
 
 /**
  * <p>
@@ -93,7 +91,7 @@ import tec.units.ri.util.SI;
  * </p>
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.1, $Date: 2014-09-18 $
+ * @version 0.6.2, $Date: 2014-11-02 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 		Quantity<Q>, Comparable<Quantity<Q>> {
@@ -108,12 +106,12 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	/**
 	 * Holds a dimensionless quantity of none (exact).
 	 */
-	public static final AbstractQuantity<Dimensionless> NONE = BaseQuantity.of(0, SI.ONE);
+	public static final AbstractQuantity<Dimensionless> NONE = NumberQuantity.of(0, AbstractUnit.ONE);
 
 	/**
 	 * Holds a dimensionless quantity of one (exact).
 	 */
-	public static final AbstractQuantity<Dimensionless> ONE = BaseQuantity.of(1, SI.ONE);
+	public static final AbstractQuantity<Dimensionless> ONE = NumberQuantity.of(1, AbstractUnit.ONE);
 
 	/**
 	 * constructor.
@@ -171,7 +169,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 		if (unit.equals(this.getUnit())) {
 			return this;
 		}
-		return BaseQuantity.of(doubleValue(unit), unit);
+		return NumberQuantity.of(doubleValue(unit), unit);
 	}
 
 	/**

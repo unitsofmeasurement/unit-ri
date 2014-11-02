@@ -25,6 +25,7 @@
  */
 package tec.units.ri.quantity;
 
+import static tec.units.ri.AbstractUnit.ONE;
 import static tec.units.ri.util.SI.*;
 
 import java.util.HashMap;
@@ -35,44 +36,9 @@ import java.util.logging.Logger;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.function.QuantityFactory;
-import javax.measure.quantity.Acceleration;
-import javax.measure.quantity.AmountOfSubstance;
-import javax.measure.quantity.Angle;
-import javax.measure.quantity.Area;
-import javax.measure.quantity.CatalyticActivity;
-import javax.measure.quantity.Dimensionless;
-import javax.measure.quantity.ElectricCapacitance;
-import javax.measure.quantity.ElectricCharge;
-import javax.measure.quantity.ElectricConductance;
-import javax.measure.quantity.ElectricCurrent;
-import javax.measure.quantity.ElectricInductance;
-import javax.measure.quantity.ElectricPotential;
-import javax.measure.quantity.ElectricResistance;
-import javax.measure.quantity.Energy;
-import javax.measure.quantity.Force;
-import javax.measure.quantity.Frequency;
-import javax.measure.quantity.Illuminance;
-import javax.measure.quantity.Information;
-import javax.measure.quantity.Length;
-import javax.measure.quantity.LuminousFlux;
-import javax.measure.quantity.LuminousIntensity;
-import javax.measure.quantity.MagneticFlux;
-import javax.measure.quantity.MagneticFluxDensity;
-import javax.measure.quantity.MagnetomotiveForce;
-import javax.measure.quantity.Mass;
-import javax.measure.quantity.Power;
-import javax.measure.quantity.Pressure;
-import javax.measure.quantity.RadiationDoseAbsorbed;
-import javax.measure.quantity.RadiationDoseEffective;
-import javax.measure.quantity.Radioactivity;
-import javax.measure.quantity.SolidAngle;
-import javax.measure.quantity.Speed;
-import javax.measure.quantity.Temperature;
-import javax.measure.quantity.Time;
-import javax.measure.quantity.Volume;
+import javax.measure.quantity.*;
 
 import tec.units.ri.AbstractQuantity;
-import tec.units.ri.util.SI;
 
 /**
  * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}).
@@ -86,7 +52,7 @@ import tec.units.ri.util.SI;
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.5.4, $Date: 2014-10-30 $
+ * @version 0.5.5, $Date: 2014-11-02 $
  */
 public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q>  {
 
@@ -214,7 +180,7 @@ public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements 
         @SuppressWarnings("rawtypes")
 	static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<>();
         static {
-            CLASS_TO_METRIC_UNIT.put(Dimensionless.class, SI.ONE);
+            CLASS_TO_METRIC_UNIT.put(Dimensionless.class, ONE);
             CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
             CLASS_TO_METRIC_UNIT.put(LuminousIntensity.class, CANDELA);
             CLASS_TO_METRIC_UNIT.put(Temperature.class, KELVIN);
@@ -253,7 +219,7 @@ public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements 
 
         @SuppressWarnings("unchecked")
         public <N extends Number, U extends Unit<Q>> Q create(N number, U unit) {
-            return (Q) new BaseQuantity<Q>(number, unit);
+            return (Q) new NumberQuantity<Q>(number, unit);
         }
 
         public Unit<Q> getMetricUnit() {

@@ -34,11 +34,10 @@ import javax.measure.format.ParserException;
 import javax.measure.function.UnitConverter;
 
 import tec.units.ri.AbstractQuantity;
-import tec.units.ri.format.MeasurementFormat;
 import tec.units.ri.format.QuantityFormat;
 
 /**
- * An amount of quantity, consisting of a Number and a Unit. BaseQuantity
+ * An amount of quantity, consisting of a Number and a Unit. NumberQuantity
  * objects are immutable.
  * 
  * @see AbstractQuantity
@@ -46,9 +45,9 @@ import tec.units.ri.format.QuantityFormat;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.9.3, $Date: 2014-10-13 $
+ * @version 0.9.4, $Date: 2014-11-02 $
  */
-public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
+public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	/**
 	 * 
@@ -110,7 +109,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	 */
 	// private double maximum;
 
-	public BaseQuantity(Number number, Unit<Q> unit) {
+	public NumberQuantity(Number number, Unit<Q> unit) {
 		super(unit);
 		value = number;
 		isExact = false;
@@ -195,9 +194,9 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public BaseQuantity<Q> add(AbstractQuantity<Q> that) {
+	public NumberQuantity<Q> add(AbstractQuantity<Q> that) {
 		final AbstractQuantity<Q> thatToUnit = that.to(getUnit());
-		return new BaseQuantity(this.getValue().doubleValue()
+		return new NumberQuantity(this.getValue().doubleValue()
 				+ thatToUnit.getValue().doubleValue(), getUnit());
 	}
 
@@ -208,13 +207,13 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Quantity<?> multiply(Quantity<?> that) {
 		final Unit<?> unit = getUnit().multiply(that.getUnit());
-		return new BaseQuantity((getValue().doubleValue() * that.getValue().doubleValue()),
+		return new NumberQuantity((getValue().doubleValue() * that.getValue().doubleValue()),
 				unit);
 	}
 
 	@Override
-	public BaseQuantity<Q> multiply(Number that) {
-		return (BaseQuantity<Q>) BaseQuantity.of(
+	public NumberQuantity<Q> multiply(Number that) {
+		return (NumberQuantity<Q>) NumberQuantity.of(
 				(getValue().doubleValue() * that.doubleValue()), getUnit());
 	}
 
@@ -222,19 +221,19 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	@Override
 	public Quantity<Q> divide(Quantity<?> that) {
 		final Unit<?> unit = getUnit().divide(that.getUnit());
-		return new BaseQuantity((getValue().doubleValue() / that.getValue()
+		return new NumberQuantity((getValue().doubleValue() / that.getValue()
 				.doubleValue()), unit);
 	}
 
 	@Override
 	public Quantity<Q> divide(Number that) {
-		return BaseQuantity.of(getValue().doubleValue() / that.doubleValue(), getUnit());
+		return NumberQuantity.of(getValue().doubleValue() / that.doubleValue(), getUnit());
 	}
 
 	@Override
 	public Quantity<Q> inverse() {
 		@SuppressWarnings({ "rawtypes", "unchecked" })
-		final Quantity<Q> m = new BaseQuantity(1d / getValue().doubleValue(),
+		final Quantity<Q> m = new NumberQuantity(1d / getValue().doubleValue(),
 				getUnit().inverse());
 		return m;
 	}
@@ -249,7 +248,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	@Override
 	public Quantity<Q> subtract(Quantity<Q> that) {
 		final Quantity<Q> thatToUnit = (Quantity<Q>) that.to(getUnit());
-		return new BaseQuantity(this.getValue().doubleValue()
+		return new NumberQuantity(this.getValue().doubleValue()
 				- thatToUnit.getValue().doubleValue(), getUnit());
 	}
 
@@ -257,7 +256,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Quantity<Q> add(Quantity<Q> that) {
 		final Quantity<Q> thatToUnit = (Quantity<Q>) that.to(getUnit());
-		return new BaseQuantity(this.getValue().doubleValue()
+		return new NumberQuantity(this.getValue().doubleValue()
 				+ thatToUnit.getValue().doubleValue(), getUnit());
 	}
 

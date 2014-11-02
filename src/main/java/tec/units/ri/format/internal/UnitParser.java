@@ -29,16 +29,13 @@ package tec.units.ri.format.internal;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.format.SymbolMap;
 import tec.units.ri.function.LogConverter;
-import tec.units.ri.util.SI;
 import tec.units.ri.util.SIPrefix;
 
 /** */
 public final class UnitParser implements UnitParserConstants {
 
     private static class Exponent {
-
         public final int pow;
-
         public final int root;
 
         public Exponent(int pow, int root) {
@@ -72,7 +69,7 @@ public final class UnitParser implements UnitParserConstants {
     }
 
     final public AbstractUnit AddExpr() throws ParseException {
-        AbstractUnit result = SI.ONE;
+        AbstractUnit result = AbstractUnit.ONE;
         Number n1 = null;
         Token sign1 = null;
         Number n2 = null;
@@ -113,8 +110,8 @@ public final class UnitParser implements UnitParserConstants {
     }
 
     final public AbstractUnit MulExpr() throws ParseException {
-        AbstractUnit result = SI.ONE;
-        AbstractUnit temp = SI.ONE;
+        AbstractUnit result = AbstractUnit.ONE;
+        AbstractUnit temp = AbstractUnit.ONE;
         result = ExponentExpr();
         label_2:
         while (true) {
@@ -164,8 +161,8 @@ public final class UnitParser implements UnitParserConstants {
     }
 
     final public AbstractUnit ExponentExpr() throws ParseException {
-        AbstractUnit result = SI.ONE;
-        AbstractUnit temp = SI.ONE;
+        AbstractUnit result = AbstractUnit.ONE;
+        AbstractUnit temp = AbstractUnit.ONE;
         Exponent exponent = null;
         Token token = null;
         if (jj_2_2(2147483647)) {
@@ -266,8 +263,8 @@ public final class UnitParser implements UnitParserConstants {
     }
 
     final public AbstractUnit AtomicExpr() throws ParseException {
-        AbstractUnit result = SI.ONE;
-        AbstractUnit temp = SI.ONE;
+        AbstractUnit result = AbstractUnit.ONE;
+        AbstractUnit temp = AbstractUnit.ONE;
         Number n = null;
         Token token = null;
         switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
