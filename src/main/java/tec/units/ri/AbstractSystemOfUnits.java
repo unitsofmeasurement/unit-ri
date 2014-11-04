@@ -33,8 +33,8 @@ import java.util.Set;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
-import javax.measure.SystemOfUnits;
 import javax.measure.Unit;
+import javax.measure.spi.SystemOfUnits;
 
 /**
  * <p>An abstract base class for unit systems.</p>

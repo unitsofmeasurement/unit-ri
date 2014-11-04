@@ -27,9 +27,9 @@ package tec.units.ri.util;
 
 import static tec.units.ri.util.SI.METRES_PER_SECOND;
 
-import javax.measure.SystemOfUnits;
 import javax.measure.Unit;
 import javax.measure.quantity.Speed;
+import javax.measure.spi.SystemOfUnits;
 
 import tec.units.ri.AbstractSystemOfUnits;
 import tec.units.ri.AbstractUnit;
