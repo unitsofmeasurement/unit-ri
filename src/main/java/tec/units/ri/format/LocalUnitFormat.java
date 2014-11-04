@@ -34,9 +34,9 @@ import java.util.ResourceBundle;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
+import javax.measure.UnitConverter;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
-import javax.measure.function.UnitConverter;
 
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.format.internal.ParseException;

@@ -30,7 +30,7 @@ import java.lang.ref.SoftReference;
 import java.util.Map;
 
 import javax.measure.Dimension;
-import javax.measure.function.UnitConverter;
+import javax.measure.UnitConverter;
 
 import tec.units.ri.function.AbstractConverter;
 

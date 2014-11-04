@@ -30,8 +30,8 @@ import static tec.units.ri.format.FormatBehavior.LOCALE_NEUTRAL;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnconvertibleException;
+import javax.measure.UnitConverter;
 import javax.measure.format.ParserException;
-import javax.measure.function.UnitConverter;
 
 import tec.units.ri.AbstractQuantity;
 import tec.units.ri.format.QuantityFormat;

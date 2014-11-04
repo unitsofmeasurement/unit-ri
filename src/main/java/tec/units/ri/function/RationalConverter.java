@@ -25,8 +25,7 @@
  */
 package tec.units.ri.function;
 
-import javax.measure.function.UnitConverter;
-import javax.measure.function.ValueSupplier;
+import javax.measure.UnitConverter;
 
 
 /**

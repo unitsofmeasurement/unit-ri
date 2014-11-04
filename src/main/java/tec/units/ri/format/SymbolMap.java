@@ -33,7 +33,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.measure.function.UnitConverter;
+import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.function.AbstractConverter;

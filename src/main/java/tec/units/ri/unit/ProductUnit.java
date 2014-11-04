@@ -31,7 +31,7 @@ import java.util.Map;
 import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.function.UnitConverter;
+import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.function.AbstractConverter;

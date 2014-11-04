@@ -25,7 +25,6 @@
  */
 package tec.units.ri.function;
 
-import javax.measure.function.ValueSupplier;
 
 /**
  * <p> This class represents a converter dividing numeric values by π (Pi).</p>

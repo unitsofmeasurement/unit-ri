@@ -27,7 +27,7 @@ package tec.units.ri.util;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.function.UnitConverter;
+import javax.measure.UnitConverter;
 
 import tec.units.ri.function.ConverterSupplier;
 import tec.units.ri.function.RationalConverter;

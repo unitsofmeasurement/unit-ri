@@ -28,7 +28,7 @@ package tec.units.ri.function;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.measure.function.UnitConverter;
+import javax.measure.UnitConverter;
 
 /**
  * <p> The base class for our {@link UnitConverter} implementations.</p>

@@ -25,7 +25,7 @@
  */
 package tec.units.ri.function;
 
-import javax.measure.function.UnitConverter;
+import javax.measure.UnitConverter;
 
 /**
  * Provides a {@link UnitConverter} to implementations

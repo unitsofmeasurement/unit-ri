@@ -25,7 +25,6 @@
  */
 package tec.units.ri.function;
 
-import javax.measure.function.ValueSupplier;
 
 /**
  * <p>
