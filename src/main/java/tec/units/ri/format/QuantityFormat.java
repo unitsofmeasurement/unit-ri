@@ -98,12 +98,12 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 
 	/**
 	 * Returns the culture invariant format based upon {@link BigDecimal}
-	 * canonical format and the {@link UnitFormat#getStandardInstance() standard} unit
+	 * canonical format and the {@link UnitFormat#getInstance() standard} unit
 	 * format. This format <b>is not</b> locale-sensitive and can be used for
 	 * unambiguous electronic communication of quantities together with their
 	 * units without loss of information. For example:
 	 * <code>"1.23456789 kg.m/s2"</code> returns
-	 * <code>Measure.valueOf(new BigDecimal("1.23456789"), Unit.valueOf("kg.m/s2")));</code>
+	 * <code>Quantities.getQuantity(new BigDecimal("1.23456789"), AbstractUnit.parse("kg.m/s2")));</code>
 	 * 
 	 * @param style the format style to apply.
 	 * @return the desired format.

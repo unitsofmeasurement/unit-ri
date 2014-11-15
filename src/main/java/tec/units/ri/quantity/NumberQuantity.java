@@ -137,7 +137,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	 * 
 	 * @see AbstractQuantity#longValue(javax.measure.Unit)
 	 */
-	public final long longValue(Unit<Q> unit) {
+	protected final long longValue(Unit<Q> unit) {
 		// Extends AbstractQuantity
 //		Unit<Q> myUnit = getUnit();
 		try {
@@ -162,7 +162,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 //		}
 	}
 
-	public final int intValue(Unit<Q> unit) throws ArithmeticException {
+	protected final int intValue(Unit<Q> unit) throws ArithmeticException {
 		long longValue = longValue(unit);
 		if ((longValue < Integer.MIN_VALUE) || (longValue > Integer.MAX_VALUE)) {
 			throw new ArithmeticException("Cannot convert " + longValue

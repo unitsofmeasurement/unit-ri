@@ -198,7 +198,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	 * 2.00 as different objects because of different internal scales,
 	 * measurements such as <code>Measure.valueOf(3.0, KILOGRAM)</code>
 	 * <code>Measure.valueOf(3, KILOGRAM)</code> and
-	 * <code>Measure.valueOf("3 kg")</code> might not be considered equals
+	 * <code>Quantities.getQuantity("3 kg")</code> might not be considered equals
 	 * because of possible differences in their implementations.
 	 * </p>
 	 *
@@ -294,7 +294,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	 * <code>ClassCastException</code> if the dimension of the specified
 	 * quantity and this measure unit's dimension do not match. For example:<br/>
 	 * <code>
-	 *     Measure<Length> length = Measure.valueOf("2 km").asType(Length.class);
+	 *     Measure<Length> length = Quantities.getQuantity("2 km").asType(Length.class);
 	 * </code>
 	 *
 	 * @param type
