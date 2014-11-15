@@ -27,6 +27,8 @@ package tec.units.ri.function;
 
 import javax.measure.UnitConverter;
 
+import tec.units.ri.AbstractConverter;
+
 
 /**
  * <p> This class represents a converter multiplying numeric values by an

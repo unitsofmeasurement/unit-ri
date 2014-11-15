@@ -40,11 +40,11 @@ import javax.measure.UnitConverter;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
+import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.format.internal.ParseException;
 import tec.units.ri.format.internal.TokenMgrError;
 import tec.units.ri.format.internal.UCUMParser;
-import tec.units.ri.function.AbstractConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
 import tec.units.ri.unit.AnnotatedUnit;

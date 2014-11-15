@@ -31,8 +31,8 @@ import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.UnitConverter;
 
+import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.function.AbstractConverter;
 import tec.units.ri.model.QuantityDimension;
 
 

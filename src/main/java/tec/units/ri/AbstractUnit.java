@@ -40,7 +40,6 @@ import javax.measure.quantity.Dimensionless;
 
 import tec.units.ri.format.LocalUnitFormat;
 import tec.units.ri.format.UCUMFormat;
-import tec.units.ri.function.AbstractConverter;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;

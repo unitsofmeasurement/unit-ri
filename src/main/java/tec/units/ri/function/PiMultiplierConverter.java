@@ -25,6 +25,8 @@
  */
 package tec.units.ri.function;
 
+import tec.units.ri.AbstractConverter;
+
 
 /**
  * <p>

@@ -32,7 +32,7 @@ import java.util.Map;
 import javax.measure.Dimension;
 import javax.measure.UnitConverter;
 
-import tec.units.ri.function.AbstractConverter;
+import tec.units.ri.AbstractConverter;
 
 /**
  * <p> This class represents the physical model used for dimensional analysis.</p>

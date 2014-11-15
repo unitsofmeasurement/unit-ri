@@ -35,8 +35,8 @@ import java.util.logging.Logger;
 
 import javax.measure.UnitConverter;
 
+import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.function.AbstractConverter;
 import tec.units.ri.util.SIPrefix;
 
 /**

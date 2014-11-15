@@ -25,6 +25,8 @@
  */
 package tec.units.ri.function;
 
+import tec.units.ri.AbstractConverter;
+
 
 /**
  * <p> This class represents a logarithmic converter of limited precision.

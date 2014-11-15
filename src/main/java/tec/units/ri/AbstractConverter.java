@@ -23,12 +23,14 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.function;
+package tec.units.ri;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.measure.UnitConverter;
+
+import tec.units.ri.function.Converter;
 
 /**
  * <p> The base class for our {@link UnitConverter} implementations.</p>
