@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.quantity;
+package tec.units.ri;
 
 import static tec.units.ri.AbstractUnit.ONE;
 import static tec.units.ri.util.SI.*;
@@ -38,7 +38,7 @@ import javax.measure.Unit;
 import javax.measure.quantity.*;
 import javax.measure.spi.QuantityFactory;
 
-import tec.units.ri.AbstractQuantity;
+import tec.units.ri.quantity.NumberQuantity;
 
 /**
  * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}).

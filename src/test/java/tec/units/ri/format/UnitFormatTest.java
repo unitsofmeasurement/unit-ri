@@ -45,9 +45,9 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import tec.units.ri.AbstractQuantityFactory;
 import tec.units.ri.format.LocalUnitFormat;
 import tec.units.ri.format.UCUMFormat;
-import tec.units.ri.quantity.AbstractQuantityFactory;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>

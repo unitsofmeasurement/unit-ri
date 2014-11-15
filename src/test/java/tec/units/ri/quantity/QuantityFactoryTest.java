@@ -33,7 +33,7 @@ import javax.measure.quantity.*;
 
 import org.junit.Test;
 
-import tec.units.ri.quantity.AbstractQuantityFactory;
+import tec.units.ri.AbstractQuantityFactory;
 
 /**
  * @author Werner Keil

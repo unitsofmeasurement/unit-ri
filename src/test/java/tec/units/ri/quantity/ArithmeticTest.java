@@ -34,6 +34,8 @@ import javax.measure.quantity.Length;
 import org.junit.Before;
 import org.junit.Test;
 
+import tec.units.ri.AbstractQuantityFactory;
+
 
 public class ArithmeticTest {
 
