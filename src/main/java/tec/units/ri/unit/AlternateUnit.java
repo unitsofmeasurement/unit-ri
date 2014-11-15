@@ -69,7 +69,7 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
      *         {@link AbstractUnit#isSystemUnit() system unit}
      */
     public AlternateUnit(AbstractUnit<?> parentUnit, String symbol) {
-        if (!parentUnit.isSI())
+        if (!parentUnit.isSystemUnit())
             throw new IllegalArgumentException("The parent unit: " +  parentUnit
                     + " is not an unscaled SI unit");
         this.parentUnit = (parentUnit instanceof AlternateUnit) ?
@@ -103,7 +103,7 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
     }
 
     @Override
-    public AbstractUnit<Q> toSI() {
+    public AbstractUnit<Q> toSystemUnit() {
         return this; // Alternate units are SI units.
     }
 

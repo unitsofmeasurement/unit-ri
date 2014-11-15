@@ -107,7 +107,7 @@ public class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     }
 
     @Override
-    public AbstractUnit<Q> toSI() {
+    public AbstractUnit<Q> toSystemUnit() {
         return this;
     }
 
