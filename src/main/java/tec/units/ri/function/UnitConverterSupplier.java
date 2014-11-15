@@ -39,7 +39,7 @@ import javax.measure.UnitConverter;
  * @author Werner Keil
  */
 //equivalent to @FunctionalInterface
-public interface ConverterSupplier {
+public interface UnitConverterSupplier {
 	
     /**
      * @return a converter

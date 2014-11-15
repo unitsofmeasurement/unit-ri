@@ -29,7 +29,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
-import tec.units.ri.function.ConverterSupplier;
+import tec.units.ri.function.UnitConverterSupplier;
 import tec.units.ri.function.RationalConverter;
 
 /**
@@ -50,7 +50,7 @@ import tec.units.ri.function.RationalConverter;
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.5, $Date: 2014-08-10 $
  */
-public enum SIPrefix implements ConverterSupplier {
+public enum SIPrefix implements UnitConverterSupplier {
 
     YOTTA(new RationalConverter(10^24L, 1L)),
     ZETTA(new RationalConverter(10^21L, 1L)),

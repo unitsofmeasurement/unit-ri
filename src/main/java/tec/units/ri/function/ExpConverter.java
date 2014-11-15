@@ -38,7 +38,7 @@ package tec.units.ri.function;
  * @version 0.4, August 3, 2014
  */
 final class ExpConverter extends AbstractConverter 
-	implements ValueSupplier<String> { //implements Immutable {
+	implements ValueSupplier<String> {
 
     /**
 	 * 

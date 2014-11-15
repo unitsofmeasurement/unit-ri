@@ -53,7 +53,7 @@ public class UnitsTest {
 
     @Test
     public void testOf() {
-        assertEquals(KILO(GRAM), AbstractUnit.of("kg")); // TODO: Problem with kg...
+        assertEquals(KILO(GRAM), AbstractUnit.parse("kg")); // TODO: Problem with kg...
     }
 
     @Test

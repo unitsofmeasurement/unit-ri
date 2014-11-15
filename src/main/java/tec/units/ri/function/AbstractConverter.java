@@ -36,7 +36,7 @@ import javax.measure.UnitConverter;
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.7.1, $Date: 2014-09-18 $
  */
-public abstract class AbstractConverter implements UnitConverter {
+public abstract class AbstractConverter implements UnitConverter, Converter<Number, Number> {
 	
     /**
 	 * 
