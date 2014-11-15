@@ -69,7 +69,7 @@ import tec.units.ri.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.1, Nov 02, 2014
+ * @version 0.8.2, Nov 15, 2014
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
