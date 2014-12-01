@@ -41,6 +41,7 @@ import tec.units.ri.function.Nameable;
  * @version 0.3 ($Revision: 428 $)
  * @see <a href="http://en.wikipedia.org/wiki/Time_series"> Wikipedia:
  *      Time Series</a>
+ * @deprecated The purpose of this class is met and exceeded by Measurement now, there seems no further need for it.
  */
 public class TimedData<T> implements Nameable { //, Supplier<T> {
 	// TODO we could use ValueSupplier instead?
