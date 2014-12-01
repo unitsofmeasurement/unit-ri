@@ -50,7 +50,7 @@ public class RangeTest {
 		max = NumberQuantity.of(10d, KILOGRAM);
 		res = NumberQuantity.of(2d, KILOGRAM);
 		
-		range = Range.of(min, max, res);
+		range = QuantityRange.of(min, max, res);
 	}
 	
 	@Test
@@ -65,7 +65,10 @@ public class RangeTest {
 
 	@Test
 	public void testGetResolution() {
-		assertEquals(res, range.getResolution());
+		assertTrue(range.getClass().equals(QuantityRange.class));
+		@SuppressWarnings("unchecked")
+		QuantityRange<Mass> qr = (QuantityRange<Mass>) range;
+		assertEquals(res, qr.getResolution());
 	}
 
 	@Test
