@@ -27,35 +27,19 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri;
+package tec.units.ri.util;
 
-import javax.measure.Quantity;
+import static org.junit.Assert.assertEquals;
+import static tec.units.ri.util.SI.GRAM;
+import static tec.units.ri.util.SI.KILOGRAM;
+import static tec.units.ri.util.SIPrefix.KILO;
 
-import tec.units.ri.function.QuantitySupplier;
+import org.junit.Test;
 
-/**
- *
- * A Measurement contains a {@link Quantity} and a timestamp.
- * 
- * <p>
- * A {@code Measurement} object is used for maintaining the tuple of quantity and timestamp.
- * The value is represented as {@linkplain Quantity}
- * and the time as {@linkplain Instant}
- * <p>
-
- * 
- * @see {@link QuantitySupplier}
- * @author werner
- * @version 0.3
- * @param <Q>
- */
-public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,
-		Comparable<Measurement<Q>> {
-
-	/**
-	 * Returns the timestamp of this {@link Measurement}.
-	 * 
-	 * @return a timestamp.
-	 */
-	long getTimestamp();
+public class PrefixTest {
+	@Test
+	public void testKilo() {
+		// TODO how to handle equals for units?
+		assertEquals(KILOGRAM.getSymbol(), KILO(GRAM).getSymbol());
+	}
 }

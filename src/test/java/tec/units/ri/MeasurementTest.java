@@ -29,33 +29,22 @@
  */
 package tec.units.ri;
 
-import javax.measure.Quantity;
+import static org.junit.Assert.assertEquals;
+import static tec.units.ri.util.SI.KILOGRAM;
+import javax.measure.quantity.Mass;
 
-import tec.units.ri.function.QuantitySupplier;
+import org.junit.Test;
 
-/**
- *
- * A Measurement contains a {@link Quantity} and a timestamp.
- * 
- * <p>
- * A {@code Measurement} object is used for maintaining the tuple of quantity and timestamp.
- * The value is represented as {@linkplain Quantity}
- * and the time as {@linkplain Instant}
- * <p>
+import tec.units.ri.quantity.Quantities;
 
- * 
- * @see {@link QuantitySupplier}
- * @author werner
- * @version 0.3
- * @param <Q>
- */
-public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,
-		Comparable<Measurement<Q>> {
+public class MeasurementTest {
 
-	/**
-	 * Returns the timestamp of this {@link Measurement}.
-	 * 
-	 * @return a timestamp.
-	 */
-	long getTimestamp();
+	@Test
+	public void testOf() {
+		long timestamp = System.currentTimeMillis();
+		Measurement<Mass> measurement = AbstractMeasurement.of(
+				Quantities.getQuantity(15, KILOGRAM), timestamp);
+		assertEquals(Quantities.getQuantity(15, KILOGRAM), measurement.getQuantity());
+		assertEquals(timestamp, measurement.getTimestamp());
+	}
 }

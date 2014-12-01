@@ -24,20 +24,20 @@
 			<url>LICENSE.txt</url>
 		</license>
 	</licenses>
-	
+
 	<scm>
-        <url>https://github.com/unitsofmeasurement/unit-ri.git</url>
-    </scm>
-    <issueManagement>
-        <system>JIRA</system>
-        <url>https://java.net/jira/browse/UNITSOFMEASUREMENT</url>
-    </issueManagement>
+		<url>https://github.com/unitsofmeasurement/unit-ri.git</url>
+	</scm>
+	<issueManagement>
+		<system>JIRA</system>
+		<url>https://java.net/jira/browse/UNITSOFMEASUREMENT</url>
+	</issueManagement>
 
 	<!-- ======================================================= -->
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
 	<properties>
-	   <jdkVersion>1.7</jdkVersion>
+		<jdkVersion>1.7</jdkVersion>
 		<project.build.javaVersion>${jdkVersion}</project.build.javaVersion>
 		<maven.compile.targetLevel>1.7</maven.compile.targetLevel>
 		<maven.compile.sourceLevel>${jdkVersion}</maven.compile.sourceLevel>
@@ -59,7 +59,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -76,7 +76,27 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.2.1</version>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<phase>package</phase>
+							<goals>
+								<goal>jar-no-fork</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
 		<plugins>
 			<!-- ======================================================= -->
 			<!-- Compilation -->
@@ -89,6 +109,14 @@
 					<target>${project.build.javaVersion}</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
+			</plugin>
+
+            <!-- ======================================================= -->
+            <!-- Source Attachment -->
+            <!-- ======================================================= -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
 			</plugin>
 
 			<!-- ======================================================= -->
@@ -112,7 +140,6 @@
 					</archive>
 				</configuration>
 			</plugin>
-
 
 			<!-- ======================================================= -->
 			<!-- Packaging (OSGi bundle) -->
@@ -225,19 +252,11 @@
 						<!-- ======================================================= -->
 						<!-- Static analysis for occurences of bug patterns -->
 						<!-- ======================================================= -->
-						<!--  plugin>
-							<groupId>org.codehaus.mojo</groupId>
-							<artifactId>findbugs-maven-plugin</artifactId>
-							<version>2.5.2</version>
-						</plugin>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-checkstyle-plugin</artifactId>
-							<version>2.11</version>
-							<configuration>
-								<configLocation>src/etc/checkstyle.xml</configLocation>
-							</configuration>
-						</plugin -->
+						<!-- plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>findbugs-maven-plugin</artifactId> 
+							<version>2.5.2</version> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+							<artifactId>maven-checkstyle-plugin</artifactId> <version>2.11</version> 
+							<configuration> <configLocation>src/etc/checkstyle.xml</configLocation> </configuration> 
+							</plugin -->
 					</reportPlugins>
 				</configuration>
 			</plugin>

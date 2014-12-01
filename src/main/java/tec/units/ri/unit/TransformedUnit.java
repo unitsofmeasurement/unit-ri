@@ -29,9 +29,11 @@ import java.util.Map;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
+import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractUnit;
+import tec.units.ri.function.UnitConverterSupplier;
 
 
 /**
@@ -54,9 +56,10 @@ import tec.units.ri.AbstractUnit;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, June 19, 2014
+ * @version 0.4, December 1, 2014
  */
-public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
+public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
+ implements UnitConverterSupplier {
   
 	/**
 	 * 
@@ -126,7 +129,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
             return true;
         if (!(that instanceof TransformedUnit))
             return false;
-        TransformedUnit thatUnit = (TransformedUnit) that;
+        TransformedUnit<?> thatUnit = (TransformedUnit<?>) that;
         return this.parentUnit.equals(thatUnit.parentUnit) &&
                 this.toParentUnit.equals(thatUnit.toParentUnit);
     }
@@ -134,5 +137,14 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
 	@Override
 	public String getSymbol() {
 		return symbol;
+	}
+	
+	public Unit<Q> getParentUnit() {
+		return parentUnit;
+	}
+
+	@Override
+	public UnitConverter getConverter() {
+		return toParentUnit;
 	}
 }

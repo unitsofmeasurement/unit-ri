@@ -25,6 +25,11 @@
  */
 package tec.units.ri.format;
 
+import static tec.units.ri.util.SI.CUBIC_METRE;
+import static tec.units.ri.util.SI.GRAM;
+import static tec.units.ri.util.SI.KILOGRAM;
+import static tec.units.ri.util.UCUM.LITER;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.text.ParsePosition;
@@ -48,6 +53,8 @@ import tec.units.ri.function.RationalConverter;
 import tec.units.ri.unit.AnnotatedUnit;
 import tec.units.ri.util.SI;
 import tec.units.ri.util.SIPrefix;
+import tec.units.ri.unit.BaseUnit;
+import tec.units.ri.unit.TransformedUnit;
 
 /**
  * <p> This class represents the local sensitive format.</p>
@@ -96,7 +103,7 @@ import tec.units.ri.util.SIPrefix;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, Nov 2, 2014
+ * @version 0.5, December 1, 2014
  */
 public class LocalUnitFormat implements UnitFormat {
 
@@ -196,7 +203,7 @@ public class LocalUnitFormat implements UnitFormat {
         if (!(unit instanceof AbstractUnit)) {
             return appendable.append(unit.toString()); // Unknown unit (use intrinsic toString() method)
         }
-        formatInternal((AbstractUnit) unit, appendable);
+        formatInternal((AbstractUnit<?>) unit, appendable);
         return appendable;
     }
 
@@ -244,83 +251,100 @@ public class LocalUnitFormat implements UnitFormat {
      * @return the operator precedence of the outermost operator in the unit 
      *   expression that was output
      */
-    private int formatInternal(AbstractUnit<?> unit, Appendable buffer) throws IOException {
-        if (unit instanceof AnnotatedUnit) {
-            unit = ((AnnotatedUnit) unit).getActualUnit();
-        }
-        String symbol = symbolMap.getSymbol(unit);
-        if (symbol != null) {
-            buffer.append(symbol);
-            return NOOP_PRECEDENCE;
-        } else if (unit.getProductUnits() != null) {
-            Map<? extends AbstractUnit, Integer> productUnits = unit.getProductUnits();
-            int negativeExponentCount = 0;
-            // Write positive exponents first...
-            boolean start = true;
-            for (AbstractUnit u : productUnits.keySet()) {
-                int pow = productUnits.get(u);
-                if (pow >= 0) {
-                    formatExponent(u, pow, 1, !start, buffer);
-                    start = false;
-                } else {
-                    negativeExponentCount += 1;
-                }
-            }
-            // ..then write negative exponents.
-            if (negativeExponentCount > 0) {
-                if (start) {
-                    buffer.append('1');
-                }
-                buffer.append('/');
-                if (negativeExponentCount > 1) {
-                    buffer.append('(');
-                }
-                start = true;
-                for (AbstractUnit u : productUnits.keySet()) {
-                    int pow = productUnits.get(u);
-                    if (pow < 0) {
-                        formatExponent(u, -pow, 1, !start, buffer);
-                        start = false;
-                    }
-                }
-                if (negativeExponentCount > 1) {
-                    buffer.append(')');
-                }
-            }
-            return PRODUCT_PRECEDENCE;
-        } else if ((!unit.isSystemUnit()) || unit.equals(SI.KILOGRAM)) {
-            UnitConverter converter = null;
-            boolean printSeparator = false;
-            StringBuffer temp = new StringBuffer();
-            int unitPrecedence = NOOP_PRECEDENCE;
-            if (unit.equals(SI.KILOGRAM)) {
-                // A special case because KILOGRAM is a BaseUnit instead of 
-                // a transformed unit, even though it has a prefix.
-                converter = SIPrefix.KILO.getConverter();
-                unitPrecedence = formatInternal(SI.GRAM, temp);
-                printSeparator = true;
-            } else {
-                AbstractUnit parentUnit = unit.getSystemUnit();
-                converter = unit.getConverterTo(parentUnit);
-                if (parentUnit.equals(SI.KILOGRAM)) {
-                    // More special-case hackery to work around gram/kilogram 
-                    // incosistency
-                    parentUnit = SI.GRAM;
-                    converter = converter.concatenate(SIPrefix.KILO.getConverter());
-                }
-                unitPrecedence = formatInternal(parentUnit, temp);
-                printSeparator = !parentUnit.equals(AbstractUnit.ONE);
-            }
-            int result = formatConverter(converter, printSeparator, unitPrecedence, temp);
-            buffer.append(temp);
-            return result;
-        } else if (unit.getSymbol() != null) {
-            buffer.append(unit.getSymbol());
-            return NOOP_PRECEDENCE;
-        } else {
-            throw new IllegalArgumentException("Cannot format the given Object as a Unit (unsupported unit type " + unit.getClass().getName() + ")");
-        }
-    }
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private int formatInternal(Unit<?> unit, Appendable buffer)
+			throws IOException {
+		if (unit instanceof AnnotatedUnit<?>) {
+			unit = ((AnnotatedUnit<?>) unit).getActualUnit();
+			// } else if (unit instanceof ProductUnit<?>) {
+			// ProductUnit<?> p = (ProductUnit<?>)unit;
+		}
+		String symbol = symbolMap.getSymbol((AbstractUnit<?>) unit);
+		if (symbol != null) {
+			buffer.append(symbol);
+			return NOOP_PRECEDENCE;
+		} else if (unit.getProductUnits() != null) {
+			Map<Unit<?>, Integer> productUnits = (Map<Unit<?>, Integer>) unit.getProductUnits();
+			int negativeExponentCount = 0;
+			// Write positive exponents first...
+			boolean start = true;
+			for (Map.Entry<Unit<?>, Integer> e : productUnits.entrySet()) {
+				int pow = e.getValue();
+				if (pow >= 0) {
+					formatExponent(e.getKey(), pow, 1, !start, buffer);
+					start = false;
+				} else {
+					negativeExponentCount += 1;
+				}
+			}
+			// ..then write negative exponents.
+			if (negativeExponentCount > 0) {
+				if (start) {
+					buffer.append('1');
+				}
+				buffer.append('/');
+				if (negativeExponentCount > 1) {
+					buffer.append('(');
+				}
+				start = true;
+				for (Map.Entry<Unit<?>, Integer> e : productUnits.entrySet()) {
+					int pow = e.getValue();
+					if (pow < 0) {
+						formatExponent(e.getKey(), -pow, 1, !start, buffer);
+						start = false;
+					}
+				}
+				if (negativeExponentCount > 1) {
+					buffer.append(')');
+				}
+			}
+			return PRODUCT_PRECEDENCE;
+		} else if (unit instanceof BaseUnit<?>) {
+			buffer.append(((BaseUnit<?>) unit).getSymbol());
+			return NOOP_PRECEDENCE;
+		} else if (unit.getSymbol() != null) { // Alternate unit.
+			buffer.append(unit.getSymbol());
+			return NOOP_PRECEDENCE;
+		} else { // A transformed unit or new unit type!
+			UnitConverter converter = null;
+			boolean printSeparator = false;
+			StringBuilder temp = new StringBuilder();
+			int unitPrecedence = NOOP_PRECEDENCE;
+			Unit<?> parentUnit = unit.getSystemUnit();
+			converter = ((AbstractUnit<?>) unit).getConverterToSI();
+			if (KILOGRAM.equals(parentUnit)) {
+				// More special-case hackery to work around gram/kilogram incosistency
+				if (unit.equals(GRAM)) {
+					buffer.append(symbolMap.getSymbol(GRAM));
+					return NOOP_PRECEDENCE;
+				}
+				parentUnit = GRAM;
+				if (unit instanceof TransformedUnit<?>) {
+					converter = ((TransformedUnit<?>) unit).getConverter();
+				} else {
+					converter = unit.getConverterTo((Unit) GRAM);
+				}
+			} else if (CUBIC_METRE.equals(parentUnit)) {
+				if (converter != null) {
+					parentUnit = LITER;
+				}
+			}
+
+			if (unit instanceof TransformedUnit) {
+				TransformedUnit<?> transUnit = (TransformedUnit<?>) unit;
+				if (parentUnit== null) parentUnit = transUnit.getParentUnit();
+//				String x = parentUnit.toString();
+				converter = transUnit.getConverter();
+			}
+
+			unitPrecedence = formatInternal(parentUnit, temp);
+			printSeparator = !parentUnit.equals(AbstractUnit.ONE);
+			int result = formatConverter(converter, printSeparator,
+					unitPrecedence, temp);
+			buffer.append(temp);
+			return result;
+		}
+	}
 
     /**
      * Format the given unit raised to the given fractional power to the
@@ -334,7 +358,7 @@ public class LocalUnitFormat implements UnitFormat {
      * @param buffer StringBuffer the buffer to append to. No assumptions should
      *    be made about its content.
      */
-    private void formatExponent(AbstractUnit<?> unit, int pow, int root, boolean continued, Appendable buffer) throws IOException {
+    private void formatExponent(Unit<?> unit, int pow, int root, boolean continued, Appendable buffer) throws IOException {
         if (continued) {
             buffer.append(MIDDLE_DOT);
         }
@@ -414,7 +438,7 @@ public class LocalUnitFormat implements UnitFormat {
     private int formatConverter(UnitConverter converter,
             boolean continued,
             int unitPrecedence,
-            StringBuffer buffer) {
+            StringBuilder buffer) {
         SIPrefix prefix = symbolMap.getPrefix(converter);
         if ((prefix != null) && (unitPrecedence == NOOP_PRECEDENCE)) {
             buffer.insert(0, symbolMap.getSymbol(prefix));
