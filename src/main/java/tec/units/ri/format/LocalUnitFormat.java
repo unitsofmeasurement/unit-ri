@@ -51,8 +51,8 @@ import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
 import tec.units.ri.unit.AnnotatedUnit;
-import tec.units.ri.util.SI;
 import tec.units.ri.util.SIPrefix;
+import tec.units.ri.unit.AlternateUnit;
 import tec.units.ri.unit.BaseUnit;
 import tec.units.ri.unit.TransformedUnit;
 
@@ -236,7 +236,8 @@ public class LocalUnitFormat implements UnitFormat {
         }
     }
 
-    @Override
+    @SuppressWarnings("rawtypes")
+	@Override
     public AbstractUnit<? extends Quantity> parse(CharSequence csq) throws ParserException {
     	return parse(csq, new ParsePosition(0));
     }
@@ -302,7 +303,7 @@ public class LocalUnitFormat implements UnitFormat {
 		} else if (unit instanceof BaseUnit<?>) {
 			buffer.append(((BaseUnit<?>) unit).getSymbol());
 			return NOOP_PRECEDENCE;
-		} else if (unit.getSymbol() != null) { // Alternate unit.
+		} else if (unit instanceof AlternateUnit<?>) { // unit.getSymbol() != null) { // Alternate unit.
 			buffer.append(unit.getSymbol());
 			return NOOP_PRECEDENCE;
 		} else { // A transformed unit or new unit type!
