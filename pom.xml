@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>tec.units</groupId>
 	<artifactId>unit-ri</artifactId>
-	<version>0.6-SNAPSHOT</version>
+	<version>0.6</version>
 	<packaging>bundle</packaging>
 	<name>Units of Measurement Reference Implementation</name>
 	<url>http://github.com/unitsofmeasurement/unit-ri</url>
@@ -78,25 +78,6 @@
 	</dependencyManagement>
 
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>2.2.1</version>
-					<executions>
-						<execution>
-							<id>attach-sources</id>
-							<phase>package</phase>
-							<goals>
-								<goal>jar-no-fork</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-
 		<plugins>
 			<!-- ======================================================= -->
 			<!-- Compilation -->
