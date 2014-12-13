@@ -7,14 +7,14 @@
 	<name>Units of Measurement Reference Implementation</name>
 	<url>http://github.com/unitsofmeasurement/unit-ri</url>
 	<organization>
-		<name>Units of Measurement project</name>
-		<url>http://www.unitsofmeasurement.org</url>
+		<name>Jean-Marie Dautelle, Werner Keil, V2COM</name>
+		<url>http://unitsofmeasurement.github.io</url>
 	</organization>
 	<description>Unit Standard (JSR 363) Reference Implementation.</description>
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>0.7-SNAPSHOT</version>
+		<version>0.7</version>
 	</parent>
 
 	<licenses>
