@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>0.7</version>
+		<version>0.8-SNAPSHOT</version>
 	</parent>
 
 	<licenses>
@@ -91,37 +91,37 @@
 				</configuration>
 			</plugin>
 
-            <!-- ======================================================= -->
-            <!-- Source Attachment -->
-            <!-- ======================================================= -->
+			<!-- ======================================================= -->
+			<!-- Source Attachment -->
+			<!-- ======================================================= -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 			</plugin>
-			
+
 			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <detectLinks>true</detectLinks>
-                    <!-- excludePackageNames>blabla</excludePackageNames -->
-                    <keywords>true</keywords>
-                    <linksource>true</linksource>
-                    <failOnError>false</failOnError>
-                    <!-- overview>${basedir}/overview.html</overview -->
-                    <source>${maven.compile.sourceLevel}</source>
-                    <!-- stylesheetfile>${basedir}/src/site/css/money-jdoc.css</stylesheetfile -->
-                    <verbose>true</verbose>
-                </configuration>
-            </plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<detectLinks>true</detectLinks>
+					<!-- excludePackageNames>package1</excludePackageNames -->
+					<keywords>true</keywords>
+					<linksource>true</linksource>
+					<failOnError>false</failOnError>
+					<!-- overview>${basedir}/overview.html</overview -->
+					<source>${maven.compile.sourceLevel}</source>
+					<!-- stylesheetfile>${basedir}/src/site/css/money-jdoc.css</stylesheetfile -->
+					<verbose>true</verbose>
+				</configuration>
+			</plugin>
 
 			<!-- ======================================================= -->
 			<!-- JAR packaging -->
@@ -266,16 +266,21 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-    <!-- Additional repositories -->
-    <!-- Helps to resolve Parent POM -->
-    <repositories>
-        <repository>
-            <id>geotoolkit</id>
-            <name>Geotoolkit.org project</name>
-            <url>http://maven.geotoolkit.org</url>
-        </repository>
-    </repositories>
+
+	<!-- Additional repositories -->
+	<!-- Helps to resolve Parent POM -->
+	<repositories>
+		<repository>
+			<id>geotoolkit</id>
+			<name>Geotoolkit.org project</name>
+			<url>http://maven.geotoolkit.org</url>
+		</repository>
+		<repository>
+			<id>jcenter</id>
+			<name>JCenter</name>
+			<url>http://jcenter.bintray.com</url>
+		</repository>
+	</repositories>
 
 	<profiles>
 		<profile>
