@@ -30,7 +30,7 @@
     in consequence,the operations each permits. For example, the summation
     of a {@link org.unitsofmeasurement.quantity.Length length} and a {@link org.unitsofmeasurement.quantity.Duration duration}
     is not allowed by the standard model, but is quite valid in a relativistic context.</p>
-    
+<!--    
 <p> Models are {@link javolution.context.LocalContext context-local}, allowing 
     multiple models to be used concurrently. For example:[code]
         LocalContext.enter();
@@ -40,7 +40,7 @@
         } finally {
            LocalContext.exit();
         }[/code]</p>
-
+-->
 <p> The names and characteristics of the models are presented in the following table:</p>
 
 <table border="1" cellspacing="1">
