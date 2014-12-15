@@ -26,6 +26,7 @@
 package tec.units.ri;
 
 import static tec.units.ri.format.UCUMFormat.Variant.CASE_SENSITIVE;
+import static tec.units.ri.format.UCUMFormat.Variant.PRINT;
 
 import java.io.IOException;
 import java.util.Map;
@@ -69,7 +70,7 @@ import tec.units.ri.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.2, Nov 15, 2014
+ * @version 0.8.3, Dec 15, 2014
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
@@ -182,10 +183,10 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
 	/**
 	 * Returns the standard <a href="http://unitsofmeasure.org/">UCUM</a>
-	 * representation of this physics unit. The string produced for a given unit
+	 * representation of this unit. The string produced for a given unit
 	 * is always the same; it is not affected by the locale. It can be used as a
 	 * canonical string representation for exchanging units, or as a key for a
-	 * Hashtable, etc.
+	 * Map, Hashtable, etc.
 	 *
 	 * Locale-sensitive unit parsing should be handled using the OSGi
 	 * {@link org.unitsofmeasurement.service.UnitFormat} service (or the
@@ -197,9 +198,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	public String toString() {
 		final Appendable tmp = new StringBuilder();
 		try {
-			// return UCUMFormat.getInstance(CASE_SENSITIVE).format(this,
-			// tmp).toString();
-			return LocalUnitFormat.getInstance().format(this, tmp).toString();
+			 return UCUMFormat.getInstance(PRINT).format(this,
+			 tmp).toString();
+//			return LocalUnitFormat.getInstance().format(this, tmp).toString();
 		} catch (IOException ioException) {
 			throw new Error(ioException); // Should never happen.
 		} finally {

@@ -143,7 +143,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 *             if any problem occurs while parsing the specified character
 	 *             sequence (e.g. illegal syntax).
 	 */
-	public abstract AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
+	abstract AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
 			throws IllegalArgumentException, ParserException;
 	
 	/**
@@ -274,7 +274,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 
 		@SuppressWarnings("unchecked")
 		@Override
-		public AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
+		AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
 				throws IllegalArgumentException, ParserException {
 			String str = csq.toString();
 			Number number = numberFormat.parse(str, cursor);
@@ -336,7 +336,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 
 		@SuppressWarnings("unchecked")
 		@Override
-		public AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
+		AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
 				throws ParserException {
 			int startDecimal = cursor.getIndex();
 			while ((startDecimal < csq.length())

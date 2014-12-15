@@ -33,7 +33,6 @@ import static tec.units.ri.util.UCUM.LITER;
 import java.io.IOException;
 import java.io.StringReader;
 import java.text.ParsePosition;
-import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -103,7 +102,7 @@ import tec.units.ri.unit.TransformedUnit;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, December 1, 2014
+ * @version 0.5.1, December 16, 2014
  */
 public class LocalUnitFormat implements UnitFormat {
 
@@ -153,9 +152,9 @@ public class LocalUnitFormat implements UnitFormat {
      * Returns an instance for the given locale.
      * @param locale
      */
-    public static LocalUnitFormat getInstance(Locale locale) {
-        return new LocalUnitFormat(SymbolMap.of(ResourceBundle.getBundle(LocalUnitFormat.class.getName(), locale)));
-    }
+//    public static LocalUnitFormat getInstance(Locale locale) {
+//        return new LocalUnitFormat(SymbolMap.of(ResourceBundle.getBundle(LocalUnitFormat.class.getName(), locale)));
+//    }
 
     /** Returns an instance for the given symbol map. */
     public static LocalUnitFormat getInstance(SymbolMap symbols) {
@@ -207,7 +206,7 @@ public class LocalUnitFormat implements UnitFormat {
         return appendable;
     }
 
-    public AbstractUnit<?> parse(CharSequence csq, ParsePosition cursor) throws ParserException {
+    AbstractUnit<?> parse(CharSequence csq, ParsePosition cursor) throws ParserException {
         // Parsing reads the whole character sequence from the parse position.
         int start = cursor.getIndex();
         int end = csq.length();
