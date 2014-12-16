@@ -51,7 +51,7 @@ import tec.units.ri.quantity.NumberQuantity;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, $Date: 2014-11-02 $
+ * @version 0.5, $Date: 2014-12-16 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat extends Format implements Parser<CharSequence, Quantity> {
@@ -281,8 +281,6 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 			if (number == null)
 				throw new IllegalArgumentException("Number cannot be parsed");
 			Unit unit = unitFormat.parse(csq);
-//			if (number instanceof BigDecimal)
-//				return AbstractQuantity.of((BigDecimal) number, unit);
 			if (number instanceof Long)
 				return NumberQuantity.of(number.longValue(), unit);
 			else if (number instanceof Double)
