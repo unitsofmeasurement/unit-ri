@@ -92,9 +92,12 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
 	 */
 	@Override
 	public boolean contains(Quantity<Q> q) {
-		if (q.getValue().doubleValue() >= getMinimum().getValue().doubleValue() &&
-		 q.getValue().doubleValue() <= getMaximum().getValue().doubleValue()) {
-			return true;
+		if (q != null && q.getValue() != null) {
+			// TODO use hasMinimum() and hasMaximum() to avoid null of the range, too 
+			if (q.getValue().doubleValue() >= getMinimum().getValue().doubleValue() &&
+			 q.getValue().doubleValue() <= getMaximum().getValue().doubleValue()) {
+				return true;
+			}
 		}
 		return false;
 	}
