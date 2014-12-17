@@ -41,7 +41,7 @@ import javax.measure.Quantity;
  *            The value of the range.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.1, November 29, 2014
+ * @version 0.2, December 17, 2014
  * @see <a
  *      href="http://www.botts-inc.com/SensorML_1.0.1/schemaBrowser/SensorML_QuantityRange.html">
  *      SensorML: QuantityRange</a>
@@ -59,10 +59,8 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
 	}
 	
 	/**
-	 * Returns an {@code Range} with the specified values.
+	 * Returns an {@code QuantityRange} with the specified values.
 	 *
-	 * @param <T>
-	 *            the class of the value
 	 * @param minimum
 	 *            The minimum value for the measurement range.
 	 * @param maximum
@@ -75,24 +73,6 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
 	public static QuantityRange of(Quantity minimum, Quantity maximum, Quantity resolution) {
 		return new QuantityRange(minimum, maximum, resolution);
 	}
-
-/*
-	/**
-	 * Returns an {@code Range} with the specified values.
-	 *
-	 * @param <T>
-	 *            the class of the value
-	 * @param minimum
-	 *            The minimum value for the quantity range.
-	 * @param maximum
-	 *            The maximum value for the quantity range.
-	 * @return an {@code QuantityRange} with the given values
-	 
-	@SuppressWarnings({ "rawtypes", "unchecked" }) */
-//	protected static QuantityRange of(Quantity minimum, Quantity maximum) {
-//		return new QuantityRange(minimum, maximum);
-//	}
-	
 
 	/**
 	 * Returns the resolution of the measurement range. The value is the same as
@@ -112,7 +92,8 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
 	 */
 	@Override
 	public boolean contains(Quantity<Q> q) {
-		if (q.getValue().doubleValue() >= getMinimum().getValue().doubleValue()) {
+		if (q.getValue().doubleValue() >= getMinimum().getValue().doubleValue() &&
+		 q.getValue().doubleValue() <= getMaximum().getValue().doubleValue()) {
 			return true;
 		}
 		return false;
