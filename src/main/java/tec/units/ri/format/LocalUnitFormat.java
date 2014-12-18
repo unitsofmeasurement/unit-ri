@@ -102,7 +102,7 @@ import tec.units.ri.unit.TransformedUnit;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.1, December 16, 2014
+ * @version 0.5.2, December 18, 2014
  */
 public class LocalUnitFormat implements UnitFormat {
 
@@ -208,6 +208,7 @@ public class LocalUnitFormat implements UnitFormat {
 
     AbstractUnit<?> parse(CharSequence csq, ParsePosition cursor) throws ParserException {
         // Parsing reads the whole character sequence from the parse position.
+        // TODO Is there any use for cursor? It seems an int as startPosition would work (also in ME)
         int start = cursor.getIndex();
         int end = csq.length();
         if (end <= start) {
