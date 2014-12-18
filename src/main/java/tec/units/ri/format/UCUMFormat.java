@@ -62,18 +62,12 @@ import tec.units.ri.util.SIPrefix;
  * href="http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=61354"> Units
  * of Measure in Clinical Information Systems</a>. </p>
  *
- * <p> As of revision 1.16, the BNF in the UCUM standard contains an <a
- * href="http://unitsofmeasure.org/ticket/4">error</a>. I've attempted to work
- * around the problem by modifying the BNF productions for &lt;Term&gt;. Once the
- * error in the standard is corrected, it may be necessary to modify the
- * productions in the UCUMParser.jj file to conform to the standard. </p>
- *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, 2 November 2014
+ * @version 0.7, 18 December 2014
  */
 public abstract class UCUMFormat implements UnitFormat {
-
+// TODO Clarify BNF in the UCUM standard, see http://unitsofmeasure.org/ticket/4
     /**
 	 * 
 	 */
@@ -104,11 +98,11 @@ public abstract class UCUMFormat implements UnitFormat {
     }
 
     /**
-	 * Returns an instance for formatting and parsing using user
-	 * defined symbols
-	 * @param variant the <strong>UCUM</strong> variant to use
-	 * @param symbolMap the map of user defined symbols to use
-	 */
+     * Returns an instance for formatting and parsing using user
+     * defined symbols
+     * @param variant the <strong>UCUM</strong> variant to use
+     * @param symbolMap the map of user defined symbols to use
+     */
     public static UCUMFormat getInstance(Variant variant, 
     		SymbolMap symbolMap) {
     	switch (variant) {
@@ -122,6 +116,7 @@ public abstract class UCUMFormat implements UnitFormat {
 	     		throw new IllegalArgumentException("Unknown variant: " + variant);
     	}
     }
+    
     /**
      * The symbol map used by this instance to map between
      * {@link AbstractUnit Unit}s and
@@ -133,8 +128,8 @@ public abstract class UCUMFormat implements UnitFormat {
     // Constructors //
     // ////////////////
     /**
-	 * Base constructor.
-	 */
+     * Base constructor.
+     */
     UCUMFormat(SymbolMap symbolMap) {
         this.symbolMap = symbolMap;
     }
@@ -311,29 +306,6 @@ public abstract class UCUMFormat implements UnitFormat {
             buffer.append(")");
         }
     }
-
-//    static final ResourceBundle.Control getControl(final String key) {
-//    	return new ResourceBundle.Control() {
-//      		 @Override
-//   		 public List<Locale> getCandidateLocales(String baseName, Locale locale) {
-//   		     if (baseName == null)
-//   			 throw new NullPointerException();
-//   		     if (locale.equals(new Locale(key))) {
-//   			 return Arrays.asList(
-//   			     locale,
-//   			     Locale.GERMANY,
-//   			     // no Locale.GERMAN here
-//   			     Locale.ROOT);
-//   		     } else if (locale.equals(Locale.GERMANY)) {
-//   			 return Arrays.asList(
-//   			     locale,
-//   			     // no Locale.GERMAN here
-//   			     Locale.ROOT);
-//   		     }
-//   		     return super.getCandidateLocales(baseName, locale);
-//      		 }
-//	     };
-//    }
     
     // /////////////////
     // Inner classes //
@@ -350,11 +322,11 @@ public abstract class UCUMFormat implements UnitFormat {
     }
     
     /**
-	 * The Print format is used to output units according to the "print" column
-	 * in the UCUM standard. Because "print" symbols in UCUM are not unique,
-	 * this class of UCUMFormat may not be used for parsing, only for
-	 * formatting.
-	 */
+     * The Print format is used to output units according to the "print" column
+     * in the UCUM standard. Because "print" symbols in UCUM are not unique,
+     * this class of UCUMFormat may not be used for parsing, only for
+     * formatting.
+     */
     private static final class Print extends UCUMFormat {
 
         /**
@@ -394,14 +366,14 @@ public abstract class UCUMFormat implements UnitFormat {
         	return parse(csq, new ParsePosition(0));
         
 		}
-    }
+    	}
 
-    /**
+    	/**
 	 * The Parsing format outputs formats and parses units according to the
 	 * "c/s" or "c/i" column in the UCUM standard, depending on which SymbolMap
 	 * is passed to its constructor.
 	 */
-    private static final class Parsing extends UCUMFormat {
+    	private static final class Parsing extends UCUMFormat {
 
 //        private static final long serialVersionUID = -922531801940132715L;
         private static final SymbolMap CASE_SENSITIVE_SYMBOLS = SymbolMap.of(
