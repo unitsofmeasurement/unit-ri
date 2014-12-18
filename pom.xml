@@ -4,6 +4,7 @@
 	<groupId>tec.units</groupId>
 	<artifactId>unit-ri</artifactId>
 	<packaging>bundle</packaging>
+	<version>0.8-SNAPSHOT</version>
 	<name>Units of Measurement Reference Implementation</name>
 	<url>http://github.com/unitsofmeasurement/unit-ri</url>
 	<organization>
@@ -14,7 +15,7 @@
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>0.8-SNAPSHOT</version>
+		<version>0.7</version>
 	</parent>
 
 	<licenses>
