@@ -33,14 +33,14 @@ import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.model.QuantityDimension;
+import tec.units.ri.quantity.QuantityDimension;
 
 
 /**
  * <p> This class represents the building blocks on top of which all others
  *     physical units are created. Base units are always unscaled SI units.</p>
  * 
- * <p> When using the {@link tec.units.ri.model.StandardModel standard model},
+ * <p> When using the {@link tec.units.ri.util.StandardModel standard model},
  *     all seven {@link org.org.unitsofmeasurement.impl.system.SI SI} base units
  *     are dimensionally independent.</p>
  *

@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.model;
+package tec.units.ri;
 
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
@@ -32,7 +32,8 @@ import java.util.Map;
 import javax.measure.Dimension;
 import javax.measure.UnitConverter;
 
-import tec.units.ri.AbstractConverter;
+import tec.units.ri.quantity.QuantityDimension;
+import tec.units.ri.util.StandardModel;
 
 /**
  * <p> This class represents the physical model used for dimensional analysis.</p>

@@ -35,7 +35,7 @@ import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.model.QuantityDimension;
+import tec.units.ri.quantity.QuantityDimension;
 
 /**
  * <p>  This class represents units formed by the product of rational powers of
