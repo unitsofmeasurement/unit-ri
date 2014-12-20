@@ -26,7 +26,7 @@
 package tec.units.ri;
 
 import java.lang.ref.Reference;
-import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 import java.util.Map;
 
 import javax.measure.Dimension;
@@ -74,22 +74,22 @@ import tec.units.ri.util.StandardModel;
  * @see <a href="http://en.wikipedia.org/wiki/Dimensional_analysis">Wikipedia: Dimensional Analysis</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.3, $Date: 2014-12-15 $
+ * @version 0.5.4, $Date: 2014-12-20 $
  */
 public abstract class DimensionalModel {
 
     /**
      * Holds the current model.
      */
-    private static Reference<DimensionalModel> Current = new SoftReference<DimensionalModel>(new StandardModel());
+    private static Reference<DimensionalModel> Current = new WeakReference<DimensionalModel>(new StandardModel());
 
     /**
-     * Returns a dimensional model
+     * Returns the current dimensional model
      * (by default an instance of {@link StandardModel}).
      *
      * @return the current physical model.
      */
-    public static DimensionalModel getInstance() {
+    public static DimensionalModel current() {
         return DimensionalModel.Current.get();
     }
 

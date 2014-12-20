@@ -247,7 +247,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		Dimension thatDimension = that.getDimension();
 		if (thisDimension.equals(thatDimension))
 			return true;
-		DimensionalModel model = DimensionalModel.getInstance(); // Use
+		DimensionalModel model = DimensionalModel.current(); // Use
 																	// dimensional
 																	// analysis
 																	// model.
@@ -322,7 +322,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 														// compatible they must
 														// be both abstract
 														// units.
-		DimensionalModel model = DimensionalModel.getInstance();
+		DimensionalModel model = DimensionalModel.current();
 		AbstractUnit thisSystemUnit = this.getSystemUnit();
 		UnitConverter thisToDimension = model.getDimensionalTransform(
 				thisSystemUnit.getDimension()).concatenate(

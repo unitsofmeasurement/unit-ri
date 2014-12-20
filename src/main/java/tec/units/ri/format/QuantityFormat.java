@@ -98,7 +98,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 
 	/**
 	 * Returns the culture invariant format based upon {@link BigDecimal}
-	 * canonical format and the {@link UnitFormat#getInstance() standard} unit
+	 * canonical format and the {@link UnitFormat#current() standard} unit
 	 * format. This format <b>is not</b> locale-sensitive and can be used for
 	 * unambiguous electronic communication of quantities together with their
 	 * units without loss of information. For example:
