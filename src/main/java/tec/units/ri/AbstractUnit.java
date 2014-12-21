@@ -178,6 +178,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 */
 	public static Unit<?> parse(CharSequence charSequence) {
 		return UCUMFormat.getInstance(CASE_SENSITIVE).parse(charSequence);
+//		return LocalUnitFormat.getInstance().parse(charSequence);
 	}
 
 	/**

@@ -48,7 +48,7 @@ import tec.units.ri.function.RationalConverter;
  * @see <a href="http://en.wikipedia.org/wiki/SI_prefix">Wikipedia: SI Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, $Date: 2014-08-10 $
+ * @version 0.5.1, $Date: 2014-12-21 $
  */
 public enum SIPrefix implements UnitConverterSupplier {
 
@@ -73,14 +73,14 @@ public enum SIPrefix implements UnitConverterSupplier {
     ZEPTO(new RationalConverter(1L, 10^21L)),
     YOCTO(new RationalConverter(1L, 10^24L));
 
-    private final RationalConverter converter;
+    private final UnitConverter converter;
 
     /**
      * Creates a new prefix.
      *
      * @param converter the associated unit converter.
      */
-    private SIPrefix (RationalConverter converter) {
+    private SIPrefix (UnitConverter converter) {
         this.converter = converter;
     }
 
@@ -101,7 +101,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e24)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> YOTTA(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> YOTTA(Unit<Q> unit) {
         return unit.transform(YOTTA.getConverter());
     }
 
@@ -113,7 +113,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e21)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> ZETTA(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> ZETTA(Unit<Q> unit) {
         return unit.transform(ZETTA.getConverter());
     }
 
@@ -125,7 +125,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e18)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> EXA(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> EXA(Unit<Q> unit) {
         return unit.transform(EXA.getConverter());
     }
 
@@ -137,7 +137,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e15)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> PETA(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> PETA(Unit<Q> unit) {
         return unit.transform(PETA.getConverter());
     }
 
@@ -149,7 +149,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e12)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> TERA(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> TERA(Unit<Q> unit) {
         return unit.transform(TERA.getConverter());
     }
 
@@ -173,7 +173,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e6)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> MEGA(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> MEGA(Unit<Q> unit) {
         return unit.transform(MEGA.getConverter());
     }
 
@@ -185,7 +185,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e3)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> KILO(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> KILO(Unit<Q> unit) {
         return unit.transform(KILO.getConverter());
     }
 
@@ -197,7 +197,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e2)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> HECTO(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> HECTO(Unit<Q> unit) {
         return unit.transform(HECTO.getConverter());
     }
 
@@ -209,7 +209,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e1)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> DEKA(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> DEKA(Unit<Q> unit) {
         return unit.transform(DEKA.getConverter());
     }
 
@@ -221,7 +221,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e-1)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> DECI(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> DECI(Unit<Q> unit) {
         return unit.transform(DECI.getConverter());
     }
 
@@ -245,7 +245,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e-3)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> MILLI(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> MILLI(Unit<Q> unit) {
         return unit.transform(MILLI.getConverter());
     }
 
@@ -257,7 +257,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e-6)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> MICRO(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> MICRO(Unit<Q> unit) {
         return unit.transform(MICRO.getConverter());
     }
 
@@ -269,7 +269,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e-9)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> NANO(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> NANO(Unit<Q> unit) {
         return unit.transform(NANO.getConverter());
     }
 
@@ -281,7 +281,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e-12)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> PICO(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> PICO(Unit<Q> unit) {
         return unit.transform(PICO.getConverter());
     }
 
@@ -293,7 +293,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e-15)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> FEMTO(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> FEMTO(Unit<Q> unit) {
         return unit.transform(FEMTO.getConverter());
     }
 
@@ -305,7 +305,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e-18)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> ATTO(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> ATTO(Unit<Q> unit) {
         return unit.transform(ATTO.getConverter());
     }
 
@@ -317,7 +317,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e-21)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> ZEPTO(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> ZEPTO(Unit<Q> unit) {
         return unit.transform(ZEPTO.getConverter());
     }
 
@@ -329,7 +329,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @param unit any unit.
      * @return <code>unit.times(1e-24)</code>.
      */
-    public static <Q extends Quantity<Q>> Unit<Q> YOCTO(Unit<Q> unit) {
+    public static final <Q extends Quantity<Q>> Unit<Q> YOCTO(Unit<Q> unit) {
         return unit.transform(YOCTO.getConverter());
     }
 
