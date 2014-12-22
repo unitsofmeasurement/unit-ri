@@ -36,8 +36,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.text.ParsePosition;
 import java.util.Map;
-import java.util.ResourceBundle;
-
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
@@ -177,8 +175,8 @@ public class LocalUnitFormat implements UnitFormat {
 	 * is initialized, this instance will no longer be used.
 	 */
 	private static LocalUnitFormat DEFAULT_INSTANCE = new LocalUnitFormat(
-			SymbolMap.of(toMap(ResourceBundle.getBundle(LocalUnitFormat.class
-					.getPackage().getName() + ".messages"))));
+			SymbolMap.of(toMap(LocalUnitFormat.class.getPackage().getName()
+					+ ".messages")));
 	/**
 	 * Multiplicand character
 	 */

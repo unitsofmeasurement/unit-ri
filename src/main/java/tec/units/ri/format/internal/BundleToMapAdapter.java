@@ -7,14 +7,18 @@ import java.util.ResourceBundle;
 
 public final class BundleToMapAdapter {
 	public final static Map<String, String> toMap(final ResourceBundle resource) {
-	    Map<String, String> map = new HashMap<>();
+		Map<String, String> map = new HashMap<>();
 
-	    Enumeration<String> keys = resource.getKeys();
-	    while (keys.hasMoreElements()) {
-	      String key = keys.nextElement();
-	      map.put(key, resource.getString(key));
-	    }
+		Enumeration<String> keys = resource.getKeys();
+		while (keys.hasMoreElements()) {
+			String key = keys.nextElement();
+			map.put(key, resource.getString(key));
+		}
 
-	    return map;
-	  }
+		return map;
+	}
+
+	public final static Map<String, String> toMap(String resName) {
+		return toMap(ResourceBundle.getBundle(resName));
+	}
 }

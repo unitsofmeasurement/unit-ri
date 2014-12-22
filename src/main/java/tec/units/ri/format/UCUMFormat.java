@@ -350,7 +350,7 @@ public abstract class UCUMFormat implements UnitFormat {
          */
 		// private static final long serialVersionUID = 2990875526976721414L;
 		private static final SymbolMap PRINT_SYMBOLS = SymbolMap
-				.of(toMap(ResourceBundle.getBundle(BUNDLE_BASE + "_Print")));
+				.of(toMap(BUNDLE_BASE + "_Print"));
 		private static final Print DEFAULT = new Print(PRINT_SYMBOLS);
 
 		public Print(SymbolMap symbols) {
