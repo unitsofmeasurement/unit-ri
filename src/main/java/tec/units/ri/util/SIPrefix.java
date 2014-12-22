@@ -48,7 +48,7 @@ import tec.units.ri.function.RationalConverter;
  * @see <a href="http://en.wikipedia.org/wiki/SI_prefix">Wikipedia: SI Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.1, $Date: 2014-12-21 $
+ * @version 0.5.2, $Date: 2014-12-22 $
  */
 public enum SIPrefix implements UnitConverterSupplier {
 
@@ -332,5 +332,4 @@ public enum SIPrefix implements UnitConverterSupplier {
     public static final <Q extends Quantity<Q>> Unit<Q> YOCTO(Unit<Q> unit) {
         return unit.transform(YOCTO.getConverter());
     }
-
 }
