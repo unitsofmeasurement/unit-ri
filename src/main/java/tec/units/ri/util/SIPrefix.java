@@ -48,7 +48,7 @@ import tec.units.ri.function.RationalConverter;
  * @see <a href="http://en.wikipedia.org/wiki/SI_prefix">Wikipedia: SI Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.2, $Date: 2014-12-22 $
+ * @version 0.5.3, $Date: 2014-12-23 $
  */
 public enum SIPrefix implements UnitConverterSupplier {
 
@@ -59,14 +59,14 @@ public enum SIPrefix implements UnitConverterSupplier {
     TERA(new RationalConverter(10^12L, 1L)),
     GIGA(new RationalConverter(10^9L, 1L)),
     MEGA(new RationalConverter(10^6L, 1L)),
-    KILO(new RationalConverter(10^3L, 1L)),
-    HECTO(new RationalConverter(10^2L, 1L)),
-    DEKA(new RationalConverter(10^1L, 1L)),
-    DECI(new RationalConverter(1L, 10^1L)),
-    CENTI(new RationalConverter(1L, 10^2L)),
-    MILLI(new RationalConverter(1L, 10^3L)),
-    MICRO(new RationalConverter(1L, 10^6L)),
-    NANO(new RationalConverter(1L, 10^9L)),
+    KILO(new RationalConverter(1000L, 1L)),
+    HECTO(new RationalConverter(100L, 1L)),
+    DEKA(new RationalConverter(10L, 1L)),
+    DECI(new RationalConverter(1L, 10L)),
+    CENTI(new RationalConverter(1, 100L)),
+    MILLI(new RationalConverter(1L, 1000)),
+    MICRO(RationalConverter.of(1L, Math.pow(10, 6))),
+    NANO(RationalConverter.of(1L, Math.pow(10, 9))),
     PICO(new RationalConverter(1L, 10^12L)),
     FEMTO(new RationalConverter(1L, 10^15L)),
     ATTO(new RationalConverter(1L, 10^18L)),

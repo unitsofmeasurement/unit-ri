@@ -59,8 +59,7 @@ public final class RationalConverter extends AbstractConverter
     private final long divisor;
 
     /**
-     * Convenience method equivalent to
-     * <code>RationalConverter.valueOf(BigInteger.valueOf(dividend), BigInteger.valueOf(divisor))</code>
+     * Constructor
      *
      * @param dividend the dividend.
      * @param divisor the positive divisor.
@@ -72,6 +71,32 @@ public final class RationalConverter extends AbstractConverter
     	this.divisor = divisor;
     }
 
+    /**
+     * Convenience method equivalent to
+     * <code>new RationalConverter(dividend, divisor)</code>
+     *
+     * @param dividend the dividend.
+     * @param divisor the positive divisor.
+     * @throws IllegalArgumentException if <code>divisor &lt;= 0</code>
+     * @throws IllegalArgumentException if <code>dividend == divisor</code>
+     */
+    public static final RationalConverter of(long dividend, long divisor) {
+    	return new RationalConverter(dividend, divisor);
+    }
+    
+    /**
+     * Convenience method equivalent to
+     * <code>new RationalConverter(dividend, divisor)</code>
+     *
+     * @param dividend the dividend.
+     * @param divisor the positive divisor.
+     * @throws IllegalArgumentException if <code>divisor &lt;= 0</code>
+     * @throws IllegalArgumentException if <code>dividend == divisor</code>
+     */
+    public static final RationalConverter of(double dividend, double divisor) {
+    	return new RationalConverter((long)dividend, (long)divisor);
+    }
+    
     /**
      * Returns the integer dividend for this rational converter.
      *
