@@ -56,7 +56,7 @@ import tec.units.ri.function.UnitConverterSupplier;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, December 1, 2014
+ * @version 0.5, December 23, 2014
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
  implements UnitConverterSupplier {
@@ -74,7 +74,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     /**
      * Holds the converter to the parent unit.
      */
-    private final UnitConverter toParentUnit;
+    private final UnitConverter converter;
     
     /**
      * Holds the symbol.
@@ -94,7 +94,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
             throw new IllegalArgumentException("The parent unit: " +  parentUnit
                     + " is not a system unit");
         this.parentUnit = parentUnit;
-        this.toParentUnit = toParentUnit;
+        this.converter = toParentUnit;
         this.symbol = parentUnit.getSymbol();
     }
 
@@ -105,7 +105,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
 
     @Override
     public UnitConverter getConverterToSI() {
-        return parentUnit.getConverterToSI().concatenate(toParentUnit);
+        return parentUnit.getConverterToSI().concatenate(converter);
     }
 
     @Override
@@ -120,7 +120,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
 
     @Override
     public int hashCode() {
-        return parentUnit.hashCode() + toParentUnit.hashCode();
+        return parentUnit.hashCode() + converter.hashCode();
     }
 
     @Override
@@ -131,7 +131,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
             return false;
         TransformedUnit<?> thatUnit = (TransformedUnit<?>) that;
         return this.parentUnit.equals(thatUnit.parentUnit) &&
-                this.toParentUnit.equals(thatUnit.toParentUnit);
+                this.converter.equals(thatUnit.converter);
     }
 
 	@Override
@@ -145,6 +145,6 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
 
 	@Override
 	public UnitConverter getConverter() {
-		return toParentUnit;
+		return converter;
 	}
 }
