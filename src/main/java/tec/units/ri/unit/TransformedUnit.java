@@ -40,11 +40,11 @@ import tec.units.ri.function.UnitConverterSupplier;
  * <p> This class represents the units derived from other units using
  *     {@linkplain UnitConverter converters}.</p>
  *
- * <p> Examples of transformed units:[code]
+ * <p> Examples of transformed units:<code>
  *         CELSIUS = KELVIN.shift(273.15);
  *         FOOT = METRE.multiply(3048).divide(10000);
  *         MILLISECOND = MILLI(SECOND);
- *     [/code]</p>
+ *     </code></p>
  *
  * <p> Transformed units have no label. But like any other units,
  *     they may have labels attached to them (see {@link tec.units.ri.format.SymbolMap
