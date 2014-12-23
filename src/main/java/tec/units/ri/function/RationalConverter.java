@@ -38,7 +38,7 @@ import tec.units.ri.AbstractConverter;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, December 19, 2014
+ * @version 0.5.1, December 23, 2014
  */
 public final class RationalConverter extends AbstractConverter 
 	implements ValueSupplier<Double> {
@@ -138,9 +138,13 @@ public final class RationalConverter extends AbstractConverter
     public boolean isLinear() {
         return true;
     }
-
+    
+    public double getAsDouble() {
+    	return (double)dividend / (double) divisor;
+    }
+    
     @Override
 	public Double getValue() {
-		return Double.valueOf((double)dividend / (double) divisor);
+		return Double.valueOf(getAsDouble());
 	}
 }
