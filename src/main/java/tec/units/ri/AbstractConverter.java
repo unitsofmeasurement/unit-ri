@@ -30,15 +30,13 @@ import java.util.List;
 
 import javax.measure.UnitConverter;
 
-import tec.units.ri.function.Converter;
-
 /**
  * <p> The base class for our {@link UnitConverter} implementations.</p>
  *
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7.1, $Date: 2014-09-18 $
+ * @version 0.7.2, $Date: 2014-12-23 $
  */
-public abstract class AbstractConverter implements UnitConverter, Converter<Number, Number> {
+public abstract class AbstractConverter implements UnitConverter {
 	
     /**
 	 * 
