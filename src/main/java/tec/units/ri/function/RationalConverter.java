@@ -38,7 +38,7 @@ import tec.units.ri.AbstractConverter;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.1, December 23, 2014
+ * @version 0.5.2, December 24, 2014
  */
 public final class RationalConverter extends AbstractConverter 
 	implements ValueSupplier<Double> {
@@ -51,12 +51,12 @@ public final class RationalConverter extends AbstractConverter
 	/**
      * Holds the converter dividend.
      */
-    private final long dividend;
+    private final double dividend;
 
     /**
      * Holds the converter divisor (always positive).
      */
-    private final long divisor;
+    private final double divisor;
 
     /**
      * Constructor
@@ -66,7 +66,7 @@ public final class RationalConverter extends AbstractConverter
      * @throws IllegalArgumentException if <code>divisor &lt;= 0</code>
      * @throws IllegalArgumentException if <code>dividend == divisor</code>
      */
-    public RationalConverter (long dividend, long divisor) {
+    public RationalConverter (double dividend, double divisor) {
     	this.dividend = dividend;
     	this.divisor = divisor;
     }
@@ -81,7 +81,7 @@ public final class RationalConverter extends AbstractConverter
      * @throws IllegalArgumentException if <code>dividend == divisor</code>
      */
     public static final RationalConverter of(long dividend, long divisor) {
-    	return new RationalConverter(dividend, divisor);
+    	return new RationalConverter((double)dividend, (double)divisor);
     }
     
     /**
@@ -94,7 +94,7 @@ public final class RationalConverter extends AbstractConverter
      * @throws IllegalArgumentException if <code>dividend == divisor</code>
      */
     public static final RationalConverter of(double dividend, double divisor) {
-    	return new RationalConverter((long)dividend, (long)divisor);
+    	return new RationalConverter(dividend, divisor);
     }
     
     /**
@@ -102,7 +102,7 @@ public final class RationalConverter extends AbstractConverter
      *
      * @return this converter dividend.
      */
-    public long getDividend() {
+    public double getDividend() {
         return dividend;
     }
 
@@ -111,7 +111,7 @@ public final class RationalConverter extends AbstractConverter
      *
      * @return this converter divisor.
      */
-    public long getDivisor() {
+    public double getDivisor() {
         return divisor;
     }
 
@@ -125,9 +125,9 @@ public final class RationalConverter extends AbstractConverter
         if (!(converter instanceof RationalConverter))
             return super.concatenate(converter);
         RationalConverter that = (RationalConverter) converter;
-        long newDividend = this.getDividend() * that.getDividend();
-        long newDivisor = this.getDivisor() * that.getDivisor();
-        long gcd = gcd(newDividend,newDivisor);
+        double newDividend = this.getDividend() * that.getDividend();
+        double newDivisor = this.getDivisor() * that.getDivisor();
+        double gcd = gcd(newDividend,newDivisor);
         newDividend = newDividend / gcd; // TODO clarify if this works with long
         newDivisor = newDivisor / gcd;
         return (newDividend == 1 && newDivisor == 1)
@@ -136,7 +136,7 @@ public final class RationalConverter extends AbstractConverter
 
     @Override
     public RationalConverter inverse() {
-        return Math.signum((double)dividend) == -1 ? new RationalConverter(negateExact(getDivisor()), negateExact(getDividend()))
+        return Math.signum(dividend) == -1 ? new RationalConverter(negateExact(getDivisor()), negateExact(getDividend()))
                 : new RationalConverter(getDivisor(), getDividend());
     }
 
@@ -156,7 +156,7 @@ public final class RationalConverter extends AbstractConverter
 
     @Override
     public int hashCode() {
-        return Long.valueOf(dividend).hashCode() + Long.valueOf(dividend).hashCode();
+        return Double.valueOf(dividend).hashCode() + Double.valueOf(dividend).hashCode();
     }
 
     @Override

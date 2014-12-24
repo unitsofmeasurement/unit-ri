@@ -25,6 +25,8 @@
  */
 package tec.units.ri.util;
 
+import static tec.units.ri.util.MathPow.pow;
+
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
@@ -36,9 +38,10 @@ import tec.units.ri.function.RationalConverter;
  * <p> This class provides support for the 20 SI prefixes used in the metric
  *     system (decimal multiples and submultiples of SI units).
  *     For example:<pre><code>
- *     import static org.unitsofmeasurement.ri.util.SI.*;  // Static import.
- *     import static org.unitsofmeasurement.ri.util.SIPrefix.*; // Static import.
- *     import org.unitsofmeasurement.quantity.*;
+ *     import static tec.units.ri.util.SI.*;  // Static import.
+ *     import static tec.units.ri.util.SIPrefix.*; // Static import.
+ *     import javax.measure.*;
+ *     import javax.measure.quantity.*;
  *     ...
  *     Unit<Pressure> HECTOPASCAL = HECTO(PASCAL);
  *     Unit<Length> KILOMETRE = KILO(METRE);
@@ -48,30 +51,29 @@ import tec.units.ri.function.RationalConverter;
  * @see <a href="http://en.wikipedia.org/wiki/Metric_prefix">Wikipedia: Metric Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.4, $Date: 2014-12-24 $
+ * @version 0.5.5, $Date: 2014-12-24 $
  */
 public enum SIPrefix implements UnitConverterSupplier {
-
-    YOTTA(new RationalConverter(10^24L, 1L)),
-    ZETTA(new RationalConverter(10^21L, 1L)),
-    EXA(new RationalConverter(10^18L, 1L)),
-    PETA(new RationalConverter(10^15L, 1L)),
-    TERA(new RationalConverter(10^12L, 1L)),
-    GIGA(new RationalConverter(10^9L, 1L)),
-    MEGA(new RationalConverter(10^6L, 1L)),
-    KILO(new RationalConverter(1000L, 1L)),
-    HECTO(new RationalConverter(100L, 1L)),
-    DEKA(new RationalConverter(10L, 1L)),
-    DECI(new RationalConverter(1L, 10L)),
-    CENTI(new RationalConverter(1, 100L)),
-    MILLI(new RationalConverter(1L, 1000)),
-    MICRO(RationalConverter.of(1L, Math.pow(10, 6))),
-    NANO(RationalConverter.of(1L, Math.pow(10, 9))),
-    PICO(new RationalConverter(1L, 10^12L)),
-    FEMTO(new RationalConverter(1L, 10^15L)),
-    ATTO(new RationalConverter(1L, 10^18L)),
-    ZEPTO(new RationalConverter(1L, 10^21L)),
-    YOCTO(new RationalConverter(1L, 10^24L));
+    YOTTA(RationalConverter.of(1000000000000000000000000d, 1d)),
+    ZETTA(RationalConverter.of(1000000000000000000000d, 1d)),
+    EXA(RationalConverter.of(pow(10, 18), 1d)),
+    PETA(RationalConverter.of(pow(10, 15), 1d)),
+    TERA(RationalConverter.of(pow(10, 12), 1d)),
+    GIGA(RationalConverter.of(pow(10, 9), 1d)),
+    MEGA(RationalConverter.of(pow(10, 6), 1d)),
+    KILO(RationalConverter.of(1000d, 1d)),
+    HECTO(RationalConverter.of(100d, 1d)),
+    DEKA(RationalConverter.of(10d, 1d)),
+    DECI(RationalConverter.of(1d, 10d)),
+    CENTI(RationalConverter.of(1d, 100d)),
+    MILLI(RationalConverter.of(1d, 1000d)),
+    MICRO(RationalConverter.of(1d, pow(10, 6))),
+    NANO(RationalConverter.of(1d, pow(10, 9))),
+    PICO(RationalConverter.of(1d, pow(10, 12))),
+    FEMTO(RationalConverter.of(1d, pow(10, 15))),
+    ATTO(RationalConverter.of(1d, pow(10, 18))),
+    ZEPTO(RationalConverter.of(1d, pow(10, 21))),
+    YOCTO(RationalConverter.of(1d, pow(10, 24)));
 
     private final UnitConverter converter;
 

@@ -45,7 +45,7 @@ import tec.units.ri.util.SI;
  *     published {@link DimensionService} instances.
  *     For convenience, a static method {@link QuantityDimension#getInstance(Class)
  *     aggregating the results of all {@link DimensionService} instances
- *     is provided.<br/><br/>
+ *     is provided.<br><br>
  *     <code>
  *        QuantityDimension velocityDimension
  *            = QuantityDimension.getInstance(Velocity.class);
@@ -54,7 +54,7 @@ import tec.units.ri.util.SI;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.1, $Date: 2014-11-02 $
+ * @version 0.5.2, $Date: 2014-12-24 $
  */
 public final class QuantityDimension implements Dimension {
 	private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());

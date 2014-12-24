@@ -28,23 +28,23 @@ package tec.units.ri.function;
 class MathHelper {
 	/**
 	 * Returns the negation of the argument, throwing an exception if the result
-	 * overflows a {@code long}.
+	 * exceeds a {@code double}.
 	 *
 	 * @param a
 	 *            the value to negate
 	 * @return the result
 	 * @throws ArithmeticException
-	 *             if the result overflows a long
+	 *             if the result overflows a double
 	 */
-	static long negateExact(long a) {
-		if (a == Long.MIN_VALUE) {
-			throw new ArithmeticException("long overflow");
+	static double negateExact(double a) {
+		if (a == Double.MAX_VALUE || a == Double.MIN_VALUE) {
+			throw new ArithmeticException("double overflow");
 		}
 
 		return -a;
 	}
 
-	static long gcd(long a, long b) {
+	static double gcd(double a, double b) {
 		if (b == 0)
 			return a;
 		return gcd(b, a % b);
