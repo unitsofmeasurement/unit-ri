@@ -33,10 +33,9 @@ import javax.measure.Unit;
  *     units.</p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.1, December 25, 2013
+ * @version 0.5.2, December 24, 2013
  */
 public final class BinaryPrefix {
-// FIXME change to enum like SIPrefix
 	
      /**
      * Default constructor (private).

@@ -33,12 +33,17 @@ import javax.measure.spi.SystemOfUnits;
 
 import tec.units.ri.AbstractSystemOfUnits;
 import tec.units.ri.AbstractUnit;
+import tec.units.ri.function.Nameable;
 
-
-public class CommonUnits extends AbstractSystemOfUnits {
+/**
+ * <p> This class defines commonly used units outside the {@link SI} standard.
+ *
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 0.2, December 24, 2014
+*/
+public class CommonUnits extends AbstractSystemOfUnits implements Nameable {
 
 	private CommonUnits() {
-		
 	}
 	
 	private static final CommonUnits INSTANCE = new CommonUnits();
@@ -73,24 +78,4 @@ public class CommonUnits extends AbstractSystemOfUnits {
         INSTANCE.units.add(unit);
         return unit;
     }
-    
-	/**
-	 * Adds a new named unit to the collection.
-	 * 
-	 * @param unit the unit being added.
-	 * @param name the name of the unit.
-	 * @return <code>unit</code>.
-	 */
-	@SuppressWarnings("unchecked")
-	private static <U extends AbstractUnit<?>> U addUnit(U unit, String name) {
-		if (name != null && unit instanceof AbstractUnit) {
-			AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
-			//aUnit.setName(name);
-			INSTANCE.units.add(aUnit);
-			return (U) aUnit;
-		}
-		INSTANCE.units.add(unit);
-		return unit;
-	}
-
 }

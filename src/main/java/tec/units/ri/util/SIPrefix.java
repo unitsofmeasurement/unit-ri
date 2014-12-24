@@ -45,10 +45,10 @@ import tec.units.ri.function.RationalConverter;
  *     </code></pre>
  * </p>
  *
- * @see <a href="http://en.wikipedia.org/wiki/SI_prefix">Wikipedia: SI Prefix</a>
+ * @see <a href="http://en.wikipedia.org/wiki/Metric_prefix">Wikipedia: Metric Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.3, $Date: 2014-12-23 $
+ * @version 0.5.4, $Date: 2014-12-24 $
  */
 public enum SIPrefix implements UnitConverterSupplier {
 
