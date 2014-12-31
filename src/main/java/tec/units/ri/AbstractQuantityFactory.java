@@ -52,7 +52,7 @@ import tec.units.ri.quantity.NumberQuantity;
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.6.1, $Date: 2014-12-24 $
+ * @version 0.6.2, $Date: 2014-12-31 $
  */
 public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q>  {
 
@@ -137,8 +137,8 @@ public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements 
      * @param unit the unit
      * @return the corresponding quantity
      */
-    //public abstract Quantity<Q> create(Number value, Unit<Q> unit);
-    public abstract <N extends Number, U extends Unit<Q>> Q create(N number, U unit);
+    public abstract Quantity<Q> create(Number value, Unit<Q> unit);
+//    public abstract <N extends Number, U extends Unit<Q>> Q create(N number, U unit);
 
     /**
      * Returns the metric unit for quantities produced by this factory
@@ -219,8 +219,8 @@ public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements 
         }
 
         @SuppressWarnings("unchecked")
-//        public Quantity<Q> create(Number value, Unit<Q> unit) {
-        public <N extends Number, U extends Unit<Q>> Q create(N value, U unit) {
+        public Quantity<Q> create(Number value, Unit<Q> unit) {
+//        public <N extends Number, U extends Unit<Q>> Q create(N value, U unit) {
             return (Q) new NumberQuantity<Q>(value, unit);
         }
 
