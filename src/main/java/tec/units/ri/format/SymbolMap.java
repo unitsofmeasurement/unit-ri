@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractConverter;
@@ -61,7 +62,7 @@ import tec.units.ri.util.SIPrefix;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.4, December 22, 2014
+ * @version 0.5.5, January 12, 2015
  */
 public final class SymbolMap {
 	private static final Logger logger = Logger.getLogger(SymbolMap.class
@@ -208,7 +209,7 @@ public final class SymbolMap {
 	 *            the corresponding symbol.
 	 * @return the corresponding symbol or <code>null</code> if none.
 	 */
-	public String getSymbol(AbstractUnit<?> unit) {
+	public String getSymbol(Unit<?> unit) {
 		return unitToSymbol.get(unit);
 	}
 

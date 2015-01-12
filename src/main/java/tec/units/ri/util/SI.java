@@ -30,6 +30,7 @@ import static tec.units.ri.AbstractUnit.ONE;
 import java.util.HashMap;
 
 import javax.measure.Quantity;
+import javax.measure.Unit;
 import javax.measure.quantity.*;
 
 import tec.units.ri.AbstractSystemOfUnits;
@@ -176,9 +177,8 @@ public final class SI extends AbstractSystemOfUnits {
      * The SI derived unit for mass quantities (standard name <code>g</code>).
      * The base unit for mass quantity is {@link #KILOGRAM}.
      */
-    @SuppressWarnings("unchecked")
-	public static final TransformedUnit<Mass> GRAM
-            = new TransformedUnit(KILOGRAM, SIPrefix.KILO.getConverter());
+    public static final Unit<Mass> GRAM = KILOGRAM.divide(1000);
+//            = new TransformedUnit(KILOGRAM, SIPrefix.KILO.getConverter());
 
     /**
      * The SI unit for plane angle quantities (standard name <code>rad</code>).
