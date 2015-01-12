@@ -61,7 +61,7 @@ public enum SIPrefix implements UnitConverterSupplier {
     TERA(RationalConverter.of(pow(10, 12), 1d)),
     GIGA(RationalConverter.of(pow(10, 9), 1d)),
     MEGA(RationalConverter.of(pow(10, 6), 1d)),
-    KILO(RationalConverter.of(1000d, 1d)),
+    KILO(RationalConverter.of(pow(10, 3), 1d)),
     HECTO(RationalConverter.of(100d, 1d)),
     DEKA(RationalConverter.of(10d, 1d)),
     DECI(RationalConverter.of(1d, 10d)),

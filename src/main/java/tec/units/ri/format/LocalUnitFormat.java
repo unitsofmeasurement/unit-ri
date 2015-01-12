@@ -26,7 +26,6 @@
 package tec.units.ri.format;
 
 import static tec.units.ri.format.internal.BundleToMapAdapter.toMap;
-
 import static tec.units.ri.util.SI.CUBIC_METRE;
 import static tec.units.ri.util.SI.GRAM;
 import static tec.units.ri.util.SI.KILOGRAM;
@@ -36,6 +35,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.text.ParsePosition;
 import java.util.Map;
+
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
@@ -163,7 +163,7 @@ import tec.units.ri.unit.TransformedUnit;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.3, December 22, 2014
+ * @version 0.5.4, January 12, 2015
  */
 public class LocalUnitFormat implements UnitFormat {
 
@@ -344,8 +344,7 @@ public class LocalUnitFormat implements UnitFormat {
 			buffer.append(symbol);
 			return NOOP_PRECEDENCE;
 		} else if (unit.getProductUnits() != null) {
-			Map<Unit<?>, Integer> productUnits = (Map<Unit<?>, Integer>) unit
-					.getProductUnits();
+			Map<Unit<?>, Integer> productUnits = (Map<Unit<?>, Integer>) unit.getProductUnits();
 			int negativeExponentCount = 0;
 			// Write positive exponents first...
 			boolean start = true;
@@ -383,9 +382,7 @@ public class LocalUnitFormat implements UnitFormat {
 		} else if (unit instanceof BaseUnit<?>) {
 			buffer.append(((BaseUnit<?>) unit).getSymbol());
 			return NOOP_PRECEDENCE;
-		} else if (unit instanceof AlternateUnit<?>) { // unit.getSymbol() !=
-														// null) { // Alternate
-														// unit.
+		} else if (unit instanceof AlternateUnit<?>) { // unit.getSymbol() != null) { // Alternate unit.
 			buffer.append(unit.getSymbol());
 			return NOOP_PRECEDENCE;
 		} else { // A transformed unit or new unit type!
@@ -416,9 +413,8 @@ public class LocalUnitFormat implements UnitFormat {
 
 			if (unit instanceof TransformedUnit) {
 				TransformedUnit<?> transUnit = (TransformedUnit<?>) unit;
-				if (parentUnit == null)
-					parentUnit = transUnit.getParentUnit();
-				// String x = parentUnit.toString();
+				if (parentUnit== null) parentUnit = transUnit.getParentUnit();
+//				String x = parentUnit.toString();
 				converter = transUnit.getConverter();
 			}
 
