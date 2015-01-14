@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -30,6 +30,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tec.units.ri.AbstractUnit;
+import tec.units.ri.util.SIPrefix;
+import tec.units.ri.util.UCUM;
 import static org.junit.Assert.*;
 import static tec.units.ri.util.SI.GRAM;
 import static tec.units.ri.util.SIPrefix.KILO;
@@ -40,125 +42,133 @@ import static tec.units.ri.util.SIPrefix.KILO;
  */
 public class UnitsTest {
 
-    public UnitsTest() {
-    }
+	public UnitsTest() {
+	}
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
+	@BeforeClass
+	public static void setUpClass() throws Exception {
+	}
 
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
+	@AfterClass
+	public static void tearDownClass() throws Exception {
+	}
 
-    @Test
-    public void testOf() {
-        assertEquals(KILO(GRAM), AbstractUnit.parse("kg")); // TODO: Problem with kg...
-    }
+	@Test
+	public void testOf() {
+		assertEquals(KILO(GRAM), AbstractUnit.parse("kg")); // TODO: Problem
+															// with kg...
+	}
 
-    @Test
-    public void testAnnotate() {
-    }
+	@Test
+	public void testAnnotate() {
+	}
 
-    @Test
-    public void testGetAnnotation() {
-    }
+	@Test
+	public void testGetAnnotation() {
+	}
 
-    @Test
-    public void testGetUnannotatedUnit() {
-    }
+	@Test
+	public void testGetUnannotatedUnit() {
+	}
 
-    @Test
-    public void testIsSystemUnit() {
-    }
+	@Test
+	public void testIsSystemUnit() {
+	}
 
-    @Test
-    public void testToString() {
-    }
+	@Test
+	public void testToString() {
+		assertEquals("kg", SIPrefix.KILO(UCUM.GRAM).toString());
+		assertEquals("lb", UCUM.POUND.toString());
+		assertEquals("uz", UCUM.OUNCE.toString()); // TODO try using UCUM.Print for toString()
+		assertEquals("g", UCUM.GRAM.toString());
+	}
 
-    @Test
-    public void testGetConverterToSystemUnit() {
-    }
+	@Test
+	public void testGetConverterToSystemUnit() {
+	}
 
-    @Test
-    public void testGetSymbol() {
-    }
+	@Test
+	public void testGetSymbol() {
+		assertEquals("lb", UCUM.POUND.getSymbol());
+		assertEquals("oz", UCUM.OUNCE.getSymbol());
+		assertEquals("kg", SIPrefix.KILO(UCUM.GRAM).getSymbol());
+		assertEquals("g", UCUM.GRAM.getSymbol());
+	}
 
-    @Test
-    public void testGetSystemUnit() {
-    }
+	@Test
+	public void testGetSystemUnit() {
+	}
 
-    @Test
-    public void testGetProductUnits() {
-    }
+	@Test
+	public void testGetProductUnits() {
+	}
 
-    @Test
-    public void testGetDimension() {
-    }
+	@Test
+	public void testGetDimension() {
+	}
 
-    @Test
-    public void testIsCompatible() {
-    }
+	@Test
+	public void testIsCompatible() {
+	}
 
-    @Test
-    public void testAsType() {
-    }
+	@Test
+	public void testAsType() {
+	}
 
-    @Test
-    public void testGetConverterTo() {
-    }
+	@Test
+	public void testGetConverterTo() {
+	}
 
-    @Test
-    public void testGetConverterToAny() {
-    }
+	@Test
+	public void testGetConverterToAny() {
+	}
 
-    @Test
-    public void testAlternate() {
-    }
+	@Test
+	public void testAlternate() {
+	}
 
-    @Test
-    public void testTransform() {
-    }
+	@Test
+	public void testTransform() {
+	}
 
-    @Test
-    public void testAdd() {
-    }
+	@Test
+	public void testAdd() {
+	}
 
-    @Test
-    public void testMultiply_double() {
-    }
+	@Test
+	public void testMultiply_double() {
+	}
 
-    @Test
-    public void testMultiply_ErrorType() {
-    }
+	@Test
+	public void testMultiply_ErrorType() {
+	}
 
-    @Test
-    public void testInverse() {
-    }
+	@Test
+	public void testInverse() {
+	}
 
-    @Test
-    public void testDivide_double() {
-    }
+	@Test
+	public void testDivide_double() {
+	}
 
-    @Test
-    public void testDivide_ErrorType() {
-    }
+	@Test
+	public void testDivide_ErrorType() {
+	}
 
-    @Test
-    public void testRoot() {
-    }
+	@Test
+	public void testRoot() {
+	}
 
-    @Test
-    public void testPow() {
-    }
+	@Test
+	public void testPow() {
+	}
 
-    @Test
-    public void testHashCode() {
-    }
+	@Test
+	public void testHashCode() {
+	}
 
-    @Test
-    public void testEquals() {
-    }
-
+	@Test
+	public void testEquals() {
+	}
 
 }
