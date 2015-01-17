@@ -303,7 +303,7 @@ public class UnitsTest {
 
 	@Test
 	public void testGetSymbol() {
-		// see https://java.net/jira/browse/UNITSOFMEASUREMENT-109
+		// TODO see https://java.net/jira/browse/UNITSOFMEASUREMENT-109
 		assertEquals("kg", SI.KILOGRAM.getSymbol());
 		assertEquals("kg", SI.GRAM.getSymbol()); //"g"
 		assertEquals("kg", UCUM.POUND.getSymbol()); //"lb"
