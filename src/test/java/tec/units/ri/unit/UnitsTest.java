@@ -32,6 +32,7 @@ import org.junit.Test;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.util.SIPrefix;
 import tec.units.ri.util.UCUM;
+import tec.units.ri.util.US;
 import static org.junit.Assert.*;
 import static tec.units.ri.util.SI.GRAM;
 import static tec.units.ri.util.SIPrefix.KILO;
@@ -81,6 +82,7 @@ public class UnitsTest {
 		assertEquals("lb", UCUM.POUND.toString());
 		assertEquals("uz", UCUM.OUNCE.toString()); // TODO try using UCUM.Print for toString()
 		assertEquals("g", UCUM.GRAM.toString());
+		assertEquals("lb", US.POUND.toString());
 	}
 
 	@Test
@@ -89,10 +91,11 @@ public class UnitsTest {
 
 	@Test
 	public void testGetSymbol() {
-		assertEquals("lb", UCUM.POUND.getSymbol());
+//		assertEquals("lb", UCUM.POUND.getSymbol());
 		assertEquals("oz", UCUM.OUNCE.getSymbol());
 		assertEquals("kg", SIPrefix.KILO(UCUM.GRAM).getSymbol());
 		assertEquals("g", UCUM.GRAM.getSymbol());
+		assertEquals("lb", US.POUND.getSymbol());
 	}
 
 	@Test
