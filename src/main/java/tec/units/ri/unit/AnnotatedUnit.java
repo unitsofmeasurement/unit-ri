@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -43,7 +43,7 @@ import tec.units.ri.AbstractUnit;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, May 22, 2014
+ * @version 0.3, January 17, 2014
  */
 public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
@@ -81,7 +81,7 @@ public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
     }
 
     /**
-     * Returns the annotqtion of this annotated unit.
+     * Returns the annotation of this annotated unit.
      *
      * @return the annotation.
      */

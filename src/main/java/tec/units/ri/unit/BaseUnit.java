@@ -56,7 +56,7 @@ public class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1721629233768215930L;
+//	private static final long serialVersionUID = 1721629233768215930L;
 
 	/**
      * Holds the symbol.
