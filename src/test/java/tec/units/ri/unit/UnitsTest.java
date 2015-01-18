@@ -29,6 +29,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import javax.measure.quantity.Dimensionless;
+import javax.measure.quantity.Mass;
 import javax.measure.quantity.Power;
 
 import org.junit.After;
@@ -313,6 +314,17 @@ public class UnitsTest {
 		assertEquals("kg", US.POUND.getSymbol()); //"lb"
 	}
 
+	@Test
+	public void testGetParentUnit() {
+		assertEquals("TransformedUnit", SI.GRAM.getClass().getSimpleName());
+		assertEquals("kg", ((TransformedUnit<Mass>)SI.GRAM).getParentUnit().getSymbol());
+//		assertEquals("kg", UCUM.POUND.getSymbol()); //"lb"
+//		assertEquals("kg", UCUM.OUNCE.getSymbol());//"oz"
+//		assertEquals("kg", SIPrefix.KILO(UCUM.GRAM).getSymbol());
+//		assertEquals("kg", UCUM.GRAM.getSymbol()); //"g"
+//		assertEquals("kg", US.POUND.getSymbol()); //"lb"
+	}
+	
 	@Test
 	public void testGetSystemUnit() {
 	}
