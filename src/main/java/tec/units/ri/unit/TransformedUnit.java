@@ -97,6 +97,19 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
         this.converter = toParentUnit;
         this.symbol = parentUnit.getSymbol();
     }
+    
+    /**
+     * Creates a transformed unit from the specified system unit.
+     *
+     * @param parentUnit the system unit from which this unit is derived.
+     * @param toParentUnit the converter to the parent units.
+     * @throws IllegalArgumentException if the specified parent unit is not an
+     *         {@link AbstractUnit#isSystemUnit() system unit}
+     * @throws ClassCastException if parentUnit is not a valid {@link Unit} implementation
+     */
+    public TransformedUnit(Unit<Q> parentUnit, UnitConverter toParentUnit) {
+    		this((AbstractUnit<Q>) parentUnit, toParentUnit);
+    }
 
     @Override
     public Dimension getDimension() {
@@ -114,7 +127,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     }
 
     @Override
-    public Map<? extends AbstractUnit<?>, Integer> getProductUnits() {
+    public Map<? extends Unit<?>, Integer> getProductUnits() {
         return parentUnit.getProductUnits();
     }
 

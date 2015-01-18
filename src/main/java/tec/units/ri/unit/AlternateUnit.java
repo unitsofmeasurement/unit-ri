@@ -29,6 +29,7 @@ import java.util.Map;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
+import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractUnit;
@@ -73,8 +74,22 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
             throw new IllegalArgumentException("The parent unit: " +  parentUnit
                     + " is not an unscaled SI unit");
         this.parentUnit = (parentUnit instanceof AlternateUnit) ?
-            ((AlternateUnit)parentUnit).getParentUnit() : parentUnit;
+            ((AlternateUnit<?>)parentUnit).getParentUnit() : parentUnit;
         this.symbol = symbol;
+    }
+    
+    /**
+     * Creates an alternate unit for the specified system unit identified by the
+     * specified name and symbol.
+     *
+     * @param parent the system unit from which this alternate unit is derived.
+     * @param symbol the symbol for this alternate unit.
+     * @throws IllegalArgumentException if the specified parent unit is not an
+     *         {@link AbstractUnit#isSystemUnit() system unit}
+     * @throws ClassCastException if parentUnit is not a valid {@link Unit} implementation
+     */
+    public AlternateUnit(Unit<?> parentUnit, String symbol) {
+    	this((AbstractUnit<?>) parentUnit, symbol);
     }
 
     /**
@@ -108,7 +123,7 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
     }
 
     @Override
-    public Map<? extends AbstractUnit<?>, Integer> getProductUnits() {
+    public Map<? extends Unit<?>, Integer> getProductUnits() {
         return parentUnit.getProductUnits();
     }
 
@@ -123,7 +138,7 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
             return true;
         if (!(obj instanceof AlternateUnit))
             return false;
-        AlternateUnit that = (AlternateUnit) obj;
+        AlternateUnit<?> that = (AlternateUnit<?>) obj;
         return this.parentUnit.equals(that.parentUnit) &&
                 this.symbol.equals(that.symbol);
     }

@@ -87,7 +87,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @param productUnit the product unit source.
      * @throws ClassCastException if the specified unit is not a product unit.
      */
-    public ProductUnit(AbstractUnit<?> productUnit) {
+    public ProductUnit(Unit<?> productUnit) {
     	this.symbol = productUnit.getSymbol();
         this.elements = ((ProductUnit<?>) productUnit).elements;
     }

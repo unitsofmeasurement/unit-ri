@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -32,14 +32,13 @@ import javax.measure.quantity.Speed;
 import javax.measure.spi.SystemOfUnits;
 
 import tec.units.ri.AbstractSystemOfUnits;
-import tec.units.ri.AbstractUnit;
 import tec.units.ri.function.Nameable;
 
 /**
  * <p> This class defines commonly used units outside the {@link SI} standard.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, December 24, 2014
+ * @version 0.3, January 18, 2015
 */
 public class CommonUnits extends AbstractSystemOfUnits implements Nameable {
 
@@ -74,7 +73,7 @@ public class CommonUnits extends AbstractSystemOfUnits implements Nameable {
      * @param  unit the unit being added.
      * @return <code>unit</code>.
      */
-    private static <U extends AbstractUnit<?>>  U addUnit(U unit) {
+    private static <U extends Unit<?>>  U addUnit(U unit) {
         INSTANCE.units.add(unit);
         return unit;
     }

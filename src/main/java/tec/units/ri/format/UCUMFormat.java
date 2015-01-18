@@ -161,11 +161,11 @@ public abstract class UCUMFormat implements UnitFormat {
 			throw new UnsupportedOperationException(
 					"The UCUM format supports only known units (AbstractUnit instances)");
 		}
-		AbstractUnit unit = (AbstractUnit) unknownUnit;
+		Unit unit = unknownUnit;
 		CharSequence symbol;
 		CharSequence annotation = null;
-		if (unit instanceof AnnotatedUnit) {
-			AnnotatedUnit annotatedUnit = (AnnotatedUnit) unit;
+		if (unknownUnit instanceof AnnotatedUnit) {
+			AnnotatedUnit annotatedUnit = (AnnotatedUnit) unknownUnit;
 			unit = annotatedUnit.getActualUnit();
 			annotation = annotatedUnit.getAnnotation();
 		}
@@ -204,7 +204,7 @@ public abstract class UCUMFormat implements UnitFormat {
 				}
 			}
 			symbol = app;
-		} else if (!unit.isSystemUnit() || unit.equals(SI.KILOGRAM)) {
+		} else if (!((AbstractUnit)unit).isSystemUnit() || unit.equals(SI.KILOGRAM)) {
 			final StringBuilder temp = new StringBuilder();
 			UnitConverter converter;
 			boolean printSeparator;
@@ -248,7 +248,7 @@ public abstract class UCUMFormat implements UnitFormat {
 		return appendable;
 	}
 
-	void appendAnnotation(AbstractUnit<?> unit, CharSequence symbol,
+	void appendAnnotation(Unit<?> unit, CharSequence symbol,
 			CharSequence annotation, Appendable appendable) throws IOException {
 		appendable.append('{');
 		appendable.append(annotation);
@@ -365,7 +365,7 @@ public abstract class UCUMFormat implements UnitFormat {
 		}
 
 		@Override
-		void appendAnnotation(AbstractUnit<?> unit, CharSequence symbol,
+		void appendAnnotation(Unit<?> unit, CharSequence symbol,
 				CharSequence annotation, Appendable appendable)
 				throws IOException {
 			if (symbol != null && symbol.length() > 0) {

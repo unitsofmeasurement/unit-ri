@@ -29,6 +29,7 @@ import java.util.Map;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
+import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractUnit;
@@ -43,14 +44,14 @@ import tec.units.ri.AbstractUnit;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, January 17, 2014
+ * @version 0.4, January 18, 2015
  */
 public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
     /**
      * Holds the actual unit.
      */
-    private final AbstractUnit<?> actualUnit;
+    private final Unit<?> actualUnit;
 
     /**
      * Holds the annotation.
@@ -64,7 +65,7 @@ public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
      * @param annotation the annotation.
      * @return the annotated unit.
      */
-    public AnnotatedUnit(AbstractUnit<?> actualUnit, String annotation) {
+    public AnnotatedUnit(Unit<?> actualUnit, String annotation) {
         this.actualUnit = (actualUnit instanceof AnnotatedUnit) ?
             ((AnnotatedUnit<Q>)actualUnit).actualUnit : actualUnit;
         this.annotation = annotation;
@@ -76,7 +77,7 @@ public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
      *
      * @return the actual unit.
      */
-    public AbstractUnit<?> getActualUnit() {
+    public Unit<?> getActualUnit() {
         return actualUnit;
     }
 
@@ -95,7 +96,7 @@ public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
     }
 
     @Override
-    public Map<? extends AbstractUnit<?>, Integer> getProductUnits() {
+    public Map<? extends Unit<?>, Integer> getProductUnits() {
         return actualUnit.getProductUnits();
     }
 
@@ -111,7 +112,11 @@ public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
 
     @Override
     public UnitConverter getConverterToSI() {
-        return actualUnit.getConverterToSI();
+    	if (actualUnit instanceof AbstractUnit) {
+    		return ((AbstractUnit<?>)actualUnit).getConverterToSI();
+    	} else {
+    		throw new ClassCastException("Unknown type " + actualUnit.getClass());
+    	}
     }
 
     @Override

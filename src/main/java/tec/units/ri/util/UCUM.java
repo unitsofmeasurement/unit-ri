@@ -27,6 +27,7 @@ package tec.units.ri.util;
 
 import static tec.units.ri.AbstractUnit.ONE;
 
+import tec.units.ri.AbstractUnit;
 import tec.units.ri.AbstractSystemOfUnits;
 import tec.units.ri.function.PiMultiplierConverter;
 import tec.units.ri.unit.AnnotatedUnit;
@@ -254,7 +255,8 @@ public final class UCUM extends AbstractSystemOfUnits {
     public static final Unit<MagneticPermeability> PERMEABILITY_OF_VACUUM 
             = addUnit(SI.NEWTONS_PER_SQUARE_AMPERE.multiply(PI).multiply(4).divide(1E7).asType(MagneticPermeability.class));
     /** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-    public static final Unit<ElectricCharge> ELEMENTARY_CHARGE = addUnit(SI.COULOMB.transform(SI.ELECTRON_VOLT.getConverterToSI()));
+    public static final Unit<ElectricCharge> ELEMENTARY_CHARGE = addUnit(SI.COULOMB.transform(
+    																		((AbstractUnit<Energy>)SI.ELECTRON_VOLT).getConverterToSI()));
     /** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
     public static final Unit<Mass> ELECTRON_MASS = addUnit(GRAM.multiply(9.1093897E-28));
     /** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */

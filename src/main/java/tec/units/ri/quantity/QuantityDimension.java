@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -54,7 +54,7 @@ import tec.units.ri.util.SI;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.2, $Date: 2014-12-24 $
+ * @version 0.5.3, $Date: 2015-01-18 $
  */
 public final class QuantityDimension implements Dimension {
 	private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
@@ -107,7 +107,7 @@ public final class QuantityDimension implements Dimension {
     /**
      * Holds the pseudo unit associated to this dimension.
      */
-    private final AbstractUnit<?> pseudoUnit;
+    private final Unit<?> pseudoUnit;
 
     /**
      * Returns the dimension for the specified quantity type by aggregating
@@ -149,7 +149,7 @@ public final class QuantityDimension implements Dimension {
      *
      * @param pseudoUnit the pseudo-unit.
      */
-    private QuantityDimension(AbstractUnit<?> pseudoUnit) {
+    private QuantityDimension(Unit<?> pseudoUnit) {
         this.pseudoUnit = pseudoUnit;
     }
 
@@ -225,11 +225,11 @@ public final class QuantityDimension implements Dimension {
      * @return the mapping between the fundamental dimensions and their exponent.
      */
     @SuppressWarnings("rawtypes")
-	public Map<? extends QuantityDimension, Integer> getProductDimensions() {
-        Map<? extends AbstractUnit, Integer> pseudoUnits = pseudoUnit.getProductUnits();
+	public Map<? extends Dimension, Integer> getProductDimensions() {
+        Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getProductUnits();
         if (pseudoUnit == null) return null;
-        Map<QuantityDimension, Integer> fundamentalDimensions = new HashMap<QuantityDimension, Integer>();
-        for (Map.Entry<? extends AbstractUnit, Integer> entry : pseudoUnits.entrySet()) {
+        Map<Dimension, Integer> fundamentalDimensions = new HashMap<Dimension, Integer>();
+        for (Map.Entry<? extends Unit, Integer> entry : pseudoUnits.entrySet()) {
             fundamentalDimensions.put(new QuantityDimension(entry.getKey()), entry.getValue());
         }
         return fundamentalDimensions;

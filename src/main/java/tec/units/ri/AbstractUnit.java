@@ -281,7 +281,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	}
 
 	@Override
-	public abstract Map<? extends AbstractUnit<?>, Integer> getProductUnits();
+	public abstract Map<? extends Unit<?>, Integer> getProductUnits();
 
 	@Override
 	public abstract Dimension getDimension();
