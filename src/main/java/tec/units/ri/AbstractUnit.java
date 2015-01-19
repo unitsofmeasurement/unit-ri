@@ -86,7 +86,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	public static final AbstractUnit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
 
 	/**
-	 * Holds the unique symbols collection (base unit or alternate units).
+	 * Holds the unique symbols collection (base units or alternate units).
 	 */
 	protected static final Map<String, Unit<?>> SYMBOL_TO_UNIT = new HashMap<>();
 	
