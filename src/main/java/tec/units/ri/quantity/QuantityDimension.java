@@ -27,6 +27,7 @@ package tec.units.ri.quantity;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.measure.Dimension;
@@ -120,7 +121,7 @@ public final class QuantityDimension implements Dimension {
     public static <Q extends Quantity<Q>> Dimension getInstance(Class<Q> quantityType) {
         // TODO: Track OSGi services and aggregate results.
         Unit<Q> siUnit = SI.getInstance().getUnit(quantityType);
-        if (siUnit == null) logger.warning("Quantity type: " + quantityType + " unknown");
+        if (siUnit == null) logger.log(Level.WARNING, "Quantity type: " + quantityType + " unknown");
         return (siUnit != null) ? siUnit.getDimension() : null;
     }
 

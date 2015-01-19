@@ -32,6 +32,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.ServiceLoader;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.measure.spi.ServiceProvider;
@@ -72,7 +73,7 @@ public final class Bootstrap {
                 return sp;
             }
         } catch (Exception e) {
-            Logger.getLogger(Bootstrap.class.getName()).info("No ServiceProvider loaded, using default.");
+            Logger.getLogger(Bootstrap.class.getName()).log(Level.INFO,"No ServiceProvider loaded, using default.");
         }
         return new DefaultServiceProvider();
     }
@@ -89,13 +90,13 @@ public final class Bootstrap {
             if (Bootstrap.serviceProviderDelegate==null) {
                 Bootstrap.serviceProviderDelegate = serviceProvider;
                 Logger.getLogger(Bootstrap.class.getName())
-                        .info("Money Bootstrap: new ServiceProvider set: " + serviceProvider.getClass().getName());
+                        .log(Level.INFO,"Unit Bootstrap: new ServiceProvider set: " + serviceProvider.getClass().getName());
                 return null;
             } else {
                 ServiceProvider prevProvider = Bootstrap.serviceProviderDelegate;
                 Bootstrap.serviceProviderDelegate = serviceProvider;
                 Logger.getLogger(Bootstrap.class.getName())
-                        .warning("Money Bootstrap: ServiceProvider replaced: " + serviceProvider.getClass().getName());
+                        .log(Level.WARNING, "Unit Bootstrap: ServiceProvider replaced: " + serviceProvider.getClass().getName());
                 return prevProvider;
             }
         }
