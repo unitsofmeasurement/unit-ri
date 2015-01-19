@@ -1,6 +1,6 @@
 /**
  * Unit-API - Units of Measurement API for Java
- * Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ * Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -29,6 +29,7 @@ import static tec.units.ri.format.UCUMFormat.Variant.CASE_SENSITIVE;
 import static tec.units.ri.format.UCUMFormat.Variant.PRINT;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.measure.Dimension;
@@ -69,7 +70,7 @@ import tec.units.ri.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.3, Dec 15, 2014
+ * @version 0.8.5, Jan 19, 2015
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
@@ -84,6 +85,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 */
 	public static final AbstractUnit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
 
+	/**
+	 * Holds the unique symbols collection (base unit or alternate units).
+	 */
+	protected static final Map<String, Unit<?>> SYMBOL_TO_UNIT = new HashMap<>();
+	
 	/**
 	 * Holds the name.
 	 */

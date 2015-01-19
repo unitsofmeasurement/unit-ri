@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -29,6 +29,7 @@ import java.util.Map;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
+import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractConverter;
@@ -49,7 +50,7 @@ import tec.units.ri.quantity.QuantityDimension;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, May 22, 2014
+ * @version 0.3, Jan 19, 2015
  */
 public class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
@@ -99,6 +100,16 @@ public class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     public BaseUnit(String symbol, String name) {
         this(symbol);
         this.name = name;
+        // Checks if the symbol is associated to a different unit. TODO verify if we want these checks
+/*        synchronized (AbstractUnit.SYMBOL_TO_UNIT) {
+            Unit<?> unit = AbstractUnit.SYMBOL_TO_UNIT.get(symbol);
+            if (unit == null) {
+                AbstractUnit.SYMBOL_TO_UNIT.put(symbol, this);
+                return;
+            }
+            if (!(unit instanceof BaseUnit<?>))
+                throw new IllegalArgumentException("Symbol " + symbol + " is associated to a different unit");
+        } */
     }
 
     @Override

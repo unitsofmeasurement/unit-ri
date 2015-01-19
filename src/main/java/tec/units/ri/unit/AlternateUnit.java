@@ -76,6 +76,21 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
         this.parentUnit = (parentUnit instanceof AlternateUnit) ?
             ((AlternateUnit<?>)parentUnit).getParentUnit() : parentUnit;
         this.symbol = symbol;
+        
+        // Checks if the symbol is associated to a different unit. TODO verify if we want these checks
+ /*       synchronized (AbstractUnit.SYMBOL_TO_UNIT) {
+            AbstractUnit<?> unit = (AbstractUnit<?>) AbstractUnit.SYMBOL_TO_UNIT.get(symbol);
+            if (unit == null) {
+                AbstractUnit.SYMBOL_TO_UNIT.put(symbol, this);
+                return;
+            }
+            if (unit instanceof AlternateUnit<?>) {
+                AlternateUnit<?> existingUnit = (AlternateUnit<?>) unit;
+                if (symbol.equals(existingUnit.getSymbol()) && this.parentUnit.equals(existingUnit.parentUnit))
+                    return; // OK, same unit.
+            }
+            throw new IllegalArgumentException("Symbol " + symbol + " is associated to a different unit");
+        } */
     }
     
     /**
