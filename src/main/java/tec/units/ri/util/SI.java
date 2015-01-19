@@ -59,7 +59,7 @@ import tec.units.ri.unit.TransformedUnit;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.2, January 18, 2015
+ * @version 0.5.3, January 19, 2015
 */
 public final class SI extends AbstractSystemOfUnits {
 
@@ -177,15 +177,17 @@ public final class SI extends AbstractSystemOfUnits {
      * The SI derived unit for mass quantities (standard name <code>g</code>).
      * The base unit for mass quantity is {@link #KILOGRAM}.
      */
-    public static final Unit<Mass> GRAM = KILOGRAM.divide(1000);
-//            = new TransformedUnit(KILOGRAM, SIPrefix.KILO.getConverter());
+    public static final Unit<Mass> GRAM = 
+    		 addUnit(KILOGRAM.divide(1000));
+//    		 addUnit(new AlternateUnit<Mass>(
+//    				KILOGRAM.divide(1000), "g"), Mass.class);
 
     /**
      * The SI unit for plane angle quantities (standard name <code>rad</code>).
      * One radian is the angle between two radii of a circle such that the
      * length of the arc between them is equal to the radius.
      */
-    public static final AlternateUnit<Angle> RADIAN
+    public static final Unit<Angle> RADIAN
             = addUnit(new AlternateUnit<Angle>(ONE, "rad"), Angle.class);
 
     /**
