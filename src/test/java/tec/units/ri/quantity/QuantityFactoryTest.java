@@ -65,7 +65,8 @@ public class QuantityFactoryTest {
 		Quantity<Time> t = AbstractQuantityFactory.getInstance(Time.class).create(40, MINUTE); // 40 min
 		assertEquals(Integer.valueOf(40), t.getValue());
 		assertEquals(MINUTE, t.getUnit());
-		assertEquals("s", t.getUnit().getSymbol()); // FIXME this should be "min", tweak for TransformedUnit
+//		assertEquals("s", t.getUnit().getSymbol()); // FIXME this should be "min", tweak for TransformedUnit
+		assertNull(t.getUnit().getSymbol()); // see https://java.net/jira/browse/UNITSOFMEASUREMENT-109 meets Unit spec as of now
 		assertEquals("40 min", t.toString());
 	}
 

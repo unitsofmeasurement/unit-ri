@@ -79,7 +79,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     /**
      * Holds the symbol.
      */
-    private final String symbol;
+    private String symbol;
 
     /**
      * Creates a transformed unit from the specified system unit.
@@ -95,7 +95,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
                     + " is not a system unit");
         this.parentUnit = parentUnit;
         this.converter = toParentUnit;
-        this.symbol = parentUnit.getSymbol();
+//        this.symbol = parentUnit.getSymbol();
     }
     
     /**
