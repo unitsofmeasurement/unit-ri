@@ -43,9 +43,9 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.format.internal.ParseException;
+import tec.units.ri.format.internal.TokenException;
 import tec.units.ri.format.internal.TokenMgrError;
-import tec.units.ri.format.internal.UnitParser;
+import tec.units.ri.format.internal.UnitFormatParser;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
@@ -293,12 +293,12 @@ public class LocalUnitFormat implements UnitFormat {
 			return AbstractUnit.ONE;
 		}
 		try {
-			UnitParser parser = new UnitParser(symbolMap, new StringReader(
+			UnitFormatParser parser = new UnitFormatParser(symbolMap, new StringReader(
 					source));
 			AbstractUnit<?> result = parser.parseUnit();
 			cursor.setIndex(end);
 			return result;
-		} catch (ParseException e) {
+		} catch (TokenException e) {
 			if (e.currentToken != null) {
 				cursor.setErrorIndex(start + e.currentToken.endColumn);
 			} else {

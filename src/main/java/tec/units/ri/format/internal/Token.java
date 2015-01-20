@@ -30,7 +30,7 @@ package tec.units.ri.format.internal;
 /**
  * Describes the input token stream.
  *
- * @version 0.5.3, January 17, 2015
+ * @version 0.5.4, January 20, 2015
  */
 
 public final class Token {

@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -25,7 +25,7 @@
  */
 package tec.units.ri.format.internal;
 
-import static tec.units.ri.format.internal.UCUMParserConstants.*;
+import static tec.units.ri.format.internal.UCUMTokenConstants.*;
 
 import javax.measure.Unit;
 
@@ -42,13 +42,13 @@ import tec.units.ri.util.SIPrefix;
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @see <a href="http://unitsofmeasure.org">UCUM</a>
- * @version 0.6.1, November 02, 2014
+ * @version 0.6.2, January 20, 2015
  */
-public class UCUMParser {
+public class UCUMFormatParser {
 
     private SymbolMap symbols;
 
-    public UCUMParser(SymbolMap symbols, java.io.InputStream in) {
+    public UCUMFormatParser(SymbolMap symbols, java.io.InputStream in) {
         this(in);
         this.symbols = symbols;
     }
@@ -56,7 +56,7 @@ public class UCUMParser {
 //
 // Parser productions
 //
-    final public Unit parseUnit() throws ParseException {
+    final public Unit parseUnit() throws TokenException {
         AbstractUnit u;
         u = Term();
         jj_consume_token(0);
@@ -67,7 +67,7 @@ public class UCUMParser {
         throw new Error("Missing return statement in function");
     }
     
-    final public AbstractUnit Term() throws ParseException {
+    final public AbstractUnit Term() throws TokenException {
         AbstractUnit result = AbstractUnit.ONE;
         AbstractUnit temp = AbstractUnit.ONE;
         result = Component();
@@ -95,7 +95,7 @@ public class UCUMParser {
                 default:
                     jj_la1[1] = jj_gen;
                     jj_consume_token(-1);
-                    throw new ParseException();
+                    throw new TokenException();
             }
         }
         {
@@ -105,7 +105,7 @@ public class UCUMParser {
         throw new Error("Missing return statement in function");
     }
 
-    final public AbstractUnit Component() throws ParseException {
+    final public AbstractUnit Component() throws TokenException {
         AbstractUnit result = AbstractUnit.ONE;
         Token token = null;
         if (jj_2_1(2147483647)) {
@@ -154,13 +154,13 @@ public class UCUMParser {
                 default:
                     jj_la1[2] = jj_gen;
                     jj_consume_token(-1);
-                    throw new ParseException();
+                    throw new TokenException();
             }
         }
         throw new Error("Missing return statement in function");
     }
 
-    final public AbstractUnit Annotatable() throws ParseException {
+    final public AbstractUnit Annotatable() throws TokenException {
         AbstractUnit result = AbstractUnit.ONE;
         Token token1 = null;
         Token token2 = null;
@@ -197,13 +197,13 @@ public class UCUMParser {
                 default:
                     jj_la1[4] = jj_gen;
                     jj_consume_token(-1);
-                    throw new ParseException();
+                    throw new TokenException();
             }
         }
         throw new Error("Missing return statement in function");
     }
 
-    final public AbstractUnit SimpleUnit() throws ParseException {
+    final public AbstractUnit SimpleUnit() throws TokenException {
         Token token = null;
         token = jj_consume_token(ATOM);
         AbstractUnit unit = symbols.getUnit(token.image);
@@ -221,7 +221,7 @@ public class UCUMParser {
             }
             {
                 if (true)
-                    throw new ParseException();
+                    throw new TokenException();
             }
         } else {
             {
@@ -311,7 +311,7 @@ public class UCUMParser {
         return false;
     }
     /** Generated Token Manager. */
-    public UCUMParserTokenManager token_source;
+    public UCUMTokenManager token_source;
 
     SimpleCharStream jj_input_stream;
 
@@ -347,18 +347,18 @@ public class UCUMParser {
     private int jj_gc = 0;
 
     /** Constructor with InputStream. */
-    public UCUMParser(java.io.InputStream stream) {
+    public UCUMFormatParser(java.io.InputStream stream) {
         this(stream, null);
     }
 
     /** Constructor with InputStream and supplied encoding */
-    public UCUMParser(java.io.InputStream stream, String encoding) {
+    public UCUMFormatParser(java.io.InputStream stream, String encoding) {
         try {
             jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1);
         } catch (java.io.UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
-        token_source = new UCUMParserTokenManager(jj_input_stream);
+        token_source = new UCUMTokenManager(jj_input_stream);
         token = new Token();
         jj_ntk = -1;
         jj_gen = 0;
@@ -395,9 +395,9 @@ public class UCUMParser {
     }
 
     /** Constructor. */
-    public UCUMParser(java.io.Reader stream) {
+    public UCUMFormatParser(java.io.Reader stream) {
         jj_input_stream = new SimpleCharStream(stream, 1, 1);
-        token_source = new UCUMParserTokenManager(jj_input_stream);
+        token_source = new UCUMTokenManager(jj_input_stream);
         token = new Token();
         jj_ntk = -1;
         jj_gen = 0;
@@ -425,7 +425,7 @@ public class UCUMParser {
     }
 
     /** Constructor with generated Token Manager. */
-    public UCUMParser(UCUMParserTokenManager tm) {
+    public UCUMFormatParser(UCUMTokenManager tm) {
         token_source = tm;
         token = new Token();
         jj_ntk = -1;
@@ -439,7 +439,7 @@ public class UCUMParser {
     }
 
     /** Reinitialise. */
-    public void ReInit(UCUMParserTokenManager tm) {
+    public void ReInit(UCUMTokenManager tm) {
         token_source = tm;
         token = new Token();
         jj_ntk = -1;
@@ -452,7 +452,7 @@ public class UCUMParser {
         }
     }
 
-    private Token jj_consume_token(int kind) throws ParseException {
+    private Token jj_consume_token(int kind) throws TokenException {
         Token oldToken;
         if ((oldToken = token).next != null)
             token = token.next;
@@ -582,8 +582,8 @@ public class UCUMParser {
         }
     }
 
-    /** Generate ParseException. */
-    public ParseException generateParseException() {
+    /** Generate TokenException. */
+    public TokenException generateParseException() {
         jj_expentries.clear();
         boolean[] la1tokens = new boolean[16];
         if (jj_kind >= 0) {
@@ -613,7 +613,7 @@ public class UCUMParser {
         for (int i = 0; i < jj_expentries.size(); i++) {
             exptokseq[i] = jj_expentries.get(i);
         }
-        return new ParseException(token, exptokseq, tokenImage);
+        return new TokenException(token, exptokseq, tokenImage);
     }
 
     /** Enable tracing. */

@@ -44,9 +44,9 @@ import javax.measure.format.UnitFormat;
 
 import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.format.internal.ParseException;
+import tec.units.ri.format.internal.TokenException;
 import tec.units.ri.format.internal.TokenMgrError;
-import tec.units.ri.format.internal.UCUMParser;
+import tec.units.ri.format.internal.UCUMFormatParser;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
 import tec.units.ri.unit.AnnotatedUnit;
@@ -457,13 +457,13 @@ public abstract class UCUMFormat implements UnitFormat {
 			if (!caseSensitive) {
 				source = source.toUpperCase();
 			}
-			UCUMParser parser = new UCUMParser(symbolMap,
+			UCUMFormatParser parser = new UCUMFormatParser(symbolMap,
 					new ByteArrayInputStream(source.getBytes()));
 			try {
 				Unit<?> result = parser.parseUnit();
 				cursor.setIndex(end);
 				return result;
-			} catch (ParseException e) {
+			} catch (TokenException e) {
 				if (e.currentToken != null) {
 					cursor.setErrorIndex(start + e.currentToken.endColumn);
 				} else {
