@@ -38,14 +38,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.omg.CORBA.UnknownUserException;
-
 import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.quantity.Quantities;
 import tec.units.ri.util.SI;
 import tec.units.ri.util.SIPrefix;
-import tec.units.ri.util.UCUM;
 import tec.units.ri.util.US;
 import static org.junit.Assert.*;
 import static tec.units.ri.util.SI.GRAM;
@@ -291,11 +288,8 @@ public class UnitsTest {
 
 	@Test
 	public void testToString() {
-		assertEquals("kg", SIPrefix.KILO(UCUM.GRAM).toString());
+		assertEquals("kg", SIPrefix.KILO(SI.GRAM).toString());
 		assertEquals("g", SI.GRAM.toString());
-		assertEquals("lb", UCUM.POUND.toString());
-		assertEquals("uz", UCUM.OUNCE.toString()); // TODO try using UCUM.Print for toString()
-		assertEquals("g", UCUM.GRAM.toString());
 		assertEquals("lb", US.POUND.toString());
 	}
 
@@ -308,22 +302,15 @@ public class UnitsTest {
 		// TODO see https://java.net/jira/browse/UNITSOFMEASUREMENT-109
 		assertEquals("kg", SI.KILOGRAM.getSymbol());
 //		assertEquals("kg", SI.GRAM.getSymbol()); //"g"
-//		assertEquals("kg", UCUM.POUND.getSymbol()); //"lb"
-//		assertEquals("kg", UCUM.OUNCE.getSymbol());//"oz"
-		assertEquals("kg", SIPrefix.KILO(UCUM.GRAM).getSymbol());
-//		assertEquals("kg", UCUM.GRAM.getSymbol()); //"g"
+		assertEquals("kg", SIPrefix.KILO(SI.GRAM).getSymbol());
 //		assertEquals("kg", US.POUND.getSymbol()); //"lb"
-		assertNull(UCUM.OUNCE.getSymbol());
 	}
 
 	@Test
 	public void testGetParentUnit() {
 		assertEquals("TransformedUnit", SI.GRAM.getClass().getSimpleName());
 		assertEquals("kg", ((TransformedUnit<Mass>)SI.GRAM).getParentUnit().getSymbol());
-//		assertEquals("kg", UCUM.POUND.getSymbol()); //"lb"
-//		assertEquals("kg", UCUM.OUNCE.getSymbol());//"oz"
-//		assertEquals("kg", SIPrefix.KILO(UCUM.GRAM).getSymbol());
-//		assertEquals("kg", UCUM.GRAM.getSymbol()); //"g"
+//		assertEquals("kg", SIPrefix.KILO(SI.GRAM).getSymbol());
 //		assertEquals("kg", US.POUND.getSymbol()); //"lb"
 	}
 	

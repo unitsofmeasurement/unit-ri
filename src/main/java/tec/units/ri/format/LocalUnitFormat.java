@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -29,7 +29,7 @@ import static tec.units.ri.format.internal.BundleToMapAdapter.toMap;
 import static tec.units.ri.util.SI.CUBIC_METRE;
 import static tec.units.ri.util.SI.GRAM;
 import static tec.units.ri.util.SI.KILOGRAM;
-import static tec.units.ri.util.UCUM.LITER;
+import static tec.units.ri.util.SI.LITRE;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -163,7 +163,7 @@ import tec.units.ri.unit.TransformedUnit;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.4, January 12, 2015
+ * @version 0.5.5, January 22, 2015
  */
 public class LocalUnitFormat implements UnitFormat {
 
@@ -407,7 +407,7 @@ public class LocalUnitFormat implements UnitFormat {
 				}
 			} else if (CUBIC_METRE.equals(parentUnit)) {
 				if (converter != null) {
-					parentUnit = LITER;
+					parentUnit = LITRE;
 				}
 			}
 
