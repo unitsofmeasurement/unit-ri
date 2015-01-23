@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -30,7 +30,7 @@ package tec.units.ri.format.internal;
 /**
  * Describes the input token stream.
  *
- * @version 0.5.4, January 20, 2015
+ * @version 5.2, April 16, 2014
  */
 
 public final class Token {

@@ -44,9 +44,9 @@ import javax.measure.format.UnitFormat;
 
 import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.format.internal.TokenException;
+import tec.units.ri.format.internal.ParseException;
 import tec.units.ri.format.internal.TokenMgrError;
-import tec.units.ri.format.internal.UCUMFormatParser;
+import tec.units.ri.format.internal.UCUMParser;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
 import tec.units.ri.unit.AnnotatedUnit;
@@ -164,8 +164,8 @@ public abstract class UCUMFormat implements UnitFormat {
 		Unit unit = unknownUnit;
 		CharSequence symbol;
 		CharSequence annotation = null;
-		if (unknownUnit instanceof AnnotatedUnit) {
-			AnnotatedUnit annotatedUnit = (AnnotatedUnit) unknownUnit;
+		if (unit instanceof AnnotatedUnit) {
+			AnnotatedUnit annotatedUnit = (AnnotatedUnit) unit;
 			unit = annotatedUnit.getActualUnit();
 			annotation = annotatedUnit.getAnnotation();
 		}
@@ -204,7 +204,7 @@ public abstract class UCUMFormat implements UnitFormat {
 				}
 			}
 			symbol = app;
-		} else if (!((AbstractUnit)unit).isSystemUnit() || unit.equals(SI.KILOGRAM)) {
+		} else if ((unit instanceof AbstractUnit && !((AbstractUnit)unit).isSystemUnit()) || unit.equals(SI.KILOGRAM)) {
 			final StringBuilder temp = new StringBuilder();
 			UnitConverter converter;
 			boolean printSeparator;
@@ -457,13 +457,13 @@ public abstract class UCUMFormat implements UnitFormat {
 			if (!caseSensitive) {
 				source = source.toUpperCase();
 			}
-			UCUMFormatParser parser = new UCUMFormatParser(symbolMap,
+			UCUMParser parser = new UCUMParser(symbolMap,
 					new ByteArrayInputStream(source.getBytes()));
 			try {
 				Unit<?> result = parser.parseUnit();
 				cursor.setIndex(end);
 				return result;
-			} catch (TokenException e) {
+			} catch (ParseException e) {
 				if (e.currentToken != null) {
 					cursor.setErrorIndex(start + e.currentToken.endColumn);
 				} else {
