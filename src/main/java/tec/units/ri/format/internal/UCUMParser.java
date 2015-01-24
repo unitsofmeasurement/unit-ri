@@ -35,7 +35,7 @@ import tec.units.ri.util.SIPrefix;
 
 /**
  * <p> 
- * Parser definition for parsing {@link AbstractUnit Unit}s
+ * Parser definition for parsing {@link Unit Unit}s
  * according to the <a href="http://unitsofmeasure.org">
  * Uniform Code for Units of Measure</a>.
  * 
@@ -57,7 +57,7 @@ public class UCUMParser {
 // Parser productions
 //
     final public Unit parseUnit() throws ParseException {
-        AbstractUnit u;
+        Unit u;
         u = Term();
         jj_consume_token(0);
         {
@@ -67,9 +67,9 @@ public class UCUMParser {
         throw new Error("Missing return statement in function");
     }
     
-    final public AbstractUnit Term() throws ParseException {
-        AbstractUnit result = AbstractUnit.ONE;
-        AbstractUnit temp = AbstractUnit.ONE;
+    final public Unit Term() throws ParseException {
+        Unit result = AbstractUnit.ONE;
+        Unit temp = AbstractUnit.ONE;
         result = Component();
         label_1:
         while (true) {
@@ -105,15 +105,15 @@ public class UCUMParser {
         throw new Error("Missing return statement in function");
     }
 
-    final public AbstractUnit Component() throws ParseException {
-        AbstractUnit result = AbstractUnit.ONE;
+    final public Unit Component() throws ParseException {
+        Unit result = AbstractUnit.ONE;
         Token token = null;
         if (jj_2_1(2147483647)) {
             result = Annotatable();
             token = jj_consume_token(ANNOTATION);
             {
                 if (true)
-                    return result.annotate(token.image.substring(1, token.image.length() - 1));
+                    return ((AbstractUnit)result).annotate(token.image.substring(1, token.image.length() - 1));
             }
         } else {
             switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
@@ -126,7 +126,7 @@ public class UCUMParser {
                 case ANNOTATION:
                     token = jj_consume_token(ANNOTATION); {
                     if (true)
-                        return  result.annotate(token.image.substring(1, token.image.length() - 1));
+                        return  ((AbstractUnit)result).annotate(token.image.substring(1, token.image.length() - 1));
                 }
                 break;
                 case FACTOR:
@@ -160,8 +160,8 @@ public class UCUMParser {
         throw new Error("Missing return statement in function");
     }
 
-    final public AbstractUnit Annotatable() throws ParseException {
-        AbstractUnit result = AbstractUnit.ONE;
+    final public Unit Annotatable() throws ParseException {
+        Unit result = AbstractUnit.ONE;
         Token token1 = null;
         Token token2 = null;
         if (jj_2_2(2147483647)) {
@@ -203,10 +203,10 @@ public class UCUMParser {
         throw new Error("Missing return statement in function");
     }
 
-    final public AbstractUnit SimpleUnit() throws ParseException {
+    final public Unit SimpleUnit() throws ParseException {
         Token token = null;
         token = jj_consume_token(ATOM);
-        AbstractUnit unit = symbols.getUnit(token.image);
+        Unit unit = symbols.getUnit(token.image);
         if (unit == null) {
             SIPrefix prefix = symbols.getPrefix(token.image);
             if (prefix != null) {

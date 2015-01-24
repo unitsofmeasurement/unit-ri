@@ -31,7 +31,6 @@ package tec.units.ri.util;
 
 import static org.junit.Assert.assertEquals;
 import static tec.units.ri.util.SI.GRAM;
-import static tec.units.ri.util.SI.METRE;
 import static tec.units.ri.util.SI.KILOGRAM;
 import static tec.units.ri.util.SIPrefix.KILO;
 
@@ -39,15 +38,8 @@ import org.junit.Test;
 
 public class PrefixTest {
 	@Test
-	public void testKg() {
+	public void testKilo() {
 		// TODO how to handle equals for units?
 		assertEquals(KILOGRAM.getSymbol(), KILO(GRAM).getSymbol());
-		assertEquals(KILOGRAM.toString(), KILO(GRAM).toString());
-	}
-	
-	@Test
-	public void testKm() {
-//		assertEquals(KILOMETRE.getSymbol(), KILO(GRAM).getSymbol());
-		assertEquals("km", KILO(METRE).toString());
 	}
 }

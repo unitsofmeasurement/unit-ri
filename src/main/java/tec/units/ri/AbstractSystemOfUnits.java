@@ -92,6 +92,25 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
         return quantityToUnit.get(quantityType);
     }
 	
+    /**
+	 * Adds a new named unit to the collection.
+	 * 
+	 * @param unit the unit being added.
+	 * @param name the name of the unit.
+	 * @return <code>unit</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	protected <U extends Unit<?>> U addUnit(U unit, String name) {
+		if (name != null && unit instanceof AbstractUnit) {
+			AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+			aUnit.setName(name);
+			units.add(aUnit);
+			return (U) aUnit;
+		}
+		units.add(unit);
+		return unit;
+	}
+    
 	static class Helper {
 		static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, 
 				Dimension dimension) {

@@ -151,17 +151,17 @@ public abstract class AbstractConverter implements UnitConverter {
      * This class represents converters made up of two or more separate
      * converters (in matrix notation <code>[pair] = [left] x [right]</code>).
      */
-    private static final class Pair extends AbstractConverter {
+    public static final class Pair extends AbstractConverter {
 
         /**
          * Holds the first converter.
          */
-        private UnitConverter left;
+        private final UnitConverter left;
 
         /**
          * Holds the second converter.
          */
-        private UnitConverter right;
+        private final UnitConverter right;
 
         /**
          * Creates a compound converter resulting from the combined
@@ -217,5 +217,13 @@ public abstract class AbstractConverter implements UnitConverter {
         public int hashCode() {
             return left.hashCode() + right.hashCode();
         }
+
+		public UnitConverter getLeft() {
+			return left;
+		}
+
+		public UnitConverter getRight() {
+			return right;
+		}
     }
 }

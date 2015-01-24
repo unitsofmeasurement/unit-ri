@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -65,8 +65,8 @@ public class QuantityFactoryTest {
 		Quantity<Time> t = AbstractQuantityFactory.getInstance(Time.class).create(40, MINUTE); // 40 min
 		assertEquals(Integer.valueOf(40), t.getValue());
 		assertEquals(MINUTE, t.getUnit());
+		assertNull(t.getUnit().getSymbol());
 //		assertEquals("s", t.getUnit().getSymbol()); // FIXME this should be "min", tweak for TransformedUnit
-		assertNull(t.getUnit().getSymbol()); // see https://java.net/jira/browse/UNITSOFMEASUREMENT-109 meets Unit spec as of now
 		assertEquals("40 min", t.toString());
 	}
 

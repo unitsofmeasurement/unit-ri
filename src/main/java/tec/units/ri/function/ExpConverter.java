@@ -39,7 +39,7 @@ import tec.units.ri.AbstractConverter;
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.4, August 3, 2014
  */
-final class ExpConverter extends AbstractConverter 
+public final class ExpConverter extends AbstractConverter 
 	implements ValueSupplier<String> {
 
     /**

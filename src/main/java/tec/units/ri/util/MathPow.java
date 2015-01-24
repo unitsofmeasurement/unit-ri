@@ -25,6 +25,7 @@
  */
 package tec.units.ri.util;
 
+@Deprecated
 final class MathPow {
 	static final double pow(double x, double y)
 	{

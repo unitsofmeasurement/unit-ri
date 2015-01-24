@@ -140,7 +140,7 @@ public class UnitFormatTest {
 			fail(e.getMessage());
 		}
 		assertEquals(METRE, sut.getUnit());
-		assertEquals("M", a.toString());
+		assertEquals("m", a.toString());
 	}
 
 	@Test

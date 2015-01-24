@@ -40,13 +40,13 @@ import tec.units.ri.function.QuantitySupplier;
  * <p>
  * A {@code Measurement} object is used for maintaining the tuple of quantity and timestamp.
  * The value is represented as {@linkplain Quantity}
- * and the time as <type>long</type>
+ * and the time as {@linkplain Instant}
  * <p>
 
  * 
  * @see {@link QuantitySupplier}
  * @author werner
- * @version 0.4
+ * @version 0.3
  * @param <Q>
  */
 public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,
