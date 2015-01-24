@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -26,7 +26,6 @@
 package tec.units.ri.format;
 
 import java.text.FieldPosition;
-import java.text.Format;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.io.IOException;
@@ -51,15 +50,15 @@ import tec.units.ri.quantity.NumberQuantity;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, $Date: 2014-12-16 $
+ * @version 0.5.1, $Date: 2015-01-24 $
  */
 @SuppressWarnings("rawtypes")
-public abstract class QuantityFormat extends Format implements Parser<CharSequence, Quantity> {
+public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4628006924354248662L;
+//	private static final long serialVersionUID = -4628006924354248662L;
 
 	/**
 	 * Holds the default format instance.
@@ -159,8 +158,8 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 *             if any problem occurs while parsing the specified character
 	 *             sequence (e.g. illegal syntax).
 	 */
-	public abstract AbstractQuantity<?> parse(CharSequence csq)
-			throws IllegalArgumentException, ParserException;
+	/*public abstract AbstractQuantity<?> parse(CharSequence csq)
+			throws IllegalArgumentException, ParserException; */
 
 	/**
 	 * Formats the specified value using {@link CompoundUnit} compound units}.
@@ -202,7 +201,6 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 //		return DEFAULT._unitFormat.format(low, dest);
 //	}
 
-	@Override
 	public final StringBuffer format(Object obj, final StringBuffer toAppendTo,
 			FieldPosition pos) {
 		if (!(obj instanceof AbstractQuantity<?>))
@@ -218,8 +216,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 		}
 	}
 
-	@Override
-	public final AbstractQuantity<?> parseObject(String source, ParsePosition pos) {
+	final AbstractQuantity<?> parseObject(String source, ParsePosition pos) {
 		try {
 			return parse(source, pos);
 		} catch (IllegalArgumentException | ParserException e) {
@@ -296,7 +293,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 			return parse(csq, new ParsePosition(0));
 		}
 
-		private static final long serialVersionUID = 1L;
+//		private static final long serialVersionUID = 1L;
 
 	}
 
@@ -306,7 +303,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 		/**
 		 * 
 		 */
-		private static final long serialVersionUID = 2758248665095734058L;
+//		private static final long serialVersionUID = 2758248665095734058L;
 
 		@Override
 		public Appendable format(AbstractQuantity measure, Appendable dest)

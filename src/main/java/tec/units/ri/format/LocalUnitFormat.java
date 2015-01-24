@@ -25,8 +25,7 @@
  */
 package tec.units.ri.format;
 
-import static tec.units.ri.format.internal.BundleToMapAdapter.toMap;
-
+import static tec.units.ri.format.internal.l10.BundleToMapAdapter.toMap;
 import static tec.units.ri.util.SI.CUBIC_METRE;
 import static tec.units.ri.util.SI.GRAM;
 import static tec.units.ri.util.SI.KILOGRAM;
@@ -36,11 +35,11 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.text.ParsePosition;
 import java.util.Map;
+
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import javax.measure.format.ParserException;
-import javax.measure.format.UnitFormat;
 
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.format.internal.ParseException;
@@ -163,9 +162,9 @@ import tec.units.ri.unit.TransformedUnit;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.3, December 22, 2014
+ * @version 0.5.4, January 24, 2015
  */
-public class LocalUnitFormat implements UnitFormat {
+public class LocalUnitFormat extends AbstractUnitFormat {
 
 	// ////////////////////////////////////////////////////
 	// Class variables //
@@ -259,7 +258,7 @@ public class LocalUnitFormat implements UnitFormat {
 	 * 
 	 * @return SymbolMap the current symbol map
 	 */
-	SymbolMap getSymbols() {
+	SymbolMap getSymbols1() {
 		return symbolMap;
 	}
 
@@ -278,7 +277,7 @@ public class LocalUnitFormat implements UnitFormat {
 		return appendable;
 	}
 
-	AbstractUnit<?> parse(CharSequence csq, ParsePosition cursor)
+	protected AbstractUnit<?> parse(CharSequence csq, ParsePosition cursor)
 			throws ParserException {
 		// Parsing reads the whole character sequence from the parse position.
 		// TODO Is there any use for cursor? It seems an int as startPosition
@@ -597,5 +596,11 @@ public class LocalUnitFormat implements UnitFormat {
 			buffer.append(")");
 			return EXPONENT_PRECEDENCE;
 		}
+	}
+
+	@Override
+	protected SymbolMapImpl getSymbols() {
+		// FIXME integrate SymbolMap and SymbolMapImpl then return it here
+		return null;
 	}
 }

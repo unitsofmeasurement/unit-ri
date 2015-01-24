@@ -27,8 +27,6 @@ package tec.units.ri.format;
 
 import java.io.IOException;
 import java.text.ParsePosition;
-import java.util.Locale;
-
 import javax.measure.Unit;
 import javax.measure.format.UnitFormat;
 
@@ -50,14 +48,14 @@ import tec.units.ri.AbstractUnit;
  * @version 0.5.1 ($Revision: 215 $), $Date: 2015-01-24 $
  * 
  */
-public abstract class AbstractFormat implements UnitFormat {
+public abstract class AbstractUnitFormat implements UnitFormat {
 
    /**
      * Returns the {@link SymbolMap} for this unit format.
      *
      * @return the symbol map used by this format.
      */
-    protected abstract SymbolMapImpl getSymbolMap();
+    protected abstract SymbolMapImpl getSymbols();
 
     /**
      * Formats the specified unit.
@@ -84,25 +82,6 @@ public abstract class AbstractFormat implements UnitFormat {
      */
     protected abstract Unit<?> parse(CharSequence csq, ParsePosition cursor)
             throws IllegalArgumentException;
-
-    /**
-     * Return a formatter for CurrencyAmount objects in the given
-     * locale.
-     * @param locale desired locale
-     * @return a formatter object
-     */
-    public static AbstractFormat getUnitFormat(Locale locale) {
-        return SimpleUnitFormat.getInstance(locale);
-    }
-
-    /**
-     * Return a formatter for CurrencyAmount objects in the default
-     * locale.
-     * @return a formatter object
-     */
-    public static AbstractFormat getUnitFormat() {
-        return getUnitFormat(Locale.getDefault());
-    }
     
     /**
      * Convenience method equivalent to {@link #format(AbstractUnit, Appendable)}

@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format.internal;
+package tec.units.ri.format.internal.l10;
 
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -33,7 +33,7 @@ import java.util.ResourceBundle;
 /**
  * 
  * @author Werner Keil
- * @version 0.1, December 22, 2014
+ * @version 0.2, January 24, 2015
  *
  */
 public final class BundleToMapAdapter {

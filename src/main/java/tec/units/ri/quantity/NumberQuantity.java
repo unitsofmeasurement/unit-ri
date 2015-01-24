@@ -340,7 +340,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	 *            the decimal value and its unit (if any) separated by space(s).
 	 * @return <code>MeasureFormat.getStandard().parse(csq)</code>
 	 */
-	public static AbstractQuantity<?> parse(CharSequence csq) {
+	public static Quantity<?> parse(CharSequence csq) {
 		try {
 			return QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq);
 		} catch (IllegalArgumentException | ParserException e) {

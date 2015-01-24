@@ -164,9 +164,9 @@ import tec.units.ri.unit.AnnotatedUnit;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:uomo@catmedia.us">Werner Keil</a>
- * @version 0.4.1 ($Revision: 232 $), $Date: 2010-10-13 17:13:18 +0200 (Mi, 13 Okt 2010) $
+ * @version 0.4.2, $Date: 2015-01-24 $
  */
-public class SimpleUnitFormat extends AbstractFormat {
+public class SimpleUnitFormat extends AbstractUnitFormat {
 
 	// ////////////////////////////////////////////////////
 	// Class variables //
@@ -287,7 +287,7 @@ public class SimpleUnitFormat extends AbstractFormat {
 	 * 
 	 * @return SymbolMap the current symbol map
 	 */
-	public SymbolMapImpl getSymbolMap() {
+	protected SymbolMapImpl getSymbols() {
 		return symbolMap;
 	}
 
