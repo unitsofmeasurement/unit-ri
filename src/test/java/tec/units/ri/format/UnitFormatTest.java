@@ -26,7 +26,6 @@
 package tec.units.ri.format;
 
 import static org.junit.Assert.*;
-import static tec.units.ri.format.UCUMFormat.Variant.*;
 import static tec.units.ri.util.SI.KILOGRAM;
 import static tec.units.ri.util.SI.METRE;
 import static tec.units.ri.util.SI.MINUTE;
@@ -47,8 +46,6 @@ import org.junit.Test;
 
 import tec.units.ri.AbstractQuantityFactory;
 import tec.units.ri.format.LocalUnitFormat;
-import tec.units.ri.format.UCUMFormat;
-import tec.units.ri.format.internal.simple.SimpleUnitFormat;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
@@ -83,65 +80,6 @@ public class UnitFormatTest {
 			fail(e.getMessage());
 		}
 		assertEquals("m/s", a2.toString());
-	}
-
-	@Test
-	public void testFormatUCUMPrint() {
-		final UnitFormat format = UCUMFormat.getInstance(PRINT);
-		final Appendable a = new StringBuilder();
-		try {
-			format.format(METRE, a);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals(METRE, sut.getUnit());
-		assertEquals("m", a.toString());
-
-		final Appendable a2 = new StringBuilder();
-		@SuppressWarnings("unchecked")
-		Unit<Speed> v = (Unit<Speed>) sut.getUnit().divide(SECOND);
-		try {
-			format.format(v, a2);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals("1/s.m", a2.toString());
-	}
-
-	@Test
-	public void testFormatUCUMCS() {
-		final UnitFormat format = UCUMFormat.getInstance(CASE_SENSITIVE);
-		final Appendable a = new StringBuilder();
-		try {
-			format.format(METRE, a);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals(METRE, sut.getUnit());
-		assertEquals("m", a.toString());
-
-		final Appendable a2 = new StringBuilder();
-		@SuppressWarnings("unchecked")
-		Unit<Speed> v = (Unit<Speed>) sut.getUnit().divide(SECOND);
-		try {
-			format.format(v, a2);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals("1/s.m", a2.toString());
-	}
-
-	@Test
-	public void testFormatUCUMCI() {
-		final UnitFormat format = UCUMFormat.getInstance(CASE_INSENSITIVE);
-		final Appendable a = new StringBuilder();
-		try {
-			format.format(METRE, a);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals(METRE, sut.getUnit());
-		assertEquals("m", a.toString());
 	}
 
 	@Test
@@ -186,17 +124,6 @@ public class UnitFormatTest {
 		try {
 			Unit<?> u = format.parse("kg");
 			assertEquals("kg", u.getSymbol());
-			assertEquals(KILOGRAM, u);
-		} catch (ParserException e) {
-			fail(e.getMessage());
-		}
-	}
-	
-	@Test(expected = UnsupportedOperationException.class)
-	public void testParseUCUMPrint() {
-		final UnitFormat format = UCUMFormat.getInstance(PRINT);
-		try {
-			Unit<?> u = format.parse("kg");
 			assertEquals(KILOGRAM, u);
 		} catch (ParserException e) {
 			fail(e.getMessage());

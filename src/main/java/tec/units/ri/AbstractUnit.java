@@ -25,9 +25,6 @@
  */
 package tec.units.ri;
 
-import static tec.units.ri.format.UCUMFormat.Variant.CASE_SENSITIVE;
-import static tec.units.ri.format.UCUMFormat.Variant.PRINT;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,8 +38,7 @@ import javax.measure.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
 import tec.units.ri.format.LocalUnitFormat;
-import tec.units.ri.format.UCUMFormat;
-import tec.units.ri.format.internal.simple.SimpleUnitFormat;
+import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
@@ -71,7 +67,7 @@ import tec.units.ri.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.5, Jan 19, 2015
+ * @version 0.8.6, Jan 24, 2015
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 

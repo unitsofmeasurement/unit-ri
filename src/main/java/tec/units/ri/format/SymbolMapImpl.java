@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format.internal.simple;
+package tec.units.ri.format;
 
 import java.lang.reflect.Field;
 import java.util.Enumeration;
@@ -60,9 +60,9 @@ import tec.units.ri.function.RationalConverter;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author  <a href="mailto:uomo@catmedia.us">Werner Keil</a>
- * @version 1.8 ($Revision: 212 $), $Date: 2010-09-13 23:50:44 +0200 (Mo, 13 Sep 2010) $
+ * @version 0.8, $Date: 2015-01-24 $
  */
-class SymbolMapImpl { //implements SymbolMap {
+public class SymbolMapImpl { //implements SymbolMap {
 	// TODO fix issue with duplicate symbols (i.E. in different systems)
     private final Map<String, Unit<?>> symbolToUnit;
     private final Map<Unit<?>, String> unitToSymbol;
@@ -174,7 +174,7 @@ class SymbolMapImpl { //implements SymbolMap {
      * @param symbol the unit symbol.
      * @return the corresponding prefix or <code>null</code> if none.
      */
-    ParsePrefix getPrefix (String symbol) {
+    public ParsePrefix getPrefix (String symbol) { // TODO visibility
         for (Iterator<String> i = symbolToPrefix.keySet().iterator(); i.hasNext(); ) {
             String pfSymbol = i.next();
             if (symbol.startsWith(pfSymbol)) {
@@ -200,7 +200,7 @@ class SymbolMapImpl { //implements SymbolMap {
      * @param prefix the prefix.
      * @return the corresponding symbol or <code>null</code> if none.
      */
-    String getSymbol (ParsePrefix prefix) {
+    public String getSymbol (ParsePrefix prefix) { // TODO visibility
         return prefixToSymbol.get(prefix);
     }
 

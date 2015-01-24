@@ -23,15 +23,13 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format.internal.simple;
+package tec.units.ri.format;
 
 import static tec.units.ri.util.SI.*;
 import static tec.units.ri.util.US.LITER;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.io.StringReader;
-import java.math.BigInteger;
 import java.text.FieldPosition;
 import java.text.ParsePosition;
 import java.util.Formattable;
@@ -43,6 +41,9 @@ import java.util.ResourceBundle;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
+import tec.units.ri.format.internal.simple.ParseException;
+import tec.units.ri.format.internal.simple.TokenMgrError;
+import tec.units.ri.format.internal.simple.SimpleFormatParser;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.ExpConverter;
 import tec.units.ri.function.LogConverter;
@@ -179,7 +180,7 @@ public class SimpleUnitFormat extends AbstractFormat {
 	/**
 	 * Name of the resource bundle
 	 */
-	private static final String BUNDLE_NAME = SimpleUnitFormat.class.getPackage()
+	private static final String BUNDLE_NAME = SimpleFormatParser.class.getPackage()
 			.getName() + ".messages"; //$NON-NLS-1$
 
 	/**
@@ -320,7 +321,7 @@ public class SimpleUnitFormat extends AbstractFormat {
 			return AbstractUnit.ONE;
 		}
 		try {
-			UnitParser parser = new UnitParser(symbolMap, new StringReader(
+			SimpleFormatParser parser = new SimpleFormatParser(symbolMap, new StringReader(
 					source));
 			Unit<?> result = parser.parseUnit();
 			if (cursor != null)

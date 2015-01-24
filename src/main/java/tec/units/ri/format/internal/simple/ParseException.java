@@ -27,6 +27,8 @@ package tec.units.ri.format.internal.simple;
 
 import static tec.units.ri.format.internal.simple.TokenMgrError.addEscapes;
 
+import javax.measure.MeasurementException;
+
 /**
  * This exception is thrown when parse errors are encountered.
  * You can explicitly create objects of this exception type by
@@ -40,7 +42,7 @@ import static tec.units.ri.format.internal.simple.TokenMgrError.addEscapes;
  * @author  <a href="mailto:uomo@catmedia.us">Werner Keil</a>
  * @version 1.0.1 ($Revision: 105 $), $Date: 2010-08-05 21:44:23 +0100 (Do, 05 Aug 2010) $
  */
-class ParseException extends RuntimeException {
+public class ParseException extends MeasurementException {
 
     /**
      * The version identifier for this Serializable class.

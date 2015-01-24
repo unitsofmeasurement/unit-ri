@@ -28,11 +28,13 @@ package tec.units.ri.format.internal.simple;
 import javax.measure.Unit;
 
 import tec.units.ri.AbstractUnit;
+import tec.units.ri.format.ParsePrefix;
+import tec.units.ri.format.SymbolMapImpl;
 import tec.units.ri.function.LogConverter;
 
 
 /** */
-class UnitParser implements UnitParserConstants {
+public final class SimpleFormatParser implements UnitParserConstants {
 
     private static class Exponent {
         final int pow;
@@ -45,7 +47,7 @@ class UnitParser implements UnitParserConstants {
 
     private SymbolMapImpl symbols;
 
-    UnitParser (SymbolMapImpl symbols, java.io.Reader in) {
+    public SimpleFormatParser (SymbolMapImpl symbols, java.io.Reader in) { // TODO visiblity
         this(in);
         this.symbols = symbols;
     }
@@ -54,7 +56,7 @@ class UnitParser implements UnitParserConstants {
 // Parser productions
 //
     @SuppressWarnings("unused")
-	Unit<?> parseUnit() throws ParseException {
+	public Unit<?> parseUnit() throws ParseException { // TODO visibility
         Unit<?> result;
     result = compoundExpr();
     jj_consume_token(0);
@@ -540,11 +542,11 @@ Token sign() throws ParseException {
   private int jj_gc = 0;
 
   /** Constructor with InputStream. */
-  UnitParser(java.io.InputStream stream) {
+  SimpleFormatParser(java.io.InputStream stream) {
      this(stream, null);
   }
   /** Constructor with InputStream and supplied encoding */
-  UnitParser(java.io.InputStream stream, String encoding) {
+  SimpleFormatParser(java.io.InputStream stream, String encoding) {
     try { jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
     token_source = new UnitParserTokenManager(jj_input_stream);
     token = new Token();
@@ -555,7 +557,7 @@ Token sign() throws ParseException {
   }
 
   /** Constructor. */
-  UnitParser(java.io.Reader stream) {
+  SimpleFormatParser(java.io.Reader stream) {
     jj_input_stream = new SimpleCharStream(stream, 1, 1);
     token_source = new UnitParserTokenManager(jj_input_stream);
     token = new Token();
@@ -577,7 +579,7 @@ Token sign() throws ParseException {
 //  }
 
   /** Constructor with generated Token Manager. */
-  UnitParser(UnitParserTokenManager tm) {
+  SimpleFormatParser(UnitParserTokenManager tm) {
     token_source = tm;
     token = new Token();
     jj_ntk = -1;

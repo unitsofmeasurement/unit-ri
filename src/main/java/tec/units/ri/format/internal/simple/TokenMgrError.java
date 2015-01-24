@@ -26,7 +26,7 @@
 package tec.units.ri.format.internal.simple;
 
 /** Token Manager Error. */
-class TokenMgrError extends Error
+public class TokenMgrError extends Error
 {
 
   /**

@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format.internal.simple;
+package tec.units.ri.format;
 
 import static tec.units.ri.function.MathHelper.pow;
 
@@ -38,7 +38,7 @@ import tec.units.ri.function.UnitConverterSupplier;
  *
  * @version 0.4
  */
-enum ParsePrefix implements UnitConverterSupplier {
+public enum ParsePrefix implements UnitConverterSupplier {
 
 	   YOTTA(RationalConverter.of(1000000000000000000000000d, 1d)),
 	    ZETTA(RationalConverter.of(1000000000000000000000d, 1d)),

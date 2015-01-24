@@ -29,14 +29,14 @@ package tec.units.ri.format.internal.simple;
  * Describes the input token stream.
  */
 
-class Token implements java.io.Serializable {
+public final class Token {
 
      /**
       * The version identifier for this Serializable class.
       * Increment only if the <i>serialized</i> form of the
       * class changes.
       */
-    private static final long serialVersionUID = 2188279658897600591L;
+//    private static final long serialVersionUID = 2188279658897600591L;
 
   /**
    * An integer that describes the kind of this token.  This numbering
@@ -52,7 +52,7 @@ class Token implements java.io.Serializable {
   /** The line number of the last character of this Token. */
   int endLine;
   /** The column number of the last character of this Token. */
-  int endColumn;
+  public int endColumn;
 
   /**
    * The string image of the token.
