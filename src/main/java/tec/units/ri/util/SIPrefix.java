@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -25,7 +25,7 @@
  */
 package tec.units.ri.util;
 
-import static tec.units.ri.util.MathPow.pow;
+import static tec.units.ri.function.MathHelper.pow;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
@@ -51,7 +51,7 @@ import tec.units.ri.function.RationalConverter;
  * @see <a href="http://en.wikipedia.org/wiki/Metric_prefix">Wikipedia: Metric Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.5, $Date: 2014-12-24 $
+ * @version 0.6, $Date: 2015-01-24 $
  */
 public enum SIPrefix implements UnitConverterSupplier {
     YOTTA(RationalConverter.of(1000000000000000000000000d, 1d)),
