@@ -48,6 +48,7 @@ import org.junit.Test;
 import tec.units.ri.AbstractQuantityFactory;
 import tec.units.ri.format.LocalUnitFormat;
 import tec.units.ri.format.UCUMFormat;
+import tec.units.ri.format.internal.simple.SimpleUnitFormat;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
@@ -154,24 +155,38 @@ public class UnitFormatTest {
 			fail(e.getMessage());
 		}
 	}
-
+	
 	@Test
-	public void testParseUCUMCS() {
-		final UnitFormat format = UCUMFormat.getInstance(CASE_SENSITIVE);
+	public void testParseSimple() {
+		final UnitFormat format = SimpleUnitFormat.getInstance();
 		try {
-			Unit<?> u = format.parse("min");
-			assertEquals(MINUTE, u);
+			Unit<?> u = format.parse("s");
+			assertEquals("s", u.getSymbol());
+			assertEquals(SECOND, u);
 		} catch (ParserException e) {
 			fail(e.getMessage());
 		}
 	}
 	
 	@Test
-	public void testParseUCUMCI() {
-		final UnitFormat format = UCUMFormat.getInstance(CASE_INSENSITIVE);
+	public void testParseSimple2() {
+		final UnitFormat format = SimpleUnitFormat.getInstance();
 		try {
-			Unit<?> u = format.parse("M");
+			Unit<?> u = format.parse("m");
+			assertEquals("m", u.getSymbol());
 			assertEquals(METRE, u);
+		} catch (ParserException e) {
+			fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testParseSimple3() {
+		final UnitFormat format = SimpleUnitFormat.getInstance();
+		try {
+			Unit<?> u = format.parse("kg");
+			assertEquals("kg", u.getSymbol());
+			assertEquals(KILOGRAM, u);
 		} catch (ParserException e) {
 			fail(e.getMessage());
 		}

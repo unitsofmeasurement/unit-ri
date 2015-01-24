@@ -42,6 +42,7 @@ import javax.measure.quantity.Dimensionless;
 
 import tec.units.ri.format.LocalUnitFormat;
 import tec.units.ri.format.UCUMFormat;
+import tec.units.ri.format.internal.simple.SimpleUnitFormat;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
@@ -183,7 +184,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *             parsed (e.g. not UCUM compliant).
 	 */
 	public static Unit<?> parse(CharSequence charSequence) {
-		return UCUMFormat.getInstance(CASE_SENSITIVE).parse(charSequence);
+		return SimpleUnitFormat.getInstance().parse(charSequence);
 //		return LocalUnitFormat.getInstance().parse(charSequence);
 	}
 
