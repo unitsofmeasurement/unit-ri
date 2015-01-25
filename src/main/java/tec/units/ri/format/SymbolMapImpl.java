@@ -38,6 +38,7 @@ import javax.measure.UnitConverter;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
+import tec.units.ri.util.SIPrefix;
 
 /**
  * <p> This class holds the default implementation of the SymbolMap
@@ -66,9 +67,9 @@ public class SymbolMapImpl { //implements SymbolMap {
 	// TODO fix issue with duplicate symbols (i.E. in different systems)
     private final Map<String, Unit<?>> symbolToUnit;
     private final Map<Unit<?>, String> unitToSymbol;
-    private final Map<String, ParsePrefix> symbolToPrefix;
-    private final Map<ParsePrefix, String> prefixToSymbol;
-    private final Map<UnitConverter, ParsePrefix> converterToPrefix;
+    private final Map<String, SIPrefix> symbolToPrefix;
+    private final Map<SIPrefix, String> prefixToSymbol;
+    private final Map<UnitConverter, SIPrefix> converterToPrefix;
 
     /**
      * Creates an empty mapping.
@@ -76,9 +77,9 @@ public class SymbolMapImpl { //implements SymbolMap {
     public SymbolMapImpl () {
         symbolToUnit = new HashMap<String, Unit<?>>();
         unitToSymbol = new HashMap<Unit<?>, String>();
-        symbolToPrefix = new HashMap<String, ParsePrefix>();
-        prefixToSymbol = new HashMap<ParsePrefix, String>();
-        converterToPrefix = new HashMap<UnitConverter, ParsePrefix>();
+        symbolToPrefix = new HashMap<String, SIPrefix>();
+        prefixToSymbol = new HashMap<SIPrefix, String>();
+        converterToPrefix = new HashMap<UnitConverter, SIPrefix>();
     }
 
     /**
@@ -112,8 +113,8 @@ public class SymbolMapImpl { //implements SymbolMap {
                     } else {
                         label((AbstractUnit<?>)value, symbol);
                     }
-                } else if (value instanceof ParsePrefix) {
-                    label((ParsePrefix)value, symbol);
+                } else if (value instanceof SIPrefix) {
+                    label((SIPrefix)value, symbol);
                 } else {
                     throw new ClassCastException("" + value + " to Unit or Prefix");  //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-1$
                 }
@@ -142,7 +143,7 @@ public class SymbolMapImpl { //implements SymbolMap {
 //    }
 
    public UnitConverter getConverter(String prefix) {
-        ParsePrefix prefixObject = symbolToPrefix.get(prefix);
+        SIPrefix prefixObject = symbolToPrefix.get(prefix);
         if (prefixObject == null) return null;
         return prefixObject.getConverter();
     }
@@ -153,7 +154,7 @@ public class SymbolMapImpl { //implements SymbolMap {
      *    symbolMap.label(Prefix.MICRO, "µ");
      * [/code]
      */
-    void label(ParsePrefix prefix, String symbol) {
+    void label(SIPrefix prefix, String symbol) {
         symbolToPrefix.put(symbol, prefix);
         prefixToSymbol.put(prefix, symbol);
         converterToPrefix.put(prefix.getConverter(), prefix);
@@ -174,7 +175,7 @@ public class SymbolMapImpl { //implements SymbolMap {
      * @param symbol the unit symbol.
      * @return the corresponding prefix or <code>null</code> if none.
      */
-    public ParsePrefix getPrefix (String symbol) { // TODO visibility
+    public SIPrefix getPrefix (String symbol) { // TODO visibility
         for (Iterator<String> i = symbolToPrefix.keySet().iterator(); i.hasNext(); ) {
             String pfSymbol = i.next();
             if (symbol.startsWith(pfSymbol)) {
@@ -190,7 +191,7 @@ public class SymbolMapImpl { //implements SymbolMap {
      * @param converter the unit converter.
      * @return the corresponding prefix or <code>null</code> if none.
      */
-    ParsePrefix getPrefixObject (UnitConverter converter) {
+    SIPrefix getPrefixObject (UnitConverter converter) {
         return converterToPrefix.get(converter);
     }
 
@@ -200,7 +201,7 @@ public class SymbolMapImpl { //implements SymbolMap {
      * @param prefix the prefix.
      * @return the corresponding symbol or <code>null</code> if none.
      */
-    public String getSymbol (ParsePrefix prefix) { // TODO visibility
+    public String getSymbol (SIPrefix prefix) { // TODO visibility
         return prefixToSymbol.get(prefix);
     }
 
@@ -209,7 +210,7 @@ public class SymbolMapImpl { //implements SymbolMap {
 	}
 
 	public String getPrefix(UnitConverter converter) {
-        ParsePrefix prefix = getPrefixObject(converter);
+        SIPrefix prefix = getPrefixObject(converter);
         if (prefix == null) return null;
         return prefixToSymbol.get(prefix);
 	}

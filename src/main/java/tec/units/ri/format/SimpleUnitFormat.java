@@ -55,6 +55,7 @@ import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractConverter.Pair;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.unit.AnnotatedUnit;
+import tec.units.ri.util.SIPrefix;
 
 /**
  * <p>
@@ -561,7 +562,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 */
 	private int formatConverter(UnitConverter converter, boolean continued,
 			int unitPrecedence, StringBuilder buffer) {
-		ParsePrefix prefix = symbolMap
+		SIPrefix prefix = symbolMap
 				.getPrefixObject((AbstractConverter) converter);
 		if ((prefix != null) && (unitPrecedence == NOOP_PRECEDENCE)) {
 			buffer.insert(0, symbolMap.getSymbol(prefix));
