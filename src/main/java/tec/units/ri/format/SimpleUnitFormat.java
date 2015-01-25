@@ -236,7 +236,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * 
 	 * @param locale
 	 */
-	public static SimpleUnitFormat getInstance(Locale locale) {
+	static SimpleUnitFormat getInstance(Locale locale) {
 		return new SimpleUnitFormat(new SymbolMapImpl(ResourceBundle.getBundle(
 				BUNDLE_NAME, locale)), locale);
 	}
