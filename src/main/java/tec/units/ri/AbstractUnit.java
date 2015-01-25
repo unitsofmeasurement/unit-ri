@@ -67,7 +67,7 @@ import tec.units.ri.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.6, Jan 24, 2015
+ * @version 0.8.7, Jan 25, 2015
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
@@ -164,12 +164,12 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *
 	 * Locale-sensitive unit parsing may be handled using the OSGi
 	 * {@link javax.measure.spi.UnitFormatService} or for non-OSGi applications
-	 * the {@link LocalUnitFormat} utility class.
+	 * instances of {@link UnitFormat}.
 	 *
 	 * <p>
 	 * Note: The standard UCUM format supports dimensionless units.[code]
 	 * AbstractUnit<Dimensionless> PERCENT =
-	 * AbstractUnit.of("100").inverse().asType(Dimensionless.class); [/code]
+	 * AbstractUnit.parse("100").inverse().asType(Dimensionless.class); [/code]
 	 * </p>
 	 *
 	 * @param charSequence
@@ -192,8 +192,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * Map, Hashtable, etc.
 	 *
 	 * Locale-sensitive unit parsing should be handled using the OSGi
-	 * {@link org.unitsofmeasurement.service.UnitFormat} service (or the
-	 * {@link LocalUnitFormat} class for non-OSGi applications).
+	 * {@link org.unitsofmeasurement.service.UnitFormat} service (or
+	 * {@link UnitFormat} for non-OSGi applications).
 	 *
 	 * @return <code>UCUMFormat.getCaseSensitiveInstance().format(this)</code>
 	 */
@@ -201,9 +201,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	public String toString() {
 		final Appendable tmp = new StringBuilder();
 		try {
-//			 return UCUMFormat.getInstance(PRINT).format(this,
-//			 tmp).toString();
-			return LocalUnitFormat.getInstance().format(this, tmp).toString();
+			return SimpleUnitFormat.getInstance().format(this, tmp).toString();
 		} catch (IOException ioException) {
 			throw new Error(ioException); // Should never happen.
 		} finally {

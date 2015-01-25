@@ -60,7 +60,7 @@ import tec.units.ri.util.SIPrefix;
 
 /**
  * <p>
- * This class represents the local sensitive format.
+ * This class represents the local neutral format.
  * </p>
  * 
  * <h3>Here is the grammar for Units in Extended Backus-Naur Form (EBNF)</h3>
@@ -727,7 +727,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * @see java.text.Format#parseObject(java.lang.String,
 	 *      java.text.ParsePosition)
 	 */
-	public Object parseObject(String source, ParsePosition pos) {
+	Object parseObject(String source, ParsePosition pos) {
 		return parse(source, pos);
 	}
 
