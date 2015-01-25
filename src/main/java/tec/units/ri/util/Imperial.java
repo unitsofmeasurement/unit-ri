@@ -25,8 +25,8 @@
  */
 package tec.units.ri.util;
 
-import static tec.units.ri.format.internal.simple.NonSI.AVOIRDUPOIS_POUND_DIVIDEND;
-import static tec.units.ri.format.internal.simple.NonSI.AVOIRDUPOIS_POUND_DIVISOR;
+import static tec.units.ri.spi.internal.NonSI.AVOIRDUPOIS_POUND_DIVIDEND;
+import static tec.units.ri.spi.internal.NonSI.AVOIRDUPOIS_POUND_DIVISOR;
 import static tec.units.ri.util.SI.*;
 import static tec.units.ri.util.SIPrefix.MICRO;
 

@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -27,13 +27,15 @@
 /* JavaCCOptions:TOKEN_EXTENDS=,KEEP_LINE_COL=null,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package tec.units.ri.format.internal;
 
+import tec.units.ri.function.ValueSupplier;
+
 /**
  * Describes the input token stream.
  *
- * @version 5.2, April 16, 2014
+ * @version 0.5.3, January 25, 2015
  */
 
-public final class Token {
+public final class Token implements ValueSupplier<Object> {
 
 	 /**
       * The Serialization identifier for this class.

@@ -156,6 +156,7 @@
 					<instructions>
 						<Export-Package>tec.units.ri.*</Export-Package>
 						<Private-Package>tec.units.ri.format.internal.*</Private-Package>
+						<Private-Package>tec.units.ri.spi.internal.*</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>

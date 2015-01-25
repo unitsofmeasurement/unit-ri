@@ -26,6 +26,7 @@
 package tec.units.ri.format.internal.l10;
 
 import java.util.Hashtable;
+import java.util.Map;
 
 /**
  * @author Werner
@@ -33,10 +34,10 @@ import java.util.Hashtable;
  * Resource bundle for German, no specific country.
  */
 public class Resources_de extends Resources {
-    private Hashtable strings;
+    private Map<String, String> strings;
  
     public Resources_de() {
-        strings = new Hashtable(30);
+        strings = new Hashtable<>(30);
  
         strings.put("exit", "Beenden");
         strings.put("textLbl", "Texte");
@@ -44,6 +45,6 @@ public class Resources_de extends Resources {
     }
  
     public String handleGetString(String key) {
-        return (String)strings.get(key);
+        return strings.get(key);
     }
 }
