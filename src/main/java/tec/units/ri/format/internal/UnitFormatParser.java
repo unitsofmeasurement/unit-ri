@@ -32,7 +32,7 @@ import tec.units.ri.function.LogConverter;
 import tec.units.ri.util.SIPrefix;
 
 /** */
-public final class UnitParser implements UnitParserConstants {
+public final class UnitFormatParser implements UnitTokenConstants {
 
     private static class Exponent {
         public final int pow;
@@ -45,7 +45,7 @@ public final class UnitParser implements UnitParserConstants {
     }
     private SymbolMap _symbols;
 
-    public UnitParser(SymbolMap symbols, java.io.Reader in) {
+    public UnitFormatParser(SymbolMap symbols, java.io.Reader in) {
         this(in);
         _symbols = symbols;
     }
@@ -53,7 +53,7 @@ public final class UnitParser implements UnitParserConstants {
 //
 // Parser productions
 //
-    final public AbstractUnit parseUnit() throws ParseException {
+    final public AbstractUnit parseUnit() throws TokenException {
         AbstractUnit result;
         result = CompoundExpr();
         jj_consume_token(0);
@@ -64,11 +64,11 @@ public final class UnitParser implements UnitParserConstants {
         throw new Error("Missing return statement in function");
     }
 
-    final public AbstractUnit CompoundExpr() throws ParseException {
+    final public AbstractUnit CompoundExpr() throws TokenException {
         throw new UnsupportedOperationException("Compound units not supported");
     }
 
-    final public AbstractUnit AddExpr() throws ParseException {
+    final public AbstractUnit AddExpr() throws TokenException {
         AbstractUnit result = AbstractUnit.ONE;
         Number n1 = null;
         Token sign1 = null;
@@ -109,7 +109,7 @@ public final class UnitParser implements UnitParserConstants {
         throw new Error("Missing return statement in function");
     }
 
-    final public AbstractUnit MulExpr() throws ParseException {
+    final public AbstractUnit MulExpr() throws TokenException {
         AbstractUnit result = AbstractUnit.ONE;
         AbstractUnit temp = AbstractUnit.ONE;
         result = ExponentExpr();
@@ -137,7 +137,7 @@ public final class UnitParser implements UnitParserConstants {
                         default:
                             jj_la1[3] = jj_gen;
                             jj_consume_token(-1);
-                            throw new ParseException();
+                            throw new TokenException();
                     }
                     temp = ExponentExpr();
                     result = result.multiply(temp);
@@ -150,7 +150,7 @@ public final class UnitParser implements UnitParserConstants {
                 default:
                     jj_la1[4] = jj_gen;
                     jj_consume_token(-1);
-                    throw new ParseException();
+                    throw new TokenException();
             }
         }
         {
@@ -160,7 +160,7 @@ public final class UnitParser implements UnitParserConstants {
         throw new Error("Missing return statement in function");
     }
 
-    final public AbstractUnit ExponentExpr() throws ParseException {
+    final public AbstractUnit ExponentExpr() throws TokenException {
         AbstractUnit result = AbstractUnit.ONE;
         AbstractUnit temp = AbstractUnit.ONE;
         Exponent exponent = null;
@@ -176,7 +176,7 @@ public final class UnitParser implements UnitParserConstants {
                 default:
                     jj_la1[5] = jj_gen;
                     jj_consume_token(-1);
-                    throw new ParseException();
+                    throw new TokenException();
             }
             jj_consume_token(CARET);
             result = AtomicExpr();
@@ -236,7 +236,7 @@ public final class UnitParser implements UnitParserConstants {
                         default:
                             jj_la1[8] = jj_gen;
                             jj_consume_token(-1);
-                            throw new ParseException();
+                            throw new TokenException();
                     }
                     jj_consume_token(OPEN_PAREN);
                     result = AddExpr();
@@ -256,13 +256,13 @@ public final class UnitParser implements UnitParserConstants {
                 default:
                     jj_la1[9] = jj_gen;
                     jj_consume_token(-1);
-                    throw new ParseException();
+                    throw new TokenException();
             }
         }
         throw new Error("Missing return statement in function");
     }
 
-    final public AbstractUnit AtomicExpr() throws ParseException {
+    final public AbstractUnit AtomicExpr() throws TokenException {
         AbstractUnit result = AbstractUnit.ONE;
         AbstractUnit temp = AbstractUnit.ONE;
         Number n = null;
@@ -300,7 +300,7 @@ public final class UnitParser implements UnitParserConstants {
                     }
                     {
                         if (true)
-                            throw new ParseException();
+                            throw new TokenException();
                     }
                 } else {
                     {
@@ -320,12 +320,12 @@ public final class UnitParser implements UnitParserConstants {
             default:
                 jj_la1[10] = jj_gen;
                 jj_consume_token(-1);
-                throw new ParseException();
+                throw new TokenException();
         }
         throw new Error("Missing return statement in function");
     }
 
-    final public Token Sign() throws ParseException {
+    final public Token Sign() throws TokenException {
         Token result = null;
         switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
             case PLUS:
@@ -337,7 +337,7 @@ public final class UnitParser implements UnitParserConstants {
             default:
                 jj_la1[11] = jj_gen;
                 jj_consume_token(-1);
-                throw new ParseException();
+                throw new TokenException();
         }
         {
             if (true)
@@ -346,7 +346,7 @@ public final class UnitParser implements UnitParserConstants {
         throw new Error("Missing return statement in function");
     }
 
-    final public Number NumberExpr() throws ParseException {
+    final public Number NumberExpr() throws TokenException {
         Token token = null;
         switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
             case INTEGER:
@@ -364,12 +364,12 @@ public final class UnitParser implements UnitParserConstants {
             default:
                 jj_la1[12] = jj_gen;
                 jj_consume_token(-1);
-                throw new ParseException();
+                throw new TokenException();
         }
         throw new Error("Missing return statement in function");
     }
 
-    final public Exponent Exp() throws ParseException {
+    final public Exponent Exp() throws TokenException {
         Token powSign = null;
         Token powToken = null;
         Token rootSign = null;
@@ -444,7 +444,7 @@ public final class UnitParser implements UnitParserConstants {
                     default:
                         jj_la1[17] = jj_gen;
                         jj_consume_token(-1);
-                        throw new ParseException();
+                        throw new TokenException();
                 }
                 break;
             case SUPERSCRIPT_INTEGER:
@@ -489,7 +489,7 @@ public final class UnitParser implements UnitParserConstants {
             default:
                 jj_la1[18] = jj_gen;
                 jj_consume_token(-1);
-                throw new ParseException();
+                throw new TokenException();
         }
         throw new Error("Missing return statement in function");
     }
@@ -573,7 +573,7 @@ public final class UnitParser implements UnitParserConstants {
         return false;
     }
     /** Generated Token Manager. */
-    public UnitParserTokenManager token_source;
+    public UnitTokenManager token_source;
 
     SimpleCharStream jj_input_stream;
 
@@ -609,18 +609,18 @@ public final class UnitParser implements UnitParserConstants {
     private int jj_gc = 0;
 
     /** Constructor with InputStream. */
-    public UnitParser(java.io.InputStream stream) {
+    public UnitFormatParser(java.io.InputStream stream) {
         this(stream, null);
     }
 
     /** Constructor with InputStream and supplied encoding */
-    public UnitParser(java.io.InputStream stream, String encoding) {
+    public UnitFormatParser(java.io.InputStream stream, String encoding) {
         try {
             jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1);
         } catch (java.io.UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
-        token_source = new UnitParserTokenManager(jj_input_stream);
+        token_source = new UnitTokenManager(jj_input_stream);
         token = new Token();
         jj_ntk = -1;
         jj_gen = 0;
@@ -657,9 +657,9 @@ public final class UnitParser implements UnitParserConstants {
     }
 
     /** Constructor. */
-    public UnitParser(java.io.Reader stream) {
+    public UnitFormatParser(java.io.Reader stream) {
         jj_input_stream = new SimpleCharStream(stream, 1, 1);
-        token_source = new UnitParserTokenManager(jj_input_stream);
+        token_source = new UnitTokenManager(jj_input_stream);
         token = new Token();
         jj_ntk = -1;
         jj_gen = 0;
@@ -687,7 +687,7 @@ public final class UnitParser implements UnitParserConstants {
     }
 
     /** Constructor with generated Token Manager. */
-    public UnitParser(UnitParserTokenManager tm) {
+    public UnitFormatParser(UnitTokenManager tm) {
         token_source = tm;
         token = new Token();
         jj_ntk = -1;
@@ -701,7 +701,7 @@ public final class UnitParser implements UnitParserConstants {
     }
 
     /** Reinitialise. */
-    public void ReInit(UnitParserTokenManager tm) {
+    public void ReInit(UnitTokenManager tm) {
         token_source = tm;
         token = new Token();
         jj_ntk = -1;
@@ -714,7 +714,7 @@ public final class UnitParser implements UnitParserConstants {
         }
     }
 
-    private Token jj_consume_token(int kind) throws ParseException {
+    private Token jj_consume_token(int kind) throws TokenException {
         Token oldToken;
         if ((oldToken = token).next != null)
             token = token.next;
@@ -838,8 +838,8 @@ public final class UnitParser implements UnitParserConstants {
         }
     }
 
-    /** Generate ParseException. */
-    public ParseException generateParseException() {
+    /** Generate TokenException. */
+    public TokenException generateParseException() {
         jj_expentries.clear();
         boolean[] la1tokens = new boolean[21];
         if (jj_kind >= 0) {
@@ -869,7 +869,7 @@ public final class UnitParser implements UnitParserConstants {
         for (int i = 0; i < jj_expentries.size(); i++) {
             exptokseq[i] = jj_expentries.get(i);
         }
-        return new ParseException(token, exptokseq, tokenImage);
+        return new TokenException(token, exptokseq, tokenImage);
     }
 
     /** Enable tracing. */

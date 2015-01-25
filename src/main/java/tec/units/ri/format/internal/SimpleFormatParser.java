@@ -34,7 +34,7 @@ import tec.units.ri.util.SIPrefix;
 
 
 /** */
-public final class SimpleFormatParser implements UnitParserConstants {
+public final class SimpleFormatParser implements UnitTokenConstants {
 
     private static class Exponent {
         final int pow;
@@ -56,7 +56,7 @@ public final class SimpleFormatParser implements UnitParserConstants {
 // Parser productions
 //
     @SuppressWarnings("unused")
-	public Unit<?> parseUnit() throws ParseException { // TODO visibility
+	public Unit<?> parseUnit() throws TokenException { // TODO visibility
         Unit<?> result;
     result = compoundExpr();
     jj_consume_token(0);
@@ -65,7 +65,7 @@ public final class SimpleFormatParser implements UnitParserConstants {
   }
 
   @SuppressWarnings("unused")
-Unit<?> compoundExpr() throws ParseException {
+Unit<?> compoundExpr() throws TokenException {
         Unit<?> result = AbstractUnit.ONE;
         result = addExpr();
     label_1:
@@ -85,7 +85,7 @@ Unit<?> compoundExpr() throws ParseException {
   }
 
   @SuppressWarnings("unused")
-Unit<?> addExpr() throws ParseException {
+Unit<?> addExpr() throws TokenException {
         Unit<?> result = AbstractUnit.ONE;
         Number n1 = null;
         Token sign1 = null;
@@ -125,7 +125,7 @@ Unit<?> addExpr() throws ParseException {
     throw new Error("Missing return statement in function");
   }
 
-    Unit<?> mulExpr() throws ParseException {
+    Unit<?> mulExpr() throws TokenException {
         Unit<?> result = AbstractUnit.ONE;
         Unit<?> temp = AbstractUnit.ONE;
     result = exponentExpr();
@@ -154,7 +154,7 @@ Unit<?> addExpr() throws ParseException {
         default:
           jj_la1[3] = jj_gen;
           jj_consume_token(-1);
-          throw new ParseException();
+          throw new TokenException();
         }
         temp = exponentExpr();
                                                           result=result.multiply(temp);
@@ -167,7 +167,7 @@ Unit<?> addExpr() throws ParseException {
       default:
         jj_la1[4] = jj_gen;
         jj_consume_token(-1);
-        throw new ParseException();
+        throw new TokenException();
       }
     }
       //{if (true) 
@@ -176,7 +176,7 @@ Unit<?> addExpr() throws ParseException {
   }
 
     @SuppressWarnings("unused")
-	Unit<?> exponentExpr() throws ParseException {
+	Unit<?> exponentExpr() throws TokenException {
         Unit<?> result = AbstractUnit.ONE;
         Exponent exponent = null;
         Token token = null;
@@ -191,7 +191,7 @@ Unit<?> addExpr() throws ParseException {
       default:
         jj_la1[5] = jj_gen;
         jj_consume_token(-1);
-        throw new ParseException();
+        throw new TokenException();
       }
       jj_consume_token(CARET);
       result = atomicExpr();
@@ -248,7 +248,7 @@ Unit<?> addExpr() throws ParseException {
         default:
           jj_la1[8] = jj_gen;
           jj_consume_token(-1);
-          throw new ParseException();
+          throw new TokenException();
         }
         jj_consume_token(OPEN_PAREN);
         result = addExpr();
@@ -265,13 +265,13 @@ Unit<?> addExpr() throws ParseException {
       default:
         jj_la1[9] = jj_gen;
         jj_consume_token(-1);
-        throw new ParseException();
+        throw new TokenException();
       }
     }
     throw new Error("Missing return statement in function");
   }
 
-  Unit<?> atomicExpr() throws ParseException {
+  Unit<?> atomicExpr() throws TokenException {
         Unit<?> result = AbstractUnit.ONE;
 //        Unit<?> temp = AbstractUnit.ONE;
         Number n = null;
@@ -298,7 +298,7 @@ Unit<?> addExpr() throws ParseException {
                     {if (true) return unit.transform(prefix.getConverter());}
                 }
             }
-            {if (true) throw new ParseException();}
+            {if (true) throw new TokenException();}
         } else {
             {if (true) return unit;}
         }
@@ -312,13 +312,13 @@ Unit<?> addExpr() throws ParseException {
     default:
       jj_la1[10] = jj_gen;
       jj_consume_token(-1);
-      throw new ParseException();
+      throw new TokenException();
     }
 //    throw new Error("Missing return statement in function");
   }
 
   @SuppressWarnings("unused")
-Token sign() throws ParseException {
+Token sign() throws TokenException {
         Token result = null;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case PLUS:
@@ -330,13 +330,13 @@ Token sign() throws ParseException {
     default:
       jj_la1[11] = jj_gen;
       jj_consume_token(-1);
-      throw new ParseException();
+      throw new TokenException();
     }
         {if (true) return result;}
     throw new Error("Missing return statement in function");
   }
 
-  Number numberExpr() throws ParseException {
+  Number numberExpr() throws TokenException {
         Token token = null;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case INTEGER:
@@ -350,12 +350,12 @@ Token sign() throws ParseException {
     default:
       jj_la1[12] = jj_gen;
       jj_consume_token(-1);
-      throw new ParseException();
+      throw new TokenException();
     }
 //    throw new Error("Missing return statement in function");
   }
 
-  Exponent exp() throws ParseException {
+  Exponent exp() throws TokenException {
         Token powSign = null;
         Token powToken = null;
         Token rootSign = null;
@@ -428,7 +428,7 @@ Token sign() throws ParseException {
       default:
         jj_la1[17] = jj_gen;
         jj_consume_token(-1);
-        throw new ParseException();
+        throw new TokenException();
       }
     case SUPERSCRIPT_INTEGER:
       powToken = jj_consume_token(SUPERSCRIPT_INTEGER);
@@ -452,7 +452,7 @@ Token sign() throws ParseException {
     default:
       jj_la1[18] = jj_gen;
       jj_consume_token(-1);
-      throw new ParseException();
+      throw new TokenException();
     }
 //    throw new Error("Missing return statement in function");
   }
@@ -519,7 +519,7 @@ Token sign() throws ParseException {
   }
 
   /** Generated Token Manager. */
-  private UnitParserTokenManager token_source;
+  private UnitTokenManager token_source;
   private SimpleCharStream jj_input_stream;
   /** Current token. */
   private Token token;
@@ -548,7 +548,7 @@ Token sign() throws ParseException {
   /** Constructor with InputStream and supplied encoding */
   SimpleFormatParser(java.io.InputStream stream, String encoding) {
     try { jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
-    token_source = new UnitParserTokenManager(jj_input_stream);
+    token_source = new UnitTokenManager(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
@@ -559,7 +559,7 @@ Token sign() throws ParseException {
   /** Constructor. */
   SimpleFormatParser(java.io.Reader stream) {
     jj_input_stream = new SimpleCharStream(stream, 1, 1);
-    token_source = new UnitParserTokenManager(jj_input_stream);
+    token_source = new UnitTokenManager(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
@@ -579,7 +579,7 @@ Token sign() throws ParseException {
 //  }
 
   /** Constructor with generated Token Manager. */
-  SimpleFormatParser(UnitParserTokenManager tm) {
+  SimpleFormatParser(UnitTokenManager tm) {
     token_source = tm;
     token = new Token();
     jj_ntk = -1;
@@ -589,7 +589,7 @@ Token sign() throws ParseException {
   }
 
   /** Reinitialise. */
-//  private void reInit(UnitParserTokenManager tm) {
+//  private void reInit(UnitTokenManager tm) {
 //    token_source = tm;
 //    token = new Token();
 //    jj_ntk = -1;
@@ -598,7 +598,7 @@ Token sign() throws ParseException {
 //    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
 //  }
 
-  private Token jj_consume_token(int kind) throws ParseException {
+  private Token jj_consume_token(int kind) throws TokenException {
     Token oldToken;
     if ((oldToken = token).next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
@@ -708,8 +708,8 @@ Token sign() throws ParseException {
     }
   }
 
-  /** Generate ParseException. */
-  ParseException generateParseException() {
+  /** Generate TokenException. */
+  TokenException generateParseException() {
     jj_expentries.clear();
     boolean[] la1tokens = new boolean[21];
     if (jj_kind >= 0) {
@@ -739,7 +739,7 @@ Token sign() throws ParseException {
     for (int i = 0; i < jj_expentries.size(); i++) {
       exptokseq[i] = jj_expentries.get(i);
     }
-    return new ParseException(token, exptokseq, tokenImage);
+    return new TokenException(token, exptokseq, tokenImage);
   }
 
   /** Enable tracing. */

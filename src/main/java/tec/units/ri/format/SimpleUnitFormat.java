@@ -42,7 +42,7 @@ import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
 import tec.units.ri.format.internal.SimpleFormatParser;
-import tec.units.ri.format.internal.ParseException;
+import tec.units.ri.format.internal.TokenException;
 import tec.units.ri.format.internal.TokenMgrError;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.ExpConverter;
@@ -328,7 +328,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 			if (cursor != null)
 				cursor.setIndex(end);
 			return result;
-		} catch (ParseException e) {
+		} catch (TokenException e) {
 			if (cursor != null) {
 				if (e.currentToken != null) {
 					cursor.setErrorIndex(start + e.currentToken.endColumn);
