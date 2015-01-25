@@ -40,6 +40,7 @@ import java.util.ResourceBundle;
 
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
+import javax.measure.format.ParserException;
 
 import tec.units.ri.format.internal.SimpleFormatParser;
 import tec.units.ri.format.internal.TokenException;
@@ -165,7 +166,7 @@ import tec.units.ri.util.SIPrefix;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:uomo@catmedia.us">Werner Keil</a>
- * @version 0.4.2, $Date: 2015-01-24 $
+ * @version 0.4.3, $Date: 2015-01-25 $
  */
 public class SimpleUnitFormat extends AbstractUnitFormat {
 
@@ -218,8 +219,6 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * can have a higher precedence.
 	 */
 	private static final int NOOP_PRECEDENCE = Integer.MAX_VALUE;
-
-//	private final Locale uLocale;
 	
 	// /////////////////
 	// Class methods //
@@ -336,15 +335,15 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 					cursor.setErrorIndex(start);
 				}
 			}
-			throw new IllegalArgumentException(e.getMessage());
+			throw new ParserException(e);
 		} catch (TokenMgrError e) {
 			cursor.setErrorIndex(start);
-			throw new IllegalArgumentException(e.getMessage());
+			throw new ParserException(e);
 		}
 	}
 	
 	public Unit<?> parse(CharSequence csq)
-			throws IllegalArgumentException {
+			throws ParserException {
 		return parse(csq, new ParsePosition(0));
 	}
 
