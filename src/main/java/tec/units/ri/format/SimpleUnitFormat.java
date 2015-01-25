@@ -41,9 +41,9 @@ import java.util.ResourceBundle;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
-import tec.units.ri.format.internal.simple.ParseException;
-import tec.units.ri.format.internal.simple.TokenMgrError;
-import tec.units.ri.format.internal.simple.SimpleFormatParser;
+import tec.units.ri.format.internal.SimpleFormatParser;
+import tec.units.ri.format.internal.ParseException;
+import tec.units.ri.format.internal.TokenMgrError;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.ExpConverter;
 import tec.units.ri.function.LogConverter;
