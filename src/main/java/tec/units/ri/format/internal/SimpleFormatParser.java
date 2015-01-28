@@ -28,7 +28,7 @@ package tec.units.ri.format.internal;
 import javax.measure.Unit;
 
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.format.SymbolMapImpl;
+import tec.units.ri.format.SymbolMap;
 import tec.units.ri.function.LogConverter;
 import tec.units.ri.util.SIPrefix;
 
@@ -45,9 +45,9 @@ public final class SimpleFormatParser implements UnitTokenConstants {
         }
     }
 
-    private SymbolMapImpl symbols;
+    private SymbolMap symbols;
 
-    public SimpleFormatParser (SymbolMapImpl symbols, java.io.Reader in) { // TODO visiblity
+    public SimpleFormatParser (SymbolMap symbols, java.io.Reader in) { // TODO visiblity
         this(in);
         this.symbols = symbols;
     }

@@ -50,8 +50,8 @@ import tec.units.ri.AbstractSystemOfUnits;
  * 
  * @noextend This class is not intended to be extended by clients.
  * 
- * @author <a href="mailto:uomo@catmedia.us">Werner Keil</a>
- * @version 0.2, $Date: 2015-01-11 14:52:11 +0200 $
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 0.3, $Date: 2015-01-28 $
  * @see <a
  *      href="http://en.wikipedia.org/wiki/http://en.wikipedia.org/wiki/Imperial_unit">Wikipedia:
  *      Imperial Units</a>

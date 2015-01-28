@@ -44,8 +44,8 @@ import tec.units.ri.AbstractUnit;
  *        Unit.valueOf("ft").equals(SI.METRE.multiply(3048).divide(10000))[/code]</p>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @author  <a href="mailto:uomo@catmedia.us">Werner Keil</a>
- * @version 0.5.1 ($Revision: 215 $), $Date: 2015-01-24 $
+ * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 0.5.2 $Date: 2015-01-28 $
  * 
  */
 public abstract class AbstractUnitFormat implements UnitFormat {
@@ -55,7 +55,7 @@ public abstract class AbstractUnitFormat implements UnitFormat {
      *
      * @return the symbol map used by this format.
      */
-    protected abstract SymbolMapImpl getSymbols();
+    protected abstract SymbolMap getSymbols();
 
     /**
      * Formats the specified unit.

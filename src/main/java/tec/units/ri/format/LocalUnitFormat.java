@@ -258,7 +258,8 @@ public class LocalUnitFormat extends AbstractUnitFormat {
 	 * 
 	 * @return SymbolMap the current symbol map
 	 */
-	SymbolMap getSymbols1() {
+	@Override
+	protected SymbolMap getSymbols() {
 		return symbolMap;
 	}
 
@@ -598,9 +599,8 @@ public class LocalUnitFormat extends AbstractUnitFormat {
 		}
 	}
 
-	@Override
-	protected SymbolMapImpl getSymbols() {
-		// FIXME integrate SymbolMap and SymbolMapImpl then return it here
-		return null;
-	}
+//	protected SymbolMap getSymbols() {
+//		// FIXME integrate SymbolMap and SymbolMapImpl then return it here
+//		return null;
+//	}
 }

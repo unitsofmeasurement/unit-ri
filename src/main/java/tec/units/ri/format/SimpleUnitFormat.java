@@ -25,6 +25,7 @@
  */
 package tec.units.ri.format;
 
+import static tec.units.ri.format.internal.l10.BundleToMapAdapter.toMap;
 import static tec.units.ri.util.SI.*;
 import static tec.units.ri.util.US.LITER;
 
@@ -165,8 +166,8 @@ import tec.units.ri.util.SIPrefix;
  * </table>
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
- * @author <a href="mailto:uomo@catmedia.us">Werner Keil</a>
- * @version 0.4.3, $Date: 2015-01-25 $
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 0.4.4, $Date: 2015-01-28 $
  */
 public class SimpleUnitFormat extends AbstractUnitFormat {
 
@@ -190,7 +191,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * is initialized, this instance will no longer be used.
 	 */
 	private static final SimpleUnitFormat DEFAULT_INSTANCE = new SimpleUnitFormat(
-			new SymbolMapImpl(ResourceBundle.getBundle(BUNDLE_NAME)), Locale.getDefault());
+			SymbolMap.of(toMap(ResourceBundle.getBundle(BUNDLE_NAME))), Locale.getDefault());
 
 	/** Multiplicand character */
 	private static final char MIDDLE_DOT = '\u00b7'; //$NON-NLS-1$
@@ -237,12 +238,12 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * @param locale
 	 */
 	static SimpleUnitFormat getInstance(Locale locale) {
-		return new SimpleUnitFormat(new SymbolMapImpl(ResourceBundle.getBundle(
-				BUNDLE_NAME, locale)), locale);
+		return new SimpleUnitFormat(SymbolMap.of(toMap(ResourceBundle.getBundle(
+				BUNDLE_NAME, locale))), locale);
 	}
 
 	/** Returns an instance for the given symbol map. */
-	protected static SimpleUnitFormat getInstance(SymbolMapImpl symbols, Locale locale) {
+	protected static SimpleUnitFormat getInstance(SymbolMap symbols, Locale locale) {
 		return new SimpleUnitFormat(symbols, locale);
 	}
 
@@ -253,7 +254,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * The symbol map used by this instance to map between
 	 * {@link org.unitsofmeasure.Unit Unit}s and <code>String</code>s, etc...
 	 */
-	private transient SymbolMapImpl symbolMap;
+	private transient SymbolMap symbolMap;
 
 	// ////////////////
 	// Constructors //
@@ -263,8 +264,8 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * 
 	 */
 	public SimpleUnitFormat() {
-		this(new SymbolMapImpl(ResourceBundle.getBundle(
-				BUNDLE_NAME, Locale.getDefault())), Locale.getDefault());
+		this(SymbolMap.of(toMap(ResourceBundle.getBundle(
+				BUNDLE_NAME, Locale.getDefault()))), Locale.getDefault());
 	}
 	
 	/**
@@ -273,7 +274,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * @param symbols
 	 *            the symbol mapping.
 	 */
-	private SimpleUnitFormat(SymbolMapImpl symbols, Locale loc) {
+	private SimpleUnitFormat(SymbolMap symbols, Locale loc) {
 		symbolMap = symbols;
 //		uLocale = loc;
 	}
@@ -287,7 +288,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * 
 	 * @return SymbolMap the current symbol map
 	 */
-	protected SymbolMapImpl getSymbols() {
+	protected SymbolMap getSymbols() {
 		return symbolMap;
 	}
 
@@ -562,7 +563,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	private int formatConverter(UnitConverter converter, boolean continued,
 			int unitPrecedence, StringBuilder buffer) {
 		SIPrefix prefix = symbolMap
-				.getPrefixObject((AbstractConverter) converter);
+				.getPrefix((AbstractConverter) converter);
 		if ((prefix != null) && (unitPrecedence == NOOP_PRECEDENCE)) {
 			buffer.insert(0, symbolMap.getSymbol(prefix));
 			return NOOP_PRECEDENCE;
@@ -710,7 +711,6 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 			FieldPosition pos) {
 		try {
 			Unit<?> unit = (Unit<?>) obj;
-			// fmt.setCurrency(currency.getCurrency());
 			return (StringBuffer) format(unit, toAppendTo);
 		} catch (IOException ie) {
 			throw new IllegalArgumentException(

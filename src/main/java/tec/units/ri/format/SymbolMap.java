@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -62,7 +62,7 @@ import tec.units.ri.util.SIPrefix;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.4, December 22, 2014
+ * @version 0.5.5, January 28, 2015
  */
 public final class SymbolMap {
 	private static final Logger logger = Logger.getLogger(SymbolMap.class
@@ -237,9 +237,9 @@ public final class SymbolMap {
 	 * @return the corresponding prefix or <code>null</code> if none.
 	 */
 	public SIPrefix getPrefix(UnitConverter converter) {
-		return (SIPrefix) converterToPrefix.get(converter);
+		return converterToPrefix.get(converter);
 	}
-
+	
 	/**
 	 * Returns the symbol for the specified prefix.
 	 *
