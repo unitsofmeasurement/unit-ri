@@ -54,7 +54,7 @@ import tec.units.ri.util.SI;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.3, $Date: 2015-01-18 $
+ * @version 0.5.4, $Date: 2015-01-28 $
  */
 public final class QuantityDimension implements Dimension {
 	private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
@@ -226,8 +226,8 @@ public final class QuantityDimension implements Dimension {
      */
     @SuppressWarnings("rawtypes")
 	public Map<? extends Dimension, Integer> getProductDimensions() {
-        Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getProductUnits();
-        if (pseudoUnit == null) return null;
+        final Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getProductUnits();
+        if (pseudoUnits == null) return null;
         Map<Dimension, Integer> fundamentalDimensions = new HashMap<Dimension, Integer>();
         for (Map.Entry<? extends Unit, Integer> entry : pseudoUnits.entrySet()) {
             fundamentalDimensions.put(new QuantityDimension(entry.getKey()), entry.getValue());
