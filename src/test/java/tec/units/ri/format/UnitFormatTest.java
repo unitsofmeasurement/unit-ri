@@ -107,6 +107,18 @@ public class UnitFormatTest {
 	}
 	
 	@Test
+	public void testParseSimple1() {
+		final UnitFormat format = SimpleUnitFormat.getInstance();
+		try {
+			Unit<?> u = format.parse("min");
+//			assertEquals("min", u.getSymbol());
+			assertEquals(MINUTE, u);
+		} catch (ParserException e) {
+			fail(e.getMessage());
+		}
+	}
+	
+	@Test
 	public void testParseSimple2() {
 		final UnitFormat format = SimpleUnitFormat.getInstance();
 		try {
