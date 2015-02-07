@@ -23,33 +23,28 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format.internal.l10;
+package tec.units.ri.format.internal.l10n;
 
-import java.util.Enumeration;
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 /**
+ * @author Werner
  * 
- * @author Werner Keil
- * @version 0.2, January 24, 2015
- *
+ * Resource bundle for German, no specific country.
  */
-public final class BundleToMapAdapter {
-	public final static Map<String, String> toMap(final ResourceBundle resource) {
-		Map<String, String> map = new HashMap<>();
-
-		Enumeration<String> keys = resource.getKeys();
-		while (keys.hasMoreElements()) {
-			String key = keys.nextElement();
-			map.put(key, resource.getString(key));
-		}
-
-		return map;
-	}
-
-	public final static Map<String, String> toMap(String resName) {
-		return toMap(ResourceBundle.getBundle(resName));
-	}
+public class Resources_de extends Resources {
+    private Map<String, String> strings;
+ 
+    public Resources_de() {
+        strings = new Hashtable<>(30);
+ 
+        strings.put("exit", "Beenden");
+        strings.put("textLbl", "Texte");
+        strings.put("text", "Da ist ein Text.");
+    }
+ 
+    public String handleGetString(String key) {
+        return strings.get(key);
+    }
 }

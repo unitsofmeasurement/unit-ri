@@ -1,10 +1,14 @@
-package tec.units.ri.format.internal.l10;
+package tec.units.ri.format.internal.l10n;
 
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
-public class L10Test {
+import tec.units.ri.format.internal.l10n.Locale;
+import tec.units.ri.format.internal.l10n.ResourceBundle;
+
+public class ResourceBundleTest {
 
 	@Test
 	public void test() {
@@ -15,5 +19,4 @@ public class L10Test {
 		String title = resources.getString("title");
 		assertEquals("Localization example", title);
 	}
-
 }

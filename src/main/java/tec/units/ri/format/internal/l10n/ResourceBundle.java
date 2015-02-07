@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format.internal.l10;
+package tec.units.ri.format.internal.l10n;
 
 import java.util.Vector;
 import javax.measure.MeasurementException;
@@ -58,7 +58,7 @@ public abstract class ResourceBundle {
             try {
                 // Try to instantiate a resource bundle using the name
                 // constructed above
-                Class bundleClass = Class.forName("tec.units.ri.format.internal.l10." + bundleName); // TODO try use generics here
+                Class bundleClass = Class.forName("tec.units.ri.format.internal.l10n." + bundleName); // TODO try use generics here
                 bundle = (ResourceBundle)bundleClass.newInstance();
                 // Set the parent bundle for this bundle. For the base bundle
                 // (the one with the root locale, Locale.ROOT), the parent is

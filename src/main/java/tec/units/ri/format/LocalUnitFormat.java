@@ -25,7 +25,7 @@
  */
 package tec.units.ri.format;
 
-import static tec.units.ri.format.internal.l10.BundleToMapAdapter.toMap;
+import static tec.units.ri.format.internal.l10n.BundleToMapAdapter.toMap;
 import static tec.units.ri.util.SI.CUBIC_METRE;
 import static tec.units.ri.util.SI.GRAM;
 import static tec.units.ri.util.SI.KILOGRAM;

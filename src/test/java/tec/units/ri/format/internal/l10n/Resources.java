@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tec.units.ri.format.internal.l10;
+package tec.units.ri.format.internal.l10n;
 
 /**
  *
  * @author Werner
  */
 import java.util.Hashtable;
+
+import tec.units.ri.format.internal.l10n.ResourceBundle;
  
 /**
  * Default resource bundle (English / United States).

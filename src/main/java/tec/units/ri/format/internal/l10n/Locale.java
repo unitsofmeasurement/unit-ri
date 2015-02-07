@@ -23,12 +23,12 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format.internal.l10;
+package tec.units.ri.format.internal.l10n;
 
 /**
- * A Java ME compliant backport of <type>Locale</type>
+ * A Java ME compliant backport of {@link java.util.Locale}
  * @author Werner
- * @version 0.2
+ * @version 0.3
  */
 public class Locale {
     public static final Locale ROOT = new Locale("", "");
