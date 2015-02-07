@@ -9,7 +9,7 @@ import net.sf.json.JSONObject;
 
 import org.junit.Test;
 
-public class JSonTest {
+public class JsonTest {
 
 	@Test
 	public void test() {
