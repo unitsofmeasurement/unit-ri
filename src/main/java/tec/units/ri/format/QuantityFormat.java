@@ -274,7 +274,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 		AbstractQuantity<?> parse(CharSequence csq, int index)
 				throws IllegalArgumentException, ParserException {
 			String str = csq.toString();
-			Number number = numberFormat.parse(str, index);
+			Number number = numberFormat.parse(str);
 			if (number == null)
 				throw new IllegalArgumentException("Number cannot be parsed");
 			Unit unit = unitFormat.parse(csq);
