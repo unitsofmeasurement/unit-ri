@@ -1,9 +1,10 @@
 package tec.units.ri.format.internal.l10n;
-
 /*
- *   
- *
- * Copyright  1990-2008 Sun Microsystems, Inc. All Rights Reserved.
+ * 
+ * @(#)NumberFormat.java﻿  1.55 06/10/10
+ * 
+ * Portions Copyright  2000-2006 Sun Microsystems, Inc. All Rights
+ * Reserved.  Use is subject to license terms.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
  * This program is free software; you can redistribute it and/or
@@ -26,1007 +27,805 @@ package tec.units.ri.format.internal.l10n;
  * information or have any questions.
  */
 
-import java.text.DigitList;
-import java.text.ParsePosition;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-/**
- * <code>NumberFormat</code> has features designed to make it possible to
- * format numbers in any locale. It also supports different kinds of numbers,
- * including integers (123), fixed-point numbers (123.4), percentages (12%),
- * and currency amounts ($123). All of these can be localized. <p>
+/*
+ * (C) Copyright Taligent, Inc. 1996, 1997 - All Rights Reserved
+ * (C) Copyright IBM Corp. 1996 - 1998 - All Rights Reserved
  *
- * To obtain a <code>NumberFormat</code> for a specific locale call one of
- * <code>NumberFormat</code>'s factory methods, such as:
- * <ul>
- *    <li> <code>getPercentageInstance(locale)</code>
- *    <li> <code>getIntegerInstance(locale)</code>
- *    <li> <code>getCurrencyInstance(locale)</code>
- *    <li> <code>getDecimalInstance(local)</code>
- *  </ul>
- *  <p>
- *
- * Usage: <pre>
- * NumberFormat f = NumberFormat.getCurrencyInstance(loc);
- * StringBuffer sb = f.format(new Double(123.45), new StringBuffer());
- * </pre> <p>
- *
- * Or eventualy it's possible to change number of decimals displayed <pre>
- * NumberFormat f = NumberFormat.getCurrencyInstance(loc);
- * f.setMaximumFractionDigits(2);
- * StringBuffer sb = f.format(new Double(123.45559), new StringBuffer());
- * </pre>
+ *   The original version of this source code and documentation is copyrighted
+ * and owned by Taligent, Inc., a wholly-owned subsidiary of IBM. These
+ * materials are provided under terms of a License Agreement between Taligent
+ * and Sun. This technology is protected by multiple US and International
+ * patents. This notice and attribution to Taligent may not be removed.
+ *   Taligent is a registered trademark of Taligent, Inc.
  *
  */
-public class NumberFormat {
-	private static final Logger logging = Logger.getLogger(NumberFormat.class.getName());
-	
-    /**
-     * Class name.
-     */
-    private static final String classname = NumberFormat.class.getName();
-    /**
-     * Upper limit on integer digits for a Java double.
-     */
-    private final static int DOUBLE_INTEGER_DIGITS = 309;
-    /**
-     * Upper limit on fraction digits for a Java double.
-     */
-    private final static int DOUBLE_FRACTION_DIGITS = 340;
-    /**
-     * Non localized percent sign.
-     */
-    public final static char NONLOCALIZED_PERCENT_SIGN = '\u0025';
-
-    /**
-     * Unicode INFINITY character.
-     */
-    public final static char UNICODE_INFINITY = '\u221e';
-
-    /**
-     * Styles of formatting j2se compatible.
-     */
-
-    /**
-     * General number.
-     */
-    public final static int NUMBERSTYLE = 0;
-    /**
-     * Currency style.
-     */
-    public final static int CURRENCYSTYLE = 1;
-    /**
-     * Percent style.
-     */
-    public final static int PERCENTSTYLE = 2;
-    /**
-     * Integer style.
-     */
-    public final static int INTEGERSTYLE = 3;
-    
-    private static final int STATUS_INFINITE = 0;
-    private static final int STATUS_POSITIVE = 1;
-    private static final int STATUS_LENGTH   = 2;
-
-
-    /**
-     * Holds initialized instance of DecimalFormatSymbols which encapsulate
-     * locale dependent informations like currency symbol, percent symbol etc.
-     */
-    private NumberFormatSymbols symbols;
-
-    /**
-     * Is this <code>NumberFormat</code> instance for currency formatting?
-     */
-    private boolean isCurrencyFormat = false;
-
-    /**
-     * Is this <code>NumberFormat</code> instance of percentage formatting?
-     */
-    private boolean isPercentageFormat = false;
-
-    /**
-     * Digit list does most of formatting work.
-     */
-    private DigitList digitList = new DigitList();
-
-    /**
-     * Style of <code>NumberFormat</code>. Possible styles are:
-     * <ul>
-     *   <li> {@link #NUMBERSTYLE}
-     *   <li> {@link #CURRENCYSTYLE}
-     *   <li> {@link #PERCENTSTYLE}
-     *   <li> {@link #INTEGERSTYLE}
-     * </ul>
-     */
-    private int style = NUMBERSTYLE;
-
-
-    /**
-     * Create <code>NumberFormat</code> with given number pattern and set of
-     * locale numeric symbols.
-     *
-     * @param  style    the style of <code>NumberFormat</code>
-     *      <ul>
-     *        <li> {@link #NUMBERSTYLE}
-     *        <li> {@link #CURRENCYSTYLE}
-     *        <li> {@link #PERCENTSTYLE}
-     *        <li> {@link #INTEGERSTYLE}
-     *      </ul>
-     *
-     * @param  symbols  NumberFormatSymbols identifying numbers formatting for
-     *      given locale.
-     */
-    public NumberFormat(int style, NumberFormatSymbols symbols) {
-        this.style = style;
-        this.symbols = symbols;
-        isCurrencyFormat = (style == CURRENCYSTYLE);
-        isPercentageFormat = (style == PERCENTSTYLE);
-        applySymbols();
-        if (logging.getLevel().intValue() <= Level.INFO.intValue()) {
-            logging.log(Level.INFO, //LogChannels.LC_JSR238,
-                           classname + ": " +
-                           "NumberFormat created\n" +
-                           "style is " + style + "\n" +
-                           "symbols is " + symbols);
-        }
-    }
-
-    /**
-     * Returns a general-purpose number format for the current default
-     * {@link java.util.Locale.Category#FORMAT FORMAT} locale.
-     *
-     * @return the {@code NumberFormat} instance for general-purpose number
-     * formatting
-     */
-    public static final NumberFormat getInstance() {
-    	return new NumberFormat(NUMBERSTYLE, new NumberFormatSymbols());
-    }
-
-    /**
-     * Set maximal number of decimals to be displayed.
-     *
-     * @param  count  number of decimals to display
-     * @see #getMaximumFractionDigits
-     */
-    public void setMaximumFractionDigits(int count) {
-        if (symbols != null &&
-                count <= DOUBLE_FRACTION_DIGITS &&
-            count >= 0 &&
-                style != INTEGERSTYLE) {
-            symbols.maximumFractionDigits[style] = count;
-            if (symbols.minimumFractionDigits[style] < count) {
-                symbols.minimumFractionDigits[style] = count;
-            }
-        }
-    }
-
-
-    /**
-     * How many decimals is used to display number.
-     *
-     * @return    maximum number of decimals or <code>-1</code> if non-localized
-     *      formatting is used.
-     * @see #setMaximumFractionDigits
-     */
-    public int getMaximumFractionDigits() {
-        return (symbols != null) ?
-                symbols.maximumFractionDigits[style] :
-                -1;
-    }
-
-
-    /**
-     * Sets minimum number of decimals to be displayed.
-     *
-     * @param  count  minimum number of decimals to display
-     * @see #getMinimumFractionDigits
-     */
-    public void setMinimumFractionDigits(int count) {
-        if (symbols != null &&
-                count >= 0 &&
-                style != INTEGERSTYLE) {
-            symbols.minimumFractionDigits[style] = count;
-            if (count > symbols.maximumFractionDigits[style]) {
-                symbols.maximumFractionDigits[style] = count;
-            }
-        }
-    }
-
-
-    /**
-     * Sets multiplier to different value than symbols for this locale do.
-     *
-     * @param  multiplier  new value for multiplier;
-     * @see #getMultiplier
-     */
-    public void setMultiplier(int multiplier) {
-        if (symbols != null) {
-            symbols.multiplier[style] = multiplier;
-        }
-    }
-
-
-    /**
-     * Gets actual multilier used by this locale for this number style. Usually
-     *  (1 or 100).
-     *
-     * @return    the multiplier
-     * @see #setMultiplier
-     */
-    public int getMultiplier() {
-        return (symbols != null) ? symbols.multiplier[style] : 1;
-    }
-
-
-    /**
-     * Sets if grouping is used.
-     *
-     * @param  used <code>true</code> if grouping should be used
-     */
-    public void setGroupingUsed(boolean used) {
-        if (symbols != null) {
-            symbols.groupingUsed = used;
-        }
-    }
-
-
-    /**
-     * Get minimum of decimals used to display number.
-     *
-     * @return    minimum number of decimals or <code>-1</code> if non-localized
-     *      formatting is used.
-     * @see #setMinimumFractionDigits
-     */
-    public int getMinimumFractionDigits() {
-        return (symbols != null) ?
-                symbols.minimumFractionDigits[style] :
-                -1;
-    }
-
-
-    /**
-     * Sets minimum integer digits.
-     *
-     * @param  count the count of digits
-     * @see #getMinimumIntegerDigits
-     */
-    public void setMinimumIntegerDigits(int count) {
-        if (symbols != null && count > 0) {
-            symbols.minimumIntegerDigits[style] = count;
-        }
-    }
-
-
-    /**
-     * Gets minimum integer digits.
-     *
-     * @return number minimum of integer digits
-     * @see #setMinimumIntegerDigits
-     */
-    public int getMinimumIntegerDigits() {
-        return (symbols != null) ?
-                symbols.minimumIntegerDigits[style] :
-                -1;
-    }
-
-    /**
-     * Sets currency symbol.
-     *
-     * @param symbol the currency symbol
-     * @return previously used currency symbol
-     */
-    public String setCurrencySymbol(String symbol) {
-    	String oldsymbol = null;
-        if (isCurrencyFormat) {
-            if (symbols != null) {
-            	oldsymbol = symbols.currencySymbol;
-                if (!symbol.equals(symbols.currencySymbol)) {
-                    symbols.currencySymbol = symbol;
-                    symbols.suffixes[style] =
-                            replSubStr(symbols.suffixes[style], oldsymbol,
-                                       symbol);
-                    symbols.prefixes[style] =
-                            replSubStr(symbols.prefixes[style], oldsymbol,
-                                       symbol);
-                    symbols.negativeSuffix[style] =
-                            replSubStr(symbols.negativeSuffix[style], oldsymbol,
-                                       symbol);
-                    symbols.negativePrefix[style] =
-                            replSubStr(symbols.negativePrefix[style], oldsymbol,
-                                       symbol);
-                    symbols.positiveSuffix[style] =
-                            replSubStr(symbols.positiveSuffix[style], oldsymbol,
-                                       symbol);
-                    symbols.positivePrefix[style] =
-                            replSubStr(symbols.positivePrefix[style], oldsymbol,
-                                       symbol);
-                }
-            }
-        }
-        return oldsymbol;
-    }
-    /**
-     * Replaces substring in the string onto new string.
-     *
-     * @param str the changed string
-     * @param oldVal the replaced substring
-     * @param newVal the replacing string
-     * @return changed string
-     */
-    private String replSubStr(String str, String oldVal, String newVal) {
-        String res = str;
-        if (str.length() > 0) {
-            int pos = str.indexOf(oldVal);
-            if (pos >= 0) {
-                res = str.substring(0, pos);
-                res = res.concat(newVal);
-                res = res.concat(str.substring(pos + oldVal.length()));
-                return res;
-            }
-        }
-        return res;
-    }
-
-    /**
-     * Lookup table of supported currencies for appropriate symbol.
-     * 
-     * @param currencyCode code ISO 4217. 
-     * @return currency symbol or <code>null</code> if none was found.
-     */
-    public String getCurrencySymbolForCode(String currencyCode) {
-    	if (symbols != null && symbols.currencies != null){
-	        for (int i = 0; i < symbols.currencies.length; i++) {
-	            if (symbols.currencies[i].length>0 && symbols.currencies[i][0].equals(currencyCode))
-	                if (symbols.currencies[i].length>1){ 
-	                	return  symbols.currencies[i][1];
-	                } else {
-	                	return null;
-	                }
-	        }
-    	}
-        return null;
-    }
-        
-    /**
-     * Check if some attributes of <code>NumberFormatSymbols</code> are
-     * undefined and replace them with default values.
-     */
-    private void applySymbols() {
-        if (symbols != null) {
-            if (symbols.maximumIntegerDigits[style] == -1) {
-                symbols.maximumIntegerDigits[style] = DOUBLE_INTEGER_DIGITS;
-            }
-            if (symbols.maximumFractionDigits[style] == -1) {
-                symbols.maximumFractionDigits[style] = DOUBLE_FRACTION_DIGITS;
-            }
-        }
-    }
-
-
-    /**
-     * Method formats long.
-     *
-     * @param  value  long number to format
-     * @return        formatted long number
-     */
-    public String format(long value) {
-        return format(new Long(value));
-    }
-
-
-    /**
-     * Method formats double.
-     *
-     * @param  value  double value to format
-     * @return        formatted double number
-     */
-    public String format(double value) {
-        if (symbols != null) {
-            if (Double.isNaN(value)) {
-                return symbols.NaN;
-            }
-            if (Double.isInfinite(value)) {
-                String prefix = (value > 0.0) ? "" : symbols.negativePrefix[style];
-                String suffix = (value > 0.0) ? "" : symbols.negativeSuffix[style];
-                return prefix + symbols.infinity + suffix;
-            }
-        } else {
-            if (Double.isNaN(value)) {
-                return "NaN";
-            }
-            if (Double.isInfinite(value)) {
-                String prefix = (value > 0.0) ? "" : "-";
-                return prefix + UNICODE_INFINITY;
-            }
-        }
-        return format(new Double(value));
-    }    
-
-    /**
-     * Method formats integer.
-     *
-     * @param  value  integer value to format
-     * @return        formatted integer number
-     */
-    public String format(int value) {
-        return format(new Long(value));
-    }
-
-
-    /**
-     * Method formats float.
-     *
-     * @param  value  float value to format
-     * @return        formatted float number
-     */
-    public String format(float value) {
-        return format((double)value);
-    }
-
-
-    /**
-     * Does formatting. Result is appended to parameter
-     * <code>StringBuffer appendTo</code>.
-     *
-     * @param  o         object to format
-     * @return           buffer with appended formatted text
-     */
-    public String format(Object o) {
-        StringBuffer appendTo = new StringBuffer();
-        if (o == null) {
-            return "";
-        }
-        if (symbols != null) {
-            if (o instanceof Double) {
-                format(((Double) o).doubleValue(), appendTo);
-            }
-            if (o instanceof Long) {
-                format(((Long) o).longValue(), appendTo);
-            }
-        } else {
-            if (isPercentageFormat) {
-                if (o instanceof Double) {
-                    appendTo.append(Double.toString(
-                                    ((Double)o).doubleValue() * 100.0));
-                } else if (o instanceof Long) {
-                    long value = ((Long) o).longValue();
-                    appendTo.append(Long.toString(value));
-                    if (value != 0) appendTo.append("00");
-                }
-                appendTo.append(NONLOCALIZED_PERCENT_SIGN);
-            } else {
-                return o.toString();
-            }
-        }
-        return appendTo.toString();
-    }
-
-
-    /**
-     * Formats double number.
-     *
-     * @param  number  the double number to formatt
-     * @param  result  formatted number
-     * @return         buffer with appended formatted number
-     */
-    private StringBuffer format(double number, StringBuffer result) {
-        if (Double.isNaN(number)) {
-            result.append(symbols.NaN);
-            return result;
-        }
-        boolean isNegative = (number < 0.0) ||
-                             (number == 0.0 && 1 / number < 0.0);
-        if (isNegative) {
-            number = -number;
-        }
-
-        if (symbols.multiplier[style] != 1) {
-            number *= symbols.multiplier[style];
-        }
-
-        if (Double.isInfinite(number)) {
-            if (isNegative) {
-                result.append(symbols.negativePrefix[style]);
-            } else {
-                result.append(symbols.positivePrefix[style]);
-            }
-            result.append(symbols.infinity);
-
-            if (isNegative) {
-                result.append(symbols.negativeSuffix[style]);
-            } else {
-                result.append(symbols.positiveSuffix[style]);
-            }
-            return result;
-        }
-
-        digitList.set(number, symbols.maximumFractionDigits[style]);
-        result = subformat(result, isNegative, false);
-
-        return result;
-    }
-
-
-
-    /**
-     * Format a long to produce a string.
-     *
-     * @param  number  The long to format
-     * @param  result  where the text is to be appended
-     * @return         The formatted number
-     */
-    private StringBuffer format(long number, StringBuffer result) {
-        boolean isNegative = (number < 0);
-        if (isNegative) {
-            number = -number;
-        }
-
-        if (symbols.multiplier[style] != 1 &&
-                symbols.multiplier[style] != 0) {
-            boolean useDouble = false;
-
-            if (number < 0) {
-                //  This can only happen if number == Long.MIN_VALUE
-
-                long cutoff = Long.MIN_VALUE / symbols.multiplier[style];
-                useDouble = (number < cutoff);
-            } else {
-                long cutoff = Long.MAX_VALUE / symbols.multiplier[style];
-                useDouble = (number > cutoff);
-            }
-
-            if (useDouble) {
-                double dnumber = (double) (isNegative ? -number : number);
-                return format(dnumber, result);
-            }
-        }
-
-        number *= symbols.multiplier[style];
-        synchronized (digitList) {
-            digitList.set(number, 0);
-
-            return subformat(result, isNegative, true);
-        }
-    }
-
-
-    /**
-     * Formats content of DigitList.
-     *
-     * @param  result      buffer to append formatted number to
-     * @param  isNegative  <code>true</code> if number is negative
-     * @param  isInteger   <code>true</code> if integer number will be formatted
-     * @return             buffer with appended formatted number
-     */
-    private StringBuffer subformat(StringBuffer result,
-            boolean isNegative, boolean isInteger) {
-
-        char zero = symbols.zeroDigit;
-        int zeroDelta = zero - '0';
-        //  '0' is the DigitList representation of zero
-        char grouping = symbols.groupingSeparator;
-        char decimal = isCurrencyFormat ?
-                symbols.monetarySeparator :
-                symbols.decimalSeparator;
-
-        if (digitList.isZero()) {
-            digitList.decimalAt = 0;
-            //  Normalize
-        }
-
-        int fieldStart = result.length();
-
-        if (isNegative) {
-            result.append(symbols.negativePrefix[style]);
-        } else {
-            result.append(symbols.positivePrefix[style]);
-        }
-
-        String prefix = symbols.prefixes[style];
-        result.append(prefix);
-
-        int count = symbols.minimumIntegerDigits[style];
-        int digitIndex = 0;
-        //  Index into digitList.fDigits[]
-        if (digitList.decimalAt > 0 && count < digitList.decimalAt) {
-            count = digitList.decimalAt;
-        }
-
-        if (count > symbols.maximumIntegerDigits[style]) {
-            count = symbols.maximumIntegerDigits[style];
-            digitIndex = digitList.decimalAt - count;
-        }
-
-        if (logging.getLevel().intValue() <= Level.INFO.intValue()) {
-        	 logging.log(Level.INFO, //LogChannels.LC_JSR238,
-                           classname + " :" +
-                           "grouping used " + symbols.groupingUsed + "\n" +
-                           "grouping separator \"" + grouping + "\"\n" +
-                           "decimal separator \"" + decimal + "\"\n" +
-                           "digit count " + count);
-        }
-
-        int sizeBeforeIntegerPart = result.length();
-        for (int i = count - 1; i >= 0; --i) {
-            if (i < digitList.decimalAt && digitIndex < digitList.count) {
-                //  Output a real digit
-                result.append((char) (digitList.digits[digitIndex++] +
-                                      zeroDelta));
-            } else {
-                //  Output a leading zero
-                result.append(zero);
-            }
-
-            //  Output grouping separator if necessary.  Don't output a
-            //  grouping separator if i==0 though; that's at the end of
-            //  the integer part.
-            if (symbols.groupingUsed && i > 0 &&
-                    (symbols.groupingCount != 0) &&
-                    (i % symbols.groupingCount == 0)) {
-                int gStart = result.length();
-                result.append(grouping);
-                if (logging.getLevel().intValue() <= Level.INFO.intValue()) {
-               	 logging.log(Level.INFO, //LogChannels.LC_JSR238,
-                                   classname + ": " +
-                                   "add grouping at " + (digitIndex-1));
-                }
-            }
-        }// for
-
-        boolean fractionPresent = (symbols.minimumFractionDigits[style] > 0) ||
-                (!isInteger && digitIndex < digitList.count);
-
-        if (!fractionPresent && result.length() == sizeBeforeIntegerPart) {
-            result.append(zero);
-        }
-        //  Output the decimal separator if we always do so.
-        int sStart = result.length();
-        if (symbols.decimalSeparatorAlwaysShown || fractionPresent) {
-            result.append(decimal);
-        }
-
-        for (int i = 0; i < symbols.maximumFractionDigits[style]; ++i) {
-            if (i >= symbols.minimumFractionDigits[style] &&
-                    (isInteger || digitIndex >= digitList.count)) {
-                break;
-            }
-
-            if (-1 - i > (digitList.decimalAt - 1)) {
-                result.append(zero);
-                continue;
-            }
-
-            if (!isInteger && digitIndex < digitList.count) {
-                result.append((char) (digitList.digits[digitIndex++] +
-                                      zeroDelta));
-            } else {
-                result.append(zero);
-            }
-        }
-
-        String suffix = symbols.suffixes[style];
-        result.append(suffix);
-
-        if (isNegative) {
-            result.append(symbols.negativeSuffix[style]);
-        } else {
-            result.append(symbols.positiveSuffix[style]);
-        }
-
-        return result;
-    }
-    
-    /**
-     * Parses text from a string to produce a <code>Number</code>.
-     * <p>
-     * The method attempts to parse text starting at the index given by
-     * <code>pos</code>.
-     * If parsing succeeds, then the index of <code>pos</code> is updated
-     * to the index after the last character used (parsing does not necessarily
-     * use all characters up to the end of the string), and the parsed
-     * number is returned. The updated <code>pos</code> can be used to
-     * indicate the starting point for the next call to this method.
-     * If an error occurs, then the index of <code>pos</code> is not
-     * changed, the error index of <code>pos</code> is set to the index of
-     * the character where the error occurred, and null is returned.
-     * <p>
-     * The subclass returned depends on the value of {@link #isParseBigDecimal}
-     * as well as on the string being parsed.
-     * <ul>
-     *   <li>If <code>isParseBigDecimal()</code> is false (the default),
-     *       most integer values are returned as <code>Long</code>
-     *       objects, no matter how they are written: <code>"17"</code> and
-     *       <code>"17.000"</code> both parse to <code>Long(17)</code>.
-     *       Values that cannot fit into a <code>Long</code> are returned as
-     *       <code>Double</code>s. This includes values with a fractional part,
-     *       infinite values, <code>NaN</code>, and the value -0.0.
-     *       <code>DecimalFormat</code> does <em>not</em> decide whether to
-     *       return a <code>Double</code> or a <code>Long</code> based on the
-     *       presence of a decimal separator in the source string. Doing so
-     *       would prevent integers that overflow the mantissa of a double,
-     *       such as <code>"-9,223,372,036,854,775,808.00"</code>, from being
-     *       parsed accurately.
-     *       <p>
-     *       Callers may use the <code>Number</code> methods
-     *       <code>doubleValue</code>, <code>longValue</code>, etc., to obtain
-     *       the type they want.
-     *   <li>If <code>isParseBigDecimal()</code> is true, values are returned
-     *       as <code>BigDecimal</code> objects. The values are the ones
-     *       constructed by {@link java.math.BigDecimal#BigDecimal(String)}
-     *       for corresponding strings in locale-independent format. The
-     *       special cases negative and positive infinity and NaN are returned
-     *       as <code>Double</code> instances holding the values of the
-     *       corresponding <code>Double</code> constants.
-     * </ul>
-     * <p>
-     * <code>DecimalFormat</code> parses all Unicode characters that represent
-     * decimal digits, as defined by <code>Character.digit()</code>. In
-     * addition, <code>DecimalFormat</code> also recognizes as digits the ten
-     * consecutive characters starting with the localized zero digit defined in
-     * the <code>DecimalFormatSymbols</code> object.
-     *
-     * @param text the string to be parsed
-     * @param pos  A <code>ParsePosition</code> object with index and error
-     *             index information as described above.
-     * @return     the parsed value, or <code>null</code> if the parse fails
-     * @exception  NullPointerException if <code>text</code> or
-     *             <code>pos</code> is null.
-     */
-    public Number parse(String text, int index) {
-        // special case NaN
-        if (text.regionMatches(index, symbols.NaN, 0, symbols.NaN.length())) {
-            index = index + symbols.NaN.length();
-            return new Double(Double.NaN);
-        }
-        
-        boolean[] status = new boolean[STATUS_LENGTH];
-        if (!subparse(text, pos, positivePrefix, negativePrefix, digitList, false, status)) {
-            return null;
-        }
-
-        // special case INFINITY
-        if (status[STATUS_INFINITE]) {
-            if (status[STATUS_POSITIVE] == (getMultiplier() >= 0)) {
-                return new Double(Double.POSITIVE_INFINITY);
-            } else {
-                return new Double(Double.NEGATIVE_INFINITY);
-            }
-        }
-
-        if (getMultiplier() == 0) {
-            if (digitList.isZero()) {
-                return new Double(Double.NaN);
-            } else if (status[STATUS_POSITIVE]) {
-                return new Double(Double.POSITIVE_INFINITY);
-            } else {
-                return new Double(Double.NEGATIVE_INFINITY);
-            }
-        }
-    }
-    
-    /**
-     * Parse the given text into a number.  The text is parsed beginning at
-     * parsePosition, until an unparseable character is seen.
-     * @param text The string to parse.
-     * @param parsePosition The position at which to being parsing.  Upon
-     * return, the first unparseable character.
-     * @param digits The DigitList to set to the parsed value.
-     * @param isExponent If true, parse an exponent.  This means no
-     * infinite values and integer only.
-     * @param status Upon return contains boolean status flags indicating
-     * whether the value was infinite and whether it was positive.
-     */
-    private final boolean subparse(String text, int index,
-                   String positivePrefix, String negativePrefix,
-                   DigitList digits, boolean isExponent,
-                   boolean status[]) {
-        int position = index;
-        int oldStart = index;
-        int backup;
-        boolean gotPositive, gotNegative;
-
-        // check for positivePrefix; take longest
-        gotPositive = text.regionMatches(position, positivePrefix, 0,
-                                         positivePrefix.length());
-        gotNegative = text.regionMatches(position, negativePrefix, 0,
-                                         negativePrefix.length());
-
-        if (gotPositive && gotNegative) {
-            if (positivePrefix.length() > negativePrefix.length()) {
-                gotNegative = false;
-            } else if (positivePrefix.length() < negativePrefix.length()) {
-                gotPositive = false;
-            }
-        }
-
-        if (gotPositive) {
-            position += positivePrefix.length();
-        } else if (gotNegative) {
-            position += negativePrefix.length();
-        } else {
-//            parsePosition.errorIndex = position;
-            return false;
-        }
-
-        // process digits or Inf, find decimal position
-        status[STATUS_INFINITE] = false;
-        if (!isExponent && text.regionMatches(position,symbols.getInfinity(),0,
-                          symbols.getInfinity().length())) {
-            position += symbols.getInfinity().length();
-            status[STATUS_INFINITE] = true;
-        } else {
-            // We now have a string of digits, possibly with grouping symbols,
-            // and decimal points.  We want to process these into a DigitList.
-            // We don't want to put a bunch of leading zeros into the DigitList
-            // though, so we keep track of the location of the decimal point,
-            // put only significant digits into the DigitList, and adjust the
-            // exponent as needed.
-
-            digits.decimalAt = digits.count = 0;
-            char zero = symbols.getZeroDigit();
-            char decimal = isCurrencyFormat ?
-                symbols.getMonetaryDecimalSeparator() :
-                symbols.getDecimalSeparator();
-            char grouping = symbols.getGroupingSeparator();
-            String exponentString = symbols.getExponentSeparator();
-            boolean sawDecimal = false;
-            boolean sawExponent = false;
-            boolean sawDigit = false;
-            int exponent = 0; // Set to the exponent value, if any
-
-            // We have to track digitCount ourselves, because digits.count will
-            // pin when the maximum allowable digits is reached.
-            int digitCount = 0;
-
-            backup = -1;
-            for (; position < text.length(); ++position) {
-                char ch = text.charAt(position);
-
-                /* We recognize all digit ranges, not only the Latin digit range
-                 * '0'..'9'.  We do so by using the Character.digit() method,
-                 * which converts a valid Unicode digit to the range 0..9.
-                 *
-                 * The character 'ch' may be a digit.  If so, place its value
-                 * from 0 to 9 in 'digit'.  First try using the locale digit,
-                 * which may or MAY NOT be a standard Unicode digit range.  If
-                 * this fails, try using the standard Unicode digit ranges by
-                 * calling Character.digit().  If this also fails, digit will
-                 * have a value outside the range 0..9.
-                 */
-                int digit = ch - zero;
-                if (digit < 0 || digit > 9) {
-                    digit = Character.digit(ch, 10);
-                }
-
-                if (digit == 0) {
-                    // Cancel out backup setting (see grouping handler below)
-                    backup = -1; // Do this BEFORE continue statement below!!!
-                    sawDigit = true;
-
-                    // Handle leading zeros
-                    if (digits.count == 0) {
-                        // Ignore leading zeros in integer part of number.
-                        if (!sawDecimal) {
-                            continue;
-                        }
-
-                        // If we have seen the decimal, but no significant
-                        // digits yet, then we account for leading zeros by
-                        // decrementing the digits.decimalAt into negative
-                        // values.
-                        --digits.decimalAt;
-                    } else {
-                        ++digitCount;
-                        digits.append((char)(digit + '0'));
-                    }
-                } else if (digit > 0 && digit <= 9) { // [sic] digit==0 handled above
-                    sawDigit = true;
-                    ++digitCount;
-                    digits.append((char)(digit + '0'));
-
-                    // Cancel out backup setting (see grouping handler below)
-                    backup = -1;
-                } else if (!isExponent && ch == decimal) {
-                    // If we're only parsing integers, or if we ALREADY saw the
-                    // decimal, then don't parse this one.
-                    if (style == INTEGERSTYLE) {
-                        break;
-                    }
-                    digits.decimalAt = digitCount; // Not digits.count!
-                    sawDecimal = true;
-                } else if (!isExponent && ch == grouping && isGroupingUsed()) {
-                    if (sawDecimal) {
-                        break;
-                    }
-                    // Ignore grouping characters, if we are using them, but
-                    // require that they be followed by a digit.  Otherwise
-                    // we backup and reprocess them.
-                    backup = position;
-                } else if (!isExponent && text.regionMatches(position, exponentString, 0, exponentString.length())
-                             && !sawExponent) {
-                    // Process the exponent by recursively calling this method.
-                     ParsePosition pos = new ParsePosition(position + exponentString.length());
-                    boolean[] stat = new boolean[STATUS_LENGTH];
-                    DigitList exponentDigits = new DigitList();
-
-                    if (subparse(text, pos, "", Character.toString(symbols.getMinusSign()), exponentDigits, true, stat) &&
-                        exponentDigits.fitsIntoLong(stat[STATUS_POSITIVE], true)) {
-                        position = pos.index; // Advance past the exponent
-                        exponent = (int)exponentDigits.getLong();
-                        if (!stat[STATUS_POSITIVE]) {
-                            exponent = -exponent;
-                        }
-                        sawExponent = true;
-                    }
-                    break; // Whether we fail or succeed, we exit this loop
-                } else {
-                    break;
-                }
-            }
-
-            if (backup != -1) {
-                position = backup;
-            }
-
-            // If there was no decimal point we have an integer
-            if (!sawDecimal) {
-                digits.decimalAt = digitCount; // Not digits.count!
-            }
-
-            // Adjust for exponent, if any
-            digits.decimalAt += exponent;
-
-            // If none of the text string was recognized.  For example, parse
-            // "x" with pattern "#0.00" (return index and error index both 0)
-            // parse "$" with pattern "$#0.00". (return index 0 and error
-            // index 1).
-            if (!sawDigit && digitCount == 0) {
-                index = oldStart;
-//                parsePosition.errorIndex = oldStart;
-                return false;
-            }
-        }
-
-        // check for suffix
-        if (!isExponent) {
-            if (gotPositive) {
-                gotPositive = text.regionMatches(position,positiveSuffix,0,
-                                                 positiveSuffix.length());
-            }
-            if (gotNegative) {
-                gotNegative = text.regionMatches(position,negativeSuffix,0,
-                                                 negativeSuffix.length());
-            }
-
-        // if both match, take longest
-        if (gotPositive && gotNegative) {
-            if (positiveSuffix.length() > negativeSuffix.length()) {
-                gotNegative = false;
-            } else if (positiveSuffix.length() < negativeSuffix.length()) {
-                gotPositive = false;
-            }
-        }
-
-        // fail if neither or both
-        if (gotPositive == gotNegative) {
-            parsePosition.errorIndex = position;
-            return false;
-        }
-
-        index = position +
-            (gotPositive ? positiveSuffix.length() : negativeSuffix.length()); // mark success!
-        } else {
-            index = position;
-        }
-
-        status[STATUS_POSITIVE] = gotPositive;
-        if (index == oldStart) {
-//            parsePosition.errorIndex = position;
-            return false;
-        }
-        return true;
-    }
+
+import java.util.Hashtable;
+
+/**
+ * <code>NumberFormat</code> is the abstract base class for all number formats.
+ * This class provides the interface for formatting and parsing numbers.
+ * <code>NumberFormat</code> also provides methods for determining which locales
+ * have number formats, and what their names are.
+ * 
+ * <p>
+ * <code>NumberFormat</code> helps you to format and parse numbers for any
+ * locale. Your code can be completely independent of the locale conventions for
+ * decimal points, thousands-separators, or even the particular decimal digits
+ * used, or whether the number format is even decimal.
+ * 
+ * <p>
+ * To format a number for the current Locale, use one of the factory class
+ * methods: <blockquote>
+ * 
+ * <pre>
+ * myString = NumberFormat.getInstance().format(myNumber);
+ * </pre>
+ * 
+ * </blockquote> If you are formatting multiple numbers, it is more efficient to
+ * get the format and use it multiple times so that the system doesn't have to
+ * fetch the information about the local language and country conventions
+ * multiple times. <blockquote>
+ * 
+ * <pre>
+ * NumberFormat nf = NumberFormat.getInstance();
+ * for (int i = 0; i &lt; a.length; ++i) {
+ * ﻿  output.println(nf.format(myNumber[i]) + &quot;; &quot;);
+ * }
+ * </pre>
+ * 
+ * </blockquote> To format a number for a different Locale, specify it in the
+ * call to <code>getInstance</code>. <blockquote>
+ * 
+ * <pre>
+ * NumberFormat nf = NumberFormat.getInstance(Locale.FRENCH);
+ * </pre>
+ * 
+ * </blockquote> You can also use a <code>NumberFormat</code> to parse numbers:
+ * <blockquote>
+ * 
+ * <pre>
+ * myNumber = nf.parse(myString);
+ * </pre>
+ * 
+ * </blockquote> Use <code>getInstance</code> or <code>getNumberInstance</code>
+ * to get the normal number format. Use <code>getIntegerInstance</code> to get
+ * an integer number format. Use <code>getCurrencyInstance</code> to get the
+ * currency number format. And use <code>getPercentInstance</code> to get a
+ * format for displaying percentages. With this format, a fraction like 0.53 is
+ * displayed as 53%.
+ * 
+ * <p>
+ * You can also control the display of numbers with such methods as
+ * <code>setMinimumFractionDigits</code>. If you want even more control over the
+ * format or parsing, or want to give your users more control, you can try
+ * casting the <code>NumberFormat</code> you get from the factory methods to a
+ * <code>DecimalFormat</code>. This will work for the vast majority of locales;
+ * just remember to put it in a <code>try</code> block in case you encounter an
+ * unusual one.
+ * 
+ * <p>
+ * NumberFormat and DecimalFormat are designed such that some controls work for
+ * formatting and others work for parsing. The following is the detailed
+ * description for each these control methods,
+ * <p>
+ * setParseIntegerOnly : only affects parsing, e.g. if true, "3456.78" -> 3456
+ * (and leaves the parse position just after index 6) if false, "3456.78" ->
+ * 3456.78 (and leaves the parse position just after index 8) This is
+ * independent of formatting. If you want to not show a decimal point where
+ * there might be no digits after the decimal point, use
+ * setDecimalSeparatorAlwaysShown.
+ * <p>
+ * setDecimalSeparatorAlwaysShown : only affects formatting, and only where
+ * there might be no digits after the decimal point, such as with a pattern like
+ * "#,##0.##", e.g., if true, 3456.00 -> "3,456." if false, 3456.00 -> "3456"
+ * This is independent of parsing. If you want parsing to stop at the decimal
+ * point, use setParseIntegerOnly.
+ * 
+ * <p>
+ * You can also use forms of the <code>parse</code> and <code>format</code>
+ * methods with <code>ParsePosition</code> and <code>FieldPosition</code> to
+ * allow you to:
+ * <ul>
+ * <li>progressively parse through pieces of a string
+ * <li>align the decimal point and other areas
+ * </ul>
+ * For example, you can align numbers in two ways:
+ * <ol>
+ * <li>If you are using a monospaced font with spacing for alignment, you can
+ * pass the <code>FieldPosition</code> in your format call, with
+ * <code>field</code> = <code>INTEGER_FIELD</code>. On output,
+ * <code>getEndIndex</code> will be set to the offset between the last character
+ * of the integer and the decimal. Add (desiredSpaceCount - getEndIndex) spaces
+ * at the front of the string.
+ * 
+ * <li>If you are using proportional fonts, instead of padding with spaces,
+ * measure the width of the string in pixels from the start to
+ * <code>getEndIndex</code>. Then move the pen by (desiredPixelWidth -
+ * widthToAlignmentPoint) before drawing the text. It also works where there is
+ * no decimal, but possibly additional characters at the end, e.g., with
+ * parentheses in negative numbers: "(12)" for -12.
+ * </ol>
+ * 
+ * <h4><a name="synchronization">Synchronization</a></h4>
+ * 
+ * <p>
+ * Number formats are generally not synchronized. It is recommended to create
+ * separate format instances for each thread. If multiple threads access a
+ * format concurrently, it must be synchronized externally.
+ * 
+ * @see DecimalFormat
+ * @see ChoiceFormat
+ * @version 1.47, 01/19/00
+ * @author Mark Davis
+ * @author Helena Shih
+ */
+public abstract class NumberFormat extends Format {
+
+﻿  /**
+﻿   * Field constant used to construct a FieldPosition object. Signifies that
+﻿   * the position of the integer part of a formatted number should be
+﻿   * returned.
+﻿   * 
+﻿   * @see java.text.FieldPosition
+﻿   */
+﻿  public static final int INTEGER_FIELD = 0;
+
+﻿  /**
+﻿   * Field constant used to construct a FieldPosition object. Signifies that
+﻿   * the position of the fraction part of a formatted number should be
+﻿   * returned.
+﻿   * 
+﻿   * @see java.text.FieldPosition
+﻿   */
+﻿  public static final int FRACTION_FIELD = 1;
+
+﻿  /**
+﻿   * Formats an object to produce a string. This general routines allows
+﻿   * polymorphic parsing and formatting for objects.
+﻿   * 
+﻿   * @param number
+﻿   *            the object to format
+﻿   * @param toAppendTo
+﻿   *            where the text is to be appended
+﻿   * @param pos
+﻿   *            On input: an alignment field, if desired. On output: the
+﻿   *            offsets of the alignment field.
+﻿   * @return the value passed in as toAppendTo (this allows chaining, as with
+﻿   *         StringBuffer.append())
+﻿   * @exception IllegalArgumentException
+﻿   *                when the Format cannot format the given object.
+﻿   * @see java.text.FieldPosition
+﻿   */
+﻿  public final StringBuffer format(Object number, StringBuffer toAppendTo,
+﻿  ﻿  ﻿  FieldPosition pos) {
+﻿  ﻿  if (number instanceof Long)
+﻿  ﻿  ﻿  return format(((Long) number).longValue(), toAppendTo, pos);
+﻿  ﻿  else if (number instanceof Double)
+﻿  ﻿  ﻿  return format(((Double) number).doubleValue(), toAppendTo, pos);
+﻿  ﻿  else if (number instanceof Integer)
+﻿  ﻿  ﻿  return format(((Integer) number).intValue(), toAppendTo, pos);
+﻿  ﻿  else {
+﻿  ﻿  ﻿  throw new IllegalArgumentException(
+﻿  ﻿  ﻿  ﻿  ﻿  "Cannot format given Object as a Number");
+﻿  ﻿  }
+﻿  }
+
+﻿  /**
+﻿   * Parses text from a string to produce a <code>Number</code>.
+﻿   * <p>
+﻿   * The method attempts to parse text starting at the index given by
+﻿   * <code>pos</code>. If parsing succeeds, then the index of <code>pos</code>
+﻿   * is updated to the index after the last character used (parsing does not
+﻿   * necessarily use all characters up to the end of the string), and the
+﻿   * parsed number is returned. The updated <code>pos</code> can be used to
+﻿   * indicate the starting point for the next call to this method. If an error
+﻿   * occurs, then the index of <code>pos</code> is not changed, the error
+﻿   * index of <code>pos</code> is set to the index of the character where the
+﻿   * error occurred, and null is returned.
+﻿   * <p>
+﻿   * See the {@link #parse(String, ParsePosition)} method for more information
+﻿   * on number parsing.
+﻿   * 
+﻿   * @param source
+﻿   *            A <code>String</code>, part of which should be parsed.
+﻿   * @param pos
+﻿   *            A <code>ParsePosition</code> object with index and error index
+﻿   *            information as described above.
+﻿   * @return A <code>Number</code> parsed from the string. In case of error,
+﻿   *         returns null.
+﻿   * @exception NullPointerException
+﻿   *                if <code>pos</code> is null.
+﻿   */
+﻿  // public final Object parseObject(String source, ParsePosition pos) {
+﻿  // return parse(source, pos);
+﻿  // }
+﻿  /**
+﻿   * Specialization of format.
+﻿   * 
+﻿   * @see java.text.Format#format
+﻿   */
+﻿  public final String format(double number) {
+﻿  ﻿  return format(number, new StringBuffer(),
+﻿  ﻿  ﻿  ﻿  DontCareFieldPosition.INSTANCE).toString();
+﻿  }
+
+﻿  /**
+﻿   * Specialization of format.
+﻿   * 
+﻿   * @see java.text.Format#format
+﻿   */
+﻿  public final String format(long number) {
+﻿  ﻿  return format(number, new StringBuffer(),
+﻿  ﻿  ﻿  ﻿  DontCareFieldPosition.INSTANCE).toString();
+﻿  }
+
+﻿  /**
+﻿   * Specialization of format.
+﻿   * 
+﻿   * @see java.text.Format#format
+﻿   */
+﻿  public abstract StringBuffer format(double number, StringBuffer toAppendTo,
+﻿  ﻿  ﻿  FieldPosition pos);
+
+﻿  /**
+﻿   * Specialization of format.
+﻿   * 
+﻿   * @see java.text.Format#format
+﻿   */
+﻿  public abstract StringBuffer format(long number, StringBuffer toAppendTo,
+﻿  ﻿  ﻿  FieldPosition pos);
+
+﻿  // /**
+﻿  // * Returns a Long if possible (e.g., within the range [Long.MIN_VALUE,
+﻿  // * Long.MAX_VALUE] and with no decimals), otherwise a Double. If
+﻿  // IntegerOnly
+﻿  // * is set, will stop at a decimal point (or equivalent; e.g., for rational
+﻿  // * numbers "1 2/3", will stop after the 1). Does not throw an exception;
+﻿  // if
+﻿  // * no object can be parsed, index is unchanged!
+﻿  // *
+﻿  // * @see java.text.NumberFormat#isParseIntegerOnly
+﻿  // * @see java.text.Format#parseObject
+﻿  // */
+﻿  // public abstract Number parse(String source, ParsePosition parsePosition);
+﻿  //
+﻿  // /**
+﻿  // * Parses text from the beginning of the given string to produce a number.
+﻿  // * The method may not use the entire text of the given string.
+﻿  // * <p>
+﻿  // * See the {@link #parse(String, ParsePosition)} method for more
+﻿  // information
+﻿  // * on number parsing.
+﻿  // *
+﻿  // * @param source
+﻿  // * A <code>String</code> whose beginning should be parsed.
+﻿  // * @return A <code>Number</code> parsed from the string.
+﻿  // * @exception ParseException
+﻿  // * if the beginning of the specified string cannot be parsed.
+﻿  // */
+﻿  // public Number parse(String source) throws ParseException {
+﻿  // ParsePosition parsePosition = new ParsePosition(0);
+﻿  // Number result = parse(source, parsePosition);
+﻿  // if (parsePosition.index == 0) {
+﻿  // throw new ParseException("Unparseable number: \"" + source + "\"",
+﻿  // parsePosition.errorIndex);
+﻿  // }
+﻿  // return result;
+﻿  // }
+
+﻿  /**
+﻿   * Returns true if this format will parse numbers as integers only. For
+﻿   * example in the English locale, with ParseIntegerOnly true, the string
+﻿   * "1234." would be parsed as the integer value 1234 and parsing would stop
+﻿   * at the "." character. Of course, the exact format accepted by the parse
+﻿   * operation is locale dependant and determined by sub-classes of
+﻿   * NumberFormat.
+﻿   */
+﻿  public boolean isParseIntegerOnly() {
+﻿  ﻿  return parseIntegerOnly;
+﻿  }
+
+﻿  /**
+﻿   * Sets whether or not numbers should be parsed as integers only.
+﻿   * 
+﻿   * @see #isParseIntegerOnly
+﻿   */
+﻿  public void setParseIntegerOnly(boolean value) {
+﻿  ﻿  parseIntegerOnly = value;
+﻿  }
+
+﻿  // ============== Locale Stuff =====================
+
+﻿  /**
+﻿   * Returns a general-purpose number format for the current default locale.
+﻿   */
+﻿  public final static NumberFormat getNumberInstance() {
+﻿  ﻿  return getInstance(NUMBERSTYLE);
+﻿  }
+
+﻿  /**
+﻿   * Returns an integer number format for the current default locale. The
+﻿   * returned number format is configured to round floating point numbers to
+﻿   * the nearest integer using IEEE half-even rounding (see
+﻿   * {@link java.math.BigDecimal#ROUND_HALF_EVEN ROUND_HALF_EVEN}) for
+﻿   * formatting, and to parse only the integer part of an input string (see
+﻿   * {@link #isParseIntegerOnly isParseIntegerOnly}). NOTE:
+﻿   * <B>java.math.BigDecimal</B> is found in J2ME CDC profiles such as J2ME
+﻿   * Foundation Profile.
+﻿   * 
+﻿   * @return a number format for integer values
+﻿   * @since 1.4
+﻿   */
+﻿  public final static NumberFormat getIntegerInstance() {
+﻿  ﻿  return getInstance(INTEGERSTYLE);
+﻿  }
+
+﻿  /**
+﻿   * Returns a currency format for the current default locale.
+﻿   */
+﻿  public final static NumberFormat getCurrencyInstance() {
+﻿  ﻿  return getInstance(CURRENCYSTYLE);
+﻿  }
+
+﻿  /**
+﻿   * Returns a percentage format for the current default locale.
+﻿   */
+﻿  public final static NumberFormat getPercentInstance() {
+﻿  ﻿  return getInstance(PERCENTSTYLE);
+﻿  }
+
+﻿  /**
+﻿   * Returns a scientific format for the current default locale.
+﻿   */
+﻿  /* public */final static NumberFormat getScientificInstance() {
+﻿  ﻿  return getInstance(SCIENTIFICSTYLE);
+﻿  }
+
+﻿  /**
+﻿   * Overrides hashCode
+﻿   */
+﻿  public int hashCode() {
+﻿  ﻿  return maximumIntegerDigits * 37 + maxFractionDigits;
+﻿  ﻿  // just enough fields for a reasonable distribution
+﻿  }
+
+﻿  /**
+﻿   * Overrides equals
+﻿   */
+﻿  public boolean equals(Object obj) {
+﻿  ﻿  if (obj == null)
+﻿  ﻿  ﻿  return false;
+﻿  ﻿  if (this == obj)
+﻿  ﻿  ﻿  return true;
+﻿  ﻿  if (getClass() != obj.getClass())
+﻿  ﻿  ﻿  return false;
+﻿  ﻿  NumberFormat other = (NumberFormat) obj;
+﻿  ﻿  return (maximumIntegerDigits == other.maximumIntegerDigits
+﻿  ﻿  ﻿  ﻿  && minimumIntegerDigits == other.minimumIntegerDigits
+﻿  ﻿  ﻿  ﻿  && maximumFractionDigits == other.maximumFractionDigits
+﻿  ﻿  ﻿  ﻿  && minimumFractionDigits == other.minimumFractionDigits
+﻿  ﻿  ﻿  ﻿  && groupingUsed == other.groupingUsed && parseIntegerOnly == other.parseIntegerOnly);
+﻿  }
+
+﻿  /**
+﻿   * Returns true if grouping is used in this format. For example, in the
+﻿   * English locale, with grouping on, the number 1234567 might be formatted
+﻿   * as "1,234,567". The grouping separator as well as the size of each group
+﻿   * is locale dependant and is determined by sub-classes of NumberFormat.
+﻿   * 
+﻿   * @see #setGroupingUsed
+﻿   */
+﻿  public boolean isGroupingUsed() {
+﻿  ﻿  return groupingUsed;
+﻿  }
+
+﻿  /**
+﻿   * Set whether or not grouping will be used in this format.
+﻿   * 
+﻿   * @see #isGroupingUsed
+﻿   */
+﻿  public void setGroupingUsed(boolean newValue) {
+﻿  ﻿  groupingUsed = newValue;
+﻿  }
+
+﻿  /**
+﻿   * Returns the maximum number of digits allowed in the integer portion of a
+﻿   * number.
+﻿   * 
+﻿   * @see #setMaximumIntegerDigits
+﻿   */
+﻿  public int getMaximumIntegerDigits() {
+﻿  ﻿  return maximumIntegerDigits;
+﻿  }
+
+﻿  /**
+﻿   * Sets the maximum number of digits allowed in the integer portion of a
+﻿   * number. maximumIntegerDigits must be >= minimumIntegerDigits. If the new
+﻿   * value for maximumIntegerDigits is less than the current value of
+﻿   * minimumIntegerDigits, then minimumIntegerDigits will also be set to the
+﻿   * new value.
+﻿   * 
+﻿   * @param newValue
+﻿   *            the maximum number of integer digits to be shown; if less than
+﻿   *            zero, then zero is used. The concrete subclass may enforce an
+﻿   *            upper limit to this value appropriate to the numeric type
+﻿   *            being formatted.
+﻿   * @see #getMaximumIntegerDigits
+﻿   */
+﻿  public void setMaximumIntegerDigits(int newValue) {
+﻿  ﻿  maximumIntegerDigits = Math.max(0, newValue);
+﻿  ﻿  if (minimumIntegerDigits > maximumIntegerDigits)
+﻿  ﻿  ﻿  minimumIntegerDigits = maximumIntegerDigits;
+﻿  }
+
+﻿  /**
+﻿   * Returns the minimum number of digits allowed in the integer portion of a
+﻿   * number.
+﻿   * 
+﻿   * @see #setMinimumIntegerDigits
+﻿   */
+﻿  public int getMinimumIntegerDigits() {
+﻿  ﻿  return minimumIntegerDigits;
+﻿  }
+
+﻿  /**
+﻿   * Sets the minimum number of digits allowed in the integer portion of a
+﻿   * number. minimumIntegerDigits must be <= maximumIntegerDigits. If the new
+﻿   * value for minimumIntegerDigits exceeds the current value of
+﻿   * maximumIntegerDigits, then maximumIntegerDigits will also be set to the
+﻿   * new value
+﻿   * 
+﻿   * @param newValue
+﻿   *            the minimum number of integer digits to be shown; if less than
+﻿   *            zero, then zero is used. The concrete subclass may enforce an
+﻿   *            upper limit to this value appropriate to the numeric type
+﻿   *            being formatted.
+﻿   * @see #getMinimumIntegerDigits
+﻿   */
+﻿  public void setMinimumIntegerDigits(int newValue) {
+﻿  ﻿  minimumIntegerDigits = Math.max(0, newValue);
+﻿  ﻿  if (minimumIntegerDigits > maximumIntegerDigits)
+﻿  ﻿  ﻿  maximumIntegerDigits = minimumIntegerDigits;
+﻿  }
+
+﻿  /**
+﻿   * Returns the maximum number of digits allowed in the fraction portion of a
+﻿   * number.
+﻿   * 
+﻿   * @see #setMaximumFractionDigits
+﻿   */
+﻿  public int getMaximumFractionDigits() {
+﻿  ﻿  return maximumFractionDigits;
+﻿  }
+
+﻿  /**
+﻿   * Sets the maximum number of digits allowed in the fraction portion of a
+﻿   * number. maximumFractionDigits must be >= minimumFractionDigits. If the
+﻿   * new value for maximumFractionDigits is less than the current value of
+﻿   * minimumFractionDigits, then minimumFractionDigits will also be set to the
+﻿   * new value.
+﻿   * 
+﻿   * @param newValue
+﻿   *            the maximum number of fraction digits to be shown; if less
+﻿   *            than zero, then zero is used. The concrete subclass may
+﻿   *            enforce an upper limit to this value appropriate to the
+﻿   *            numeric type being formatted.
+﻿   * @see #getMaximumFractionDigits
+﻿   */
+﻿  public void setMaximumFractionDigits(int newValue) {
+﻿  ﻿  maximumFractionDigits = Math.max(0, newValue);
+﻿  ﻿  if (maximumFractionDigits < minimumFractionDigits)
+﻿  ﻿  ﻿  minimumFractionDigits = maximumFractionDigits;
+﻿  }
+
+﻿  /**
+﻿   * Returns the minimum number of digits allowed in the fraction portion of a
+﻿   * number.
+﻿   * 
+﻿   * @see #setMinimumFractionDigits
+﻿   */
+﻿  public int getMinimumFractionDigits() {
+﻿  ﻿  return minimumFractionDigits;
+﻿  }
+
+﻿  /**
+﻿   * Sets the minimum number of digits allowed in the fraction portion of a
+﻿   * number. minimumFractionDigits must be <= maximumFractionDigits. If the
+﻿   * new value for minimumFractionDigits exceeds the current value of
+﻿   * maximumFractionDigits, then maximumIntegerDigits will also be set to the
+﻿   * new value
+﻿   * 
+﻿   * @param newValue
+﻿   *            the minimum number of fraction digits to be shown; if less
+﻿   *            than zero, then zero is used. The concrete subclass may
+﻿   *            enforce an upper limit to this value appropriate to the
+﻿   *            numeric type being formatted.
+﻿   * @see #getMinimumFractionDigits
+﻿   */
+﻿  public void setMinimumFractionDigits(int newValue) {
+﻿  ﻿  minimumFractionDigits = Math.max(0, newValue);
+﻿  ﻿  if (maximumFractionDigits < minimumFractionDigits)
+﻿  ﻿  ﻿  maximumFractionDigits = minimumFractionDigits;
+﻿  }
+
+﻿  // =======================privates===============================
+
+﻿  private static NumberFormat getInstance(int choice) {
+﻿  ﻿  /* try the cache first */
+﻿  ﻿  String[] numberPatterns = new String[] { "", "", "", "", "" };
+
+﻿  ﻿  DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+﻿  ﻿  int entry = (choice == INTEGERSTYLE) ? NUMBERSTYLE : choice;
+﻿  ﻿  DecimalFormat format = new DecimalFormat(numberPatterns[entry], symbols);
+
+﻿  ﻿  if (choice == INTEGERSTYLE) {
+﻿  ﻿  ﻿  format.setMaximumFractionDigits(0);
+﻿  ﻿  ﻿  format.setDecimalSeparatorAlwaysShown(false);
+﻿  ﻿  ﻿  format.setParseIntegerOnly(true);
+﻿  ﻿  } else if (choice == CURRENCYSTYLE) {
+﻿  ﻿  ﻿  //format.adjustForCurrencyDefaultFractionDigits();
+﻿  ﻿  }
+
+﻿  ﻿  return format;
+﻿  }
+
+﻿  // Constants used by factory methods to specify a style of format.
+﻿  private static final int NUMBERSTYLE = 0;
+﻿  private static final int CURRENCYSTYLE = 1;
+﻿  private static final int PERCENTSTYLE = 2;
+﻿  private static final int SCIENTIFICSTYLE = 3;
+﻿  private static final int INTEGERSTYLE = 4;
+
+﻿  /**
+﻿   * True if the the grouping (i.e. thousands) separator is used when
+﻿   * formatting and parsing numbers.
+﻿   * 
+﻿   * @serial
+﻿   * @see #isGroupingUsed
+﻿   */
+﻿  private boolean groupingUsed = true;
+
+﻿  /**
+﻿   * The maximum number of digits allowed in the integer portion of a number.
+﻿   * <code>maxIntegerDigits</code> must be greater than or equal to
+﻿   * <code>minIntegerDigits</code>.
+﻿   * <p>
+﻿   * <strong>Note:</strong> This field exists only for serialization
+﻿   * compatibility with JDK 1.1. In Java platform 2 v1.2 and higher, the new
+﻿   * <code>int</code> field <code>maximumIntegerDigits</code> is used instead.
+﻿   * When writing to a stream, <code>maxIntegerDigits</code> is set to
+﻿   * <code>maximumIntegerDigits</code> or <code>Byte.MAX_VALUE</code>,
+﻿   * whichever is smaller. When reading from a stream, this field is used only
+﻿   * if <code>serialVersionOnStream</code> is less than 1.
+﻿   * 
+﻿   * @serial
+﻿   * @see #getMaximumIntegerDigits
+﻿   */
+﻿  private byte maxIntegerDigits = 40;
+
+﻿  /**
+﻿   * The minimum number of digits allowed in the integer portion of a number.
+﻿   * <code>minimumIntegerDigits</code> must be less than or equal to
+﻿   * <code>maximumIntegerDigits</code>.
+﻿   * <p>
+﻿   * <strong>Note:</strong> This field exists only for serialization
+﻿   * compatibility with JDK 1.1. In Java platform 2 v1.2 and higher, the new
+﻿   * <code>int</code> field <code>minimumIntegerDigits</code> is used instead.
+﻿   * When writing to a stream, <code>minIntegerDigits</code> is set to
+﻿   * <code>minimumIntegerDigits</code> or <code>Byte.MAX_VALUE</code>,
+﻿   * whichever is smaller. When reading from a stream, this field is used only
+﻿   * if <code>serialVersionOnStream</code> is less than 1.
+﻿   * 
+﻿   * @serial
+﻿   * @see #getMinimumIntegerDigits
+﻿   */
+﻿  private byte minIntegerDigits = 1;
+
+﻿  /**
+﻿   * The maximum number of digits allowed in the fractional portion of a
+﻿   * number. <code>maximumFractionDigits</code> must be greater than or equal
+﻿   * to <code>minimumFractionDigits</code>.
+﻿   * <p>
+﻿   * <strong>Note:</strong> This field exists only for serialization
+﻿   * compatibility with JDK 1.1. In Java platform 2 v1.2 and higher, the new
+﻿   * <code>int</code> field <code>maximumFractionDigits</code> is used
+﻿   * instead. When writing to a stream, <code>maxFractionDigits</code> is set
+﻿   * to <code>maximumFractionDigits</code> or <code>Byte.MAX_VALUE</code>,
+﻿   * whichever is smaller. When reading from a stream, this field is used only
+﻿   * if <code>serialVersionOnStream</code> is less than 1.
+﻿   * 
+﻿   * @serial
+﻿   * @see #getMaximumFractionDigits
+﻿   */
+﻿  private byte maxFractionDigits = 3; // invariant, >= minFractionDigits
+
+﻿  /**
+﻿   * The minimum number of digits allowed in the fractional portion of a
+﻿   * number. <code>minimumFractionDigits</code> must be less than or equal to
+﻿   * <code>maximumFractionDigits</code>.
+﻿   * <p>
+﻿   * <strong>Note:</strong> This field exists only for serialization
+﻿   * compatibility with JDK 1.1. In Java platform 2 v1.2 and higher, the new
+﻿   * <code>int</code> field <code>minimumFractionDigits</code> is used
+﻿   * instead. When writing to a stream, <code>minFractionDigits</code> is set
+﻿   * to <code>minimumFractionDigits</code> or <code>Byte.MAX_VALUE</code>,
+﻿   * whichever is smaller. When reading from a stream, this field is used only
+﻿   * if <code>serialVersionOnStream</code> is less than 1.
+﻿   * 
+﻿   * @serial
+﻿   * @see #getMinimumFractionDigits
+﻿   */
+﻿  private byte minFractionDigits = 0;
+
+﻿  /**
+﻿   * True if this format will parse numbers as integers only.
+﻿   * 
+﻿   * @serial
+﻿   * @see #isParseIntegerOnly
+﻿   */
+﻿  private boolean parseIntegerOnly = false;
+
+﻿  // new fields for 1.2. byte is too small for integer digits.
+
+﻿  /**
+﻿   * The maximum number of digits allowed in the integer portion of a number.
+﻿   * <code>maximumIntegerDigits</code> must be greater than or equal to
+﻿   * <code>minimumIntegerDigits</code>.
+﻿   * 
+﻿   * @serial
+﻿   * @since 1.2
+﻿   * @see #getMaximumIntegerDigits
+﻿   */
+﻿  private int maximumIntegerDigits = 40;
+
+﻿  /**
+﻿   * The minimum number of digits allowed in the integer portion of a number.
+﻿   * <code>minimumIntegerDigits</code> must be less than or equal to
+﻿   * <code>maximumIntegerDigits</code>.
+﻿   * 
+﻿   * @serial
+﻿   * @since 1.2
+﻿   * @see #getMinimumIntegerDigits
+﻿   */
+﻿  private int minimumIntegerDigits = 1;
+
+﻿  /**
+﻿   * The maximum number of digits allowed in the fractional portion of a
+﻿   * number. <code>maximumFractionDigits</code> must be greater than or equal
+﻿   * to <code>minimumFractionDigits</code>.
+﻿   * 
+﻿   * @serial
+﻿   * @since 1.2
+﻿   * @see #getMaximumFractionDigits
+﻿   */
+﻿  private int maximumFractionDigits = 3; // invariant, >= minFractionDigits
+
+﻿  /**
+﻿   * The minimum number of digits allowed in the fractional portion of a
+﻿   * number. <code>minimumFractionDigits</code> must be less than or equal to
+﻿   * <code>maximumFractionDigits</code>.
+﻿   * 
+﻿   * @serial
+﻿   * @since 1.2
+﻿   * @see #getMinimumFractionDigits
+﻿   */
+﻿  private int minimumFractionDigits = 0;
+
+﻿  static final int currentSerialVersion = 1;
+
+﻿  /**
+﻿   * Describes the version of <code>NumberFormat</code> present on the stream.
+﻿   * Possible values are:
+﻿   * <ul>
+﻿   * <li><b>0</b> (or uninitialized): the JDK 1.1 version of the stream
+﻿   * format. In this version, the <code>int</code> fields such as
+﻿   * <code>maximumIntegerDigits</code> were not present, and the
+﻿   * <code>byte</code> fields such as <code>maxIntegerDigits</code> are used
+﻿   * instead.
+﻿   * 
+﻿   * <li><b>1</b>: the 1.2 version of the stream format. The values of the
+﻿   * <code>byte</code> fields such as <code>maxIntegerDigits</code> are
+﻿   * ignored, and the <code>int</code> fields such as
+﻿   * <code>maximumIntegerDigits</code> are used instead.
+﻿   * </ul>
+﻿   * When streaming out a <code>NumberFormat</code>, the most recent format
+﻿   * (corresponding to the highest allowable
+﻿   * <code>serialVersionOnStream</code>) is always written.
+﻿   * 
+﻿   * @serial
+﻿   * @since 1.2
+﻿   */
+﻿  private int serialVersionOnStream = currentSerialVersion;
+
+﻿  // Removed "implements Cloneable" clause. Needs to update serialization
+﻿  // ID for backward compatibility.
+﻿  static final long serialVersionUID = -2308460125733713944L;
+
+﻿  //
+﻿  // class for AttributedCharacterIterator attributes
+﻿  //
+﻿  /**
+﻿   * Defines constants that are used as attribute keys in the
+﻿   * <code>AttributedCharacterIterator</code> returned from
+﻿   * <code>NumberFormat.formatToCharacterIterator</code> and as field
+﻿   * identifiers in <code>FieldPosition</code>.
+﻿   * 
+﻿   * @since 1.4
+﻿   */
+﻿  public static class Field extends Format.Field {
+﻿  ﻿  // table of all instances in this class, used by readResolve
+﻿  ﻿  private static final Hashtable instanceMap = new Hashtable(11);
+
+﻿  ﻿  /**
+﻿  ﻿   * Creates a Field instance with the specified name.
+﻿  ﻿   * 
+﻿  ﻿   * @param name
+﻿  ﻿   *            Name of the attribute
+﻿  ﻿   */
+﻿  ﻿  protected Field(String name) {
+﻿  ﻿  ﻿  super(name);
+﻿  ﻿  ﻿  if (this.getClass() == NumberFormat.Field.class) {
+﻿  ﻿  ﻿  ﻿  instanceMap.put(name, this);
+﻿  ﻿  ﻿  }
+﻿  ﻿  }
+
+﻿  ﻿  /**
+﻿  ﻿   * Constant identifying the integer field.
+﻿  ﻿   */
+﻿  ﻿  public static final Field INTEGER = new Field("integer");
+
+﻿  ﻿  /**
+﻿  ﻿   * Constant identifying the fraction field.
+﻿  ﻿   */
+﻿  ﻿  public static final Field FRACTION = new Field("fraction");
+
+﻿  ﻿  /**
+﻿  ﻿   * Constant identifying the exponent field.
+﻿  ﻿   */
+﻿  ﻿  public static final Field EXPONENT = new Field("exponent");
+
+﻿  ﻿  /**
+﻿  ﻿   * Constant identifying the decimal separator field.
+﻿  ﻿   */
+﻿  ﻿  public static final Field DECIMAL_SEPARATOR = new Field(
+﻿  ﻿  ﻿  ﻿  "decimal separator");
+
+﻿  ﻿  /**
+﻿  ﻿   * Constant identifying the sign field.
+﻿  ﻿   */
+﻿  ﻿  public static final Field SIGN = new Field("sign");
+
+﻿  ﻿  /**
+﻿  ﻿   * Constant identifying the grouping separator field.
+﻿  ﻿   */
+﻿  ﻿  public static final Field GROUPING_SEPARATOR = new Field(
+﻿  ﻿  ﻿  ﻿  "grouping separator");
+
+﻿  ﻿  /**
+﻿  ﻿   * Constant identifying the exponent symbol field.
+﻿  ﻿   */
+﻿  ﻿  public static final Field EXPONENT_SYMBOL = new Field("exponent symbol");
+
+﻿  ﻿  /**
+﻿  ﻿   * Constant identifying the percent field.
+﻿  ﻿   */
+﻿  ﻿  public static final Field PERCENT = new Field("percent");
+
+﻿  ﻿  /**
+﻿  ﻿   * Constant identifying the permille field.
+﻿  ﻿   */
+﻿  ﻿  public static final Field PERMILLE = new Field("per mille");
+
+﻿  ﻿  /**
+﻿  ﻿   * Constant identifying the currency field.
+﻿  ﻿   */
+﻿  ﻿  public static final Field CURRENCY = new Field("currency");
+
+﻿  ﻿  /**
+﻿  ﻿   * Constant identifying the exponent sign field.
+﻿  ﻿   */
+﻿  ﻿  public static final Field EXPONENT_SIGN = new Field("exponent sign");
+﻿  }
 }
 
