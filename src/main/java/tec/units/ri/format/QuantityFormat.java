@@ -26,7 +26,6 @@
 package tec.units.ri.format;
 
 import java.text.FieldPosition;
-import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.io.IOException;
 
@@ -38,6 +37,7 @@ import javax.measure.format.UnitFormat;
 
 import tec.units.ri.AbstractQuantity;
 import tec.units.ri.AbstractUnit;
+import tec.units.ri.format.internal.l10n.NumberFormat;
 import tec.units.ri.quantity.NumberQuantity;
 
 /**
@@ -136,13 +136,13 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 	 * the last character used.
 	 * 
 	 * @param csq the <code>CharSequence</code> to parse.
-	 * @param cursor the cursor holding the current parsing index.
+	 * @param index the current parsing index.
 	 * @return the object parsed from the specified character sub-sequence.
 	 * @throws IllegalArgumentException
 	 *             if any problem occurs while parsing the specified character
 	 *             sequence (e.g. illegal syntax).
 	 */
-	abstract AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
+	abstract AbstractQuantity<?> parse(CharSequence csq, int index)
 			throws IllegalArgumentException, ParserException;
 	
 	/**
@@ -201,7 +201,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 //		return DEFAULT._unitFormat.format(low, dest);
 //	}
 
-	public final StringBuffer format(Object obj, final StringBuffer toAppendTo,
+	/* public final StringBuffer format(Object obj, final StringBuffer toAppendTo,
 			FieldPosition pos) {
 		if (!(obj instanceof AbstractQuantity<?>))
 			throw new IllegalArgumentException(
@@ -214,16 +214,16 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 		} catch (IOException ex) {
 			throw new Error(ex); // Cannot happen.
 		}
-	}
+	} */
 
-	final AbstractQuantity<?> parseObject(String source, ParsePosition pos) {
+/*	final AbstractQuantity<?> parseObject(String source, ParsePosition pos) {
 		try {
 			return parse(source, pos);
 		} catch (IllegalArgumentException | ParserException e) {
 			return null; // Unfortunately the message why the parsing failed
 		} // is lost; but we have to follow the Format spec.
 
-	}
+	} */
 
 	/**
 	 * Convenience method equivalent to {@link #format(AbstractQuantity, Appendable)}
@@ -271,10 +271,10 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 
 		@SuppressWarnings("unchecked")
 		@Override
-		AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
+		AbstractQuantity<?> parse(CharSequence csq, int index)
 				throws IllegalArgumentException, ParserException {
 			String str = csq.toString();
-			Number number = numberFormat.parse(str, cursor);
+			Number number = numberFormat.parse(str, index);
 			if (number == null)
 				throw new IllegalArgumentException("Number cannot be parsed");
 			Unit unit = unitFormat.parse(csq);
@@ -290,7 +290,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 		}
 		
 		public AbstractQuantity<?> parse(CharSequence csq) throws IllegalArgumentException, ParserException {
-			return parse(csq, new ParsePosition(0));
+			return parse(csq, 0);
 		}
 
 //		private static final long serialVersionUID = 1L;
@@ -331,9 +331,9 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 
 		@SuppressWarnings("unchecked")
 		@Override
-		AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
+		AbstractQuantity<?> parse(CharSequence csq, int index)
 				throws ParserException {
-			int startDecimal = cursor.getIndex();
+			int startDecimal = index; //cursor.getIndex();
 			while ((startDecimal < csq.length())
 					&& Character.isWhitespace(csq.charAt(startDecimal))) {
 				startDecimal++;
@@ -345,14 +345,14 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 			}
 			Double decimal = new Double(csq.subSequence(startDecimal,
 					endDecimal).toString());
-			cursor.setIndex(endDecimal + 1);
-			Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
+//			cursor.setIndex(endDecimal + 1);
+			Unit unit = LocalUnitFormat.getInstance().parse(csq, index);
 			return NumberQuantity.of(decimal.doubleValue(), unit);
 		}
 		
 		public AbstractQuantity<?> parse(CharSequence csq)
 				throws ParserException {
-			return parse(csq, new ParsePosition(0));
+			return parse(csq, 0);
 		}
 	}
 }

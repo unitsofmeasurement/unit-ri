@@ -31,8 +31,6 @@ import static tec.units.ri.util.US.LITER;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.text.FieldPosition;
-import java.text.ParsePosition;
 import java.util.Formattable;
 import java.util.Formatter;
 import java.util.Locale;
@@ -167,7 +165,7 @@ import tec.units.ri.util.SIPrefix;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4.4, $Date: 2015-01-28 $
+ * @version 0.5, $Date: 2015-02-08 $
  */
 public class SimpleUnitFormat extends AbstractUnitFormat {
 
@@ -309,10 +307,10 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 		return appendable;
 	}
 
-	protected Unit<?> parse(CharSequence csq, ParsePosition cursor)
+	protected Unit<?> parse(CharSequence csq, int index)
 			throws IllegalArgumentException {
 		// Parsing reads the whole character sequence from the parse position.
-		int start = cursor != null ? cursor.getIndex() : 0;
+		int start = index; //cursor != null ? cursor.getIndex() : 0;
 		int end = csq.length();
 		if (end <= start) {
 			return AbstractUnit.ONE;
@@ -325,27 +323,27 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 			SimpleFormatParser parser = new SimpleFormatParser(symbolMap, new StringReader(
 					source));
 			Unit<?> result = parser.parseUnit();
-			if (cursor != null)
-				cursor.setIndex(end);
+//			if (cursor != null)
+//				cursor.setIndex(end);
 			return result;
 		} catch (TokenException e) {
-			if (cursor != null) {
-				if (e.currentToken != null) {
-					cursor.setErrorIndex(start + e.currentToken.endColumn);
-				} else {
-					cursor.setErrorIndex(start);
-				}
-			}
+//			if (cursor != null) {
+//				if (e.currentToken != null) {
+//					cursor.setErrorIndex(start + e.currentToken.endColumn);
+//				} else {
+//					cursor.setErrorIndex(start);
+//				}
+//			}
 			throw new ParserException(e);
 		} catch (TokenMgrError e) {
-			cursor.setErrorIndex(start);
+//			cursor.setErrorIndex(start);
 			throw new ParserException(e);
 		}
 	}
 	
 	public Unit<?> parse(CharSequence csq)
 			throws ParserException {
-		return parse(csq, new ParsePosition(0));
+		return parse(csq, 0);
 	}
 
 	/**
@@ -707,7 +705,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * @see java.text.Format#format(java.lang.Object, java.lang.StringBuffer,
 	 *      java.text.FieldPosition)
 	 */
-	protected StringBuffer format(Object obj, StringBuffer toAppendTo,
+	/* protected StringBuffer format(Object obj, StringBuffer toAppendTo,
 			FieldPosition pos) {
 		try {
 			Unit<?> unit = (Unit<?>) obj;
@@ -719,7 +717,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 			throw new IllegalArgumentException(
 					"Invalid type: " + obj.getClass().getName()); //$NON-NLS-1$
 		}
-	}
+	} */
 
 	/**
 	 * Override Format.parseObject().
@@ -727,8 +725,8 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * @see java.text.Format#parseObject(java.lang.String,
 	 *      java.text.ParsePosition)
 	 */
-	Object parseObject(String source, ParsePosition pos) {
-		return parse(source, pos);
-	}
+//	Object parseObject(String source, ParsePosition pos) {
+//		return parse(source, pos);
+//	}
 
 }

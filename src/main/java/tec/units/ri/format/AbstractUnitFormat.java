@@ -26,7 +26,6 @@
 package tec.units.ri.format;
 
 import java.io.IOException;
-import java.text.ParsePosition;
 import javax.measure.Unit;
 import javax.measure.format.UnitFormat;
 
@@ -45,7 +44,7 @@ import tec.units.ri.AbstractUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.2 $Date: 2015-01-28 $
+ * @version 0.6 $Date: 2015-02-08 $
  * 
  */
 public abstract class AbstractUnitFormat implements UnitFormat {
@@ -75,12 +74,12 @@ public abstract class AbstractUnitFormat implements UnitFormat {
      * {@link AbstractUnit#ONE} is returned.
      *
      * @param csq the <code>CharSequence</code> to parse.
-     * @param cursor the cursor holding the current parsing index.
+     * @param index the current parsing index.
      * @return the unit parsed from the specified character sub-sequence.
      * @throws IllegalArgumentException if any problem occurs while parsing the
      *         specified character sequence (e.g. illegal syntax).
      */
-    protected abstract Unit<?> parse(CharSequence csq, ParsePosition cursor)
+    protected abstract Unit<?> parse(CharSequence csq, int index)
             throws IllegalArgumentException;
     
     /**

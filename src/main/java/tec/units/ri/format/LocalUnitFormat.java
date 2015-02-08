@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -33,7 +33,6 @@ import static tec.units.ri.util.SI.LITRE;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.text.ParsePosition;
 import java.util.Map;
 
 import javax.measure.Quantity;
@@ -162,7 +161,7 @@ import tec.units.ri.unit.TransformedUnit;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.4, January 24, 2015
+ * @version 0.6, February 8, 2015
  */
 public class LocalUnitFormat extends AbstractUnitFormat {
 
@@ -278,12 +277,12 @@ public class LocalUnitFormat extends AbstractUnitFormat {
 		return appendable;
 	}
 
-	protected AbstractUnit<?> parse(CharSequence csq, ParsePosition cursor)
+	protected AbstractUnit<?> parse(CharSequence csq, int index)
 			throws ParserException {
 		// Parsing reads the whole character sequence from the parse position.
 		// TODO Is there any use for cursor? It seems an int as startPosition
 		// would work (also in ME)
-		int start = cursor.getIndex();
+		int start = index; //= cursor.getIndex();
 		int end = csq.length();
 		if (end <= start) {
 			return AbstractUnit.ONE;
@@ -296,17 +295,17 @@ public class LocalUnitFormat extends AbstractUnitFormat {
 			UnitFormatParser parser = new UnitFormatParser(symbolMap, new StringReader(
 					source));
 			AbstractUnit<?> result = parser.parseUnit();
-			cursor.setIndex(end);
+//			cursor.setIndex(end);
 			return result;
 		} catch (TokenException e) {
 			if (e.currentToken != null) {
-				cursor.setErrorIndex(start + e.currentToken.endColumn);
+//				cursor.setErrorIndex(start + e.currentToken.endColumn);
 			} else {
-				cursor.setErrorIndex(start);
+//				cursor.setErrorIndex(start);
 			}
 			throw new IllegalArgumentException(e.getMessage());
 		} catch (TokenMgrError e) {
-			cursor.setErrorIndex(start);
+//			cursor.setErrorIndex(start);
 			throw new ParserException(e);
 		}
 	}
@@ -315,7 +314,7 @@ public class LocalUnitFormat extends AbstractUnitFormat {
 	@Override
 	public AbstractUnit<? extends Quantity> parse(CharSequence csq)
 			throws ParserException {
-		return parse(csq, new ParsePosition(0));
+		return parse(csq, 0);
 	}
 
 	/**
@@ -598,9 +597,4 @@ public class LocalUnitFormat extends AbstractUnitFormat {
 			return EXPONENT_PRECEDENCE;
 		}
 	}
-
-//	protected SymbolMap getSymbols() {
-//		// FIXME integrate SymbolMap and SymbolMapImpl then return it here
-//		return null;
-//	}
 }
