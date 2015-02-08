@@ -26,7 +26,7 @@
 package tec.units.ri.format.internal.l10n;
 
 /**
- * An abstraction over common resource methods.
+ * An abstraction over common resource methods in an ME/SE compatible manner.
  * @author Werner Keil
  * @version 0.1
  */ 

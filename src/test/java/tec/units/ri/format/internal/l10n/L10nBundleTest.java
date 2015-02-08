@@ -18,11 +18,31 @@ public class L10nBundleTest {
 	
 	@Test
 	public void testMapBundle() {
+		Locale locale = Locale.getDefault();
+		   
+		L10nBundle resources = MapResourceBundle.getBundle("Resources", locale);
+		assertNotNull(resources);
+		String text = resources.getString("title");
+		assertEquals("Localization example", text);
+	}
+	
+	@Test
+	public void testMapBundle_de() {
 		Locale locale = new Locale("de");
 		   
 		L10nBundle resources = MapResourceBundle.getBundle("Resources", locale);
 		assertNotNull(resources);
-		String title = resources.getString("title");
-		assertEquals("Localization example", title);
+		String text = resources.getString("text");
+		assertEquals("Da ist ein Text.", text);
+	}
+	
+	@Test
+	public void testMapBundle_fr() {
+		Locale locale = new Locale("fr");
+		   
+		L10nBundle resources = MapResourceBundle.getBundle("Resources", locale);
+		assertNotNull(resources);
+		String text = resources.getString("text");
+		assertEquals("Voici du texte.", text);
 	}
 }
