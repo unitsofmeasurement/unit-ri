@@ -25,8 +25,6 @@
  */
 package tec.units.ri.format;
 
-import java.text.FieldPosition;
-import java.text.ParsePosition;
 import java.io.IOException;
 
 import javax.measure.Quantity;
@@ -50,7 +48,7 @@ import tec.units.ri.quantity.NumberQuantity;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.1, $Date: 2015-01-24 $
+ * @version 0.6, $Date: 2015-02-08 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {

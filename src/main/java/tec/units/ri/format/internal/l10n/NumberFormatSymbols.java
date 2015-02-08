@@ -3,7 +3,7 @@ package tec.units.ri.format.internal.l10n;
 /*
  *   
  *
- * Portions Copyright  1990-2007 Sun Microsystems, Inc. All Rights Reserved.
+ * Portions Copyright  1990-2008 Sun Microsystems, Inc. All Rights Reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  * 
  * This program is free software; you can redistribute it and/or
@@ -40,11 +40,11 @@ import javax.measure.format.ParserException;
  *  the grouping separator, and so on) needed by <code>NumberFormat</code> to
  *  format numbers. <code>NumberFormatSymbols</code> could be instantiated and
  *  setup by user but recommended is to get it from <code>ResourceManager
- *  </code> repectively <code>DevResourceManager.getNumberFormatSymbols()
- *  </code> already initialized. All fields are left public intentionaly.
+ *  </code> respectively <code>DevResourceManager.getNumberFormatSymbols()
+ *  </code> already initialized. All fields are left public intentionally.
  *
  */
-class NumberFormatSymbols { //implements SerializableResource {
+public class NumberFormatSymbols { //implements SerializableResource {
 
     /**
      *  Creates <code>DecimalFormatSymbols</code> instance uninitialized. All
@@ -269,7 +269,7 @@ class NumberFormatSymbols { //implements SerializableResource {
      *                             resource occured
      */
     public void write(java.io.OutputStream out) throws IOException, 
-    ParserException {
+     ParserException {
         DataOutputStream dous = new DataOutputStream(out);
         dous.writeUTF(currencySymbol);
         dous.writeUTF(intlCurrencySymbol);
@@ -357,3 +357,4 @@ class NumberFormatSymbols { //implements SerializableResource {
         }
     }
 }
+
