@@ -274,7 +274,6 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 */
 	private SimpleUnitFormat(SymbolMap symbols, Locale loc) {
 		symbolMap = symbols;
-//		uLocale = loc;
 	}
 
 	// //////////////////////
@@ -698,35 +697,4 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 		fmt.close(); // XXX try Java 7 with res, but for now let's leave J6 compliant
 		return unitPrecedence;
 	}
-		
-	/**
-	 * Override Format.format().
-	 * 
-	 * @see java.text.Format#format(java.lang.Object, java.lang.StringBuffer,
-	 *      java.text.FieldPosition)
-	 */
-	/* protected StringBuffer format(Object obj, StringBuffer toAppendTo,
-			FieldPosition pos) {
-		try {
-			Unit<?> unit = (Unit<?>) obj;
-			return (StringBuffer) format(unit, toAppendTo);
-		} catch (IOException ie) {
-			throw new IllegalArgumentException(
-					"Invalid type: " + obj.getClass().getName()); //$NON-NLS-1$
-		} catch (ClassCastException e) {
-			throw new IllegalArgumentException(
-					"Invalid type: " + obj.getClass().getName()); //$NON-NLS-1$
-		}
-	} */
-
-	/**
-	 * Override Format.parseObject().
-	 * 
-	 * @see java.text.Format#parseObject(java.lang.String,
-	 *      java.text.ParsePosition)
-	 */
-//	Object parseObject(String source, ParsePosition pos) {
-//		return parse(source, pos);
-//	}
-
 }

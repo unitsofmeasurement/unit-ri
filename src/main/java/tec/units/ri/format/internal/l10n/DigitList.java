@@ -75,7 +75,7 @@ package tec.units.ri.format.internal.l10n;
  *
  * @see        NumberFormat
  */
-public final class DigitList {
+final class DigitList {
     /**
      * The maximum number of significant digits in an IEEE 754 double, that is,
      * in a Java double. This must not be increased, or garbage digits will be
