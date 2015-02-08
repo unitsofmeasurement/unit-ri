@@ -8,7 +8,7 @@ import java.io.Reader;
 import java.util.Hashtable;
 import java.util.Map;
 
-public class L10nResources {
+public class L10nResources implements L10nBundle {
 
     // Constants -----------------------------------------------------
 
@@ -43,7 +43,7 @@ public class L10nResources {
    * @param locale name of locale.
    * @return L10nResources instance.
    */
-  public static L10nResources getL10nResources(String locale) {
+  public static L10nResources getBundle(String locale) {
     return new L10nResources(locale);
   }
 

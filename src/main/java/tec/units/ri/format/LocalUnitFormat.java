@@ -218,7 +218,7 @@ public class LocalUnitFormat extends AbstractUnitFormat {
 	 */
 	// public static LocalUnitFormat getInstance(Locale locale) {
 	// return new
-	// LocalUnitFormat(SymbolMap.of(ResourceBundle.getBundle(LocalUnitFormat.class.getName(),
+	// LocalUnitFormat(SymbolMap.of(MapResourceBundle.getBundle(LocalUnitFormat.class.getName(),
 	// locale)));
 	// }
 

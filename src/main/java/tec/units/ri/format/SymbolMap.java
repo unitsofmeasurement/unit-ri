@@ -48,7 +48,7 @@ import tec.units.ri.util.SIPrefix;
  * </p>
  *
  * <p>
- * Mappings are read from a <code>ResourceBundle</code>, the keys of which
+ * Mappings are read from a <code>MapResourceBundle</code>, the keys of which
  * should consist of a fully-qualified class name, followed by a dot ('.'), and
  * then the name of a static field belonging to that class, followed optionally
  * by another dot and a number. If the trailing dot and number are not present,
@@ -91,7 +91,7 @@ public final class SymbolMap {
 //	 * @param rb
 //	 *            the resource bundle.
 //	 */
-//	private SymbolMap(ResourceBundle rb) {
+//	private SymbolMap(MapResourceBundle rb) {
 //		this(rb.keySet());
 //	}
 

@@ -29,25 +29,25 @@ import java.util.Vector;
 import javax.measure.MeasurementException;
 
 /**
- * A Java ME compliant backport of <type>ResourceBundle</type>
+ * A Java ME compliant backport of {@link java.util.ResourceBundle}
  * @author Werner
- * @version 0.2
+ * @version 0.3
  */ 
-public abstract class ResourceBundle {
-    protected ResourceBundle parent;
+public abstract class MapResourceBundle implements L10nBundle {
+    protected MapResourceBundle parent;
  
     /**
      * Returns a resource bundle using the specified base name and target
      * locale.
      */
-    public static ResourceBundle getBundle(String baseName, Locale targetLocale) {
-        ResourceBundle parentBundle = null;
-        ResourceBundle bundle = null;
+    public static MapResourceBundle getBundle(String baseName, Locale targetLocale) {
+        MapResourceBundle parentBundle = null;
+        MapResourceBundle bundle = null;
         // Get a list of candidate locales for which resource bundles are
         // searched
         Vector candidateLocales = getCandidateLocales(targetLocale);
         // Go through every candidate locale and try to instantiate a
-        // ResourceBundle using the base name and the candidate locale
+        // MapResourceBundle using the base name and the candidate locale
         for (int i = candidateLocales.size() - 1; i >= 0; i--) {
             Locale locale = (Locale)candidateLocales.elementAt(i);
             // Bundle name consists of the base name plus an underscore and
@@ -59,7 +59,7 @@ public abstract class ResourceBundle {
                 // Try to instantiate a resource bundle using the name
                 // constructed above
                 Class bundleClass = Class.forName("tec.units.ri.format.internal.l10n." + bundleName); // TODO try use generics here
-                bundle = (ResourceBundle)bundleClass.newInstance();
+                bundle = (MapResourceBundle)bundleClass.newInstance();
                 // Set the parent bundle for this bundle. For the base bundle
                 // (the one with the root locale, Locale.ROOT), the parent is
                 // null.
@@ -99,7 +99,7 @@ public abstract class ResourceBundle {
         return locales;
     }
  
-    protected void setParent(ResourceBundle parent) {
+    protected void setParent(MapResourceBundle parent) {
         this.parent = parent;
     }
  

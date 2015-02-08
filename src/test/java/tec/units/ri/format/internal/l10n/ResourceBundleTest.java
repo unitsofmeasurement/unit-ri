@@ -6,7 +6,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import tec.units.ri.format.internal.l10n.Locale;
-import tec.units.ri.format.internal.l10n.ResourceBundle;
+import tec.units.ri.format.internal.l10n.MapResourceBundle;
 
 public class ResourceBundleTest {
 
@@ -14,7 +14,7 @@ public class ResourceBundleTest {
 	public void test() {
 		Locale locale = new Locale("de");
 		   
-		ResourceBundle   resources = ResourceBundle.getBundle("Resources", locale);
+		MapResourceBundle   resources = MapResourceBundle.getBundle("Resources", locale);
 		assertNotNull(resources);
 		String title = resources.getString("title");
 		assertEquals("Localization example", title);

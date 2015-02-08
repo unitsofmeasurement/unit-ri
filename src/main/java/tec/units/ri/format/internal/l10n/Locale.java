@@ -30,7 +30,7 @@ package tec.units.ri.format.internal.l10n;
  * @author Werner
  * @version 0.3
  */
-public class Locale {
+class Locale {
     public static final Locale ROOT = new Locale("", "");
     private String language;
     private String country;

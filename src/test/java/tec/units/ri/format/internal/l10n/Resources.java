@@ -11,12 +11,12 @@ package tec.units.ri.format.internal.l10n;
  */
 import java.util.Hashtable;
 
-import tec.units.ri.format.internal.l10n.ResourceBundle;
+import tec.units.ri.format.internal.l10n.MapResourceBundle;
  
 /**
  * Default resource bundle (English / United States).
  */
-public class Resources extends ResourceBundle {
+public class Resources extends MapResourceBundle {
     private Hashtable strings;
  
     public Resources() {
