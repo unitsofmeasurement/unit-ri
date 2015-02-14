@@ -16,8 +16,8 @@
 package tec.units.ri.function;
 
 import static org.junit.Assert.*;
-import static tec.units.ri.util.SI.*;
-import static tec.units.ri.util.SIPrefix.*;
+import static tec.units.ri.spi.SI.*;
+import static tec.units.ri.spi.SIPrefix.*;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;

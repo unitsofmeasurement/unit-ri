@@ -29,7 +29,7 @@ package tec.units.ri.format.internal;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.format.SymbolMap;
 import tec.units.ri.function.LogConverter;
-import tec.units.ri.util.SIPrefix;
+import tec.units.ri.spi.SIPrefix;
 
 /** */
 public final class UnitFormatParser implements UnitTokenConstants {

@@ -27,12 +27,12 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.util;
+package tec.units.ri.spi;
 
 import static org.junit.Assert.assertEquals;
-import static tec.units.ri.util.SI.GRAM;
-import static tec.units.ri.util.SI.KILOGRAM;
-import static tec.units.ri.util.SIPrefix.KILO;
+import static tec.units.ri.spi.SI.GRAM;
+import static tec.units.ri.spi.SI.KILOGRAM;
+import static tec.units.ri.spi.SIPrefix.KILO;
 
 import org.junit.Test;
 

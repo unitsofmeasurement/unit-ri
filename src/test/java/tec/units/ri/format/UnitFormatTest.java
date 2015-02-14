@@ -26,10 +26,10 @@
 package tec.units.ri.format;
 
 import static org.junit.Assert.*;
-import static tec.units.ri.util.SI.KILOGRAM;
-import static tec.units.ri.util.SI.METRE;
-import static tec.units.ri.util.SI.MINUTE;
-import static tec.units.ri.util.SI.SECOND;
+import static tec.units.ri.spi.SI.KILOGRAM;
+import static tec.units.ri.spi.SI.METRE;
+import static tec.units.ri.spi.SI.MINUTE;
+import static tec.units.ri.spi.SI.SECOND;
 
 import java.io.IOException;
 

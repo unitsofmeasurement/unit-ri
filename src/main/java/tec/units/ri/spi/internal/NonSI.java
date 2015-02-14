@@ -25,31 +25,31 @@
  */
 package tec.units.ri.spi.internal;
 
-import static tec.units.ri.util.SI.AMPERE;
-import static tec.units.ri.util.SI.BECQUEREL;
-import static tec.units.ri.util.SI.BIT;
-import static tec.units.ri.util.SI.COULOMB;
-import static tec.units.ri.util.SI.GRAM;
-import static tec.units.ri.util.SI.GRAY;
-import static tec.units.ri.util.SI.JOULE;
-import static tec.units.ri.util.SI.KELVIN;
-import static tec.units.ri.util.SI.KILOGRAM;
-import static tec.units.ri.util.SI.LUX;
-import static tec.units.ri.util.SI.METRE;
-import static tec.units.ri.util.SI.METRES_PER_SECOND;
-import static tec.units.ri.util.SI.METRES_PER_SQUARE_SECOND;
-import static tec.units.ri.util.SI.MOLE;
-import static tec.units.ri.util.SI.NEWTON;
-import static tec.units.ri.util.SI.PASCAL;
-import static tec.units.ri.util.SI.RADIAN;
-import static tec.units.ri.util.SI.SECOND;
-import static tec.units.ri.util.SI.SIEVERT;
-import static tec.units.ri.util.SI.SQUARE_METRE;
-import static tec.units.ri.util.SI.STERADIAN;
-import static tec.units.ri.util.SI.TESLA;
-import static tec.units.ri.util.SI.WATT;
-import static tec.units.ri.util.SI.WEBER;
-import static tec.units.ri.util.SIPrefix.*;
+import static tec.units.ri.spi.SI.AMPERE;
+import static tec.units.ri.spi.SI.BECQUEREL;
+import static tec.units.ri.spi.SI.BIT;
+import static tec.units.ri.spi.SI.COULOMB;
+import static tec.units.ri.spi.SI.GRAM;
+import static tec.units.ri.spi.SI.GRAY;
+import static tec.units.ri.spi.SI.JOULE;
+import static tec.units.ri.spi.SI.KELVIN;
+import static tec.units.ri.spi.SI.KILOGRAM;
+import static tec.units.ri.spi.SI.LUX;
+import static tec.units.ri.spi.SI.METRE;
+import static tec.units.ri.spi.SI.METRES_PER_SECOND;
+import static tec.units.ri.spi.SI.METRES_PER_SQUARE_SECOND;
+import static tec.units.ri.spi.SI.MOLE;
+import static tec.units.ri.spi.SI.NEWTON;
+import static tec.units.ri.spi.SI.PASCAL;
+import static tec.units.ri.spi.SI.RADIAN;
+import static tec.units.ri.spi.SI.SECOND;
+import static tec.units.ri.spi.SI.SIEVERT;
+import static tec.units.ri.spi.SI.SQUARE_METRE;
+import static tec.units.ri.spi.SI.STERADIAN;
+import static tec.units.ri.spi.SI.TESLA;
+import static tec.units.ri.spi.SI.WATT;
+import static tec.units.ri.spi.SI.WEBER;
+import static tec.units.ri.spi.SIPrefix.*;
 
 import javax.measure.Unit;
 import javax.measure.quantity.*;
@@ -58,7 +58,7 @@ import tec.units.ri.AbstractSystemOfUnits;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.function.LogConverter;
 import tec.units.ri.function.RationalConverter;
-import tec.units.ri.util.SI;
+import tec.units.ri.spi.SI;
 
 
 /**

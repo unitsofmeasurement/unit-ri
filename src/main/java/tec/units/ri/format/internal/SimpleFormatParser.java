@@ -30,7 +30,7 @@ import javax.measure.Unit;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.format.SymbolMap;
 import tec.units.ri.function.LogConverter;
-import tec.units.ri.util.SIPrefix;
+import tec.units.ri.spi.SIPrefix;
 
 
 /** */

@@ -23,9 +23,9 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.util;
+package tec.units.ri.spi;
 
-import static tec.units.ri.util.SI.METRES_PER_SECOND;
+import static tec.units.ri.spi.SI.METRES_PER_SECOND;
 
 import javax.measure.Unit;
 import javax.measure.quantity.Speed;

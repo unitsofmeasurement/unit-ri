@@ -26,7 +26,7 @@
 package tec.units.ri.util;
 
 import static org.junit.Assert.*;
-import static tec.units.ri.util.SI.KILOGRAM;
+import static tec.units.ri.spi.SI.KILOGRAM;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Mass;

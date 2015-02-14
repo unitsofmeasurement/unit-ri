@@ -23,10 +23,10 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.util;
+package tec.units.ri.spi;
 
-import static tec.units.ri.util.SI.*;
-import static tec.units.ri.util.SIPrefix.MICRO;
+import static tec.units.ri.spi.SI.*;
+import static tec.units.ri.spi.SIPrefix.MICRO;
 import tec.units.ri.AbstractSystemOfUnits;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.function.RationalConverter;

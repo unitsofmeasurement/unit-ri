@@ -26,10 +26,10 @@
 package tec.units.ri.format;
 
 import static tec.units.ri.format.internal.l10n.BundleToMapAdapter.toMap;
-import static tec.units.ri.util.SI.CUBIC_METRE;
-import static tec.units.ri.util.SI.GRAM;
-import static tec.units.ri.util.SI.KILOGRAM;
-import static tec.units.ri.util.SI.LITRE;
+import static tec.units.ri.spi.SI.CUBIC_METRE;
+import static tec.units.ri.spi.SI.GRAM;
+import static tec.units.ri.spi.SI.KILOGRAM;
+import static tec.units.ri.spi.SI.LITRE;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -47,8 +47,8 @@ import tec.units.ri.format.internal.UnitFormatParser;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
+import tec.units.ri.spi.SIPrefix;
 import tec.units.ri.unit.AnnotatedUnit;
-import tec.units.ri.util.SIPrefix;
 import tec.units.ri.unit.AlternateUnit;
 import tec.units.ri.unit.BaseUnit;
 import tec.units.ri.unit.TransformedUnit;

@@ -26,7 +26,7 @@
 package tec.units.ri.quantity;
 
 import static org.junit.Assert.*;
-import static tec.units.ri.util.SI.*;
+import static tec.units.ri.spi.SI.*;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.*;
