@@ -25,7 +25,10 @@
  */
 package tec.units.ri.format.internal.l10n;
 
+import java.util.Enumeration;
+import java.util.ResourceBundle;
 import java.util.Vector;
+
 import javax.measure.MeasurementException;
 
 /**
@@ -116,6 +119,16 @@ public abstract class MapResourceBundle implements L10nBundle {
         }
         return string;
     }
+    
+    /**
+     * Returns an <code>Enumeration</code> of the keys contained in
+     * this <code>ResourceBundle</code> and its parent bundles.
+     *
+     * @return an <code>Enumeration</code> of the keys contained in
+     *         this <code>ResourceBundle</code> and its parent bundles.
+     * @see #keySet()
+     */
+    public abstract Enumeration<String> getKeys();
  
     /**
      * Gets a string for the given key from this resource bundle. Returns null

@@ -9,7 +9,9 @@ package tec.units.ri.format.internal.l10n;
  *
  * @author Werner
  */
+import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.ResourceBundle;
 
 import tec.units.ri.format.internal.l10n.MapResourceBundle;
  
@@ -31,5 +33,23 @@ public class Resources extends MapResourceBundle {
  
     public String handleGetString(String key) {
         return (String)strings.get(key);
+    }
+    
+    /**
+     * Returns an <code>Enumeration</code> of the keys contained in
+     * this <code>ResourceBundle</code> and its parent bundles.
+     *
+     * @return an <code>Enumeration</code> of the keys contained in
+     *         this <code>ResourceBundle</code> and its parent bundles.
+     * @see #keySet()
+     */
+    public Enumeration<String> getKeys() {
+        // lazily load the lookup hashtable.
+//        if (lookup == null) {
+//            loadLookup();
+//        }
+//
+//        ResourceBundle parent = this.parent;
+        return strings.keys();
     }
 }

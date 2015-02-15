@@ -33,7 +33,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.Formattable;
 import java.util.Formatter;
-import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -44,6 +43,8 @@ import javax.measure.format.ParserException;
 import tec.units.ri.format.internal.SimpleFormatParser;
 import tec.units.ri.format.internal.TokenException;
 import tec.units.ri.format.internal.TokenMgrError;
+import tec.units.ri.format.internal.l10n.Locale;
+import tec.units.ri.format.internal.l10n.MapResourceBundle;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.ExpConverter;
 import tec.units.ri.function.LogConverter;
@@ -235,10 +236,10 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * 
 	 * @param locale
 	 */
-	static SimpleUnitFormat getInstance(Locale locale) {
-		return new SimpleUnitFormat(SymbolMap.of(toMap(ResourceBundle.getBundle(
-				BUNDLE_NAME, locale))), locale);
-	}
+//	static SimpleUnitFormat getInstance(Locale locale) {
+//		return new SimpleUnitFormat(SymbolMap.of(toMap(ResourceBundle.getBundle(
+//				BUNDLE_NAME, locale))), locale);
+//	}
 
 	/** Returns an instance for the given symbol map. */
 	protected static SimpleUnitFormat getInstance(SymbolMap symbols, Locale locale) {
@@ -262,7 +263,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * 
 	 */
 	public SimpleUnitFormat() {
-		this(SymbolMap.of(toMap(ResourceBundle.getBundle(
+		this(SymbolMap.of(toMap(MapResourceBundle.getBundle(
 				BUNDLE_NAME, Locale.getDefault()))), Locale.getDefault());
 	}
 	

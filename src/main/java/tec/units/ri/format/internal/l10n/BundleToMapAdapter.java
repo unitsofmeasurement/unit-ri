@@ -33,11 +33,23 @@ import java.util.ResourceBundle;
 /**
  * 
  * @author Werner Keil
- * @version 0.2, January 24, 2015
+ * @version 0.3, February 15, 2015
  *
  */
 public final class BundleToMapAdapter {
 	public final static Map<String, String> toMap(final ResourceBundle resource) {
+		Map<String, String> map = new HashMap<>();
+
+		Enumeration<String> keys = resource.getKeys();
+		while (keys.hasMoreElements()) {
+			String key = keys.nextElement();
+			map.put(key, resource.getString(key));
+		}
+
+		return map;
+	}
+	
+	public final static Map<String, String> toMap(final MapResourceBundle resource) {
 		Map<String, String> map = new HashMap<>();
 
 		Enumeration<String> keys = resource.getKeys();
