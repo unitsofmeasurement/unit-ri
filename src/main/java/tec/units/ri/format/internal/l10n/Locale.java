@@ -26,7 +26,7 @@
 package tec.units.ri.format.internal.l10n;
 
 /**
- * A Java ME compliant backport of {@link java.util.Locale}
+ * A Java ME compliant backport of {@linkplain java.util.Locale}
  * @author Werner
  * @version 0.3
  */

@@ -85,16 +85,6 @@ public final class SymbolMap {
 		converterToPrefix = new HashMap<>();
 	}
 
-//	/**
-//	 * Creates a symbol map from the specified resource bundle,
-//	 *
-//	 * @param rb
-//	 *            the resource bundle.
-//	 */
-//	private SymbolMap(MapResourceBundle rb) {
-//		this(rb.keySet());
-//	}
-
 	/**
 	 * Creates a symbol map from the specified map
 	 *

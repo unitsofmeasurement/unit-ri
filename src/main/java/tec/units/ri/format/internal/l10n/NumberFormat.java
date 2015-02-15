@@ -216,8 +216,7 @@ public class NumberFormat {
 	}
 
 	/**
-	 * Returns a general-purpose number format for the current default
-	 * {@link java.util.Locale.Category#FORMAT FORMAT} locale.
+	 * Returns a general-purpose number format.
 	 *
 	 * @return the {@code NumberFormat} instance for general-purpose number
 	 *         formatting
