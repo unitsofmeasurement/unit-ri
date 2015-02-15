@@ -37,7 +37,6 @@ import javax.measure.UnconvertibleException;
 import javax.measure.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
-import tec.units.ri.format.LocalUnitFormat;
 import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
@@ -67,7 +66,7 @@ import tec.units.ri.unit.TransformedUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.7, Jan 25, 2015
+ * @version 0.8.8, Feb 15, 2015
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 

@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -45,7 +45,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import tec.units.ri.AbstractQuantityFactory;
-import tec.units.ri.format.LocalUnitFormat;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
@@ -59,40 +58,40 @@ public class UnitFormatTest {
 		sut = AbstractQuantityFactory.getInstance(Length.class).create(10, METRE);
 	}
 
-	@Test
-	public void testFormatLocal() {
-		final UnitFormat format = LocalUnitFormat.getInstance();
-		final Appendable a = new StringBuilder();
-		try {
-			format.format(METRE, a);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals(METRE, sut.getUnit());
-		assertEquals("m", a.toString());
+//	@Test
+//	public void testFormatLocal() {
+//		final UnitFormat format = LocalUnitFormat.getInstance();
+//		final Appendable a = new StringBuilder();
+//		try {
+//			format.format(METRE, a);
+//		} catch (IOException e) {
+//			fail(e.getMessage());
+//		}
+//		assertEquals(METRE, sut.getUnit());
+//		assertEquals("m", a.toString());
+//
+//		final Appendable a2 = new StringBuilder();
+//		@SuppressWarnings("unchecked")
+//		Unit<Speed> v = (Unit<Speed>) sut.getUnit().divide(SECOND);
+//		try {
+//			format.format(v, a2);
+//		} catch (IOException e) {
+//			fail(e.getMessage());
+//		}
+//		assertEquals("m/s", a2.toString());
+//	}
 
-		final Appendable a2 = new StringBuilder();
-		@SuppressWarnings("unchecked")
-		Unit<Speed> v = (Unit<Speed>) sut.getUnit().divide(SECOND);
-		try {
-			format.format(v, a2);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals("m/s", a2.toString());
-	}
-
-	@Test
-	@Ignore
-	public void testParseLocal() {
-		final UnitFormat format = LocalUnitFormat.getInstance();
-		try {
-			Unit<?> u = format.parse("min");
-			assertEquals("min", u.getSymbol());
-		} catch (ParserException e) {
-			fail(e.getMessage());
-		}
-	}
+//	@Test
+//	@Ignore
+//	public void testParseLocal() {
+//		final UnitFormat format = LocalUnitFormat.getInstance();
+//		try {
+//			Unit<?> u = format.parse("min");
+//			assertEquals("min", u.getSymbol());
+//		} catch (ParserException e) {
+//			fail(e.getMessage());
+//		}
+//	}
 	
 	@Test
 	public void testParseSimple() {

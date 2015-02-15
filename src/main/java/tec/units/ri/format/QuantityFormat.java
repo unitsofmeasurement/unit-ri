@@ -48,7 +48,7 @@ import tec.units.ri.quantity.NumberQuantity;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, $Date: 2015-02-08 $
+ * @version 0.6.1, $Date: 2015-02-15 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
@@ -62,7 +62,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 	 * Holds the default format instance.
 	 */
 	private static final NumberSpaceUnit DEFAULT = new NumberSpaceUnit(
-			NumberFormat.getInstance(), LocalUnitFormat.getInstance());
+			NumberFormat.getInstance(), SimpleUnitFormat.getInstance());
 
 	/**
 	 * Holds the standard format instance.
@@ -323,7 +323,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 				if (measure.getUnit().equals(AbstractUnit.ONE))
 					return dest;
 				dest.append(' ');
-				return LocalUnitFormat.getInstance().format(unit, dest);
+				return SimpleUnitFormat.getInstance().format(unit, dest);
 //			}
 		}
 
@@ -344,7 +344,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 			Double decimal = new Double(csq.subSequence(startDecimal,
 					endDecimal).toString());
 //			cursor.setIndex(endDecimal + 1);
-			Unit unit = LocalUnitFormat.getInstance().parse(csq, index);
+			Unit unit = SimpleUnitFormat.getInstance().parse(csq, index);
 			return NumberQuantity.of(decimal.doubleValue(), unit);
 		}
 		
