@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -24,8 +24,8 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 /**
- * This package provides utility classes in conformity with the
- * <a href="http://www.unitsofmeasurement.org/">Units of Measurement API</a>.
+ * This package provides SPI implementations in conformity with the
+ * <a href="http://unitsofmeasurement.github.io/">Units of Measurement API</a>.
  *
  * <h3> Standard / Non Standard Units</h3>
  * <ul>
@@ -35,20 +35,14 @@
  *    <li> The class {@link US} contains units 
  *      as defined in the <a href="http://en.wikipedia.org/wiki/United_States_customary_units">
  *      "United States customary system"</a>.</li>
- *    <li> The class {@link UCUM} contains standard and non-standard units 
- *      as defined by the <a href="http://unitsofmeasure.org/">
- *      "Uniform Code for Units of Measure"</a>.</li>
  *    <li> The class {@link CommonUnits} contains other commonly used non-standard units.</li>
  * </ul>
  *
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2
+ * @version 0.3
  */
-package tec.units.ri.util;
+package tec.units.ri.spi;
 
-import tec.units.ri.spi.CommonUnits;
-import tec.units.ri.spi.SI;
-import tec.units.ri.spi.US;
 
