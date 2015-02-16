@@ -33,10 +33,13 @@ import java.util.logging.Logger;
 
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
+import javax.measure.spi.SystemOfUnits;
 
 import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
+import tec.units.ri.spi.SI;
 import tec.units.ri.spi.SIPrefix;
+import tec.units.ri.spi.US;
 
 /**
  * <p>
@@ -62,14 +65,14 @@ import tec.units.ri.spi.SIPrefix;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.5, January 28, 2015
+ * @version 0.6, February 16, 2015
  */
 public final class SymbolMap {
 	private static final Logger logger = Logger.getLogger(SymbolMap.class
 			.getName());
 
-	private final Map<String, AbstractUnit<?>> symbolToUnit;
-	private final Map<AbstractUnit<?>, String> unitToSymbol;
+	private final Map<String, Unit<?>> symbolToUnit;
+	private final Map<Unit<?>, String> unitToSymbol;
 	private final Map<String, Object> symbolToPrefix;
 	private final Map<Object, String> prefixToSymbol;
 	private final Map<UnitConverter, SIPrefix> converterToPrefix;
@@ -95,6 +98,7 @@ public final class SymbolMap {
 		this();
 		for (String fqn : map.keySet()) {
 			// String fqn = i.nextElement();
+			SystemOfUnits sou;
 			String symbol = map.get(fqn);
 			boolean isAlias = false;
 			int lastDot = fqn.lastIndexOf('.');
@@ -109,20 +113,30 @@ public final class SymbolMap {
 			}
 			try {
 				Class<?> c = Class.forName(className);
-				Field field = c.getField(fieldName);
-				Object value = field.get(null);
-				if (value instanceof AbstractUnit<?>) {
-					if (isAlias) {
-						alias((AbstractUnit<?>) value, symbol);
+//				Object o = c.newInstance();
+/*				
+				if (SI.class.equals(c)) {
+//					SI si = (SI)o;
+//					System.out.println(si.getName()); // + " (" + sou.getUnits().size() + ")");
+					sou = SI.getInstance();
+					processSOU(sou, symbol, isAlias);
+				} else if (US.class.equals(c)) {
+					sou = US.getInstance();
+					processSOU(sou, symbol, isAlias);
+				} else { */
+					//SIPrefix.
+				
+					Field field = c.getField(fieldName);
+					Object value = field.get(null);
+					if (value instanceof Unit<?>) { // this should not happen, just a fallback for now
+						aliasOrLabel((Unit<?>) value, symbol, isAlias);
+					} else if (value instanceof SIPrefix) {
+						label((SIPrefix) value, symbol);
 					} else {
-						label((AbstractUnit<?>) value, symbol);
+						throw new ClassCastException("unable to cast " + value
+								+ " to Unit or Prefix");
 					}
-				} else if (value instanceof SIPrefix) {
-					label((SIPrefix) value, symbol);
-				} else {
-					throw new ClassCastException("unable to cast " + value
-							+ " to Unit or Prefix");
-				}
+				//}
 			} catch (Exception error) {
 				logger.log(Level.SEVERE, "Error", error);
 			}
@@ -149,7 +163,7 @@ public final class SymbolMap {
 	 * @param symbol
 	 *            the new symbol for the unit.
 	 */
-	public void label(AbstractUnit<?> unit, String symbol) {
+	public void label(Unit<?> unit, String symbol) {
 		symbolToUnit.put(symbol, unit);
 		unitToSymbol.put(unit, symbol);
 	}
@@ -166,7 +180,7 @@ public final class SymbolMap {
 	 * @param symbol
 	 *            the new symbol for the unit.
 	 */
-	public void alias(AbstractUnit<?> unit, String symbol) {
+	public void alias(Unit<?> unit, String symbol) {
 		symbolToUnit.put(symbol, unit);
 	}
 
@@ -188,7 +202,7 @@ public final class SymbolMap {
 	 *            the symbol.
 	 * @return the corresponding unit or <code>null</code> if none.
 	 */
-	public AbstractUnit<?> getUnit(String symbol) {
+	public Unit<?> getUnit(String symbol) {
 		return symbolToUnit.get(symbol);
 	}
 
@@ -239,5 +253,24 @@ public final class SymbolMap {
 	 */
 	public String getSymbol(SIPrefix prefix) {
 		return prefixToSymbol.get(prefix);
+	}
+	
+	// Private methods
+	
+	private void processSOU(final SystemOfUnits sou, final String symbol, boolean isAlias) {
+		for (Unit<?> u : sou.getUnits()) {
+			if (symbol.equals(u.getSymbol())) {
+				System.out.println(u.getClass().getName() + ": " + symbol);
+				aliasOrLabel(u, symbol, isAlias);
+			}
+		}
+	}
+	
+	private void aliasOrLabel(final Unit<?> unit, final String symbol, boolean isAlias) {
+		if (isAlias) {
+			alias(unit, symbol);
+		} else {
+			label(unit, symbol);
+		}
 	}
 }
