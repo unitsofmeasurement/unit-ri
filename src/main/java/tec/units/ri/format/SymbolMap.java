@@ -113,10 +113,8 @@ public final class SymbolMap {
 			}
 			try {
 				Class<?> c = Class.forName(className);
-//				Object o = c.newInstance();
 /*				
 				if (SI.class.equals(c)) {
-//					SI si = (SI)o;
 //					System.out.println(si.getName()); // + " (" + sou.getUnits().size() + ")");
 					sou = SI.getInstance();
 					processSOU(sou, symbol, isAlias);
