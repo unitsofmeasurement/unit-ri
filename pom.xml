@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>0.7.1</version>
+		<version>0.8-SNAPSHOT</version>
 	</parent>
 
 	<licenses>
@@ -270,10 +270,18 @@
 
 	<!-- Additional repositories -->
 	<!-- Helps to resolve Parent POM -->
-	<!-- repositories> <repository> <id>geotoolkit</id> <name>Geotoolkit.org 
-		project</name> <url>http://maven.geotoolkit.org</url> </repository> <repository> 
-		<id>jcenter</id> <name>JCenter</name> <url>http://jcenter.bintray.com</url> 
-		</repository> </repositories -->
+	<repositories> 
+		repository> 
+			<id>geotoolkit</id>
+			<name>Geotoolkit.org project</name>
+			<url>http://maven.geotoolkit.org</url> 
+		</repository>
+		<repository> 
+			<id>jcenter</id>
+			<name>JCenter</name>
+			<url>http://jcenter.bintray.com</url> 
+		</repository> 
+	</repositories>
 
 	<profiles>
 		<profile>
