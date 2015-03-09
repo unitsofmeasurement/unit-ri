@@ -271,7 +271,7 @@
 	<!-- Additional repositories -->
 	<!-- Helps to resolve Parent POM -->
 	<repositories> 
-		repository> 
+		<repository> 
 			<id>geotoolkit</id>
 			<name>Geotoolkit.org project</name>
 			<url>http://maven.geotoolkit.org</url> 
