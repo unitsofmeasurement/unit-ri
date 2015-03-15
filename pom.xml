@@ -11,10 +11,11 @@
 		<url>http://unitsofmeasurement.github.io</url>
 	</organization>
 	<description>Unit Standard (JSR 363) Reference Implementation.</description>
+	<version>0.8-SNAPSHOT</version>
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>0.8-SNAPSHOT</version>
+		<version>0.8-RC1</version>
 	</parent>
 
 	<licenses>
