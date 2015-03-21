@@ -5,13 +5,10 @@
  */
 package tec.units.ri.format.internal.l10n;
 
-/**
- *
- * @author Werner
- */
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.ResourceBundle;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import tec.units.ri.format.internal.l10n.MapResourceBundle;
  
@@ -19,10 +16,10 @@ import tec.units.ri.format.internal.l10n.MapResourceBundle;
  * Default resource bundle (English / United States).
  */
 public class Resources extends MapResourceBundle {
-    private Hashtable strings;
+    private Map<String, String> strings;
  
     public Resources() {
-        strings = new Hashtable(30);
+        strings = new HashMap<String, String>(30);
  
         strings.put("title", "Localization example");
         strings.put("exit", "Exit");
@@ -43,13 +40,18 @@ public class Resources extends MapResourceBundle {
      *         this <code>ResourceBundle</code> and its parent bundles.
      * @see #keySet()
      */
-    public Enumeration<String> getKeys() {
+    public Iterator<String> getKeys() {
         // lazily load the lookup hashtable.
 //        if (lookup == null) {
 //            loadLookup();
 //        }
 //
 //        ResourceBundle parent = this.parent;
-        return strings.keys();
+        return strings.keySet().iterator();
     }
+
+	@Override
+	public Set<String> keySet() {
+		return strings.keySet();
+	}
 }

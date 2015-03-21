@@ -27,13 +27,14 @@ package tec.units.ri.format.internal.l10n;
 
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
  * 
  * @author Werner Keil
- * @version 0.3, February 15, 2015
+ * @version 0.4, March 21, 2015
  *
  */
 public final class BundleToMapAdapter {
@@ -52,9 +53,9 @@ public final class BundleToMapAdapter {
 	public final static Map<String, String> toMap(final MapResourceBundle resource) {
 		Map<String, String> map = new HashMap<>();
 
-		Enumeration<String> keys = resource.getKeys();
-		while (keys.hasMoreElements()) {
-			String key = keys.nextElement();
+		Iterator<String> keys = resource.getKeys();
+		while (keys.hasNext()) {
+			String key = keys.next();
 			map.put(key, resource.getString(key));
 		}
 
