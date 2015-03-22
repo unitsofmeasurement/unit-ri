@@ -44,7 +44,7 @@ import tec.units.ri.format.internal.SimpleFormatParser;
 import tec.units.ri.format.internal.TokenException;
 import tec.units.ri.format.internal.TokenMgrError;
 import tec.units.ri.format.internal.l10n.Locale;
-import tec.units.ri.format.internal.l10n.MapResourceBundle;
+import tec.units.ri.format.internal.l10n.L10nResources;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.ExpConverter;
 import tec.units.ri.function.LogConverter;
@@ -263,7 +263,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * 
 	 */
 	public SimpleUnitFormat() {
-		this(SymbolMap.of(toMap(MapResourceBundle.getBundle(
+		this(SymbolMap.of(toMap(L10nResources.getBundle(
 				BUNDLE_NAME, Locale.getDefault()))), Locale.getDefault());
 	}
 	

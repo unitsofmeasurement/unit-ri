@@ -10,12 +10,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import tec.units.ri.format.internal.l10n.MapResourceBundle;
+import tec.units.ri.format.internal.l10n.L10nResources;
  
 /**
  * Default resource bundle (English / United States).
  */
-public class Resources extends MapResourceBundle {
+public class Resources extends L10nResources {
     private Map<String, String> strings;
  
     public Resources() {
