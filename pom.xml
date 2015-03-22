@@ -11,7 +11,7 @@
 		<url>http://unitsofmeasurement.github.io</url>
 	</organization>
 	<description>Unit Standard (JSR 363) Reference Implementation.</description>
-	<version>0.8-SNAPSHOT</version>
+	<version>0.8-RC1</version>
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
@@ -37,6 +37,7 @@
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
 	<properties>
+	    <jsr.version>${project.version}</jsr.version>
 		<jdkVersion>1.7</jdkVersion>
 		<project.build.javaVersion>${jdkVersion}</project.build.javaVersion>
 		<maven.compile.targetLevel>1.7</maven.compile.targetLevel>

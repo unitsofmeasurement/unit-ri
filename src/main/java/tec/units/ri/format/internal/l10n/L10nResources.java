@@ -48,7 +48,7 @@ public abstract class L10nResources implements L10nBundle {
         L10nResources bundle = null;
         // Get a list of candidate locales for which resource bundles are
         // searched
-        List<Locale> candidateLocales = getCandidateLocales(targetLocale);
+        final List<Locale> candidateLocales = getCandidateLocales(targetLocale);
         // Go through every candidate locale and try to instantiate a
         // L10nResources using the base name and the candidate locale
         for (int i = candidateLocales.size() - 1; i >= 0; i--) {
@@ -61,7 +61,7 @@ public abstract class L10nResources implements L10nBundle {
             try {
                 // Try to instantiate a resource bundle using the name
                 // constructed above
-                Class bundleClass = Class.forName("tec.units.ri.format.internal.l10n." + bundleName); // TODO try use generics here
+                Class bundleClass = Class.forName(bundleName); // TODO try use generics here
                 bundle = (L10nResources)bundleClass.newInstance();
                 // Set the parent bundle for this bundle. For the base bundle
                 // (the one with the root locale, Locale.ROOT), the parent is
