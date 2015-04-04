@@ -59,7 +59,7 @@ import tec.units.ri.unit.TransformedUnit;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.3, January 19, 2015
+ * @version 0.5.4, April 4, 2015
 */
 public final class SI extends AbstractSystemOfUnits {
 
@@ -89,7 +89,6 @@ public final class SI extends AbstractSystemOfUnits {
         return INSTANCE;
     }
 
-    
 
     ////////////////
     // BASE UNITS //
@@ -343,7 +342,7 @@ public final class SI extends AbstractSystemOfUnits {
      * 100 Cel.
      */
     public static final Unit<Temperature> CELSIUS
-            = addUnit(new TransformedUnit(KELVIN, new AddConverter(273.15)));
+            = addUnit(new TransformedUnit<Temperature>(KELVIN, new AddConverter(273.15)));
             // Not mapping to Temperature since temperature is mapped to Kelvin.
 
     /**
@@ -657,5 +656,4 @@ public final class SI extends AbstractSystemOfUnits {
         INSTANCE.quantityToUnit.put(type, unit);
         return unit;
     }
-
 }
