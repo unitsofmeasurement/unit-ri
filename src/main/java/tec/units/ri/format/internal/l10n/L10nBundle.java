@@ -28,8 +28,8 @@ package tec.units.ri.format.internal.l10n;
 /**
  * An abstraction over common resource methods in an ME/SE compatible manner.
  * @author Werner Keil
- * @version 0.1
+ * @version 0.2
  */ 
-public interface L10nBundle {
+public interface L10nBundle { // TODO could we rename it to something like MessageBundle?
 	 public String getString(String key);
 }
