@@ -35,9 +35,10 @@ import javax.measure.Unit;
  * time the supplier is invoked, unless implementing classes enforce it.
  * 
  * <p>This is a <a href="http://download.java.net/jdk8/docs/api/java/util/function/package-summary.html">functional interface</a>
- * whose functional method is {@link #getConverter()}.
+ * whose functional method is {@link #getUnit()}.
  * 
  * @author Werner Keil
+ * @version 0.8, $Date: 2015-04-19 $
  */
 //equivalent to @FunctionalInterface
 public interface UnitSupplier<Q extends Quantity<Q>> {
