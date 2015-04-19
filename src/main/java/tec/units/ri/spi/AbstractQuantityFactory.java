@@ -26,7 +26,7 @@
 package tec.units.ri.spi;
 
 import static tec.units.ri.AbstractUnit.ONE;
-import static tec.units.ri.spi.SI.*;
+import static tec.units.ri.unit.SI.*;
 
 import java.util.HashMap;
 import java.util.Map;

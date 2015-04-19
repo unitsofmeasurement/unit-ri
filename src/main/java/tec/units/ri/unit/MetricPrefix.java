@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.spi;
+package tec.units.ri.unit;
 
 import static tec.units.ri.function.MathHelper.pow;
 
@@ -35,11 +35,11 @@ import tec.units.ri.function.UnitConverterSupplier;
 import tec.units.ri.function.RationalConverter;
 
 /**
- * <p> This class provides support for the 20 SI prefixes used in the metric
- *     system (decimal multiples and submultiples of SI units).
+ * <p> This class provides support for the 20 prefixes used in the metric
+ *     system (decimal multiples and submultiples of units).
  *     For example:<pre><code>
- *     import static tec.units.ri.spi.SI.*;  // Static import.
- *     import static tec.units.ri.spi.SIPrefix.*; // Static import.
+ *     import static tec.units.ri.unit.SI.*;  // Static import.
+ *     import static tec.units.ri.unit.MetricPrefix.*; // Static import.
  *     import javax.measure.*;
  *     import javax.measure.quantity.*;
  *     ...
@@ -51,9 +51,9 @@ import tec.units.ri.function.RationalConverter;
  * @see <a href="http://en.wikipedia.org/wiki/Metric_prefix">Wikipedia: Metric Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, $Date: 2015-04-19 $
+ * @version 0.8, $Date: 2015-04-19 $
  */
-public enum SIPrefix implements UnitConverterSupplier {
+public enum MetricPrefix implements UnitConverterSupplier {
     YOTTA(RationalConverter.of(1000000000000000000000000d, 1d)),
     ZETTA(RationalConverter.of(1000000000000000000000d, 1d)),
     EXA(RationalConverter.of(pow(10, 18), 1d)),
@@ -82,7 +82,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      *
      * @param converter the associated unit converter.
      */
-    private SIPrefix (UnitConverter converter) {
+    private MetricPrefix (UnitConverter converter) {
         this.converter = converter;
     }
 

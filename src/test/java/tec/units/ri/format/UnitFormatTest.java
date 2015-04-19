@@ -26,13 +26,13 @@
 package tec.units.ri.format;
 
 import static org.junit.Assert.*;
-import static tec.units.ri.spi.SI.KILOGRAM;
-import static tec.units.ri.spi.SI.METRE;
-import static tec.units.ri.spi.SI.MINUTE;
-import static tec.units.ri.spi.SI.SECOND;
-import static tec.units.ri.spi.SI.HERTZ;
-import static tec.units.ri.spi.SIPrefix.KILO;
-import static tec.units.ri.spi.SIPrefix.MEGA;
+import static tec.units.ri.unit.MetricPrefix.KILO;
+import static tec.units.ri.unit.MetricPrefix.MEGA;
+import static tec.units.ri.unit.SI.HERTZ;
+import static tec.units.ri.unit.SI.KILOGRAM;
+import static tec.units.ri.unit.SI.METRE;
+import static tec.units.ri.unit.SI.MINUTE;
+import static tec.units.ri.unit.SI.SECOND;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;

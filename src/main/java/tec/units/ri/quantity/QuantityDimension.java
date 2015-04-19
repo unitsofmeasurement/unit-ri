@@ -34,8 +34,8 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.spi.SI;
 import tec.units.ri.unit.BaseUnit;
+import tec.units.ri.unit.SI;
 
 /**
 *  <p> This class represents a quantity dimension (dimension of a physical

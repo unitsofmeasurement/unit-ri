@@ -23,33 +23,33 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.spi.internal;
+package tec.units.ri.unit.internal;
 
-import static tec.units.ri.spi.SI.AMPERE;
-import static tec.units.ri.spi.SI.BECQUEREL;
-import static tec.units.ri.spi.SI.BIT;
-import static tec.units.ri.spi.SI.COULOMB;
-import static tec.units.ri.spi.SI.GRAM;
-import static tec.units.ri.spi.SI.GRAY;
-import static tec.units.ri.spi.SI.JOULE;
-import static tec.units.ri.spi.SI.KELVIN;
-import static tec.units.ri.spi.SI.KILOGRAM;
-import static tec.units.ri.spi.SI.LUX;
-import static tec.units.ri.spi.SI.METRE;
-import static tec.units.ri.spi.SI.METRES_PER_SECOND;
-import static tec.units.ri.spi.SI.METRES_PER_SQUARE_SECOND;
-import static tec.units.ri.spi.SI.MOLE;
-import static tec.units.ri.spi.SI.NEWTON;
-import static tec.units.ri.spi.SI.PASCAL;
-import static tec.units.ri.spi.SI.RADIAN;
-import static tec.units.ri.spi.SI.SECOND;
-import static tec.units.ri.spi.SI.SIEVERT;
-import static tec.units.ri.spi.SI.SQUARE_METRE;
-import static tec.units.ri.spi.SI.STERADIAN;
-import static tec.units.ri.spi.SI.TESLA;
-import static tec.units.ri.spi.SI.WATT;
-import static tec.units.ri.spi.SI.WEBER;
-import static tec.units.ri.spi.SIPrefix.*;
+import static tec.units.ri.unit.MetricPrefix.*;
+import static tec.units.ri.unit.SI.AMPERE;
+import static tec.units.ri.unit.SI.BECQUEREL;
+import static tec.units.ri.unit.SI.BIT;
+import static tec.units.ri.unit.SI.COULOMB;
+import static tec.units.ri.unit.SI.GRAM;
+import static tec.units.ri.unit.SI.GRAY;
+import static tec.units.ri.unit.SI.JOULE;
+import static tec.units.ri.unit.SI.KELVIN;
+import static tec.units.ri.unit.SI.KILOGRAM;
+import static tec.units.ri.unit.SI.LUX;
+import static tec.units.ri.unit.SI.METRE;
+import static tec.units.ri.unit.SI.METRES_PER_SECOND;
+import static tec.units.ri.unit.SI.METRES_PER_SQUARE_SECOND;
+import static tec.units.ri.unit.SI.MOLE;
+import static tec.units.ri.unit.SI.NEWTON;
+import static tec.units.ri.unit.SI.PASCAL;
+import static tec.units.ri.unit.SI.RADIAN;
+import static tec.units.ri.unit.SI.SECOND;
+import static tec.units.ri.unit.SI.SIEVERT;
+import static tec.units.ri.unit.SI.SQUARE_METRE;
+import static tec.units.ri.unit.SI.STERADIAN;
+import static tec.units.ri.unit.SI.TESLA;
+import static tec.units.ri.unit.SI.WATT;
+import static tec.units.ri.unit.SI.WEBER;
 
 import javax.measure.Unit;
 import javax.measure.quantity.*;
@@ -58,7 +58,7 @@ import tec.units.ri.AbstractSystemOfUnits;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.function.LogConverter;
 import tec.units.ri.function.RationalConverter;
-import tec.units.ri.spi.SI;
+import tec.units.ri.unit.SI;
 
 
 /**

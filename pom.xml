@@ -37,7 +37,7 @@
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
 	<properties>
-		<jsr.version>${project.version}</jsr.version>
+		<jsr.version>0.8-RC2</jsr.version>
 		<jdkVersion>1.7</jdkVersion>
 		<project.build.javaVersion>${jdkVersion}</project.build.javaVersion>
 		<maven.compile.targetLevel>1.7</maven.compile.targetLevel>
@@ -158,7 +158,7 @@
 					<instructions>
 						<Export-Package>tec.units.ri.*</Export-Package>
 						<Private-Package>tec.units.ri.format.internal.*</Private-Package>
-						<Private-Package>tec.units.ri.spi.internal.*</Private-Package>
+						<Private-Package>tec.units.ri.unit.internal.*</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -272,14 +272,12 @@
 
 	<!-- Additional repositories -->
 	<!-- Helps to resolve Parent POM -->
-	<repositories>
-		<!--  
+	<repositories>  
 		<repository>
 			<id>geotoolkit</id>
 			<name>Geotoolkit.org project</name>
 			<url>http://maven.geotoolkit.org</url>
 		</repository>
-		-->
 		<repository>
 			<id>jcenter</id>
 			<name>JCenter</name>

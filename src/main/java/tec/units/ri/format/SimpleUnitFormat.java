@@ -26,8 +26,8 @@
 package tec.units.ri.format;
 
 import static tec.units.ri.format.internal.l10n.BundleToMapAdapter.toMap;
-import static tec.units.ri.spi.SI.*;
-import static tec.units.ri.spi.US.LITER;
+import static tec.units.ri.unit.SI.*;
+import static tec.units.ri.unit.US.LITER;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -50,8 +50,8 @@ import tec.units.ri.function.ExpConverter;
 import tec.units.ri.function.LogConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
-import tec.units.ri.spi.SIPrefix;
 import tec.units.ri.unit.BaseUnit;
+import tec.units.ri.unit.MetricPrefix;
 import tec.units.ri.unit.TransformedUnit;
 import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractConverter.Pair;
@@ -560,7 +560,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 */
 	private int formatConverter(UnitConverter converter, boolean continued,
 			int unitPrecedence, StringBuilder buffer) {
-		SIPrefix prefix = symbolMap
+		MetricPrefix prefix = symbolMap
 				.getPrefix((AbstractConverter) converter);
 		if ((prefix != null) && (unitPrecedence == NOOP_PRECEDENCE)) {
 			buffer.insert(0, symbolMap.getSymbol(prefix));

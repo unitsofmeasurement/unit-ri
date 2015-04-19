@@ -42,16 +42,16 @@ import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
 import tec.units.ri.quantity.QuantityDimension;
-import tec.units.ri.spi.SI;
 import tec.units.ri.unit.AlternateUnit;
 import tec.units.ri.unit.AnnotatedUnit;
 import tec.units.ri.unit.ProductUnit;
+import tec.units.ri.unit.SI;
 import tec.units.ri.unit.TransformedUnit;
 
 /**
  * <p>
  * The class represents units founded on the seven
- * {@link tec.units.ri.spi.org.unitsofmeasurement.impl.system.SI SI} base units for seven
+ * {@link tec.units.ri.unit.org.unitsofmeasurement.impl.system.SI SI} base units for seven
  * base quantities assumed to be mutually independent.
  * </p>
  *

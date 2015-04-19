@@ -42,7 +42,7 @@ import tec.units.ri.quantity.QuantityDimension;
  *     physical units are created. Base units are always unscaled SI units.</p>
  * 
  * <p> When using the {@link tec.units.ri.util.StandardModel standard model},
- *     all seven {@link tec.units.ri.spi.org.unitsofmeasurement.impl.system.SI SI} base units
+ *     all seven {@link tec.units.ri.unit.org.unitsofmeasurement.impl.system.SI SI} base units
  *     are dimensionally independent.</p>
  *
  * @see <a href="http://en.wikipedia.org/wiki/SI_base_unit">

@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.spi;
+package tec.units.ri.unit;
 
 import static tec.units.ri.AbstractUnit.ONE;
 
@@ -41,10 +41,6 @@ import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.PiMultiplierConverter;
 import tec.units.ri.function.RationalConverter;
 import tec.units.ri.quantity.QuantityDimension;
-import tec.units.ri.unit.AlternateUnit;
-import tec.units.ri.unit.BaseUnit;
-import tec.units.ri.unit.ProductUnit;
-import tec.units.ri.unit.TransformedUnit;
 
 
 /**
@@ -55,7 +51,7 @@ import tec.units.ri.unit.TransformedUnit;
  * @see <a href="http://en.wikipedia.org/wiki/International_System_of_Units">Wikipedia: International System of Units</a>
  * @see <a href="http://physics.nist.gov/cuu/Units/outside.html>Units outside the SI that are accepted for use with the SI</a>
  * @see <a href="http://www.bipm.org/utils/common/pdf/si_brochure_8.pdf>SI 2006 - Official Specification</a>
- * @see SIPrefix
+ * @see MetricPrefix
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>

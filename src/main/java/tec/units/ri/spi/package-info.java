@@ -45,6 +45,8 @@
  */
 package tec.units.ri.spi;
 
+import tec.units.ri.unit.SI;
+import tec.units.ri.unit.US;
 import tec.units.ri.unit.Units;
 
 

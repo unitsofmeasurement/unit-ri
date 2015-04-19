@@ -34,8 +34,8 @@ import org.junit.Test;
 
 import tec.units.ri.AbstractUnit;
 import static org.junit.Assert.*;
-import static tec.units.ri.spi.SI.GRAM;
-import static tec.units.ri.spi.SIPrefix.KILO;
+import static tec.units.ri.unit.MetricPrefix.KILO;
+import static tec.units.ri.unit.SI.GRAM;
 
 /**
  *

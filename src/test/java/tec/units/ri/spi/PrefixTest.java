@@ -30,9 +30,9 @@
 package tec.units.ri.spi;
 
 import static org.junit.Assert.assertEquals;
-import static tec.units.ri.spi.SI.GRAM;
-import static tec.units.ri.spi.SI.KILOGRAM;
-import static tec.units.ri.spi.SIPrefix.KILO;
+import static tec.units.ri.unit.MetricPrefix.KILO;
+import static tec.units.ri.unit.SI.GRAM;
+import static tec.units.ri.unit.SI.KILOGRAM;
 
 import org.junit.Test;
 

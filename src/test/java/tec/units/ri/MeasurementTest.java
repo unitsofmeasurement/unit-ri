@@ -30,7 +30,7 @@
 package tec.units.ri;
 
 import static org.junit.Assert.assertEquals;
-import static tec.units.ri.spi.SI.KILOGRAM;
+import static tec.units.ri.unit.SI.KILOGRAM;
 
 import javax.measure.quantity.Mass;
 

@@ -23,15 +23,13 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.spi;
+package tec.units.ri.unit;
 
-import static tec.units.ri.spi.SI.*;
-import static tec.units.ri.spi.SIPrefix.MICRO;
+import static tec.units.ri.unit.MetricPrefix.MICRO;
+import static tec.units.ri.unit.SI.*;
 import tec.units.ri.AbstractSystemOfUnits;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.function.RationalConverter;
-import tec.units.ri.unit.ProductUnit;
-import tec.units.ri.unit.TransformedUnit;
 
 import javax.measure.Unit;
 import javax.measure.quantity.Angle;

@@ -31,7 +31,7 @@ import javax.measure.Unit;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.format.SymbolMap;
 import tec.units.ri.function.LogConverter;
-import tec.units.ri.spi.SIPrefix;
+import tec.units.ri.unit.MetricPrefix;
 
 /** */
 public final class UnitFormatParser implements UnitTokenConstants {
@@ -289,7 +289,7 @@ public final class UnitFormatParser implements UnitTokenConstants {
                 token = jj_consume_token(UNIT_IDENTIFIER);
                 Unit unit = _symbols.getUnit(token.image);
                 if (unit == null) {
-                    SIPrefix prefix = _symbols.getPrefix(token.image);
+                    MetricPrefix prefix = _symbols.getPrefix(token.image);
                     if (prefix != null) {
                         String prefixSymbol = _symbols.getSymbol(prefix);
                         unit = _symbols.getUnit(token.image.substring(prefixSymbol.length()));

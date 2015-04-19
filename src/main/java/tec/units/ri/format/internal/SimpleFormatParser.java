@@ -30,7 +30,7 @@ import javax.measure.Unit;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.format.SymbolMap;
 import tec.units.ri.function.LogConverter;
-import tec.units.ri.spi.SIPrefix;
+import tec.units.ri.unit.MetricPrefix;
 
 
 /** */
@@ -290,7 +290,7 @@ Unit<?> addExpr() throws TokenException {
       token = jj_consume_token(UNIT_IDENTIFIER);
         Unit<?> unit = symbols.getUnit(token.image);
         if (unit == null) {
-            SIPrefix prefix = symbols.getPrefix(token.image);
+            MetricPrefix prefix = symbols.getPrefix(token.image);
             if (prefix != null) {
                 String prefixSymbol = symbols.getSymbol(prefix);
                 unit = symbols.getUnit(token.image.substring(prefixSymbol.length()));
