@@ -273,11 +273,13 @@
 	<!-- Additional repositories -->
 	<!-- Helps to resolve Parent POM -->
 	<repositories>
+		<!--  
 		<repository>
 			<id>geotoolkit</id>
 			<name>Geotoolkit.org project</name>
 			<url>http://maven.geotoolkit.org</url>
 		</repository>
+		-->
 		<repository>
 			<id>jcenter</id>
 			<name>JCenter</name>
