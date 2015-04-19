@@ -23,28 +23,58 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package tec.units.ri.unit;
+
+import static tec.units.ri.spi.SI.METRES_PER_SECOND;
+
+import javax.measure.Unit;
+import javax.measure.quantity.Speed;
+import javax.measure.spi.SystemOfUnits;
+
+import tec.units.ri.AbstractSystemOfUnits;
+import tec.units.ri.function.Nameable;
+
 /**
- * This package provides SPI implementations in conformity with the
- * <a href="http://unitsofmeasurement.github.io/">Units of Measurement API</a>.
+ * <p> This class defines commonly used units.
  *
- * <h3> Standard / Non Standard Units</h3>
- * <ul>
- *    <li> The class {@link SI} contains standard units as defined by the 
- *       <a href="http://physics.nist.gov/Pubs/SP330/sp330.pdf">
- *      "The International System of Units"</a>.</li>
- *    <li> The class {@link US} contains units 
- *      as defined in the <a href="http://en.wikipedia.org/wiki/United_States_customary_units">
- *      "United States customary system"</a>.</li>
- *    <li> The class {@link Units} contains other commonly used non-standard units.</li>
- * </ul>
- *
- *
- * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3
- */
-package tec.units.ri.spi;
+ * @version 0.4, April 19, 2015
+*/
+public class Units extends AbstractSystemOfUnits implements Nameable {
 
-import tec.units.ri.unit.Units;
+	private Units() {
+	}
+	
+	private static final Units INSTANCE = new Units();
+	
+	public String getName() {
+		return getClass().getSimpleName();
+	}
 
-
+	/**
+	 * A unit of velocity expressing the number of international {@link #KILOMETRE
+	 * kilometres} per {@link #HOUR hour} (abbreviation <code>kph</code>).
+	 */
+	public static final Unit<Speed> KILOMETRES_PER_HOUR = addUnit(
+			METRES_PER_SECOND.multiply(0.277778d)).asType(Speed.class);
+	
+	/**
+	 * Returns the unique instance of this class.
+	 * 
+	 * @return the Imperial instance.
+	 */
+	public static SystemOfUnits getInstance() {
+		return INSTANCE;
+	}
+	
+    /**
+     * Adds a new unit not mapped to any specified quantity type.
+     *
+     * @param  unit the unit being added.
+     * @return <code>unit</code>.
+     */
+    private static <U extends Unit<?>>  U addUnit(U unit) {
+        INSTANCE.units.add(unit);
+        return unit;
+    }
+}

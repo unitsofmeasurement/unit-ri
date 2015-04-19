@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -23,58 +23,27 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.spi;
+package tec.units.ri.function;
 
-import static tec.units.ri.spi.SI.METRES_PER_SECOND;
-
+import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.quantity.Speed;
-import javax.measure.spi.SystemOfUnits;
-
-import tec.units.ri.AbstractSystemOfUnits;
-import tec.units.ri.function.Nameable;
 
 /**
- * <p> This class defines commonly used units outside the {@link SI} standard.
+ * Provides a {@link Unit} to implementations
  *
- * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, January 18, 2015
-*/
-public class CommonUnits extends AbstractSystemOfUnits implements Nameable {
-
-	private CommonUnits() {
-	}
-	
-	private static final CommonUnits INSTANCE = new CommonUnits();
-	
-	public String getName() {
-		return "Common Units";
-	}
-
-	/**
-	 * A unit of velocity expressing the number of international {@link #KILOMETRE
-	 * kilometres} per {@link #HOUR hour} (abbreviation <code>kph</code>).
-	 */
-	public static final Unit<Speed> KILOMETRES_PER_HOUR = addUnit(
-			METRES_PER_SECOND.multiply(0.277778d)).asType(Speed.class);
-	
-	/**
-	 * Returns the unique instance of this class.
-	 * 
-	 * @return the Imperial instance.
-	 */
-	public static SystemOfUnits getInstance() {
-		return INSTANCE;
-	}
+ * <p>There is no requirement that a distinct result be returned each
+ * time the supplier is invoked, unless implementing classes enforce it.
+ * 
+ * <p>This is a <a href="http://download.java.net/jdk8/docs/api/java/util/function/package-summary.html">functional interface</a>
+ * whose functional method is {@link #getConverter()}.
+ * 
+ * @author Werner Keil
+ */
+//equivalent to @FunctionalInterface
+public interface UnitSupplier<Q extends Quantity<Q>> {
 	
     /**
-     * Adds a new unit not mapped to any specified quantity type.
-     *
-     * @param  unit the unit being added.
-     * @return <code>unit</code>.
+     * @return a unit
      */
-    private static <U extends Unit<?>>  U addUnit(U unit) {
-        INSTANCE.units.add(unit);
-        return unit;
-    }
+    Unit<Q> getUnit();
 }

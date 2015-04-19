@@ -29,6 +29,8 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Dimensionless;
 
+import tec.units.ri.function.UnitSupplier;
+import tec.units.ri.function.ValueSupplier;
 import tec.units.ri.quantity.NumberQuantity;
 
 /**
@@ -91,10 +93,10 @@ import tec.units.ri.quantity.NumberQuantity;
  * </p>
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.2, $Date: 2014-11-02 $
+ * @version 0.6.3, $Date: 2015-04-19 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
-		Quantity<Q>, Comparable<Quantity<Q>> {
+		Quantity<Q>, Comparable<Quantity<Q>>, UnitSupplier<Q>, ValueSupplier<Number> {
 
 	/**
 	 * 

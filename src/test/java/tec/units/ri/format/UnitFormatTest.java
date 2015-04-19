@@ -30,18 +30,17 @@ import static tec.units.ri.spi.SI.KILOGRAM;
 import static tec.units.ri.spi.SI.METRE;
 import static tec.units.ri.spi.SI.MINUTE;
 import static tec.units.ri.spi.SI.SECOND;
-
-import java.io.IOException;
+import static tec.units.ri.spi.SI.HERTZ;
+import static tec.units.ri.spi.SIPrefix.KILO;
+import static tec.units.ri.spi.SIPrefix.MEGA;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
+import javax.measure.quantity.Frequency;
 import javax.measure.quantity.Length;
-import javax.measure.quantity.Speed;
-
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import tec.units.ri.AbstractQuantityFactory;
@@ -55,44 +54,63 @@ public class UnitFormatTest {
 
 	@Before
 	public void init() {
-		sut = AbstractQuantityFactory.getInstance(Length.class).create(10, METRE);
+		sut = AbstractQuantityFactory.getInstance(Length.class).create(10,
+				METRE);
 	}
 
-//	@Test
-//	public void testFormatLocal() {
-//		final UnitFormat format = LocalUnitFormat.getInstance();
-//		final Appendable a = new StringBuilder();
-//		try {
-//			format.format(METRE, a);
-//		} catch (IOException e) {
-//			fail(e.getMessage());
-//		}
-//		assertEquals(METRE, sut.getUnit());
-//		assertEquals("m", a.toString());
-//
-//		final Appendable a2 = new StringBuilder();
-//		@SuppressWarnings("unchecked")
-//		Unit<Speed> v = (Unit<Speed>) sut.getUnit().divide(SECOND);
-//		try {
-//			format.format(v, a2);
-//		} catch (IOException e) {
-//			fail(e.getMessage());
-//		}
-//		assertEquals("m/s", a2.toString());
-//	}
+	// @Test
+	// public void testFormatLocal() {
+	// final UnitFormat format = LocalUnitFormat.getInstance();
+	// final Appendable a = new StringBuilder();
+	// try {
+	// format.format(METRE, a);
+	// } catch (IOException e) {
+	// fail(e.getMessage());
+	// }
+	// assertEquals(METRE, sut.getUnit());
+	// assertEquals("m", a.toString());
+	//
+	// final Appendable a2 = new StringBuilder();
+	// @SuppressWarnings("unchecked")
+	// Unit<Speed> v = (Unit<Speed>) sut.getUnit().divide(SECOND);
+	// try {
+	// format.format(v, a2);
+	// } catch (IOException e) {
+	// fail(e.getMessage());
+	// }
+	// assertEquals("m/s", a2.toString());
+	// }
 
-//	@Test
-//	@Ignore
-//	public void testParseLocal() {
-//		final UnitFormat format = LocalUnitFormat.getInstance();
-//		try {
-//			Unit<?> u = format.parse("min");
-//			assertEquals("min", u.getSymbol());
-//		} catch (ParserException e) {
-//			fail(e.getMessage());
-//		}
-//	}
+	// @Test
+	// @Ignore
+	// public void testParseLocal() {
+	// final UnitFormat format = LocalUnitFormat.getInstance();
+	// try {
+	// Unit<?> u = format.parse("min");
+	// assertEquals("min", u.getSymbol());
+	// } catch (ParserException e) {
+	// fail(e.getMessage());
+	// }
+	// }
+
+	@Test
+	public void testFormat() {
+		Unit<Frequency> hz = HERTZ;
+		assertEquals("Hz", hz.toString());
+	}
 	
+	@Test
+	public void testFormat2() {
+		Unit<Frequency> mhz = MEGA(HERTZ);
+		assertEquals("Mhz", mhz.toString());
+	}
+
+	@Test
+	public void testFormat3() {
+		Unit<Frequency> khz = KILO(HERTZ);
+		assertEquals("khz", khz.toString());
+	}
+
 	@Test
 	public void testParseSimple() {
 		final UnitFormat format = SimpleUnitFormat.getInstance();
@@ -104,19 +122,19 @@ public class UnitFormatTest {
 			fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testParseSimple1() {
 		final UnitFormat format = SimpleUnitFormat.getInstance();
 		try {
 			Unit<?> u = format.parse("min");
-//			assertEquals("min", u.getSymbol());
+			// assertEquals("min", u.getSymbol());
 			assertEquals(MINUTE, u);
 		} catch (ParserException e) {
 			fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testParseSimple2() {
 		final UnitFormat format = SimpleUnitFormat.getInstance();
@@ -128,7 +146,7 @@ public class UnitFormatTest {
 			fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testParseSimple3() {
 		final UnitFormat format = SimpleUnitFormat.getInstance();

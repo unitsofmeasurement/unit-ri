@@ -38,8 +38,8 @@ import tec.units.ri.function.RationalConverter;
  * <p> This class provides support for the 20 SI prefixes used in the metric
  *     system (decimal multiples and submultiples of SI units).
  *     For example:<pre><code>
- *     import static tec.units.ri.util.SI.*;  // Static import.
- *     import static tec.units.ri.util.SIPrefix.*; // Static import.
+ *     import static tec.units.ri.spi.SI.*;  // Static import.
+ *     import static tec.units.ri.spi.SIPrefix.*; // Static import.
  *     import javax.measure.*;
  *     import javax.measure.quantity.*;
  *     ...
@@ -51,7 +51,7 @@ import tec.units.ri.function.RationalConverter;
  * @see <a href="http://en.wikipedia.org/wiki/Metric_prefix">Wikipedia: Metric Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, $Date: 2015-01-24 $
+ * @version 0.7, $Date: 2015-04-19 $
  */
 public enum SIPrefix implements UnitConverterSupplier {
     YOTTA(RationalConverter.of(1000000000000000000000000d, 1d)),
@@ -173,7 +173,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      *
      * @param <Q> The type of the quantity measured by the unit.
      * @param unit any unit.
-     * @return <code>unit.times(1e6)</code>.
+     * @return <code>unit.multiply(1e6)</code>.
      */
     public static final <Q extends Quantity<Q>> Unit<Q> MEGA(Unit<Q> unit) {
         return unit.transform(MEGA.getConverter());
@@ -185,7 +185,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      *
      * @param <Q> The type of the quantity measured by the unit.
      * @param unit any unit.
-     * @return <code>unit.times(1e3)</code>.
+     * @return <code>unit.multiply(1e3)</code>.
      */
     public static final <Q extends Quantity<Q>> Unit<Q> KILO(Unit<Q> unit) {
         return unit.transform(KILO.getConverter());
@@ -197,7 +197,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      *
      * @param <Q> The type of the quantity measured by the unit.
      * @param unit any unit.
-     * @return <code>unit.times(1e2)</code>.
+     * @return <code>unit.multiply(1e2)</code>.
      */
     public static final <Q extends Quantity<Q>> Unit<Q> HECTO(Unit<Q> unit) {
         return unit.transform(HECTO.getConverter());
@@ -209,7 +209,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      *
      * @param <Q> The type of the quantity measured by the unit.
      * @param unit any unit.
-     * @return <code>unit.times(1e1)</code>.
+     * @return <code>unit.multiply(1e1)</code>.
      */
     public static final <Q extends Quantity<Q>> Unit<Q> DEKA(Unit<Q> unit) {
         return unit.transform(DEKA.getConverter());
@@ -233,7 +233,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      *
      * @param <Q> The type of the quantity measured by the unit.
      * @param unit any unit.
-     * @return <code>unit.times(1e-2)</code>.
+     * @return <code>unit.multiply(1e-2)</code>.
      */
     public static <Q extends Quantity<Q>> Unit<Q> CENTI(Unit<Q> unit) {
         return unit.transform(CENTI.getConverter());

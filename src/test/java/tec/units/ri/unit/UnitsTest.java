@@ -25,6 +25,9 @@
  */
 package tec.units.ri.unit;
 
+import javax.measure.Unit;
+import javax.measure.quantity.Dimensionless;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -161,4 +164,12 @@ public class UnitsTest {
     }
 
 
+    @Test
+    public void testOne() {
+    	Unit<Dimensionless> one = AbstractUnit.ONE;
+    	assertTrue(one.isCompatible(AbstractUnit.ONE));
+    	Unit<Dimensionless> two = one.shift(1);
+    	assertTrue(two.isCompatible(AbstractUnit.ONE));
+    	assertFalse(two.equals(AbstractUnit.ONE));
+    }
 }

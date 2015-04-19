@@ -239,19 +239,19 @@ public final class NonSI extends AbstractSystemOfUnits {
 	 * A unit of duration equal to <code>60 s</code> (standard name
 	 * <code>min</code>).
 	 */
-	static final Unit<Time> MINUTE = addUnit(SECOND.multiply(60));
+	public static final Unit<Time> MINUTE = addUnit(SECOND.multiply(60));
 
 	/**
 	 * A unit of duration equal to <code>60 {@link #MINUTE}</code> (standard
 	 * name <code>h</code>).
 	 */
-	static final Unit<Time> HOUR = addUnit(MINUTE.multiply(60));
+	public static final Unit<Time> HOUR = addUnit(MINUTE.multiply(60));
 
 	/**
 	 * A unit of duration equal to <code>24 {@link #HOUR}</code> (standard name
 	 * <code>d</code>).
 	 */
-	static final Unit<Time> DAY = addUnit(HOUR.multiply(24));
+	public static final Unit<Time> DAY = addUnit(HOUR.multiply(24));
 
 	/**
 	 * A unit of duration equal to the time required for a complete rotation of
@@ -392,13 +392,13 @@ public final class NonSI extends AbstractSystemOfUnits {
 	static final Unit<Area> ARE = addUnit(SQUARE_METRE.multiply(100));
 
 	// ///////////////
-	// Data Amount //
+	// Information //
 	// ///////////////
 	/**
 	 * A unit of data amount equal to <code>8 {@link SI#BIT}</code> (BinarY
 	 * TErm, standard name <code>byte</code>).
 	 */
-	static final Unit<Information> BYTE = addUnit(BIT.multiply(8));
+	public static final Unit<Information> BYTE = addUnit(BIT.multiply(8));
 
 	/**
 	 * Equivalent {@link #BYTE}
