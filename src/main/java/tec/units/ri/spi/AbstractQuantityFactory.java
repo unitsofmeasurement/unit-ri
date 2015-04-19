@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri;
+package tec.units.ri.spi;
 
 import static tec.units.ri.AbstractUnit.ONE;
 import static tec.units.ri.spi.SI.*;
@@ -38,81 +38,35 @@ import javax.measure.Unit;
 import javax.measure.quantity.*;
 import javax.measure.spi.QuantityFactory;
 
+import tec.units.ri.AbstractQuantity;
 import tec.units.ri.quantity.NumberQuantity;
 
 /**
  * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}).
  *
  * For example:<br/><code>
- *      Mass m = QuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
- *      Time m = QuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
+ *      Mass m = AbstractQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
+ *      Time m = AbstractQuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
  * </code>
  * @param <Q> The type of the quantity.
  *
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.6.2, $Date: 2015-01-23 $
+ * @version 0.6.4, $Date: 2015-04-19 $
  */
-public abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q>  {
+abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q>  {
 
     /**
      * Holds the current instances.
      */
     @SuppressWarnings("rawtypes")
-    private static final Map<Class, AbstractQuantityFactory> INSTANCES = new HashMap<>();
+    static final Map<Class, AbstractQuantityFactory> INSTANCES = new HashMap<>();
 
-    private static final Logger logger = Logger.getLogger(AbstractQuantityFactory.class.getName());
+    static final Logger logger = Logger.getLogger(AbstractQuantityFactory.class.getName());
 
-    private static final Level LOG_LEVEL = Level.FINE;
+    static final Level LOG_LEVEL = Level.FINE;
 
-    /**
-     * Returns the default instance for the specified quantity type.
-     *
-     * @param <Q> The type of the quantity
-     * @param type the quantity type
-     * @return the quantity factory for the specified type
-     */
-    @SuppressWarnings("unchecked")
-	public static <Q extends Quantity<Q>>  AbstractQuantityFactory<Q> getInstance(final Class<Q> type) {
-
-         logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
-         AbstractQuantityFactory<Q> factory;
-         if (!type.isInterface()) {
-        	 if (type != null && type.getInterfaces() != null & type.getInterfaces().length > 0) {
-	        	 logger.log(LOG_LEVEL, "Type0: " + type.getInterfaces()[0]);
-	             Class<?> type2 = type.getInterfaces()[0];
-
-	            factory = INSTANCES.get(type2);
-	            if (factory != null) return factory;
-	            if (!AbstractQuantity.class.isAssignableFrom(type2))
-	                // This exception is not documented because it should never happen if the
-	                // user don't try to trick the Java generic types system with unsafe cast.
-	                throw new ClassCastException();
-	            factory = new Default<Q>((Class<Q>)type2);
-	            INSTANCES.put(type2, factory);
-        	 } else {
-                 factory = INSTANCES.get(type);
-                 if (factory != null) return factory;
-                 if (!AbstractQuantity.class.isAssignableFrom(type))
-                     // This exception is not documented because it should never happen if the
-                     // user don't try to trick the Java generic types system with unsafe cast.
-                     throw new ClassCastException();
-                 factory = new Default<Q>(type);
-                 INSTANCES.put(type, factory);
-        	 }
-         } else {
-            factory = INSTANCES.get(type);
-            if (factory != null) return factory;
-            if (!Quantity.class.isAssignableFrom(type))
-                // This exception is not documented because it should never happen if the
-                // user don't try to trick the Java generic types system with unsafe cast.
-                throw new ClassCastException();
-            factory = new Default<Q>(type);
-            INSTANCES.put(type, factory);
-         }
-        return factory;
-    }
 
     /**
      * Overrides the default implementation of the factory for the specified

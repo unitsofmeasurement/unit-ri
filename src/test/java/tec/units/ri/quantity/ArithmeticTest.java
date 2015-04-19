@@ -34,7 +34,7 @@ import javax.measure.quantity.Length;
 import org.junit.Before;
 import org.junit.Test;
 
-import tec.units.ri.AbstractQuantityFactory;
+import tec.units.ri.spi.DefaultQuantityFactory;
 
 
 public class ArithmeticTest {
@@ -43,7 +43,7 @@ public class ArithmeticTest {
 	
 	@Before
 	public void init() {
-		sut = AbstractQuantityFactory.getInstance(Length.class).create(10, METRE);
+		sut = DefaultQuantityFactory.getInstance(Length.class).create(10, METRE);
 	}
 	
 	@Test
@@ -58,7 +58,7 @@ public class ArithmeticTest {
 	
 	@Test
 	public void testAdd() {
-		Quantity<Length> len = AbstractQuantityFactory.getInstance(Length.class).create(5, METRE);
+		Quantity<Length> len = DefaultQuantityFactory.getInstance(Length.class).create(5, METRE);
 		Quantity<Length> result = sut.add(len);
 		assertNotNull(result);
 		assertEquals(METRE, result.getUnit());
@@ -67,7 +67,7 @@ public class ArithmeticTest {
 
 	@Test
 	public void testSubtract() {
-		Quantity<Length> len = AbstractQuantityFactory.getInstance(Length.class).create(5, METRE);
+		Quantity<Length> len = DefaultQuantityFactory.getInstance(Length.class).create(5, METRE);
 		Quantity<Length> result = sut.subtract(len);
 		assertNotNull(result);
 		assertEquals(METRE, result.getUnit());

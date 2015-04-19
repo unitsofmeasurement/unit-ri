@@ -40,21 +40,23 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 import javax.measure.quantity.Frequency;
 import javax.measure.quantity.Length;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import tec.units.ri.AbstractQuantityFactory;
+import tec.units.ri.spi.DefaultQuantityFactory;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  *
  */
 public class UnitFormatTest {
+	@SuppressWarnings("unused")
 	private Quantity<Length> sut;
 
 	@Before
 	public void init() {
-		sut = AbstractQuantityFactory.getInstance(Length.class).create(10,
+		sut = DefaultQuantityFactory.getInstance(Length.class).create(10,
 				METRE);
 	}
 
