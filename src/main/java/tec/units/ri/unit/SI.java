@@ -402,7 +402,7 @@ public final class SI extends AbstractSystemOfUnits {
     //////////////////////////////
 
     /**
-     * The SI unit for velocity quantities (standard name <code>m/s</code>).
+     * The SI unit for speed quantities (standard name <code>m/s</code>).
      */
     public static final Unit<Speed> METRES_PER_SECOND
             = addUnit(new ProductUnit<Speed>(
