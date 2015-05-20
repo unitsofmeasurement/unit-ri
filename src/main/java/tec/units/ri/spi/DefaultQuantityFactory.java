@@ -56,7 +56,7 @@ import tec.units.ri.quantity.NumberQuantity;
  *         Desruisseaux</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.6.4, $Date: 2015-04-19 $
+ * @version 0.6.5, $Date: 2015-05-20 $
  */
 public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
 		AbstractQuantityFactory<Q> {
@@ -94,10 +94,10 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
 		CLASS_TO_METRIC_UNIT.put(Length.class, METRE);
 		CLASS_TO_METRIC_UNIT.put(AmountOfSubstance.class, MOLE);
 		CLASS_TO_METRIC_UNIT.put(Time.class, SECOND);
-		CLASS_TO_METRIC_UNIT.put(MagnetomotiveForce.class, AMPERE_TURN);
+//		CLASS_TO_METRIC_UNIT.put(MagnetomotiveForce.class, AMPERE_TURN);
 		CLASS_TO_METRIC_UNIT.put(Angle.class, RADIAN);
 		CLASS_TO_METRIC_UNIT.put(SolidAngle.class, STERADIAN);
-		CLASS_TO_METRIC_UNIT.put(Information.class, BIT);
+//		CLASS_TO_METRIC_UNIT.put(Information.class, BIT);
 		CLASS_TO_METRIC_UNIT.put(Frequency.class, HERTZ);
 		CLASS_TO_METRIC_UNIT.put(Force.class, NEWTON);
 		CLASS_TO_METRIC_UNIT.put(Pressure.class, PASCAL);
