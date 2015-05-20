@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -34,7 +34,7 @@ import javax.measure.UnitConverter;
  * <p> The base class for our {@link UnitConverter} implementations.</p>
  *
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7.2, $Date: 2014-12-23 $
+ * @version 0.7.3, $Date: 2015-05-20 $
  */
 public abstract class AbstractConverter implements UnitConverter {
 	
@@ -100,7 +100,7 @@ public abstract class AbstractConverter implements UnitConverter {
 
     @Override
     public Number convert(Number value) {
-        return convert(Double.valueOf(value.doubleValue()));
+        return convert(value.doubleValue()); // TODO null check?
     }
 
     public abstract double convert(double value);
