@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -40,20 +40,20 @@ import javax.measure.spi.SystemOfUnits;
  * <p>An abstract base class for unit systems.</p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 2.2, $Date: 2014-02-09 01:16:54 +0100 (So, 09 Feb 2014) $
+ * @version 2.2.1, $Date: 2015-05-23 $
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
     /**
      * Holds the units.
      */
-    protected final Set<Unit<?>> units = new HashSet<>(); // Diamond, Java 7+
+    protected final Set<Unit<?>> units = new HashSet<Unit<?>>();
 
     /**
      * Holds the mapping quantity to unit.
      */
     @SuppressWarnings("rawtypes")
 	protected final Map<Class<? extends Quantity>, AbstractUnit>
-            quantityToUnit = new HashMap<>(); // Diamond (Java 7+)
+            quantityToUnit = new HashMap<Class<? extends Quantity>, AbstractUnit>();
 
     /**
      * The natural logarithm.
@@ -77,7 +77,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 
     @Override
     public Set<? extends Unit<?>> getUnits(Dimension dimension) {
-        final Set<Unit<?>> set = new HashSet<>(); // Diamond, Java 7+
+        final Set<Unit<?>> set = new HashSet<Unit<?>>();
         for (Unit<?> unit : this.getUnits()) {
             if (dimension.equals(unit.getDimension())) {
                 set.add(unit);
@@ -115,7 +115,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 		static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, 
 				Dimension dimension) {
 			if (dimension != null) {
-				Set<Unit<?>>dimSet = new HashSet<>(); // Diamond, Java 7+
+				Set<Unit<?>>dimSet = new HashSet<Unit<?>>();
 				for (Unit<?> u : units) {
 					if (dimension.equals(u.getDimension())) {
 						dimSet.add(u);

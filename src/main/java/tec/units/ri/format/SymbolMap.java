@@ -81,11 +81,11 @@ public final class SymbolMap {
 	 * Creates an empty mapping.
 	 */
 	private SymbolMap() {
-		symbolToUnit = new HashMap<>();
-		unitToSymbol = new HashMap<>();
-		symbolToPrefix = new HashMap<>();
-		prefixToSymbol = new HashMap<>();
-		converterToPrefix = new HashMap<>();
+		symbolToUnit = new HashMap<String, Unit<?>>();
+		unitToSymbol = new HashMap<Unit<?>, String>();
+		symbolToPrefix = new HashMap<String, Object>();
+		prefixToSymbol = new HashMap<Object, String>();
+		converterToPrefix = new HashMap<UnitConverter, MetricPrefix>();
 	}
 
 	/**

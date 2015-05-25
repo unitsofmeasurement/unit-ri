@@ -38,7 +38,7 @@ import java.util.ResourceBundle;
  */
 public final class BundleToMapAdapter {
 	public final static Map<String, String> toMap(final ResourceBundle resource) {
-		Map<String, String> map = new HashMap<>();
+		final Map<String, String> map = new HashMap<String, String>();
 
 		Iterator<String> keys = resource.keySet().iterator();
 		while (keys.hasNext()) {
@@ -50,7 +50,7 @@ public final class BundleToMapAdapter {
 	}
 	
 	public final static Map<String, String> toMap(final L10nResources resource) {
-		Map<String, String> map = new HashMap<>();
+		final Map<String, String> map = new HashMap<String, String>();
 
 		Iterator<String> keys = resource.getKeys();
 		while (keys.hasNext()) {

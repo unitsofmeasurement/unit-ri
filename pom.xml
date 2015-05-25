@@ -37,10 +37,10 @@
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
 	<properties>
-		<jsr.version>0.8-SNAPSHOT</jsr.version>
+		<!--  use parent jsr.version>0.8-RC2</jsr.version -->
 		<jdkVersion>1.7</jdkVersion>
 		<project.build.javaVersion>${jdkVersion}</project.build.javaVersion>
-		<maven.compile.targetLevel>1.7</maven.compile.targetLevel>
+		<maven.compile.targetLevel>${jdkVersion}</maven.compile.targetLevel>
 		<maven.compile.sourceLevel>${jdkVersion}</maven.compile.sourceLevel>
 	</properties>
 

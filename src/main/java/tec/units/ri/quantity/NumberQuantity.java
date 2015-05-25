@@ -343,8 +343,10 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	public static Quantity<?> parse(CharSequence csq) {
 		try {
 			return QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq);
-		} catch (IllegalArgumentException | ParserException e) {
-			throw new IllegalArgumentException(e); // TODO could we handle this
+		} catch (IllegalArgumentException ie) {
+			throw ie;
+		} catch (ParserException pe) {
+			throw new IllegalArgumentException(pe); // TODO could we handle this
 													// differently?
 		}
 	}

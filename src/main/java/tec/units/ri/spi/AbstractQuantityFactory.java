@@ -61,7 +61,7 @@ abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements Quantit
      * Holds the current instances.
      */
     @SuppressWarnings("rawtypes")
-    static final Map<Class, AbstractQuantityFactory> INSTANCES = new HashMap<>();
+    static final Map<Class, AbstractQuantityFactory> INSTANCES = new HashMap<Class, AbstractQuantityFactory>();
 
     static final Logger logger = Logger.getLogger(AbstractQuantityFactory.class.getName());
 
@@ -133,7 +133,7 @@ abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements Quantit
         }
         
         @SuppressWarnings("rawtypes")
-	static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<>();
+	static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<Class, Unit>();
         static {
             CLASS_TO_METRIC_UNIT.put(Dimensionless.class, ONE);
             CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);

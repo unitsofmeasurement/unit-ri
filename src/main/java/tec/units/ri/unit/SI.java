@@ -165,13 +165,6 @@ public final class SI extends AbstractSystemOfUnits {
     ////////////////////////////////
 
     /**
-     * The SI unit for magnetomotive force (standard name <code>At</code>).
-     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
-     */
-    public static final Unit<MagnetomotiveForce> AMPERE_TURN
-            = addUnit(new AlternateUnit<MagnetomotiveForce>(SI.AMPERE, "At"), MagnetomotiveForce.class);
-
-    /**
      * The SI derived unit for mass quantities (standard name <code>g</code>).
      * The base unit for mass quantity is {@link #KILOGRAM}.
      */

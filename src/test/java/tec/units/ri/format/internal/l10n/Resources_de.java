@@ -37,7 +37,7 @@ public class Resources_de extends Resources {
     private Map<String, String> strings;
  
     public Resources_de() {
-        strings = new Hashtable<>(30);
+        strings = new Hashtable<String, String>(30);
  
         strings.put("exit", "Beenden");
         strings.put("textLbl", "Texte");

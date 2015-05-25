@@ -84,7 +84,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	/**
 	 * Holds the unique symbols collection (base units or alternate units).
 	 */
-	protected static final Map<String, Unit<?>> SYMBOL_TO_UNIT = new HashMap<>();
+	protected static final Map<String, Unit<?>> SYMBOL_TO_UNIT = new HashMap<String, Unit<?>>();
 	
 	/**
 	 * Holds the name.

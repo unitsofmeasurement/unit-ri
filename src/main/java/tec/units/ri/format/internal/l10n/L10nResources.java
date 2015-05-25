@@ -90,7 +90,7 @@ public abstract class L10nResources implements L10nBundle {
         String language = locale.getLanguage();
         String country = locale.getCountry();
  
-        List<Locale> locales = new ArrayList<>(3);
+        final List<Locale> locales = new ArrayList<Locale>(3);
         if (!country.equals("")) {
             locales.add(locale);
         }
