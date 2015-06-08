@@ -59,6 +59,7 @@ import javax.measure.spi.SystemOfUnits;
  * @see <a
  *      href="http://en.wikipedia.org/wiki/United_States_customary_units">Wikipedia:
  *      United State Customary Units</a>
+ * @deprecated moving to unit-systems-common, see https://github.com/unitsofmeasurement/uom-systems/issues/issues/issue/2
  */
 public final class US extends AbstractSystemOfUnits {
 
