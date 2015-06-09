@@ -31,7 +31,6 @@ import javax.measure.Dimension;
 import javax.measure.UnitConverter;
 
 import tec.units.ri.quantity.QuantityDimension;
-import tec.units.ri.util.StandardModel;
 
 /**
  * <p> This class represents the physical model used for dimensional analysis.</p>
@@ -72,7 +71,7 @@ import tec.units.ri.util.StandardModel;
  * @see <a href="http://en.wikipedia.org/wiki/Dimensional_analysis">Wikipedia: Dimensional Analysis</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.5, $Date: 2015-06-08 $
+ * @version 0.5.6, $Date: 2015-06-09 $
  */
 public abstract class DimensionalModel {
 
