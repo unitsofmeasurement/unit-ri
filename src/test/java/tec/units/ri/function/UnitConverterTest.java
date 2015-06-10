@@ -43,7 +43,7 @@ public class UnitConverterTest {
 
 		assertEquals(400, result1, 0);
 		assertEquals(600, result2, 0);
-		assertEquals(400, result3);  
+		assertEquals(400d, result3);  
 		assertEquals(400, result3.intValue(), 0);  
 	}
 	
