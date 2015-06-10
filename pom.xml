@@ -349,4 +349,5 @@
 			</build>
 		</profile>
 	</profiles>
+	<version>0.8-SNAPSHOT</version>
 </project>
