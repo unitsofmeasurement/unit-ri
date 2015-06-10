@@ -25,11 +25,14 @@
  */
 package tec.units.ri.format.internal.l10n;
 
+import java.util.Set;
+
 /**
  * An abstraction over common resource methods in an ME/SE compatible manner.
  * @author Werner Keil
- * @version 0.2
+ * @version 0.3
  */ 
 public interface L10nBundle { // TODO could we rename it to something like MessageBundle?
 	 public String getString(String key);
+	 public Set<String> keySet();
 }
