@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -34,7 +34,7 @@ import java.util.Map;
  * Resource bundle for German, no specific country.
  */
 public class Resources_de extends Resources {
-    private Map<String, String> strings;
+    private final Map<String, String> strings;
  
     public Resources_de() {
         strings = new Hashtable<String, String>(30);
