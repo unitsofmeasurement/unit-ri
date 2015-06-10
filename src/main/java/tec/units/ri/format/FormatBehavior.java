@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -30,6 +30,7 @@ package tec.units.ri.format;
  * Defines different ways of formatting.
  * 
  * @author Werner Keil
+ * @version 0.2
  */
 public enum FormatBehavior {
 
@@ -42,7 +43,7 @@ public enum FormatBehavior {
 	/**
 	 * Formatting occurs in a locale-sensitive way.
 	 * 
-	 * @see java.util.Locale
+	 * @see java.util.Locale or equivalent for Java ME
 	 */
 	LOCALE_SENSITIVE
 }
