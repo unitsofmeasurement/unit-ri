@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright 2013-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
+ *  Copyright 2013-2015, Jean-Marie Dautelle, Werner Keil, V2COM and individual
  *  contributors by the @author tag.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,8 +39,12 @@ public class UnitConverterTest {
 		double length2 = 6.0;
 		double result1 = converter.convert(length1);
 		double result2 = converter.convert(length2);
+		Number result3 = converter.convert(new Double(length1));
+
 		assertEquals(400, result1, 0);
 		assertEquals(600, result2, 0);
+		assertEquals(400, result3);  
+		assertEquals(400, result3.intValue(), 0);  
 	}
 	
 	@Test
