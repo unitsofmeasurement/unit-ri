@@ -32,7 +32,7 @@ import java.util.Set;
 import tec.units.ri.format.internal.TokenException;
 
 /**
- * A Java ME compliant backport of {@link java.util.ResourceBundle}
+ * A Java ME compliant backport of {@linkplain java.util.ResourceBundle}
  * @author Werner
  * @version 0.6
  */ 

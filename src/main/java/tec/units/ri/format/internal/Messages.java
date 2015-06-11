@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format;
+package tec.units.ri.format.internal;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -56,10 +56,10 @@ public class Messages extends L10nResources {
 		strings.put("tec.units.ri.unit.SI.JOULE", "J");
 		strings.put("tec.units.ri.unit.SI.KATAL", "kat");
 		strings.put("tec.units.ri.unit.SI.KELVIN", "K");
-		strings.put("tec.units.ri.unit.SI.KILOGRAM ", "kg");
+		strings.put("tec.units.ri.unit.SI.KILOGRAM", "kg");
 		strings.put("tec.units.ri.unit.SI.KILOGRAM.1", "kilogram");
 		strings.put("tec.units.ri.unit.SI.LUMEN", "lm");
-		strings.put("tec.units.ri.unit.SI.LUX ", "lx");
+		strings.put("tec.units.ri.unit.SI.LUX", "lx");
 		strings.put("tec.units.ri.unit.SI.METRE", "m");
 		strings.put("tec.units.ri.unit.SI.MOLE", "mol");
 		strings.put("tec.units.ri.unit.SI.NEWTON", "N");

@@ -1,4 +1,4 @@
-package tec.units.ri.format;
+package tec.units.ri.format.internal.l10n;
 
 import static org.junit.Assert.*;
 
@@ -21,7 +21,7 @@ public class MessagesTest {
 	public void testMessageBundle() {
 		Locale locale = Locale.getDefault();
 		   
-		L10nBundle bundle = L10nResources.getBundle("tec.units.ri.format.Messages", locale);
+		L10nBundle bundle = L10nResources.getBundle("tec.units.ri.format.internal.Messages", locale);
 		assertNotNull(bundle);
 		String text = bundle.getString("tec.units.ri.unit.Units.KILOMETRES_PER_HOUR");
 		assertEquals("kph", text);

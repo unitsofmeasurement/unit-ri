@@ -34,7 +34,6 @@ import java.io.StringReader;
 import java.util.Formattable;
 import java.util.Formatter;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
@@ -182,15 +181,16 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
 	 * Name of the resource bundle
 	 */
-	private static final String BUNDLE_NAME = SimpleFormatParser.class.getPackage()
-			.getName() + ".messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "tec.units.ri.format.internal.Messages"; //$NON-NLS-1$
+	//= SimpleFormatParser.class.getPackage()			.getName() + ".messages"; 
 
 	/**
 	 * Default locale instance. If the default locale is changed after the class
 	 * is initialized, this instance will no longer be used.
 	 */
-	private static final SimpleUnitFormat DEFAULT_INSTANCE = new SimpleUnitFormat(
-			SymbolMap.of(toMap(ResourceBundle.getBundle(BUNDLE_NAME))), Locale.getDefault());
+	private static final SimpleUnitFormat DEFAULT_INSTANCE = new SimpleUnitFormat();
+			//SymbolMap.of(toMap(L10nResources.getBundle(BUNDLE_NAME, 
+				//	Locale.getDefault()), Locale.getDefault()));
 
 	/** Multiplicand character */
 	private static final char MIDDLE_DOT = '\u00b7'; //$NON-NLS-1$

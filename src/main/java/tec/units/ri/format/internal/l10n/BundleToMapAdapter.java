@@ -28,16 +28,15 @@ package tec.units.ri.format.internal.l10n;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 /**
  * 
  * @author Werner Keil
- * @version 0.5, March 22, 2015
+ * @version 0.6, June 11, 2015
  *
  */
 public final class BundleToMapAdapter {
-	public final static Map<String, String> toMap(final ResourceBundle resource) {
+	/*public final static Map<String, String> toMap(final ResourceBundle resource) {
 		final Map<String, String> map = new HashMap<String, String>();
 
 		Iterator<String> keys = resource.keySet().iterator();
@@ -47,7 +46,7 @@ public final class BundleToMapAdapter {
 		}
 
 		return map;
-	}
+	} */
 	
 	public final static Map<String, String> toMap(final L10nResources resource) {
 		final Map<String, String> map = new HashMap<String, String>();
@@ -61,7 +60,7 @@ public final class BundleToMapAdapter {
 		return map;
 	}
 
-	public final static Map<String, String> toMap(String resName) {
+	/*public final static Map<String, String> toMap(String resName) {
 		return toMap(ResourceBundle.getBundle(resName));
-	}
+	}*/
 }
