@@ -29,12 +29,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import javax.measure.MeasurementException;
+import tec.units.ri.format.internal.TokenException;
 
 /**
  * A Java ME compliant backport of {@link java.util.ResourceBundle}
  * @author Werner
- * @version 0.5
+ * @version 0.6
  */ 
 public abstract class L10nResources implements L10nBundle {
     protected L10nResources parent;
@@ -75,7 +75,7 @@ public abstract class L10nResources implements L10nBundle {
         // If bundle is null even here, no resource bundle could be found.
         // This is an error situation.
         if (bundle == null) {
-            throw new MeasurementException(
+            throw new TokenException(
                 "Can't find resource bundle for base name " + baseName + ".");
         }
         return bundle;
@@ -113,7 +113,7 @@ public abstract class L10nResources implements L10nBundle {
                 string = parent.getString(key);
             }
             if (string == null) {
-                throw new MeasurementException("Can't find resource for bundle " +
+                throw new TokenException("Can't find resource for bundle " +
                     this.getClass().getName() + " and key " + key + ".");
             }
         }
