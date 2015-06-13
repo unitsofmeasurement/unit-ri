@@ -9,6 +9,9 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-119
+ */
 public class L10nPropertyResources implements L10nBundle {
 
 	// Constants -----------------------------------------------------
