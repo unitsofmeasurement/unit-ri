@@ -113,7 +113,7 @@ public class Messages extends L10nResources {
 		strings.put("tec.units.ri.unit.Units.KILOMETRES_PER_HOUR", "kph");
 	}
 
-	public String handleGetString(String key) {
+	protected String handleGetString(String key) {
 		return strings.get(key);
 	}
 

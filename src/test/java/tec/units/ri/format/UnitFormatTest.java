@@ -34,17 +34,21 @@ import static tec.units.ri.unit.SI.METRE;
 import static tec.units.ri.unit.SI.MINUTE;
 import static tec.units.ri.unit.SI.SECOND;
 
+import java.io.IOException;
+
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 import javax.measure.quantity.Frequency;
 import javax.measure.quantity.Length;
+import javax.measure.quantity.Speed;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import tec.units.ri.spi.DefaultQuantityFactory;
+import tec.units.ri.unit.Units;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
@@ -114,6 +118,12 @@ public class UnitFormatTest {
 	}
 
 	@Test
+	public void testFormat4() {
+		Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
+		assertEquals("kph", kph.toString());
+	}
+	
+	@Test
 	public void testParseSimple() {
 		final UnitFormat format = SimpleUnitFormat.getInstance();
 		try {
@@ -123,6 +133,29 @@ public class UnitFormatTest {
 		} catch (ParserException e) {
 			fail(e.getMessage());
 		}
+	}
+	
+	@Test
+	public void testFormatFromQuantity() {
+		final UnitFormat format = SimpleUnitFormat.getInstance();
+		final Appendable a = new StringBuilder();
+		try {
+			format.format(METRE, a);
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}
+		assertEquals(METRE, sut.getUnit());
+		assertEquals("m", a.toString());
+
+		final Appendable a2 = new StringBuilder();
+		@SuppressWarnings("unchecked")
+		Unit<Speed> v = (Unit<Speed>) sut.getUnit().divide(SECOND);
+		try {
+			format.format(v, a2);
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}
+		assertEquals("m/s", a2.toString());
 	}
 
 	@Test

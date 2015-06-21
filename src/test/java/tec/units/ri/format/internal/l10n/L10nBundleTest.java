@@ -34,6 +34,9 @@ public class L10nBundleTest {
 		assertNotNull(resources);
 		String text = resources.getString("text");
 		assertEquals("Da ist ein Text.", text);
+		
+		text = resources.getString("title");
+		assertEquals("Localization example", text);
 	}
 	
 	@Test

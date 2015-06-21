@@ -1,4 +1,4 @@
-package tec.units.ri.format.internal.l10n;
+package tec.units.ri.format.internal;
 
 import static org.junit.Assert.*;
 
