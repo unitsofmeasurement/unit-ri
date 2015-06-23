@@ -38,11 +38,11 @@ import tec.units.ri.function.Nameable;
  * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, April 19, 2015
+ * @version 0.4.1, June 24, 2015
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
-	private Units() {
+	protected Units() {
 	}
 	
 	private static final Units INSTANCE = new Units();

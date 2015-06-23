@@ -43,7 +43,6 @@ import tec.units.ri.function.PiMultiplierConverter;
 import tec.units.ri.function.RationalConverter;
 import tec.units.ri.quantity.QuantityDimension;
 
-
 /**
  * <p> This class defines all SI (Système International d'Unités) base units and
  *     derived units as well as units that are accepted for use with the
@@ -189,13 +188,6 @@ public final class SI extends AbstractSystemOfUnits {
      */
     public static final AlternateUnit<SolidAngle> STERADIAN
             = addUnit(new AlternateUnit<SolidAngle>(ONE, "sr"), SolidAngle.class);
-
-    /**
-     * The SI unit for binary information (standard name <code>bit</code>).
-     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
-     */
-    public static final AlternateUnit<Information> BIT
-            = addUnit(new AlternateUnit<Information>(ONE, "bit"), Information.class);
 
     /**
      * The SI unit for frequency (standard name <code>Hz</code>).
@@ -496,8 +488,8 @@ public final class SI extends AbstractSystemOfUnits {
      * The SI unit for binary information rate (standard name <code>bit/s</code>).
      * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
      */
-    public static final Unit<InformationRate> BITS_PER_SECOND
-            = addUnit(new ProductUnit<InformationRate>(BIT.divide(SECOND)), InformationRate.class);
+    /*public static final Unit<InformationRate> BITS_PER_SECOND
+            = addUnit(new ProductUnit<InformationRate>(BIT.divide(SECOND)), InformationRate.class);*/
 
     /////////////////////////////////////////////////////////////////
     // Units outside the SI that are accepted for use with the SI. //

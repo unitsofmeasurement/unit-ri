@@ -28,7 +28,6 @@ package tec.units.ri.unit.internal;
 import static tec.units.ri.unit.MetricPrefix.*;
 import static tec.units.ri.unit.SI.AMPERE;
 import static tec.units.ri.unit.SI.BECQUEREL;
-import static tec.units.ri.unit.SI.BIT;
 import static tec.units.ri.unit.SI.COULOMB;
 import static tec.units.ri.unit.SI.GRAM;
 import static tec.units.ri.unit.SI.GRAY;
@@ -60,7 +59,6 @@ import tec.units.ri.function.LogConverter;
 import tec.units.ri.function.RationalConverter;
 import tec.units.ri.unit.SI;
 
-
 /**
  * <p>
  * This class contains units that are not part of the International System of
@@ -80,7 +78,7 @@ import tec.units.ri.unit.SI;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.18, $Date: 2015-06-04 $
+ * @version 1.19, $Date: 2015-06-24 $
  */
 final class NonSI extends AbstractSystemOfUnits {
 
@@ -397,12 +395,12 @@ final class NonSI extends AbstractSystemOfUnits {
 	 * A unit of data amount equal to <code>8 {@link SI#BIT}</code> (BinarY
 	 * TErm, standard name <code>byte</code>).
 	 */
-	public static final Unit<Information> BYTE = addUnit(BIT.multiply(8));
+	//public static final Unit<Information> BYTE = addUnit(BIT.multiply(8));
 
 	/**
 	 * Equivalent {@link #BYTE}
 	 */
-	static final Unit<Information> OCTET = BYTE;
+	//static final Unit<Information> OCTET = BYTE;
 
 	// ////////////////////
 	// Electric current //
