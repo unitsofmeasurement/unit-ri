@@ -158,8 +158,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	}
 
 	/**
-	 * Returns the physics unit represented by the specified characters as per
-	 * standard <a href="http://www.unitsofmeasure.org/">UCUM</a> format.
+	 * Returns the physics unit represented by the specified characters.
 	 *
 	 * Locale-sensitive unit parsing may be handled using the OSGi
 	 * {@link javax.measure.spi.UnitFormatService} or for non-OSGi applications
@@ -173,19 +172,16 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *
 	 * @param charSequence
 	 *            the character sequence to parse.
-	 * @return <code>UCUMFormat.getCaseSensitiveInstance().parse(csq, new ParsePosition(0))</code>
+	 * @return <code>SimpleUnitFormat.getInstance().parse(csq)</code>
 	 * @throws ParserException
-	 *             if the specified character sequence cannot be correctly
-	 *             parsed (e.g. not UCUM compliant).
+	 *             if the specified character sequence cannot be parsed correctly.
 	 */
 	public static Unit<?> parse(CharSequence charSequence) {
 		return SimpleUnitFormat.getInstance().parse(charSequence);
-//		return LocalUnitFormat.getInstance().parse(charSequence);
 	}
 
 	/**
-	 * Returns the standard <a href="http://unitsofmeasure.org/">UCUM</a>
-	 * representation of this unit. The string produced for a given unit
+	 * Returns the standard {@link String} representation of this unit. The string produced for a given unit
 	 * is always the same; it is not affected by the locale. It can be used as a
 	 * canonical string representation for exchanging units, or as a key for a
 	 * Map, Hashtable, etc.
@@ -194,7 +190,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * {@link org.unitsofmeasurement.service.UnitFormat} service (or
 	 * {@link UnitFormat} for non-OSGi applications).
 	 *
-	 * @return <code>UCUMFormat.getCaseSensitiveInstance().format(this)</code>
+	 * @return <code>SimpleUnitFormat.getInstance().format(this)</code>
 	 */
 	@Override
 	public String toString() {

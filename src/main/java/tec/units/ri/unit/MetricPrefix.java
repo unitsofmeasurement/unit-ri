@@ -38,7 +38,7 @@ import tec.units.ri.function.RationalConverter;
  * <p> This class provides support for the 20 prefixes used in the metric
  *     system (decimal multiples and submultiples of units).
  *     For example:<pre><code>
- *     import static tec.units.ri.unit.SI.*;  // Static import.
+ *     import static tec.units.ri.unit.Units.*;  // Static import.
  *     import static tec.units.ri.unit.MetricPrefix.*; // Static import.
  *     import javax.measure.*;
  *     import javax.measure.quantity.*;
@@ -51,7 +51,7 @@ import tec.units.ri.function.RationalConverter;
  * @see <a href="http://en.wikipedia.org/wiki/Metric_prefix">Wikipedia: Metric Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8, $Date: 2015-04-19 $
+ * @version 0.8, $Date: 2015-06-24 $
  */
 public enum MetricPrefix implements UnitConverterSupplier {
     YOTTA(RationalConverter.of(1000000000000000000000000d, 1d)),
