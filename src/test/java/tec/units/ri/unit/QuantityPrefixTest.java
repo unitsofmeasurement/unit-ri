@@ -34,27 +34,72 @@ import static tec.units.ri.unit.MetricPrefix.*;
 import static tec.units.ri.unit.SI.GRAM;
 import static tec.units.ri.unit.SI.KILOGRAM;
 
-import javax.measure.Unit;
+import javax.measure.Quantity;
+import javax.measure.quantity.Length;
 import javax.measure.quantity.Mass;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
-public class PrefixTest {
+import tec.units.ri.quantity.Quantities;
+
+@Ignore
+public class QuantityPrefixTest {
 	@Test
-	public void testKilo() {
-		// TODO how to handle equals for units?
-		assertEquals(KILOGRAM.toString(), KILO(GRAM).toString());
+	public void testMega() {
+		Quantity<Mass> m1 = Quantities.getQuantity(1.0, MEGA(SI.GRAM));
+		assertEquals(1d, m1.getValue());
+		assertEquals("Mg", m1.getUnit().toString());
 	}
 	
 	@Test
-	public void testMega() {
-		Unit<Mass> m1 = MEGA(GRAM);
-		assertEquals("Mg", m1.toString());
+	public void testMega2() {
+		Quantity<Mass> m1 = Quantities.getQuantity(1.0, SI.TONNE);
+		assertEquals(1d, m1.getValue());
+		assertEquals("t", m1.getUnit().toString());
+	}
+	
+	@Test
+	public void testMicro() {
+		Quantity<Mass> m1 = Quantities.getQuantity(1.0, SI.GRAM);
+		assertEquals(1d, m1.getValue());
+		assertEquals("g", m1.getUnit().toString());
+				
+		Quantity<Mass> m2 = m1.to(MICRO(SI.GRAM));
+		assertEquals(1e6d, m2.getValue());
+		assertEquals("µg", m2.getUnit().toString());
+	}
+	
+	@Test
+	public void testMicro2() {
+		Quantity<Length> m1 = Quantities.getQuantity(1.0, SI.METRE);
+		assertEquals(1d, m1.getValue());
+		assertEquals("m", m1.getUnit().toString());
+				
+		Quantity<Length> m2 = m1.to(MICRO(SI.METRE));
+		assertEquals(1000000.0d, m2.getValue());
+		assertEquals("µm", m2.getUnit().toString());
 	}
 	
 	@Test
 	public void testNano() {
-		Unit<Mass> m1 = NANO(GRAM);
-		assertEquals("ng", m1.toString());
+		Quantity<Mass> m1 = Quantities.getQuantity(1.0, SI.GRAM);
+		assertEquals(1d, m1.getValue());
+		assertEquals("g", m1.getUnit().toString());
+				
+		Quantity<Mass> m2 = m1.to(NANO(SI.GRAM));
+		assertEquals(1000000000.0d, m2.getValue());
+		assertEquals("ng", m2.getUnit().toString());
+	}
+	
+	@Test
+	public void testNano2() {
+		Quantity<Length> m1 = Quantities.getQuantity(1.0, SI.METRE);
+		assertEquals(1d, m1.getValue());
+		assertEquals("m", m1.getUnit().toString());
+				
+		Quantity<Length> m2 = m1.to(NANO(SI.METRE));
+		assertEquals(1000000000.0d, m2.getValue());
+		assertEquals("nm", m2.getUnit().toString());
 	}
 }

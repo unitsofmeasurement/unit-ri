@@ -367,7 +367,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 			// } else if (unit instanceof ProductUnit<?>) {
 			// ProductUnit<?> p = (ProductUnit<?>)unit;
 		}
-		String symbol = symbolMap.getSymbol(unit);
+		final String symbol = symbolMap.getSymbol(unit);
 		if (symbol != null) {
 			buffer.append(symbol);
 			return NOOP_PRECEDENCE;
@@ -421,15 +421,20 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 			Unit<?> parentUnit = unit.getSystemUnit();
 			converter = ((AbstractUnit<?>) unit).getConverterToSI();
 			if (KILOGRAM.equals(parentUnit)) {
-				// More special-case hackery to work around gram/kilogram
-				// incosistency
-				if (unit.equals(GRAM)) {
-					buffer.append(symbolMap.getSymbol(GRAM));
-					return NOOP_PRECEDENCE;
-				}
-				parentUnit = GRAM;
 				if (unit instanceof TransformedUnit<?>) {
-					converter = ((TransformedUnit<?>) unit).getConverter();
+					//converter = ((TransformedUnit<?>) unit).getConverter();
+					
+					// More special-case hackery to work around gram/kilogram
+					// incosistency
+					if (unit.equals(GRAM)) {
+						buffer.append(symbolMap.getSymbol(GRAM));
+						return NOOP_PRECEDENCE;
+					} else {
+						//parentUnit = GRAM;
+						//converter = unit.getConverterTo((Unit) KILOGRAM);
+						converter = ((TransformedUnit) unit).getConverter();
+					}
+					//parentUnit = GRAM;
 				} else {
 					converter = unit.getConverterTo((Unit) GRAM);
 				}
@@ -480,7 +485,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 		if (continued) {
 			buffer.append(MIDDLE_DOT);
 		}
-		StringBuilder temp = new StringBuilder();
+		final StringBuilder temp = new StringBuilder();
 		int unitPrecedence = formatInternal(unit, temp);
 
 		if (unitPrecedence < PRODUCT_PRECEDENCE) {
