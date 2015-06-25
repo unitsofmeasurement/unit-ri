@@ -438,7 +438,8 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 					parentUnit = LITER;
 				}
 			}
-
+			
+			// TODO this may need to be in an else clause, could be related to https://github.com/unitsofmeasurement/si-units/issues/4
 			if (unit instanceof TransformedUnit) {
 				TransformedUnit transUnit = (TransformedUnit) unit;
 				if (parentUnit== null) parentUnit = transUnit.getParentUnit();
