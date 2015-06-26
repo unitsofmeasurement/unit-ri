@@ -57,4 +57,10 @@ public class PrefixTest {
 		Unit<Mass> m1 = NANO(GRAM);
 		assertEquals("ng", m1.toString());
 	}
+	
+	@Test
+	public void testPicoNano() {
+		Unit<Mass> m1 = PICO(KILOGRAM);
+		assertEquals("ng", m1.toString());
+	}
 }

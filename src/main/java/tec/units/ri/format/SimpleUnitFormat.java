@@ -566,7 +566,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 */
 	private int formatConverter(UnitConverter converter, boolean continued,
 			int unitPrecedence, StringBuilder buffer) {
-		MetricPrefix prefix = symbolMap
+		final MetricPrefix prefix = symbolMap
 				.getPrefix((AbstractConverter) converter);
 		if ((prefix != null) && (unitPrecedence == NOOP_PRECEDENCE)) {
 			buffer.insert(0, symbolMap.getSymbol(prefix));
