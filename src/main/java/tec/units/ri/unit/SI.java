@@ -86,13 +86,6 @@ public final class SI extends Units {
     //////////////////////////////
     // SI DERIVED PRODUCT UNITS //
     //////////////////////////////
- 
-    /**
-     * The SI unit for action quantities (standard name <code>j.s</code>).
-     */
-    public static final Unit<Action> JOULE_SECOND
-            = addUnit(new ProductUnit<Action>(
-            JOULE.multiply(SECOND)), Action.class);
 
     /**
      * The SI unit for electric permittivity quantities (standard name <code>F/m</code>).
@@ -100,21 +93,6 @@ public final class SI extends Units {
     public static final Unit<ElectricPermittivity> FARADS_PER_METRE
             = addUnit(new ProductUnit<ElectricPermittivity>(
             FARAD.divide(METRE)), ElectricPermittivity.class);
-
-    /**
-     * The SI unit for magnetic permeability quantities (standard name <code>N/A2</code>).
-     *  @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
-     */
-    public static final Unit<MagneticPermeability> NEWTONS_PER_SQUARE_AMPERE
-            = addUnit(new ProductUnit<MagneticPermeability>(
-            NEWTON.divide(AMPERE.pow(2))), MagneticPermeability.class);
-
-    /**
-     * The SI unit for wave number quantities (standard name <code>1/m</code>).
-     */
-    public static final Unit<WaveNumber> RECIPROCAL_METRE
-            = addUnit(new ProductUnit<WaveNumber>(
-            METRE.pow(-1)), WaveNumber.class);
 
     /**
      * The SI unit for dynamic viscosity quantities (standard name <code>Pa.s</code>).
