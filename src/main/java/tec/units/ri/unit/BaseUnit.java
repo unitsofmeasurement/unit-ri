@@ -29,20 +29,17 @@ import java.util.Map;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
-import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.quantity.QuantityDimension;
 
-
 /**
  * <p> This class represents the building blocks on top of which all others
  *     physical units are created. Base units are always unscaled SI units.</p>
  * 
- * <p> When using the {@link tec.units.ri.util.StandardModel standard model},
- *     all seven {@link tec.units.ri.unit.org.unitsofmeasurement.impl.system.SI SI} base units
+ * <p> When using the standard model, all seven SI base units
  *     are dimensionally independent.</p>
  *
  * @see <a href="http://en.wikipedia.org/wiki/SI_base_unit">
@@ -50,7 +47,7 @@ import tec.units.ri.quantity.QuantityDimension;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, Jan 19, 2015
+ * @version 0.4, Jun 27, 2015
  */
 public class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
@@ -123,7 +120,7 @@ public class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     }
 
     @Override
-    public UnitConverter getConverterToSI() throws UnsupportedOperationException {
+    public UnitConverter getSystemConverter() throws UnsupportedOperationException {
         return AbstractConverter.IDENTITY;
     }
 

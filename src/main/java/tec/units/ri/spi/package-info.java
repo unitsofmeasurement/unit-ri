@@ -29,7 +29,7 @@
  *
  * <h3> Standard / Non Standard Units</h3>
  * <ul>
- *    <li> The class {@link SI} contains standard units as defined by the 
+ *    <li> The class {@link Units} contains the most important standard units defined by the 
  *       <a href="http://physics.nist.gov/Pubs/SP330/sp330.pdf">
  *      "The International System of Units"</a>.</li>
  *    <li> The class {@link US} contains units 

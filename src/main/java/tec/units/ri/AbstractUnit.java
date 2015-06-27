@@ -45,13 +45,11 @@ import tec.units.ri.quantity.QuantityDimension;
 import tec.units.ri.unit.AlternateUnit;
 import tec.units.ri.unit.AnnotatedUnit;
 import tec.units.ri.unit.ProductUnit;
-import tec.units.ri.unit.SI;
 import tec.units.ri.unit.TransformedUnit;
 
 /**
  * <p>
- * The class represents units founded on the seven
- * {@link tec.units.ri.unit.org.unitsofmeasurement.impl.system.SI SI} base units for seven
+ * The class represents units founded on the seven SI base units for seven
  * base quantities assumed to be mutually independent.
  * </p>
  *
@@ -66,7 +64,7 @@ import tec.units.ri.unit.TransformedUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.8, Feb 15, 2015
+ * @version 0.9, Jun 27, 2015
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
@@ -117,36 +115,36 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	}
 
 	/**
-	 * Returns the unscaled {@link SI} unit from which this unit is derived.
+	 * Returns the unscaled standard (SI) unit from which this unit is derived.
 	 * 
 	 * They SI unit can be be used to identify a quantity given the unit. For
-	 * example:[code] static boolean isAngularVelocity(AbstractUnit<?> unit) {
-	 * return unit.toSI().equals(RADIAN.divide(SECOND)); }
+	 * example:<code> static boolean isAngularVelocity(AbstractUnit<?> unit) {
+	 * return unit.toSystemUnit().equals(RADIAN.divide(SECOND)); }
 	 * assert(REVOLUTION.divide(MINUTE).isAngularVelocity()); // Returns true.
-	 * [/code]
+	 * </code>
 	 *
 	 * @return the unscaled metric unit from which this unit is derived.
 	 */
 	protected abstract AbstractUnit<Q> toSystemUnit();
 
 	/**
-	 * Returns the converter from this unit to its unscaled {@link #toSI SI}
+	 * Returns the converter from this unit to its unscaled {@link #toSystemUnit standard}
 	 * unit.
 	 *
-	 * @return <code>getConverterTo(this.toSI())</code>
-	 * @see #toSI
+	 * @return <code>getConverterTo(this.toSystemUnit())</code>
+	 * @see #toSystemUnit
 	 */
-	public abstract UnitConverter getConverterToSI();
+	public abstract UnitConverter getSystemConverter();
 
 	/**
 	 * Annotates the specified unit. Annotation does not change the unit
 	 * semantic. Annotations are often written between curly braces behind
-	 * units. For example: [code] AbstractUnit<Volume> PERCENT_VOL =
-	 * SI.PERCENT.annotate("vol"); // "%{vol}" AbstractUnit<Mass> KG_TOTAL =
-	 * SI.KILOGRAM.annotate("total"); // "kg{total}" AbstractUnit<Dimensionless>
-	 * RED_BLOOD_CELLS = ONE.annotate("RBC"); // "{RBC}" [/code]
+	 * units. For example: <code> Unit<Volume> PERCENT_VOL =
+	 * Units.PERCENT.annotate("vol"); // "%{vol}" AbstractUnit<Mass> KG_TOTAL =
+	 * Units.KILOGRAM.annotate("total"); // "kg{total}" AbstractUnit<Dimensionless>
+	 * RED_BLOOD_CELLS = ONE.annotate("RBC"); // "{RBC}" </code>
 	 *
-	 * Note: Annotation of system units are not considered themselves as system
+	 * Note: Annotations of system units are not considered themselves as system
 	 * units.
 	 *
 	 * @param annotation
@@ -262,8 +260,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *            the quantity class identifying the nature of the unit.
 	 * @throws ClassCastException
 	 *             if the dimension of this unit is different from the
-	 *             {@link SI} dimension of the specified type.
-	 * @see SI#getUnit(Class)
+	 *             SI dimension of the specified type.
+	 * @see Units#getUnit(Class)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -303,7 +301,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 			} catch (IncommensurableException e) {
 				throw new UnconvertibleException(e);
 			}
-		UnitConverter thisToSI = this.getConverterToSI();
+		UnitConverter thisToSI = this.getSystemConverter();
 		UnitConverter thatToSI = that.getConverterTo(thatSystemUnit);
 		return thatToSI.inverse().concatenate(thisToSI);
 	}
@@ -323,11 +321,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		AbstractUnit thisSystemUnit = this.getSystemUnit();
 		UnitConverter thisToDimension = model.getDimensionalTransform(
 				thisSystemUnit.getDimension()).concatenate(
-				this.getConverterToSI());
+				this.getSystemConverter());
 		AbstractUnit thatSystemUnit = thatAbstr.getSystemUnit();
 		UnitConverter thatToDimension = model.getDimensionalTransform(
 				thatSystemUnit.getDimension()).concatenate(
-				thatAbstr.getConverterToSI());
+				thatAbstr.getSystemConverter());
 		return thatToDimension.inverse().concatenate(thisToDimension);
 	}
 
@@ -339,7 +337,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	@Override
 	public final AbstractUnit<Q> transform(UnitConverter operation) {
 		AbstractUnit<Q> systemUnit = this.getSystemUnit();
-		UnitConverter cvtr = this.getConverterToSI().concatenate(operation);
+		UnitConverter cvtr = this.getSystemConverter().concatenate(operation);
 		if (cvtr.equals(AbstractConverter.IDENTITY))
 			return systemUnit;
 		return new TransformedUnit<Q>(systemUnit, cvtr);

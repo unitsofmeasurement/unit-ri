@@ -31,8 +31,8 @@ package tec.units.ri.unit;
 
 import static org.junit.Assert.assertEquals;
 import static tec.units.ri.unit.MetricPrefix.*;
-import static tec.units.ri.unit.SI.GRAM;
-import static tec.units.ri.unit.SI.KILOGRAM;
+import static tec.units.ri.unit.Units.GRAM;
+import static tec.units.ri.unit.Units.KILOGRAM;
 
 import javax.measure.Unit;
 import javax.measure.quantity.Mass;

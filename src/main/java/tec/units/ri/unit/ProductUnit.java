@@ -303,10 +303,10 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
         return (AbstractUnit<Q>) systemUnit;
     }
 
-    public UnitConverter getConverterToSI() {
+    public UnitConverter getSystemConverter() {
         UnitConverter converter = AbstractConverter.IDENTITY;
         for (Element e : elements) {
-            UnitConverter cvtr = e.unit.getConverterToSI();
+            UnitConverter cvtr = e.unit.getSystemConverter();
             if (!(cvtr.isLinear()))
                 throw new UnsupportedOperationException(e.unit + " is non-linear, cannot convert");
             if (e.root != 1)

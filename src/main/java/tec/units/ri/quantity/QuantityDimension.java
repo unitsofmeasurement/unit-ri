@@ -37,6 +37,7 @@ import javax.measure.Unit;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.unit.BaseUnit;
 import tec.units.ri.unit.SI;
+import tec.units.ri.unit.Units;
 
 /**
 *  <p> This class represents a quantity dimension (dimension of a physical
@@ -112,7 +113,7 @@ public final class QuantityDimension implements Dimension {
 
     /**
      * Returns the dimension for the specified quantity type by aggregating
-     * the results of {@link DimensionService} or <code>null</code>
+     * the results of {@link Units.getUnits()} or <code>null</code>
      * if the specified quantity is unknown.
      *
      * @param quantityType the quantity type.
@@ -120,9 +121,9 @@ public final class QuantityDimension implements Dimension {
      */
     public static <Q extends Quantity<Q>> Dimension getInstance(Class<Q> quantityType) {
         // TODO: Track OSGi services and aggregate results.
-        Unit<Q> siUnit = SI.getInstance().getUnit(quantityType);
-        if (siUnit == null) logger.log(Level.WARNING, "Quantity type: " + quantityType + " unknown");
-        return (siUnit != null) ? siUnit.getDimension() : null;
+        Unit<Q> baseUnit = Units.getInstance().getUnit(quantityType);
+        if (baseUnit == null) logger.log(Level.WARNING, "Quantity type: " + quantityType + " unknown");
+        return (baseUnit != null) ? baseUnit.getDimension() : null;
     }
 
     /**

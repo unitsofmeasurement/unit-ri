@@ -111,9 +111,9 @@ public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
     }
 
     @Override
-    public UnitConverter getConverterToSI() {
+    public UnitConverter getSystemConverter() {
     	if (actualUnit instanceof AbstractUnit) {
-    		return ((AbstractUnit<?>)actualUnit).getConverterToSI();
+    		return ((AbstractUnit<?>)actualUnit).getSystemConverter();
     	} else {
     		throw new ClassCastException("Unknown type " + actualUnit.getClass());
     	}

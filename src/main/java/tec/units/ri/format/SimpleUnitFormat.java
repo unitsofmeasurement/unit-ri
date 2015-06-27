@@ -421,7 +421,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 			StringBuilder temp = new StringBuilder();
 			int unitPrecedence = NOOP_PRECEDENCE;
 			Unit<?> parentUnit = unit.getSystemUnit();
-			converter = ((AbstractUnit<?>) unit).getConverterToSI();
+			converter = ((AbstractUnit<?>) unit).getSystemConverter();
 			if (KILOGRAM.equals(parentUnit)) {
 				if (unit instanceof TransformedUnit<?>) {
 					//converter = ((TransformedUnit<?>) unit).getConverter();

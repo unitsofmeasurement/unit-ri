@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -34,7 +34,6 @@ import tec.units.ri.function.RationalConverter;
 import javax.measure.Unit;
 import javax.measure.quantity.Angle;
 import javax.measure.quantity.Area;
-import javax.measure.quantity.Information;
 import javax.measure.quantity.Energy;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Mass;
@@ -55,7 +54,7 @@ import javax.measure.spi.SystemOfUnits;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.17, $Date: 2014-04-06 22:44:42 +0200 (So, 06 Apr 2014) $
+ * @version 1.18, $Date: 2015-06-27 $
  * @see <a
  *      href="http://en.wikipedia.org/wiki/United_States_customary_units">Wikipedia:
  *      United State Customary Units</a>
@@ -421,24 +420,6 @@ public final class US extends AbstractSystemOfUnits {
 //        return unit;
 //    }
     
-//	/**
-//	 * Adds a new named unit to the collection.
-//	 * 
-//	 * @param unit the unit being added.
-//	 * @param name the name of the unit.
-//	 * @return <code>unit</code>.
-//	 */
-//	@SuppressWarnings("unchecked")
-//	private static <U extends Unit<?>> U addUnit(U unit, String name) {
-//		if (name != null && unit instanceof Unit) {
-//			Unit<?> aUnit = (Unit<?>)unit;
-//			//aUnit.setName(name);
-//			INSTANCE.units.add(aUnit);
-//			return (U) aUnit;
-//		}
-//		INSTANCE.units.add(unit);
-//		return unit;
-//	}
 
 	/**
 	 * Adds a new unit to the collection.
