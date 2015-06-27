@@ -38,8 +38,6 @@ import javax.measure.spi.SystemOfUnits;
 import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.unit.MetricPrefix;
-import tec.units.ri.unit.SI;
-import tec.units.ri.unit.US;
 
 /**
  * <p>
@@ -65,7 +63,7 @@ import tec.units.ri.unit.US;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, February 16, 2015
+ * @version 0.7, June 27, 2015
  */
 public final class SymbolMap {
 	private static final Logger logger = Logger.getLogger(SymbolMap.class
@@ -153,7 +151,7 @@ public final class SymbolMap {
 
 	/**
 	 * Attaches a label to the specified unit. For example:[code]
-	 * symbolMap.label(DAY.multiply(365), "year"); symbolMap.label(NonSI.FOOT,
+	 * symbolMap.label(DAY.multiply(365), "year"); symbolMap.label(FOOT,
 	 * "ft"); [/code]
 	 *
 	 * @param unit
@@ -169,9 +167,9 @@ public final class SymbolMap {
 	/**
 	 * Attaches an alias to the specified unit. Multiple aliases may be attached
 	 * to the same unit. Aliases are used during parsing to recognize different
-	 * variants of the same unit.[code] symbolMap.alias(NonSI.FOOT, "foot");
-	 * symbolMap.alias(NonSI.FOOT, "feet"); symbolMap.alias(SI.METER, "meter");
-	 * symbolMap.alias(SI.METER, "metre"); [/code]
+	 * variants of the same unit.<br><code> symbolMap.alias(FOOT, "foot");
+	 * symbolMap.alias(FOOT, "feet"); symbolMap.alias(METRE, "meter");
+	 * symbolMap.alias(METER, "metre"); </code>
 	 *
 	 * @param unit
 	 *            the unit to label.
@@ -183,9 +181,9 @@ public final class SymbolMap {
 	}
 
 	/**
-	 * Attaches a label to the specified prefix. For example:[code]
+	 * Attaches a label to the specified prefix. For example:<code>
 	 * symbolMap.label(MetricPrefix.GIGA, "G"); symbolMap.label(MetricPrefix.MICRO,
-	 * "µ"); [/code]
+	 * "µ"); </code>
 	 */
 	public void label(MetricPrefix prefix, String symbol) {
 		symbolToPrefix.put(symbol, prefix);

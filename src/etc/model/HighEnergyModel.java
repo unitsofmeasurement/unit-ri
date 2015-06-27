@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -29,9 +29,9 @@ package org.unitsofmeasurement.ri.model;
  * This class represents the high-energy model.
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 5.0, October 12, 2010
+ * @version 0.5.1, June 27, 2015
  */
-public class HighEnergyModel extends RelativisticModel {
+class HighEnergyModel extends RelativisticModel {
 
 
     /**
@@ -42,23 +42,23 @@ public class HighEnergyModel extends RelativisticModel {
 
 // TODO: Allow more conversion.
 //        // SPEED_OF_LIGHT (METRE / SECOND) = 1
-//        SI.SECOND.setDimension(SI.NANO(SI.SECOND), new MultiplyConverter(1E9));
-//        SI.METRE.setDimension(SI.NANO(SI.SECOND),
+//        SECOND.setDimension(NANO(SECOND), new MultiplyConverter(1E9));
+//        METRE.setDimension(NANO(SECOND),
 //                new MultiplyConverter(1E9 / c));
 //
 //        // ENERGY = m²·kg/s² = kg·c²
-//        SI.KILOGRAM.setDimension(SI.GIGA(NonSI.ELECTRON_VOLT),
+//        KILOGRAM.setDimension(GIGA(ELECTRON_VOLT),
 //                new MultiplyConverter(c * c / ePlus / 1E9));
 //
 //        // BOLTZMANN (JOULE / KELVIN = (KILOGRAM / C^2 ) / KELVIN) = 1
-//        SI.KELVIN.setDimension(SI.GIGA(NonSI.ELECTRON_VOLT),
+//        KELVIN.setDimension(GIGA(ELECTRON_VOLT),
 //                new MultiplyConverter(k / ePlus / 1E9));
 //
 //        // ELEMENTARY_CHARGE (SECOND * AMPERE) = 1
-//        SI.AMPERE.setDimension(Unit.ONE.divide(SI.NANO(SI.SECOND)),
+//        AMPERE.setDimension(Unit.ONE.divide(SI.NANO(SI.SECOND)),
 //                new MultiplyConverter(1E-9 / ePlus));
 //
-//        SI.MOLE.setDimension(SI.MOLE, Converter.IDENTITY);
-//        SI.CANDELA.setDimension(SI.CANDELA, Converter.IDENTITY);
+//        MOLE.setDimension(MOLE, AbstractConverter.IDENTITY);
+//        CANDELA.setDimension(CANDELA, AbstractConverter.IDENTITY);
 
 }

@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -29,9 +29,9 @@ package org.unitsofmeasurement.ri.model;
  * This class represents the quantum model.
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 5.0, October 12, 2010
+ * @version 0.5.1, June 27, 2015
  */
-public class QuantumModel extends HighEnergyModel {
+class QuantumModel extends HighEnergyModel {
 
     /**
      * Default constructor.
@@ -41,26 +41,26 @@ public class QuantumModel extends HighEnergyModel {
     
 // TODO: Allow more conversion.
 //        // ENERGY = m²·kg/s² = kg·c²
-//        SI.KILOGRAM.setDimension(SI.GIGA(NonSI.ELECTRON_VOLT),
+//        KILOGRAM.setDimension(SI.GIGA(ELECTRON_VOLT),
 //                new MultiplyConverter(1E-9 * c * c / ePlus));
 //
 //        // H_BAR (SECOND * JOULE = SECOND * (KILOGRAM / C^2 )) = 1
-//        SI.SECOND.setDimension(Unit.ONE.divide(SI.GIGA(NonSI.ELECTRON_VOLT)),
+//        SECOND.setDimension(Unit.ONE.divide(SI.GIGA(ELECTRON_VOLT)),
 //                new MultiplyConverter(1E9 * ePlus / hBar));
 //
 //        // SPEED_OF_LIGHT (METRE / SECOND) = 1
-//        SI.METRE.setDimension(Unit.ONE.divide(SI.GIGA(NonSI.ELECTRON_VOLT)),
+//        METRE.setDimension(Unit.ONE.divide(SI.GIGA(ELECTRON_VOLT)),
 //                new MultiplyConverter(1E9 * ePlus / (c * hBar)));
 //
 //        // BOLTZMANN (JOULE / KELVIN = (KILOGRAM / C^2 ) / KELVIN) = 1
-//        SI.KELVIN.setDimension(SI.GIGA(NonSI.ELECTRON_VOLT),
+//        KELVIN.setDimension(SI.GIGA(ELECTRON_VOLT),
 //                new MultiplyConverter(1E-9 * k / ePlus));
 //
 //        // MAGNETIC CONSTANT (NEWTON / AMPERE^2) = 1
-//        SI.AMPERE.setDimension(SI.GIGA(NonSI.ELECTRON_VOLT),
+//        AMPERE.setDimension(SI.GIGA(ELECTRON_VOLT),
 //                new MultiplyConverter(1E-9 * MathLib.sqrt(µ0 * c * hBar) / ePlus));
 //
-//        SI.MOLE.setDimension(SI.MOLE, Converter.IDENTITY);
-//        SI.CANDELA.setDimension(SI.CANDELA, Converter.IDENTITY);
+//        MOLE.setDimension(MOLE, AbstractConverter.IDENTITY);
+//        CANDELA.setDimension(CANDELA, AbstractConverter.IDENTITY);
     
 }
