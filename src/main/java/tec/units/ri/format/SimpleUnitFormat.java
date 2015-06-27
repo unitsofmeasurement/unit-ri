@@ -25,6 +25,8 @@
  */
 package tec.units.ri.format;
 
+//import static java.lang.StrictMath.E; // not in CLDC 8
+import static java.lang.Math.E;
 import static tec.units.ri.format.internal.l10n.BundleToMapAdapter.toMap;
 import static tec.units.ri.unit.SI.*;
 import static tec.units.ri.unit.US.LITER;
@@ -593,7 +595,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 		} else if (converter instanceof LogConverter) {
 			double base = ((LogConverter) converter).getBase();
 			StringBuffer expr = new StringBuffer();
-			if (base == StrictMath.E) {
+			if (base == E) {
 				expr.append("ln"); //$NON-NLS-1$
 			} else {
 				expr.append("log"); //$NON-NLS-1$
@@ -612,7 +614,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 			}
 			StringBuffer expr = new StringBuffer();
 			double base = ((ExpConverter) converter).getBase();
-			if (base == StrictMath.E) {
+			if (base == E) {
 				expr.append('e');
 			} else {
 				expr.append((int) base);

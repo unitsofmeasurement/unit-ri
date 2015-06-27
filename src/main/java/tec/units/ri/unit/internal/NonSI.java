@@ -78,7 +78,7 @@ import tec.units.ri.unit.SI;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.19, $Date: 2015-06-24 $
+ * @version 1.20, $Date: 2015-06-27 $
  */
 final class NonSI extends AbstractSystemOfUnits {
 
@@ -131,7 +131,7 @@ final class NonSI extends AbstractSystemOfUnits {
 	 * <code>Ï€</code>).
 	 */
 	static final Unit<Dimensionless> PI = addUnit(AbstractUnit.ONE
-			.multiply(StrictMath.PI));
+			.multiply(Math.PI));
 
 	/**
 	 * A dimensionless unit equals to <code>0.01</code> (standard name

@@ -25,6 +25,9 @@
  */
 package tec.units.ri.format.internal;
 
+// import static java.lang.StrictMath.E; // not in CLDC 8
+import static java.lang.Math.E;
+
 import javax.measure.Unit;
 
 import tec.units.ri.AbstractUnit;
@@ -199,7 +202,7 @@ Unit<?> addExpr() throws TokenException {
         if (token.kind == INTEGER) {
             base = Integer.parseInt(token.image);
         } else {
-            base = StrictMath.E;
+            base = E;
         }
         {if (true) return result.transform(new LogConverter(base).inverse());}
     } else {
@@ -258,7 +261,7 @@ Unit<?> addExpr() throws TokenException {
             if (token.kind == INTEGER) {
                 base = Integer.parseInt(token.image);
             } else if (token.kind == NAT_LOG) {
-                base = StrictMath.E;
+                base = E;
             }
         }
         {if (true) return result.transform(new LogConverter(base));}

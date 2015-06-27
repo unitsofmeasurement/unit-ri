@@ -186,7 +186,7 @@ public final class UnitFormatParser implements UnitTokenConstants {
             if (token.kind == INTEGER) {
                 base = Integer.parseInt(token.image);
             } else {
-                base = StrictMath.E;
+                base = E;
             }
             {
                 if (true)
@@ -248,7 +248,7 @@ public final class UnitFormatParser implements UnitTokenConstants {
                         if (token.kind == INTEGER) {
                             base = Integer.parseInt(token.image);
                         } else if (token.kind == NAT_LOG) {
-                            base = StrictMath.E;
+                            base = E;
                         }
                     } {
                     if (true)
