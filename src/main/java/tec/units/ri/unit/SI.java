@@ -95,14 +95,6 @@ public final class SI extends Units {
             FARAD.divide(METRE)), ElectricPermittivity.class);
 
     /**
-     * The SI unit for dynamic viscosity quantities (standard name <code>Pa.s</code>).
-     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
-     */
-    public static final Unit<DynamicViscosity> PASCAL_SECOND
-            = addUnit(new ProductUnit<DynamicViscosity>(
-            PASCAL.multiply(SECOND)), DynamicViscosity.class);
-
-    /**
      * The SI unit for luminance quantities (standard name <code>cd/m2</code>).
      */
     public static final Unit<Luminance> CANDELAS_PER_SQUARE_METRE
@@ -110,27 +102,11 @@ public final class SI extends Units {
             CANDELA.divide(SQUARE_METRE)), Luminance.class);
 
     /**
-     * The SI unit for kinematic viscosity quantities (standard name <code>m2/s"</code>).
-     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
-     */
-    public static final Unit<KinematicViscosity> SQUARE_METRES_PER_SECOND
-            = addUnit(new ProductUnit<KinematicViscosity>(
-            SQUARE_METRE.divide(SECOND)), KinematicViscosity.class);
-
-    /**
      * The SI unit for magnetic field strength quantities (standard name <code>A/m"</code>).
      */
     public static final Unit<MagneticFieldStrength> AMPERES_PER_METRE
             = addUnit(new ProductUnit<MagneticFieldStrength>(
             AMPERE.divide(METRE)), MagneticFieldStrength.class);
-
-    /**
-     * The SI unit for ionizing radiation quantities (standard name <code>C/kg"</code>).
-     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
-     */
-    public static final Unit<IonizingRadiation> COULOMBS_PER_KILOGRAM
-            = addUnit(new ProductUnit<IonizingRadiation>(
-            COULOMB.divide(KILOGRAM)), IonizingRadiation.class);
 
     /**
      * An angle unit accepted for use with SI units (standard name <code>deg/code>).
