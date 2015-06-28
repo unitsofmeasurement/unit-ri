@@ -26,6 +26,7 @@
 package tec.units.ri.unit;
 
 import static tec.units.ri.AbstractUnit.ONE;
+
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Acceleration;
@@ -74,7 +75,7 @@ import tec.units.ri.quantity.QuantityDimension;
  * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, June 27, 2015
+ * @version 0.5.1, June 28, 2015
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
@@ -448,6 +449,12 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      */
     public static final Unit<Time> DAY
         = new TransformedUnit<Time>(SECOND, new RationalConverter(24 * 60 * 60, 1));
+    
+    /**
+     * A time unit accepted for use with SI units (standard name <code>y/code>).
+     */
+	public static final Unit<Time> YEAR = addUnit(Units.DAY.multiply(365.25));
+	
     
     /////////////////////
     // Collection View //
