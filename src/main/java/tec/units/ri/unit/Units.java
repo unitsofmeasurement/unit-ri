@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -75,14 +75,14 @@ import tec.units.ri.quantity.QuantityDimension;
  * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.1, June 28, 2015
+ * @version 0.5.2, July 2, 2015
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
-	protected Units() {
-	}
-	
-	private static final Units INSTANCE = new Units();
+    protected Units() {
+    }
+    
+    private static final Units INSTANCE = new Units();
 
     ////////////////
     // BASE UNITS //
@@ -382,6 +382,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
     public static final AlternateUnit<CatalyticActivity> KATAL
             = addUnit(new AlternateUnit<CatalyticActivity>(
             MOLE.divide(SECOND), "kat"), CatalyticActivity.class);
+            
 
     //////////////////////////////
     // SI DERIVED PRODUCT UNITS //
@@ -453,7 +454,8 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
     /**
      * A time unit accepted for use with SI units (standard name <code>y/code>).
      */
-	public static final Unit<Time> YEAR = addUnit(Units.DAY.multiply(365.25));
+	public static final Unit<Time> YEAR = addUnit(Units.DAY.multiply(365.2525)); 
+	// using Gregorian year instead of Julian (365.25)
 	
     
     /////////////////////
@@ -461,18 +463,18 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
     /////////////////////
     
     @Override
-	public String getName() {
-		return getClass().getSimpleName();
-	}
+    public String getName() {
+	return getClass().getSimpleName();
+    }
     
-	/**
-	 * Returns the unique instance of this class.
-	 * 
-	 * @return the Imperial instance.
-	 */
-	public static SystemOfUnits getInstance() {
-		return INSTANCE;
-	}
+    /**
+     * Returns the unique instance of this class.
+     * 
+     * @return the Imperial instance.
+     */
+    public static SystemOfUnits getInstance() {
+	return INSTANCE;
+    }
 	
     /**
      * Adds a new unit not mapped to any specified quantity type.
