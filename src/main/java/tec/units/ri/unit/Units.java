@@ -434,6 +434,12 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
         = new TransformedUnit<Dimensionless>(ONE, new RationalConverter(1, 100));
 
     /**
+     * A volume unit accepted for use with SI units (standard name <code>l</code>).
+     */
+    public static final Unit<Volume> LITRE
+        = new TransformedUnit<Volume>(CUBIC_METRE, new RationalConverter(1, 1000));
+    
+    /**
      * A time unit accepted for use with SI units (standard name <code>min</code>).
      */
     public static final Unit<Time> MINUTE

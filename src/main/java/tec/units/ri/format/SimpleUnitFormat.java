@@ -28,8 +28,7 @@ package tec.units.ri.format;
 //import static java.lang.StrictMath.E; // not in CLDC 8
 import static java.lang.Math.E;
 import static tec.units.ri.format.internal.l10n.BundleToMapAdapter.toMap;
-import static tec.units.ri.unit.SI.*;
-import static tec.units.ri.unit.US.LITER;
+import static tec.units.ri.unit.Units.*;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -167,7 +166,7 @@ import tec.units.ri.unit.AnnotatedUnit;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, $Date: 2015-02-08 $
+ * @version 0.5.1, $Date: 2015-07-03 $
  */
 public class SimpleUnitFormat extends AbstractUnitFormat {
 
@@ -442,7 +441,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 				}
 			} else if (CUBIC_METRE.equals(parentUnit)) {
 				if (converter != null) {
-					parentUnit = LITER;
+					parentUnit = LITRE;
 				}
 			}
 			

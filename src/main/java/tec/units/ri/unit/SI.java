@@ -126,11 +126,6 @@ public final class SI extends Units {
     public static final Unit<Angle> SECOND_ANGLE
         = new TransformedUnit<Angle>(RADIAN,  new PiMultiplierConverter().concatenate(new RationalConverter(1, 180 * 60 * 60)));
 
-    /**
-     * A volume unit accepted for use with SI units (standard name <code>l</code>).
-     */
-    public static final Unit<Volume> LITRE
-        = new TransformedUnit<Volume>(CUBIC_METRE, new RationalConverter(1, 1000));
 
     /**
      * A mass unit accepted for use with SI units (standard name <code>t</code>).

@@ -58,6 +58,8 @@ public class Messages extends L10nResources {
 		strings.put("tec.units.ri.unit.Units.KELVIN", "K");
 		strings.put("tec.units.ri.unit.Units.KILOGRAM", "kg");
 		strings.put("tec.units.ri.unit.Units.KILOGRAM.1", "kilogram");
+		strings.put("tec.units.ri.unit.Units.KILOMETRES_PER_HOUR", "kph");
+		strings.put("tec.units.ri.unit.Units.LITRE", "l");
 		strings.put("tec.units.ri.unit.Units.LUMEN", "lm");
 		strings.put("tec.units.ri.unit.Units.LUX", "lx");
 		strings.put("tec.units.ri.unit.Units.METRE", "m");
@@ -110,7 +112,6 @@ public class Messages extends L10nResources {
 		strings.put("tec.units.ri.unit.MetricPrefix.YOTTA", "Y");
 		strings.put("tec.units.ri.unit.MetricPrefix.ZEPTO", "z");
 		strings.put("tec.units.ri.unit.MetricPrefix.ZETTA", "Z");
-		strings.put("tec.units.ri.unit.Units.KILOMETRES_PER_HOUR", "kph");
 	}
 
 	protected String handleGetString(String key) {

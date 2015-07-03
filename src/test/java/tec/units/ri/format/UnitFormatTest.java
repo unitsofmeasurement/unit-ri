@@ -28,11 +28,13 @@ package tec.units.ri.format;
 import static org.junit.Assert.*;
 import static tec.units.ri.unit.MetricPrefix.KILO;
 import static tec.units.ri.unit.MetricPrefix.MEGA;
-import static tec.units.ri.unit.SI.HERTZ;
-import static tec.units.ri.unit.SI.KILOGRAM;
-import static tec.units.ri.unit.SI.METRE;
-import static tec.units.ri.unit.SI.MINUTE;
-import static tec.units.ri.unit.SI.SECOND;
+import static tec.units.ri.unit.Units.HERTZ;
+import static tec.units.ri.unit.Units.KILOGRAM;
+import static tec.units.ri.unit.Units.METRE;
+import static tec.units.ri.unit.Units.MINUTE;
+import static tec.units.ri.unit.Units.NEWTON;
+import static tec.units.ri.unit.Units.SECOND;
+import static tec.units.ri.unit.Units.STERADIAN;
 
 import java.io.IOException;
 
@@ -40,8 +42,10 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
+import javax.measure.quantity.Force;
 import javax.measure.quantity.Frequency;
 import javax.measure.quantity.Length;
+import javax.measure.quantity.SolidAngle;
 import javax.measure.quantity.Speed;
 
 import org.junit.Before;
@@ -100,25 +104,37 @@ public class UnitFormatTest {
 	// }
 
 	@Test
-	public void testFormat() {
+	public void testFormatHz() {
 		Unit<Frequency> hz = HERTZ;
 		assertEquals("Hz", hz.toString());
 	}
 	
 	@Test
-	public void testFormat2() {
+	public void testFormatHz2() {
 		Unit<Frequency> mhz = MEGA(HERTZ);
 		assertEquals("Mhz", mhz.toString());
 	}
-
+	
 	@Test
-	public void testFormat3() {
+	public void testFormatHz3() {
 		Unit<Frequency> khz = KILO(HERTZ);
 		assertEquals("khz", khz.toString());
 	}
+	
+	@Test
+	public void testFormatSr() {
+		Unit<SolidAngle> sr = STERADIAN;
+		assertEquals("sr", sr.toString());
+	}
+	
+	@Test
+	public void testFormatNewton() {
+		Unit<Force> n = NEWTON;
+		assertEquals("N", n.toString());
+	}
 
 	@Test
-	public void testFormat4() {
+	public void testFormatKph() {
 		Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
 		assertEquals("kph", kph.toString());
 	}
