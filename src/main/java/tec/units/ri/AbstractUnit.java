@@ -90,6 +90,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	protected String name;
 	
 	/**
+	 * Holds the symbol.
+	 */
+	private String symbol;
+	
+	/**
 	 * Default constructor.
 	 */
 	protected AbstractUnit() {
@@ -286,6 +291,14 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
 	public String getName() {
 		return name;
+	}
+	
+	public String getSymbol() {
+		return symbol;
+	}
+	
+	protected void setSymbol(String s) {
+		this.symbol = s;
 	}
 
 	@Override

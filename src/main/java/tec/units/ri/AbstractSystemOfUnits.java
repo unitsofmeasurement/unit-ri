@@ -97,6 +97,33 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 	 * 
 	 * @param unit the unit being added.
 	 * @param name the name of the unit.
+	 * @param name the symbol of the unit.
+	 * @return <code>unit</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	protected <U extends Unit<?>> U addUnit(U unit, String name, String symbol) {
+		if (name != null && symbol!= null && unit instanceof AbstractUnit) {
+			AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+			aUnit.setName(name);
+			aUnit.setSymbol(symbol);
+			units.add(aUnit);
+			return (U) aUnit;
+		}
+		if (name != null && unit instanceof AbstractUnit) {
+			AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+			aUnit.setName(name);
+			units.add(aUnit);
+			return (U) aUnit;
+		}
+		units.add(unit);
+		return unit;
+	}
+	
+    /**
+	 * Adds a new named unit to the collection.
+	 * 
+	 * @param unit the unit being added.
+	 * @param name the name of the unit.
 	 * @return <code>unit</code>.
 	 */
 	@SuppressWarnings("unchecked")
@@ -110,8 +137,8 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 		units.add(unit);
 		return unit;
 	}
-    
-	static class Helper {
+	
+	protected static class Helper {
 		static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, 
 				Dimension dimension) {
 			if (dimension != null) {
@@ -124,6 +151,52 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 				return dimSet;
 			}
 			return null;
+		}
+		
+	    /**
+		 * Adds a new named unit to the collection.
+		 * 
+		 * @param unit the unit being added.
+		 * @param name the name of the unit.
+		 * @return <code>unit</code>.
+		 */
+		@SuppressWarnings("unchecked")
+		public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String name) {
+			if (name != null && unit instanceof AbstractUnit) {
+				AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+				aUnit.setName(name);
+				units.add(aUnit);
+				return (U) aUnit;
+			}
+			units.add(unit);
+			return unit;
+		}
+		
+	    /**
+		 * Adds a new named unit to the collection.
+		 * 
+		 * @param unit the unit being added.
+		 * @param name the name of the unit.
+		 * @param name the symbol of the unit.
+		 * @return <code>unit</code>.
+		 */
+		@SuppressWarnings("unchecked")
+		public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String name, String symbol) {
+			if (name != null && symbol!= null && unit instanceof AbstractUnit) {
+				AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+				aUnit.setName(name);
+				aUnit.setSymbol(symbol);
+				units.add(aUnit);
+				return (U) aUnit;
+			}
+			if (name != null && unit instanceof AbstractUnit) {
+				AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+				aUnit.setName(name);
+				units.add(aUnit);
+				return (U) aUnit;
+			}
+			units.add(unit);
+			return unit;
 		}
 	}
 }

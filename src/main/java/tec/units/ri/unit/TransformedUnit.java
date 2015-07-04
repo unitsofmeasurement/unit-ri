@@ -149,6 +149,9 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
 	@Override
 	//TODO clarify JavaDoc or adjust to what the Unit JavaDoc says.
 	public String getSymbol() {
+		if (super.getSymbol() != null) {
+			return super.getSymbol();
+		}
 		return symbol;
 	}
 	

@@ -414,6 +414,9 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 		} else if (unit.getSymbol() != null) { // Alternate unit.
 			buffer.append(unit.getSymbol());
 			return NOOP_PRECEDENCE;
+//		} else if (unit.getName() != null) {
+//			buffer.append(unit.getName());
+//			return NOOP_PRECEDENCE;
 		} else { // A transformed unit or new unit type!
 			UnitConverter converter = null;
 			boolean printSeparator = false;
@@ -445,7 +448,6 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 				}
 			}
 			
-			// TODO this may need to be in an else clause, could be related to https://github.com/unitsofmeasurement/si-units/issues/4
 			if (unit instanceof TransformedUnit) {
 				TransformedUnit transUnit = (TransformedUnit) unit;
 				if (parentUnit== null) parentUnit = transUnit.getParentUnit();
