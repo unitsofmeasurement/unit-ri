@@ -577,7 +577,7 @@ public final class UnitFormatParser implements UnitTokenConstants {
     /** Generated Token Manager. */
     public UnitTokenManager token_source;
 
-    SimpleCharStream jj_input_stream;
+    DefaultCharStream jj_input_stream;
 
     /** Current token. */
     public Token token;
@@ -618,7 +618,7 @@ public final class UnitFormatParser implements UnitTokenConstants {
     /** Constructor with InputStream and supplied encoding */
     public UnitFormatParser(java.io.InputStream stream, String encoding) {
         try {
-            jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1);
+            jj_input_stream = new DefaultCharStream(stream, encoding, 1, 1);
         } catch (java.io.UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -660,7 +660,7 @@ public final class UnitFormatParser implements UnitTokenConstants {
 
     /** Constructor. */
     public UnitFormatParser(java.io.Reader stream) {
-        jj_input_stream = new SimpleCharStream(stream, 1, 1);
+        jj_input_stream = new DefaultCharStream(stream, 1, 1);
         token_source = new UnitTokenManager(jj_input_stream);
         token = new Token();
         jj_ntk = -1;

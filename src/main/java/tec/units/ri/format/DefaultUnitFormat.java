@@ -40,7 +40,7 @@ import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import javax.measure.format.ParserException;
 
-import tec.units.ri.format.internal.SimpleFormatParser;
+import tec.units.ri.format.internal.DefaultFormatParser;
 import tec.units.ri.format.internal.TokenException;
 import tec.units.ri.format.internal.TokenMgrError;
 import tec.units.ri.format.internal.l10n.Locale;
@@ -168,7 +168,7 @@ import tec.units.ri.unit.AnnotatedUnit;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.5.1, $Date: 2015-07-03 $
  */
-public class SimpleUnitFormat extends AbstractUnitFormat {
+public class DefaultUnitFormat extends AbstractUnitFormat {
 
 	// ////////////////////////////////////////////////////
 	// Class variables //
@@ -189,7 +189,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * Default locale instance. If the default locale is changed after the class
 	 * is initialized, this instance will no longer be used.
 	 */
-	private static final SimpleUnitFormat DEFAULT_INSTANCE = new SimpleUnitFormat();
+	private static final DefaultUnitFormat DEFAULT_INSTANCE = new DefaultUnitFormat();
 			//SymbolMap.of(toMap(L10nResources.getBundle(BUNDLE_NAME, 
 				//	Locale.getDefault()), Locale.getDefault()));
 
@@ -228,7 +228,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * Returns the instance for the current default locale (non-ascii characters
 	 * are allowed)
 	 */
-	public static SimpleUnitFormat getInstance() {
+	public static DefaultUnitFormat getInstance() {
 		return DEFAULT_INSTANCE;
 	}
 
@@ -243,8 +243,8 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 //	}
 
 	/** Returns an instance for the given symbol map. */
-	protected static SimpleUnitFormat getInstance(SymbolMap symbols, Locale locale) {
-		return new SimpleUnitFormat(symbols, locale);
+	protected static DefaultUnitFormat getInstance(SymbolMap symbols, Locale locale) {
+		return new DefaultUnitFormat(symbols, locale);
 	}
 
 	// //////////////////////
@@ -263,7 +263,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * Base constructor.
 	 * 
 	 */
-	public SimpleUnitFormat() {
+	public DefaultUnitFormat() {
 		this(SymbolMap.of(toMap(L10nResources.getBundle(
 				BUNDLE_NAME, Locale.getDefault()))), Locale.getDefault());
 	}
@@ -274,7 +274,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * @param symbols
 	 *            the symbol mapping.
 	 */
-	private SimpleUnitFormat(SymbolMap symbols, Locale loc) {
+	private DefaultUnitFormat(SymbolMap symbols, Locale loc) {
 		symbolMap = symbols;
 	}
 
@@ -321,7 +321,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 			return AbstractUnit.ONE;
 		}
 		try {
-			SimpleFormatParser parser = new SimpleFormatParser(symbolMap, new StringReader(
+			DefaultFormatParser parser = new DefaultFormatParser(symbolMap, new StringReader(
 					source));
 			Unit<?> result = parser.parseUnit();
 //			if (cursor != null)
@@ -446,6 +446,8 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 				if (converter != null) {
 					parentUnit = LITRE;
 				}
+			} else if (LITRE.equals(parentUnit)) {
+				System.out.println(parentUnit);
 			}
 			
 			if (unit instanceof TransformedUnit) {

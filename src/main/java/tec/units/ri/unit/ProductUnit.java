@@ -481,6 +481,9 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
 	@Override
 	public String getSymbol() {
+		if (super.getSymbol() != null) {
+			return super.getSymbol();
+		}
 		return symbol;
 	}
 }

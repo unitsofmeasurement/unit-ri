@@ -37,7 +37,7 @@ import javax.measure.UnconvertibleException;
 import javax.measure.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
-import tec.units.ri.format.SimpleUnitFormat;
+import tec.units.ri.format.DefaultUnitFormat;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
@@ -180,7 +180,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *             if the specified character sequence cannot be parsed correctly.
 	 */
 	public static Unit<?> parse(CharSequence charSequence) {
-		return SimpleUnitFormat.getInstance().parse(charSequence);
+		return DefaultUnitFormat.getInstance().parse(charSequence);
 	}
 
 	/**
@@ -199,7 +199,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	public String toString() {
 		final Appendable tmp = new StringBuilder();
 		try {
-			return SimpleUnitFormat.getInstance().format(this, tmp).toString();
+			return DefaultUnitFormat.getInstance().format(this, tmp).toString();
 		} catch (IOException ioException) {
 			throw new Error(ioException); // Should never happen.
 		} finally {

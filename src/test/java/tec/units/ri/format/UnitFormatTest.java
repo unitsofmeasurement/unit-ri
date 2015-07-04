@@ -141,7 +141,7 @@ public class UnitFormatTest {
 	
 	@Test
 	public void testParseSimple() {
-		final UnitFormat format = SimpleUnitFormat.getInstance();
+		final UnitFormat format = DefaultUnitFormat.getInstance();
 		try {
 			Unit<?> u = format.parse("s");
 			assertEquals("s", u.getSymbol());
@@ -153,7 +153,7 @@ public class UnitFormatTest {
 	
 	@Test
 	public void testFormatFromQuantity() {
-		final UnitFormat format = SimpleUnitFormat.getInstance();
+		final UnitFormat format = DefaultUnitFormat.getInstance();
 		final Appendable a = new StringBuilder();
 		try {
 			format.format(METRE, a);
@@ -176,7 +176,7 @@ public class UnitFormatTest {
 
 	@Test
 	public void testParseSimple1() {
-		final UnitFormat format = SimpleUnitFormat.getInstance();
+		final UnitFormat format = DefaultUnitFormat.getInstance();
 		try {
 			Unit<?> u = format.parse("min");
 			// assertEquals("min", u.getSymbol());
@@ -188,7 +188,7 @@ public class UnitFormatTest {
 
 	@Test
 	public void testParseSimple2() {
-		final UnitFormat format = SimpleUnitFormat.getInstance();
+		final UnitFormat format = DefaultUnitFormat.getInstance();
 		try {
 			Unit<?> u = format.parse("m");
 			assertEquals("m", u.getSymbol());
@@ -200,7 +200,7 @@ public class UnitFormatTest {
 
 	@Test
 	public void testParseSimple3() {
-		final UnitFormat format = SimpleUnitFormat.getInstance();
+		final UnitFormat format = DefaultUnitFormat.getInstance();
 		try {
 			Unit<?> u = format.parse("kg");
 			assertEquals("kg", u.getSymbol());

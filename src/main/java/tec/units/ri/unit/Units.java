@@ -437,7 +437,9 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * A volume unit accepted for use with SI units (standard name <code>l</code>).
      */
     public static final Unit<Volume> LITRE
-        = new TransformedUnit<Volume>(CUBIC_METRE, new RationalConverter(1, 1000));
+        = AbstractSystemOfUnits.Helper.addUnit(INSTANCE.units, 
+        		new TransformedUnit<Volume>(CUBIC_METRE, new RationalConverter(1, 1000)),
+        		"Litre", "l");
     
     /**
      * A time unit accepted for use with SI units (standard name <code>min</code>).
@@ -479,7 +481,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * @return the Imperial instance.
      */
     public static SystemOfUnits getInstance() {
-	return INSTANCE;
+    	return INSTANCE;
     }
 	
     /**
