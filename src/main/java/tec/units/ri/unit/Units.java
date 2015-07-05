@@ -435,6 +435,8 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 
     /**
      * A volume unit accepted for use with SI units (standard name <code>l</code>).
+     * @see <a href="https://en.wikipedia.org/wiki/Litre">
+     *      Wikipedia: Litre</a>
      */
     public static final Unit<Volume> LITRE
         = AbstractSystemOfUnits.Helper.addUnit(INSTANCE.units, 

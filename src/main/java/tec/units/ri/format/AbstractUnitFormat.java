@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -26,80 +26,122 @@
 package tec.units.ri.format;
 
 import java.io.IOException;
+import java.text.FieldPosition;
+
 import javax.measure.Unit;
+import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.units.ri.AbstractUnit;
 
 /**
- * <p> This class provides the interface for formatting and parsing {@link
- *     AbstractUnit units}.</p>
+ * <p>
+ * This class provides the interface for formatting and parsing
+ * {@link AbstractUnit units}.
+ * </p>
  *
- * <p> For all metric units, the 20 SI prefixes used to form decimal
- *     multiples and sub-multiples of SI units are recognized.
- *     {@link USCustomary US Customary} units are directly recognized. For example:[code]
- *        Unit.valueOf("m°C").equals(SI.MILLI(SI.CELSIUS))
- *        Unit.valueOf("kW").equals(SI.KILO(SI.WATT))
- *        Unit.valueOf("ft").equals(SI.METRE.multiply(3048).divide(10000))[/code]</p>
+ * <p>
+ * For all metric units, the 20 SI prefixes used to form decimal multiples and
+ * sub-multiples of SI units are recognized. {@link USCustomary US Customary}
+ * units are directly recognized. For example:[code]
+ * Unit.valueOf("m°C").equals(SI.MILLI(SI.CELSIUS))
+ * Unit.valueOf("kW").equals(SI.KILO(SI.WATT))
+ * Unit.valueOf("ft").equals(SI.METRE.multiply(3048).divide(10000))[/code]
+ * </p>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6 $Date: 2015-02-08 $
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 0.7 $Date: 2015-07-05 $
  * 
  */
 public abstract class AbstractUnitFormat implements UnitFormat {
 
-   /**
-     * Returns the {@link SymbolMap} for this unit format.
-     *
-     * @return the symbol map used by this format.
-     */
-    protected abstract SymbolMap getSymbols();
+	/**
+	 * Returns the {@link SymbolMap} for this unit format.
+	 *
+	 * @return the symbol map used by this format.
+	 */
+	protected abstract SymbolMap getSymbols();
 
-    /**
-     * Formats the specified unit.
-     *
-     * @param unit the unit to format.
-     * @param appendable the appendable destination.
-     * @return The appendable destination passed in as {@code appendable},
-     *         with formatted text appended.
-     * @throws IOException if an error occurs.
-     */
-    public abstract Appendable format(Unit<?> unit, Appendable appendable)
-            throws IOException;
+	/**
+	 * Formats an object to produce a string. This is equivalent to <blockquote>
+	 * {@link #format(Object, StringBuffer, FieldPosition) format}<code>(obj,
+	 *         new StringBuffer(), new FieldPosition(0)).toString();</code>
+	 * </blockquote>
+	 *
+	 * @param obj
+	 *            The object to format
+	 * @return Formatted string.
+	 * @exception IllegalArgumentException
+	 *                if the Format cannot format the given object
+	 */
+	public final String format(Unit<?> unit) {
+		if (unit instanceof AbstractUnit) {
+			return format((AbstractUnit<?>) unit, new StringBuilder())
+					.toString();
+		} else {
+			try {
+				return (this.format(unit, new StringBuilder()))
+						.toString();
+			} catch (IOException ex) {
+				throw new ParserException(ex); // Should never happen.
+			}
+		}
+	}
 
-    /**
-     * Parses a portion of the specified <code>CharSequence</code> from the
-     * specified position to produce a unit. If there is no unit to parse
-     * {@link AbstractUnit#ONE} is returned.
-     *
-     * @param csq the <code>CharSequence</code> to parse.
-     * @param index the current parsing index.
-     * @return the unit parsed from the specified character sub-sequence.
-     * @throws IllegalArgumentException if any problem occurs while parsing the
-     *         specified character sequence (e.g. illegal syntax).
-     */
-    protected abstract Unit<?> parse(CharSequence csq, int index)
-            throws IllegalArgumentException;
-    
-    /**
-     * Convenience method equivalent to {@link #format(AbstractUnit, Appendable)}
-     * except it does not raise an IOException.
-     *
-     * @param unit the unit to format.
-     * @param dest the appendable destination.
-     * @return the specified <code>StringBuilder</code>.
-     */
-    final StringBuilder format(AbstractUnit<?> unit, StringBuilder dest) {
-        try {
-            return (StringBuilder) this.format(unit, (Appendable) dest);
-        } catch (IOException ex) {
-            throw new Error(ex); // Can never happen.
-        }
-    }
+	/**
+	 * Formats the specified unit.
+	 *
+	 * @param unit
+	 *            the unit to format.
+	 * @param appendable
+	 *            the appendable destination.
+	 * @return The appendable destination passed in as {@code appendable}, with
+	 *         formatted text appended.
+	 * @throws IOException
+	 *             if an error occurs.
+	 */
+	public abstract Appendable format(Unit<?> unit, Appendable appendable)
+			throws IOException;
 
-    /**
-     * serialVersionUID
-     */
-//    private static final long serialVersionUID = -2046025267890654321L;
+	/**
+	 * Parses a portion of the specified <code>CharSequence</code> from the
+	 * specified position to produce a unit. If there is no unit to parse
+	 * {@link AbstractUnit#ONE} is returned.
+	 *
+	 * @param csq
+	 *            the <code>CharSequence</code> to parse.
+	 * @param index
+	 *            the current parsing index.
+	 * @return the unit parsed from the specified character sub-sequence.
+	 * @throws IllegalArgumentException
+	 *             if any problem occurs while parsing the specified character
+	 *             sequence (e.g. illegal syntax).
+	 */
+	protected abstract Unit<?> parse(CharSequence csq, int index)
+			throws IllegalArgumentException;
+
+	/**
+	 * Convenience method equivalent to
+	 * {@link #format(AbstractUnit, Appendable)} except it does not raise an
+	 * IOException.
+	 *
+	 * @param unit
+	 *            the unit to format.
+	 * @param dest
+	 *            the appendable destination.
+	 * @return the specified <code>StringBuilder</code>.
+	 */
+	final StringBuilder format(AbstractUnit<?> unit, StringBuilder dest) {
+		try {
+			return (StringBuilder) this.format(unit, (Appendable) dest);
+		} catch (IOException ex) {
+			throw new ParserException(ex); // Should never happen.
+		}
+	}
+
+	/**
+	 * serialVersionUID
+	 */
+	// private static final long serialVersionUID = -2046025267890654321L;
 }

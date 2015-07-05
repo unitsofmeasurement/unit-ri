@@ -26,7 +26,6 @@
 package tec.units.ri;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.measure.Dimension;
@@ -37,6 +36,7 @@ import javax.measure.UnconvertibleException;
 import javax.measure.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
+import tec.units.ri.format.BaseFormat;
 import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
@@ -64,7 +64,7 @@ import tec.units.ri.unit.TransformedUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.9, Jun 27, 2015
+ * @version 0.9.1, Jul 5, 2015
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
@@ -78,11 +78,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * Holds the dimensionless unit <code>ONE</code>.
 	 */
 	public static final AbstractUnit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
-
-	/**
-	 * Holds the unique symbols collection (base units or alternate units).
-	 */
-	protected static final Map<String, Unit<?>> SYMBOL_TO_UNIT = new HashMap<String, Unit<?>>();
 	
 	/**
 	 * Holds the name.
@@ -197,6 +192,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 */
 	@Override
 	public String toString() {
+		return BaseFormat.getInstance().format(this);
+		/*
 		final Appendable tmp = new StringBuilder();
 		try {
 			return SimpleUnitFormat.getInstance().format(this, tmp).toString();
@@ -205,6 +202,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		} finally {
 			// if (tmp!=null) tmp.clear();
 		}
+		*/
 	}
 
 	// ///////////////////////////////////////////////////////

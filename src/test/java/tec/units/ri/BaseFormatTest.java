@@ -40,6 +40,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import tec.units.ri.format.BaseFormat;
 import tec.units.ri.unit.Units;
 
 /**

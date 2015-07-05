@@ -112,13 +112,13 @@ public class UnitFormatTest {
 	@Test
 	public void testFormatHz2() {
 		Unit<Frequency> mhz = MEGA(HERTZ);
-		assertEquals("Mhz", mhz.toString());
+		assertEquals("MHz", mhz.toString());
 	}
 	
 	@Test
 	public void testFormatHz3() {
 		Unit<Frequency> khz = KILO(HERTZ);
-		assertEquals("khz", khz.toString());
+		assertEquals("kHz", khz.toString());
 	}
 	
 	@Test

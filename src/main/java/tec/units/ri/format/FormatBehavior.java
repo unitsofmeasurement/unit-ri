@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -25,12 +25,11 @@
  */
 package tec.units.ri.format;
 
-
 /**
  * Defines different ways of formatting.
  * 
  * @author Werner Keil
- * @version 0.2
+ * @version 0.3
  */
 public enum FormatBehavior {
 

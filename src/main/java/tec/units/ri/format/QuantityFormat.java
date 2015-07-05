@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -48,7 +48,7 @@ import tec.units.ri.quantity.NumberQuantity;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.1, $Date: 2015-02-15 $
+ * @version 0.6.2, $Date: 2015-07-05 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
@@ -94,13 +94,13 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 //	}
 
 	/**
-	 * Returns the culture invariant format based upon {@link BigDecimal}
+	 * Returns the culture invariant format based upon {@link Number}
 	 * canonical format and the {@link UnitFormat#current() standard} unit
 	 * format. This format <b>is not</b> locale-sensitive and can be used for
 	 * unambiguous electronic communication of quantities together with their
 	 * units without loss of information. For example:
 	 * <code>"1.23456789 kg.m/s2"</code> returns
-	 * <code>Quantities.getQuantity(new BigDecimal("1.23456789"), AbstractUnit.parse("kg.m/s2")));</code>
+	 * <code>Quantities.getQuantity(new Double(1.23456789d), AbstractUnit.parse("kg.m/s2")));</code>
 	 * 
 	 * @param style the format style to apply.
 	 * @return the desired format.
