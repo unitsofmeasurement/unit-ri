@@ -1080,7 +1080,8 @@ public abstract class BaseFormat extends AbstractUnitFormat implements UnitForma
 		// DEFAULT.label(NonUnits.KNOT, "kn");
 		// DEFAULT.label(NonUnits.MACH, "Mach");
 		// DEFAULT.label(NonUnits.C, "c");
-		DEFAULT.label(Units.LITRE, "L");
+		ASCII.label(Units.LITRE, "l");
+		DEFAULT.label(Units.LITRE, "l");
 		DEFAULT.label(MetricPrefix.MICRO(Units.LITRE), "µl");
 		ASCII.label(MetricPrefix.MICRO(Units.LITRE), "microL");
 		ASCII.label(MetricPrefix.MILLI(Units.LITRE), "mL");
