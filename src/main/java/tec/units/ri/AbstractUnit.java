@@ -37,7 +37,7 @@ import javax.measure.UnconvertibleException;
 import javax.measure.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
-import tec.units.ri.format.DefaultUnitFormat;
+import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
@@ -165,7 +165,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *
 	 * Locale-sensitive unit parsing may be handled using the OSGi
 	 * {@link javax.measure.spi.UnitFormatService} or for non-OSGi applications
-	 * instances of {@link UnitFormat}.
+	 * instances of {@link BaseFormat}.
 	 *
 	 * <p>
 	 * Note: The standard UCUM format supports dimensionless units.[code]
@@ -180,7 +180,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *             if the specified character sequence cannot be parsed correctly.
 	 */
 	public static Unit<?> parse(CharSequence charSequence) {
-		return DefaultUnitFormat.getInstance().parse(charSequence);
+		return SimpleUnitFormat.getInstance().parse(charSequence);
 	}
 
 	/**
@@ -190,8 +190,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * Map, Hashtable, etc.
 	 *
 	 * Locale-sensitive unit parsing should be handled using the OSGi
-	 * {@link org.unitsofmeasurement.service.UnitFormat} service (or
-	 * {@link UnitFormat} for non-OSGi applications).
+	 * {@link tec.units.ri.BaseFormat.service.UnitFormat} service (or
+	 * {@link BaseFormat} for non-OSGi applications).
 	 *
 	 * @return <code>SimpleUnitFormat.getInstance().format(this)</code>
 	 */
@@ -199,7 +199,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	public String toString() {
 		final Appendable tmp = new StringBuilder();
 		try {
-			return DefaultUnitFormat.getInstance().format(this, tmp).toString();
+			return SimpleUnitFormat.getInstance().format(this, tmp).toString();
 		} catch (IOException ioException) {
 			throw new Error(ioException); // Should never happen.
 		} finally {

@@ -62,7 +62,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 	 * Holds the default format instance.
 	 */
 	private static final NumberSpaceUnit DEFAULT = new NumberSpaceUnit(
-			NumberFormat.getInstance(), DefaultUnitFormat.getInstance());
+			NumberFormat.getInstance(), SimpleUnitFormat.getInstance());
 
 	/**
 	 * Holds the standard format instance.
@@ -323,7 +323,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 				if (measure.getUnit().equals(AbstractUnit.ONE))
 					return dest;
 				dest.append(' ');
-				return DefaultUnitFormat.getInstance().format(unit, dest);
+				return SimpleUnitFormat.getInstance().format(unit, dest);
 //			}
 		}
 
@@ -344,7 +344,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 			Double decimal = new Double(csq.subSequence(startDecimal,
 					endDecimal).toString());
 //			cursor.setIndex(endDecimal + 1);
-			Unit unit = DefaultUnitFormat.getInstance().parse(csq, index);
+			Unit unit = SimpleUnitFormat.getInstance().parse(csq, index);
 			return NumberQuantity.of(decimal.doubleValue(), unit);
 		}
 		
