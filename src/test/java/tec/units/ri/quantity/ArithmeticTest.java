@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -26,7 +26,7 @@
 package tec.units.ri.quantity;
 
 import static org.junit.Assert.*;
-import static tec.units.ri.unit.SI.METRE;
+import static tec.units.ri.unit.Units.METRE;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Length;
@@ -35,7 +35,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import tec.units.ri.spi.DefaultQuantityFactory;
-
 
 public class ArithmeticTest {
 

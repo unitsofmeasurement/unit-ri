@@ -35,7 +35,7 @@ import tec.units.ri.quantity.NumberQuantity;
 import javax.measure.quantity.Pressure;
 
 import static org.junit.Assert.*;
-import static tec.units.ri.unit.SI.PASCAL;
+import static tec.units.ri.unit.Units.PASCAL;
 
 /**
  *

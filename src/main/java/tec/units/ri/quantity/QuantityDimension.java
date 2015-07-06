@@ -36,7 +36,6 @@ import javax.measure.Unit;
 
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.unit.BaseUnit;
-import tec.units.ri.unit.SI;
 import tec.units.ri.unit.Units;
 
 /**
