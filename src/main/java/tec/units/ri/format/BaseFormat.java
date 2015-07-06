@@ -52,7 +52,7 @@ import javax.measure.format.UnitFormat;
 
 /**
  * <p>
- * This class provides the interface for formatting and parsing {@link Unit
+ * This class implements the {@link UnitFormat} interface for formatting and parsing {@link Unit
  * units}.
  * </p>
  * 
@@ -69,10 +69,10 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.4, July 5, 2015
+ * @version 0.4.1, July 6, 2015
  */
 public abstract class BaseFormat extends AbstractUnitFormat implements UnitFormat {
-
+// TODO rename to SimpleUnitFormat (which gets a new more appropriate name)
 	/**
 	 * 
 	 */
@@ -937,6 +937,7 @@ public abstract class BaseFormat extends AbstractUnitFormat implements UnitForma
 			Units.SIEVERT, Units.STERADIAN, Units.TESLA, Units.VOLT,
 			Units.WATT, Units.WEBER };
 
+	// TODO these strings should come from MetricPrefix and be declared there.
 	private static final String[] PREFIXES = { "Y", "Z", "E", "P", "T", "G",
 			"M", "k", "h", "da", "d", "c", "m", "µ", "n", "p", "f", "a", "z",
 			"y" };
