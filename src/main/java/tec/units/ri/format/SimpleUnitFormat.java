@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -60,7 +60,7 @@ import tec.units.ri.unit.AnnotatedUnit;
 
 /**
  * <p>
- * This class represents the local neutral format.
+ * This class implements {@link UnitFormat}.
  * </p>
  * 
  * <h3>Here is the grammar for Units in Extended Backus-Naur Form (EBNF)</h3>
@@ -169,6 +169,7 @@ import tec.units.ri.unit.AnnotatedUnit;
  * @version 0.5.1, $Date: 2015-07-03 $
  */
 public class SimpleUnitFormat extends AbstractUnitFormat {
+// TODO rename into something like EBNFUnitFormat
 
 	// ////////////////////////////////////////////////////
 	// Class variables //
