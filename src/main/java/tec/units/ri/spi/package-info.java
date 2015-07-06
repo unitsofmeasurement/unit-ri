@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -32,21 +32,11 @@
  *    <li> The class {@link Units} contains the most important standard units defined by the 
  *       <a href="http://physics.nist.gov/Pubs/SP330/sp330.pdf">
  *      "The International System of Units"</a>.</li>
- *    <li> The class {@link US} contains units 
- *      as defined in the <a href="http://en.wikipedia.org/wiki/United_States_customary_units">
- *      "United States customary system"</a>.</li>
- *    <li> The class {@link Units} contains other commonly used non-standard units.</li>
  * </ul>
  *
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3
+ * @version 0.4
  */
 package tec.units.ri.spi;
-
-import tec.units.ri.unit.SI;
-import tec.units.ri.unit.US;
-import tec.units.ri.unit.Units;
-
-

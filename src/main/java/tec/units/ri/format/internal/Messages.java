@@ -78,7 +78,7 @@ public class Messages extends L10nResources {
 		strings.put("tec.units.ri.unit.Units.VOLT", "V");
 		strings.put("tec.units.ri.unit.Units.WATT", "W");
 		strings.put("tec.units.ri.unit.Units.WEBER", "Wb");
-
+/*
 		strings.put("tec.units.ri.unit.US.FAHRENHEIT", "\u00B0F");
 		strings.put("tec.units.ri.unit.US.FAHRENHEIT.1", "\u2109");
 		strings.put("tec.units.ri.unit.US.FOOT", "ft");
@@ -91,7 +91,7 @@ public class Messages extends L10nResources {
 		strings.put("tec.units.ri.unit.US.MILE", "mi");
 		strings.put("tec.units.ri.unit.US.MILES_PER_HOUR", "mph");
 		strings.put("tec.units.ri.unit.US.POUND", "lb");
-
+*/
 		strings.put("tec.units.ri.unit.MetricPrefix.ATTO", "a");
 		strings.put("tec.units.ri.unit.MetricPrefix.CENTI", "c");
 		strings.put("tec.units.ri.unit.MetricPrefix.DECI", "d");

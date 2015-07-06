@@ -330,7 +330,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	 *
 	 * <p>
 	 * Note: This method handles only
-	 * {@link tec.units.ri.BaseFormat.UnitFormat#getStandard standard} unit format
+	 * {@link tec.units.ri.SimpleUnitFormat.UnitFormat#getStandard standard} unit format
 	 * (<a href="http://unitsofmeasure.org/">UCUM</a> based). Locale-sensitive
 	 * measure formatting and parsing are handled by the
 	 * {@link MeasurementFormat} class and its subclasses.

@@ -40,7 +40,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import tec.units.ri.format.BaseFormat;
+import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.unit.Units;
 
 /**
@@ -49,11 +49,11 @@ import tec.units.ri.unit.Units;
  */
 public class BaseFormatTest {
 
-	private BaseFormat fmt;
+	private SimpleUnitFormat fmt;
 
 	@Before
 	public void init() {
-		fmt = BaseFormat.getInstance();
+		fmt = SimpleUnitFormat.getInstance();
 	}
 	
 	@Test
