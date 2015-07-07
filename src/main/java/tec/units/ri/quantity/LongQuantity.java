@@ -39,7 +39,7 @@ import tec.units.ri.AbstractQuantity;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.1, $Date: 2014-08-24 $
+ * @version 0.2, $Date: 2015-07-07 $
  */
 final class LongQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -71,12 +71,14 @@ final class LongQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	@Override
 	public Quantity<Q> add(Quantity<Q> that) {
-		return NumberQuantity.of(value + that.getValue().longValue(), getUnit()); // TODO use shift of the unit?
+		final Quantity<Q> converted = that.to(getUnit());
+		return NumberQuantity.of(value + converted.getValue().longValue(), getUnit());
 	}
 
 	@Override
 	public Quantity<Q> subtract(Quantity<Q> that) {
-		return NumberQuantity.of(value - that.getValue().longValue(), getUnit()); // TODO use shift of the unit?
+		final Quantity<Q> converted = that.to(getUnit());
+		return NumberQuantity.of(value - converted.getValue().longValue(), getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -106,5 +108,4 @@ final class LongQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	public Quantity<Q> divide(Number that) {
 		return NumberQuantity.of(value / that.doubleValue(), getUnit());
 	}
-
 }

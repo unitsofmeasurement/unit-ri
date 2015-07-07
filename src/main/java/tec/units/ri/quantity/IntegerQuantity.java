@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -40,7 +40,7 @@ import tec.units.ri.AbstractQuantity;
  * @author Otavio de Santana
  * @param <Q>
  *            The type of the quantity.
- * @version 0.2, $Date: 2014-08-02 $
+ * @version 0.3, $Date: 2015-07-07 $
  */
 final class IntegerQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -72,18 +72,21 @@ final class IntegerQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	@Override
 	public Quantity<Q> add(Quantity<Q> that) {
-		return NumberQuantity.of(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
+		final Quantity<Q> converted = that.to(getUnit());
+		return NumberQuantity.of(value + converted.getValue().intValue(), getUnit());
 	}
 
 	@Override
 	public Quantity<Q> subtract(Quantity<Q> that) {
-		return NumberQuantity.of(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
+		final Quantity<Q> converted = that.to(getUnit());
+		return NumberQuantity.of(value - converted.getValue().intValue(), getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Quantity<?> multiply(Quantity<?> that) {
-		return new IntegerQuantity(value * that.getValue().intValue(), getUnit());
+		return new IntegerQuantity(value * that.getValue().intValue(), 
+				getUnit().multiply(that.getUnit()));
 	}
 
 	@Override
@@ -93,8 +96,8 @@ final class IntegerQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	@Override
 	public Quantity<?> divide(Quantity<?> that) {
-		return NumberQuantity.of((double) value / that.getValue().doubleValue(), getUnit()
-				.divide(that.getUnit()));
+		return NumberQuantity.of((double) value / that.getValue().doubleValue(), 
+				getUnit().divide(that.getUnit()));
 	}
 
 	@SuppressWarnings("unchecked")

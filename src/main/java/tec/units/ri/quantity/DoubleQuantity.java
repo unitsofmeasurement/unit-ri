@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -40,7 +40,7 @@ import tec.units.ri.AbstractQuantity;
  * @author Otavio de Santana
  * @param <Q>
  *            The type of the quantity.
- * @version 0.3, $Date: 2014-10-10 $
+ * @version 0.4, $Date: 2015-07-07 $
  */
 final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -55,7 +55,6 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
     public Double getValue() {
         return value;
     }
-
 
     public double doubleValue(Unit<Q> unit) {
         return (super.getUnit().equals(unit)) ? value : super.getUnit().getConverterTo(unit).convert(value);
@@ -72,12 +71,14 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	@Override
 	public Quantity<Q> add(Quantity<Q> that) {
-		return NumberQuantity.of(value + that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
+		final Quantity<Q> converted = that.to(getUnit());
+		return NumberQuantity.of(value + converted.getValue().doubleValue(), getUnit());
 	}
 
 	@Override
 	public Quantity<Q> subtract(Quantity<Q> that) {
-		return NumberQuantity.of(value - that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
+		final Quantity<Q> converted = that.to(getUnit());
+		return NumberQuantity.of(value - converted.getValue().doubleValue(), getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

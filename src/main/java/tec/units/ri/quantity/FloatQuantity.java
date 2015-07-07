@@ -70,13 +70,15 @@ final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	}
 
 	@Override
-	public AbstractQuantity<Q> add(Quantity<Q> that) {
-		return NumberQuantity.of(value + that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
+	public Quantity<Q> add(Quantity<Q> that) {
+		final Quantity<Q> converted = that.to(getUnit());
+		return NumberQuantity.of(value + converted.getValue().floatValue(), getUnit());
 	}
 
 	@Override
-	public AbstractQuantity<Q> subtract(Quantity<Q> that) {
-		return NumberQuantity.of(value - that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
+	public Quantity<Q> subtract(Quantity<Q> that) {
+		final Quantity<Q> converted = that.to(getUnit());
+		return NumberQuantity.of(value - converted.getValue().floatValue(), getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
