@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.spi;
+package tec.units.ri.quantity;
 
 import static tec.units.ri.AbstractUnit.ONE;
 import static tec.units.ri.unit.Units.*;
@@ -37,7 +37,6 @@ import javax.measure.quantity.*;
 import javax.measure.spi.QuantityFactory;
 
 import tec.units.ri.AbstractQuantity;
-import tec.units.ri.quantity.NumberQuantity;
 
 /**
  * The default factory implementation. This factory provides a default

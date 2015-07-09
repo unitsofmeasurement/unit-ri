@@ -51,7 +51,7 @@ import javax.measure.quantity.Speed;
 import org.junit.Before;
 import org.junit.Test;
 
-import tec.units.ri.spi.DefaultQuantityFactory;
+import tec.units.ri.quantity.DefaultQuantityFactory;
 import tec.units.ri.unit.Units;
 
 /**

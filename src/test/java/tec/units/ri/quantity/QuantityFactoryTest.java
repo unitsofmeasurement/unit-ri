@@ -34,8 +34,6 @@ import javax.measure.quantity.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import tec.units.ri.spi.DefaultQuantityFactory;
-
 /**
  * @author Werner Keil
  *
