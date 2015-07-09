@@ -9,7 +9,6 @@ import java.util.Locale;
 
 import javax.measure.spi.ServiceProvider;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
