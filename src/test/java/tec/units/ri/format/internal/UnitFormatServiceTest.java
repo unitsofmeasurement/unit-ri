@@ -1,4 +1,4 @@
-/*
+/**
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -25,61 +25,37 @@
  */
 package tec.units.ri.format.internal;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import static org.junit.Assert.*;
 
-import javax.measure.format.UnitFormat;
 import javax.measure.spi.UnitFormatService;
 
-import tec.units.ri.format.SimpleUnitFormat;
-import tec.units.ri.format.SimpleUnitFormat.Flavor;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
- * Default format service.
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  *
- * @author Werner Keil
  */
-public class DefaultUnitFormatService implements UnitFormatService {
+public class UnitFormatServiceTest {
+	private UnitFormatService sut;
 
-    private static final String DEFAULT_FORMAT = Flavor.Default.name();
-   
-    private Map<String, UnitFormat> formats = new HashMap<String, UnitFormat>();
- 
-    public DefaultUnitFormatService() {
-        formats.put(DEFAULT_FORMAT, SimpleUnitFormat.getInstance());
-        formats.put(Flavor.ASCII.name(), SimpleUnitFormat.getInstance(Flavor.ASCII));
-    }
+	@Before
+	public void init() {
+		sut = new DefaultUnitFormatService();
+	}
 
-//    @Override
-//    public String getProviderName() {
-//        return PROVIDER_NAME;
-//    }
-
-    /*
-     * (non-Javadoc)
-     * @see
-     * UnitFormatService#getUnitFormat(String)
-     */
-    @Override
-    public UnitFormat getUnitFormat(String formatName) {
-        Objects.requireNonNull(formatName, "Format name required");
-        return formats.get(formatName);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see
-     * UnitFormatService#getUnitFormat()
-     */
-    @Override
-    public UnitFormat getUnitFormat() {
-        return getUnitFormat(DEFAULT_FORMAT);
-    }
-
-    public Set<String> getAvailableFormatNames() {
-        return formats.keySet();
-    }
-
+	@Test
+	public void testGetFormat() {
+		assertNotNull(sut.getUnitFormat());
+		assertEquals("tec.units.ri.format.SimpleUnitFormat$DefaultFormat", sut.getUnitFormat().getClass().getName());
+	}
+	
+	
+	@Test
+	public void TestGetFormatNames() {
+		DefaultUnitFormatService service = new DefaultUnitFormatService();
+		assertNotNull(service.getAvailableFormatNames());
+		assertEquals(2, service.getAvailableFormatNames().size());
+	}
+	
 }
