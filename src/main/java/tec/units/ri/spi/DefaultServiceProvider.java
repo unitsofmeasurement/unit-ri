@@ -44,7 +44,7 @@ import javax.measure.spi.ServiceProvider;
 class DefaultServiceProvider implements ServiceProvider {
     /** List of services loaded, per class. */
     private final ConcurrentHashMap<Class, List<Object>> servicesLoaded = new ConcurrentHashMap<Class, List<Object>>();
-
+    // TODO does this work in CLDC8?
     @Override
     public int getPriority() {
         return 0;
