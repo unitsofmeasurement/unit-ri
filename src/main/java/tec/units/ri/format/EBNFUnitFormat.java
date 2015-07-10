@@ -27,7 +27,7 @@ package tec.units.ri.format;
 
 //import static java.lang.StrictMath.E; // not in CLDC 8
 import static java.lang.Math.E;
-import static tec.units.ri.format.internal.l10n.BundleToMapAdapter.toMap;
+import static tec.units.ri.internal.format.l10n.BundleToMapAdapter.toMap;
 import static tec.units.ri.unit.Units.*;
 
 import java.io.IOException;
@@ -40,16 +40,16 @@ import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import javax.measure.format.ParserException;
 
-import tec.units.ri.format.internal.UnitFormatParser;
-import tec.units.ri.format.internal.TokenException;
-import tec.units.ri.format.internal.TokenMgrError;
-import tec.units.ri.format.internal.l10n.Locale;
-import tec.units.ri.format.internal.l10n.L10nResources;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.ExpConverter;
 import tec.units.ri.function.LogConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
+import tec.units.ri.internal.format.TokenException;
+import tec.units.ri.internal.format.TokenMgrError;
+import tec.units.ri.internal.format.UnitFormatParser;
+import tec.units.ri.internal.format.l10n.L10nResources;
+import tec.units.ri.internal.format.l10n.Locale;
 import tec.units.ri.unit.BaseUnit;
 import tec.units.ri.unit.MetricPrefix;
 import tec.units.ri.unit.TransformedUnit;
@@ -183,7 +183,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	/**
 	 * Name of the resource bundle
 	 */
-	private static final String BUNDLE_NAME = "tec.units.ri.format.internal.Messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "tec.units.ri.internal.format.Messages"; //$NON-NLS-1$
 	//= SimpleFormatParser.class.getPackage()			.getName() + ".messages"; 
 
 	/**

@@ -23,13 +23,14 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format.internal.l10n;
+package tec.units.ri.internal.format.l10n;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import tec.units.ri.format.internal.TokenException;
+
+import tec.units.ri.internal.format.TokenException;
 
 /**
  * A Java ME compliant backport of {@linkplain java.util.ResourceBundle}

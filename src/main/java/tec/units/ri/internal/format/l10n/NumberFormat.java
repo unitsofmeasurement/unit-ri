@@ -24,7 +24,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package tec.units.ri.format.internal.l10n;
+package tec.units.ri.internal.format.l10n;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

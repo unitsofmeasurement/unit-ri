@@ -1,11 +1,14 @@
-package tec.units.ri.format.internal.l10n;
+package tec.units.ri.internal.format.l10n;
 
 import static org.junit.Assert.*;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
-import tec.units.ri.format.internal.l10n.L10nPropertyResources;
+import tec.units.ri.internal.format.l10n.L10nBundle;
+import tec.units.ri.internal.format.l10n.L10nPropertyResources;
+import tec.units.ri.internal.format.l10n.L10nResources;
+import tec.units.ri.internal.format.l10n.Locale;
 
 public class L10nBundleTest {
 	
@@ -20,7 +23,7 @@ public class L10nBundleTest {
 	public void testMapBundle() {
 		Locale locale = Locale.getDefault();
 		   
-		L10nBundle resources = L10nResources.getBundle("tec.units.ri.format.internal.l10n.Resources", locale);
+		L10nBundle resources = L10nResources.getBundle("tec.units.ri.internal.format.l10n.Resources", locale);
 		assertNotNull(resources);
 		String text = resources.getString("title");
 		assertEquals("Localization example", text);
@@ -30,7 +33,7 @@ public class L10nBundleTest {
 	public void testMapBundle_de() {
 		Locale locale = new Locale("de");
 		   
-		L10nBundle resources = L10nResources.getBundle("tec.units.ri.format.internal.l10n.Resources", locale);
+		L10nBundle resources = L10nResources.getBundle("tec.units.ri.internal.format.l10n.Resources", locale);
 		assertNotNull(resources);
 		String text = resources.getString("text");
 		assertEquals("Da ist ein Text.", text);
@@ -43,7 +46,7 @@ public class L10nBundleTest {
 	public void testMapBundle_fr() {
 		Locale locale = new Locale("fr");
 		   
-		L10nBundle resources = L10nResources.getBundle("tec.units.ri.format.internal.l10n.Resources", locale);
+		L10nBundle resources = L10nResources.getBundle("tec.units.ri.internal.format.l10n.Resources", locale);
 		assertNotNull(resources);
 		String text = resources.getString("text");
 		assertEquals("Voici du texte.", text);

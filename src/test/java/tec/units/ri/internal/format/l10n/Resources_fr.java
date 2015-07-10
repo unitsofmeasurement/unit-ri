@@ -1,6 +1,6 @@
 /**
- * Unit-API - Units of Measurement API for Java
- * Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Unit-API - Units of Measurement API for Java
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -23,16 +23,28 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format.internal.l10n;
+package tec.units.ri.internal.format.l10n;
 
-import java.util.Set;
+import java.util.Hashtable;
+import java.util.Map;
 
 /**
- * An abstraction over common resource methods in an ME/SE compatible manner.
- * @author Werner Keil
- * @version 0.3
- */ 
-public interface L10nBundle { // TODO could we rename it to something like MessageBundle?
-	 public String getString(String key);
-	 public Set<String> keySet();
+ * @author Werner
+ * 
+ * Resource bundle for French, no specific country.
+ */
+public class Resources_fr extends Resources {
+    private Map<String, String> strings;
+ 
+    public Resources_fr() {
+        strings = new Hashtable<String, String>(30);
+ 
+        strings.put("exit", "Quitter");
+        strings.put("textLbl", "Texte");
+        strings.put("text", "Voici du texte.");
+    }
+ 
+    public String handleGetString(String key) {
+        return strings.get(key);
+    }
 }

@@ -23,28 +23,41 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format.internal.l10n;
+package tec.units.ri.internal.format;
 
-import java.util.Hashtable;
-import java.util.Map;
+import static org.junit.Assert.*;
+
+import javax.measure.spi.UnitFormatService;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import tec.units.ri.internal.format.DefaultUnitFormatService;
 
 /**
- * @author Werner
- * 
- * Resource bundle for French, no specific country.
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ *
  */
-public class Resources_fr extends Resources {
-    private Map<String, String> strings;
- 
-    public Resources_fr() {
-        strings = new Hashtable<String, String>(30);
- 
-        strings.put("exit", "Quitter");
-        strings.put("textLbl", "Texte");
-        strings.put("text", "Voici du texte.");
-    }
- 
-    public String handleGetString(String key) {
-        return strings.get(key);
-    }
+public class UnitFormatServiceTest {
+	private UnitFormatService sut;
+
+	@Before
+	public void init() {
+		sut = new DefaultUnitFormatService();
+	}
+
+	@Test
+	public void testGetFormat() {
+		assertNotNull(sut.getUnitFormat());
+		assertEquals("tec.units.ri.format.SimpleUnitFormat$DefaultFormat", sut.getUnitFormat().getClass().getName());
+	}
+	
+	
+	@Test
+	public void TestGetFormatNames() {
+		DefaultUnitFormatService service = new DefaultUnitFormatService();
+		assertNotNull(service.getAvailableFormatNames());
+		assertEquals(2, service.getAvailableFormatNames().size());
+	}
+	
 }

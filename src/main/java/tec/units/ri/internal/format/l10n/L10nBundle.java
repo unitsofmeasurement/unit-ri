@@ -1,6 +1,6 @@
 /**
- *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
+ * Unit-API - Units of Measurement API for Java
+ * Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -23,39 +23,16 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format.internal;
+package tec.units.ri.internal.format.l10n;
 
-import static org.junit.Assert.*;
-
-import javax.measure.spi.UnitFormatService;
-
-import org.junit.Before;
-import org.junit.Test;
+import java.util.Set;
 
 /**
- * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- *
- */
-public class UnitFormatServiceTest {
-	private UnitFormatService sut;
-
-	@Before
-	public void init() {
-		sut = new DefaultUnitFormatService();
-	}
-
-	@Test
-	public void testGetFormat() {
-		assertNotNull(sut.getUnitFormat());
-		assertEquals("tec.units.ri.format.SimpleUnitFormat$DefaultFormat", sut.getUnitFormat().getClass().getName());
-	}
-	
-	
-	@Test
-	public void TestGetFormatNames() {
-		DefaultUnitFormatService service = new DefaultUnitFormatService();
-		assertNotNull(service.getAvailableFormatNames());
-		assertEquals(2, service.getAvailableFormatNames().size());
-	}
-	
+ * An abstraction over common resource methods in an ME/SE compatible manner.
+ * @author Werner Keil
+ * @version 0.3
+ */ 
+public interface L10nBundle { // TODO could we rename it to something like MessageBundle?
+	 public String getString(String key);
+	 public Set<String> keySet();
 }

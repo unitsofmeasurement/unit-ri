@@ -29,4 +29,4 @@
  * @author Werner
  *
  */
-package tec.units.ri.format.internal.l10n;
+package tec.units.ri.internal.format.l10n;

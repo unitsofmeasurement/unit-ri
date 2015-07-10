@@ -23,14 +23,14 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format.internal;
+package tec.units.ri.internal.format;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import tec.units.ri.format.internal.l10n.L10nResources;
+import tec.units.ri.internal.format.l10n.L10nResources;
 
 /**
  * Default resource bundle (English / United States).

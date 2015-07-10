@@ -59,7 +59,7 @@
  *
  */
 
-package tec.units.ri.format.internal.l10n;
+package tec.units.ri.internal.format.l10n;
 
 /**
  * Digit List. Handles the transcoding between numeric values and strings of

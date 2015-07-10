@@ -35,7 +35,7 @@ import javax.measure.format.UnitFormat;
 
 import tec.units.ri.AbstractQuantity;
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.format.internal.l10n.NumberFormat;
+import tec.units.ri.internal.format.l10n.NumberFormat;
 import tec.units.ri.quantity.NumberQuantity;
 
 /**

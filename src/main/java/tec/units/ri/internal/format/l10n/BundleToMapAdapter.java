@@ -1,4 +1,4 @@
-/*
+/**
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -23,28 +23,44 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format.internal.l10n;
+package tec.units.ri.internal.format.l10n;
 
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
- * @author Werner
  * 
- * Resource bundle for German, no specific country.
+ * @author Werner Keil
+ * @version 0.6, June 11, 2015
+ *
  */
-public class Resources_de extends Resources {
-    private final Map<String, String> strings;
- 
-    public Resources_de() {
-        strings = new Hashtable<String, String>(30);
- 
-        strings.put("exit", "Beenden");
-        strings.put("textLbl", "Texte");
-        strings.put("text", "Da ist ein Text.");
-    }
- 
-    public String handleGetString(String key) {
-        return strings.get(key);
-    }
+public final class BundleToMapAdapter {
+	/*public final static Map<String, String> toMap(final ResourceBundle resource) {
+		final Map<String, String> map = new HashMap<String, String>();
+
+		Iterator<String> keys = resource.keySet().iterator();
+		while (keys.hasNext()) {
+			String key = keys.next();
+			map.put(key, resource.getString(key));
+		}
+
+		return map;
+	} */
+	
+	public final static Map<String, String> toMap(final L10nResources resource) {
+		final Map<String, String> map = new HashMap<String, String>();
+
+		Iterator<String> keys = resource.getKeys();
+		while (keys.hasNext()) {
+			String key = keys.next();
+			map.put(key, resource.getString(key));
+		}
+
+		return map;
+	}
+
+	/*public final static Map<String, String> toMap(String resName) {
+		return toMap(ResourceBundle.getBundle(resName));
+	}*/
 }

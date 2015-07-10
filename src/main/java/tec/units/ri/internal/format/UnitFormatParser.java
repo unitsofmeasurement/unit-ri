@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.format.internal;
+package tec.units.ri.internal.format;
 
 // import static java.lang.StrictMath.E; // not in CLDC 8
 import static java.lang.Math.E;
