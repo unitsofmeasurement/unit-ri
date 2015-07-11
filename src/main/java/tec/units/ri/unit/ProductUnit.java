@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -49,7 +49,7 @@ import tec.units.ri.quantity.QuantityDimension;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.4, November 2, 2014
+ * @version 0.5.5, July 11, 2015
  */
 public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
@@ -242,8 +242,8 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     }
 
     @Override
-    public Map<AbstractUnit<?>, Integer> getProductUnits() {
-        final Map<AbstractUnit<?>, Integer> units = new HashMap<>(); // Diamond (Java7+)
+    public Map<Unit<?>, Integer> getProductUnits() {
+        final Map<Unit<?>, Integer> units = new HashMap<Unit<?>, Integer>();
         for (int i = 0; i < getUnitCount(); i++) {
             units.put(getUnit(i), getUnitPow(i));
         }

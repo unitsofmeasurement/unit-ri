@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -38,12 +38,10 @@ import javax.measure.Quantity;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Mass;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import tec.units.ri.quantity.Quantities;
 
-@Ignore
 public class QuantityPrefixTest {
 	@Test
 	public void testMega() {

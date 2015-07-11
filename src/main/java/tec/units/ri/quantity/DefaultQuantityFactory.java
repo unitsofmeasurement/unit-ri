@@ -83,7 +83,7 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
 	}
 
 	@SuppressWarnings("rawtypes")
-	static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<>();
+	static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<Class, Unit>();
 	static {
 		CLASS_TO_METRIC_UNIT.put(Dimensionless.class, ONE);
 		CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
