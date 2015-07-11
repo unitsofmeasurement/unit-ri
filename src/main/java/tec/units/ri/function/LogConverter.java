@@ -32,7 +32,7 @@ import tec.units.ri.AbstractConverter;
  * <p> This class represents a logarithmic converter of limited precision.
  *     Such converter  is typically used to create logarithmic unit.
  *     For example:[code]
- *     Unit<Dimensionless> BEL = Unit.ONE.transform(new LogConverter(10).inverse());
+ *     Unit<Dimensionless> BEL = Units.ONE.transform(new LogConverter(10).inverse());
  *     [/code]</p>
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>

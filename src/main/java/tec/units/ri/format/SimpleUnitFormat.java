@@ -503,7 +503,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		@Override
 		public Unit<? extends Quantity> parseProductUnit(CharSequence csq,
 				ParsePosition pos) throws ParserException {
-			Unit result = AbstractUnit.ONE;
+			Unit result = Units.ONE;
 			int token = nextToken(csq, pos);
 			switch (token) {
 			case IDENTIFIER:

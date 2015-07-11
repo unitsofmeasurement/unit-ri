@@ -84,17 +84,41 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
      * Creates a transformed unit from the specified system unit.
      *
      * @param parentUnit the system unit from which this unit is derived.
-     * @param toParentUnit the converter to the parent units.
+     * @param unitConverter the converter to the parent units.
      * @throws IllegalArgumentException if the specified parent unit is not an
      *         {@link AbstractUnit#isSystemUnit() system unit}
      */
-    public TransformedUnit(AbstractUnit<Q> parentUnit, UnitConverter toParentUnit) {
+    public TransformedUnit(AbstractUnit<Q> parentUnit, UnitConverter unitConverter) {
         if (!parentUnit.isSystemUnit())
             throw new IllegalArgumentException("The parent unit: " +  parentUnit
                     + " is not a system unit");
         this.parentUnit = parentUnit;
-        this.converter = toParentUnit;
+        this.converter = unitConverter;
 //        this.symbol = parentUnit.getSymbol();
+    }
+    
+    /**
+     * Creates a transformed unit from the specified system unit.
+     *
+     * @parem symbol the symbol to use with this transformed unit.
+     * @param parentUnit the system unit from which this unit is derived.
+     * @param unitConverter the converter to the parent units.
+     * @throws IllegalArgumentException if the specified parent unit is not an
+     *         {@link AbstractUnit#isSystemUnit() system unit}
+     */
+    public TransformedUnit(String symbol, Unit<Q> parentUnit, UnitConverter unitConverter) {
+        if(parentUnit instanceof AbstractUnit) {
+	    	final AbstractUnit<Q> abParent = (AbstractUnit<Q>) parentUnit;
+        	if (!abParent.isSystemUnit()) {
+	            throw new IllegalArgumentException("The parent unit: " + abParent
+	                    + " is not a system unit");
+	        }
+	        this.parentUnit = abParent;
+	        this.converter = unitConverter;
+	//        this.symbol = symbol; //TODO see https://github.com/unitsofmeasurement/uom-se/issues/54
+        } else {
+        	throw new IllegalArgumentException("The parent unit: " + parentUnit + " is not an abstract unit.");
+        }
     }
     
     /**

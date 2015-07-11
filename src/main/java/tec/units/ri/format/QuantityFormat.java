@@ -37,6 +37,7 @@ import tec.units.ri.AbstractQuantity;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.internal.format.l10n.NumberFormat;
 import tec.units.ri.quantity.NumberQuantity;
+import tec.units.ri.unit.Units;
 
 /**
  * <p> This class provides the interface for formatting and parsing {@link AbstractQuantity
@@ -260,7 +261,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 //						(CompoundUnit) unit, dest);
 //			else {
 				dest.append(numberFormat.format(quantity.getValue()));
-				if (quantity.getUnit().equals(AbstractUnit.ONE))
+				if (quantity.getUnit().equals(Units.ONE))
 					return dest;
 				dest.append(' ');
 				return unitFormat.format(quantity.getUnit(), dest);
@@ -320,7 +321,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 					Number number = measure.getValue();
 					dest.append(number.toString());
 //				}
-				if (measure.getUnit().equals(AbstractUnit.ONE))
+				if (measure.getUnit().equals(Units.ONE))
 					return dest;
 				dest.append(' ');
 				return EBNFUnitFormat.getInstance().format(unit, dest);

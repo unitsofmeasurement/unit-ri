@@ -68,7 +68,7 @@ public final class QuantityDimension implements Dimension {
 	/**
      * Holds dimensionless.
      */
-    public static final Dimension NONE = new QuantityDimension(AbstractUnit.ONE);
+    public static final Dimension NONE = new QuantityDimension(Units.ONE);
 
     /**
      * Holds length dimension (L).

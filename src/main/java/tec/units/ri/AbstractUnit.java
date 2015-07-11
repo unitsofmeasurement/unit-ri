@@ -25,7 +25,8 @@
  */
 package tec.units.ri;
 
-import java.io.IOException;
+import static tec.units.ri.unit.Units.ONE;
+
 import java.util.Map;
 
 import javax.measure.Dimension;
@@ -34,8 +35,6 @@ import javax.measure.Unit;
 import javax.measure.IncommensurableException;
 import javax.measure.UnconvertibleException;
 import javax.measure.UnitConverter;
-import javax.measure.quantity.Dimensionless;
-
 import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.format.EBNFUnitFormat;
 import tec.units.ri.function.AddConverter;
@@ -46,6 +45,7 @@ import tec.units.ri.unit.AlternateUnit;
 import tec.units.ri.unit.AnnotatedUnit;
 import tec.units.ri.unit.ProductUnit;
 import tec.units.ri.unit.TransformedUnit;
+import tec.units.ri.unit.Units;
 
 /**
  * <p>
@@ -73,12 +73,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 */
 	// private static final long serialVersionUID = -4344589505537030204L;
 
-
-	/**
-	 * Holds the dimensionless unit <code>ONE</code>.
-	 */
-	public static final AbstractUnit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
-	
 	/**
 	 * Holds the name.
 	 */
@@ -401,7 +395,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *            the physical unit multiplicand.
 	 * @return <code>this * that</code>
 	 */
-	public final AbstractUnit<?> multiply(AbstractUnit<?> that) {
+	public final Unit<?> multiply(AbstractUnit<?> that) {
 		if (this.equals(ONE))
 			return that;
 		if (that.equals(ONE))
@@ -415,7 +409,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * @return <code>1 / this</code>
 	 */
 	@Override
-	public final AbstractUnit<?> inverse() {
+	public final Unit<?> inverse() {
 		if (this.equals(ONE))
 			return this;
 		return ProductUnit.getQuotientInstance(ONE, this);
@@ -457,17 +451,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	}
 
 	/**
-	 * Returns the quotient of this physical unit with the one specified.
-	 *
-	 * @param that
-	 *            the physical unit divisor.
-	 * @return <code>this.multiply(that.inverse())</code>
-	 */
-	public final AbstractUnit<?> divide(AbstractUnit<?> that) {
-		return this.multiply(that.inverse());
-	}
-
-	/**
 	 * Returns a unit equals to the given root of this unit.
 	 *
 	 * @param n
@@ -478,7 +461,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *             an unit with a fractional exponent.
 	 */
 	@Override
-	public final AbstractUnit<?> root(int n) {
+	public final Unit<?> root(int n) {
 		if (n > 0)
 			return ProductUnit.getRootInstance(this, n);
 		else if (n == 0)
@@ -496,7 +479,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * @return the result of raising this unit to the exponent.
 	 */
 	@Override
-	public final AbstractUnit<?> pow(int n) {
+	public final Unit<?> pow(int n) {
 		if (n > 0)
 			return this.multiply(this.pow(n - 1));
 		else if (n == 0)

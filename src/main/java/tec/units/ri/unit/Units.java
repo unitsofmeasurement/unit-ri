@@ -25,8 +25,6 @@
  */
 package tec.units.ri.unit;
 
-import static tec.units.ri.AbstractUnit.ONE;
-
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Acceleration;
@@ -75,7 +73,7 @@ import tec.units.ri.quantity.QuantityDimension;
  * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.2, July 2, 2015
+ * @version 0.5.3, July 11, 2015
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
@@ -84,6 +82,13 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
     
     private static final Units INSTANCE = new Units();
 
+    /**
+     * Holds the dimensionless unit <code>ONE</code>.
+     */
+    public static final Unit<Dimensionless> ONE
+        = addUnit( new ProductUnit<Dimensionless>(), Dimensionless.class);
+
+    
     ////////////////
     // BASE UNITS //
     ////////////////
@@ -443,28 +448,38 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
         		new TransformedUnit<Volume>(CUBIC_METRE, new RationalConverter(1, 1000)),
         		"Litre", "l");
     
+	//////////
+	// Time //
+	//////////
     /**
      * A time unit accepted for use with SI units (standard name <code>min</code>).
      */
     public static final Unit<Time> MINUTE
-        = new TransformedUnit<Time>(SECOND, new RationalConverter(60, 1));
+        = new TransformedUnit<Time>("min", SECOND, RationalConverter.of(60, 1));
 
     /**
      * A time unit accepted for use with SI units (standard name <code>h/code>).
      */
     public static final Unit<Time> HOUR
-        = new TransformedUnit<Time>(SECOND, new RationalConverter(60 * 60, 1));
+        = new TransformedUnit<Time>("h", SECOND, RationalConverter.of(60 * 60, 1));
 
     /**
      * A time unit accepted for use with SI units (standard name <code>d/code>).
      */
     public static final Unit<Time> DAY
-        = new TransformedUnit<Time>(SECOND, new RationalConverter(24 * 60 * 60, 1));
+        = new TransformedUnit<Time>("d", SECOND, RationalConverter.of(24 * 60 * 60, 1));
+
+	/**
+	 * A unit of duration equal to 7 {@link #DAY} (standard name
+	 * <code>week</code>).
+	 */
+	static final Unit<Time> WEEK = addUnit(DAY.multiply(7));
     
     /**
      * A time unit accepted for use with SI units (standard name <code>y/code>).
      */
-	public static final Unit<Time> YEAR = addUnit(Units.DAY.multiply(365.2525)); 
+	public static final Unit<Time> YEAR = addUnit(Units.DAY.multiply(365.2525));
+
 	// using Gregorian year instead of Julian (365.25)
 	
     

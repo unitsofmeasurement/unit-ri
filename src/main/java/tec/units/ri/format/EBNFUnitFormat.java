@@ -53,6 +53,7 @@ import tec.units.ri.internal.format.l10n.Locale;
 import tec.units.ri.unit.BaseUnit;
 import tec.units.ri.unit.MetricPrefix;
 import tec.units.ri.unit.TransformedUnit;
+import tec.units.ri.unit.Units;
 import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractConverter.Pair;
 import tec.units.ri.AbstractUnit;
@@ -315,11 +316,11 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 		int start = index; //cursor != null ? cursor.getIndex() : 0;
 		int end = csq.length();
 		if (end <= start) {
-			return AbstractUnit.ONE;
+			return Units.ONE;
 		}
 		String source = csq.subSequence(start, end).toString().trim();
 		if (source.length() == 0) {
-			return AbstractUnit.ONE;
+			return Units.ONE;
 		}
 		try {
 			UnitFormatParser parser = new UnitFormatParser(symbolMap, new StringReader(
@@ -459,7 +460,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 			}
 
 			unitPrecedence = formatInternal(parentUnit, temp);
-			printSeparator = !parentUnit.equals(AbstractUnit.ONE);
+			printSeparator = !parentUnit.equals(Units.ONE);
 			int result = formatConverter(converter, printSeparator,
 					unitPrecedence, temp);
 			buffer.append(temp);
@@ -481,7 +482,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	 *            boolean <code>true</code> if the converter expression should
 	 *            begin with an operator, otherwise <code>false</code>. This
 	 *            will always be true unless the unit being modified is equal to
-	 *            Unit.ONE.
+	 *            Units.ONE.
 	 * @param buffer
 	 *            StringBuffer the buffer to append to. No assumptions should be
 	 *            made about its content.

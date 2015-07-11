@@ -25,7 +25,6 @@
  */
 package tec.units.ri.quantity;
 
-import static tec.units.ri.AbstractUnit.ONE;
 import static tec.units.ri.unit.Units.*;
 
 import java.util.HashMap;

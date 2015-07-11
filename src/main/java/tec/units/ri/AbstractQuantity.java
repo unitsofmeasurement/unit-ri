@@ -32,6 +32,7 @@ import javax.measure.quantity.Dimensionless;
 import tec.units.ri.function.UnitSupplier;
 import tec.units.ri.function.ValueSupplier;
 import tec.units.ri.quantity.NumberQuantity;
+import tec.units.ri.unit.Units;
 
 /**
  * <p>
@@ -108,12 +109,12 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	/**
 	 * Holds a dimensionless quantity of none (exact).
 	 */
-	public static final AbstractQuantity<Dimensionless> NONE = NumberQuantity.of(0, AbstractUnit.ONE);
+	public static final AbstractQuantity<Dimensionless> NONE = NumberQuantity.of(0, Units.ONE);
 
 	/**
 	 * Holds a dimensionless quantity of one (exact).
 	 */
-	public static final AbstractQuantity<Dimensionless> ONE = NumberQuantity.of(1, AbstractUnit.ONE);
+	public static final AbstractQuantity<Dimensionless> ONE = NumberQuantity.of(1, Units.ONE);
 
 	/**
 	 * constructor.

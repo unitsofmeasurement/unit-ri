@@ -28,148 +28,166 @@ package tec.units.ri.unit;
 import javax.measure.Unit;
 import javax.measure.quantity.Dimensionless;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
+import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
 import static org.junit.Assert.*;
 import static tec.units.ri.unit.MetricPrefix.KILO;
 import static tec.units.ri.unit.Units.GRAM;
+import static tec.units.ri.unit.Units.METRE;
 
 /**
  *
  * @author Werner Keil
  */
 public class UnitsTest {
-// TODO most of these are empty
-    public UnitsTest() {
-    }
+	Unit<Dimensionless> one;
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
+	// TODO most of these are empty
+	public UnitsTest() {
+	}
 
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
+	@BeforeClass
+	public static void setUpClass() throws Exception {
+	}
 
-    @Test
-    public void testParse() {
-        assertEquals(KILO(GRAM), AbstractUnit.parse("kg")); // TODO: Problem with kg...
-    }
+	@AfterClass
+	public static void tearDownClass() throws Exception {
+	}
 
-    @Test
-    public void testAnnotate() {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see junit.framework.TestCase#setUp()
+	 */
+	@Before
+	public void setUp() throws Exception {
+		// super.setUp();
+		one = Units.ONE;
+	}
 
-    @Test
-    public void testGetAnnotation() {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see junit.framework.TestCase#tearDown()
+	 */
+	@After
+	public void tearDown() throws Exception {
+		// super.tearDown();
+		one = null;
+	}
 
-    @Test
-    public void testGetUnannotatedUnit() {
-    }
+	@Test
+	public void testParse() {
+		assertEquals(KILO(GRAM), AbstractUnit.parse("kg")); // TODO: Problem
+															// with kg...
+	}
 
-    @Test
-    public void testIsSystemUnit() {
-    }
-
-    @Test
-    public void testToString() {
-    }
-
-    @Test
-    public void testGetConverterToSystemUnit() {
-    }
-
-    @Test
-    public void testGetSymbol() {
-    }
-
-    @Test
-    public void testGetSystemUnit() {
-    }
-
-    @Test
-    public void testGetProductUnits() {
-    }
-
-    @Test
-    public void testGetDimension() {
-    }
-
-    @Test
-    public void testIsCompatible() {
-    }
-
-    @Test
-    public void testAsType() {
-    }
-
-    @Test
-    public void testGetConverterTo() {
-    }
-
-    @Test
-    public void testGetConverterToAny() {
-    }
-
-    @Test
-    public void testAlternate() {
-    }
-
+    /**
+     * Test method for {@link javax.measure.Unit#transform}.
+     */
     @Test
     public void testTransform() {
+        Unit<?> result = one.transform(AbstractConverter.IDENTITY);
+        assertEquals(result, one);
     }
 
+    /**
+     * Test method for {@link javax.measure.Unit#shift(double)}.
+     */
     @Test
-    public void testAdd() {
+    public void testShift() {
+    	Unit<?> result = one.shift(10);
+        assertNotSame(result, one);
     }
 
+    /**
+     * Test method for {@link javax.measure.Unit#multiply(long)}.
+     */
     @Test
-    public void testMultiply_double() {
+    public void testMultiplyLong() {
+    	Unit<?> result = one.multiply(2L);
+        assertNotSame(result, one);
     }
 
-    @Test
-    public void testMultiply_ErrorType() {
-    }
+	/**
+	 * Test method for {@link javax.measure.Unit#asType(java.lang.Class)}.
+	 */
+	@Test
+	public void testAsType() {
+		one.asType(Dimensionless.class);
+		try {
+			METRE.asType(Dimensionless.class);
+			fail("Should have raised ClassCastException");
+		} catch (ClassCastException e) {
+			assertTrue(true);
+		}
+	}
 
-    @Test
-    public void testInverse() {
-    }
+	@Test
+	public void testGetConverterTo() {
+	}
 
-    @Test
-    public void testDivide_double() {
-    }
+	@Test
+	public void testGetConverterToAny() {
+	}
 
-    @Test
-    public void testDivide_ErrorType() {
-    }
+	@Test
+	public void testAlternate() {
+	}
 
-    @Test
-    public void testRoot() {
-    }
+	@Test
+	public void testAdd() {
+	}
 
-    @Test
-    public void testPow() {
-    }
+	@Test
+	public void testMultiply_double() {
+	}
 
-    @Test
-    public void testHashCode() {
-    }
+	@Test
+	public void testMultiply_ErrorType() {
+	}
 
-    @Test
-    public void testEquals() {
-    }
+	@Test
+	public void testInverse() {
+	}
 
+	@Test
+	public void testDivide_double() {
+	}
 
-    @Test
-    public void testOne() {
-    	Unit<Dimensionless> one = AbstractUnit.ONE;
-    	assertTrue(one.isCompatible(AbstractUnit.ONE));
-    	Unit<Dimensionless> two = one.shift(1);
-    	assertTrue(two.isCompatible(AbstractUnit.ONE));
-    	assertFalse(two.equals(AbstractUnit.ONE));
-    }
+	@Test
+	public void testDivide_ErrorType() {
+	}
+
+	@Test
+	public void testRoot() {
+	}
+
+	@Test
+	public void testPow() {
+	}
+
+	@Test
+	public void testHashCode() {
+	}
+
+	@Test
+	public void testEquals() {
+	}
+
+	@Test
+	public void testOne() {
+		Unit<Dimensionless> one = Units.ONE;
+		assertTrue(one.isCompatible(Units.ONE));
+		Unit<Dimensionless> two = one.shift(1);
+		assertTrue(two.isCompatible(Units.ONE));
+		assertFalse(two.equals(Units.ONE));
+	}
 }

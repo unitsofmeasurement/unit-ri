@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -40,7 +40,7 @@ import javax.measure.spi.SystemOfUnits;
  * <p>An abstract base class for unit systems.</p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 2.2.1, $Date: 2015-05-23 $
+ * @version 2.3, $Date: 2015-07-11 $
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
     /**
@@ -52,8 +52,8 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
      * Holds the mapping quantity to unit.
      */
     @SuppressWarnings("rawtypes")
-	protected final Map<Class<? extends Quantity>, AbstractUnit>
-            quantityToUnit = new HashMap<Class<? extends Quantity>, AbstractUnit>();
+	protected final Map<Class<? extends Quantity>, Unit>
+            quantityToUnit = new HashMap<Class<? extends Quantity>, Unit>();
 
     /**
      * The natural logarithm.
@@ -88,7 +88,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
     
     @SuppressWarnings("unchecked")
 	@Override
-    public <Q extends Quantity<Q>> AbstractUnit<Q> getUnit(Class<Q> quantityType) {
+    public <Q extends Quantity<Q>> Unit<Q> getUnit(Class<Q> quantityType) {
         return quantityToUnit.get(quantityType);
     }
 	

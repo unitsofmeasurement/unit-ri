@@ -35,6 +35,7 @@ import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
+import tec.units.ri.function.UnitSupplier;
 import tec.units.ri.quantity.QuantityDimension;
 
 /**
@@ -110,7 +111,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @param right the right unit operand.
      * @return <code>left * right</code>
      */
-    public static AbstractUnit<?> getProductInstance(AbstractUnit<?> left, AbstractUnit<?> right) {
+    public static Unit<?> getProductInstance(AbstractUnit<?> left, AbstractUnit<?> right) {
         Element[] leftElems;
         if (left instanceof ProductUnit<?>)
             leftElems = ((ProductUnit<?>) left).elements;
@@ -131,7 +132,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @param right the divisor unit operand.
      * @return <code>dividend / divisor</code>
      */
-    public static AbstractUnit<?> getQuotientInstance(AbstractUnit<?> left, AbstractUnit<?> right) {
+    public static Unit<?> getQuotientInstance(Unit<?> left, Unit<?> right) {
         Element[] leftElems;
         if (left instanceof ProductUnit<?>)
             leftElems = ((ProductUnit<?>) left).elements;
@@ -159,7 +160,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @return <code>unit^(1/nn)</code>
      * @throws ArithmeticException if <code>n == 0</code>.
      */
-    public static AbstractUnit<?> getRootInstance(AbstractUnit<?> unit, int n) {
+    public static Unit<?> getRootInstance(AbstractUnit<?> unit, int n) {
         Element[] unitElems;
         if (unit instanceof ProductUnit<?>) {
             Element[] elems = ((ProductUnit<?>) unit).elements;
@@ -182,7 +183,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @param nn the exponent (nn &gt; 0).
      * @return <code>unit^n</code>
      */
-    static AbstractUnit<?> getPowInstance(AbstractUnit<?> unit, int n) {
+    static Unit<?> getPowInstance(AbstractUnit<?> unit, int n) {
         Element[] unitElems;
         if (unit instanceof ProductUnit<?>) {
             Element[] elems = ((ProductUnit<?>) unit).elements;
@@ -213,7 +214,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @throws IndexOutOfBoundsException if index is out of range
      *         <code>(index &lt; 0 || index &gt;= getUnitCount())</code>.
      */
-    public AbstractUnit<?> getUnit(int index) {
+    public Unit<?> getUnit(int index) {
         return elements[index].getUnit();
     }
 
@@ -293,7 +294,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     @SuppressWarnings("unchecked")
 	@Override
     public AbstractUnit<Q> toSystemUnit() {
-        Unit<?> systemUnit = AbstractUnit.ONE;
+        Unit<?> systemUnit = Units.ONE;
         for (Element element : elements) {
             Unit<?> unit = element.unit.getSystemUnit();
             unit = unit.pow(element.pow);
@@ -306,7 +307,8 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     public UnitConverter getSystemConverter() {
         UnitConverter converter = AbstractConverter.IDENTITY;
         for (Element e : elements) {
-            UnitConverter cvtr = e.unit.getSystemConverter();
+            @SuppressWarnings("rawtypes")
+			UnitConverter cvtr = ((AbstractUnit)e.unit).getSystemConverter(); // TODO check for type
             if (!(cvtr.isLinear()))
                 throw new UnsupportedOperationException(e.unit + " is non-linear, cannot convert");
             if (e.root != 1)
@@ -327,7 +329,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     public Dimension getDimension() {
     	Dimension dimension = QuantityDimension.NONE;
         for (int i = 0; i < this.getUnitCount(); i++) {
-            AbstractUnit<?> unit = this.getUnit(i);
+            Unit<?> unit = this.getUnit(i);
             if (this.elements != null && unit.getDimension() != null) {
             	Dimension d = unit.getDimension().pow(this.getUnitPow(i)).root(this.getUnitRoot(i));
             	dimension = dimension.multiply(d);
@@ -344,13 +346,13 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @return the corresponding unit.
      */
     @SuppressWarnings("rawtypes")
-	private static AbstractUnit<?> getInstance(Element[] leftElems, Element[] rightElems) {
+	private static Unit<?> getInstance(Element[] leftElems, Element[] rightElems) {
 
         // Merges left elements with right elements.
         Element[] result = new Element[leftElems.length + rightElems.length];
         int resultIndex = 0;
         for (Element leftElem : leftElems) {
-            AbstractUnit<?> unit = leftElem.unit;
+            Unit<?> unit = leftElem.unit;
             int p1 = leftElem.pow;
             int r1 = leftElem.root;
             int p2 = 0;
@@ -372,7 +374,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
         // Appends remaining right elements not merged.
         for (Element rightElem : rightElems) {
-            AbstractUnit<?> unit = rightElem.unit;
+            Unit<?> unit = rightElem.unit;
             boolean hasBeenMerged = false;
             for (Element leftElem : leftElems) {
                 if (unit.equals(leftElem.unit)) {
@@ -386,7 +388,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
         // Returns or creates instance.
         if (resultIndex == 0)
-            return AbstractUnit.ONE;
+            return Units.ONE;
         else if ((resultIndex == 1) && (result[0].pow == result[0].root))
             return result[0].unit;
         else {
@@ -414,7 +416,8 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     /**
      * Inner product element represents a rational power of a single unit.
      */
-    private final static class Element {
+    @SuppressWarnings("rawtypes")
+	private final static class Element implements UnitSupplier {
 
         /**
 		 * 
@@ -424,7 +427,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 		/**
          * Holds the single unit.
          */
-        private final AbstractUnit<?> unit;
+        private final Unit<?> unit;
 
         /**
          * Holds the power exponent.
@@ -443,7 +446,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
          * @param pow the power exponent.
          * @param root the root exponent.
          */
-        private Element(AbstractUnit<?> unit, int pow, int root) {
+        private Element(Unit<?> unit, int pow, int root) {
             this.unit = unit;
             this.pow = pow;
             this.root = root;
@@ -454,7 +457,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
          *
          * @return the single unit.
          */
-        public AbstractUnit<?> getUnit() {
+        public Unit<?> getUnit() {
             return unit;
         }
 
