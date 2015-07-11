@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -29,48 +29,24 @@
  */
 package tec.units.ri.unit;
 
-import static org.junit.Assert.assertEquals;
-import static tec.units.ri.unit.MetricPrefix.*;
-import static tec.units.ri.unit.Units.GRAM;
-import static tec.units.ri.unit.Units.KILOGRAM;
-import static tec.units.ri.unit.Units.METRE;
-
-import javax.measure.Unit;
-import javax.measure.UnitConverter;
-import javax.measure.quantity.Mass;
+import javax.measure.quantity.Length;
 
 import org.junit.Test;
 
-import tec.units.ri.function.RationalConverter;
+import tec.units.ri.AbstractUnit;
+import static org.junit.Assert.*;
 
-public class PrefixTest {
-	@Test
-	public void testKilo() {
-		// TODO how to handle equals for units?
-		assertEquals(KILOGRAM.toString(), KILO(GRAM).toString());
-	}
+/**
+ *
+ * @author Werner Keil
+ */
+public class BaseUnitTest {
 	
-	@Test
-	public void testMega() {
-		Unit<Mass> m1 = MEGA(GRAM);
-		assertEquals("Mg", m1.toString());
-	}
-	
-	@Test
-	public void testNano() {
-		Unit<Mass> m1 = NANO(GRAM);
-		assertEquals("ng", m1.toString());
-	}
-	
-	@Test
-	public void testPicoNano() {
-		Unit<Mass> m1 = PICO(KILOGRAM);
-		assertEquals("ng", m1.toString());
-	}
-	
-	@Test
-	public void testBetweenPrefixes() {
-		UnitConverter conv = YOTTA(METRE).getConverterTo(ZETTA(METRE));
-		assertEquals(conv, new RationalConverter(4.7683715820312499E17, 4.76837158203125E14)); // TODO value?
-	}
+	private AbstractUnit<Length> sut = new BaseUnit<Length>("m");
+
+    @Test
+    public void testEquals() {
+    	assertTrue(sut.equals(new BaseUnit<Length>("m")));
+    }
+    
 }

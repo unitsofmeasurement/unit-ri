@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -34,7 +34,6 @@ import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
-import tec.units.ri.AbstractUnit;
 import tec.units.ri.unit.BaseUnit;
 import tec.units.ri.unit.Units;
 
