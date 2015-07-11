@@ -71,6 +71,12 @@ public class PrefixTest {
 	@Test
 	public void testBetweenPrefixes() {
 		UnitConverter conv = YOTTA(METRE).getConverterTo(ZETTA(METRE));
-		assertEquals(conv, new RationalConverter(4.7683715820312499E17, 4.76837158203125E14)); // TODO value?
+		assertEquals(new RationalConverter(4.7683715820312499E17, 4.76837158203125E14), conv); // TODO value?
+	}
+	
+	@Test
+	public void testBetweenPrefixes2() {
+		UnitConverter conv = KILO(METRE).getConverterTo(GIGA(METRE));
+		assertEquals(RationalConverter.of(1d, 1000000d), conv);
 	}
 }
