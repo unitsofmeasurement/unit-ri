@@ -36,6 +36,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import tec.units.ri.quantity.NumberQuantity;
+import tec.units.ri.quantity.QuantityRange;
 import tec.units.ri.util.Range;
 
 public class RangeTest {
