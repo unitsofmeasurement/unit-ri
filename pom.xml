@@ -5,6 +5,7 @@
 	<artifactId>unit-ri</artifactId>
 	<packaging>bundle</packaging>
 	<name>Units of Measurement Reference Implementation</name>
+	<version>0.8-SNAPSHOT</version>
 	<url>http://github.com/unitsofmeasurement/unit-ri</url>
 	<organization>
 		<name>Jean-Marie Dautelle, Werner Keil, V2COM</name>
@@ -326,8 +327,6 @@
 								</excludes>
 							</configuration>
 						</plugin>
-						<!-- TODO enable this only for major upgrades (ensure to copy LICENSE.txt 
-							to LICENSE.bak first) -->
 					</plugins>
 				</pluginManagement>
 				<plugins>
@@ -347,5 +346,4 @@
 			</build>
 		</profile>
 	</profiles>
-	<version>0.8-SNAPSHOT</version>
 </project>
