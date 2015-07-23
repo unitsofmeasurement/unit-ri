@@ -37,7 +37,7 @@
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
 	<properties>
-		<!--  use parent jsr.version>0.8-RCx</jsr.version -->
+		<jsr.version>0.8-SNAPSHOT</jsr.version>
 		<jdkVersion>1.7</jdkVersion>
 		<project.build.javaVersion>${jdkVersion}</project.build.javaVersion>
 		<maven.compile.targetLevel>${jdkVersion}</maven.compile.targetLevel>

@@ -42,13 +42,13 @@ import javax.measure.spi.ServiceProvider;
  *
  * @author Werner Keil
  */
-class RIServiceProvider implements ServiceProvider {
+public class RIServiceProvider implements ServiceProvider {
     /** List of services loaded, per class. */
     private final Map<Class, List<Object>> servicesLoaded = new HashMap<Class, List<Object>>();
     // TODO does this work in CLDC8?
 //    @Override
     public int getPriority() {
-        return 0;
+        return 1;
     }
 
     /**
