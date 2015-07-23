@@ -37,7 +37,7 @@ import org.junit.Test;
 
 import tec.units.ri.quantity.NumberQuantity;
 import tec.units.ri.quantity.QuantityRange;
-import tec.units.ri.util.Range;
+import tec.units.ri.spi.Range;
 
 public class RangeTest {
 	private Quantity<Mass> min;
