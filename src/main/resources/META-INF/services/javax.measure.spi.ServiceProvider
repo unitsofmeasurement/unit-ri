@@ -1,1 +1,1 @@
-javax.measure.spi.DefaultServiceProvider
+tec.units.ri.spi.RIServiceProvider
