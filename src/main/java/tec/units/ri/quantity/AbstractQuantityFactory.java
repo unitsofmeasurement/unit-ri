@@ -43,15 +43,15 @@ import tec.units.ri.AbstractQuantity;
  * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}).
  *
  * For example:<br/><code>
- *      Mass m = AbstractQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
- *      Time m = AbstractQuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
+ *      Mass m = DefaultQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
+ *      Time m = DefaultQuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
  * </code>
  * @param <Q> The type of the quantity.
  *
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.6.6, $Date: 2015-07-06 $
+ * @version 0.6.7, $Date: 2015-07-06 $
  */
 abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q>  {
 
@@ -100,6 +100,7 @@ abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements Quantit
      */
     public abstract Unit<Q> getMetricUnit();
 
+// TODO this seems redundant compared to DefaultQuantityFactory
     /**
      * The default factory implementation. This factory provides
      * a default implementation for every {@link AbstractQuantity} sub-types.
