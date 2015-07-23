@@ -35,12 +35,14 @@ import javax.measure.Unit;
 import javax.measure.IncommensurableException;
 import javax.measure.UnconvertibleException;
 import javax.measure.UnitConverter;
+
 import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.format.EBNFUnitFormat;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
 import tec.units.ri.quantity.QuantityDimension;
+import tec.units.ri.spi.DimensionalModel;
 import tec.units.ri.unit.AlternateUnit;
 import tec.units.ri.unit.AnnotatedUnit;
 import tec.units.ri.unit.ProductUnit;

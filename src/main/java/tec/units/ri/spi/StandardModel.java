@@ -23,9 +23,9 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri;
+package tec.units.ri.spi;
 
-import tec.units.ri.DimensionalModel;
+import tec.units.ri.spi.DimensionalModel;
 
 
 /**

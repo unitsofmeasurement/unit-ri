@@ -23,13 +23,14 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri;
+package tec.units.ri.spi;
 
 import java.util.Map;
 
 import javax.measure.Dimension;
 import javax.measure.UnitConverter;
 
+import tec.units.ri.AbstractConverter;
 import tec.units.ri.quantity.QuantityDimension;
 
 /**
