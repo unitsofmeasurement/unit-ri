@@ -23,48 +23,41 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.spi;
-
-import static org.junit.Assert.*;
+package tec.units.ri.internal;
 
 import java.util.Collection;
-import java.util.Locale;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.measure.spi.Bootstrap;
-import javax.measure.spi.UnitFormatService;
+import javax.measure.spi.SystemOfUnits;
+import javax.measure.spi.SystemOfUnitsService;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import tec.units.ri.unit.Units;
 
 /**
- * Tests for services provided via {@link Bootstrap}.
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 0.1, July 25, 2015
  */
-@SuppressWarnings("unchecked")
-public class ServiceTest {
+public class DefaultSystemOfUnitsService implements SystemOfUnitsService {
+	
+	final Map<String, SystemOfUnits> souMap = new HashMap<String, SystemOfUnits>();
 
-    @Test
-    @Ignore
-    public void testGetServices() throws Exception {
-        Collection<Object> services = Collection.class.cast(Bootstrap.getServices(String.class));
-        assertNotNull(services);
-        assertFalse(services.isEmpty());
-        assertTrue(services.contains("service1"));
-        assertTrue(services.contains("service2"));
-        services = Collection.class.cast(Bootstrap.getServices(Runtime.class));
-        assertNotNull(services);
-        assertTrue(services.isEmpty());
-    }
+	public DefaultSystemOfUnitsService() {
+		souMap.put(Units.class.getSimpleName(), Units.getInstance());
+	}
+	
+	public Collection<SystemOfUnits> getSystemsOfUnits() {
+		return souMap.values();
+	}
+	
+	@Override
+	public SystemOfUnits getSystemOfUnits() {
+		return getSystemOfUnits(Units.class.getSimpleName());
+	}
 
-    @Test
-    public void testGetService() throws Exception {
-        UnitFormatService ufs = Bootstrap.getService(UnitFormatService.class);
-        assertNotNull(ufs);
-        assertNotNull(ufs.getUnitFormat());
-        assertEquals("DefaultFormat", ufs.getUnitFormat().getClass().getSimpleName());
-    }
+	@Override
+	public SystemOfUnits getSystemOfUnits(String name) {
+		return souMap.get(name);
+	}
 
-    @Test
-    public void testGetService_BadCase() throws Exception {
-        assertNull(Bootstrap.getService(Locale.class));
-    }
 }
