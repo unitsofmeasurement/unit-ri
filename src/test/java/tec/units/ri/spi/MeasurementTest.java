@@ -27,7 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri;
+package tec.units.ri.spi;
 
 import static org.junit.Assert.assertEquals;
 import static tec.units.ri.unit.Units.KILOGRAM;
@@ -36,8 +36,8 @@ import javax.measure.quantity.Mass;
 
 import org.junit.Test;
 
-import tec.units.ri.AbstractMeasurement;
 import tec.units.ri.quantity.Quantities;
+import tec.units.ri.spi.AbstractMeasurement;
 import tec.units.ri.spi.Measurement;
 
 public class MeasurementTest {

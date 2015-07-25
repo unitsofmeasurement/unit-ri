@@ -1,6 +1,6 @@
-/*
+/**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -27,34 +27,29 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.spi;
+package tec.units.ri;
 
-import javax.measure.Quantity;
+import static org.junit.Assert.assertEquals;
 
-import tec.units.ri.function.QuantitySupplier;
+import javax.measure.quantity.Length;
 
-/**
- *
- * A Measurement contains a {@link Quantity} and a timestamp.
- * 
- * <p>
- * A {@code Measurement} object is used for maintaining the tuple of quantity and timestamp.
- * The value is represented as {@linkplain Quantity}
- * and the timestamp as <type>long</type>.
- * <p>
- * 
- * @see {@link QuantitySupplier}
- * @author werner
- * @version 0.4
- * @param <Q>
- */
-public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,
-		Comparable<Measurement<Q>> {
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-	/**
-	 * Returns the timestamp of this {@link Measurement}.
-	 * 
-	 * @return a timestamp.
-	 */
-	long getTimestamp();
+import tec.units.ri.AbstractUnit;
+import tec.units.ri.unit.BaseUnit;
+
+public class AbstractUnitTest {
+	private static final AbstractUnit<Length> sut = new BaseUnit<Length>("m");
+    
+	@BeforeClass
+	public static void init() {
+		sut.setName("Test");
+	}
+	
+    @Test
+    public void testName() {
+    	assertEquals("Test", sut.getName());
+    }
 }
+

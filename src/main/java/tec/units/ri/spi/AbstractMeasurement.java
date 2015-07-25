@@ -23,11 +23,9 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri;
+package tec.units.ri.spi;
 
 import javax.measure.Quantity;
-
-import tec.units.ri.spi.Measurement;
 
 /**
  * <p>
@@ -42,7 +40,7 @@ import tec.units.ri.spi.Measurement;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.1, $Date: 2014-11-29 $
  */
-public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
+abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 		Measurement<Q> {
 
 	/**
