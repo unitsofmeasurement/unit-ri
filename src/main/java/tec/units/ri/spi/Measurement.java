@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -27,7 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri;
+package tec.units.ri.spi;
 
 import javax.measure.Quantity;
 
@@ -38,15 +38,14 @@ import tec.units.ri.function.QuantitySupplier;
  * A Measurement contains a {@link Quantity} and a timestamp.
  * 
  * <p>
- * A {@code Measurement} object is used for maintaining the tuple of quantity and timestamp.
+ * A <type>Measurement</type> object is used for maintaining the tuple of quantity and timestamp.
  * The value is represented as {@linkplain Quantity}
- * and the time as {@linkplain Instant}
+ * and the timestamp as <type>long</type>.
  * <p>
-
  * 
  * @see {@link QuantitySupplier}
  * @author werner
- * @version 0.3
+ * @version 0.4
  * @param <Q>
  */
 public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,

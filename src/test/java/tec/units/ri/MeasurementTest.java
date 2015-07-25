@@ -36,7 +36,9 @@ import javax.measure.quantity.Mass;
 
 import org.junit.Test;
 
+import tec.units.ri.AbstractMeasurement;
 import tec.units.ri.quantity.Quantities;
+import tec.units.ri.spi.Measurement;
 
 public class MeasurementTest {
 

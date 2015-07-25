@@ -27,6 +27,8 @@ package tec.units.ri;
 
 import javax.measure.Quantity;
 
+import tec.units.ri.spi.Measurement;
+
 /**
  * <p>
  * This class represents the immutable result of a measurement stated in a known
