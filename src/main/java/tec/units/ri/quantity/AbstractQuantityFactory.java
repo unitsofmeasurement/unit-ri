@@ -25,8 +25,6 @@
  */
 package tec.units.ri.quantity;
 
-import static tec.units.ri.unit.Units.*;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -34,7 +32,6 @@ import java.util.logging.Logger;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.quantity.*;
 import javax.measure.spi.QuantityFactory;
 
 import tec.units.ri.AbstractQuantity;
@@ -51,7 +48,7 @@ import tec.units.ri.AbstractQuantity;
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.6.7, $Date: 2015-07-06 $
+ * @version 0.6.8, $Date: 2015-07-25 $
  */
 abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q>  {
 
@@ -59,7 +56,7 @@ abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements Quantit
      * Holds the current instances.
      */
     @SuppressWarnings("rawtypes")
-    static final Map<Class, AbstractQuantityFactory> INSTANCES = new HashMap<Class, AbstractQuantityFactory>();
+    static final Map<Class, QuantityFactory> INSTANCES = new HashMap<Class, QuantityFactory>();
 
     static final Logger logger = Logger.getLogger(AbstractQuantityFactory.class.getName());
 
@@ -99,86 +96,4 @@ abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements Quantit
      * @return the metric units for this factory quantities.
      */
     public abstract Unit<Q> getMetricUnit();
-
-// TODO this seems redundant compared to DefaultQuantityFactory
-    /**
-     * The default factory implementation. This factory provides
-     * a default implementation for every {@link AbstractQuantity} sub-types.
-     *
-     * @param <Q> The type of the quantity
-     */
-    private static final class Default<Q extends Quantity<Q>>  extends AbstractQuantityFactory<Q> {
-
-        /**
-         * The type of the quantities created by this factory.
-         */
-        @SuppressWarnings("unused")
-	private final Class<Q> type;
-
-        /**
-         * The metric unit for quantities created by this factory.
-         */
-        private final Unit<Q> metricUnit;
-
-        /**
-         * Creates a new factory for quantities of the given type.
-         *
-         * @param type The type of the quantities created by this factory.
-         */
-        @SuppressWarnings("unchecked")
-	Default(final Class<Q> type) {
-            this.type = type;
-            metricUnit = CLASS_TO_METRIC_UNIT.get(type);
-        }
-        
-        @SuppressWarnings("rawtypes")
-	static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<Class, Unit>();
-        static {
-            CLASS_TO_METRIC_UNIT.put(Dimensionless.class, ONE);
-            CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
-            CLASS_TO_METRIC_UNIT.put(LuminousIntensity.class, CANDELA);
-            CLASS_TO_METRIC_UNIT.put(Temperature.class, KELVIN);
-            CLASS_TO_METRIC_UNIT.put(Mass.class, KILOGRAM);
-            CLASS_TO_METRIC_UNIT.put(Length.class, METRE);
-            CLASS_TO_METRIC_UNIT.put(AmountOfSubstance.class, MOLE);
-            CLASS_TO_METRIC_UNIT.put(Time.class, SECOND);
-//            CLASS_TO_METRIC_UNIT.put(MagnetomotiveForce.class, AMPERE_TURN);
-            CLASS_TO_METRIC_UNIT.put(Angle.class, RADIAN);
-            CLASS_TO_METRIC_UNIT.put(SolidAngle.class, STERADIAN);
-//            CLASS_TO_METRIC_UNIT.put(Information.class, BIT);
-            CLASS_TO_METRIC_UNIT.put(Frequency.class, HERTZ);
-            CLASS_TO_METRIC_UNIT.put(Force.class, NEWTON);
-            CLASS_TO_METRIC_UNIT.put(Pressure.class, PASCAL);
-            CLASS_TO_METRIC_UNIT.put(Energy.class, JOULE);
-            CLASS_TO_METRIC_UNIT.put(Power.class, WATT);
-            CLASS_TO_METRIC_UNIT.put(ElectricCharge.class, COULOMB);
-            CLASS_TO_METRIC_UNIT.put(ElectricPotential.class, VOLT);
-            CLASS_TO_METRIC_UNIT.put(ElectricCapacitance.class, FARAD);
-            CLASS_TO_METRIC_UNIT.put(ElectricResistance.class, OHM);
-            CLASS_TO_METRIC_UNIT.put(ElectricConductance.class, SIEMENS);
-            CLASS_TO_METRIC_UNIT.put(MagneticFlux.class, WEBER);
-            CLASS_TO_METRIC_UNIT.put(MagneticFluxDensity.class, TESLA);
-            CLASS_TO_METRIC_UNIT.put(ElectricInductance.class, HENRY);
-            CLASS_TO_METRIC_UNIT.put(LuminousFlux.class, LUMEN);
-            CLASS_TO_METRIC_UNIT.put(Illuminance.class, LUX);
-            CLASS_TO_METRIC_UNIT.put(Radioactivity.class, BECQUEREL);
-            CLASS_TO_METRIC_UNIT.put(RadiationDoseAbsorbed.class, GRAY);
-            CLASS_TO_METRIC_UNIT.put(RadiationDoseEffective.class, SIEVERT);
-            CLASS_TO_METRIC_UNIT.put(CatalyticActivity.class, KATAL);
-            CLASS_TO_METRIC_UNIT.put(Speed.class, METRES_PER_SECOND);
-            CLASS_TO_METRIC_UNIT.put(Acceleration.class, METRES_PER_SQUARE_SECOND);
-            CLASS_TO_METRIC_UNIT.put(Area.class, SQUARE_METRE);
-            CLASS_TO_METRIC_UNIT.put(Volume.class, CUBIC_METRE);
-        }
-
-        @SuppressWarnings("unchecked")
-        public Quantity<Q> create(Number value, Unit<Q> unit) {
-//        public <N extends Number, U extends Unit<Q>> Q create(N value, U unit) {
-            return (Q) new NumberQuantity<Q>(value, unit);
-        }
-
-        public Unit<Q> getMetricUnit() {
-            return metricUnit;
-        }
-    }
 }

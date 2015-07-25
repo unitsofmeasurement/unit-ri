@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -51,11 +51,11 @@ import tec.units.ri.quantity.QuantityDimension;
  *     use one of the predefined model or create their own.
  *     <code>
  *     DimensionalModel relativistic = new DimensionalModel() {
- *         public Dimension getFundamentalDimension(QuantityDimension dimension) {
+ *         public Dimension getFundamentalDimension(Dimension dimension) {
  *             if (dimension.equals(QuantityDimension.LENGTH)) return QuantityDimension.TIME; // Consider length derived from time.
  *                 return super.getDimension(dimension); // Returns product of fundamental dimension.
  *             }
- *             public UnitConverter getDimensionalTransform(QuantityDimension dimension) {
+ *             public UnitConverter getDimensionalTransform(Dimension dimension) {
  *                 if (dimension.equals(QuantityDimension.LENGTH)) return new RationalConverter(1, 299792458); // Converter (1/C) from LENGTH SI unit (m) to TIME SI unit (s).
  *                 return super.getDimensionalTransform(dimension);
  *             }
@@ -72,14 +72,14 @@ import tec.units.ri.quantity.QuantityDimension;
  * @see <a href="http://en.wikipedia.org/wiki/Dimensional_analysis">Wikipedia: Dimensional Analysis</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.6, $Date: 2015-06-09 $
+ * @version 0.5.6, $Date: 2015-07-25 $
  */
 public abstract class DimensionalModel {
 
     /**
      * Holds the current model.
      */
-    private static final DimensionalModel CURRENT = new StandardModel();
+    private static DimensionalModel currentModel = new StandardModel();
 
     /**
      * Returns the current dimensional model
@@ -88,19 +88,18 @@ public abstract class DimensionalModel {
      * @return the current physical model.
      */
     public static DimensionalModel current() {
-        return CURRENT;
+        return currentModel;
     }
 
-//    /**
-//     * Sets the current physics model (local to the current thread when executing
-//     * within a {@link LocalContext}).
-//     *
-//     * @param  model the context-local physics model.
-//     * @see    #getCurrent
-//     */
-//    public static void setCurrent(DimensionalModel model) {
-//        DimensionalModel.Current. .Current set(model);
-//    }
+    /**
+     * Sets the current dimensional model 
+     *
+     * @param  model the new current model.
+     * @see    #current
+     */
+    protected static void setCurrent(DimensionalModel model) {
+        currentModel = model;
+    }
 
     /**
      * Default constructor (allows for derivation).

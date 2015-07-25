@@ -54,7 +54,7 @@ import tec.units.ri.AbstractQuantity;
  *         Desruisseaux</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.6.6, $Date: 2015-05-20 $
+ * @version 0.6.7, $Date: 2015-07-25 $
  */
 public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
 		AbstractQuantityFactory<Q> {
@@ -92,10 +92,8 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
 		CLASS_TO_METRIC_UNIT.put(Length.class, METRE);
 		CLASS_TO_METRIC_UNIT.put(AmountOfSubstance.class, MOLE);
 		CLASS_TO_METRIC_UNIT.put(Time.class, SECOND);
-//		CLASS_TO_METRIC_UNIT.put(MagnetomotiveForce.class, AMPERE_TURN);
 		CLASS_TO_METRIC_UNIT.put(Angle.class, RADIAN);
 		CLASS_TO_METRIC_UNIT.put(SolidAngle.class, STERADIAN);
-//		CLASS_TO_METRIC_UNIT.put(Information.class, BIT);
 		CLASS_TO_METRIC_UNIT.put(Frequency.class, HERTZ);
 		CLASS_TO_METRIC_UNIT.put(Force.class, NEWTON);
 		CLASS_TO_METRIC_UNIT.put(Pressure.class, PASCAL);
@@ -132,7 +130,7 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
 		return metricUnit;
 	}
 
-	   /**
+	/**
      * Returns the default instance for the specified quantity type.
      *
      * @param <Q> The type of the quantity
@@ -141,9 +139,8 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
      */
     @SuppressWarnings("unchecked")
 	public static <Q extends Quantity<Q>> QuantityFactory<Q> getInstance(final Class<Q> type) {
-
          logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
-         AbstractQuantityFactory<Q> factory;
+         QuantityFactory<Q> factory;
          if (!type.isInterface()) {
         	 if (type != null && type.getInterfaces() != null & type.getInterfaces().length > 0) {
 	        	 logger.log(LOG_LEVEL, "Type0: " + type.getInterfaces()[0]);
@@ -179,5 +176,4 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
          }
         return factory;
     }
-	
 }
