@@ -25,13 +25,14 @@
  */
 package tec.units.ri.internal;
 
+import static java.util.logging.Level.WARNING;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.measure.spi.ServiceProvider;
@@ -45,10 +46,10 @@ import javax.measure.spi.ServiceProvider;
 public class RIServiceProvider implements ServiceProvider {
     /** List of services loaded, per class. */
     private final Map<Class, List<Object>> servicesLoaded = new HashMap<Class, List<Object>>();
-    // TODO does this work in CLDC8?
-//    @Override
+    
+    @Override
     public int getPriority() {
-        return 1;
+        return 10;
     }
 
     /**
@@ -60,7 +61,7 @@ public class RIServiceProvider implements ServiceProvider {
      *            the concrete type.
      * @return the items found, never {@code null}.
      */
-//    @Override
+    @Override
     public <T> List<T> getServices(final Class<T> serviceType) {
         @SuppressWarnings("unchecked")
         List<T> found = (List<T>) servicesLoaded.get(serviceType);
@@ -71,7 +72,7 @@ public class RIServiceProvider implements ServiceProvider {
         return loadServices(serviceType);
     }
 
-//    @Override
+    @Override
     public <T> T getService(Class<T> serviceType) {
         List<T> servicesFound = getServices(serviceType);
         if(servicesFound.isEmpty()){
@@ -100,10 +101,9 @@ public class RIServiceProvider implements ServiceProvider {
             }
             return services;
         } catch (Exception e) {
-            Logger.getLogger(RIServiceProvider.class.getName()).log(Level.WARNING,
+            Logger.getLogger(RIServiceProvider.class.getName()).log(WARNING,
                                                                          "Error loading services of type " + serviceType, e);
             return services;
         }
     }
-
 }
