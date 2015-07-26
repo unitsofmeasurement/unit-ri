@@ -154,14 +154,12 @@
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<extensions>true</extensions>
-				<!-- 
 				<configuration>
 					<instructions>
 						<Export-Package>tec.units.ri.*</Export-Package>
 						<Private-Package>tec.units.ri.internal.*</Private-Package>
 					</instructions>
 				</configuration>
-				 -->
 			</plugin>
 
 			<!-- ======================================================= -->
