@@ -40,6 +40,7 @@ import tec.units.ri.format.SimpleUnitFormat.Flavor;
  * Default format service.
  *
  * @author Werner Keil
+ * @version 0.2, July 27, 2015
  */
 public class DefaultUnitFormatService implements UnitFormatService {
 
