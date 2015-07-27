@@ -25,6 +25,7 @@
  */
 package tec.units.ri.function;
 
+// TODO move to *internal or *internal.function.
 public final class MathHelper {
 	/**
 	 * Returns the negation of the argument, throwing an exception if the result
