@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-20154, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -23,9 +23,8 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.function;
+package tec.units.ri.internal;
 
-// TODO move to *internal or *internal.function.
 public final class MathHelper {
 	/**
 	 * Returns the negation of the argument, throwing an exception if the result
@@ -37,7 +36,7 @@ public final class MathHelper {
 	 * @throws ArithmeticException
 	 *             if the result overflows a double
 	 */
-	static double negateExact(double a) {
+	public static double negateExact(double a) {
 		if (a == Double.MAX_VALUE || a == Double.MIN_VALUE) {
 			throw new ArithmeticException("double overflow");
 		}
@@ -45,7 +44,7 @@ public final class MathHelper {
 		return -a;
 	}
 
-	static double gcd(double a, double b) {
+	public static double gcd(double a, double b) {
 		if (b == 0)
 			return a;
 		return gcd(b, a % b);

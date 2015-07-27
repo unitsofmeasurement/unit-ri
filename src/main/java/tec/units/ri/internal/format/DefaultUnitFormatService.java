@@ -33,6 +33,7 @@ import java.util.Set;
 import javax.measure.format.UnitFormat;
 import javax.measure.spi.UnitFormatService;
 
+import tec.units.ri.format.EBNFUnitFormat;
 import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.format.SimpleUnitFormat.Flavor;
 
@@ -46,11 +47,12 @@ public class DefaultUnitFormatService implements UnitFormatService {
 
     private static final String DEFAULT_FORMAT = Flavor.Default.name();
    
-    private Map<String, UnitFormat> formats = new HashMap<String, UnitFormat>();
+    private final Map<String, UnitFormat> formats = new HashMap<String, UnitFormat>();
  
     public DefaultUnitFormatService() {
         formats.put(DEFAULT_FORMAT, SimpleUnitFormat.getInstance());
         formats.put(Flavor.ASCII.name(), SimpleUnitFormat.getInstance(Flavor.ASCII));
+        formats.put("EBNF", EBNFUnitFormat.getInstance());
     }
 
 //    @Override

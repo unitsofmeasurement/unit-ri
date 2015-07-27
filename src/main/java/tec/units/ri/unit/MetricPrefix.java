@@ -25,7 +25,7 @@
  */
 package tec.units.ri.unit;
 
-import static tec.units.ri.function.MathHelper.pow;
+import static tec.units.ri.internal.MathHelper.pow;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;

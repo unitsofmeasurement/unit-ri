@@ -27,6 +27,7 @@ package tec.units.ri.internal.format;
 
 import static org.junit.Assert.*;
 
+import javax.measure.spi.Bootstrap;
 import javax.measure.spi.UnitFormatService;
 
 import org.junit.Before;
@@ -43,7 +44,7 @@ public class UnitFormatServiceTest {
 
 	@Before
 	public void init() {
-		sut = new DefaultUnitFormatService();
+		sut = Bootstrap.getService(UnitFormatService.class);
 	}
 
 	@Test
@@ -52,12 +53,22 @@ public class UnitFormatServiceTest {
 		assertEquals("tec.units.ri.format.SimpleUnitFormat$DefaultFormat", sut.getUnitFormat().getClass().getName());
 	}
 	
-	
 	@Test
 	public void TestGetFormatNames() {
 		DefaultUnitFormatService service = new DefaultUnitFormatService();
 		assertNotNull(service.getAvailableFormatNames());
-		assertEquals(2, service.getAvailableFormatNames().size());
+		assertEquals(3, service.getAvailableFormatNames().size());
 	}
 	
+	   @Test
+	    public void testGetFormatFound() throws Exception {
+	        assertNotNull(sut);
+	        assertNotNull(sut.getUnitFormat("EBNF"));
+	    }
+	    
+	    @Test
+	    public void testGetFormatNotFound() throws Exception {
+	        assertNotNull(sut);
+	        assertNull(sut.getUnitFormat("XYZ"));
+	    }
 }
