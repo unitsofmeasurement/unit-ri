@@ -65,8 +65,8 @@ public abstract class AbstractUnitFormat implements UnitFormat {
 
 	/**
 	 * Formats an object to produce a string. This is equivalent to <blockquote>
-	 * {@link #format(Object, StringBuffer, FieldPosition) format}<code>(obj,
-	 *         new StringBuffer(), new FieldPosition(0)).toString();</code>
+	 * {@link #format(Unit, StringBuilder) format}<code>(unit,
+	 *         new StringBuilder()).toString();</code>
 	 * </blockquote>
 	 *
 	 * @param obj
