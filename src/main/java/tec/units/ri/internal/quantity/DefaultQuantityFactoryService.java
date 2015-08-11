@@ -34,14 +34,14 @@ import java.util.Objects;
 
 import javax.measure.Quantity;
 import javax.measure.spi.QuantityFactory;
+import javax.measure.spi.QuantityFactoryService;
 
 import tec.units.ri.quantity.DefaultQuantityFactory;
-import tec.units.ri.spi.QuantityFactoryService;
 
 /**
  * Provider of Quantities
  * @author Werner Keil
- * @version 0.2
+ * @version 0.3
  */
 @SuppressWarnings("rawtypes")
 public final class DefaultQuantityFactoryService implements QuantityFactoryService {
