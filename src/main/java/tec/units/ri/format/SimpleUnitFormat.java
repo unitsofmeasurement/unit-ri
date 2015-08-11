@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import tec.units.ri.AbstractUnit;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;

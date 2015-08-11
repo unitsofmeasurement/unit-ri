@@ -156,10 +156,10 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *
 	 * Locale-sensitive unit parsing may be handled using the OSGi
 	 * {@link javax.measure.spi.UnitFormatService} or for non-OSGi applications
-	 * instances of {@link SimpleUnitFormat}.
+	 * instances of {@link EBNFUnitFormat}.
 	 *
 	 * <p>
-	 * Note: The standard UCUM format supports dimensionless units.[code]
+	 * Note: The standard format supports dimensionless units.[code]
 	 * AbstractUnit<Dimensionless> PERCENT =
 	 * AbstractUnit.parse("100").inverse().asType(Dimensionless.class); [/code]
 	 * </p>
