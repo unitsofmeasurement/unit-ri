@@ -54,17 +54,18 @@ import tec.units.ri.unit.Units;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.4, $Date: 2015-01-28 $
+ * @see <a href="https://en.wikipedia.org/wiki/International_System_of_Quantities#Base_quantities">Wikipedia: ISQ - Base Quantities</a>
+ * @version 0.5.5, $Date: 2015-08-21 $
  */
 public final class QuantityDimension implements Dimension {
 	private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
 	
     /**
-	 * 
-	 */
+     * 
+     */
 //	private static final long serialVersionUID = 123289037718650030L;
 
-	/**
+    /**
      * Holds dimensionless.
      */
     public static final Dimension NONE = new QuantityDimension(Units.ONE);
