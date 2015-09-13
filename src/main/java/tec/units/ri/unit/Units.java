@@ -64,6 +64,7 @@ import javax.measure.spi.SystemOfUnits;
 
 import tec.units.ri.AbstractSystemOfUnits;
 import tec.units.ri.AbstractUnit;
+import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.Nameable;
 import tec.units.ri.function.RationalConverter;
@@ -489,7 +490,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
     
     @Override
     public String getName() {
-	return getClass().getSimpleName();
+    	return getClass().getSimpleName();
     }
     
     /**
@@ -524,4 +525,10 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
         INSTANCE.quantityToUnit.put(type, unit);
         return unit;
     }
+    
+	// //////////////////////////////////////////////////////////////////////////
+	// Label adjustments for Units
+	static {
+		SimpleUnitFormat.getInstance().label(LITRE, "l");
+	}
 }

@@ -167,7 +167,7 @@ import tec.units.ri.unit.AnnotatedUnit;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, $Date: 2015-07-06 $
+ * @version 0.6.1, $Date: 2015-09-13 $
  */
 public class EBNFUnitFormat extends AbstractUnitFormat {
 // TODO rename into something like EBNFUnitFormat
@@ -310,6 +310,10 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 		return appendable;
 	}
 
+	@Override
+	public void label(Unit<?> unit, String label) {
+	}
+	
 	protected Unit<?> parse(CharSequence csq, int index)
 			throws IllegalArgumentException {
 		// Parsing reads the whole character sequence from the parse position.

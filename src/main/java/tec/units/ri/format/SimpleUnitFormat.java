@@ -30,7 +30,6 @@ import java.lang.CharSequence;
 import java.text.FieldPosition; // FIXME get rid of those without breaking JUnits
 import java.text.ParsePosition;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import tec.units.ri.function.AddConverter;
@@ -68,7 +67,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.4.2, July 6, 2015
+ * @version 0.4.3, September 13, 2015
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
@@ -161,10 +160,10 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	 * @return the unit format for the specified locale.
 	 * @deprecated currently unused
 	 */
-	public static SimpleUnitFormat getInstance(Locale inLocale) {
+/*	public static SimpleUnitFormat getInstance(Locale inLocale) {
 		return DEFAULT; // TBD: Implement Locale Format.
 	}
-
+*/
 	/**
 	 * Returns the {@link SimpleUnitFormat} in the desired {@link Flavor}
 	 * 
@@ -229,14 +228,14 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			ParsePosition pos) throws ParserException;
 
 	/**
-	 * Attaches a system-wide label to the specified unit. For example: [code]
-	 * UnitFormat.getInstance().label(DAY.multiply(365), "year");
-	 * UnitFormat.getInstance().label(METER.multiply(0.3048), "ft"); [/code] If
+	 * Attaches a system-wide label to the specified unit. For example:<br><code>
+	 * SimpleUnitFormat.getInstance().label(DAY.multiply(365), "year");
+	 * SimpleUnitFormat.getInstance().label(METRE.multiply(0.3048), "ft"); </code><br>If
 	 * the specified label is already associated to an unit the previous
 	 * association is discarded or ignored.
 	 * 
 	 * @param unit
-	 *            the unit being labelled.
+	 *            the unit being labeled.
 	 * @param label
 	 *            the new label for this unit.
 	 * @throws IllegalArgumentException
@@ -1000,7 +999,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
-	// To be moved in resource bundle in future release (locale dependent).
+	// To be moved in to other modules.
 	static {
 		DEFAULT.label(Units.PERCENT, "%");
 		// DEFAULT.label(NonUnits.DECIBEL, "dB");

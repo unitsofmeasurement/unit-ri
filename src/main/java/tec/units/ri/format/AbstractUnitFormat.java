@@ -26,7 +26,6 @@
 package tec.units.ri.format;
 
 import java.io.IOException;
-import java.text.FieldPosition;
 
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
@@ -51,11 +50,15 @@ import tec.units.ri.AbstractUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7 $Date: 2015-07-05 $
+ * @version 0.7.1 $Date: 2015-09-13 $
  * 
  */
 public abstract class AbstractUnitFormat implements UnitFormat {
-
+	/**
+	 * serialVersionUID
+	 */
+	// private static final long serialVersionUID = -2046025267890654321L;
+	
 	/**
 	 * Returns the {@link SymbolMap} for this unit format.
 	 *
@@ -139,9 +142,4 @@ public abstract class AbstractUnitFormat implements UnitFormat {
 			throw new ParserException(ex); // Should never happen.
 		}
 	}
-
-	/**
-	 * serialVersionUID
-	 */
-	// private static final long serialVersionUID = -2046025267890654321L;
 }
