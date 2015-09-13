@@ -310,7 +310,6 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 		return appendable;
 	}
 
-	@Override
 	public void label(Unit<?> unit, String label) {
 	}
 	
