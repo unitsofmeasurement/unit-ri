@@ -50,7 +50,7 @@ import tec.units.ri.AbstractUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7.1 $Date: 2015-09-13 $
+ * @version 0.7.2 $Date: 2015-09-14 $
  * 
  */
 public abstract class AbstractUnitFormat implements UnitFormat {
@@ -124,6 +124,10 @@ public abstract class AbstractUnitFormat implements UnitFormat {
 	protected abstract Unit<?> parse(CharSequence csq, int index)
 			throws IllegalArgumentException;
 
+	public boolean isLocaleSensitive() {
+		return false;
+	}
+	
 	/**
 	 * Convenience method equivalent to
 	 * {@link #format(AbstractUnit, Appendable)} except it does not raise an
