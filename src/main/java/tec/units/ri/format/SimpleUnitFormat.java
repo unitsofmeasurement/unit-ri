@@ -728,6 +728,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			return isNegative ? -result : result;
 		}
 
+		//TODO change ParsePos to int arguments
 		private double readDouble(CharSequence csq, ParsePosition pos) {
 			final int length = csq.length();
 			int start = pos.getIndex();
