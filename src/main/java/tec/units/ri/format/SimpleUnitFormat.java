@@ -25,6 +25,9 @@
  */
 package tec.units.ri.format;
 
+import static tec.units.ri.unit.MetricPrefix.NANO;
+import static tec.units.ri.unit.Units.LITRE;
+
 import java.io.IOException;
 import java.lang.CharSequence;
 import java.text.FieldPosition; // FIXME get rid of those without breaking JUnits
@@ -1079,16 +1082,18 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		// DEFAULT.label(NonUnits.KNOT, "kn");
 		// DEFAULT.label(NonUnits.MACH, "Mach");
 		// DEFAULT.label(NonUnits.C, "c");
-		ASCII.label(Units.LITRE, "l");
-		DEFAULT.label(Units.LITRE, "l");
-		DEFAULT.label(MetricPrefix.MICRO(Units.LITRE), "µl");
-		ASCII.label(MetricPrefix.MICRO(Units.LITRE), "microL");
-		ASCII.label(MetricPrefix.MILLI(Units.LITRE), "mL");
-		DEFAULT.label(MetricPrefix.MILLI(Units.LITRE), "ml");
-		ASCII.label(MetricPrefix.CENTI(Units.LITRE), "cL");
-		DEFAULT.label(MetricPrefix.CENTI(Units.LITRE), "cl");
-		ASCII.label(MetricPrefix.DECI(Units.LITRE), "dL");
-		DEFAULT.label(MetricPrefix.DECI(Units.LITRE), "dl");
+		ASCII.label(LITRE, "l");
+		DEFAULT.label(LITRE, "l");
+		DEFAULT.label(MetricPrefix.NANO(LITRE), "nl");
+		ASCII.label(MetricPrefix.NANO(LITRE), "nl");
+		DEFAULT.label(MetricPrefix.MICRO(LITRE), "µl");
+		ASCII.label(MetricPrefix.MICRO(LITRE), "microL");
+		ASCII.label(MetricPrefix.MILLI(LITRE), "mL");
+		DEFAULT.label(MetricPrefix.MILLI(LITRE), "ml");
+		ASCII.label(MetricPrefix.CENTI(LITRE), "cL");
+		DEFAULT.label(MetricPrefix.CENTI(LITRE), "cl");
+		ASCII.label(MetricPrefix.DECI(LITRE), "dL");
+		DEFAULT.label(MetricPrefix.DECI(LITRE), "dl");
 		// DEFAULT.label(NonUnits.GALLON_LIQUID_US, "gal");
 		// DEFAULT.label(NonUnits.OUNCE_LIQUID_US, "oz");
 		// DEFAULT.label(NonUnits.GALLON_DRY_US, "gallon_dry_us");
