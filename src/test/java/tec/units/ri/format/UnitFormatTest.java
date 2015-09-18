@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -26,8 +26,7 @@
 package tec.units.ri.format;
 
 import static org.junit.Assert.*;
-import static tec.units.ri.unit.MetricPrefix.KILO;
-import static tec.units.ri.unit.MetricPrefix.MEGA;
+import static tec.units.ri.unit.MetricPrefix.*;
 import static tec.units.ri.unit.Units.HERTZ;
 import static tec.units.ri.unit.Units.KILOGRAM;
 import static tec.units.ri.unit.Units.METRE;
@@ -59,7 +58,6 @@ import tec.units.ri.unit.Units;
  *
  */
 public class UnitFormatTest {
-	@SuppressWarnings("unused")
 	private Quantity<Length> sut;
 
 	@Before
@@ -119,6 +117,18 @@ public class UnitFormatTest {
 	public void testFormatHz3() {
 		Unit<Frequency> khz = KILO(HERTZ);
 		assertEquals("kHz", khz.toString());
+	}
+	
+	@Test
+	public void testFormatHz4() {
+		Unit<Frequency> mhz = MICRO(HERTZ);
+		assertEquals("µHz", mhz.toString());
+	}
+	
+	@Test
+	public void testFormatHz5() {
+		Unit<Frequency> mhz = NANO(HERTZ);
+		assertEquals("nHz", mhz.toString());
 	}
 	
 	@Test

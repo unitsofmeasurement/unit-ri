@@ -233,6 +233,14 @@
 							</configuration>
 						</plugin>
 
+	                   <plugin>
+		                    <groupId>org.apache.maven.plugins</groupId>
+		                    <artifactId>maven-surefire-plugin</artifactId>
+		                    <configuration>
+		                        <testFailureIgnore>false</testFailureIgnore>
+		                    </configuration>
+		               </plugin>
+	                
 						<!-- ======================================================= -->
 						<!-- Report on test results -->
 						<!-- ======================================================= -->
