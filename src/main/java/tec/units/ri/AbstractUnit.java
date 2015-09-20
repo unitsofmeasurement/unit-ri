@@ -351,14 +351,14 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	}
 
 	@Override
-	public final AbstractUnit<Q> shift(double offset) {
+	public final Unit<Q> shift(double offset) {
 		if (offset == 0)
 			return this;
 		return transform(new AddConverter(offset));
 	}
 
 	@Override
-	public final AbstractUnit<Q> multiply(double factor) {
+	public final Unit<Q> multiply(double factor) {
 		if (factor == 1)
 			return this;
 		if (isLongValue(factor))
