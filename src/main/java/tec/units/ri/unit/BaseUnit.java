@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -47,9 +47,9 @@ import tec.units.ri.quantity.QuantityDimension;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, Jun 27, 2015
+ * @version 0.5, Sep 20, 2015
  */
-public class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
+public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
     /**
 	 * 
