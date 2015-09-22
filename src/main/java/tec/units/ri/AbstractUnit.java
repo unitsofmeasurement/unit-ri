@@ -35,6 +35,7 @@ import javax.measure.Unit;
 import javax.measure.IncommensurableException;
 import javax.measure.UnconvertibleException;
 import javax.measure.UnitConverter;
+import javax.measure.quantity.Dimensionless;
 
 import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.format.EBNFUnitFormat;
@@ -75,6 +76,12 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 */
 	// private static final long serialVersionUID = -4344589505537030204L;
 
+	/**
+     * Holds the dimensionless unit <code>ONE</code>.
+     */
+    public static final Unit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
+
+	
 	/**
 	 * Holds the name.
 	 */

@@ -4,13 +4,17 @@
  *
  * All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions
+ *    and the following disclaimer in the documentation and/or other materials provided with the distribution.
  *
- * 3. Neither the name of JSR-363 nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+ * 3. Neither the name of JSR-363 nor the names of its contributors may be used to endorse or promote products
+ *    derived from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
@@ -25,16 +29,19 @@
  */
 package tec.units.ri.quantity;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import tec.units.ri.AbstractUnit;
+import tec.units.ri.unit.BaseUnit;
+import tec.units.ri.unit.Units;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
-import tec.units.ri.unit.Units;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.logging.Logger;
 
 /**
 *  <p> This class represents a quantity dimension (dimension of a physical
@@ -44,25 +51,64 @@ import tec.units.ri.unit.Units;
  *     published {@link DimensionService} instances.
  *     For convenience, a static method {@link QuantityDimension#getInstance(Class)
  *     aggregating the results of all {@link DimensionService} instances
- *     is provided.<br><br>
+ *     is provided.<br/><br/>
  *     <code>
- *        QuantityDimension velocityDimension
- *            = QuantityDimension.getInstance(Velocity.class);
+ *        QuantityDimension speedDimension
+ *            = QuantityDimension.of(Speed.class);
  *     </code>
  * </p>
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @see <a href="https://en.wikipedia.org/wiki/International_System_of_Quantities#Base_quantities">Wikipedia: ISQ - Base Quantities</a>
- * @version 0.6, $Date: 2015-09-22 $
+ * @version 0.5.3, $Date: 2015-07-12 $
  */
-public final class QuantityDimension implements Dimension {
+public final class QuantityDimension implements Dimension, Serializable {
 	private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
 	
     /**
-     * 
+	 * 
+	 */
+	private static final long serialVersionUID = 123289037718650030L;
+
+	/**
+     * Holds dimensionless.
      */
-//	private static final long serialVersionUID = 123289037718650030L;
+    public static final Dimension NONE = new QuantityDimension(AbstractUnit.ONE);
+
+    /**
+     * Holds length dimension (L).
+     */
+    public static final Dimension LENGTH = new QuantityDimension('L');
+
+    /**
+     * Holds mass dimension (M).
+     */
+    public static final Dimension MASS = new QuantityDimension('M');
+
+    /**
+     * Holds time dimension (T).
+     */
+    public static final Dimension TIME = new QuantityDimension('T');
+
+    /**
+     * Holds electric current dimension (I).
+     */
+    public static final Dimension ELECTRIC_CURRENT = new QuantityDimension('I');
+
+    /**
+     * Holds temperature dimension (Θ).
+     */
+    public static final Dimension TEMPERATURE = new QuantityDimension('\u0398');
+
+    /**
+     * Holds amount of substance dimension (N).
+     */
+    public static final Dimension AMOUNT_OF_SUBSTANCE = new QuantityDimension('N');
+
+    /**
+     * Holds luminous intensity dimension (J).
+     */
+    public static final Dimension LUMINOUS_INTENSITY = new QuantityDimension('J');
 
     /**
      * Holds the pseudo unit associated to this dimension.
@@ -71,17 +117,17 @@ public final class QuantityDimension implements Dimension {
 
     /**
      * Returns the dimension for the specified quantity type by aggregating
-     * the results of {@link Units.getUnits()} or <code>null</code>
+     * the results of {@link DimensionService} or <code>null</code>
      * if the specified quantity is unknown.
      *
      * @param quantityType the quantity type.
      * @return the dimension for the quantity type or <code>null</code>.
      */
     public static <Q extends Quantity<Q>> Dimension getInstance(Class<Q> quantityType) {
-        // TODO: Track OSGi services and aggregate results.
-        Unit<Q> baseUnit = Units.getInstance().getUnit(quantityType);
-        if (baseUnit == null) logger.log(Level.WARNING, "Quantity type: " + quantityType + " unknown");
-        return (baseUnit != null) ? baseUnit.getDimension() : null;
+        // TODO: Track OSGi services and aggregate results (register custom types)
+        Unit<Q> siUnit = Units.getInstance().getUnit(quantityType);
+        if (siUnit == null) logger.finer("Quantity type: " + quantityType + " unknown"); // we're logging but probably FINER is enough?
+        return (siUnit != null) ? siUnit.getDimension() : null;
     }
 
     /**
@@ -91,7 +137,7 @@ public final class QuantityDimension implements Dimension {
      */
     @SuppressWarnings("rawtypes")
 	QuantityDimension(char symbol) {
-        pseudoUnit = new PseudoUnit("[" + symbol + ']', NONE);
+        pseudoUnit = new BaseUnit("[" + symbol + ']', NONE);
     }
     
     /**
@@ -132,7 +178,7 @@ public final class QuantityDimension implements Dimension {
      * @param  that the dimension multiplicand.
      * @return <code>this * that</code>
      */
-    QuantityDimension multiply(QuantityDimension that) {
+    public QuantityDimension multiply(QuantityDimension that) {
         return new QuantityDimension(this.pseudoUnit.multiply(that.pseudoUnit));
     }
 
@@ -152,7 +198,7 @@ public final class QuantityDimension implements Dimension {
      * @param  that the dimension divisor.
      * @return <code>this.multiply(that.pow(-1))</code>
      */
-    QuantityDimension divide(QuantityDimension that) {
+    public QuantityDimension divide(QuantityDimension that) {
         return this.multiply(that.pow(-1));
     }
 
@@ -185,10 +231,10 @@ public final class QuantityDimension implements Dimension {
      * @return the mapping between the fundamental dimensions and their exponent.
      */
     @SuppressWarnings("rawtypes")
-	public Map<? extends Dimension, Integer> getProductDimensions() {
-        final Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getProductUnits();
+	public Map<? extends QuantityDimension, Integer> getProductDimensions() {
+        Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getProductUnits();
         if (pseudoUnits == null) return null;
-        Map<Dimension, Integer> fundamentalDimensions = new HashMap<Dimension, Integer>();
+        Map<QuantityDimension, Integer> fundamentalDimensions = new HashMap<>();
         for (Map.Entry<? extends Unit, Integer> entry : pseudoUnits.entrySet()) {
             fundamentalDimensions.put(new QuantityDimension(entry.getKey()), entry.getValue());
         }
@@ -200,54 +246,20 @@ public final class QuantityDimension implements Dimension {
         return pseudoUnit.toString();
     }
 
-    @Override
-    public boolean equals(Object that) {
-        return this == that || (that instanceof QuantityDimension) && pseudoUnit.equals(((QuantityDimension) that).pseudoUnit);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof QuantityDimension) {
+			QuantityDimension other = (QuantityDimension) obj;
+			return Objects.equals(pseudoUnit, other.pseudoUnit);
+		}
+		return false;
+	}
 
     @Override
     public int hashCode() {
-        return pseudoUnit.hashCode();
+        return Objects.hashCode(pseudoUnit);
     }
-    
-    /**
-     * Holds dimensionless.
-     */
-    public static final Dimension NONE = new QuantityDimension(Units.ONE);
-
-    /**
-     * Holds length dimension (L).
-     */
-    public static final Dimension LENGTH = QuantityDimension.getInstance('L');
-
-    /**
-     * Holds mass dimension (M).
-     */
-    public static final Dimension MASS = new QuantityDimension('M');
-
-    /**
-     * Holds time dimension (T).
-     */
-    public static final Dimension TIME = new QuantityDimension('T');
-
-    /**
-     * Holds electric current dimension (I).
-     */
-    public static final Dimension ELECTRIC_CURRENT = new QuantityDimension('I');
-
-    /**
-     * Holds temperature dimension (Θ).
-     */
-    public static final Dimension TEMPERATURE = new QuantityDimension('\u0398');
-
-    /**
-     * Holds amount of substance dimension (N).
-     */
-    public static final Dimension AMOUNT_OF_SUBSTANCE = new QuantityDimension('N');
-
-    /**
-     * Holds luminous intensity dimension (J).
-     */
-    public static final Dimension LUMINOUS_INTENSITY = new QuantityDimension('J');
-
 }
