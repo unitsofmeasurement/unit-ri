@@ -1,4 +1,4 @@
-/**
+/*
  * Unit-API - Units of Measurement API for Java
  * Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -24,8 +24,6 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package tec.units.ri;
-
-import static tec.units.ri.unit.Units.ONE;
 
 import java.util.Map;
 
@@ -67,7 +65,7 @@ import tec.units.ri.unit.Units;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.9.1, Jul 5, 2015
+ * @version 0.9.2, Sep 22, 2015
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 

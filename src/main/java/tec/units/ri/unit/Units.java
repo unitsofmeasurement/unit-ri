@@ -85,6 +85,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 
     /**
      * Holds the dimensionless unit <code>ONE</code>.
+     * @deprecated consider moving it to {@link AbstractUnit} again for static constant usage reasons.
      */
     public static final Unit<Dimensionless> ONE
         = addUnit( new ProductUnit<Dimensionless>(), Dimensionless.class);
