@@ -73,6 +73,9 @@ public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      */
     public BaseUnit(String symbol, Dimension dimension) {
         this.symbol = symbol;
+        if (dimension == null) {
+        	dimension = QuantityDimension.getInstance(' '); // FIXME try pass char here
+        }
         this.dimension = dimension;
     }
     

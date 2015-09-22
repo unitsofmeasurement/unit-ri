@@ -332,7 +332,11 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
             Unit<?> unit = this.getUnit(i);
             if (this.elements != null && unit.getDimension() != null) {
             	Dimension d = unit.getDimension().pow(this.getUnitPow(i)).root(this.getUnitRoot(i));
-            	dimension = dimension.multiply(d);
+            	if (dimension!=null) {
+            		dimension = dimension.multiply(d);
+            	} else {
+            		dimension = d; // FIXME hackaround
+            	}
             }
         }
         return dimension;

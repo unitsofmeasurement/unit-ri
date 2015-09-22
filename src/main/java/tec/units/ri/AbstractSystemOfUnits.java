@@ -72,6 +72,9 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 	// ///////////////////
     @Override
     public Set<Unit<?>> getUnits() {
+    	for (Unit<?> u : units) {
+    		System.out.println(u + "; D: " + u.getDimension() + "; C: " + u.getClass());
+    	}
         return Collections.unmodifiableSet(units);
     }
 

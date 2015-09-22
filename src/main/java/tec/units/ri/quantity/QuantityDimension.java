@@ -34,7 +34,6 @@ import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
-import tec.units.ri.unit.BaseUnit;
 import tec.units.ri.unit.Units;
 
 /**
@@ -55,7 +54,7 @@ import tec.units.ri.unit.Units;
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @see <a href="https://en.wikipedia.org/wiki/International_System_of_Quantities#Base_quantities">Wikipedia: ISQ - Base Quantities</a>
- * @version 0.5.5, $Date: 2015-08-21 $
+ * @version 0.6, $Date: 2015-09-22 $
  */
 public final class QuantityDimension implements Dimension {
 	private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
@@ -64,46 +63,6 @@ public final class QuantityDimension implements Dimension {
      * 
      */
 //	private static final long serialVersionUID = 123289037718650030L;
-
-    /**
-     * Holds dimensionless.
-     */
-    public static final Dimension NONE = new QuantityDimension(Units.ONE);
-
-    /**
-     * Holds length dimension (L).
-     */
-    public static final Dimension LENGTH = new QuantityDimension('L');
-
-    /**
-     * Holds mass dimension (M).
-     */
-    public static final Dimension MASS = new QuantityDimension('M');
-
-    /**
-     * Holds time dimension (T).
-     */
-    public static final Dimension TIME = new QuantityDimension('T');
-
-    /**
-     * Holds electric current dimension (I).
-     */
-    public static final Dimension ELECTRIC_CURRENT = new QuantityDimension('I');
-
-    /**
-     * Holds temperature dimension (Θ).
-     */
-    public static final Dimension TEMPERATURE = new QuantityDimension('\u0398');
-
-    /**
-     * Holds amount of substance dimension (N).
-     */
-    public static final Dimension AMOUNT_OF_SUBSTANCE = new QuantityDimension('N');
-
-    /**
-     * Holds luminous intensity dimension (J).
-     */
-    public static final Dimension LUMINOUS_INTENSITY = new QuantityDimension('J');
 
     /**
      * Holds the pseudo unit associated to this dimension.
@@ -132,7 +91,7 @@ public final class QuantityDimension implements Dimension {
      */
     @SuppressWarnings("rawtypes")
 	QuantityDimension(char symbol) {
-        pseudoUnit = new BaseUnit("[" + symbol + ']', NONE);
+        pseudoUnit = new PseudoUnit("[" + symbol + ']', NONE);
     }
     
     /**
@@ -141,7 +100,7 @@ public final class QuantityDimension implements Dimension {
      * @param sambol the quantity symbol.
      * @return the dimension for the given symbol.
      */
-    static QuantityDimension getInstance(char symbol) {
+    public static QuantityDimension getInstance(char symbol) {
     	return new QuantityDimension(symbol);
     }
 
@@ -250,5 +209,45 @@ public final class QuantityDimension implements Dimension {
     public int hashCode() {
         return pseudoUnit.hashCode();
     }
+    
+    /**
+     * Holds dimensionless.
+     */
+    public static final Dimension NONE = new QuantityDimension(Units.ONE);
+
+    /**
+     * Holds length dimension (L).
+     */
+    public static final Dimension LENGTH = QuantityDimension.getInstance('L');
+
+    /**
+     * Holds mass dimension (M).
+     */
+    public static final Dimension MASS = new QuantityDimension('M');
+
+    /**
+     * Holds time dimension (T).
+     */
+    public static final Dimension TIME = new QuantityDimension('T');
+
+    /**
+     * Holds electric current dimension (I).
+     */
+    public static final Dimension ELECTRIC_CURRENT = new QuantityDimension('I');
+
+    /**
+     * Holds temperature dimension (Θ).
+     */
+    public static final Dimension TEMPERATURE = new QuantityDimension('\u0398');
+
+    /**
+     * Holds amount of substance dimension (N).
+     */
+    public static final Dimension AMOUNT_OF_SUBSTANCE = new QuantityDimension('N');
+
+    /**
+     * Holds luminous intensity dimension (J).
+     */
+    public static final Dimension LUMINOUS_INTENSITY = new QuantityDimension('J');
 
 }
