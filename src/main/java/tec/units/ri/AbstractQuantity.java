@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -32,7 +32,6 @@ import javax.measure.quantity.Dimensionless;
 import tec.units.ri.function.UnitSupplier;
 import tec.units.ri.function.ValueSupplier;
 import tec.units.ri.quantity.NumberQuantity;
-import tec.units.ri.unit.Units;
 
 /**
  * <p>
@@ -94,7 +93,7 @@ import tec.units.ri.unit.Units;
  * </p>
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.3, $Date: 2015-04-19 $
+ * @version 0.7, $Date: 2015-09-23 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 		Quantity<Q>, Comparable<Quantity<Q>>, UnitSupplier<Q>, ValueSupplier<Number> {
@@ -109,12 +108,12 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	/**
 	 * Holds a dimensionless quantity of none (exact).
 	 */
-	public static final AbstractQuantity<Dimensionless> NONE = NumberQuantity.of(0, Units.ONE);
+	public static final AbstractQuantity<Dimensionless> NONE = NumberQuantity.of(0, AbstractUnit.ONE);
 
 	/**
 	 * Holds a dimensionless quantity of one (exact).
 	 */
-	public static final AbstractQuantity<Dimensionless> ONE = NumberQuantity.of(1, Units.ONE);
+	public static final AbstractQuantity<Dimensionless> ONE = NumberQuantity.of(1, AbstractUnit.ONE);
 
 	/**
 	 * constructor.
