@@ -26,6 +26,7 @@
 package tec.units.ri.format;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
@@ -50,7 +51,7 @@ import tec.units.ri.AbstractUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7.2 $Date: 2015-09-14 $
+ * @version 0.7.3 $Date: 2015-09-24 $
  * 
  */
 public abstract class AbstractUnitFormat implements UnitFormat {
@@ -58,6 +59,9 @@ public abstract class AbstractUnitFormat implements UnitFormat {
 	 * serialVersionUID
 	 */
 	// private static final long serialVersionUID = -2046025267890654321L;
+	
+	protected static final Logger logger = Logger.getLogger(AbstractUnitFormat.class
+			.getName());
 	
 	/**
 	 * Returns the {@link SymbolMap} for this unit format.

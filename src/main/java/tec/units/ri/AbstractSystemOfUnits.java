@@ -30,6 +30,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
@@ -40,9 +42,12 @@ import javax.measure.spi.SystemOfUnits;
  * <p>An abstract base class for unit systems.</p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 2.3, $Date: 2015-07-11 $
+ * @version 0.3, $Date: 2015-09-24 $
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
+	protected static final Logger logger = Logger.getLogger(AbstractSystemOfUnits.class
+			.getName());
+	
     /**
      * Holds the units.
      */
@@ -72,8 +77,10 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 	// ///////////////////
     @Override
     public Set<Unit<?>> getUnits() {
-    	for (Unit<?> u : units) {
-    		System.out.println(u + "; D: " + u.getDimension() + "; C: " + u.getClass());
+    	if (logger.isLoggable(Level.FINEST)) {
+	    	for (Unit<?> u : units) {
+	    		logger.log(Level.FINEST, u + "; D: " + u.getDimension() + "; C: " + u.getClass());
+	    	}
     	}
         return Collections.unmodifiableSet(units);
     }

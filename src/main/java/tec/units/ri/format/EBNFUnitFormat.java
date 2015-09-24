@@ -35,6 +35,7 @@ import java.io.StringReader;
 import java.util.Formattable;
 import java.util.Formatter;
 import java.util.Map;
+import java.util.logging.Level;
 
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
@@ -452,7 +453,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 					parentUnit = LITRE;
 				}
 			} else if (LITRE.equals(parentUnit)) {
-				System.out.println(parentUnit);
+				logger.log(Level.INFO, String.valueOf(parentUnit)); // TODO change level
 			}
 			
 			if (unit instanceof TransformedUnit) {
