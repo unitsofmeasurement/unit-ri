@@ -168,10 +168,9 @@ import tec.units.ri.unit.AnnotatedUnit;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.1, $Date: 2015-09-13 $
+ * @version 0.6.2, $Date: 2015-09-25 $
  */
-public class EBNFUnitFormat extends AbstractUnitFormat {
-// TODO rename into something like EBNFUnitFormat
+public final class EBNFUnitFormat extends AbstractUnitFormat {
 
 	// ////////////////////////////////////////////////////
 	// Class variables //
