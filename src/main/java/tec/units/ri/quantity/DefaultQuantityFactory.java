@@ -43,8 +43,8 @@ import tec.units.ri.AbstractQuantity;
  *
  * For example:<br/>
  * <code>
- *      Mass m = DefaultQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
- *      Time m = DefaultQuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
+ *      Quantity<Mass> m = DefaultQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
+ *      Quantity<Time> m = DefaultQuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
  * </code>
  * 
  * @param <Q>
@@ -54,7 +54,7 @@ import tec.units.ri.AbstractQuantity;
  *         Desruisseaux</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.6.7, $Date: 2015-07-25 $
+ * @version 0.7, $Date: 2015-09-27 $
  */
 public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
 		AbstractQuantityFactory<Q> {
@@ -126,7 +126,7 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
 		return (Q) new NumberQuantity<Q>(value, unit);
 	}
 
-	public Unit<Q> getMetricUnit() {
+	public Unit<Q> getSystemUnit() {
 		return metricUnit;
 	}
 

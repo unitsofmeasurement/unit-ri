@@ -48,7 +48,7 @@ import tec.units.ri.AbstractQuantity;
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.6.8, $Date: 2015-07-25 $
+ * @version 0.7, $Date: 2015-09-27 $
  */
 abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q>  {
 
@@ -88,12 +88,4 @@ abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements Quantit
      */
     public abstract Quantity<Q> create(Number value, Unit<Q> unit);
 //    public abstract <N extends Number, U extends Unit<Q>> Q create(N number, U unit);
-
-    /**
-     * Returns the metric unit for quantities produced by this factory
-     * or <code>null</code> if unknown.
-     *
-     * @return the metric units for this factory quantities.
-     */
-    public abstract Unit<Q> getMetricUnit();
 }
