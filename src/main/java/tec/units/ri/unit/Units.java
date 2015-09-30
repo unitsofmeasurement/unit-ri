@@ -530,6 +530,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 	// //////////////////////////////////////////////////////////////////////////
 	// Label adjustments for Units
 	static {
+		SimpleUnitFormat.getInstance().label(KILOMETRES_PER_HOUR, "kph");
 		SimpleUnitFormat.getInstance().label(LITRE, "l");
 	}
 }
