@@ -29,7 +29,6 @@ import java.io.IOException;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.format.Parser;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
