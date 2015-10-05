@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -27,9 +27,6 @@
  * This package provides concrete implementations of the 
  * {@link javax.measure.UnitConverter} interface.
  * 
- * As well as concrete implementations of 
- * {@link javax.measure.spi.UnitformatService}.
- * Clients can also obtain concrete implementations from their OSGi bundle 
- * context or service tracker.
+ * As well as functional interfaces used by these or other implementing classes.
  */
 package tec.units.ri.function;
