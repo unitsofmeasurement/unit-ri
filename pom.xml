@@ -1,3 +1,34 @@
+<!--
+
+    Units of Measurement Reference Implementation
+    Copyright © 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
+
+    All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without modification,
+    are permitted provided that the following conditions are met:
+
+    1. Redistributions of source code must retain the above copyright notice,
+       this list of conditions and the following disclaimer.
+
+    2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions
+       and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+    3. Neither the name of JSR-363 nor the names of its contributors may be used to endorse or promote products
+       derived from this software without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+    THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+    LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+    AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+    EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -5,7 +36,6 @@
 	<artifactId>unit-ri</artifactId>
 	<packaging>bundle</packaging>
 	<name>Units of Measurement Reference Implementation</name>
-	<version>0.8-SNAPSHOT</version>
 	<url>http://github.com/unitsofmeasurement/unit-ri</url>
 	<organization>
 		<name>Jean-Marie Dautelle, Werner Keil, V2COM</name>
@@ -15,7 +45,7 @@
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>0.8-RC3</version>
+		<version>0.8-SNAPSHOT</version>
 	</parent>
 
 	<licenses>
@@ -161,6 +191,34 @@
 					</instructions>
 				</configuration>
 			</plugin>
+			
+			<!-- ======================================================= -->
+            <!-- Maven License Plugin -->
+            <!-- ======================================================= -->
+			<plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <header>src/etc/header.txt</header>
+                    <properties>
+                        <owner>Jean-Marie Dautelle, Werner Keil, V2COM</owner>
+                        <currentYear>2015</currentYear>
+                    </properties>
+                    <excludes>
+                        <exclude>**/README</exclude>
+                        <exclude>**/settings.xml</exclude>
+                        <exclude>src/test/resources/**</exclude>
+                        <exclude>src/main/resources/**</exclude>
+                        <exclude>src/etc/**</exclude>
+                    </excludes>
+                    <headerDefinitions>
+                        <headerDefinition>src/etc/headers.xml</headerDefinition>
+                    </headerDefinitions>
+                    <mapping>
+                        <java>JAVA_STYLE</java>
+                    </mapping>
+                </configuration>
+            </plugin>
 
 			<!-- ======================================================= -->
 			<!-- Maven web site -->
@@ -320,62 +378,4 @@
             <url>https://oss.jfrog.org/artifactory/oss-snapshot-local</url>
         </snapshotRepository>
     </distributionManagement>
-
-	<profiles>
-		<profile>
-			<id>license</id>
-			<activation>
-				<property>
-					<name>license</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
-				<pluginManagement>
-					<plugins>
-						<!-- ======================================================= -->
-						<!-- License -->
-						<!-- ======================================================= -->
-						<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>license-maven-plugin</artifactId> 
-							<version>1.4</version> </plugin> -->
-						<plugin>
-							<groupId>com.google.code.maven-license-plugin</groupId>
-							<artifactId>maven-license-plugin</artifactId>
-							<configuration>
-								<basedir>${basedir}</basedir>
-								<header>src/etc/header.txt</header>
-								<quiet>false</quiet>
-								<failIfMissing>true</failIfMissing>
-								<aggregate>false</aggregate>
-								<encoding>UTF-8</encoding>
-								<excludes>
-									<exclude>target/**</exclude>
-									<exclude>nbproject/**</exclude>
-									<exclude>LICENSE*.txt</exclude>
-									<exclude>README.*</exclude>
-									<exclude>checkstyle*.*</exclude>
-									<exclude>*.css</exclude>
-									<exclude>*.launch</exclude>
-								</excludes>
-							</configuration>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-				<plugins>
-					<plugin>
-						<groupId>com.google.code.maven-license-plugin</groupId>
-						<artifactId>maven-license-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>compile</phase>
-								<goals>
-									<goal>format</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>
