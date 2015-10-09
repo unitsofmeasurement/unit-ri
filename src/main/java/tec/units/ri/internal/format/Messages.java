@@ -82,6 +82,7 @@ public class Messages extends L10nResources {
 		strings.put("tec.units.ri.unit.Units.VOLT", "V");
 		strings.put("tec.units.ri.unit.Units.WATT", "W");
 		strings.put("tec.units.ri.unit.Units.WEBER", "Wb");
+		strings.put("tec.units.ri.unit.Units.PERCENT", "%");
 /*
 		strings.put("tec.units.ri.unit.US.FAHRENHEIT", "\u00B0F");
 		strings.put("tec.units.ri.unit.US.FAHRENHEIT.1", "\u2109");
