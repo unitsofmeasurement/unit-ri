@@ -55,7 +55,7 @@ public class MessagesTest {
 		String text = bundle.getString("tec.units.ri.unit.Units.KILOMETRES_PER_HOUR");
 		assertEquals("kph", text);
 		
-		assertEquals(58, bundle.keySet().size());
+		assertEquals(60, bundle.keySet().size());
 	}
 /*	
 	@Test

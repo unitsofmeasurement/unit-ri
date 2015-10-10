@@ -29,7 +29,6 @@
  */
 package tec.units.ri.format;
 
-import static tec.units.ri.unit.MetricPrefix.NANO;
 import static tec.units.ri.unit.Units.LITRE;
 
 import java.io.IOException;
@@ -74,7 +73,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.4.3, September 13, 2015
+ * @version 0.5, October 10, 2015
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
@@ -405,10 +404,12 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		public boolean isValidIdentifier(String name) {
 			if ((name == null) || (name.length() == 0))
 				return false;
-			for (int i = 0; i < name.length(); i++) {
+			/*for (int i = 0; i < name.length(); i++) {
 				if (!isUnitIdentifierPart(name.charAt(i)))
 					return false;
-			}
+			} */
+			if (!isUnitIdentifierPart(name.charAt(0))) // label must not begin with a digit or mathematical operator
+					return false;
 			return true;
 		}
 
@@ -923,6 +924,19 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			return appendable;
 		}
 
+		@Override
+		public boolean isValidIdentifier(String name) {
+			if ((name == null) || (name.length() == 0))
+				return false;
+			/*for (int i = 0; i < name.length(); i++) {  TODO check for non ASCII characters here
+				if (!isUnitIdentifierPart(name.charAt(i)))
+					return false;
+			} */
+			if (!isUnitIdentifierPart(name.charAt(0))) // label must not begin with a digit or mathematical operator
+					return false;
+			return true;
+		}
+		
 		private static final long serialVersionUID = 1L;
 	}
 
@@ -1086,6 +1100,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		// DEFAULT.label(NonUnits.KNOT, "kn");
 		// DEFAULT.label(NonUnits.MACH, "Mach");
 		// DEFAULT.label(NonUnits.C, "c");
+		DEFAULT.label(Units.CUBIC_METRE, "\u33A5");
+		ASCII.label(Units.CUBIC_METRE, "m³");
 		ASCII.label(LITRE, "l");
 		DEFAULT.label(LITRE, "l");
 		DEFAULT.label(MetricPrefix.NANO(LITRE), "nl");

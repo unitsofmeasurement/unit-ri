@@ -29,6 +29,8 @@
  */
 package tec.units.ri.unit;
 
+import static tec.units.ri.format.SimpleUnitFormat.Flavor.ASCII;
+
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Acceleration;
@@ -78,7 +80,7 @@ import tec.units.ri.quantity.QuantityDimension;
  * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.3, July 11, 2015
+ * @version 0.5.4, October 10, 2015
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 

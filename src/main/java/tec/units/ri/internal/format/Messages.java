@@ -51,6 +51,8 @@ public class Messages extends L10nResources {
 		strings.put("tec.units.ri.unit.Units.CELSIUS.1", "\u2103");
 		strings.put("tec.units.ri.unit.Units.CELSIUS.2", "Celsius");
 		strings.put("tec.units.ri.unit.Units.COULOMB", "C");
+		strings.put("tec.units.ri.unit.Units.CUBIC_METRE", "\u33A5");
+		strings.put("tec.units.ri.unit.Units.DAY", "d");
 		strings.put("tec.units.ri.unit.Units.FARAD", "F");
 		strings.put("tec.units.ri.unit.Units.GRAM", "g");
 		strings.put("tec.units.ri.unit.Units.GRAY", "Gy");
