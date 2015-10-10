@@ -67,7 +67,7 @@ import javax.measure.format.UnitFormat;
  * <code>
  *        AbstractUnit.parse("m°C").equals(MetricPrefix.MILLI(Units.CELSIUS))
  *        AbstractUnit.parse("kW").equals(MetricPrefix.KILO(Units.WATT))
- *        AbstractUnit.parse("ft").equals(Units.METER.multiply(0.3048))</code>
+ *        AbstractUnit.parse("ft").equals(Units.METRE.multiply(0.3048))</code>
  * </p>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
@@ -845,7 +845,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			}
 		}
 
-		private static final long serialVersionUID = 1L;
+//		private static final long serialVersionUID = 1L;
 
 		@Override
 		public Unit<?> parse(CharSequence csq) throws ParserException {
@@ -868,9 +868,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	}
 
 	/**
-	 * This class represents the ASCIIFormat format.
+	 * This class represents the ASCII format.
 	 */
-	protected static class ASCIIFormat extends DefaultFormat {
+	protected static final class ASCIIFormat extends DefaultFormat {
 
 		@Override
 		public String nameFor(Unit<?> unit) {
@@ -928,16 +928,38 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		public boolean isValidIdentifier(String name) {
 			if ((name == null) || (name.length() == 0))
 				return false;
-			/*for (int i = 0; i < name.length(); i++) {  TODO check for non ASCII characters here
-				if (!isUnitIdentifierPart(name.charAt(i)))
-					return false;
-			} */
 			if (!isUnitIdentifierPart(name.charAt(0))) // label must not begin with a digit or mathematical operator
 					return false;
-			return true;
+			return isAllASCII(name);
+			/*
+			for (int i = 0; i < name.length(); i++) {
+				if (!isAsciiCharacter(name.charAt(i)))
+				return false;
+			}
+			return true; */
 		}
 		
-		private static final long serialVersionUID = 1L;
+		//return if the given character is within the ASCII charset
+		private static boolean isAsciiCharacter(char c) {
+		  //return (c > 64 && c < 91) || (c > 96 && c < 123);
+		  return (int)c<128;
+		}
+		
+		// to check if a string only contains US-ASCII characters
+		//
+		private static boolean isAllASCII(String input) {
+		    boolean isASCII = true;
+		    for (int i = 0; i < input.length(); i++) {
+		        int c = input.charAt(i);
+		        if (c > 0x7F) {
+		            isASCII = false;
+		            break;
+		        }
+		    }
+		    return isASCII;
+		}
+		
+//		private static final long serialVersionUID = 1L;
 	}
 
 	/**
@@ -978,7 +1000,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 						.getSymbol() : ((AlternateUnit<?>) si).getSymbol();
 				DEFAULT.label(u, PREFIXES[j] + symbol);
 				if (PREFIXES[j] == "µ") {
-					ASCII.label(u, "micro" + symbol);
+					ASCII.label(u, "micro"); // + symbol);
 				}
 			}
 		}
@@ -1101,7 +1123,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		// DEFAULT.label(NonUnits.MACH, "Mach");
 		// DEFAULT.label(NonUnits.C, "c");
 		DEFAULT.label(Units.CUBIC_METRE, "\u33A5");
-		ASCII.label(Units.CUBIC_METRE, "m³");
+		ASCII.label(Units.CUBIC_METRE, "m3");
 		ASCII.label(LITRE, "l");
 		DEFAULT.label(LITRE, "l");
 		DEFAULT.label(MetricPrefix.NANO(LITRE), "nl");
