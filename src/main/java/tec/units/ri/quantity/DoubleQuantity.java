@@ -33,6 +33,9 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 
 import tec.units.ri.AbstractQuantity;
+import tec.units.ri.format.QuantityFormat;
+import tec.units.ri.internal.format.l10n.L10nNumberFormat;
+import tec.units.ri.internal.format.l10n.NumberFormat;
 
 /**
  * An amount of quantity, consisting of a double and a Unit. DoubleQuantity
@@ -111,5 +114,62 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	@Override
 	public AbstractQuantity<Q> inverse() {
 		return (AbstractQuantity<Q>) NumberQuantity.of(1d / value, getUnit().inverse());
+	}
+	
+	/**
+	 * Returns the <code>String</code> representation of this quantity. The
+	 * string produced for a given quantity is always the same; it is not
+	 * affected by locale. This means that it can be used as a canonical string
+	 * representation for exchanging quantity, or as a key for a Hashtable, etc.
+	 * Locale-sensitive quantity formatting and parsing is handled by the
+	 * {@link QuantityFormat} class and its subclasses.
+	 *
+	 * @return <code>UnitFormat.getInternational().format(this)</code>
+	 */
+	@Override
+	public String toString() {
+		return QuantityFormat.getInstance().format(this);
+//		String numPart = NumberFormat.getInstance().format(value);
+//		return numPart + " " + String.valueOf(getUnit());
+//		return nosci(getValue()) + " " + String.valueOf(getUnit());
+	}
+	
+	private static String nosci(double d) {
+	    if(d < 0){
+	        return "-" + nosci(-d);
+	    }
+	    String javaString = String.valueOf(d);
+	    int indexOfE =javaString.indexOf("E"); 
+	    if(indexOfE == -1){
+	        return javaString;
+	    }
+	    StringBuffer sb = new StringBuffer();
+	    if(d > 1){//big number
+	        int exp = Integer.parseInt(javaString.substring(indexOfE + 1));
+	        String sciDecimal = javaString.substring(2, indexOfE);
+	        int sciDecimalLength = sciDecimal.length();
+	        if(exp == sciDecimalLength){
+	            sb.append(javaString.charAt(0));
+	            sb.append(sciDecimal);              
+	        }else if(exp > sciDecimalLength){
+	            sb.append(javaString.charAt(0));
+	            sb.append(sciDecimal);
+	            for(int i = 0; i < exp - sciDecimalLength; i++){
+	                sb.append('0');
+	            }
+	        }else if(exp < sciDecimalLength){
+	            sb.append(javaString.charAt(0));
+	            sb.append(sciDecimal.substring(0, exp));
+	            sb.append('.');
+	            for(int i = exp; i < sciDecimalLength ; i++){
+	                sb.append(sciDecimal.charAt(i));
+	            }
+	        }
+	      return sb.toString();
+	    }else{
+	        //for little numbers use the default or you will
+	        //loose accuracy
+	        return javaString;
+	    }       
 	}
 }

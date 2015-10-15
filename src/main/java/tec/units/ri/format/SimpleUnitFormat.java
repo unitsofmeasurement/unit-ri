@@ -33,14 +33,14 @@ import static tec.units.ri.unit.Units.LITRE;
 
 import java.io.IOException;
 import java.lang.CharSequence;
-import java.text.FieldPosition; // FIXME get rid of those without breaking JUnits
-import java.text.ParsePosition;
 import java.util.HashMap;
 import java.util.Map;
 
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
+import tec.units.ri.internal.format.l10n.FieldPosition;
+import tec.units.ri.internal.format.l10n.ParsePosition;
 import tec.units.ri.unit.AlternateUnit;
 import tec.units.ri.unit.BaseUnit;
 import tec.units.ri.unit.ProductUnit;
@@ -284,8 +284,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	public abstract boolean isValidIdentifier(String name);
 
 	/**
-	 * Formats an unit and appends the resulting text to a given string buffer
-	 * (implements <code>java.text.Format</code>).
+	 * Formats an unit and appends the resulting text to a given string buffer.
 	 *
 	 * @param unit
 	 *            the unit to format.
@@ -329,8 +328,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	}
 
 	/**
-	 * Parses the text from a string to produce an object (implements
-	 * <code>java.text.Format</code>).
+	 * Parses the text from a string to produce an object.
 	 * 
 	 * @param source
 	 *            the string source, part of which should be parsed.

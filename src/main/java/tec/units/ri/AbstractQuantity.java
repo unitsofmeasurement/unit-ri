@@ -33,6 +33,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Dimensionless;
 
+import tec.units.ri.format.QuantityFormat;
 import tec.units.ri.function.UnitSupplier;
 import tec.units.ri.function.ValueSupplier;
 import tec.units.ri.quantity.NumberQuantity;
@@ -97,7 +98,7 @@ import tec.units.ri.quantity.NumberQuantity;
  * </p>
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, $Date: 2015-09-23 $
+ * @version 0.7.1, $Date: 2015-10-15 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 		Quantity<Q>, Comparable<Quantity<Q>>, UnitSupplier<Q>, ValueSupplier<Number> {
@@ -265,12 +266,12 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	}
 
 	/**
-	 * Returns the <code>String</code> representation of this measure. The
-	 * string produced for a given measure is always the same; it is not
+	 * Returns the <code>String</code> representation of this quantity. The
+	 * string produced for a given quantity is always the same; it is not
 	 * affected by locale. This means that it can be used as a canonical string
-	 * representation for exchanging measure, or as a key for a Hashtable, etc.
-	 * Locale-sensitive measure formatting and parsing is handled by the
-	 * {@link MeasurementFormat} class and its subclasses.
+	 * representation for exchanging quantity, or as a key for a Hashtable, etc.
+	 * Locale-sensitive quantity formatting and parsing is handled by the
+	 * {@link QuantityFormat} class and its subclasses.
 	 *
 	 * @return <code>UnitFormat.getInternational().format(this)</code>
 	 */
@@ -279,6 +280,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 		// return MeasureFormat.getStandard().format(this); TODO improve
 		// MeasureFormat
 		return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
+//		return QuantityFormat.getInstance().format(this);
 	}
 
 	public abstract double doubleValue(Unit<Q> unit) throws ArithmeticException;

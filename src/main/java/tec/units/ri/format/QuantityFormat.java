@@ -37,22 +37,26 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.units.ri.AbstractQuantity;
-import tec.units.ri.AbstractUnit;
+import tec.units.ri.internal.format.l10n.DecimalFormat;
+import tec.units.ri.internal.format.l10n.L10nNumberFormat;
 import tec.units.ri.internal.format.l10n.NumberFormat;
 import tec.units.ri.quantity.NumberQuantity;
 import tec.units.ri.unit.Units;
 
 /**
- * <p> This class provides the interface for formatting and parsing {@link AbstractQuantity
- *     measurements}.</p>
+ * <p>
+ * This class provides the interface for formatting and parsing
+ * {@link AbstractQuantity measurements}.
+ * </p>
  * 
- * <p> Instances of this class should be able to format measurements stated in
- *     {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
+ * <p>
+ * Instances of this class should be able to format measurements stated in
+ * {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
  * </p>
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.2, $Date: 2015-07-05 $
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 0.6.3, $Date: 2015-10-15 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
@@ -60,12 +64,18 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 	/**
 	 * 
 	 */
-//	private static final long serialVersionUID = -4628006924354248662L;
+	// private static final long serialVersionUID = -4628006924354248662L;
 
 	/**
 	 * Holds the default format instance.
 	 */
 	private static final NumberSpaceUnit DEFAULT = new NumberSpaceUnit(
+			NumberFormat.getInstance(), SimpleUnitFormat.getInstance());
+	
+	/**
+	 * Holds the default format instance.
+	 */
+	private static final NumberSpaceUnit EBNF = new NumberSpaceUnit(
 			NumberFormat.getInstance(), EBNFUnitFormat.getInstance());
 
 	/**
@@ -84,29 +94,30 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 		return DEFAULT;
 	}
 
-//	/**
-//	 * Returns the measure format using the specified number format and unit
-//	 * format (the number and unit are separated by one space).
-//	 * 
-//	 * @param numberFormat the number format.
-//	 * @param unitFormat the unit format.
-//	 * @return the corresponding format.
-//	 */
-//	public static QuantityFormat getInstance(NumberFormat numberFormat,
-//			UnitFormat unitFormat) {
-//		return new NumberSpaceUnit(numberFormat, unitFormat);
-//	}
+	// /**
+	// * Returns the measure format using the specified number format and unit
+	// * format (the number and unit are separated by one space).
+	// *
+	// * @param numberFormat the number format.
+	// * @param unitFormat the unit format.
+	// * @return the corresponding format.
+	// */
+	// public static QuantityFormat getInstance(NumberFormat numberFormat,
+	// UnitFormat unitFormat) {
+	// return new NumberSpaceUnit(numberFormat, unitFormat);
+	// }
 
 	/**
-	 * Returns the culture invariant format based upon {@link Number}
-	 * canonical format and the {@link UnitFormat#current() standard} unit
-	 * format. This format <b>is not</b> locale-sensitive and can be used for
-	 * unambiguous electronic communication of quantities together with their
-	 * units without loss of information. For example:
-	 * <code>"1.23456789 kg.m/s2"</code> returns
+	 * Returns the culture invariant format based upon {@link Number} canonical
+	 * format and the {@link UnitFormat#current() standard} unit format. This
+	 * format <b>is not</b> locale-sensitive and can be used for unambiguous
+	 * electronic communication of quantities together with their units without
+	 * loss of information. For example: <code>"1.23456789 kg.m/s2"</code>
+	 * returns
 	 * <code>Quantities.getQuantity(new Double(1.23456789d), AbstractUnit.parse("kg.m/s2")));</code>
 	 * 
-	 * @param style the format style to apply.
+	 * @param style
+	 *            the format style to apply.
 	 * @return the desired format.
 	 */
 	public static QuantityFormat getInstance(FormatBehavior style) {
@@ -123,12 +134,15 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 	/**
 	 * Formats the specified measure into an <code>Appendable</code>.
 	 * 
-	 * @param measure the measure to format.
-	 * @param dest the appendable destination.
+	 * @param measure
+	 *            the measure to format.
+	 * @param dest
+	 *            the appendable destination.
 	 * @return the specified <code>Appendable</code>.
-	 * @throws IOException if an I/O exception occurs.
+	 * @throws IOException
+	 *             if an I/O exception occurs.
 	 */
-	public abstract Appendable format(AbstractQuantity<?> measure, Appendable dest)
+	public abstract Appendable format(Quantity<?> measure, Appendable dest)
 			throws IOException;
 
 	/**
@@ -137,8 +151,10 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 	 * index of the <code>cursor</code> argument is updated to the index after
 	 * the last character used.
 	 * 
-	 * @param csq the <code>CharSequence</code> to parse.
-	 * @param index the current parsing index.
+	 * @param csq
+	 *            the <code>CharSequence</code> to parse.
+	 * @param index
+	 *            the current parsing index.
 	 * @return the object parsed from the specified character sub-sequence.
 	 * @throws IllegalArgumentException
 	 *             if any problem occurs while parsing the specified character
@@ -146,129 +162,158 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 	 */
 	abstract AbstractQuantity<?> parse(CharSequence csq, int index)
 			throws IllegalArgumentException, ParserException;
-	
+
 	/**
 	 * Parses a portion of the specified <code>CharSequence</code> from the
 	 * specified position to produce an object. If parsing succeeds, then the
 	 * index of the <code>cursor</code> argument is updated to the index after
 	 * the last character used.
 	 * 
-	 * @param csq the <code>CharSequence</code> to parse.
-	 * @param cursor the cursor holding the current parsing index.
+	 * @param csq
+	 *            the <code>CharSequence</code> to parse.
+	 * @param cursor
+	 *            the cursor holding the current parsing index.
 	 * @return the object parsed from the specified character sub-sequence.
 	 * @throws IllegalArgumentException
 	 *             if any problem occurs while parsing the specified character
 	 *             sequence (e.g. illegal syntax).
 	 */
-	/*public abstract AbstractQuantity<?> parse(CharSequence csq)
-			throws IllegalArgumentException, ParserException; */
+	/*
+	 * public abstract AbstractQuantity<?> parse(CharSequence csq) throws
+	 * IllegalArgumentException, ParserException;
+	 */
 
 	/**
 	 * Formats the specified value using {@link CompoundUnit} compound units}.
 	 * The default implementation is locale sensitive and does not use space to
-	 * separate units. For example:[code]
-	 *     Unit<Length> FOOT_INCH = FOOT.compound(INCH);
-	 *     Measure<Length> height = Measure.valueOf(1.81, METER);
-	 *     System.out.println(height.to(FOOT_INCH));
+	 * separate units. For example:[code] Unit<Length> FOOT_INCH =
+	 * FOOT.compound(INCH); Measure<Length> height = Measure.valueOf(1.81,
+	 * METER); System.out.println(height.to(FOOT_INCH));
 	 * 
-	 *     > 5ft11,26in // French Local
+	 * > 5ft11,26in // French Local
 	 * 
-	 *     Unit<Angle> DMS = DEGREE_ANGLE.compound(MINUTE_ANGLE).compound(SECOND_ANGLE);
-	 *     Measure<Angle> rotation = Measure.valueOf(35.857497, DEGREE_ANGLE);
-	 *     System.out.println(rotation.to(DMS));
+	 * Unit<Angle> DMS =
+	 * DEGREE_ANGLE.compound(MINUTE_ANGLE).compound(SECOND_ANGLE);
+	 * Measure<Angle> rotation = Measure.valueOf(35.857497, DEGREE_ANGLE);
+	 * System.out.println(rotation.to(DMS));
 	 * 
-	 *     > 35°51'26,989" // French Local 
-	 * [/code]
+	 * > 35°51'26,989" // French Local [/code]
 	 * 
-	 * @param value the value to format using compound units.
-	 * @param unit the compound unit.
-	 * @param dest the appendable destination.
+	 * @param value
+	 *            the value to format using compound units.
+	 * @param unit
+	 *            the compound unit.
+	 * @param dest
+	 *            the appendable destination.
 	 * @return the specified <code>Appendable</code>.
-	 * @throws IOException if an I/O exception occurs.
+	 * @throws IOException
+	 *             if an I/O exception occurs.
 	 */
-//	@SuppressWarnings("unchecked")
-//	protected Appendable formatCompound(double value, CompoundUnit<?> unit,
-//			Appendable dest) throws IOException {
-//		Unit high = unit.getHigh();
-//		Unit low = unit.getLow(); // The unit in which the value is stated.
-//		long highValue = (long) low.getConverterTo(high).convert(value);
-//		double lowValue = value - high.getConverterTo(low).convert(highValue);
-//		if (high instanceof CompoundUnit)
-//			formatCompound(highValue, (CompoundUnit) high, dest);
-//		else {
-//			dest.append(DEFAULT._numberFormat.format(highValue));
-//			DEFAULT._unitFormat.format(high, dest);
-//		}
-//		dest.append(DEFAULT._numberFormat.format(lowValue));
-//		return DEFAULT._unitFormat.format(low, dest);
-//	}
+	// @SuppressWarnings("unchecked")
+	// protected Appendable formatCompound(double value, CompoundUnit<?> unit,
+	// Appendable dest) throws IOException {
+	// Unit high = unit.getHigh();
+	// Unit low = unit.getLow(); // The unit in which the value is stated.
+	// long highValue = (long) low.getConverterTo(high).convert(value);
+	// double lowValue = value - high.getConverterTo(low).convert(highValue);
+	// if (high instanceof CompoundUnit)
+	// formatCompound(highValue, (CompoundUnit) high, dest);
+	// else {
+	// dest.append(DEFAULT._numberFormat.format(highValue));
+	// DEFAULT._unitFormat.format(high, dest);
+	// }
+	// dest.append(DEFAULT._numberFormat.format(lowValue));
+	// return DEFAULT._unitFormat.format(low, dest);
+	// }
 
-	/* public final StringBuffer format(Object obj, final StringBuffer toAppendTo,
-			FieldPosition pos) {
-		if (!(obj instanceof AbstractQuantity<?>))
-			throw new IllegalArgumentException(
-					"obj: Not an instance of Measure");
-		if ((toAppendTo == null) || (pos == null))
-			throw new NullPointerException();
-		try {
-			return (StringBuffer) format((AbstractQuantity<?>) obj,
-					(Appendable) toAppendTo);
-		} catch (IOException ex) {
-			throw new Error(ex); // Cannot happen.
-		}
-	} */
+	/*
+	 * public final StringBuffer format(Object obj, final StringBuffer
+	 * toAppendTo, FieldPosition pos) { if (!(obj instanceof
+	 * AbstractQuantity<?>)) throw new IllegalArgumentException(
+	 * "obj: Not an instance of Measure"); if ((toAppendTo == null) || (pos ==
+	 * null)) throw new NullPointerException(); try { return (StringBuffer)
+	 * format((AbstractQuantity<?>) obj, (Appendable) toAppendTo); } catch
+	 * (IOException ex) { throw new Error(ex); // Cannot happen. } }
+	 */
 
-/*	final AbstractQuantity<?> parseObject(String source, ParsePosition pos) {
-		try {
-			return parse(source, pos);
-		} catch (IllegalArgumentException | ParserException e) {
-			return null; // Unfortunately the message why the parsing failed
-		} // is lost; but we have to follow the Format spec.
-
-	} */
+	/*
+	 * final AbstractQuantity<?> parseObject(String source, ParsePosition pos) {
+	 * try { return parse(source, pos); } catch (IllegalArgumentException |
+	 * ParserException e) { return null; // Unfortunately the message why the
+	 * parsing failed } // is lost; but we have to follow the Format spec.
+	 * 
+	 * }
+	 */
 
 	/**
-	 * Convenience method equivalent to {@link #format(AbstractQuantity, Appendable)}
-	 * except it does not raise an IOException.
+	 * Convenience method equivalent to
+	 * {@link #format(AbstractQuantity, Appendable)} except it does not raise an
+	 * IOException.
 	 * 
-	 * @param measure the measure to format.
-	 * @param dest the appendable destination.
+	 * @param measure
+	 *            the measure to format.
+	 * @param dest
+	 *            the appendable destination.
 	 * @return the specified <code>StringBuilder</code>.
 	 */
-	public final StringBuilder format(AbstractQuantity<?> measure, StringBuilder dest) {
+	public final StringBuilder format(Quantity<?> q, StringBuilder dest) {
 		try {
-			return (StringBuilder) this.format(measure, (Appendable) dest);
+			return (StringBuilder) this.format(q, (Appendable) dest);
 		} catch (IOException ex) {
 			throw new RuntimeException(ex); // Should not happen.
 		}
 	}
 
+	/**
+	 * Formats an object to produce a string. This is equivalent to <blockquote>
+	 * {@link #format(Unit, StringBuilder) format}<code>(unit,
+	 *         new StringBuilder()).toString();</code> </blockquote>
+	 *
+	 * @param obj
+	 *            The object to format
+	 * @return Formatted string.
+	 * @exception IllegalArgumentException
+	 *                if the Format cannot format the given object
+	 */
+	public final String format(Quantity q) {
+		if (q instanceof AbstractQuantity) {
+			return format((AbstractQuantity<?>) q, new StringBuilder())
+					.toString();
+		} else {
+			return (this.format(q, new StringBuilder())).toString();
+		}
+	}
+
 	// Holds default implementation.
 	private static final class NumberSpaceUnit extends QuantityFormat {
-
+		private final DecimalFormat decimalFormat = (DecimalFormat) DecimalFormat.getNumberInstance();
+		
 		private final NumberFormat numberFormat;
-
+//		private final L10nNumberFormat parseFormat = L10nNumberFormat.getInstance();
+		
 		private final UnitFormat unitFormat;
 
 		private NumberSpaceUnit(NumberFormat numberFormat, UnitFormat unitFormat) {
 			this.numberFormat = numberFormat;
+			decimalFormat.applyPattern("#,#0.0000##");
 			this.unitFormat = unitFormat;
 		}
 
 		@Override
-		public Appendable format(AbstractQuantity<?> quantity, Appendable dest)
+		public Appendable format(Quantity<?> quantity, Appendable dest)
 				throws IOException {
-//			Unit unit = measure.getUnit();
-//			if (unit instanceof CompoundUnit)
-//				return formatCompound(measure.doubleValue(unit),
-//						(CompoundUnit) unit, dest);
-//			else {
-				dest.append(numberFormat.format(quantity.getValue()));
-				if (quantity.getUnit().equals(Units.ONE))
-					return dest;
-				dest.append(' ');
-				return unitFormat.format(quantity.getUnit(), dest);
-//			}
+			// Unit unit = measure.getUnit();
+			// if (unit instanceof CompoundUnit)
+			// return formatCompound(measure.doubleValue(unit),
+			// (CompoundUnit) unit, dest);
+			// else {
+			//dest.append(numberFormat.format(quantity.getValue()));
+			dest.append(decimalFormat.format(quantity.getValue()));
+			if (quantity.getUnit().equals(Units.ONE))
+				return dest;
+			dest.append(' ');
+			return unitFormat.format(quantity.getUnit(), dest);
+			// }
 		}
 
 		@SuppressWarnings("unchecked")
@@ -276,7 +321,8 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 		AbstractQuantity<?> parse(CharSequence csq, int index)
 				throws IllegalArgumentException, ParserException {
 			String str = csq.toString();
-			Number number = numberFormat.parse(str);
+//			Number number = parseFormat.parse(str); // TODO combine with NumberFormat
+			Number number = null; //FIXME
 			if (number == null)
 				throw new IllegalArgumentException("Number cannot be parsed");
 			Unit unit = unitFormat.parse(csq);
@@ -290,12 +336,13 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 				throw new UnsupportedOperationException("Number of type "
 						+ number.getClass() + " are not supported");
 		}
-		
-		public AbstractQuantity<?> parse(CharSequence csq) throws IllegalArgumentException, ParserException {
+
+		public AbstractQuantity<?> parse(CharSequence csq)
+				throws IllegalArgumentException, ParserException {
 			return parse(csq, 0);
 		}
 
-//		private static final long serialVersionUID = 1L;
+		// private static final long serialVersionUID = 1L;
 
 	}
 
@@ -305,37 +352,37 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 		/**
 		 * 
 		 */
-//		private static final long serialVersionUID = 2758248665095734058L;
+		// private static final long serialVersionUID = 2758248665095734058L;
 
 		@Override
-		public Appendable format(AbstractQuantity measure, Appendable dest)
+		public Appendable format(Quantity q, Appendable dest)
 				throws IOException {
-			Unit unit = measure.getUnit();
-//			if (unit instanceof CompoundUnit)
-//				return formatCompound(measure.doubleValue(unit),
-//						(CompoundUnit) unit, dest);
-//			else {
-				
-//				if (measure.isBig()) { // TODO SE only
-//					BigDecimal decimal = measure.decimalValue(unit,
-//						MathContext.UNLIMITED);
-//					dest.append(decimal.toString());
-//				} else {
-					Number number = measure.getValue();
-					dest.append(number.toString());
-//				}
-				if (measure.getUnit().equals(Units.ONE))
-					return dest;
-				dest.append(' ');
-				return EBNFUnitFormat.getInstance().format(unit, dest);
-//			}
+			Unit unit = q.getUnit();
+			// if (unit instanceof CompoundUnit)
+			// return formatCompound(measure.doubleValue(unit),
+			// (CompoundUnit) unit, dest);
+			// else {
+
+			// if (measure.isBig()) { // TODO SE only
+			// BigDecimal decimal = measure.decimalValue(unit,
+			// MathContext.UNLIMITED);
+			// dest.append(decimal.toString());
+			// } else {
+			Number number = q.getValue();
+			dest.append(number.toString());
+			// }
+			if (q.getUnit().equals(Units.ONE))
+				return dest;
+			dest.append(' ');
+			return EBNFUnitFormat.getInstance().format(unit, dest);
+			// }
 		}
 
 		@SuppressWarnings("unchecked")
 		@Override
 		AbstractQuantity<?> parse(CharSequence csq, int index)
 				throws ParserException {
-			int startDecimal = index; //cursor.getIndex();
+			int startDecimal = index; // cursor.getIndex();
 			while ((startDecimal < csq.length())
 					&& Character.isWhitespace(csq.charAt(startDecimal))) {
 				startDecimal++;
@@ -347,11 +394,11 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 			}
 			Double decimal = new Double(csq.subSequence(startDecimal,
 					endDecimal).toString());
-//			cursor.setIndex(endDecimal + 1);
+			// cursor.setIndex(endDecimal + 1);
 			Unit unit = EBNFUnitFormat.getInstance().parse(csq, index);
 			return NumberQuantity.of(decimal.doubleValue(), unit);
 		}
-		
+
 		public AbstractQuantity<?> parse(CharSequence csq)
 				throws ParserException {
 			return parse(csq, 0);
