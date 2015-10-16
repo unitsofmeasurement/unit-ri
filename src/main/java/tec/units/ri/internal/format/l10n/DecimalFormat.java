@@ -27,6 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+ 
 /*
  * (C) Copyright Taligent, Inc. 1996, 1997 - All Rights Reserved
  * (C) Copyright IBM Corp. 1996 - 1998 - All Rights Reserved
@@ -381,7 +382,7 @@ import java.util.Vector;
  */
 public class DecimalFormat extends NumberFormat {
 
-	private String mPattern = "";
+	private String mPattern = ""; // TODO "#,###.00#"
 
 	/**
 	 * Creates a DecimalFormat using the default pattern and symbols for the
