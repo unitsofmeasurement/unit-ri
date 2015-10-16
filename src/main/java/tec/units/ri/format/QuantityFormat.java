@@ -286,7 +286,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 
 	// Holds default implementation.
 	private static final class NumberSpaceUnit extends QuantityFormat {
-		private final DecimalFormat decimalFormat = (DecimalFormat) DecimalFormat.getNumberInstance();
+		private final DecimalFormat decimalFormat = new DecimalFormat();
 		
 		private final NumberFormat numberFormat;
 //		private final L10nNumberFormat parseFormat = L10nNumberFormat.getInstance();
