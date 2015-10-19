@@ -289,7 +289,7 @@ public final class EBNFUnitFormat extends AbstractUnitFormat {
 	// //////////////////////
 	/**
 	 * Get the symbol map used by this instance to map between
-	 * {@link org.unitsofmeasure.Unit Unit}s and <code>String</code>s, etc...
+	 * {@link Unit Unit}s and <code>String</code>s, etc...
 	 * 
 	 * @return SymbolMap the current symbol map
 	 */

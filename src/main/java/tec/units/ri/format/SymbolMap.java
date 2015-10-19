@@ -67,7 +67,7 @@ import tec.units.ri.unit.MetricPrefix;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, June 27, 2015
+ * @version 0.8, October 19, 2015
  */
 public final class SymbolMap {
 	private static final Logger logger = Logger.getLogger(SymbolMap.class
@@ -116,12 +116,9 @@ public final class SymbolMap {
 			try {
 				Class<?> c = Class.forName(className);
 /*				
-				if (SI.class.equals(c)) {
+				if (Units.class.equals(c)) {
 //					System.out.println(si.getName()); // + " (" + sou.getUnits().size() + ")");
 					sou = SI.getInstance();
-					processSOU(sou, symbol, isAlias);
-				} else if (US.class.equals(c)) {
-					sou = US.getInstance();
 					processSOU(sou, symbol, isAlias);
 				} else { */
 					//MetricPrefix.
@@ -154,9 +151,9 @@ public final class SymbolMap {
 	}
 
 	/**
-	 * Attaches a label to the specified unit. For example:[code]
+	 * Attaches a label to the specified unit. For example:<code>
 	 * symbolMap.label(DAY.multiply(365), "year"); symbolMap.label(FOOT,
-	 * "ft"); [/code]
+	 * "ft"); </code>
 	 *
 	 * @param unit
 	 *            the unit to label.

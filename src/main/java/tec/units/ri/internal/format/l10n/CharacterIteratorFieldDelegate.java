@@ -31,16 +31,12 @@ package tec.units.ri.internal.format.l10n;
 
 import java.util.Vector;
 
-import tec.units.ri.internal.format.l10n.Format.Field;
-import tec.units.ri.internal.format.l10n.Format.FieldDelegate;
-
 /**
  * CharacterIteratorFieldDelegate combines the notifications from a Format into
  * a resulting <code>AttributedCharacterIterator</code>. The resulting
  * <code>AttributedCharacterIterator</code> can be retrieved by way of the
  * <code>getIterator</code> method.
  * 
- * @version 1.6 10/10/06
  */
 class CharacterIteratorFieldDelegate implements Format.FieldDelegate {
 	/**

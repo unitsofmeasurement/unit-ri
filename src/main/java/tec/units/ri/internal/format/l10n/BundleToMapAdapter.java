@@ -36,7 +36,7 @@ import java.util.Map;
 /**
  * 
  * @author Werner Keil
- * @version 0.6, June 11, 2015
+ * @version 0.7, October 19, 2015
  *
  */
 public final class BundleToMapAdapter {
@@ -63,8 +63,4 @@ public final class BundleToMapAdapter {
 
 		return map;
 	}
-
-	/*public final static Map<String, String> toMap(String resName) {
-		return toMap(ResourceBundle.getBundle(resName));
-	}*/
 }

@@ -73,7 +73,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.5, October 10, 2015
+ * @version 0.6, October 19, 2015
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
@@ -847,12 +847,6 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
 		@Override
 		public Unit<?> parse(CharSequence csq) throws ParserException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		protected SymbolMap getSymbols() {
 			// TODO Auto-generated method stub
 			return null;
 		}

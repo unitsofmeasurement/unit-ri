@@ -43,7 +43,6 @@
 
 package tec.units.ri.internal.format.l10n;
 
-
 /**
  * <code>FieldPosition</code> is a simple class used by <code>Format</code> and
  * its subclasses to identify fields in formatted output. Fields can be
@@ -72,9 +71,8 @@ package tec.units.ri.internal.format.l10n;
  * string use the <code>Format</code> method
  * <code>formatToCharacterIterator</code>.
  *
- * @version 1.23 10/10/06
  * @author Mark Davis
- * @see java.text.Format
+ * @see Format
  */
 public class FieldPosition {
 

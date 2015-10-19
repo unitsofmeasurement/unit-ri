@@ -209,9 +209,8 @@ public abstract class Format {
 	 * @param obj
 	 *            The object to format
 	 * @return AttributedCharacterIterator describing the formatted value.
-	 * @since 1.4
 	 */
-	public AttributedCharacterIterator formatToCharacterIterator(Object obj) {
+	AttributedCharacterIterator formatToCharacterIterator(Object obj) {
 		return createAttributedCharacterIterator(format(obj));
 	}
 

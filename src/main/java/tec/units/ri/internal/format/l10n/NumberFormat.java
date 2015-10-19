@@ -187,7 +187,7 @@ public abstract class NumberFormat extends Format {
 	 * the position of the integer part of a formatted number should be
 	 * returned.
 	 * 
-	 * @see java.text.FieldPosition
+	 * @see FieldPosition
 	 */
 	public static final int INTEGER_FIELD = 0;
 
@@ -196,7 +196,7 @@ public abstract class NumberFormat extends Format {
 	 * the position of the fraction part of a formatted number should be
 	 * returned.
 	 * 
-	 * @see java.text.FieldPosition
+	 * @see FieldPosition
 	 */
 	public static final int FRACTION_FIELD = 1;
 
@@ -215,7 +215,7 @@ public abstract class NumberFormat extends Format {
 	 *         StringBuffer.append())
 	 * @exception IllegalArgumentException
 	 *                when the Format cannot format the given object.
-	 * @see java.text.FieldPosition
+	 * @see FieldPosition
 	 */
 	public final StringBuffer format(Object number, StringBuffer toAppendTo,
 			FieldPosition pos) {
@@ -263,7 +263,7 @@ public abstract class NumberFormat extends Format {
 	/**
 	 * Specialization of format.
 	 * 
-	 * @see java.text.Format#format
+	 * @see Format#format
 	 */
 	public final String format(double number) {
 		return format(number, new StringBuffer(),
@@ -273,7 +273,7 @@ public abstract class NumberFormat extends Format {
 	/**
 	 * Specialization of format.
 	 * 
-	 * @see java.text.Format#format
+	 * @see Format#format
 	 */
 	public final String format(long number) {
 		return format(number, new StringBuffer(),
@@ -283,7 +283,7 @@ public abstract class NumberFormat extends Format {
 	/**
 	 * Specialization of format.
 	 * 
-	 * @see java.text.Format#format
+	 * @see Format#format
 	 */
 	public abstract StringBuffer format(double number, StringBuffer toAppendTo,
 			FieldPosition pos);
@@ -291,7 +291,7 @@ public abstract class NumberFormat extends Format {
 	/**
 	 * Specialization of format.
 	 * 
-	 * @see java.text.Format#format
+	 * @see Format#format
 	 */
 	public abstract StringBuffer format(long number, StringBuffer toAppendTo,
 			FieldPosition pos);
@@ -305,8 +305,8 @@ public abstract class NumberFormat extends Format {
 	// if
 	// * no object can be parsed, index is unchanged!
 	// *
-	// * @see java.text.NumberFormat#isParseIntegerOnly
-	// * @see java.text.Format#parseObject
+	// * @see NumberFormat#isParseIntegerOnly
+	// * @see Format#parseObject
 	// */
 	// public abstract Number parse(String source, ParsePosition parsePosition);
 	//
@@ -342,7 +342,7 @@ public abstract class NumberFormat extends Format {
 	 * operation is locale dependant and determined by sub-classes of
 	 * NumberFormat.
 	 */
-	public boolean isParseIntegerOnly() {
+	boolean isParseIntegerOnly() {
 		return parseIntegerOnly;
 	}
 
@@ -351,7 +351,7 @@ public abstract class NumberFormat extends Format {
 	 * 
 	 * @see #isParseIntegerOnly
 	 */
-	public void setParseIntegerOnly(boolean value) {
+	void setParseIntegerOnly(boolean value) {
 		parseIntegerOnly = value;
 	}
 
@@ -445,7 +445,7 @@ public abstract class NumberFormat extends Format {
 	 * 
 	 * @see #setGroupingUsed
 	 */
-	public boolean isGroupingUsed() {
+	boolean isGroupingUsed() {
 		return groupingUsed;
 	}
 
@@ -454,7 +454,7 @@ public abstract class NumberFormat extends Format {
 	 * 
 	 * @see #isGroupingUsed
 	 */
-	public void setGroupingUsed(boolean newValue) {
+	void setGroupingUsed(boolean newValue) {
 		groupingUsed = newValue;
 	}
 

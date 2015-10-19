@@ -31,8 +31,8 @@ package tec.units.ri.internal.format.l10n;
 
 /**
  * A Java ME compliant backport of {@linkplain java.util.Locale}
- * @author Werner
- * @version 0.3
+ * @author Werner Keil
+ * @version 0.4
  */
 public class Locale {
     public static final Locale ROOT = new Locale("", "");

@@ -49,9 +49,9 @@ import tec.units.ri.function.UnitConverterSupplier;
  *         MILLISECOND = MILLI(SECOND);
  *     </code></p>
  *
- * <p> Transformed units have no symbol. But like any other units,
+ * <p> Transformed units have no symbol. But like all other units,
  *     they may have labels attached to them (see {@link tec.units.ri.format.SymbolMap
- *     SymbolMap}</p>
+ *     SymbolMap}, {@link javax.measure.format.UnitFormat#label(Unit, String)}</p>
  *
  * <p> Instances of this class are created through the {@link AbstractUnit#transform} method.</p>
  *
@@ -59,7 +59,7 @@ import tec.units.ri.function.UnitConverterSupplier;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.2, June 24, 2015
+ * @version 0.6, October 19, 2015
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
  implements UnitConverterSupplier {

@@ -72,7 +72,7 @@ public abstract class AbstractUnitFormat implements UnitFormat, Parser<CharSeque
 	 *
 	 * @return the symbol map used by this format.
 	 */
-	protected abstract SymbolMap getSymbols();
+	//protected abstract SymbolMap getSymbols();
 
 	/**
 	 * Formats an object to produce a string. This is equivalent to <blockquote>

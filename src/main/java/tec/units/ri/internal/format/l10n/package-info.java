@@ -30,7 +30,7 @@
 /**
  * This package provides internal helper classes emulating Localization support on Java ME.
  *
- * @author Werner
+ * @author Werner Keil
  *
  */
 package tec.units.ri.internal.format.l10n;

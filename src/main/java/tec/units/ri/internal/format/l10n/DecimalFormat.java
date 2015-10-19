@@ -371,18 +371,18 @@ import java.util.Vector;
  * </blockquote>
  *
  * @see <a
- *      href="http://java.sun.com/docs/books/tutorial/i18n/format/decimalFormat.html">Java
+ *      href="http://docs.oracle.com/javase/tutorial/i18n/format/decimalFormat.html">Java
  *      Tutorial</a>
  * @see NumberFormat
  * @see DecimalFormatSymbols
  * @see ParsePosition
- * @version 1.65, 01/12/04
  * @author Mark Davis
  * @author Alan Liu
+ * @author Werner Keil
  */
 public class DecimalFormat extends NumberFormat {
 
-	private String mPattern = ""; // TODO "#,###.00#"
+	private String mPattern = "#,##0.###";
 
 	/**
 	 * Creates a DecimalFormat using the default pattern and symbols for the
@@ -452,9 +452,9 @@ public class DecimalFormat extends NumberFormat {
 	 * @see NumberFormat#getNumberInstance
 	 * @see NumberFormat#getCurrencyInstance
 	 * @see NumberFormat#getPercentInstance
-	 * @see java.text.DecimalFormatSymbols
+	 * @see DecimalFormatSymbols
 	 */
-	public DecimalFormat(String pattern, DecimalFormatSymbols symbols) {
+	DecimalFormat(String pattern, DecimalFormatSymbols symbols) {
 		// Always applyPattern after the symbols are set
 		this.symbols = (DecimalFormatSymbols) symbols.clone();
 		applyPattern(pattern, false);
@@ -472,7 +472,7 @@ public class DecimalFormat extends NumberFormat {
 	 *            On input: an alignment field, if desired. On output: the
 	 *            offsets of the alignment field.
 	 * @return The formatted number string
-	 * @see java.text.FieldPosition
+	 * @see FieldPosition
 	 */
 	public StringBuffer format(double number, StringBuffer result,
 			FieldPosition fieldPosition) {
@@ -573,7 +573,7 @@ public class DecimalFormat extends NumberFormat {
 	 *            On input: an alignment field, if desired. On output: the
 	 *            offsets of the alignment field.
 	 * @return The formatted number string
-	 * @see java.text.FieldPosition
+	 * @see FieldPosition
 	 */
 	public StringBuffer format(long number, StringBuffer result,
 			FieldPosition fieldPosition) {
@@ -593,7 +593,7 @@ public class DecimalFormat extends NumberFormat {
 	 * @param delegate
 	 *            notified of locations of sub fields
 	 * @return The formatted number string
-	 * @see java.text.FieldPosition
+	 * @see FieldPosition
 	 */
 	private StringBuffer format(long number, StringBuffer result,
 			FieldDelegate delegate) {
@@ -653,7 +653,7 @@ public class DecimalFormat extends NumberFormat {
 	 *            The object to format
 	 * @return AttributedCharacterIterator describing the formatted value.
 	 */
-	public AttributedCharacterIterator formatToCharacterIterator(Object obj) {
+	AttributedCharacterIterator formatToCharacterIterator(Object obj) {
 		CharacterIteratorFieldDelegate delegate = new CharacterIteratorFieldDelegate();
 		StringBuffer sb = new StringBuffer();
 
@@ -1362,7 +1362,7 @@ public class DecimalFormat extends NumberFormat {
 	 * programmer or user.
 	 * 
 	 * @return desired DecimalFormatSymbols
-	 * @see java.text.DecimalFormatSymbols
+	 * @see DecimalFormatSymbols
 	 */
 	public DecimalFormatSymbols getDecimalFormatSymbols() {
 		try {
@@ -1379,7 +1379,7 @@ public class DecimalFormat extends NumberFormat {
 	 * 
 	 * @param newSymbols
 	 *            desired DecimalFormatSymbols
-	 * @see java.text.DecimalFormatSymbols
+	 * @see DecimalFormatSymbols
 	 */
 	public void setDecimalFormatSymbols(DecimalFormatSymbols newSymbols) {
 		try {
@@ -1571,9 +1571,9 @@ public class DecimalFormat extends NumberFormat {
 	 * 
 	 * @see #setGroupingSize
 	 * @see NumberFormat#isGroupingUsed
-	 * @see java.text.DecimalFormatSymbols#getGroupingSeparator
+	 * @see DecimalFormatSymbols#getGroupingSeparator
 	 */
-	public int getGroupingSize() {
+	int getGroupingSize() {
 		return groupingSize;
 	}
 
@@ -1584,7 +1584,7 @@ public class DecimalFormat extends NumberFormat {
 	 * 
 	 * @see #getGroupingSize
 	 * @see NumberFormat#setGroupingUsed
-	 * @see java.text.DecimalFormatSymbols#setGroupingSeparator
+	 * @see DecimalFormatSymbols#setGroupingSeparator
 	 */
 	public void setGroupingSize(int newValue) {
 		groupingSize = (byte) newValue;
@@ -1663,7 +1663,7 @@ public class DecimalFormat extends NumberFormat {
 	 * 
 	 * @see #applyPattern
 	 */
-	public String toLocalizedPattern() {
+	String toLocalizedPattern() {
 		return toPattern(true);
 	}
 
@@ -1675,7 +1675,7 @@ public class DecimalFormat extends NumberFormat {
 	 */
 	private void expandAffixes() {
 		// Reuse one StringBuffer for better performance
-		StringBuffer buffer = new StringBuffer();
+		final StringBuffer buffer = new StringBuffer();
 		if (posPrefixPattern != null) {
 			positivePrefix = expandAffix(posPrefixPattern, buffer);
 			positivePrefixFieldPositions = null;
@@ -2038,7 +2038,7 @@ public class DecimalFormat extends NumberFormat {
 	 * @exception IllegalArgumentException
 	 *                if the given pattern is invalid.
 	 */
-	public void applyLocalizedPattern(String pattern) {
+	void applyLocalizedPattern(String pattern) {
 		applyPattern(pattern, true);
 	}
 
@@ -2577,7 +2577,7 @@ public class DecimalFormat extends NumberFormat {
 	 * 
 	 * @serial
 	 * @see #setDecimalFormatSymbols
-	 * @see java.text.DecimalFormatSymbols
+	 * @see DecimalFormatSymbols
 	 */
 	private DecimalFormatSymbols symbols = null; // LIU new
 	// DecimalFormatSymbols();

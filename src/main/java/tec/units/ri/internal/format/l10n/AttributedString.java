@@ -40,10 +40,9 @@ import java.util.Vector;
  * 
  * @see AttributedCharacterIterator
  * @see Annotation
- * @since 1.2
  */
 
-public class AttributedString {
+class AttributedString {
 
 	// since there are no vectors of int, we have to use arrays.
 	// We allocate them in chunks of 10 elements so we don't have to allocate
@@ -204,7 +203,7 @@ public class AttributedString {
 	 * @exception IllegalArgumentException
 	 *                if the subrange given by beginIndex and endIndex is out of
 	 *                the text range.
-	 * @see java.text.Annotation
+	 * @see Annotation
 	 */
 	public AttributedString(AttributedCharacterIterator text, int beginIndex,
 			int endIndex) {
@@ -232,7 +231,7 @@ public class AttributedString {
 	 * @exception IllegalArgumentException
 	 *                if the subrange given by beginIndex and endIndex is out of
 	 *                the text range.
-	 * @see java.text.Annotation
+	 * @see Annotation
 	 */
 	public AttributedString(AttributedCharacterIterator text, int beginIndex,
 			int endIndex, Attribute[] attributes) {
