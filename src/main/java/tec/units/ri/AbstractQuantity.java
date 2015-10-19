@@ -279,8 +279,8 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	public String toString() {
 		// return MeasureFormat.getStandard().format(this); TODO improve
 		// MeasureFormat
-		return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
-//		return QuantityFormat.getInstance().format(this);
+//		return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
+		return QuantityFormat.getInstance().format(this);
 	}
 
 	public abstract double doubleValue(Unit<Q> unit) throws ArithmeticException;

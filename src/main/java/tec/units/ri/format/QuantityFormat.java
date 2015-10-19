@@ -37,8 +37,8 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.units.ri.AbstractQuantity;
+import tec.units.ri.AbstractUnit;
 import tec.units.ri.internal.format.l10n.DecimalFormat;
-import tec.units.ri.internal.format.l10n.L10nNumberFormat;
 import tec.units.ri.internal.format.l10n.NumberFormat;
 import tec.units.ri.quantity.NumberQuantity;
 import tec.units.ri.unit.Units;
@@ -46,17 +46,17 @@ import tec.units.ri.unit.Units;
 /**
  * <p>
  * This class provides the interface for formatting and parsing
- * {@link AbstractQuantity measurements}.
+ * {@link Quantity quantities}.
  * </p>
  * 
  * <p>
- * Instances of this class should be able to format measurements stated in
+ * Instances of this class should be able to format quantities stated in
  * {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
  * </p>
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.3, $Date: 2015-10-15 $
+ * @version 0.7, $Date: 2015-10-19 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
@@ -132,17 +132,17 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 	}
 
 	/**
-	 * Formats the specified measure into an <code>Appendable</code>.
+	 * Formats the specified quantity into an <code>Appendable</code>.
 	 * 
-	 * @param measure
-	 *            the measure to format.
+	 * @param quantity
+	 *            the quantity to format.
 	 * @param dest
 	 *            the appendable destination.
 	 * @return the specified <code>Appendable</code>.
 	 * @throws IOException
 	 *             if an I/O exception occurs.
 	 */
-	public abstract Appendable format(Quantity<?> measure, Appendable dest)
+	public abstract Appendable format(Quantity<?> quantity, Appendable dest)
 			throws IOException;
 
 	/**
@@ -250,8 +250,8 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 	 * {@link #format(AbstractQuantity, Appendable)} except it does not raise an
 	 * IOException.
 	 * 
-	 * @param measure
-	 *            the measure to format.
+	 * @param quantity
+	 *            the quantity to format.
 	 * @param dest
 	 *            the appendable destination.
 	 * @return the specified <code>StringBuilder</code>.
@@ -284,6 +284,22 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 		}
 	}
 
+	static int getFractionDigitsCount(double d) {
+	    if (d >= 1) { //we only need the fraction digits
+	        d = d - (long) d;
+	    }
+	    if (d == 0) { //nothing to count
+	        return 0;
+	    }
+	    d *= 10; //shifts 1 digit to left
+	    int count = 1;
+	    while (d - (long) d != 0) { //keeps shifting until there are no more fractions
+	        d *= 10;
+	        count++;
+	    }
+	    return count;
+	}
+	
 	// Holds default implementation.
 	private static final class NumberSpaceUnit extends QuantityFormat {
 		private final DecimalFormat decimalFormat = new DecimalFormat();
@@ -295,21 +311,28 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 
 		private NumberSpaceUnit(NumberFormat numberFormat, UnitFormat unitFormat) {
 			this.numberFormat = numberFormat;
-			decimalFormat.applyPattern("#,#0.0000##");
+//			decimalFormat.applyPattern("#,#0.0000##");
 			this.unitFormat = unitFormat;
 		}
 
 		@Override
 		public Appendable format(Quantity<?> quantity, Appendable dest)
 				throws IOException {
-			// Unit unit = measure.getUnit();
+			// Unit unit = quantity.getUnit();
 			// if (unit instanceof CompoundUnit)
-			// return formatCompound(measure.doubleValue(unit),
+			// return formatCompound(quantity.doubleValue(unit),
 			// (CompoundUnit) unit, dest);
 			// else {
 			//dest.append(numberFormat.format(quantity.getValue()));
+			int fract = 0;
+			if (quantity != null && quantity.getValue() != null) {
+				fract = getFractionDigitsCount(quantity.getValue().doubleValue());
+			}
+			if (fract > 1) {
+				decimalFormat.setMaximumFractionDigits(fract + 1);
+			}
 			dest.append(decimalFormat.format(quantity.getValue()));
-			if (quantity.getUnit().equals(Units.ONE))
+			if (quantity.getUnit().equals(AbstractUnit.ONE))
 				return dest;
 			dest.append(' ');
 			return unitFormat.format(quantity.getUnit(), dest);
@@ -359,12 +382,12 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 				throws IOException {
 			Unit unit = q.getUnit();
 			// if (unit instanceof CompoundUnit)
-			// return formatCompound(measure.doubleValue(unit),
+			// return formatCompound(q.doubleValue(unit),
 			// (CompoundUnit) unit, dest);
 			// else {
 
-			// if (measure.isBig()) { // TODO SE only
-			// BigDecimal decimal = measure.decimalValue(unit,
+			// if (q.isBig()) { // TODO SE only
+			// BigDecimal decimal = q.decimalValue(unit,
 			// MathContext.UNLIMITED);
 			// dest.append(decimal.toString());
 			// } else {
