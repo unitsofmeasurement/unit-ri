@@ -172,7 +172,7 @@ import tec.units.ri.unit.AnnotatedUnit;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.3, $Date: 2015-10-05 $
+ * @version 0.6.4, $Date: 2015-10-23 $
  */
 public final class EBNFUnitFormat extends AbstractUnitFormat {
 
@@ -269,7 +269,7 @@ public final class EBNFUnitFormat extends AbstractUnitFormat {
 	 * Base constructor.
 	 * 
 	 */
-	public EBNFUnitFormat() {
+	EBNFUnitFormat() {
 		this(SymbolMap.of(toMap(L10nResources.getBundle(
 				BUNDLE_NAME, Locale.getDefault()))), Locale.getDefault());
 	}
