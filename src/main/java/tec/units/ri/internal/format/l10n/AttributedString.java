@@ -30,7 +30,9 @@
 package tec.units.ri.internal.format.l10n;
 
 import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 /**
@@ -91,7 +93,7 @@ class AttributedString {
 				// Determine the runs, creating a new run when the attributes
 				// differ.
 				int offset = 0;
-				Hashtable last = null;
+				Map last = null;
 
 				for (int counter = 0; counter < iterators.length; counter++) {
 					AttributedCharacterIterator iterator = iterators[counter];
@@ -102,7 +104,7 @@ class AttributedString {
 					while (index < end) {
 						iterator.setIndex(index);
 
-						Hashtable attrs = iterator.getAttributes();
+						Map attrs = iterator.getAttributes();
 
 						if (mapsDiffer(last, attrs)) {
 							setAttributes(attrs, index - start + offset);
@@ -142,7 +144,7 @@ class AttributedString {
 	 *                not an empty Map (attributes cannot be applied to a
 	 *                0-length range).
 	 */
-	public AttributedString(String text, Hashtable attributes) {
+	public AttributedString(String text, HashMap attributes) {
 		if (text == null || attributes == null) {
 			throw new NullPointerException();
 		}
@@ -162,9 +164,10 @@ class AttributedString {
 			Vector newRunAttributeValues = new Vector(attributeCount);
 			runAttributes[0] = newRunAttributes;
 			runAttributeValues[0] = newRunAttributeValues;
-			Enumeration iterator = attributes.keys();
-			while (iterator.hasMoreElements()) {
-				Object key = iterator.nextElement();
+			
+			Set iterator = attributes.keySet();
+			for (Object key : iterator) {
+//				Object key = iterator.nextElement();
 				Object value = attributes.get(key);
 				newRunAttributes.addElement(key);
 				newRunAttributeValues.addElement(value);
@@ -396,7 +399,7 @@ class AttributedString {
 	 *                don't define a non-empty subrange of the string and the
 	 *                attributes parameter is not an empty Map.
 	 */
-	public void addAttributes(Hashtable attributes, int beginIndex, int endIndex) {
+	public void addAttributes(HashMap attributes, int beginIndex, int endIndex) {
 		if (attributes == null) {
 			throw new NullPointerException();
 		}
@@ -420,9 +423,9 @@ class AttributedString {
 		int beginRunIndex = ensureRunBreak(beginIndex);
 		int endRunIndex = ensureRunBreak(endIndex);
 
-		Enumeration iterator = attributes.keys();
-		while (iterator.hasMoreElements()) {
-			Object key = iterator.nextElement();
+		Set iterator = attributes.keySet();
+		for (Object key : iterator) {
+			//Object key = iterator.nextElement();
 			Object value = attributes.get(key);
 			addAttributeRunData((Attribute) key, value, beginRunIndex,
 					endRunIndex);
@@ -750,7 +753,7 @@ class AttributedString {
 	 * (typically the end of the text) to the ones specified in attrs. This is
 	 * only meant to be called from the constructor!
 	 */
-	private void setAttributes(Hashtable attrs, int offset) {
+	private void setAttributes(Map attrs, int offset) {
 		if (runCount == 0) {
 			createRunAttributeDataVectors();
 		}
@@ -762,9 +765,9 @@ class AttributedString {
 			Vector runAttrs = new Vector(size);
 			Vector runValues = new Vector(size);
 
-			Enumeration iterator = attrs.keys();
-			while (iterator.hasMoreElements()) {
-				Object key = iterator.nextElement();
+			Set iterator = attrs.keySet();
+			for (Object key : iterator) {
+				//Object key = iterator.nextElement();
 				Object value = attrs.get(key);
 				runAttrs.addElement(key);
 				runValues.addElement(value);
@@ -777,7 +780,7 @@ class AttributedString {
 	/**
 	 * Returns true if the attributes specified in last and attrs differ.
 	 */
-	private static boolean mapsDiffer(Hashtable last, Hashtable attrs) {
+	private static boolean mapsDiffer(Map last, Map attrs) {
 		if (last == null) {
 			return (attrs != null && attrs.size() > 0);
 		}
@@ -1005,14 +1008,14 @@ class AttributedString {
 			}
 		}
 
-		public Hashtable getAttributes() {
+		public HashMap getAttributes() {
 			if (runAttributes == null || currentRunIndex == -1
 					|| runAttributes[currentRunIndex] == null) {
 				// ??? would be nice to return null, but current spec doesn't
 				// allow it
-				// returning Hashtable saves AttributeMap from dealing with
+				// returning HashMap saves AttributeMap from dealing with
 				// emptiness
-				return new Hashtable();				
+				return new HashMap();				
 			}
 			return new AttributeMap(currentRunIndex, beginIndex, endIndex);
 		}
@@ -1114,7 +1117,7 @@ class AttributedString {
 	// the map class associated with this string class, giving access to the
 	// attributes of one run
 
-	final private class AttributeMap extends Hashtable {
+	final private class AttributeMap extends HashMap {
 
 		int runIndex;
 		int beginIndex;

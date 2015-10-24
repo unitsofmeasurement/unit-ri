@@ -38,6 +38,7 @@ package tec.units.ri.internal.format.l10n;
  */
 
 import java.util.Hashtable;
+import java.util.Map;
 import java.util.Vector;
 
 /**
@@ -122,7 +123,7 @@ interface AttributedCharacterIterator extends CharacterIterator {
 	/**
 	 * Returns a map with the attributes defined on the current character.
 	 */
-	public Hashtable getAttributes();
+	public Map getAttributes();
 
 	/**
 	 * Returns the value of the named attribute for the current character.

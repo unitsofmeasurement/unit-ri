@@ -115,6 +115,7 @@ public final class SymbolMap {
 			}
 			try {
 				Class<?> c = Class.forName(className);
+//				Object o = c.newInstance();
 /*				
 				if (Units.class.equals(c)) {
 //					System.out.println(si.getName()); // + " (" + sou.getUnits().size() + ")");
