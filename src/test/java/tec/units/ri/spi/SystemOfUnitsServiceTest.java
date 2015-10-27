@@ -52,7 +52,7 @@ public class SystemOfUnitsServiceTest {
     	assertNotNull(service);
     	SystemOfUnits system = service.getSystemOfUnits();
     	assertNotNull(system);
-    	assertEquals("Units", system.getClass().getSimpleName());
+    	assertEquals("tec.units.ri.unit.Units", system.getClass().getName());
     	assertNotNull(system.getUnits());
     	assertEquals(39, system.getUnits().size());
     }

@@ -64,7 +64,7 @@ public class ServiceTest {
         UnitFormatService ufs = Bootstrap.getService(UnitFormatService.class);
         assertNotNull(ufs);
         assertNotNull(ufs.getUnitFormat());
-        assertEquals("DefaultFormat", ufs.getUnitFormat().getClass().getSimpleName());
+        assertEquals("tec.units.ri.format.SimpleUnitFormat$DefaultFormat", ufs.getUnitFormat().getClass().getName());
     }
 
     @Test

@@ -249,7 +249,7 @@ public class UnitsTest {
 
 	@Test
 	public void testGetParentUnit() {
-		assertEquals("TransformedUnit", GRAM.getClass().getSimpleName());
+		assertEquals("tec.units.ri.unit.TransformedUnit", GRAM.getClass().getName());
 		assertEquals("kg", ((TransformedUnit<Mass>)GRAM).getParentUnit().getSymbol());
 //		assertEquals("kg", UCUM.POUND.getSymbol()); //"lb"
 //		assertEquals("kg", UCUM.OUNCE.getSymbol());//"oz"
