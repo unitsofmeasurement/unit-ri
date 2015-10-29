@@ -29,8 +29,6 @@
  */
 package tec.units.ri.spi;
 
-import java.util.Objects;
-
 import tec.units.ri.function.MaximumSupplier;
 import tec.units.ri.function.MinimumSupplier;
 
@@ -44,7 +42,7 @@ import tec.units.ri.function.MinimumSupplier;
  *            The value of the range.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.8, November 29, 2014
+ * @version 0.8.9, October 29, 2015
  */
 public abstract class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T> {
 	// TODO do we keep null for min and max to represent infinity?
@@ -115,31 +113,45 @@ public abstract class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#equals()
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj instanceof Range<?>) {
-			@SuppressWarnings("unchecked")
-			final Range<T> other = (Range<T>) obj;
-			return Objects.equals(getMinimum(), other.getMinimum()) &&
-					Objects.equals(getMaximum(), other.getMaximum());
-		}
-		return false;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
-		return Objects.hash(min, max);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((max == null) ? 0 : max.hashCode());
+		result = prime * result + ((min == null) ? 0 : min.hashCode());
+		return result;
 	}
+
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals()
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Range other = (Range) obj;
+		if (max == null) {
+			if (other.max != null)
+				return false;
+		} else if (!max.equals(other.max))
+			return false;
+		if (min == null) {
+			if (other.min != null)
+				return false;
+		} else if (!min.equals(other.min))
+			return false;
+		return true;
+	}
+
 
 	/*
 	 * (non-Javadoc)
