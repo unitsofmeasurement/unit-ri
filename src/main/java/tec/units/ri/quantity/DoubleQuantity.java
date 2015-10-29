@@ -34,8 +34,6 @@ import javax.measure.Unit;
 
 import tec.units.ri.AbstractQuantity;
 import tec.units.ri.format.QuantityFormat;
-import tec.units.ri.internal.format.l10n.L10nNumberFormat;
-import tec.units.ri.internal.format.l10n.NumberFormat;
 
 /**
  * An amount of quantity, consisting of a double and a Unit. DoubleQuantity
