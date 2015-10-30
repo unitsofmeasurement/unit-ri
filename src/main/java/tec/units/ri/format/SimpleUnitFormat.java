@@ -1051,6 +1051,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	static {
 		DEFAULT.label(Units.PERCENT, "%");
 		DEFAULT.label(Units.KILOGRAM, "kg");
+		DEFAULT.label(Units.METRE, "m");
 		// DEFAULT.label(NonUnits.DECIBEL, "dB");
 		// DEFAULT.label(NonUnits.G, "grav");
 		// DEFAULT.label(NonUnits.ATOM, "atom");
@@ -1061,9 +1062,10 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		// DEFAULT.label(NonUnits.SECOND_ANGLE, "\"");
 		// DEFAULT.label(NonUnits.CENTIRADIAN, "centiradian");
 		// DEFAULT.label(NonUnits.GRADE, "grade");
-		// DEFAULT.label(Units.ARE, "a");
+//		DEFAULT.label(Units.ARE, "a");
 		// DEFAULT.label(NonUnits.HECTARE, "ha");
 		// DEFAULT.label(NonUnits.BYTE, "byte");
+		DEFAULT.label(Units.SECOND, "s");
 		DEFAULT.label(Units.MINUTE, "min");
 		DEFAULT.label(Units.HOUR, "h");
 		DEFAULT.label(Units.DAY, "day");

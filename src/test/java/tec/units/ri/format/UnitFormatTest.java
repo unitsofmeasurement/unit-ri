@@ -63,11 +63,13 @@ import tec.units.ri.unit.Units;
  */
 public class UnitFormatTest {
 	private Quantity<Length> sut;
-
+	private UnitFormat format;
+			
 	@Before
 	public void init() {
 		sut = DefaultQuantityFactory.getInstance(Length.class).create(10,
 				METRE);
+		format = SimpleUnitFormat.getInstance();
 	}
 
 	// @Test
@@ -155,9 +157,9 @@ public class UnitFormatTest {
 	
 	@Test
 	public void testParseSimple() {
-		final UnitFormat format = EBNFUnitFormat.getInstance();
 		try {
 			Unit<?> u = format.parse("s");
+			assertNotNull(u);
 			assertEquals("s", u.getSymbol());
 			assertEquals(SECOND, u);
 		} catch (ParserException e) {
@@ -167,7 +169,6 @@ public class UnitFormatTest {
 	
 	@Test
 	public void testFormatFromQuantity() {
-		final UnitFormat format = EBNFUnitFormat.getInstance();
 		final Appendable a = new StringBuilder();
 		try {
 			format.format(METRE, a);
@@ -190,7 +191,6 @@ public class UnitFormatTest {
 
 	@Test
 	public void testParseSimple1() {
-		final UnitFormat format = EBNFUnitFormat.getInstance();
 		try {
 			Unit<?> u = format.parse("min");
 			// assertEquals("min", u.getSymbol());
@@ -202,9 +202,9 @@ public class UnitFormatTest {
 
 	@Test
 	public void testParseSimple2() {
-		final UnitFormat format = EBNFUnitFormat.getInstance();
 		try {
 			Unit<?> u = format.parse("m");
+			assertNotNull(u);
 			assertEquals("m", u.getSymbol());
 			assertEquals(METRE, u);
 		} catch (ParserException e) {
@@ -214,7 +214,6 @@ public class UnitFormatTest {
 
 	@Test
 	public void testParseSimple3() {
-		final UnitFormat format = EBNFUnitFormat.getInstance();
 		try {
 			Unit<?> u = format.parse("kg");
 			assertEquals("kg", u.getSymbol());
