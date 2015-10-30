@@ -29,8 +29,6 @@
  */
 package tec.units.ri.quantity;
 
-import static tec.units.ri.format.FormatBehavior.LOCALE_NEUTRAL;
-
 import java.util.Objects;
 
 import javax.measure.Quantity;
@@ -43,6 +41,7 @@ import tec.units.ri.format.QuantityFormat;
  * Singleton class for accessing {@link Quantity} instances.
  * @author werner
  * @author otaviojava
+ * @version 0.5, October 30, 2015
  */
 public final class Quantities {
     /**
@@ -69,7 +68,7 @@ public final class Quantities {
      */
     public static Quantity<?> getQuantity(CharSequence csq) {
         try {
-            return QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq);
+            return QuantityFormat.getInstance().parse(csq);
         } catch (IllegalArgumentException | ParserException e) {
             throw new IllegalArgumentException(e); // TODO could we handle this differently?
         }

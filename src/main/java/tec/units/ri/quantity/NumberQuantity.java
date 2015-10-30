@@ -29,8 +29,6 @@
  */
 package tec.units.ri.quantity;
 
-import static tec.units.ri.format.FormatBehavior.LOCALE_NEUTRAL;
-
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnconvertibleException;
@@ -49,7 +47,7 @@ import tec.units.ri.format.QuantityFormat;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.9.5, $Date: 2015-07-07 $
+ * @version 0.9.6, $Date: 2015-10-30 $
  */
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -346,7 +344,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	 */
 	public static Quantity<?> parse(CharSequence csq) {
 		try {
-			return QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq);
+			return QuantityFormat.getInstance().parse(csq);
 		} catch (IllegalArgumentException ie) {
 			throw ie;
 		} catch (ParserException pe) {

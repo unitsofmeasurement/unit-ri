@@ -56,7 +56,6 @@ package tec.units.ri.internal.format.l10n;
  * any of these symbols, you can get the <code>DecimalFormatSymbols</code>
  * object from your <code>DecimalFormat</code> and modify it.
  *
- * @see Locale
  * @see DecimalFormat
  * @author Mark Davis
  * @author Alan Liu

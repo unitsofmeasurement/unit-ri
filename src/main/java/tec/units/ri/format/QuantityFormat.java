@@ -56,7 +56,7 @@ import tec.units.ri.unit.Units;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7.1, $Date: 2015-10-29 $
+ * @version 0.7.2, $Date: 2015-10-30 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
@@ -84,51 +84,14 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 	private static final Standard STANDARD = new Standard();
 
 	/**
-	 * Returns the measure format for the default locale. The default format
-	 * assumes the measure is composed of a decimal number and a {@link Unit}
+	 * Returns the quantity format for the default locale. The default format
+	 * assumes the quantity is composed of a decimal number and a {@link Unit}
 	 * separated by whitespace(s).
 	 * 
 	 * @return <code>MeasureFormat.getInstance(NumberFormat.getInstance(), UnitFormat.getInstance())</code>
 	 */
 	public static QuantityFormat getInstance() {
 		return DEFAULT;
-	}
-
-	// /**
-	// * Returns the measure format using the specified number format and unit
-	// * format (the number and unit are separated by one space).
-	// *
-	// * @param numberFormat the number format.
-	// * @param unitFormat the unit format.
-	// * @return the corresponding format.
-	// */
-	// public static QuantityFormat getInstance(NumberFormat numberFormat,
-	// UnitFormat unitFormat) {
-	// return new NumberSpaceUnit(numberFormat, unitFormat);
-	// }
-
-	/**
-	 * Returns the culture invariant format based upon {@link Number} canonical
-	 * format and the {@link UnitFormat#current() standard} unit format. This
-	 * format <b>is not</b> locale-sensitive and can be used for unambiguous
-	 * electronic communication of quantities together with their units without
-	 * loss of information. For example: <code>"1.23456789 kg.m/s2"</code>
-	 * returns
-	 * <code>Quantities.getQuantity(new Double(1.23456789d), AbstractUnit.parse("kg.m/s2")));</code>
-	 * 
-	 * @param style
-	 *            the format style to apply.
-	 * @return the desired format.
-	 */
-	public static QuantityFormat getInstance(FormatBehavior style) {
-		switch (style) {
-		case LOCALE_NEUTRAL:
-			return STANDARD;
-		case LOCALE_SENSITIVE:
-			return DEFAULT;
-		default:
-			return DEFAULT;
-		}
 	}
 
 	/**

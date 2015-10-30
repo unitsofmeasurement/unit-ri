@@ -40,7 +40,6 @@ import javax.measure.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
 import tec.units.ri.format.SimpleUnitFormat;
-import tec.units.ri.format.EBNFUnitFormat;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
@@ -69,7 +68,7 @@ import tec.units.ri.unit.Units;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.9.2, Sep 22, 2015
+ * @version 0.9.3, Oct 30, 2015
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
