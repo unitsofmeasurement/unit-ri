@@ -73,7 +73,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.6, October 19, 2015
+ * @version 0.6.1, October 29, 2015
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
@@ -410,9 +410,23 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 					return false;
 			return true;
 		}
+		
+		static boolean isLetter(char c) {
+		    return (c > 64 && c < 91) || (c > 96 && c < 123);
+		}
+
+		//Not necessary but included anyways
+		static boolean isUpperCase(char c) {
+		    return c > 64 && c < 91;
+		}
+
+		static boolean isSpace(char c) {
+		    //Accounts for spaces and other "space-like" characters
+		    return c == 32 || c == 12 || c == 13 || c == 14;
+		}
 
 		static boolean isUnitIdentifierPart(char ch) {
-			return Character.isLetter(ch)
+			return isLetter(ch)
 					|| (!Character.isWhitespace(ch) && !Character.isDigit(ch)
 							&& (ch != '·') && (ch != '*') && (ch != '/')
 							&& (ch != '(') && (ch != ')') && (ch != '[')
