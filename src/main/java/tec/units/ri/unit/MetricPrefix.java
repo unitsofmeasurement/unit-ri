@@ -29,7 +29,7 @@
  */
 package tec.units.ri.unit;
 
-import static tec.units.ri.internal.MathHelper.pow;
+import static tec.units.ri.internal.MathUtil.pow;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;

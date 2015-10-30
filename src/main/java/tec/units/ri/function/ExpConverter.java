@@ -30,6 +30,7 @@
 package tec.units.ri.function;
 
 import tec.units.ri.AbstractConverter;
+import tec.units.ri.internal.MathUtil;
 
 
 /**
@@ -69,7 +70,7 @@ public final class ExpConverter extends AbstractConverter
      */
     public ExpConverter(double base) {
         this.base = base;
-        this.logOfBase = Math.log(base);
+        this.logOfBase = MathUtil.log(base);
     }
 
     /**
@@ -112,7 +113,7 @@ public final class ExpConverter extends AbstractConverter
 
     @Override
     public double convert(double amount) {
-            return Math.exp(logOfBase * amount);
+            return MathUtil.exp(logOfBase * amount);
     }
 
 //    @Override

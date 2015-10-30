@@ -30,6 +30,7 @@
 package tec.units.ri.function;
 
 import tec.units.ri.AbstractConverter;
+import tec.units.ri.internal.MathUtil;
 
 
 /**
@@ -41,7 +42,7 @@ import tec.units.ri.AbstractConverter;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, August 3, 2014
+ * @version 0.4, October 29, 2015
  */
 public final class LogConverter extends AbstractConverter 
 	implements ValueSupplier<String> { //implements Immutable<String> {
@@ -68,7 +69,7 @@ public final class LogConverter extends AbstractConverter
      */
     public LogConverter(double base) {
         this.base = base;
-        this.logOfBase = Math.log(base);
+        this.logOfBase = MathUtil.log(base);
     }
 
     /**
@@ -111,7 +112,7 @@ public final class LogConverter extends AbstractConverter
 
     @Override
     public double convert(double amount) {
-        return Math.log(amount) / logOfBase;
+        return MathUtil.log(amount) / logOfBase;
     }
 
 //    @Override
