@@ -37,7 +37,6 @@ import java.util.Set;
 import javax.measure.format.UnitFormat;
 import javax.measure.spi.UnitFormatService;
 
-import tec.units.ri.format.EBNFUnitFormat;
 import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.format.SimpleUnitFormat.Flavor;
 
@@ -45,7 +44,7 @@ import tec.units.ri.format.SimpleUnitFormat.Flavor;
  * Default format service.
  *
  * @author Werner Keil
- * @version 0.2, July 27, 2015
+ * @version 0.3, October 29, 2015
  */
 public class DefaultUnitFormatService implements UnitFormatService {
 
@@ -56,7 +55,7 @@ public class DefaultUnitFormatService implements UnitFormatService {
     public DefaultUnitFormatService() {
         formats.put(DEFAULT_FORMAT, SimpleUnitFormat.getInstance());
         formats.put(Flavor.ASCII.name(), SimpleUnitFormat.getInstance(Flavor.ASCII));
-        formats.put("EBNF", EBNFUnitFormat.getInstance());
+//        formats.put("EBNF", EBNFUnitFormat.getInstance());
     }
 
 //    @Override

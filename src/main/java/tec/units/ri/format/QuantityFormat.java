@@ -56,7 +56,7 @@ import tec.units.ri.unit.Units;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, $Date: 2015-10-19 $
+ * @version 0.7.1, $Date: 2015-10-29 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
@@ -76,7 +76,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 	 * Holds the default format instance.
 	 */
 	private static final NumberSpaceUnit EBNF = new NumberSpaceUnit(
-			NumberFormat.getInstance(), EBNFUnitFormat.getInstance());
+			NumberFormat.getInstance(), SimpleUnitFormat.getInstance());
 
 	/**
 	 * Holds the standard format instance.
@@ -397,7 +397,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 			if (q.getUnit().equals(Units.ONE))
 				return dest;
 			dest.append(' ');
-			return EBNFUnitFormat.getInstance().format(unit, dest);
+			return SimpleUnitFormat.getInstance().format(unit, dest);
 			// }
 		}
 

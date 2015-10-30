@@ -172,7 +172,8 @@ import tec.units.ri.unit.AnnotatedUnit;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.4, $Date: 2015-10-23 $
+ * @version 0.6.5, $Date: 2015-10-29 $
+ * @deprecated Not used in RI
  */
 public final class EBNFUnitFormat extends AbstractUnitFormat {
 
