@@ -41,6 +41,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -60,7 +61,7 @@ import java.util.logging.Logger;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.3, $Date: 2015-07-12 $
+ * @version 0.6, $Date: 2015-10-29 $
  */
 public final class QuantityDimension implements Dimension, Serializable {
 	private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
@@ -126,7 +127,7 @@ public final class QuantityDimension implements Dimension, Serializable {
     public static <Q extends Quantity<Q>> Dimension getInstance(Class<Q> quantityType) {
         // TODO: Track OSGi services and aggregate results (register custom types)
         Unit<Q> siUnit = Units.getInstance().getUnit(quantityType);
-        if (siUnit == null) logger.finer("Quantity type: " + quantityType + " unknown"); // we're logging but probably FINER is enough?
+        if (siUnit == null) logger.log(Level.FINER, "Quantity type: " + quantityType + " unknown"); // we're logging but probably FINER is enough?
         return (siUnit != null) ? siUnit.getDimension() : null;
     }
 

@@ -146,28 +146,8 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
          logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
          QuantityFactory<Q> factory;
          if (!type.isInterface()) {
-        	 if (type != null && type.getInterfaces() != null & type.getInterfaces().length > 0) {
-	        	 logger.log(LOG_LEVEL, "Type0: " + type.getInterfaces()[0]);
-	             Class<?> type2 = type.getInterfaces()[0];
-
-	            factory = INSTANCES.get(type2);
-	            if (factory != null) return factory;
-	            if (!AbstractQuantity.class.isAssignableFrom(type2))
-	                // This exception is not documented because it should never happen if the
-	                // user don't try to trick the Java generic types system with unsafe cast.
-	                throw new ClassCastException();
-	            factory = new DefaultQuantityFactory<Q>((Class<Q>)type2);
-	            INSTANCES.put(type2, factory);
-        	 } else {
-                 factory = INSTANCES.get(type);
-                 if (factory != null) return factory;
-                 if (!AbstractQuantity.class.isAssignableFrom(type))
-                     // This exception is not documented because it should never happen if the
-                     // user don't try to trick the Java generic types system with unsafe cast.
-                     throw new ClassCastException();
-                 factory = new DefaultQuantityFactory<Q>(type);
-                 INSTANCES.put(type, factory);
-        	 }
+        	 factory = new DefaultQuantityFactory<Q>(type);
+        	 // TODO use instances?
          } else {
             factory = INSTANCES.get(type);
             if (factory != null) return factory;
