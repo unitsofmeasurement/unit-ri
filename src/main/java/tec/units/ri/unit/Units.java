@@ -82,6 +82,8 @@ import tec.units.ri.quantity.QuantityDimension;
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
+	public static final String SYSTEM_NAME = "Units"; // This is for ME compatibility, since Class.getSimpleName() isn't available.
+	
     public Units() {
     }
     
@@ -495,7 +497,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
     
     @Override
     public String getName() {
-    	return getClass().getSimpleName();
+    	return SYSTEM_NAME;
     }
     
     /**

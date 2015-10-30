@@ -29,7 +29,6 @@
  */
 package tec.units.ri;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -46,7 +45,7 @@ import javax.measure.spi.SystemOfUnits;
  * <p>An abstract base class for unit systems.</p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, $Date: 2015-09-24 $
+ * @version 0.4, $Date: 2015-10-29 $
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 	protected static final Logger logger = Logger.getLogger(AbstractSystemOfUnits.class
@@ -86,7 +85,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 	    		logger.log(Level.FINEST, u + "; D: " + u.getDimension() + "; C: " + u.getClass());
 	    	}
     	}
-        return Collections.unmodifiableSet(units);
+        return units;
     }
 
     @Override

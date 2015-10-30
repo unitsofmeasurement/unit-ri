@@ -37,7 +37,6 @@ import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -63,13 +62,13 @@ import java.util.logging.Logger;
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.6, $Date: 2015-10-29 $
  */
-public final class QuantityDimension implements Dimension, Serializable {
+public final class QuantityDimension implements Dimension {
 	private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
 	
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 123289037718650030L;
+//	private static final long serialVersionUID = 123289037718650030L;
 
 	/**
      * Holds dimensionless.
