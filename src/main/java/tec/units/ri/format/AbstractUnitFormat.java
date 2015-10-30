@@ -46,19 +46,17 @@ import tec.units.ri.AbstractUnit;
  *
  * <p>
  * For all metric units, the 20 SI prefixes used to form decimal multiples and
- * sub-multiples of SI units are recognized. {@link USCustomary US Customary}
- * units are directly recognized. For example:[code]
- * Unit.valueOf("m°C").equals(SI.MILLI(SI.CELSIUS))
- * Unit.valueOf("kW").equals(SI.KILO(SI.WATT))
- * Unit.valueOf("ft").equals(SI.METRE.multiply(3048).divide(10000))[/code]
+ * sub-multiples of SI units are recognized. For example:<br><code>
+ * AbstractUnit.parse("m°C").equals(MetricPrefix.MILLI(Units.CELSIUS))
+ * AbstractUnit.parse("kW").equals(MetricPrefix.KILO(Units.WATT))</code>
  * </p>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7.4 $Date: 2015-10-05 $
+ * @version 0.7.5 $Date: 2015-10-29 $
  * 
  */
-public abstract class AbstractUnitFormat implements UnitFormat, Parser<CharSequence, Unit<?>> {
+public abstract class AbstractUnitFormat implements UnitFormat {
 	/**
 	 * serialVersionUID
 	 */

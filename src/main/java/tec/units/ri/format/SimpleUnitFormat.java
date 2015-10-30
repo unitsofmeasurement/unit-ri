@@ -861,15 +861,13 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
 		@Override
 		public Unit<?> parse(CharSequence csq) throws ParserException {
-			// TODO Auto-generated method stub
-			return null;
+			return parse(csq, 0);
 		}
 
 		@Override
 		protected Unit<?> parse(CharSequence csq, int index)
 				throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
+			return parseObject(csq.toString(), new ParsePosition(index));
 		}
 	}
 
@@ -1052,6 +1050,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	// To be moved in to other modules.
 	static {
 		DEFAULT.label(Units.PERCENT, "%");
+		DEFAULT.label(Units.KILOGRAM, "kg");
 		// DEFAULT.label(NonUnits.DECIBEL, "dB");
 		// DEFAULT.label(NonUnits.G, "grav");
 		// DEFAULT.label(NonUnits.ATOM, "atom");

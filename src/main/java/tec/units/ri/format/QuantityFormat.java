@@ -418,7 +418,8 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 			Double decimal = new Double(csq.subSequence(startDecimal,
 					endDecimal).toString());
 			// cursor.setIndex(endDecimal + 1);
-			Unit unit = EBNFUnitFormat.getInstance().parse(csq, index);
+			//Unit unit = EBNFUnitFormat.getInstance().parse(csq, index);
+			Unit unit = SimpleUnitFormat.getInstance().parse(csq, index);
 			return NumberQuantity.of(decimal.doubleValue(), unit);
 		}
 

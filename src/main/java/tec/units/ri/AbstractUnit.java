@@ -165,7 +165,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *
 	 * Locale-sensitive unit parsing may be handled using the OSGi
 	 * {@link javax.measure.spi.UnitFormatService} or for non-OSGi applications
-	 * instances of {@link EBNFUnitFormat}.
+	 * instances of {@link SimpleUnitFormat}.
 	 *
 	 * <p>
 	 * Note: The standard format supports dimensionless units.[code]
@@ -180,7 +180,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *             if the specified character sequence cannot be parsed correctly.
 	 */
 	public static Unit<?> parse(CharSequence charSequence) {
-		return EBNFUnitFormat.getInstance().parse(charSequence);
+		//return EBNFUnitFormat.getInstance().parse(charSequence);
+		return SimpleUnitFormat.getInstance().parse(charSequence);
 	}
 
 	/**
