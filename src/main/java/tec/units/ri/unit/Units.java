@@ -78,7 +78,7 @@ import tec.units.ri.quantity.QuantityDimension;
  * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.5, October 24, 2015
+ * @version 0.6, November 2, 2015
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
@@ -196,7 +196,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * an area on the surface of the sphere that is equal to the radius squared.
      * The total solid angle of a sphere is 4*Pi steradians.
      */
-    public static final AlternateUnit<SolidAngle> STERADIAN
+    public static final Unit<SolidAngle> STERADIAN
             = addUnit(new AlternateUnit<SolidAngle>(ONE, "sr"), SolidAngle.class);
 
     /**
@@ -205,7 +205,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * After Heinrich Rudolf Hertz (1857-1894), German physicist who was the
      * first to produce radio waves artificially.
      */
-    public static final AlternateUnit<Frequency> HERTZ
+    public static final Unit<Frequency> HERTZ
             = addUnit(new AlternateUnit<Frequency>(ONE.divide(SECOND), "Hz"), Frequency.class);
 
     /**
@@ -294,7 +294,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * One Siemens is equal to one ampere per volt. It is named after
      * the German engineer Ernst Werner von Siemens (1816-1892).
      */
-    public static final AlternateUnit<ElectricConductance> SIEMENS
+    public static final Unit<ElectricConductance> SIEMENS
             = addUnit(new AlternateUnit<ElectricConductance>(
             AMPERE.divide(VOLT), "S"), ElectricConductance.class);
 
@@ -305,7 +305,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * reduced to zero within one second. It is named after the German physicist
      * Wilhelm Eduard Weber (1804-1891).
      */
-    public static final AlternateUnit<MagneticFlux> WEBER
+    public static final Unit<MagneticFlux> WEBER
             = addUnit(new AlternateUnit<MagneticFlux>(
             VOLT.multiply(SECOND), "Wb"), MagneticFlux.class);
 
@@ -315,7 +315,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * after the Serbian-born American electrical engineer and physicist
      * Nikola Tesla (1856-1943).
      */
-    public static final AlternateUnit<MagneticFluxDensity> TESLA
+    public static final Unit<MagneticFluxDensity> TESLA
             = addUnit(new AlternateUnit<MagneticFluxDensity>(
             WEBER.divide(METRE.pow(2)), "T"), MagneticFluxDensity.class);
 
@@ -326,7 +326,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * one ampere per second. It is named after the American physicist
      * Joseph Henry (1791-1878).
      */
-    public static final AlternateUnit<ElectricInductance> HENRY
+    public static final Unit<ElectricInductance> HENRY
             = addUnit(new AlternateUnit<ElectricInductance>(
             WEBER.divide(AMPERE), "H"), ElectricInductance.class);
 
@@ -345,7 +345,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * One Lumen is equal to the amount of light given out through a solid angle
      * by a source of one candela intensity radiating equally in all directions.
      */
-    public static final AlternateUnit<LuminousFlux> LUMEN
+    public static final Unit<LuminousFlux> LUMEN
             = addUnit(new AlternateUnit<LuminousFlux>(
             CANDELA.multiply(STERADIAN), "lm"), LuminousFlux.class);
 
@@ -353,7 +353,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * The SI unit for illuminance (standard name <code>lx</code>).
      * One Lux is equal to one lumen per square metre.
      */
-    public static final AlternateUnit<Illuminance> LUX
+    public static final Unit<Illuminance> LUX
             = addUnit(new AlternateUnit<Illuminance>(
             LUMEN.divide(METRE.pow(2)), "lx"), Illuminance.class);
 
@@ -363,7 +363,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * It is named after the French physicist, Antoine-Henri Becquerel
      * (1852-1908).
      */
-    public static final AlternateUnit<Radioactivity> BECQUEREL
+    public static final Unit<Radioactivity> BECQUEREL
             = addUnit(new AlternateUnit<Radioactivity>(
             ONE.divide(SECOND), "Bq"), Radioactivity.class);
 
@@ -374,7 +374,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * kilogram of matter. It is named after the British physician
      * L. H. Gray (1905-1965).
      */
-    public static final AlternateUnit<RadiationDoseAbsorbed> GRAY
+    public static final Unit<RadiationDoseAbsorbed> GRAY
             = addUnit(new AlternateUnit<RadiationDoseAbsorbed>(
             JOULE.divide(KILOGRAM), "Gy"), RadiationDoseAbsorbed.class);
 
@@ -385,7 +385,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * radiation. It is named after the Swedish physicist Rolf Sievert
      * (1898-1966).
      */
-    public static final AlternateUnit<RadiationDoseEffective> SIEVERT
+    public static final Unit<RadiationDoseEffective> SIEVERT
             = addUnit(new AlternateUnit<RadiationDoseEffective>(
             JOULE.divide(KILOGRAM), "Sv"), RadiationDoseEffective.class);
 
