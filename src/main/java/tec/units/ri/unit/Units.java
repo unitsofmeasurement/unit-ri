@@ -84,7 +84,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 
 	public static final String SYSTEM_NAME = "Units"; // This is for ME compatibility, since Class.getSimpleName() isn't available.
 	
-    public Units() {
+    protected Units() {
     }
     
     private static final Units INSTANCE = new Units();
@@ -392,7 +392,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
     /**
      * The SI unit for catalytic activity (standard name <code>kat</code>).
      */
-    public static final AlternateUnit<CatalyticActivity> KATAL
+    public static final Unit<CatalyticActivity> KATAL
             = addUnit(new AlternateUnit<CatalyticActivity>(
             MOLE.divide(SECOND), "kat"), CatalyticActivity.class);
             
