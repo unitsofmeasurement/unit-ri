@@ -1033,8 +1033,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		}
 
 		// Special case for DEGREE_CElSIUS.
-		DEFAULT.label(Units.CELSIUS, "℃");
-		DEFAULT.alias(Units.CELSIUS, "°C");
+		DEFAULT.label(Units.CELSIUS, "°C");
+		DEFAULT.alias(Units.CELSIUS, "℃");
+		//DEFAULT.alias(Units.CELSIUS, "°C");
 		ASCII.label(Units.CELSIUS, "Celsius");
 		for (int i = 0; i < PREFIXES.length; i++) {
 			DEFAULT.label(Units.CELSIUS.transform(CONVERTERS[i]), PREFIXES[i]
