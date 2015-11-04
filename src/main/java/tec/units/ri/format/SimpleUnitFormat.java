@@ -73,7 +73,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.6.1, October 29, 2015
+ * @version 0.6.2, Nov 4, 2015
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
@@ -1033,7 +1033,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		}
 
 		// Special case for DEGREE_CElSIUS.
-		DEFAULT.label(Units.CELSIUS, "°C");
+		//DEFAULT.label(Units.CELSIUS, "°C");
+		DEFAULT.label(Units.CELSIUS, "\u00b0C");
 		DEFAULT.alias(Units.CELSIUS, "℃");
 		//DEFAULT.alias(Units.CELSIUS, "°C");
 		ASCII.label(Units.CELSIUS, "Celsius");
@@ -1045,11 +1046,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			ASCII.label(Units.CELSIUS.transform(CONVERTERS[i]),
 					asciiPrefix(PREFIXES[i]) + "Celsius");
 		}
-	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// To be moved in to other modules.
-	static {
 		DEFAULT.label(Units.PERCENT, "%");
 		DEFAULT.label(Units.KILOGRAM, "kg");
 		DEFAULT.label(Units.METRE, "m");
