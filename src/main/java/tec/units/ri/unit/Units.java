@@ -78,7 +78,7 @@ import tec.units.ri.quantity.QuantityDimension;
  * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, November 2, 2015
+ * @version 0.7, November 9, 2015
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
@@ -466,13 +466,13 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
         = new TransformedUnit<Time>("min", SECOND, RationalConverter.of(60, 1));
 
     /**
-     * A time unit accepted for use with SI units (standard name <code>h/code>).
+     * A time unit accepted for use with SI units (standard name <code>h</code>).
      */
     public static final Unit<Time> HOUR
         = new TransformedUnit<Time>("h", SECOND, RationalConverter.of(60 * 60, 1));
 
     /**
-     * A time unit accepted for use with SI units (standard name <code>d/code>).
+     * A time unit accepted for use with SI units (standard name <code>d</code>).
      */
     public static final Unit<Time> DAY
         = new TransformedUnit<Time>("d", SECOND, RationalConverter.of(24 * 60 * 60, 1));
@@ -484,7 +484,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 	static final Unit<Time> WEEK = addUnit(DAY.multiply(7));
     
     /**
-     * A time unit accepted for use with SI units (standard name <code>y/code>).
+     * A time unit accepted for use with SI units (standard name <code>y</code>).
      */
 	public static final Unit<Time> YEAR = addUnit(Units.DAY.multiply(365.2525));
 
