@@ -32,9 +32,16 @@ package tec.units.ri.spi;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
+import javax.measure.Unit;
 import javax.measure.spi.Bootstrap;
 import javax.measure.spi.SystemOfUnits;
 import javax.measure.spi.SystemOfUnitsService;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -54,6 +61,15 @@ public class SystemOfUnitsServiceTest {
     	assertNotNull(system);
     	assertEquals("tec.units.ri.unit.Units", system.getClass().getName());
     	assertNotNull(system.getUnits());
+//    	for (Unit<?> u : system.getUnits()) {
+//    		System.out.println(u.toString());
+//    	}
+/*    	Set<? extends Unit<?>> units = system.getUnits();
+    	List list = Arrays.asList((units.toArray()));
+    	Collections.sort(list);
+    	for (Object o : list) {
+    		System.out.println(o.toString());
+    	}*/
     	assertEquals(39, system.getUnits().size());
     }
 }

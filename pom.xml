@@ -357,4 +357,5 @@
 			</properties>
 		</profile>
 	</profiles>
+	<version>0.9-SNAPSHOT</version>
 </project>
