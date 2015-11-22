@@ -45,7 +45,7 @@ import tec.units.ri.quantity.DefaultQuantityFactory;
  */
 @SuppressWarnings("rawtypes")
 public final class DefaultQuantityFactoryService implements QuantityFactoryService {
-    private final Map<Class, QuantityFactory> INSTANCE = new HashMap<Class, QuantityFactory>();
+    private final Map<Class, QuantityFactory> INSTANCE = new HashMap<>();
 
     /**
      * Return a factory for this quantity
