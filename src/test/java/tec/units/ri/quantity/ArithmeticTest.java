@@ -51,7 +51,7 @@ public class ArithmeticTest {
 	
 	@Test
 	public void testValue() {
-		assertEquals(Integer.valueOf(10), sut.getValue());
+		assertEquals(10, sut.getValue());
 	}
 	
 	@Test
@@ -65,7 +65,7 @@ public class ArithmeticTest {
 		Quantity<Length> result = sut.add(len);
 		assertNotNull(result);
 		assertEquals(METRE, result.getUnit());
-		assertEquals(Double.valueOf(15), result.getValue());
+		assertEquals((double) 15, result.getValue());
 	}
 
 	@Test
@@ -74,7 +74,7 @@ public class ArithmeticTest {
 		Quantity<Length> result = sut.subtract(len);
 		assertNotNull(result);
 		assertEquals(METRE, result.getUnit());
-		assertEquals(Double.valueOf(5), result.getValue());
+		assertEquals((double) 5, result.getValue());
 	}
 	
 }

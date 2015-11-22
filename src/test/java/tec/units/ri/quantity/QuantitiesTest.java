@@ -61,7 +61,7 @@ public class QuantitiesTest {
 
     @Test
     public void testOf() {
-    	AbstractQuantity<Pressure> pressure = NumberQuantity.of(Double.valueOf(1), PASCAL); 
+    	AbstractQuantity<Pressure> pressure = NumberQuantity.of((double) 1, PASCAL);
         assertEquals(PASCAL, pressure.getUnit()); // TODO: Problem with kg...
     }
 

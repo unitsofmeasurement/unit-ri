@@ -67,7 +67,7 @@ public class UnitConverterTest {
 		Quantity<Length> quantLength2 = Quantities.getQuantity(6.0, targetUnit);
 		Quantity<Length> quantResult1 = quantLength1.to(targetUnit);
 		assertNotNull(quantResult1);
-		assertEquals(Double.valueOf(400), quantResult1.getValue());
+		assertEquals((double) 400, quantResult1.getValue());
 		assertEquals(targetUnit, quantResult1.getUnit());
 	}
 

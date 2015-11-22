@@ -47,7 +47,7 @@ public class QuantityFactoryTest {
 	@Test
 	public void testLength() {
 		Quantity<Length> l =  DefaultQuantityFactory.getInstance(Length.class).create(23.5, METRE); // 23.0 km
-		assertEquals(Double.valueOf(23.5d), l.getValue());
+		assertEquals(23.5d, l.getValue());
 		assertEquals(METRE, l.getUnit());
 		assertEquals("m", l.getUnit().getSymbol());
 	}
@@ -56,7 +56,7 @@ public class QuantityFactoryTest {
 	@Ignore
 	public void testMass() {
 		Quantity<Mass> m = DefaultQuantityFactory.getInstance(Mass.class).create(10, KILOGRAM); // 10 kg
-		assertEquals(Integer.valueOf(10), m.getValue());
+		assertEquals(10, m.getValue());
 		assertEquals(KILOGRAM, m.getUnit());
 		assertEquals("kg", m.getUnit().getSymbol());
 		assertEquals("10 kg", m.toString());
@@ -65,7 +65,7 @@ public class QuantityFactoryTest {
 	@Test
 	public void testTime() {
 		Quantity<Time> t = DefaultQuantityFactory.getInstance(Time.class).create(40, MINUTE); // 40 min
-		assertEquals(Integer.valueOf(40), t.getValue());
+		assertEquals(40, t.getValue());
 		assertEquals(MINUTE, t.getUnit());
 		assertNull(t.getUnit().getSymbol());
 //		assertEquals("s", t.getUnit().getSymbol()); // FIXME this should be "min", tweak for TransformedUnit
