@@ -54,14 +54,14 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
     /**
      * Holds the units.
      */
-    protected final Set<Unit<?>> units = new HashSet<Unit<?>>();
+    protected final Set<Unit<?>> units = new HashSet<>();
 
     /**
      * Holds the mapping quantity to unit.
      */
     @SuppressWarnings("rawtypes")
 	protected final Map<Class<? extends Quantity>, Unit>
-            quantityToUnit = new HashMap<Class<? extends Quantity>, Unit>();
+            quantityToUnit = new HashMap<>();
 
     /**
      * The natural logarithm.
@@ -90,7 +90,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 
     @Override
     public Set<? extends Unit<?>> getUnits(Dimension dimension) {
-        final Set<Unit<?>> set = new HashSet<Unit<?>>();
+        final Set<Unit<?>> set = new HashSet<>();
         for (Unit<?> unit : this.getUnits()) {
             if (dimension.equals(unit.getDimension())) {
                 set.add(unit);
@@ -155,7 +155,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 		static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, 
 				Dimension dimension) {
 			if (dimension != null) {
-				Set<Unit<?>>dimSet = new HashSet<Unit<?>>();
+				Set<Unit<?>>dimSet = new HashSet<>();
 				for (Unit<?> u : units) {
 					if (dimension.equals(u.getDimension())) {
 						dimSet.add(u);

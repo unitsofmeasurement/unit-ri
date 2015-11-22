@@ -48,7 +48,8 @@ import javax.measure.spi.ServiceProvider;
  */
 public class RIServiceProvider implements ServiceProvider {
     /** List of services loaded, per class. */
-    private final Map<Class, List<Object>> servicesLoaded = new HashMap<Class, List<Object>>();
+    @SuppressWarnings("Convert2Diamond")
+    private final Map<Class, List<Object>> servicesLoaded = new HashMap<>();
     
     @Override
     public int getPriority() {
@@ -92,8 +93,9 @@ public class RIServiceProvider implements ServiceProvider {
      *
      * @return  the items found, never {@code null}.
      */
+    @SuppressWarnings("Convert2Diamond")
     private <T> List<T> loadServices(final Class<T> serviceType) {
-        final List<T> services = new ArrayList<T>();
+        final List<T> services = new ArrayList<>();
         try {
             for (T t : ServiceLoader.load(serviceType)) {
                 services.add(t);

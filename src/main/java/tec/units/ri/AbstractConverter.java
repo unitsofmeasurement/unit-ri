@@ -97,7 +97,7 @@ public abstract class AbstractConverter implements UnitConverter {
 
     @Override
     public List<? extends UnitConverter> getConversionSteps() {
-        final List<AbstractConverter> steps = new ArrayList<AbstractConverter>();
+        final List<AbstractConverter> steps = new ArrayList<>();
         steps.add(this);
         return steps;
     }
@@ -191,7 +191,7 @@ public abstract class AbstractConverter implements UnitConverter {
 
         @Override
         public List<UnitConverter> getConversionSteps() {
-            final List<UnitConverter> steps = new ArrayList<UnitConverter>();
+            final List<UnitConverter> steps = new ArrayList<>();
             List<? extends UnitConverter> leftCompound = left.getConversionSteps();
             List<? extends UnitConverter> rightCompound = right.getConversionSteps();
             steps.addAll(leftCompound);

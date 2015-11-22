@@ -86,7 +86,7 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
 	}
 
 	@SuppressWarnings("rawtypes")
-	static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<Class, Unit>();
+	static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<>();
 	static {
 		CLASS_TO_METRIC_UNIT.put(Dimensionless.class, ONE);
 		CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
@@ -127,7 +127,7 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
 	public Quantity<Q> create(Number value, Unit<Q> unit) {
 		// public <N extends Number, U extends Unit<Q>> Q create(N value, U
 		// unit) {
-		return (Q) new NumberQuantity<Q>(value, unit);
+		return (Q) new NumberQuantity<>(value, unit);
 	}
 
 	public Unit<Q> getSystemUnit() {
@@ -146,7 +146,7 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
          logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
          QuantityFactory<Q> factory;
          if (!type.isInterface()) {
-        	 factory = new DefaultQuantityFactory<Q>(type);
+        	 factory = new DefaultQuantityFactory<>(type);
         	 // TODO use instances?
          } else {
             factory = INSTANCES.get(type);
@@ -155,7 +155,7 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
                 // This exception is not documented because it should never happen if the
                 // user don't try to trick the Java generic types system with unsafe cast.
                 throw new ClassCastException();
-            factory = new DefaultQuantityFactory<Q>(type);
+            factory = new DefaultQuantityFactory<>(type);
             INSTANCES.put(type, factory);
          }
         return factory;

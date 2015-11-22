@@ -80,7 +80,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	/**
      * Holds the dimensionless unit <code>ONE</code>.
      */
-    public static final Unit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
+    public static final Unit<Dimensionless> ONE = new ProductUnit<>();
 
 	
 	/**
@@ -156,7 +156,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * @return the annotated unit.
 	 */
 	public AnnotatedUnit<Q> annotate(String annotation) {
-		return new AnnotatedUnit<Q>(this, annotation);
+		return new AnnotatedUnit<>(this, annotation);
 	}
 
 	/**
@@ -347,7 +347,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
 	@Override
 	public final Unit<Q> alternate(String symbol) {
-		return new AlternateUnit<Q>(this, symbol);
+		return new AlternateUnit<>(this, symbol);
 	}
 
 	@Override
@@ -356,7 +356,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		UnitConverter cvtr = this.getSystemConverter().concatenate(operation);
 		if (cvtr.equals(AbstractConverter.IDENTITY))
 			return systemUnit;
-		return new TransformedUnit<Q>(systemUnit, cvtr);
+		return new TransformedUnit<>(systemUnit, cvtr);
 	}
 
 	@Override

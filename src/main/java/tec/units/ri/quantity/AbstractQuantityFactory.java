@@ -60,7 +60,7 @@ abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements Quantit
      * Holds the current instances.
      */
     @SuppressWarnings("rawtypes")
-    static final Map<Class, QuantityFactory> INSTANCES = new HashMap<Class, QuantityFactory>();
+    static final Map<Class, QuantityFactory> INSTANCES = new HashMap<>();
 
     static final Logger logger = Logger.getLogger(AbstractQuantityFactory.class.getName());
 
