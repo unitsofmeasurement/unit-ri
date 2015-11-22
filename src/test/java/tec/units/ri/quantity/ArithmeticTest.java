@@ -38,8 +38,6 @@ import javax.measure.quantity.Length;
 import org.junit.Before;
 import org.junit.Test;
 
-import tec.units.ri.unit.Units;
-
 public class ArithmeticTest {
 
 	private Quantity<Length> sut;

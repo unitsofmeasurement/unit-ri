@@ -37,7 +37,6 @@ package tec.units.ri.internal.format.l10n;
  *
  */
 
-import java.util.Hashtable;
 import java.util.Map;
 import java.util.Vector;
 
