@@ -141,7 +141,7 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	    if(indexOfE == -1){
 	        return javaString;
 	    }
-	    StringBuffer sb = new StringBuffer();
+	    StringBuilder sb = new StringBuilder();
 	    if(d > 1){//big number
 	        int exp = Integer.parseInt(javaString.substring(indexOfE + 1));
 	        String sciDecimal = javaString.substring(2, indexOfE);
