@@ -47,7 +47,7 @@ import tec.units.ri.format.QuantityFormat;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.9.6, $Date: 2015-10-30 $
+ * @version 0.9.7, $Date: 2015-11-23 $
  */
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -213,26 +213,22 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 				unit);
 	}
 
-	@Override
 	public NumberQuantity<Q> multiply(Number that) {
 		return (NumberQuantity<Q>) NumberQuantity.of(
 				(getValue().doubleValue() * that.doubleValue()), getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
 	public Quantity<Q> divide(Quantity<?> that) {
 		final Unit<?> unit = getUnit().divide(that.getUnit());
 		return new NumberQuantity((getValue().doubleValue() / that.getValue()
 				.doubleValue()), unit);
 	}
 
-	@Override
 	public Quantity<Q> divide(Number that) {
 		return NumberQuantity.of(getValue().doubleValue() / that.doubleValue(), getUnit());
 	}
 
-	@Override
 	public Quantity<Q> inverse() {
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		final Quantity<Q> m = new NumberQuantity(1d / getValue().doubleValue(),
@@ -247,14 +243,12 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
 	public Quantity<Q> subtract(Quantity<Q> that) {
 		final Quantity<Q> thatToUnit = (Quantity<Q>) that.to(getUnit());
 		return new NumberQuantity(this.getValue().doubleValue()
 				- thatToUnit.getValue().doubleValue(), getUnit());
 	}
 
-	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Quantity<Q> add(Quantity<Q> that) {
 		final Quantity<Q> thatToUnit = (Quantity<Q>) that.to(getUnit());
@@ -274,7 +268,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	 */
 	public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(
 			long longValue, Unit<Q> unit) {
-		return new LongQuantity<>(longValue, unit);
+		return new LongQuantity<Q>(longValue, unit);
 	}
 
 	/**
@@ -289,7 +283,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	 */
 	public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(int intValue,
 			Unit<Q> unit) {
-		return new IntegerQuantity<>(intValue, unit);
+		return new IntegerQuantity<Q>(intValue, unit);
 	}
 
 	/**
@@ -304,7 +298,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	 */
 	public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(
 			float floatValue, Unit<Q> unit) {
-		return new FloatQuantity<>(floatValue, unit);
+		return new FloatQuantity<Q>(floatValue, unit);
 	}
 
 	/**
@@ -319,7 +313,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	 */
 	public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(
 			double doubleValue, Unit<Q> unit) {
-		return new DoubleQuantity<>(doubleValue, unit);
+		return new DoubleQuantity<Q>(doubleValue, unit);
 	}
 
 	/**

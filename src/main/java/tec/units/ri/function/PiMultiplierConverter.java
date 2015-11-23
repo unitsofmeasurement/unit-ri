@@ -87,7 +87,6 @@ public final class PiMultiplierConverter extends AbstractConverter implements
 		return 0;
 	}
 
-	@Override
 	public boolean isLinear() {
 		return true;
 	}
@@ -139,7 +138,6 @@ public final class PiMultiplierConverter extends AbstractConverter implements
 
 	//private static final BigDecimal TWO_THIRTY_NINE = new BigDecimal("239");
 
-	@Override
 	public String getValue() {
 		return toString();
 	}

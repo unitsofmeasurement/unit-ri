@@ -164,7 +164,6 @@ public final class RationalConverter extends AbstractConverter
         return Double.valueOf(dividend).hashCode() + Double.valueOf(dividend).hashCode();
     }
 
-    @Override
     public boolean isLinear() {
         return true;
     }
@@ -173,7 +172,6 @@ public final class RationalConverter extends AbstractConverter
     	return (double)dividend / (double) divisor;
     }
     
-    @Override
 	public Double getValue() {
 		return Double.valueOf(getAsDouble());
 	}

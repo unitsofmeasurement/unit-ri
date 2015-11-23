@@ -30,7 +30,6 @@
 package tec.units.ri.internal.quantity;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import javax.measure.Quantity;
 import javax.measure.spi.QuantityFactory;
@@ -41,11 +40,11 @@ import tec.units.ri.quantity.DefaultQuantityFactory;
 /**
  * Provider of Quantities
  * @author Werner Keil
- * @version 0.3
+ * @version 0.4
  */
 @SuppressWarnings("rawtypes")
 public final class DefaultQuantityFactoryService implements QuantityFactoryService {
-    private final Map<Class, QuantityFactory> INSTANCE = new HashMap<>();
+    private final Map<Class, QuantityFactory> INSTANCE = new HashMap<Class, QuantityFactory>();
 
     /**
      * Return a factory for this quantity
@@ -55,7 +54,8 @@ public final class DefaultQuantityFactoryService implements QuantityFactoryServi
      */
     @SuppressWarnings("unchecked")
     public final <Q extends Quantity<Q>>  QuantityFactory<Q> getQuantityFactory(Class<Q> quantity){
-        Objects.requireNonNull(quantity);
+        if (quantity == null)
+            throw new NullPointerException();
         if(!INSTANCE.containsKey(quantity)) {
             synchronized (INSTANCE) {
                 INSTANCE.put(quantity, DefaultQuantityFactory.getInstance(quantity));

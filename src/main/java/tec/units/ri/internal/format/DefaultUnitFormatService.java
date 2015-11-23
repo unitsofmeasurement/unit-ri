@@ -31,7 +31,6 @@ package tec.units.ri.internal.format;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.measure.format.UnitFormat;
@@ -44,13 +43,13 @@ import tec.units.ri.format.SimpleUnitFormat.Flavor;
  * Default format service.
  *
  * @author Werner Keil
- * @version 0.3, October 29, 2015
+ * @version 0.4, November 23, 2015
  */
 public class DefaultUnitFormatService implements UnitFormatService {
 
     private static final String DEFAULT_FORMAT = Flavor.Default.name();
    
-    private final Map<String, UnitFormat> formats = new HashMap<>();
+    private final Map<String, UnitFormat> formats = new HashMap<String, UnitFormat>();
  
     public DefaultUnitFormatService() {
         formats.put(DEFAULT_FORMAT, SimpleUnitFormat.getInstance());
@@ -68,9 +67,9 @@ public class DefaultUnitFormatService implements UnitFormatService {
      * @see
      * UnitFormatService#getUnitFormat(String)
      */
-    @Override
     public UnitFormat getUnitFormat(String formatName) {
-        Objects.requireNonNull(formatName, "Format name required");
+        if (formatName == null)
+            throw new NullPointerException("Format name required");
         return formats.get(formatName);
     }
 
@@ -79,7 +78,6 @@ public class DefaultUnitFormatService implements UnitFormatService {
      * @see
      * UnitFormatService#getUnitFormat()
      */
-    @Override
     public UnitFormat getUnitFormat() {
         return getUnitFormat(DEFAULT_FORMAT);
     }

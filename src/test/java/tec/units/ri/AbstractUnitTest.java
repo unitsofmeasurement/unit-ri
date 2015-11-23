@@ -40,7 +40,7 @@ import tec.units.ri.AbstractUnit;
 import tec.units.ri.unit.BaseUnit;
 
 public class AbstractUnitTest {
-	private static final AbstractUnit<Length> sut = new BaseUnit<>("m");
+	private static final AbstractUnit<Length> sut = new BaseUnit<Length>("m");
     
 	@BeforeClass
 	public static void init() {
@@ -52,4 +52,3 @@ public class AbstractUnitTest {
     	assertEquals("Test", sut.getName());
     }
 }
-

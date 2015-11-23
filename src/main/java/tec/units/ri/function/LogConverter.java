@@ -120,12 +120,10 @@ public final class LogConverter extends AbstractConverter
 //        return BigDecimal.valueOf(convert(value.doubleValue())); // Reverts to double conversion.
 //    }
 
-    @Override
     public boolean isLinear() {
         return false;
     }
 
-    @Override
 	public String getValue() {
 		return toString();
 	}

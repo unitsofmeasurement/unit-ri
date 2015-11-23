@@ -29,8 +29,6 @@
  */
 package tec.units.ri.quantity;
 
-import java.util.Objects;
-
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
@@ -69,7 +67,9 @@ public final class Quantities {
     public static Quantity<?> getQuantity(CharSequence csq) {
         try {
             return QuantityFormat.getInstance().parse(csq);
-        } catch (IllegalArgumentException | ParserException e) {
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(e); // TODO could we handle this differently?
+        } catch (ParserException e) {
             throw new IllegalArgumentException(e); // TODO could we handle this differently?
         }
     }
@@ -85,17 +85,19 @@ public final class Quantities {
     public static <Q extends Quantity<Q>> Quantity<Q> getQuantity(Number value,
             Unit<Q> unit) {
 
-        Objects.requireNonNull(value);
-        Objects.requireNonNull(unit);
+        if (value == null)
+            throw new NullPointerException();
+        if (unit == null)
+            throw new NullPointerException();
         if (Double.class.isInstance(value)) {
-        	return new DoubleQuantity<>(value.doubleValue(), unit);
+        	return new DoubleQuantity<Q>(value.doubleValue(), unit);
     	} else if (Long.class.isInstance(value)) {
-            return new LongQuantity<>(Long.class.cast(value), unit);
+            return new LongQuantity<Q>(Long.class.cast(value), unit);
         } else if (Integer.class.isInstance(value)) {
-        	return new IntegerQuantity<>(Integer.class.cast(value), unit);
+        	return new IntegerQuantity<Q>(Integer.class.cast(value), unit);
         } else if (Float.class.isInstance(value)) {
-            	return new FloatQuantity<>(Float.class.cast(value), unit);
+            	return new FloatQuantity<Q>(Float.class.cast(value), unit);
         }
-        return new NumberQuantity<>(value, unit);
+        return new NumberQuantity<Q>(value, unit);
     }
 }

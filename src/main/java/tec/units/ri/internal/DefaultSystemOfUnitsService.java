@@ -40,11 +40,11 @@ import tec.units.ri.unit.Units;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, November 3, 2015
+ * @version 0.4, November 23, 2015
  */
 public class DefaultSystemOfUnitsService implements SystemOfUnitsService {
 	
-	final Map<String, SystemOfUnits> souMap = new HashMap<>();
+	final Map<String, SystemOfUnits> souMap = new HashMap<String, SystemOfUnits>();
 
 	public DefaultSystemOfUnitsService() {
 		souMap.put(Units.SYSTEM_NAME, Units.getInstance());
@@ -54,14 +54,11 @@ public class DefaultSystemOfUnitsService implements SystemOfUnitsService {
 		return souMap.values();
 	}
 	
-	@Override
 	public SystemOfUnits getSystemOfUnits() {
 		return getSystemOfUnits(Units.SYSTEM_NAME);
 	}
 
-	@Override
 	public SystemOfUnits getSystemOfUnits(String name) {
 		return souMap.get(name);
 	}
-
 }

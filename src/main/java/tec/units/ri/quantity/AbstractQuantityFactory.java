@@ -52,7 +52,7 @@ import tec.units.ri.AbstractQuantity;
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.7, $Date: 2015-09-27 $
+ * @version 0.8, $Date: 2015-11-23 $
  */
 abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q>  {
 
@@ -60,7 +60,7 @@ abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements Quantit
      * Holds the current instances.
      */
     @SuppressWarnings("rawtypes")
-    static final Map<Class, QuantityFactory> INSTANCES = new HashMap<>();
+    static final Map<Class, QuantityFactory> INSTANCES = new HashMap<Class, QuantityFactory>();
 
     static final Logger logger = Logger.getLogger(AbstractQuantityFactory.class.getName());
 

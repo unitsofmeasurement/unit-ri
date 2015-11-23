@@ -74,43 +74,36 @@ final class IntegerQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 		return (long) result;
 	}
 
-	@Override
 	public Quantity<Q> add(Quantity<Q> that) {
 		final Quantity<Q> converted = that.to(getUnit());
 		return NumberQuantity.of(value + converted.getValue().intValue(), getUnit());
 	}
 
-	@Override
 	public Quantity<Q> subtract(Quantity<Q> that) {
 		final Quantity<Q> converted = that.to(getUnit());
 		return NumberQuantity.of(value - converted.getValue().intValue(), getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
 	public Quantity<?> multiply(Quantity<?> that) {
 		return new IntegerQuantity(value * that.getValue().intValue(), 
 				getUnit().multiply(that.getUnit()));
 	}
 
-	@Override
 	public Quantity<Q> multiply(Number that) {
 		return NumberQuantity.of(value * that.intValue(), getUnit());
 	}
 
-	@Override
 	public Quantity<?> divide(Quantity<?> that) {
 		return NumberQuantity.of((double) value / that.getValue().doubleValue(), 
 				getUnit().divide(that.getUnit()));
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public AbstractQuantity<Q> inverse() {
 		return (AbstractQuantity<Q>) NumberQuantity.of(1 / value, getUnit().inverse());
 	}
 
-	@Override
 	public Quantity<Q> divide(Number that) {
 		return NumberQuantity.of(value / that.doubleValue(), getUnit());
 	}

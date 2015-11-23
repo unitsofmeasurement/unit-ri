@@ -47,7 +47,7 @@ import tec.units.ri.AbstractQuantity;
  *
  * For example:<br/>
  * <code>
- *      Quantity<Mass> m = DefaultQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
+ *      Quantity<Mass> m = DefaultQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br>
  *      Quantity<Time> m = DefaultQuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
  * </code>
  * 
@@ -58,7 +58,7 @@ import tec.units.ri.AbstractQuantity;
  *         Desruisseaux</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.7, $Date: 2015-09-27 $
+ * @version 0.8, $Date: 2015-11-23 $
  */
 public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
 		AbstractQuantityFactory<Q> {
@@ -86,7 +86,7 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
 	}
 
 	@SuppressWarnings("rawtypes")
-	static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<>();
+	static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<Class, Unit>();
 	static {
 		CLASS_TO_METRIC_UNIT.put(Dimensionless.class, ONE);
 		CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
@@ -127,7 +127,7 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
 	public Quantity<Q> create(Number value, Unit<Q> unit) {
 		// public <N extends Number, U extends Unit<Q>> Q create(N value, U
 		// unit) {
-		return (Q) new NumberQuantity<>(value, unit);
+		return (Q) new NumberQuantity<Q>(value, unit);
 	}
 
 	public Unit<Q> getSystemUnit() {
@@ -146,7 +146,7 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
          logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
          QuantityFactory<Q> factory;
          if (!type.isInterface()) {
-        	 factory = new DefaultQuantityFactory<>(type);
+        	 factory = new DefaultQuantityFactory<Q>(type);
         	 // TODO use instances?
          } else {
             factory = INSTANCES.get(type);
@@ -155,7 +155,7 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
                 // This exception is not documented because it should never happen if the
                 // user don't try to trick the Java generic types system with unsafe cast.
                 throw new ClassCastException();
-            factory = new DefaultQuantityFactory<>(type);
+            factory = new DefaultQuantityFactory<Q>(type);
             INSTANCES.put(type, factory);
          }
         return factory;

@@ -10,7 +10,7 @@ unit-ri
 
 JSR 363 Reference Implementation
 
-The RI aims at **Java Embedded**, both *SE 7* or above and Java *ME 8 Embedded*
+The RI aims at **Java Embedded**, both *SE 6/7* or above and Java *ME 8 Embedded*
 
 ## User Guide
 You can find the [RI User Guide](https://www.gitbook.com/book/unitsofmeasurement/unit-ri-userguide/) as GitBook.

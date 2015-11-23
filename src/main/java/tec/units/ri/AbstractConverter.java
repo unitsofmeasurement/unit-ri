@@ -38,7 +38,7 @@ import javax.measure.UnitConverter;
  * <p> The base class for our {@link UnitConverter} implementations.</p>
  *
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7.3, $Date: 2015-05-20 $
+ * @version 0.8, $Date: 2015-11-23 $
  */
 public abstract class AbstractConverter implements UnitConverter {
 	
@@ -76,7 +76,6 @@ public abstract class AbstractConverter implements UnitConverter {
         return (that == IDENTITY) ? this : new Pair(this, that);
     }
 
-    @Override
     public boolean isIdentity() {
         return false;
     }
@@ -97,7 +96,7 @@ public abstract class AbstractConverter implements UnitConverter {
 
     @Override
     public List<? extends UnitConverter> getConversionSteps() {
-        final List<AbstractConverter> steps = new ArrayList<>();
+        final List<AbstractConverter> steps = new ArrayList<AbstractConverter>();
         steps.add(this);
         return steps;
     }
@@ -145,7 +144,6 @@ public abstract class AbstractConverter implements UnitConverter {
             return 0;
         }
 
-        @Override
         public boolean isLinear() {
             return true;
         }
@@ -179,7 +177,6 @@ public abstract class AbstractConverter implements UnitConverter {
             this.right = right;
         }
 
-        @Override
         public boolean isLinear() {
             return left.isLinear() && right.isLinear();
         }
@@ -191,7 +188,7 @@ public abstract class AbstractConverter implements UnitConverter {
 
         @Override
         public List<UnitConverter> getConversionSteps() {
-            final List<UnitConverter> steps = new ArrayList<>();
+            final List<UnitConverter> steps = new ArrayList<UnitConverter>();
             List<? extends UnitConverter> leftCompound = left.getConversionSteps();
             List<? extends UnitConverter> rightCompound = right.getConversionSteps();
             steps.addAll(leftCompound);

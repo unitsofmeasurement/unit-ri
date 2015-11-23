@@ -118,7 +118,6 @@ public final class AddConverter extends AbstractConverter implements ValueSuppli
         return (int) (bits ^ (bits >>> 32));
     }
 
-    @Override
     public boolean isLinear() {
         return false;
     }

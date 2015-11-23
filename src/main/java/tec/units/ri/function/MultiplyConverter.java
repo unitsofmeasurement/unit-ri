@@ -118,12 +118,10 @@ public final class MultiplyConverter extends AbstractConverter implements
 		return (int) (bits ^ (bits >>> 32));
 	}
 
-	@Override
 	public boolean isLinear() {
 		return true;
 	}
 
-	@Override
 	public Double getValue() {
 		return factor;
 	}

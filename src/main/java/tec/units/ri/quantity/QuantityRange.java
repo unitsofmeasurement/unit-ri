@@ -29,8 +29,6 @@
  */
 package tec.units.ri.quantity;
 
-import java.util.Objects;
-
 import javax.measure.Quantity;
 
 import tec.units.ri.spi.Range;
@@ -121,9 +119,9 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
 		if (obj instanceof QuantityRange<?>) {
 			@SuppressWarnings("unchecked")
 			final QuantityRange<Q> other = (QuantityRange<Q>) obj;
-			return Objects.equals(getMinimum(), other.getMinimum()) &&
-					Objects.equals(getMaximum(), other.getMaximum()) &&
-					Objects.equals(getResolution(), other.getResolution());
+			return getMinimum() == other.getMinimum() || (getMinimum() != null && getMinimum().equals(other.getMinimum())) &&
+					getMaximum() == other.getMaximum() || (getMaximum() != null && getMaximum().equals(other.getMaximum())) &&
+					getResolution() == other.getResolution() || (getResolution() != null && getResolution().equals(other.getResolution()));
 		}
 		return false;
 	}

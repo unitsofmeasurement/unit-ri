@@ -39,7 +39,6 @@ import javax.measure.Unit;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -234,7 +233,7 @@ public final class QuantityDimension implements Dimension {
 	public Map<? extends QuantityDimension, Integer> getProductDimensions() {
         Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getProductUnits();
         if (pseudoUnits == null) return null;
-        Map<QuantityDimension, Integer> fundamentalDimensions = new HashMap<>();
+        Map<QuantityDimension, Integer> fundamentalDimensions = new HashMap<QuantityDimension, Integer>();
         for (Map.Entry<? extends Unit, Integer> entry : pseudoUnits.entrySet()) {
             fundamentalDimensions.put(new QuantityDimension(entry.getKey()), entry.getValue());
         }
@@ -253,13 +252,13 @@ public final class QuantityDimension implements Dimension {
 		}
 		if (obj instanceof QuantityDimension) {
 			QuantityDimension other = (QuantityDimension) obj;
-			return Objects.equals(pseudoUnit, other.pseudoUnit);
+			return (pseudoUnit == other.pseudoUnit) || (pseudoUnit != null && pseudoUnit.equals(other.pseudoUnit));
 		}
 		return false;
 	}
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(pseudoUnit);
+        return pseudoUnit == null ? 0 : pseudoUnit.hashCode();
     }
 }

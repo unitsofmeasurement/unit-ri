@@ -115,7 +115,6 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 			super(q);
 		}
 
-		@Override
 		public int compareTo(Object o) {
 			// TODO Auto-generated method stub
 			return 0;

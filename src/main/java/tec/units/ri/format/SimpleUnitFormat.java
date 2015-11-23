@@ -859,7 +859,6 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
 //		private static final long serialVersionUID = 1L;
 
-		@Override
 		public Unit<?> parse(CharSequence csq) throws ParserException {
 			return parse(csq, 0);
 		}

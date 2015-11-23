@@ -68,7 +68,7 @@ import tec.units.ri.unit.Units;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.9.3, Oct 30, 2015
+ * @version 0.9.4, Nov 23, 2015
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
@@ -80,7 +80,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	/**
      * Holds the dimensionless unit <code>ONE</code>.
      */
-    public static final Unit<Dimensionless> ONE = new ProductUnit<>();
+    public static final Unit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
 
 	
 	/**
@@ -156,7 +156,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * @return the annotated unit.
 	 */
 	public AnnotatedUnit<Q> annotate(String annotation) {
-		return new AnnotatedUnit<>(this, annotation);
+		return new AnnotatedUnit<Q>(this, annotation);
 	}
 
 	/**
@@ -224,7 +224,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *
 	 * @return the unscaled metric unit from which this unit is derived.
 	 */
-	@Override
 	public final AbstractUnit<Q> getSystemUnit() {
 		return toSystemUnit();
 	}
@@ -240,7 +239,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *         fundamental dimension according to the current physics model;
 	 *         <code>false</code> otherwise.
 	 */
-	@Override
 	public final boolean isCompatible(Unit<?> that) {
 		if ((this == that) || this.equals(that))
 			return true;
@@ -272,7 +270,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * @see Units#getUnit(Class)
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public final <T extends Quantity<T>> Unit<T> asType(Class<T> type) {
 		Dimension typeDimension = QuantityDimension.getInstance(type);
 		if ((typeDimension != null)
@@ -282,10 +279,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		return (Unit<T>) this;
 	}
 
-	@Override
 	public abstract Map<? extends Unit<?>, Integer> getProductUnits();
 
-	@Override
 	public abstract Dimension getDimension();
 
 	protected void setName(String name) {
@@ -304,7 +299,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		this.symbol = s;
 	}
 
-	@Override
 	public final UnitConverter getConverterTo(Unit<Q> that)
 			throws UnconvertibleException {
 		if ((this == that) || this.equals(that))
@@ -323,7 +317,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	}
 
 	@SuppressWarnings("rawtypes")
-	@Override
 	public final UnitConverter getConverterToAny(Unit<?> that)
 			throws IncommensurableException, UnconvertibleException {
 		if (!isCompatible(that))
@@ -347,7 +340,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 
 	@Override
 	public final Unit<Q> alternate(String symbol) {
-		return new AlternateUnit<>(this, symbol);
+		return new AlternateUnit<Q>(this, symbol);
 	}
 
 	@Override
@@ -356,7 +349,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		UnitConverter cvtr = this.getSystemConverter().concatenate(operation);
 		if (cvtr.equals(AbstractConverter.IDENTITY))
 			return systemUnit;
-		return new TransformedUnit<>(systemUnit, cvtr);
+		return new TransformedUnit<Q>(systemUnit, cvtr);
 	}
 
 	@Override
@@ -392,7 +385,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *            the unit multiplicand.
 	 * @return <code>this * that</code>
 	 */
-	@Override
 	public final Unit<?> multiply(Unit<?> that) {
 		if (that instanceof AbstractUnit)
 			return multiply((AbstractUnit<?>) that);
@@ -419,7 +411,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *
 	 * @return <code>1 / this</code>
 	 */
-	@Override
 	public final Unit<?> inverse() {
 		if (this.equals(ONE))
 			return this;
@@ -440,7 +431,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *            the divisor value.
 	 * @return this unit divided by the specified divisor.
 	 */
-	@Override
 	public final AbstractUnit<Q> divide(double divisor) {
 		if (divisor == 1)
 			return this;
@@ -456,7 +446,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *            the unit divisor.
 	 * @return <code>this.multiply(that.inverse())</code>
 	 */
-	@Override
 	public final Unit<?> divide(Unit<?> that) {
 		return this.multiply(that.inverse());
 	}
@@ -471,7 +460,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *             if <code>n == 0</code> or if this operation would result in
 	 *             an unit with a fractional exponent.
 	 */
-	@Override
 	public final Unit<?> root(int n) {
 		if (n > 0)
 			return ProductUnit.getRootInstance(this, n);
@@ -489,7 +477,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *            the exponent.
 	 * @return the result of raising this unit to the exponent.
 	 */
-	@Override
 	public final Unit<?> pow(int n) {
 		if (n > 0)
 			return this.multiply(this.pow(n - 1));

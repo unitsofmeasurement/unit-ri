@@ -45,7 +45,7 @@ import javax.measure.spi.SystemOfUnits;
  * <p>An abstract base class for unit systems.</p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, $Date: 2015-10-29 $
+ * @version 0.5, $Date: 2015-11-23 $
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 	protected static final Logger logger = Logger.getLogger(AbstractSystemOfUnits.class
@@ -54,14 +54,14 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
     /**
      * Holds the units.
      */
-    protected final Set<Unit<?>> units = new HashSet<>();
+    protected final Set<Unit<?>> units = new HashSet<Unit<?>>();
 
     /**
      * Holds the mapping quantity to unit.
      */
     @SuppressWarnings("rawtypes")
 	protected final Map<Class<? extends Quantity>, Unit>
-            quantityToUnit = new HashMap<>();
+            quantityToUnit = new HashMap<Class<? extends Quantity>, Unit>();
 
     /**
      * The natural logarithm.
@@ -78,7 +78,6 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 	// ///////////////////
 	// Collection View //
 	// ///////////////////
-    @Override
     public Set<Unit<?>> getUnits() {
     	if (logger.isLoggable(Level.FINEST)) {
 	    	for (Unit<?> u : units) {
@@ -90,7 +89,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 
     @Override
     public Set<? extends Unit<?>> getUnits(Dimension dimension) {
-        final Set<Unit<?>> set = new HashSet<>();
+        final Set<Unit<?>> set = new HashSet<Unit<?>>();
         for (Unit<?> unit : this.getUnits()) {
             if (dimension.equals(unit.getDimension())) {
                 set.add(unit);
@@ -100,7 +99,6 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
     }
     
     @SuppressWarnings("unchecked")
-	@Override
     public <Q extends Quantity<Q>> Unit<Q> getUnit(Class<Q> quantityType) {
         return quantityToUnit.get(quantityType);
     }
@@ -155,7 +153,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 		static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, 
 				Dimension dimension) {
 			if (dimension != null) {
-				Set<Unit<?>>dimSet = new HashSet<>();
+				Set<Unit<?>>dimSet = new HashSet<Unit<?>>();
 				for (Unit<?> u : units) {
 					if (dimension.equals(u.getDimension())) {
 						dimSet.add(u);

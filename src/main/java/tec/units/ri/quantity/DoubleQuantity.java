@@ -74,42 +74,35 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
         return (long) result;
 	}
 
-	@Override
 	public Quantity<Q> add(Quantity<Q> that) {
 		final Quantity<Q> converted = that.to(getUnit());
 		return NumberQuantity.of(value + converted.getValue().doubleValue(), getUnit());
 	}
 
-	@Override
 	public Quantity<Q> subtract(Quantity<Q> that) {
 		final Quantity<Q> converted = that.to(getUnit());
 		return NumberQuantity.of(value - converted.getValue().doubleValue(), getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
 	public Quantity<?> multiply(Quantity<?> that) {
 		return new DoubleQuantity(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
 	}
 
-	@Override
 	public Quantity<Q> multiply(Number that) {
 		return NumberQuantity.of(value * that.doubleValue(), getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
 	public Quantity<?> divide(Quantity<?> that) {
 		return new DoubleQuantity(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
 	}
 	
-	@Override
 	public Quantity<Q> divide(Number that) {
 		return NumberQuantity.of(value / that.doubleValue(), getUnit());
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public AbstractQuantity<Q> inverse() {
 		return (AbstractQuantity<Q>) NumberQuantity.of(1d / value, getUnit().inverse());
 	}

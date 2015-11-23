@@ -90,12 +90,10 @@ final class PiDivisorConverter extends AbstractConverter
         return 0;
     }
 
-    @Override
     public boolean isLinear() {
         return true;
     }
 
-    @Override
 	public String getValue() {
 		return toString();
 	}
