@@ -74,7 +74,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.6.2, Nov 4, 2015
+ * @version 0.6.3, Nov 25, 2015
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
@@ -151,7 +151,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
 	/**
 	 * Returns the unit format for the default locale (format used by
-	 * {@link Unit#valueOf(CharSequence) Unit.valueOf(CharSequence)} and
+	 * {@link AbstractUnit#parse(CharSequence) AbstractUnit.parse(CharSequence)} and
 	 * {@link Unit#toString() Unit.toString()}).
 	 * 
 	 * @return the default unit format (locale sensitive).
@@ -256,10 +256,10 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	 * Attaches a system-wide alias to this unit. Multiple aliases may be
 	 * attached to the same unit. Aliases are used during parsing to recognize
 	 * different variants of the same unit. For example: [code]
-	 * UnitFormat.getLocaleInstance().alias(METER.multiply(0.3048), "foot");
-	 * UnitFormat.getLocaleInstance().alias(METER.multiply(0.3048), "feet");
-	 * UnitFormat.getLocaleInstance().alias(METER, "meter");
-	 * UnitFormat.getLocaleInstance().alias(METER, "metre"); [/code] If the
+	 * SimpleUnitformat.getInstance().alias(METER.multiply(0.3048), "foot");
+	 * SimpleUnitFormat.getInstance().alias(METER.multiply(0.3048), "feet");
+	 * SimpleUnitFormat.getInstance().alias(METER, "meter");
+	 * SimpleUnitFormat.getInstance().alias(METER, "metre"); [/code] If the
 	 * specified label is already associated to an unit the previous association
 	 * is discarded or ignored.
 	 *
