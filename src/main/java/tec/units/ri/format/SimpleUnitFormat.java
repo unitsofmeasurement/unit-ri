@@ -36,6 +36,7 @@ import java.lang.CharSequence;
 import java.util.HashMap;
 import java.util.Map;
 
+import tec.units.ri.AbstractUnit;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
@@ -521,7 +522,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		@Override
 		public Unit<? extends Quantity> parseProductUnit(CharSequence csq,
 				ParsePosition pos) throws ParserException {
-			Unit result = Units.ONE;
+			Unit result = AbstractUnit.ONE;
 			int token = nextToken(csq, pos);
 			switch (token) {
 			case IDENTIFIER:
@@ -865,7 +866,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
 		@Override
 		protected Unit<?> parse(CharSequence csq, int index)
-				throws IllegalArgumentException {
+				throws ParserException {
 			return parseObject(csq.toString(), new ParsePosition(index));
 		}
 	}

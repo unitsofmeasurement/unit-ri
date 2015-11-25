@@ -35,7 +35,7 @@
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
 	<properties>
-		<jsr.version>0.8</jsr.version>
+		<jsr.version>0.9-SNAPSHOT</jsr.version>
 		<jdkVersion>1.6</jdkVersion>
 		<project.build.javaVersion>${jdkVersion}</project.build.javaVersion>
 		<maven.compile.targetLevel>${jdkVersion}</maven.compile.targetLevel>

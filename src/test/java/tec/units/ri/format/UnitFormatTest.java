@@ -222,4 +222,15 @@ public class UnitFormatTest {
 			fail(e.getMessage());
 		}
 	}
+	
+	@Test
+	// TODO should this throw a ParserException or return Dimensionless as UnitFormat JavaDoc states?
+	public void testParseIrregularString() {
+		try {
+			Unit<?> u = format.parse("bl//^--1a");
+			assertNull(u);
+		} catch (ParserException e) {
+			fail(e.getMessage());
+		}
+	}
 }
