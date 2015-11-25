@@ -338,15 +338,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	 * @return the corresponding unit or <code>null</code> if the string cannot
 	 *         be parsed.
 	 */
-	public final Unit<?> parseObject(String source, ParsePosition pos) {
-		int start = pos.getIndex();
-		try {
-			return parseProductUnit(source, pos);
-		} catch (ParserException e) {
-			pos.setIndex(start);
-			pos.setErrorIndex(e.getPosition());
-			return null;
-		}
+	public final Unit<?> parseObject(String source, ParsePosition pos) throws ParserException {
+		//int start = pos.getIndex();
+		return parseProductUnit(source, pos);
 	}
 
 	/**

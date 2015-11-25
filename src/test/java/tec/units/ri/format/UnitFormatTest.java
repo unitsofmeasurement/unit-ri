@@ -223,14 +223,8 @@ public class UnitFormatTest {
 		}
 	}
 	
-	@Test
-	// TODO should this throw a ParserException or return Dimensionless as UnitFormat JavaDoc states?
+	@Test(expected=ParserException.class)
 	public void testParseIrregularString() {
-		try {
-			Unit<?> u = format.parse("bl//^--1a");
-			assertNull(u);
-		} catch (ParserException e) {
-			fail(e.getMessage());
-		}
+		Unit<?> u = format.parse("bl//^--1a");
 	}
 }
