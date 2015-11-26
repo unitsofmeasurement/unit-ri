@@ -78,7 +78,7 @@ import tec.units.ri.quantity.QuantityDimension;
  * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, November 9, 2015
+ * @version 0.8, November 26, 2015
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
@@ -456,9 +456,10 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
         		new TransformedUnit<Volume>(CUBIC_METRE, new RationalConverter(1, 1000)),
         		"Litre", "l");
     
-	//////////
-	// Time //
-	//////////
+    //////////
+    // Time //
+    //////////
+    
     /**
      * A time unit accepted for use with SI units (standard name <code>min</code>).
      */
@@ -477,19 +478,17 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
     public static final Unit<Time> DAY
         = new TransformedUnit<Time>("d", SECOND, RationalConverter.of(24 * 60 * 60, 1));
 
-	/**
-	 * A unit of duration equal to 7 {@link #DAY} (standard name
-	 * <code>week</code>).
-	 */
-	static final Unit<Time> WEEK = addUnit(DAY.multiply(7));
+    /**
+     * A unit of duration equal to 7 {@link #DAY} (standard name
+     * <code>week</code>).
+     */
+    public static final Unit<Time> WEEK = addUnit(DAY.multiply(7));
     
     /**
      * A time unit accepted for use with SI units (standard name <code>y</code>).
      */
-	public static final Unit<Time> YEAR = addUnit(Units.DAY.multiply(365.2525));
-
-	// using Gregorian year instead of Julian (365.25)
-	
+    public static final Unit<Time> YEAR = addUnit(Units.DAY.multiply(365.2525));
+    // using Gregorian year instead of Julian (365.25)
     
     /////////////////////
     // Collection View //
@@ -532,11 +531,4 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
         INSTANCE.quantityToUnit.put(type, unit);
         return unit;
     }
-    
-	// //////////////////////////////////////////////////////////////////////////
-	// Label adjustments for Units
-	static {
-		SimpleUnitFormat.getInstance().label(KILOMETRES_PER_HOUR, "kph");
-		SimpleUnitFormat.getInstance().label(LITRE, "l");
-	}
 }
