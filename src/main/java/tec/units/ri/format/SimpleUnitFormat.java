@@ -1034,12 +1034,11 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		DEFAULT.label(Units.PERCENT, "%");
 		DEFAULT.label(Units.KILOGRAM, "kg");
 		DEFAULT.label(Units.METRE, "m");
-//		DEFAULT.label(Units.ARE, "a");
 		DEFAULT.label(Units.SECOND, "s");
 		DEFAULT.label(Units.MINUTE, "min");
 		DEFAULT.label(Units.HOUR, "h");
 		DEFAULT.label(Units.DAY, "day");
-		// DEFAULT.label(Units.WEEK, "week");
+		DEFAULT.label(Units.WEEK, "week");
 		DEFAULT.label(Units.YEAR, "year");
 		DEFAULT.label(Units.KILOMETRES_PER_HOUR, "kph");
 		DEFAULT.label(Units.CUBIC_METRE, "\u33A5");
