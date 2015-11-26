@@ -74,7 +74,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.6.3, Nov 25, 2015
+ * @version 0.6.4, Nov 26, 2015
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
@@ -161,16 +161,6 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		return getInstance(Flavor.Default);
 	}
 
-	/**
-	 * Returns the unit format for the specified locale.
-	 * 
-	 * @return the unit format for the specified locale.
-	 * @deprecated currently unused
-	 */
-/*	public static SimpleUnitFormat getInstance(Locale inLocale) {
-		return DEFAULT; // TBD: Implement Locale Format.
-	}
-*/
 	/**
 	 * Returns the {@link SimpleUnitFormat} in the desired {@link Flavor}
 	 * 
@@ -1044,83 +1034,14 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		DEFAULT.label(Units.PERCENT, "%");
 		DEFAULT.label(Units.KILOGRAM, "kg");
 		DEFAULT.label(Units.METRE, "m");
-		// DEFAULT.label(NonUnits.DECIBEL, "dB");
-		// DEFAULT.label(NonUnits.G, "grav");
-		// DEFAULT.label(NonUnits.ATOM, "atom");
-		// DEFAULT.label(NonUnits.REVOLUTION, "rev");
-		// DEFAULT.label(NonUnits.DEGREE_ANGLE, "°");
-		// ASCII.label(NonUnits.DEGREE_ANGLE, "degree_angle");
-		// DEFAULT.label(NonUnits.MINUTE_ANGLE, "'");
-		// DEFAULT.label(NonUnits.SECOND_ANGLE, "\"");
-		// DEFAULT.label(NonUnits.CENTIRADIAN, "centiradian");
-		// DEFAULT.label(NonUnits.GRADE, "grade");
 //		DEFAULT.label(Units.ARE, "a");
-		// DEFAULT.label(NonUnits.HECTARE, "ha");
-		// DEFAULT.label(NonUnits.BYTE, "byte");
 		DEFAULT.label(Units.SECOND, "s");
 		DEFAULT.label(Units.MINUTE, "min");
 		DEFAULT.label(Units.HOUR, "h");
 		DEFAULT.label(Units.DAY, "day");
 		// DEFAULT.label(Units.WEEK, "week");
 		DEFAULT.label(Units.YEAR, "year");
-		// DEFAULT.label(Units.MONTH, "month");
-		// DEFAULT.label(NonUnits.DAY_SIDEREAL, "day_sidereal");
-		// DEFAULT.label(NonUnits.YEAR_SIDEREAL, "year_sidereal");
-		// DEFAULT.label(NonUnits.YEAR_CALENDAR, "year_calendar");
-		// DEFAULT.label(NonUnits.E, "e");
-		// DEFAULT.label(NonUnits.FARADAY, "Fd");
-		// DEFAULT.label(NonUnits.FRANKLIN, "Fr");
-		// DEFAULT.label(NonUnits.GILBERT, "Gi");
-		// DEFAULT.label(NonUnits.ERG, "erg");
-		// DEFAULT.label(NonUnits.ELECTRON_VOLT, "eV");
-		// DEFAULT.label(Units.KILO(NonUnits.ELECTRON_VOLT), "keV");
-		// DEFAULT.label(Units.MEGA(NonUnits.ELECTRON_VOLT), "MeV");
-		// DEFAULT.label(Units.GIGA(NonUnits.ELECTRON_VOLT), "GeV");
-		// DEFAULT.label(NonUnits.LAMBERT, "La");
-		// DEFAULT.label(NonUnits.FOOT, "ft");
-		// DEFAULT.label(NonUnits.FOOT_SURVEY_US, "foot_survey_us");
-		// DEFAULT.label(NonUnits.YARD, "yd");
-		// DEFAULT.label(NonUnits.INCH, "in");
-		// DEFAULT.label(NonUnits.MILE, "mi");
-		// DEFAULT.label(NonUnits.NAUTICAL_MILE, "nmi");
-		// DEFAULT.label(NonUnits.MILES_PER_HOUR, "mph");
-		// DEFAULT.label(NonUnits.ANGSTROM, "Å");
-		// ASCII.label(NonUnits.ANGSTROM, "Angstrom");
-		// DEFAULT.label(NonUnits.ASTRONOMICAL_UNIT, "ua");
-		// DEFAULT.label(NonUnits.LIGHT_YEAR, "ly");
-		// DEFAULT.label(NonUnits.PARSEC, "pc");
-		// DEFAULT.label(NonUnits.POINT, "pt");
-		// DEFAULT.label(NonUnits.PIXEL, "pixel");
-		// DEFAULT.label(NonUnits.MAXWELL, "Mx");
-		// DEFAULT.label(NonUnits.GAUSS, "G");
-		// DEFAULT.label(NonUnits.ATOMIC_MASS, "u");
-		// DEFAULT.label(NonUnits.ELECTRON_MASS, "me");
-		// DEFAULT.label(NonUnits.POUND, "lb");
-		// DEFAULT.label(NonUnits.OUNCE, "oz");
-		// DEFAULT.label(NonUnits.TON_US, "ton_us");
-		// DEFAULT.label(NonUnits.TON_UK, "ton_uk");
-		// DEFAULT.label(NonUnits.METRIC_TON, "t");
-		// DEFAULT.label(NonUnits.DYNE, "dyn");
-		// DEFAULT.label(NonUnits.KILOGRAM_FORCE, "kgf");
-		// DEFAULT.label(NonUnits.POUND_FORCE, "lbf");
-		// DEFAULT.label(NonUnits.HORSEPOWER, "hp");
-		// DEFAULT.label(NonUnits.ATMOSPHERE, "atm");
-		// DEFAULT.label(NonUnits.BAR, "bar");
-		// DEFAULT.label(NonUnits.MILLIMETER_OF_MERCURY, "mmHg");
-		// DEFAULT.label(NonUnits.INCH_OF_MERCURY, "inHg");
-		// DEFAULT.label(NonUnits.RAD, "rd");
-		// DEFAULT.label(NonUnits.REM, "rem");
-		// DEFAULT.label(NonUnits.CURIE, "Ci");
-		// DEFAULT.label(NonUnits.RUTHERFORD, "Rd");
-		// DEFAULT.label(NonUnits.SPHERE, "sphere");
-		// DEFAULT.label(NonUnits.RANKINE, "°R");
-		// ASCII.label(NonUnits.RANKINE, "degree_rankine");
-		// DEFAULT.label(NonUnits.FAHRENHEIT, "°F");
-		// ASCII.label(NonUnits.FAHRENHEIT, "degree_fahrenheit");
 		DEFAULT.label(Units.KILOMETRES_PER_HOUR, "kph");
-		// DEFAULT.label(NonUnits.KNOT, "kn");
-		// DEFAULT.label(NonUnits.MACH, "Mach");
-		// DEFAULT.label(NonUnits.C, "c");
 		DEFAULT.label(Units.CUBIC_METRE, "\u33A5");
 		ASCII.label(Units.CUBIC_METRE, "m3");
 		ASCII.label(LITRE, "l");
@@ -1135,15 +1056,5 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		DEFAULT.label(MetricPrefix.CENTI(LITRE), "cl");
 		ASCII.label(MetricPrefix.DECI(LITRE), "dL");
 		DEFAULT.label(MetricPrefix.DECI(LITRE), "dl");
-		// DEFAULT.label(NonUnits.GALLON_LIQUID_US, "gal");
-		// DEFAULT.label(NonUnits.OUNCE_LIQUID_US, "oz");
-		// DEFAULT.label(NonUnits.GALLON_DRY_US, "gallon_dry_us");
-		// DEFAULT.label(NonUnits.GALLON_UK, "gallon_uk");
-		// DEFAULT.label(NonUnits.OUNCE_LIQUID_UK, "oz_uk");
-		// DEFAULT.label(NonUnits.ROENTGEN, "Roentgen");
-		// if (Locale.getDefault().getCountry().equals("GB")) {
-		// DEFAULT.label(NonUnits.GALLON_UK, "gal");
-		// DEFAULT.label(NonUnits.OUNCE_LIQUID_UK, "oz");
-		// }
 	}
 }
