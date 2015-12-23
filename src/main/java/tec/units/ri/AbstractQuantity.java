@@ -29,11 +29,14 @@
  */
 package tec.units.ri;
 
+import java.util.Comparator;
+
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Dimensionless;
 
 import tec.units.ri.format.QuantityFormat;
+import tec.units.ri.function.NaturalOrder;
 import tec.units.ri.function.UnitSupplier;
 import tec.units.ri.function.ValueSupplier;
 import tec.units.ri.quantity.NumberQuantity;
@@ -188,12 +191,11 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	 * @return a negative integer, zero, or a positive integer as this measure
 	 *         is less than, equal to, or greater than the specified Measurement
 	 *         quantity.
-	 * @return <code>Double.compare(this.doubleValue(getUnit()),
-	 *         that.doubleValue(getUnit()))</code>
-	 */
+     * @see {@link NaturalOrder}
+     */
 	public int compareTo(Quantity<Q> that) {
-		Unit<Q> unit = getUnit();
-		return Double.compare(doubleValue(unit), that.getValue().doubleValue());
+        final Comparator<Quantity<Q>> comparator = new NaturalOrder<Q>();
+        return comparator.compare(this, that);
 	}
 
 	/**
