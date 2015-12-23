@@ -47,7 +47,7 @@ import tec.units.ri.format.QuantityFormat;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.9.7, $Date: 2015-11-23 $
+ * @version 0.9.8, $Date: 2015-12-23 $
  */
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -61,7 +61,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see AbstractMeasurement#equals(java.lang.Object)
+	 * @see AbstractQuantity#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -90,23 +90,23 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	}
 
 	/**
-	 * Indicates if this measure is exact.
+	 * Indicates if this quantity is exact.
 	 */
 	private final boolean isExact;
 
 	/**
-	 * Holds the exact value (when exact) stated in this measure unit.
+	 * Holds the exact value (when exact) stated in this quantity's unit.
 	 */
 	// private long exactValue;
 
 	/**
-	 * Holds the minimum value stated in this measure unit. For inexact
+	 * Holds the minimum value stated in this quantity's unit. For inexact
 	 * measures: minimum < maximum
 	 */
 	// private double minimum;
 
 	/**
-	 * Holds the maximum value stated in this measure unit. For inexact
+	 * Holds the maximum value stated in this quantity's unit. For inexact
 	 * measures: maximum > minimum
 	 */
 	// private double maximum;
@@ -184,11 +184,11 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	/**
 	 * Indicates if this measured amount is exact. An exact amount is guarantee
-	 * exact only when stated in this measure unit (e.g.
+	 * exact only when stated in this quantity's unit (e.g.
 	 * <code>this.longValue()</code>); stating the amount in any other unit may
 	 * introduce conversion errors.
 	 * 
-	 * @return <code>true</code> if this measure is exact; <code>false</code>
+	 * @return <code>true</code> if this quantity is exact; <code>false</code>
 	 *         otherwise.
 	 */
 	public boolean isExact() {
@@ -257,14 +257,14 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	}
 
 	/**
-	 * Returns the scalar measure for the specified <code>long</code> stated in
+	 * Returns the scalar quantity for the specified <code>long</code> stated in
 	 * the specified unit.
 	 *
 	 * @param longValue
-	 *            the measurement value.
+	 *            the quantity value.
 	 * @param unit
 	 *            the measurement unit.
-	 * @return the corresponding <code>int</code> measure.
+	 * @return the corresponding <code>int</code> quantity.
 	 */
 	public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(
 			long longValue, Unit<Q> unit) {
@@ -272,14 +272,14 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	}
 
 	/**
-	 * Returns the scalar measure for the specified <code>int</code> stated in
+	 * Returns the scalar quantity for the specified <code>int</code> stated in
 	 * the specified unit.
 	 *
 	 * @param intValue
-	 *            the measurement value.
+	 *            the quantity value.
 	 * @param unit
 	 *            the measurement unit.
-	 * @return the corresponding <code>int</code> measure.
+	 * @return the corresponding <code>int</code> quantity.
 	 */
 	public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(int intValue,
 			Unit<Q> unit) {
@@ -287,14 +287,14 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	}
 
 	/**
-	 * Returns the scalar measure for the specified <code>float</code> stated in
+	 * Returns the scalar quantity for the specified <code>float</code> stated in
 	 * the specified unit.
 	 *
 	 * @param floatValue
 	 *            the measurement value.
 	 * @param unit
 	 *            the measurement unit.
-	 * @return the corresponding <code>float</code> measure.
+	 * @return the corresponding <code>float</code> quantity.
 	 */
 	public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(
 			float floatValue, Unit<Q> unit) {
@@ -302,14 +302,14 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	}
 
 	/**
-	 * Returns the scalar measure for the specified <code>double</code> stated
+	 * Returns the scalar quantity for the specified <code>double</code> stated
 	 * in the specified unit.
 	 *
 	 * @param doubleValue
 	 *            the measurement value.
 	 * @param unit
 	 *            the measurement unit.
-	 * @return the corresponding <code>double</code> measure.
+	 * @return the corresponding <code>double</code> quantity.
 	 */
 	public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(
 			double doubleValue, Unit<Q> unit) {
@@ -317,7 +317,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	}
 
 	/**
-	 * Returns the decimal measure of unknown type corresponding to the
+	 * Returns the decimal quantity of unknown type corresponding to the
 	 * specified representation. This method can be used to parse dimensionless
 	 * quantities.<br/>
 	 * <code>
@@ -328,13 +328,13 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	 * Note: This method handles only
 	 * {@link tec.units.ri.SimpleUnitFormat.UnitFormat#getStandard standard} unit format
 	 * (<a href="http://unitsofmeasure.org/">UCUM</a> based). Locale-sensitive
-	 * measure formatting and parsing are handled by the
+	 * quantity formatting and parsing are handled by the
 	 * {@link MeasurementFormat} class and its subclasses.
 	 * </p>
 	 *
 	 * @param csq
 	 *            the decimal value and its unit (if any) separated by space(s).
-	 * @return <code>MeasureFormat.getStandard().parse(csq)</code>
+	 * @return <code>QuantityFormat.getInstance().parse(csq)</code>
 	 */
 	public static Quantity<?> parse(CharSequence csq) {
 		try {
