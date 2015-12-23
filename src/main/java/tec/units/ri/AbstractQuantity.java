@@ -46,7 +46,7 @@ import tec.units.ri.quantity.NumberQuantity;
  * 
  * <p>
  * <code>
- *         public static final Quantity<Velocity> C = AbstractQuantity.of("299792458 m/s").asType(Velocity.class);
+ *         public static final Quantity<Velocity> C = NumberQuantity.parse("299792458 m/s").asType(Velocity.class);
  *         // Speed of Light (exact).
  *    </code>
  * </p>
@@ -98,7 +98,7 @@ import tec.units.ri.quantity.NumberQuantity;
  * </p>
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7.1, $Date: 2015-10-15 $
+ * @version 0.7.2, $Date: 2015-12-23 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 		Quantity<Q>, Comparable<Quantity<Q>>, UnitSupplier<Q>, ValueSupplier<Number> {
