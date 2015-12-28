@@ -66,7 +66,7 @@ import tec.units.ri.quantity.QuantityDimension;
  *     };
  *     try {
  *         DimensionalModel.setCurrent(relativistic); // Current thread use the relativistic model.
- *         SI.KILOGRAM.getConverterToAny(SI.JOULE); // Allowed.
+ *         Units.KILOGRAM.getConverterToAny(Units.JOULE); // Allowed.
  *         ...
  *     } finally {
  *         cleanup();
@@ -76,7 +76,7 @@ import tec.units.ri.quantity.QuantityDimension;
  * @see <a href="http://en.wikipedia.org/wiki/Dimensional_analysis">Wikipedia: Dimensional Analysis</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.6, $Date: 2015-07-25 $
+ * @version 0.5.7, $Date: 2015-12-28 $
  */
 public abstract class DimensionalModel {
 
@@ -142,6 +142,7 @@ public abstract class DimensionalModel {
      *
      * @param dimension the dimension for which the dimensional transform is returned.
      * @return the dimensional transform (identity for fundamental dimensions).
+     * @throws UnsupportedOperationException if an unsupported transform is attemted.
      */
     public UnitConverter getDimensionalTransform(Dimension dimension) {
         Map<? extends Dimension, Integer> dimensions = dimension.getProductDimensions();
