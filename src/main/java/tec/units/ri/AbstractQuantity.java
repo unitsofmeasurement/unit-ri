@@ -37,9 +37,9 @@ import javax.measure.quantity.Dimensionless;
 
 import tec.units.ri.format.QuantityFormat;
 import tec.units.ri.function.NaturalOrder;
-import tec.units.ri.function.UnitSupplier;
-import tec.units.ri.function.ValueSupplier;
 import tec.units.ri.quantity.NumberQuantity;
+import tec.uom.lib.common.function.UnitSupplier;
+import tec.uom.lib.common.function.ValueSupplier;
 
 /**
  * <p>
@@ -101,7 +101,7 @@ import tec.units.ri.quantity.NumberQuantity;
  * </p>
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7.2, $Date: 2015-12-23 $
+ * @version 0.8, $Date: 2015-12-28 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 		Quantity<Q>, Comparable<Quantity<Q>>, UnitSupplier<Q>, ValueSupplier<Number> {

@@ -30,7 +30,7 @@
 package tec.units.ri.function;
 
 import tec.units.ri.AbstractConverter;
-
+import tec.uom.lib.common.function.ValueSupplier;
 
 /**
  * <p> This class represents a converter dividing numeric values by π (Pi).</p>
@@ -40,12 +40,11 @@ import tec.units.ri.AbstractConverter;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, August 3, 2014
+ * @version 0.4, December 28, 2015
  */
 final class PiDivisorConverter extends AbstractConverter 
 	implements ValueSupplier<String> { //implements Immutable<String> {
 	
-
 	/**
 	 * 
 	 */

@@ -30,7 +30,7 @@
 package tec.units.ri.function;
 
 import tec.units.ri.AbstractConverter;
-
+import tec.uom.lib.common.function.ValueSupplier;
 
 /**
  * <p>
@@ -40,7 +40,7 @@ import tec.units.ri.AbstractConverter;
  * @see <a href="http://en.wikipedia.org/wiki/Pi"> Wikipedia: Pi</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, August 10, 2014
+ * @version 0.4, December 28, 2015
  */
 public final class PiMultiplierConverter extends AbstractConverter implements
 		ValueSupplier<String> {

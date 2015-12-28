@@ -37,7 +37,7 @@ import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.function.UnitConverterSupplier;
+import tec.uom.lib.common.function.UnitConverterSupplier;
 
 /**
  * <p> This class represents the units derived from other units using
@@ -58,7 +58,7 @@ import tec.units.ri.function.UnitConverterSupplier;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.1, October 29, 2015
+ * @version 0.7, December 28, 2015
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
  implements UnitConverterSupplier {

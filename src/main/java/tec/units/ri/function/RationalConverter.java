@@ -35,15 +35,16 @@ import static tec.units.ri.internal.MathUtil.negateExact;
 import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractConverter;
+import tec.uom.lib.common.function.ValueSupplier;
 
 /**
  * <p> This class represents a converter multiplying numeric values by an
  *     exact scaling factor (represented as the quotient of two
- *     <code>BigInteger</code> numbers).</p>
+ *     <code>double</code> numbers).</p>
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, October 29, 2015
+ * @version 0.7, December 28, 2015
  */
 public final class RationalConverter extends AbstractConverter 
 	implements ValueSupplier<Double> {

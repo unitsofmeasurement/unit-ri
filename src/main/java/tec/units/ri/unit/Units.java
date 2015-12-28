@@ -68,17 +68,16 @@ import javax.measure.spi.SystemOfUnits;
 
 import tec.units.ri.AbstractSystemOfUnits;
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.function.AddConverter;
-import tec.units.ri.function.Nameable;
 import tec.units.ri.function.RationalConverter;
 import tec.units.ri.quantity.QuantityDimension;
+import tec.uom.lib.common.function.Nameable;
 
 /**
  * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8, November 26, 2015
+ * @version 0.8.1, December 28, 2015
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 

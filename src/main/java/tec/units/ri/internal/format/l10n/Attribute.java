@@ -29,9 +29,10 @@
  */
 package tec.units.ri.internal.format.l10n;
 
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 
-import tec.units.ri.function.Nameable;
+import tec.uom.lib.common.function.Nameable;
 
 /**
  * Defines attribute keys that are used to identify text attributes. These keys
@@ -53,7 +54,7 @@ class Attribute implements Nameable {
 	private final String name;
 
 	// table of all instances in this class, used by readResolve
-	private static final Hashtable instanceMap = new Hashtable(7);
+	private static final Map instanceMap = new HashMap(7);
 
 	/**
 	 * Constructs an Attribute with the given name.

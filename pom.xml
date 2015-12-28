@@ -36,6 +36,7 @@
 	<!-- ======================================================= -->
 	<properties>
 		<jsr.version>0.9-SNAPSHOT</jsr.version>
+		<lib.version>0.9-SNAPSHOT</lib.version>
 		<jdkVersion>1.7</jdkVersion>
 		<project.build.javaVersion>${jdkVersion}</project.build.javaVersion>
 		<maven.compile.targetLevel>${jdkVersion}</maven.compile.targetLevel>
@@ -44,6 +45,11 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>tec.uom.lib</groupId>
+				<artifactId>uom-lib-common</artifactId>
+				<version>${lib.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.hamcrest</groupId>
 				<artifactId>hamcrest-all</artifactId>
@@ -63,6 +69,10 @@
 		<dependency>
 			<groupId>javax.measure</groupId>
 			<artifactId>unit-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>tec.uom.lib</groupId>
+			<artifactId>uom-lib-common</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.hamcrest</groupId>

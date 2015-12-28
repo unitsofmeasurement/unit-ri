@@ -30,13 +30,13 @@
 
 package tec.units.ri.internal.format.l10n;
 
+import tec.uom.lib.common.function.ValueSupplier;
+
 /*
  * Portions  Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
  */
-
-import tec.units.ri.function.ValueSupplier;
 
 /**
  * An Annotation object is used as a wrapper for a text attribute value if the

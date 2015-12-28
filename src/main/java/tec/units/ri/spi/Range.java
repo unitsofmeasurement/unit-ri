@@ -29,8 +29,8 @@
  */
 package tec.units.ri.spi;
 
-import tec.units.ri.function.MaximumSupplier;
-import tec.units.ri.function.MinimumSupplier;
+import tec.uom.lib.common.function.MaximumSupplier;
+import tec.uom.lib.common.function.MinimumSupplier;
 
 /**
  * A Range is a pair of <code>T</code> items that represent a range
@@ -42,7 +42,7 @@ import tec.units.ri.function.MinimumSupplier;
  *            The value of the range.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.9, October 29, 2015
+ * @version 0.9, December 28, 2015
  */
 public abstract class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T> {
 	// TODO do we keep null for min and max to represent infinity?
@@ -138,6 +138,7 @@ public abstract class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T>
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+		@SuppressWarnings("rawtypes")
 		Range other = (Range) obj;
 		if (max == null) {
 			if (other.max != null)

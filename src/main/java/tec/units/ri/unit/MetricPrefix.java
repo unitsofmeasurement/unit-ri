@@ -35,8 +35,8 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
-import tec.units.ri.function.UnitConverterSupplier;
 import tec.units.ri.function.RationalConverter;
+import tec.uom.lib.common.function.UnitConverterSupplier;
 
 /**
  * <p> This class provides support for the 20 prefixes used in the metric
@@ -55,7 +55,7 @@ import tec.units.ri.function.RationalConverter;
  * @see <a href="http://en.wikipedia.org/wiki/Metric_prefix">Wikipedia: Metric Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8, $Date: 2015-06-24 $
+ * @version 0.8.1, $Date: 2015-12-28 $
  */
 public enum MetricPrefix implements UnitConverterSupplier {
     YOTTA(RationalConverter.of(1000000000000000000000000d, 1d)),

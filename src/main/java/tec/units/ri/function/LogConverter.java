@@ -31,7 +31,7 @@ package tec.units.ri.function;
 
 import tec.units.ri.AbstractConverter;
 import tec.units.ri.internal.MathUtil;
-
+import tec.uom.lib.common.function.ValueSupplier;
 
 /**
  * <p> This class represents a logarithmic converter of limited precision.
@@ -42,7 +42,7 @@ import tec.units.ri.internal.MathUtil;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, October 29, 2015
+ * @version 0.5, December 28, 2015
  */
 public final class LogConverter extends AbstractConverter 
 	implements ValueSupplier<String> { //implements Immutable<String> {

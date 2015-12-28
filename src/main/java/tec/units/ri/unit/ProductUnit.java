@@ -39,8 +39,8 @@ import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.function.UnitSupplier;
 import tec.units.ri.quantity.QuantityDimension;
+import tec.uom.lib.common.function.UnitSupplier;
 
 /**
  * <p>  This class represents units formed by the product of rational powers of
@@ -298,7 +298,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     @SuppressWarnings("unchecked")
 	@Override
     public AbstractUnit<Q> toSystemUnit() {
-        Unit<?> systemUnit = Units.ONE;
+        Unit<?> systemUnit = AbstractUnit.ONE;
         for (Element element : elements) {
             Unit<?> unit = element.unit.getSystemUnit();
             unit = unit.pow(element.pow);
@@ -396,7 +396,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
         // Returns or creates instance.
         if (resultIndex == 0)
-            return Units.ONE;
+            return AbstractUnit.ONE;
         else if ((resultIndex == 1) && (result[0].pow == result[0].root))
             return result[0].unit;
         else {

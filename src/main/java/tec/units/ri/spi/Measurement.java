@@ -31,7 +31,7 @@ package tec.units.ri.spi;
 
 import javax.measure.Quantity;
 
-import tec.units.ri.function.QuantitySupplier;
+import tec.uom.lib.common.function.QuantitySupplier;
 
 /**
  *
@@ -45,7 +45,7 @@ import tec.units.ri.function.QuantitySupplier;
  * 
  * @see {@link QuantitySupplier}
  * @author werner
- * @version 0.4
+ * @version 0.5
  * @param <Q>
  */
 public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,

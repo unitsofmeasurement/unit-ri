@@ -32,6 +32,7 @@ package tec.units.ri.function;
 import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractConverter;
+import tec.uom.lib.common.function.ValueSupplier;
 
 
 /**
@@ -40,7 +41,7 @@ import tec.units.ri.AbstractConverter;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author Werner Keil
- * @version 0.3, Sep 06, 2014
+ * @version 0.4, Dec 28, 2015
  */
 public final class AddConverter extends AbstractConverter implements ValueSupplier<Double> {
 
