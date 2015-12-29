@@ -55,41 +55,56 @@ import tec.uom.lib.common.function.UnitConverterSupplier;
  * @see <a href="http://en.wikipedia.org/wiki/Metric_prefix">Wikipedia: Metric Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.1, $Date: 2015-12-28 $
+ * @version 0.8.2, $Date: 2015-12-29 $
  */
 public enum MetricPrefix implements UnitConverterSupplier {
-    YOTTA(RationalConverter.of(1000000000000000000000000d, 1d)),
-    ZETTA(RationalConverter.of(1000000000000000000000d, 1d)),
-    EXA(RationalConverter.of(pow(10, 18), 1d)),
-    PETA(RationalConverter.of(pow(10, 15), 1d)),
-    TERA(RationalConverter.of(pow(10, 12), 1d)),
-    GIGA(RationalConverter.of(pow(10, 9), 1d)),
-    MEGA(RationalConverter.of(pow(10, 6), 1d)),
-    KILO(RationalConverter.of(pow(10, 3), 1d)),
-    HECTO(RationalConverter.of(100d, 1d)),
-    DEKA(RationalConverter.of(10d, 1d)),
-    DECI(RationalConverter.of(1d, 10d)),
-    CENTI(RationalConverter.of(1d, 100d)),
-    MILLI(RationalConverter.of(1d, 1000d)),
-    MICRO(RationalConverter.of(1d, pow(10, 6))),
-    NANO(RationalConverter.of(1d, pow(10, 9))),
-    PICO(RationalConverter.of(1d, pow(10, 12))),
-    FEMTO(RationalConverter.of(1d, pow(10, 15))),
-    ATTO(RationalConverter.of(1d, pow(10, 18))),
-    ZEPTO(RationalConverter.of(1d, pow(10, 21))),
-    YOCTO(RationalConverter.of(1d, pow(10, 24)));
+    YOTTA("Y", RationalConverter.of(1000000000000000000000000d, 1d)),
+    ZETTA("Z", RationalConverter.of(1000000000000000000000d, 1d)),
+    EXA("E", RationalConverter.of(pow(10, 18), 1d)),
+    PETA("P", RationalConverter.of(pow(10, 15), 1d)),
+    TERA("T", RationalConverter.of(pow(10, 12), 1d)),
+    GIGA("G", RationalConverter.of(pow(10, 9), 1d)),
+    MEGA("M", RationalConverter.of(pow(10, 6), 1d)),
+    KILO("k", RationalConverter.of(pow(10, 3), 1d)),
+    HECTO("h", RationalConverter.of(100d, 1d)),
+    DEKA("da", RationalConverter.of(10d, 1d)),
+    DECI("d", RationalConverter.of(1d, 10d)),
+    CENTI("c", RationalConverter.of(1d, 100d)),
+    MILLI("m", RationalConverter.of(1d, 1000d)),
+    MICRO("µ", RationalConverter.of(1d, pow(10, 6))),
+    NANO("n", RationalConverter.of(1d, pow(10, 9))),
+    PICO("p", RationalConverter.of(1d, pow(10, 12))),
+    FEMTO("f", RationalConverter.of(1d, pow(10, 15))),
+    ATTO("a", RationalConverter.of(1d, pow(10, 18))),
+    ZEPTO("z", RationalConverter.of(1d, pow(10, 21))),
+    YOCTO("y", RationalConverter.of(1d, pow(10, 24)));
 
+	private final String symbol;
+	
     private final UnitConverter converter;
 
     /**
      * Creates a new prefix.
      *
+     * @param symbol the symbol of this prefix.
      * @param converter the associated unit converter.
      */
-    private MetricPrefix (UnitConverter converter) {
-        this.converter = converter;
+    MetricPrefix(String symbol, RationalConverter converter) {
+        this.symbol = symbol;
+    	this.converter = converter;
     }
-
+    
+    /**
+     * Returns the symbol of this prefix.
+     *
+     * @return this prefix symbol, not {@code null}.
+     * 
+     * @see #toString()
+     */
+    public String getSymbol() {
+    	return symbol;
+    }
+    
     /**
      * Returns the corresponding unit converter.
      *

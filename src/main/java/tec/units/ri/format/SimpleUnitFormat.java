@@ -920,10 +920,13 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			Units.SIEVERT, Units.STERADIAN, Units.TESLA, Units.VOLT,
 			Units.WATT, Units.WEBER };
 
-	// TODO these strings should come from MetricPrefix and be declared there.
-	private static final String[] PREFIXES = { "Y", "Z", "E", "P", "T", "G",
-			"M", "k", "h", "da", "d", "c", "m", "µ", "n", "p", "f", "a", "z",
-			"y" };
+	private static final String[] PREFIXES = {  YOTTA.getSymbol(), ZETTA.getSymbol(), 
+			EXA.getSymbol(), PETA.getSymbol(), TERA.getSymbol(), GIGA.getSymbol(),
+			MEGA.getSymbol(), KILO.getSymbol(), HECTO.getSymbol(), DEKA.getSymbol(),
+			DECI.getSymbol(), CENTI.getSymbol(), MILLI.getSymbol(), MICRO.getSymbol(),
+			NANO.getSymbol(), PICO.getSymbol(), FEMTO.getSymbol(), ATTO.getSymbol(),
+			ZEPTO.getSymbol(), YOCTO.getSymbol()	 
+		};
 
 	// TODO we could try retrieving this dynamically in a static {} method from MetricPrefix if symbols above are also aligned
 	private static final UnitConverter[] CONVERTERS = { YOTTA.getConverter(), ZETTA.getConverter(), 
@@ -932,7 +935,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			DECI.getConverter(), CENTI.getConverter(), MILLI.getConverter(), MICRO.getConverter(),
 			NANO.getConverter(), PICO.getConverter(), FEMTO.getConverter(), ATTO.getConverter(),
 			ZEPTO.getConverter(), YOCTO.getConverter()		
-	};
+		};
 
 	private static String asciiPrefix(String prefix) {
 		return prefix == "µ" ? "micro" : prefix;
