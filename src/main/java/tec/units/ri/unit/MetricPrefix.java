@@ -36,6 +36,7 @@ import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
 import tec.units.ri.function.RationalConverter;
+import tec.uom.lib.common.function.SymbolSupplier;
 import tec.uom.lib.common.function.UnitConverterSupplier;
 
 /**
@@ -57,7 +58,7 @@ import tec.uom.lib.common.function.UnitConverterSupplier;
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.8.2, $Date: 2015-12-29 $
  */
-public enum MetricPrefix implements UnitConverterSupplier {
+public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
     YOTTA("Y", RationalConverter.of(1000000000000000000000000d, 1d)),
     ZETTA("Z", RationalConverter.of(1000000000000000000000d, 1d)),
     EXA("E", RationalConverter.of(pow(10, 18), 1d)),
