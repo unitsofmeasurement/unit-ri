@@ -43,7 +43,7 @@ import tec.units.ri.quantity.NumberQuantity;
 import tec.units.ri.unit.Units;
 
 public class QuantitySortTest {
-	// TODO currently sort() only works on AbstractQuantity. If we wanted to use Quantity, we probably had to consider adding Comparable to Quantity.
+    // TODO currently sort() only works on AbstractQuantity. If we wanted to use Quantity, we probably had to consider adding Comparable to Quantity.
     private AbstractQuantity<Time> week;
 	private AbstractQuantity<Time> day;
     private AbstractQuantity<Time> hours;
