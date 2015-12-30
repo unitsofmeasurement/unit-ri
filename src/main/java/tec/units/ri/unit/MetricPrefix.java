@@ -56,7 +56,7 @@ import tec.uom.lib.common.function.UnitConverterSupplier;
  * @see <a href="http://en.wikipedia.org/wiki/Metric_prefix">Wikipedia: Metric Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.2, $Date: 2015-12-29 $
+ * @version 0.9, $Date: 2015-12-30 $
  */
 public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
     YOTTA("Y", RationalConverter.of(1000000000000000000000000d, 1d)),
@@ -80,8 +80,23 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
     ZEPTO("z", RationalConverter.of(1d, pow(10, 21))),
     YOCTO("y", RationalConverter.of(1d, pow(10, 24)));
 
-	private final String symbol;
-	
+    /**
+     * The symbol of this prefix, as returned by {@link
+     * #getSymbol}.
+     *
+     * @serial
+     * @see #getSymbol()
+     */
+    private final String symbol;
+
+    /**
+     * The <code>UnitConverter</code> of this prefix, as returned by {@link
+     * #getConverter}.
+     *
+     * @serial
+     * @see #getConverter()
+     * @see {@link UnitConverter}
+     */
     private final UnitConverter converter;
 
     /**
