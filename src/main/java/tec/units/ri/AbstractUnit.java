@@ -179,7 +179,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *             if the specified character sequence cannot be parsed correctly.
 	 */
 	public static Unit<?> parse(CharSequence charSequence) {
-		//return EBNFUnitFormat.getInstance().parse(charSequence);
 		return SimpleUnitFormat.getInstance().parse(charSequence);
 	}
 
