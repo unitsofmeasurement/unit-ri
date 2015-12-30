@@ -72,41 +72,6 @@ public class UnitFormatTest {
 		format = SimpleUnitFormat.getInstance();
 	}
 
-	// @Test
-	// public void testFormatLocal() {
-	// final UnitFormat format = LocalUnitFormat.getInstance();
-	// final Appendable a = new StringBuilder();
-	// try {
-	// format.format(METRE, a);
-	// } catch (IOException e) {
-	// fail(e.getMessage());
-	// }
-	// assertEquals(METRE, sut.getUnit());
-	// assertEquals("m", a.toString());
-	//
-	// final Appendable a2 = new StringBuilder();
-	// @SuppressWarnings("unchecked")
-	// Unit<Speed> v = (Unit<Speed>) sut.getUnit().divide(SECOND);
-	// try {
-	// format.format(v, a2);
-	// } catch (IOException e) {
-	// fail(e.getMessage());
-	// }
-	// assertEquals("m/s", a2.toString());
-	// }
-
-	// @Test
-	// @Ignore
-	// public void testParseLocal() {
-	// final UnitFormat format = LocalUnitFormat.getInstance();
-	// try {
-	// Unit<?> u = format.parse("min");
-	// assertEquals("min", u.getSymbol());
-	// } catch (ParserException e) {
-	// fail(e.getMessage());
-	// }
-	// }
-
 	@Test
 	public void testFormatHz() {
 		Unit<Frequency> hz = HERTZ;
@@ -152,7 +117,7 @@ public class UnitFormatTest {
 	@Test
 	public void testFormatKph() {
 		Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
-		assertEquals("kph", kph.toString());
+		assertEquals("km/h", kph.toString());
 	}
 	
 	@Test

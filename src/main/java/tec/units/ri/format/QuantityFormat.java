@@ -42,6 +42,7 @@ import tec.units.ri.internal.format.l10n.DecimalFormat;
 import tec.units.ri.internal.format.l10n.NumberFormat;
 import tec.units.ri.quantity.NumberQuantity;
 import tec.units.ri.unit.Units;
+import tec.uom.lib.common.function.Parser;
 
 /**
  * <p>
@@ -56,7 +57,7 @@ import tec.units.ri.unit.Units;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7.2, $Date: 2015-10-30 $
+ * @version 0.8, $Date: 2015-12-30 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
@@ -267,14 +268,10 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 	private static final class NumberSpaceUnit extends QuantityFormat {
 		private final DecimalFormat decimalFormat = new DecimalFormat();
 		
-		private final NumberFormat numberFormat;
-//		private final L10nNumberFormat parseFormat = L10nNumberFormat.getInstance();
-		
 		private final UnitFormat unitFormat;
 
 		private NumberSpaceUnit(NumberFormat numberFormat, UnitFormat unitFormat) {
-			this.numberFormat = numberFormat;
-//			decimalFormat.applyPattern("#,#0.0000##");
+			//			decimalFormat.applyPattern("#,#0.0000##");
 			this.unitFormat = unitFormat;
 		}
 

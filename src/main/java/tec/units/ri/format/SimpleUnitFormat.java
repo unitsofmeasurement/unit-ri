@@ -63,7 +63,7 @@ import javax.measure.format.UnitFormat;
  * </p>
  * 
  * <p>
- * For all SI units, the 20 SI prefixes used to form decimal multiples
+ * For SI units, the 20 SI prefixes used to form decimal multiples
  * and sub-multiples of SI units are recognized. {@link Units} are
  * directly recognized. For example:<br>
  * <code>
@@ -75,7 +75,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.6.4, Nov 26, 2015
+ * @version 0.7, Dec 30, 2015
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
@@ -111,7 +111,6 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	 * @return the default unit format (locale sensitive).
 	 */
 	public static SimpleUnitFormat getInstance() {
-		//return BaseFormat.getInstance(Locale.getDefault());
 		return getInstance(Flavor.Default);
 	}
 
@@ -1002,7 +1001,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		DEFAULT.label(Units.DAY, "day");
 		DEFAULT.label(Units.WEEK, "week");
 		DEFAULT.label(Units.YEAR, "year");
-		DEFAULT.label(Units.KILOMETRES_PER_HOUR, "kph");
+		DEFAULT.label(Units.KILOMETRES_PER_HOUR, "km/h");
 		DEFAULT.label(Units.CUBIC_METRE, "\u33A5");
 		ASCII.label(Units.CUBIC_METRE, "m3");
 		ASCII.label(LITRE, "l");
