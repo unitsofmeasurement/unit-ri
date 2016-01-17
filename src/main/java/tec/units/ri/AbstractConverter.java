@@ -38,7 +38,7 @@ import javax.measure.UnitConverter;
  * <p> The base class for our {@link UnitConverter} implementations.</p>
  *
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8, $Date: 2015-11-23 $
+ * @version 0.8.1, $Date: 2016-01-17 $
  */
 public abstract class AbstractConverter implements UnitConverter {
 	
@@ -101,9 +101,15 @@ public abstract class AbstractConverter implements UnitConverter {
         return steps;
     }
 
-    @Override
+    /**
+     * @throws IllegalArgumentException if the value is </code>null</code>.
+     */
     public Number convert(Number value) {
-        return convert(value.doubleValue()); // TODO null check?
+        if (value != null) {
+        	return convert(value.doubleValue());
+        } else {
+        	throw new IllegalArgumentException("Value cannot be null");
+        }
     }
 
     public abstract double convert(double value);
@@ -171,6 +177,7 @@ public abstract class AbstractConverter implements UnitConverter {
          *
          * @param  left the left converter.
          * @param  right the right converter.
+         * @throws IllegalArgumentException if either the left or right converter are </code>null</code>
          */
         public Pair(UnitConverter left, UnitConverter right) {
             this.left = left;
