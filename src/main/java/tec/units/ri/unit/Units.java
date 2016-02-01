@@ -50,6 +50,7 @@ import javax.measure.quantity.Force;
 import javax.measure.quantity.Frequency;
 import javax.measure.quantity.Illuminance;
 import javax.measure.quantity.Length;
+import javax.measure.quantity.Luminance;
 import javax.measure.quantity.LuminousFlux;
 import javax.measure.quantity.LuminousIntensity;
 import javax.measure.quantity.MagneticFlux;
@@ -350,23 +351,6 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
             // Not mapping to Temperature since temperature is mapped to Kelvin.
 
     /**
-     * The SI unit for luminous flux (standard name <code>lm</code>).
-     * One Lumen is equal to the amount of light given out through a solid angle
-     * by a source of one candela intensity radiating equally in all directions.
-     */
-    public static final Unit<LuminousFlux> LUMEN
-            = addUnit(new AlternateUnit<LuminousFlux>(
-            CANDELA.multiply(STERADIAN), "lm"), LuminousFlux.class);
-
-    /**
-     * The SI unit for illuminance (standard name <code>lx</code>).
-     * One Lux is equal to one lumen per square metre.
-     */
-    public static final Unit<Illuminance> LUX
-            = addUnit(new AlternateUnit<Illuminance>(
-            LUMEN.divide(METRE.pow(2)), "lx"), Illuminance.class);
-
-    /**
      * The SI unit for activity of a radionuclide (standard name <code>Bq</code>).
      * One becquerel is the radiation caused by one disintegration per second.
      * It is named after the French physicist, Antoine-Henri Becquerel
@@ -444,6 +428,34 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 	public static final Unit<Speed> KILOMETRES_PER_HOUR = addUnit(
 			METRES_PER_SECOND.multiply(0.277778d)).asType(Speed.class);
 	
+	   /**
+     * The SI unit for luminous flux (standard name <code>lm</code>).
+     * One Lumen is equal to the amount of light given out through a solid angle
+     * by a source of one candela intensity radiating equally in all directions.
+     */
+    public static final Unit<LuminousFlux> LUMEN
+            = addUnit(new AlternateUnit<LuminousFlux>(
+            CANDELA.multiply(STERADIAN), "lm"), LuminousFlux.class);
+
+    /**
+     * The SI unit for illuminance (standard name <code>lx</code>).
+     * One Lux is equal to one lumen per square metre.
+     */
+    public static final Unit<Illuminance> LUX
+            = addUnit(new AlternateUnit<Illuminance>(
+            LUMEN.divide(METRE.pow(2)), "lx"), Illuminance.class);
+    
+    /**
+     * Luminance is a photometric measure of the luminous intensity per unit area of light travelling in a given
+     * direction. It describes the amount of light that passes through, is emitted or reflected from a particular 
+     * area, and falls within a given solid angle. The SI unit for luminance is candela per square metre (<code>cd/m2</code>).
+     * @see <a href="https://en.wikipedia.org/wiki/Luminance">
+     *      Wikipedia: Luminance</a>
+     */
+    public static final Unit<Luminance> CANDELA_PER_SQUARE_METRE
+            = addUnit(new AlternateUnit<Luminance>(
+            CANDELA.divide(SQUARE_METRE), "cd/m2"), Luminance.class);
+
 
     /////////////////////////////////////////////////////////////////
     // Units outside the SI that are accepted for use with the SI. //

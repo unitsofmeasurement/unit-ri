@@ -64,6 +64,6 @@ public class SystemOfUnitsServiceTest {
     	for (Object o : list) {
     		System.out.println(o.toString());
     	}*/
-    	assertEquals(40, system.getUnits().size());
+    	assertEquals(41, system.getUnits().size());
     }
 }
