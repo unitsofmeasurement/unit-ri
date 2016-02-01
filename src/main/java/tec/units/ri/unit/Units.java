@@ -305,7 +305,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      */
     public static final Unit<ElectricPermittivity> FARAD_PER_METRE
             = addUnit(new AlternateUnit<ElectricPermittivity>(
-             FARAD.divide(METRE), "ε"), ElectricResistance.class);
+             FARAD.divide(METRE), "ε"), ElectricPermittivity.class);
     
     /**
      * The SI unit for magnetic flux (standard name <code>Wb</code>).
