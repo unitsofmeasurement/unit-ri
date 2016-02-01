@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Reference Implementation
- * Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
+ * Copyright (c) 2005-2016, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -64,6 +64,6 @@ public class SystemOfUnitsServiceTest {
     	for (Object o : list) {
     		System.out.println(o.toString());
     	}*/
-    	assertEquals(39, system.getUnits().size());
+    	assertEquals(40, system.getUnits().size());
     }
 }
