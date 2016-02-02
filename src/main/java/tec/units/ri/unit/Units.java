@@ -42,7 +42,6 @@ import javax.measure.quantity.ElectricCharge;
 import javax.measure.quantity.ElectricConductance;
 import javax.measure.quantity.ElectricCurrent;
 import javax.measure.quantity.ElectricInductance;
-import javax.measure.quantity.ElectricPermittivity;
 import javax.measure.quantity.ElectricPotential;
 import javax.measure.quantity.ElectricResistance;
 import javax.measure.quantity.Energy;
@@ -80,7 +79,7 @@ import tec.uom.lib.common.function.Nameable;
  * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.2, February 1, 2016
+ * @version 0.8.3, February 2, 2016
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
@@ -299,15 +298,6 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
     public static final Unit<ElectricConductance> SIEMENS
             = addUnit(new AlternateUnit<ElectricConductance>(
             AMPERE.divide(VOLT), "S"), ElectricConductance.class);
-
-    /**
-     * The SI unit for electric permittivity (standard name <code>ε</code>, <code>F/m </code> or <code>F·m−1</code>).
-     * In electromagnetism, absolute permittivity is the measure of resistance 
-     * that is encountered when forming an electric field in a medium.
-     */
-    public static final Unit<ElectricPermittivity> FARAD_PER_METRE
-            = addUnit(new AlternateUnit<ElectricPermittivity>(
-             FARAD.divide(METRE), "ε"), ElectricPermittivity.class);
     
     /**
      * The SI unit for magnetic flux (standard name <code>Wb</code>).
