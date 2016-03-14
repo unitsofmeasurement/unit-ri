@@ -144,7 +144,7 @@ class AttributedString {
 	 *                not an empty Map (attributes cannot be applied to a
 	 *                0-length range).
 	 */
-	public AttributedString(String text, HashMap attributes) {
+	public AttributedString(String text, Map attributes) {
 		if (text == null || attributes == null) {
 			throw new NullPointerException();
 		}
@@ -399,7 +399,7 @@ class AttributedString {
 	 *                don't define a non-empty subrange of the string and the
 	 *                attributes parameter is not an empty Map.
 	 */
-	public void addAttributes(HashMap attributes, int beginIndex, int endIndex) {
+	public void addAttributes(Map attributes, int beginIndex, int endIndex) {
 		if (attributes == null) {
 			throw new NullPointerException();
 		}
@@ -1008,7 +1008,7 @@ class AttributedString {
 			}
 		}
 
-		public HashMap getAttributes() {
+		public Map getAttributes() {
 			if (runAttributes == null || currentRunIndex == -1
 					|| runAttributes[currentRunIndex] == null) {
 				// ??? would be nice to return null, but current spec doesn't
@@ -1118,7 +1118,6 @@ class AttributedString {
 	// attributes of one run
 
 	final private class AttributeMap extends HashMap {
-
 		int runIndex;
 		int beginIndex;
 		int endIndex;
@@ -1175,4 +1174,3 @@ class AttributedString {
 		}
 	}
 }
-
