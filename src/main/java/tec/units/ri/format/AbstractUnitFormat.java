@@ -46,14 +46,15 @@ import tec.units.ri.AbstractUnit;
  *
  * <p>
  * For all metric units, the 20 SI prefixes used to form decimal multiples and
- * sub-multiples of SI units are recognized. For example:<br><code>
+ * sub-multiples of SI units are recognized. For example:<br>
+ * <code>
  * AbstractUnit.parse("m°C").equals(MetricPrefix.MILLI(Units.CELSIUS))
  * AbstractUnit.parse("kW").equals(MetricPrefix.KILO(Units.WATT))</code>
  * </p>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8 $Date: 2015-12-30 $
+ * @version 0.8.1 $Date: 2016-03-15 $
  * 
  */
 public abstract class AbstractUnitFormat implements UnitFormat {
@@ -61,22 +62,14 @@ public abstract class AbstractUnitFormat implements UnitFormat {
 	 * serialVersionUID
 	 */
 	// private static final long serialVersionUID = -2046025267890654321L;
-	
-	protected static final Logger logger = Logger.getLogger(AbstractUnitFormat.class
-			.getName());
-	
-	/**
-	 * Returns the {@link SymbolMap} for this unit format.
-	 *
-	 * @return the symbol map used by this format.
-	 */
-	//protected abstract SymbolMap getSymbols();
+
+	protected static final Logger logger = Logger
+			.getLogger(AbstractUnitFormat.class.getName());
 
 	/**
 	 * Formats an object to produce a string. This is equivalent to <blockquote>
 	 * {@link #format(Unit, StringBuilder) format}<code>(unit,
-	 *         new StringBuilder()).toString();</code>
-	 * </blockquote>
+	 *         new StringBuilder()).toString();</code> </blockquote>
 	 *
 	 * @param obj
 	 *            The object to format
@@ -90,8 +83,7 @@ public abstract class AbstractUnitFormat implements UnitFormat {
 					.toString();
 		} else {
 			try {
-				return (this.format(unit, new StringBuilder()))
-						.toString();
+				return (this.format(unit, new StringBuilder())).toString();
 			} catch (IOException ex) {
 				throw new ParserException(ex); // Should never happen.
 			}
@@ -133,7 +125,7 @@ public abstract class AbstractUnitFormat implements UnitFormat {
 	public boolean isLocaleSensitive() {
 		return false;
 	}
-	
+
 	/**
 	 * Convenience method equivalent to
 	 * {@link #format(AbstractUnit, Appendable)} except it does not raise an
