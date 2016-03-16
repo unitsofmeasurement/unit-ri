@@ -49,10 +49,8 @@ import javax.measure.quantity.Force;
 import javax.measure.quantity.Frequency;
 import javax.measure.quantity.Illuminance;
 import javax.measure.quantity.Length;
-import javax.measure.quantity.Luminance;
 import javax.measure.quantity.LuminousFlux;
 import javax.measure.quantity.LuminousIntensity;
-import javax.measure.quantity.MagneticFieldStrength;
 import javax.measure.quantity.MagneticFlux;
 import javax.measure.quantity.MagneticFluxDensity;
 import javax.measure.quantity.Mass;
@@ -79,7 +77,7 @@ import tec.uom.lib.common.function.Nameable;
  * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.3, February 2, 2016
+ * @version 0.8.4, March 16, 2016
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
@@ -319,18 +317,6 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
     public static final Unit<MagneticFluxDensity> TESLA
             = addUnit(new AlternateUnit<MagneticFluxDensity>(
             WEBER.divide(METRE.pow(2)), "T"), MagneticFluxDensity.class);
-    
-    /**
-     * A magnetic field is the magnetic effect of electric currents and magnetic materials. 
-     * The magnetic field at any given point is specified by both a direction and a magnitude (or strength);
-     * as such it is a vector field.
-     * The H-field is measured in amperes per metre (<code>A/m</code>) in SI units.
-     * @see <a href="https://en.wikipedia.org/wiki/Magnetic_field#The_H-field">
-     *      Wikipedia: Magnetic Field - The H Field</a>
-     */
-    public static final Unit<MagneticFieldStrength> AMPERE_PER_METRE
-            = addUnit(new AlternateUnit<MagneticFieldStrength>(
-            AMPERE.divide(METRE), "A/m"), MagneticFieldStrength.class);
 
     /**
      * The alternate unit for inductance (standard name <code>H</code>).
@@ -447,17 +433,6 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
     public static final Unit<Illuminance> LUX
             = addUnit(new AlternateUnit<Illuminance>(
             LUMEN.divide(METRE.pow(2)), "lx"), Illuminance.class);
-    
-    /**
-     * Luminance is a photometric measure of the luminous intensity per unit area of light travelling in a given
-     * direction. It describes the amount of light that passes through, is emitted or reflected from a particular 
-     * area, and falls within a given solid angle. The SI unit for luminance is candela per square metre (<code>cd/m2</code>).
-     * @see <a href="https://en.wikipedia.org/wiki/Luminance">
-     *      Wikipedia: Luminance</a>
-     */
-    public static final Unit<Luminance> CANDELA_PER_SQUARE_METRE
-            = addUnit(new AlternateUnit<Luminance>(
-            CANDELA.divide(SQUARE_METRE), "cd/m2"), Luminance.class);
 
 
     /////////////////////////////////////////////////////////////////
