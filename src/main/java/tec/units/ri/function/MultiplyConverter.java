@@ -41,7 +41,7 @@ import tec.uom.lib.common.function.ValueSupplier;
  * </p>
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.4, December 28, 2015
  */
 public final class MultiplyConverter extends AbstractConverter implements
@@ -50,7 +50,7 @@ public final class MultiplyConverter extends AbstractConverter implements
 	/**
 	 * 
 	 */
-//	private static final long serialVersionUID = 6588759878444545649L;
+	// private static final long serialVersionUID = 6588759878444545649L;
 
 	/**
 	 * Holds the scale factor.

@@ -39,7 +39,7 @@ import tec.uom.lib.common.function.ValueSupplier;
  * 
  * @see <a href="http://en.wikipedia.org/wiki/Pi"> Wikipedia: Pi</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.4, December 28, 2015
  */
 public final class PiMultiplierConverter extends AbstractConverter implements
@@ -56,16 +56,16 @@ public final class PiMultiplierConverter extends AbstractConverter implements
 		return value * PI;
 	}
 
-//	@Override
-//	public BigDecimal convert(BigDecimal value, MathContext ctx)
-//			throws ArithmeticException {
-//		int nbrDigits = ctx.getPrecision();
-//		if (nbrDigits == 0)
-//			throw new ArithmeticException(
-//					"Pi multiplication with unlimited precision");
-//		BigDecimal pi = Pi.pi(nbrDigits);
-//		return value.multiply(pi, ctx).scaleByPowerOfTen(1 - nbrDigits);
-//	}
+	// @Override
+	// public BigDecimal convert(BigDecimal value, MathContext ctx)
+	// throws ArithmeticException {
+	// int nbrDigits = ctx.getPrecision();
+	// if (nbrDigits == 0)
+	// throw new ArithmeticException(
+	// "Pi multiplication with unlimited precision");
+	// BigDecimal pi = Pi.pi(nbrDigits);
+	// return value.multiply(pi, ctx).scaleByPowerOfTen(1 - nbrDigits);
+	// }
 
 	@Override
 	public AbstractConverter inverse() {
@@ -106,22 +106,32 @@ public final class PiMultiplierConverter extends AbstractConverter implements
 
 		public static Double pi(int numDigits) {
 			int calcDigits = numDigits + 10;
-			return 4 * (
-					(4 * (arccot(5, calcDigits))) - arccot(
-							239, calcDigits)); /*).setScale(numDigits,
-					RoundingMode.DOWN);*/
+			return 4 * ((4 * (arccot(5, calcDigits))) - arccot(239, calcDigits)); /*
+																				 * )
+																				 * .
+																				 * setScale
+																				 * (
+																				 * numDigits
+																				 * ,
+																				 * RoundingMode
+																				 * .
+																				 * DOWN
+																				 * )
+																				 * ;
+																				 */
 		}
 
 		private static double arccot(double x, int numDigits) {
-			double unity = 1; /*BigDecimal.ONE.setScale(numDigits,
-					RoundingMode.DOWN);*/
+			double unity = 1; /*
+							 * BigDecimal.ONE.setScale(numDigits,
+							 * RoundingMode.DOWN);
+							 */
 			double sum = unity / x;
 			double xpower = sum;
 			Double term = null;
 			boolean add = false;
-			for (double n = 3; term == null
-					|| !term.equals(Double.valueOf(0)); n += 2) {
-				xpower = xpower / ((long)x^2);
+			for (double n = 3; term == null || !term.equals(Double.valueOf(0)); n += 2) {
+				xpower = xpower / ((long) x ^ 2);
 				term = xpower / n;
 				sum = add ? sum + term : sum - term;
 				add = !add;
@@ -130,13 +140,13 @@ public final class PiMultiplierConverter extends AbstractConverter implements
 		}
 	}
 
-	//private static final BigDecimal TWO = new BigDecimal("2");
+	// private static final BigDecimal TWO = new BigDecimal("2");
 
-	//private static final BigDecimal FOUR = new BigDecimal("4");
+	// private static final BigDecimal FOUR = new BigDecimal("4");
 
-	//private static final BigDecimal FIVE = new BigDecimal("5");
+	// private static final BigDecimal FIVE = new BigDecimal("5");
 
-	//private static final BigDecimal TWO_THIRTY_NINE = new BigDecimal("239");
+	// private static final BigDecimal TWO_THIRTY_NINE = new BigDecimal("239");
 
 	public String getValue() {
 		return toString();

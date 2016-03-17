@@ -43,48 +43,48 @@ import tec.units.ri.quantity.NumberQuantity;
 import tec.units.ri.unit.Units;
 
 public class QuantitySortTest {
-    // TODO currently sort() only works on AbstractQuantity. If we wanted to use Quantity, we probably had to consider adding Comparable to Quantity.
-    private AbstractQuantity<Time> week;
+	// TODO currently sort() only works on AbstractQuantity. If we wanted to use
+	// Quantity, we probably had to consider adding Comparable to Quantity.
+	private AbstractQuantity<Time> week;
 	private AbstractQuantity<Time> day;
-    private AbstractQuantity<Time> hours;
-    private AbstractQuantity<Time> minutes;
-    private AbstractQuantity<Time> seconds;
+	private AbstractQuantity<Time> hours;
+	private AbstractQuantity<Time> minutes;
+	private AbstractQuantity<Time> seconds;
 
-    @Before
-    public void init() {
-        minutes = NumberQuantity.of(15, Units.MINUTE);
-        hours = NumberQuantity.of(18, Units.HOUR);
-        day = NumberQuantity.of(1, Units.DAY);
-        week = NumberQuantity.of(7, Units.DAY);
-        seconds = NumberQuantity.of(100, Units.SECOND);
-    }
+	@Before
+	public void init() {
+		minutes = NumberQuantity.of(15, Units.MINUTE);
+		hours = NumberQuantity.of(18, Units.HOUR);
+		day = NumberQuantity.of(1, Units.DAY);
+		week = NumberQuantity.of(7, Units.DAY);
+		seconds = NumberQuantity.of(100, Units.SECOND);
+	}
 
-    @Test
-    public void sortNaturalTest() {
-        List<AbstractQuantity<Time>> times = getTimes();
-        Collections.sort(times);
-        Assert.assertEquals(seconds, times.get(0));
-        Assert.assertEquals(minutes, times.get(1));
-        Assert.assertEquals(hours, times.get(2));
-        Assert.assertEquals(day, times.get(3));
-        Assert.assertEquals(week, times.get(4));
-    }
+	@Test
+	public void sortNaturalTest() {
+		List<AbstractQuantity<Time>> times = getTimes();
+		Collections.sort(times);
+		Assert.assertEquals(seconds, times.get(0));
+		Assert.assertEquals(minutes, times.get(1));
+		Assert.assertEquals(hours, times.get(2));
+		Assert.assertEquals(day, times.get(3));
+		Assert.assertEquals(week, times.get(4));
+	}
 
-    @Test
-    public void sortNaturalDescTest() {
-        List<AbstractQuantity<Time>> times = getTimes();
-        Collections.sort(times);
-        Collections.reverse(times);
-        Assert.assertEquals(week, times.get(0));
-        Assert.assertEquals(day, times.get(1));
-        Assert.assertEquals(hours, times.get(2));
-        Assert.assertEquals(minutes, times.get(3));
-        Assert.assertEquals(seconds, times.get(4));
-    }
+	@Test
+	public void sortNaturalDescTest() {
+		List<AbstractQuantity<Time>> times = getTimes();
+		Collections.sort(times);
+		Collections.reverse(times);
+		Assert.assertEquals(week, times.get(0));
+		Assert.assertEquals(day, times.get(1));
+		Assert.assertEquals(hours, times.get(2));
+		Assert.assertEquals(minutes, times.get(3));
+		Assert.assertEquals(seconds, times.get(4));
+	}
 
-
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	private List<AbstractQuantity<Time>> getTimes() {
-        return Arrays.asList(day, minutes, hours, week, seconds);
-    }
+		return Arrays.asList(day, minutes, hours, week, seconds);
+	}
 }

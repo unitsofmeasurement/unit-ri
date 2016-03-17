@@ -164,10 +164,10 @@ class AttributedString {
 			Vector newRunAttributeValues = new Vector(attributeCount);
 			runAttributes[0] = newRunAttributes;
 			runAttributeValues[0] = newRunAttributeValues;
-			
+
 			Set iterator = attributes.keySet();
 			for (Object key : iterator) {
-//				Object key = iterator.nextElement();
+				// Object key = iterator.nextElement();
 				Object value = attributes.get(key);
 				newRunAttributes.addElement(key);
 				newRunAttributeValues.addElement(value);
@@ -271,7 +271,7 @@ class AttributedString {
 			Enumeration iterator = keys.elements();
 
 			// retain all keys by attrKeys
-			//TODO add to ArrayUtils
+			// TODO add to ArrayUtils
 			while (iterator.hasMoreElements()) {
 				Object elem = iterator.nextElement();
 				if (!attrKeys.contains(elem))
@@ -425,7 +425,7 @@ class AttributedString {
 
 		Set iterator = attributes.keySet();
 		for (Object key : iterator) {
-			//Object key = iterator.nextElement();
+			// Object key = iterator.nextElement();
 			Object value = attributes.get(key);
 			addAttributeRunData((Attribute) key, value, beginRunIndex,
 					endRunIndex);
@@ -533,8 +533,8 @@ class AttributedString {
 				newRunAttributeValues = new Vector(oldRunAttributeValues.size());
 				Enumeration iterator = oldRunAttributeValues.elements();
 				while (iterator.hasMoreElements()) {
-					newRunAttributeValues.insertElementAt(iterator
-							.nextElement(), 0);
+					newRunAttributeValues.insertElementAt(
+							iterator.nextElement(), 0);
 				}
 			}
 		}
@@ -676,8 +676,8 @@ class AttributedString {
 				int currIndex = runIndex;
 				int runStart = runStarts[currIndex];
 				while (runStart >= beginIndex
-						&& valuesMatch(value, getAttribute(attribute,
-								currIndex - 1))) {
+						&& valuesMatch(value,
+								getAttribute(attribute, currIndex - 1))) {
 					currIndex--;
 					runStart = runStarts[currIndex];
 				}
@@ -692,8 +692,8 @@ class AttributedString {
 				int runLimit = (currIndex < runCount - 1) ? runStarts[currIndex + 1]
 						: textLength;
 				while (runLimit <= endIndex
-						&& valuesMatch(value, getAttribute(attribute,
-								currIndex + 1))) {
+						&& valuesMatch(value,
+								getAttribute(attribute, currIndex + 1))) {
 					currIndex++;
 					runLimit = (currIndex < runCount - 1) ? runStarts[currIndex + 1]
 							: textLength;
@@ -716,8 +716,8 @@ class AttributedString {
 		Enumeration iterator = attributes.elements();
 		while (iterator.hasMoreElements()) {
 			Attribute key = (Attribute) iterator.nextElement();
-			if (!valuesMatch(getAttribute(key, runIndex1), getAttribute(key,
-					runIndex2))) {
+			if (!valuesMatch(getAttribute(key, runIndex1),
+					getAttribute(key, runIndex2))) {
 				return false;
 			}
 		}
@@ -767,7 +767,7 @@ class AttributedString {
 
 			Set iterator = attrs.keySet();
 			for (Object key : iterator) {
-				//Object key = iterator.nextElement();
+				// Object key = iterator.nextElement();
 				Object value = attrs.get(key);
 				runAttrs.addElement(key);
 				runValues.addElement(value);
@@ -827,8 +827,8 @@ class AttributedString {
 			this.currentIndex = beginIndex;
 			updateRunInfo();
 			if (attributes != null) {
-				//array clone
-				//TODO add to ArrayUtils
+				// array clone
+				// TODO add to ArrayUtils
 				relevantAttributes = new Attribute[attributes.length];
 				for (int i = 0; i < attributes.length; i++)
 					relevantAttributes[i] = attributes[i];
@@ -859,7 +859,6 @@ class AttributedString {
 		public int hashCode() {
 			return text.hashCode() ^ currentIndex ^ beginIndex ^ endIndex;
 		}
-
 
 		// CharacterIterator methods. See documentation in that interface.
 
@@ -932,8 +931,9 @@ class AttributedString {
 				int runStart = currentRunStart;
 				int runIndex = currentRunIndex;
 				while (runStart > beginIndex
-						&& valuesMatch(value, AttributedString.this
-								.getAttribute(attribute, runIndex - 1))) {
+						&& valuesMatch(value,
+								AttributedString.this.getAttribute(attribute,
+										runIndex - 1))) {
 					runIndex--;
 					runStart = runStarts[runIndex];
 				}
@@ -975,8 +975,9 @@ class AttributedString {
 				int runLimit = currentRunLimit;
 				int runIndex = currentRunIndex;
 				while (runLimit < endIndex
-						&& valuesMatch(value, AttributedString.this
-								.getAttribute(attribute, runIndex + 1))) {
+						&& valuesMatch(value,
+								AttributedString.this.getAttribute(attribute,
+										runIndex + 1))) {
 					runIndex++;
 					runLimit = runIndex < runCount - 1 ? runStarts[runIndex + 1]
 							: endIndex;
@@ -1015,7 +1016,7 @@ class AttributedString {
 				// allow it
 				// returning HashMap saves AttributeMap from dealing with
 				// emptiness
-				return new HashMap();				
+				return new HashMap();
 			}
 			return new AttributeMap(currentRunIndex, beginIndex, endIndex);
 		}
@@ -1042,7 +1043,8 @@ class AttributedString {
 						if (currentRunAttributes != null) {
 							int j = currentRunAttributes.size();
 							while (j-- > 0) {
-								keys.addElement(currentRunAttributes.elementAt(j));
+								keys.addElement(currentRunAttributes
+										.elementAt(j));
 							}
 						}
 					}
@@ -1133,7 +1135,8 @@ class AttributedString {
 			synchronized (AttributedString.this) {
 				int size = runAttributes[runIndex].size();
 				for (int i = 0; i < size; i++) {
-					Attribute key = (Attribute) runAttributes[runIndex].elementAt(i);
+					Attribute key = (Attribute) runAttributes[runIndex]
+							.elementAt(i);
 					Object value = runAttributeValues[runIndex].elementAt(i);
 					if (value instanceof Annotation) {
 						value = AttributedString.this.getAttributeCheckRange(
@@ -1147,13 +1150,14 @@ class AttributedString {
 			}
 			return result.elements();
 		}
-		
+
 		public Enumeration elements() {
 			Vector result = new Vector();
 			synchronized (AttributedString.this) {
 				int size = runAttributes[runIndex].size();
 				for (int i = 0; i < size; i++) {
-					Attribute key = (Attribute) runAttributes[runIndex].elementAt(i);
+					Attribute key = (Attribute) runAttributes[runIndex]
+							.elementAt(i);
 					Object value = runAttributeValues[runIndex].elementAt(i);
 					if (value instanceof Annotation) {
 						value = AttributedString.this.getAttributeCheckRange(

@@ -58,14 +58,14 @@ import javax.measure.format.UnitFormat;
 
 /**
  * <p>
- * This class implements the {@link UnitFormat} interface for formatting and parsing {@link Unit
- * units}.
+ * This class implements the {@link UnitFormat} interface for formatting and
+ * parsing {@link Unit units}.
  * </p>
  * 
  * <p>
- * For SI units, the 20 SI prefixes used to form decimal multiples
- * and sub-multiples of SI units are recognized. {@link Units} are
- * directly recognized. For example:<br>
+ * For SI units, the 20 SI prefixes used to form decimal multiples and
+ * sub-multiples of SI units are recognized. {@link Units} are directly
+ * recognized. For example:<br>
  * <code>
  *        AbstractUnit.parse("m°C").equals(MetricPrefix.MILLI(Units.CELSIUS))
  *        AbstractUnit.parse("kW").equals(MetricPrefix.KILO(Units.WATT))
@@ -81,7 +81,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
 	 * 
 	 */
-//	private static final long serialVersionUID = 4149424034841739785L;
+	// private static final long serialVersionUID = 4149424034841739785L;
 
 	/**
 	 * Flavor of this format
@@ -105,8 +105,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
 	/**
 	 * Returns the unit format for the default locale (format used by
-	 * {@link AbstractUnit#parse(CharSequence) AbstractUnit.parse(CharSequence)} and
-	 * {@link Unit#toString() Unit.toString()}).
+	 * {@link AbstractUnit#parse(CharSequence) AbstractUnit.parse(CharSequence)}
+	 * and {@link Unit#toString() Unit.toString()}).
 	 * 
 	 * @return the default unit format (locale sensitive).
 	 */
@@ -178,10 +178,12 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			ParsePosition pos) throws ParserException;
 
 	/**
-	 * Attaches a system-wide label to the specified unit. For example:<br><code>
+	 * Attaches a system-wide label to the specified unit. For example:<br>
+	 * <code>
 	 * SimpleUnitFormat.getInstance().label(DAY.multiply(365), "year");
-	 * SimpleUnitFormat.getInstance().label(METRE.multiply(0.3048), "ft"); </code><br>If
-	 * the specified label is already associated to an unit the previous
+	 * SimpleUnitFormat.getInstance().label(METRE.multiply(0.3048), "ft"); </code>
+	 * <br>
+	 * If the specified label is already associated to an unit the previous
 	 * association is discarded or ignored.
 	 * 
 	 * @param unit
@@ -281,8 +283,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	 * @return the corresponding unit or <code>null</code> if the string cannot
 	 *         be parsed.
 	 */
-	public final Unit<?> parseObject(String source, ParsePosition pos) throws ParserException {
-		//int start = pos.getIndex();
+	public final Unit<?> parseObject(String source, ParsePosition pos)
+			throws ParserException {
+		// int start = pos.getIndex();
 		return parseProductUnit(source, pos);
 	}
 
@@ -340,27 +343,29 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		public boolean isValidIdentifier(String name) {
 			if ((name == null) || (name.length() == 0))
 				return false;
-			/*for (int i = 0; i < name.length(); i++) {
-				if (!isUnitIdentifierPart(name.charAt(i)))
-					return false;
-			} */
-			if (!isUnitIdentifierPart(name.charAt(0))) // label must not begin with a digit or mathematical operator
-					return false;
+			/*
+			 * for (int i = 0; i < name.length(); i++) { if
+			 * (!isUnitIdentifierPart(name.charAt(i))) return false; }
+			 */
+			if (!isUnitIdentifierPart(name.charAt(0))) // label must not begin
+														// with a digit or
+														// mathematical operator
+				return false;
 			return true;
 		}
-		
+
 		static boolean isLetter(char c) {
-		    return (c > 64 && c < 91) || (c > 96 && c < 123);
+			return (c > 64 && c < 91) || (c > 96 && c < 123);
 		}
 
-		//Not necessary but included anyways
+		// Not necessary but included anyways
 		static boolean isUpperCase(char c) {
-		    return c > 64 && c < 91;
+			return c > 64 && c < 91;
 		}
 
 		static boolean isSpace(char c) {
-		    //Accounts for spaces and other "space-like" characters
-		    return c == 32 || c == 12 || c == 13 || c == 14;
+			// Accounts for spaces and other "space-like" characters
+			return c == 32 || c == 12 || c == 13 || c == 14;
 		}
 
 		static boolean isUnitIdentifierPart(char ch) {
@@ -533,7 +538,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 							result = result.shift(d);
 						}
 					} else {
-						throw new ParserException("not a number", pos.getIndex());
+						throw new ParserException("not a number",
+								pos.getIndex());
 					}
 					break;
 				case EOF:
@@ -603,8 +609,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		private void check(boolean expr, String message, CharSequence csq,
 				int index) throws ParserException {
 			if (!expr) {
-				throw new ParserException(message + " (in " + csq + " at index "
-						+ index + ")", index);
+				throw new ParserException(message + " (in " + csq
+						+ " at index " + index + ")", index);
 			}
 		}
 
@@ -686,7 +692,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			return isNegative ? -result : result;
 		}
 
-		//TODO change ParsePos to int arguments
+		// TODO change ParsePos to int arguments
 		private double readDouble(CharSequence csq, ParsePosition pos) {
 			final int length = csq.length();
 			int start = pos.getIndex();
@@ -795,7 +801,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			}
 		}
 
-//		private static final long serialVersionUID = 1L;
+		// private static final long serialVersionUID = 1L;
 
 		public Unit<?> parse(CharSequence csq) throws ParserException {
 			return parse(csq, 0);
@@ -869,38 +875,38 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		public boolean isValidIdentifier(String name) {
 			if ((name == null) || (name.length() == 0))
 				return false;
-			if (!isUnitIdentifierPart(name.charAt(0))) // label must not begin with a digit or mathematical operator
-					return false;
+			if (!isUnitIdentifierPart(name.charAt(0))) // label must not begin
+														// with a digit or
+														// mathematical operator
+				return false;
 			return isAllASCII(name);
 			/*
-			for (int i = 0; i < name.length(); i++) {
-				if (!isAsciiCharacter(name.charAt(i)))
-				return false;
-			}
-			return true; */
+			 * for (int i = 0; i < name.length(); i++) { if
+			 * (!isAsciiCharacter(name.charAt(i))) return false; } return true;
+			 */
 		}
-		
-		//return if the given character is within the ASCII charset
+
+		// return if the given character is within the ASCII charset
 		private static boolean isAsciiCharacter(char c) {
-		  //return (c > 64 && c < 91) || (c > 96 && c < 123);
-		  return (int)c<128;
+			// return (c > 64 && c < 91) || (c > 96 && c < 123);
+			return (int) c < 128;
 		}
-		
+
 		// to check if a string only contains US-ASCII characters
 		//
 		private static boolean isAllASCII(String input) {
-		    boolean isASCII = true;
-		    for (int i = 0; i < input.length(); i++) {
-		        int c = input.charAt(i);
-		        if (c > 0x7F) {
-		            isASCII = false;
-		            break;
-		        }
-		    }
-		    return isASCII;
+			boolean isASCII = true;
+			for (int i = 0; i < input.length(); i++) {
+				int c = input.charAt(i);
+				if (c > 0x7F) {
+					isASCII = false;
+					break;
+				}
+			}
+			return isASCII;
 		}
-		
-//		private static final long serialVersionUID = 1L;
+
+		// private static final long serialVersionUID = 1L;
 	}
 
 	/**
@@ -919,22 +925,25 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			Units.SIEVERT, Units.STERADIAN, Units.TESLA, Units.VOLT,
 			Units.WATT, Units.WEBER };
 
-	private static final String[] PREFIXES = {  YOTTA.getSymbol(), ZETTA.getSymbol(), 
-			EXA.getSymbol(), PETA.getSymbol(), TERA.getSymbol(), GIGA.getSymbol(),
-			MEGA.getSymbol(), KILO.getSymbol(), HECTO.getSymbol(), DEKA.getSymbol(),
-			DECI.getSymbol(), CENTI.getSymbol(), MILLI.getSymbol(), MICRO.getSymbol(),
-			NANO.getSymbol(), PICO.getSymbol(), FEMTO.getSymbol(), ATTO.getSymbol(),
-			ZEPTO.getSymbol(), YOCTO.getSymbol()	 
-		};
+	private static final String[] PREFIXES = { YOTTA.getSymbol(),
+			ZETTA.getSymbol(), EXA.getSymbol(), PETA.getSymbol(),
+			TERA.getSymbol(), GIGA.getSymbol(), MEGA.getSymbol(),
+			KILO.getSymbol(), HECTO.getSymbol(), DEKA.getSymbol(),
+			DECI.getSymbol(), CENTI.getSymbol(), MILLI.getSymbol(),
+			MICRO.getSymbol(), NANO.getSymbol(), PICO.getSymbol(),
+			FEMTO.getSymbol(), ATTO.getSymbol(), ZEPTO.getSymbol(),
+			YOCTO.getSymbol() };
 
-	// TODO we could try retrieving this dynamically in a static {} method from MetricPrefix if symbols above are also aligned
-	private static final UnitConverter[] CONVERTERS = { YOTTA.getConverter(), ZETTA.getConverter(), 
-			EXA.getConverter(), PETA.getConverter(), TERA.getConverter(), GIGA.getConverter(),
-			MEGA.getConverter(), KILO.getConverter(), HECTO.getConverter(), DEKA.getConverter(),
-			DECI.getConverter(), CENTI.getConverter(), MILLI.getConverter(), MICRO.getConverter(),
-			NANO.getConverter(), PICO.getConverter(), FEMTO.getConverter(), ATTO.getConverter(),
-			ZEPTO.getConverter(), YOCTO.getConverter()		
-		};
+	// TODO we could try retrieving this dynamically in a static {} method from
+	// MetricPrefix if symbols above are also aligned
+	private static final UnitConverter[] CONVERTERS = { YOTTA.getConverter(),
+			ZETTA.getConverter(), EXA.getConverter(), PETA.getConverter(),
+			TERA.getConverter(), GIGA.getConverter(), MEGA.getConverter(),
+			KILO.getConverter(), HECTO.getConverter(), DEKA.getConverter(),
+			DECI.getConverter(), CENTI.getConverter(), MILLI.getConverter(),
+			MICRO.getConverter(), NANO.getConverter(), PICO.getConverter(),
+			FEMTO.getConverter(), ATTO.getConverter(), ZEPTO.getConverter(),
+			YOCTO.getConverter() };
 
 	private static String asciiPrefix(String prefix) {
 		return prefix == "µ" ? "micro" : prefix;
@@ -956,11 +965,11 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		// Special case for KILOGRAM.
 		DEFAULT.label(Units.GRAM, "g");
 		for (int i = 0; i < PREFIXES.length; i++) {
-			if (CONVERTERS[i] == KILO.getConverter()) // TODO should it better be equals()?
+			if (CONVERTERS[i] == KILO.getConverter()) // TODO should it better
+														// be equals()?
 				continue; // kg is already defined.
-			DEFAULT.label(
-					Units.KILOGRAM.transform(CONVERTERS[i].concatenate(MILLI.getConverter())),
-					PREFIXES[i] + "g");
+			DEFAULT.label(Units.KILOGRAM.transform(CONVERTERS[i]
+					.concatenate(MILLI.getConverter())), PREFIXES[i] + "g");
 			if (PREFIXES[i] == "µ") {
 				ASCII.label(Units.KILOGRAM.transform(CONVERTERS[i]
 						.concatenate(MILLI.getConverter())), "microg");
@@ -978,10 +987,10 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		}
 
 		// Special case for DEGREE_CElSIUS.
-		//DEFAULT.label(Units.CELSIUS, "°C");
+		// DEFAULT.label(Units.CELSIUS, "°C");
 		DEFAULT.label(Units.CELSIUS, "\u00b0C");
 		DEFAULT.alias(Units.CELSIUS, "℃");
-		//DEFAULT.alias(Units.CELSIUS, "°C");
+		// DEFAULT.alias(Units.CELSIUS, "°C");
 		ASCII.label(Units.CELSIUS, "Celsius");
 		for (int i = 0; i < PREFIXES.length; i++) {
 			DEFAULT.label(Units.CELSIUS.transform(CONVERTERS[i]), PREFIXES[i]

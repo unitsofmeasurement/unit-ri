@@ -76,17 +76,19 @@ final class IntegerQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	public Quantity<Q> add(Quantity<Q> that) {
 		final Quantity<Q> converted = that.to(getUnit());
-		return NumberQuantity.of(value + converted.getValue().intValue(), getUnit());
+		return NumberQuantity.of(value + converted.getValue().intValue(),
+				getUnit());
 	}
 
 	public Quantity<Q> subtract(Quantity<Q> that) {
 		final Quantity<Q> converted = that.to(getUnit());
-		return NumberQuantity.of(value - converted.getValue().intValue(), getUnit());
+		return NumberQuantity.of(value - converted.getValue().intValue(),
+				getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Quantity<?> multiply(Quantity<?> that) {
-		return new IntegerQuantity(value * that.getValue().intValue(), 
+		return new IntegerQuantity(value * that.getValue().intValue(),
 				getUnit().multiply(that.getUnit()));
 	}
 
@@ -95,13 +97,15 @@ final class IntegerQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	}
 
 	public Quantity<?> divide(Quantity<?> that) {
-		return NumberQuantity.of((double) value / that.getValue().doubleValue(), 
-				getUnit().divide(that.getUnit()));
+		return NumberQuantity.of(
+				(double) value / that.getValue().doubleValue(), getUnit()
+						.divide(that.getUnit()));
 	}
 
 	@SuppressWarnings("unchecked")
 	public AbstractQuantity<Q> inverse() {
-		return (AbstractQuantity<Q>) NumberQuantity.of(1 / value, getUnit().inverse());
+		return (AbstractQuantity<Q>) NumberQuantity.of(1 / value, getUnit()
+				.inverse());
 	}
 
 	public Quantity<Q> divide(Number that) {

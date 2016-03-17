@@ -47,7 +47,8 @@ public class MeasurementTest {
 		long timestamp = System.currentTimeMillis();
 		Measurement<Mass> measurement = AbstractMeasurement.of(
 				Quantities.getQuantity(15, KILOGRAM), timestamp);
-		assertEquals(Quantities.getQuantity(15, KILOGRAM), measurement.getQuantity());
+		assertEquals(Quantities.getQuantity(15, KILOGRAM),
+				measurement.getQuantity());
 		assertEquals(timestamp, measurement.getTimestamp());
 	}
 }

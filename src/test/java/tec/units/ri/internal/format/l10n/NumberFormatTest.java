@@ -37,20 +37,20 @@ import tec.units.ri.internal.format.l10n.DecimalFormat;
 
 public class NumberFormatTest {
 	final String[] patterns = new String[] { "#,#00.00#", "0.0;(0.0)",
-	"0.###E0" };
-	
+			"0.###E0" };
+
 	@Test
 	public void testDecimalFormat() {
 		DecimalFormat format = (DecimalFormat) DecimalFormat
 				.getNumberInstance();
-		
+
 		double value = -12.321;
 		for (int i = 0; i < patterns.length; i++) {
 			String pattern = patterns[i];
 			format.applyPattern(pattern);
 			String formated = format.format(value);
-			String text = "Pattern: " + pattern + " Sample: "+  formated +"\n";
-//			System.out.println(text);
+			String text = "Pattern: " + pattern + " Sample: " + formated + "\n";
+			// System.out.println(text);
 			switch (i) {
 			case 0:
 				assertEquals("-12.321", formated);
@@ -65,7 +65,7 @@ public class NumberFormatTest {
 			}
 		}
 	}
-	
+
 	@Test
 	public void testSmallNumbers() {
 		DecimalFormat format = (DecimalFormat) DecimalFormat

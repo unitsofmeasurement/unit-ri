@@ -41,72 +41,75 @@ import java.util.logging.Logger;
 import javax.measure.spi.ServiceProvider;
 
 /**
- * This class implements the {@link ServiceProvider} interface and hereby uses the JDK
- * {@link java.util.ServiceLoader} to load the services required.
+ * This class implements the {@link ServiceProvider} interface and hereby uses
+ * the JDK {@link java.util.ServiceLoader} to load the services required.
  *
  * @author Werner Keil
  */
 public class RIServiceProvider implements ServiceProvider {
-    /** List of services loaded, per class. */
-    @SuppressWarnings("rawtypes")
+	/** List of services loaded, per class. */
+	@SuppressWarnings("rawtypes")
 	private final Map<Class, List<Object>> servicesLoaded = new HashMap<Class, List<Object>>();
-    
-    @Override
-    public int getPriority() {
-        return 10;
-    }
 
-    /**
-     * Loads and registers services.
-     *
-     * @param serviceType
-     *            The service type.
-     * @param <T>
-     *            the concrete type.
-     * @return the items found, never {@code null}.
-     */
-    public <T> List<T> getServices(final Class<T> serviceType) {
-        @SuppressWarnings("unchecked")
-        List<T> found = (List<T>) servicesLoaded.get(serviceType);
-        if (found != null) {
-            return found;
-        }
+	@Override
+	public int getPriority() {
+		return 10;
+	}
 
-        return loadServices(serviceType);
-    }
+	/**
+	 * Loads and registers services.
+	 *
+	 * @param serviceType
+	 *            The service type.
+	 * @param <T>
+	 *            the concrete type.
+	 * @return the items found, never {@code null}.
+	 */
+	public <T> List<T> getServices(final Class<T> serviceType) {
+		@SuppressWarnings("unchecked")
+		List<T> found = (List<T>) servicesLoaded.get(serviceType);
+		if (found != null) {
+			return found;
+		}
 
-    public <T> T getService(Class<T> serviceType) {
-        List<T> servicesFound = getServices(serviceType);
-        if(servicesFound.isEmpty()){
-            return null;
-        }
-        return servicesFound.get(0);
-    }
+		return loadServices(serviceType);
+	}
 
-    /**
-     * Loads and registers services.
-     *
-     * @param   serviceType  The service type.
-     * @param   <T>          the concrete type.
-     *
-     * @return  the items found, never {@code null}.
-     */
-    @SuppressWarnings("unchecked")
+	public <T> T getService(Class<T> serviceType) {
+		List<T> servicesFound = getServices(serviceType);
+		if (servicesFound.isEmpty()) {
+			return null;
+		}
+		return servicesFound.get(0);
+	}
+
+	/**
+	 * Loads and registers services.
+	 *
+	 * @param serviceType
+	 *            The service type.
+	 * @param <T>
+	 *            the concrete type.
+	 *
+	 * @return the items found, never {@code null}.
+	 */
+	@SuppressWarnings("unchecked")
 	private <T> List<T> loadServices(final Class<T> serviceType) {
-        final List<T> services = new ArrayList<T>();
-        try {
-            for (T t : ServiceLoader.load(serviceType)) {
-                services.add(t);
-            }
-            if (!servicesLoaded.containsKey(serviceType)) {
-            	final List<T> previousServices = (List<T>) servicesLoaded.put(serviceType, (List<Object>) services);
-            	return (previousServices != null ? previousServices : services);
-            }
-            return services;
-        } catch (Exception e) {
-            Logger.getLogger(RIServiceProvider.class.getName()).log(WARNING,
-                                                                         "Error loading services of type " + serviceType, e);
-            return services;
-        }
-    }
+		final List<T> services = new ArrayList<T>();
+		try {
+			for (T t : ServiceLoader.load(serviceType)) {
+				services.add(t);
+			}
+			if (!servicesLoaded.containsKey(serviceType)) {
+				final List<T> previousServices = (List<T>) servicesLoaded.put(
+						serviceType, (List<Object>) services);
+				return (previousServices != null ? previousServices : services);
+			}
+			return services;
+		} catch (Exception e) {
+			Logger.getLogger(RIServiceProvider.class.getName()).log(WARNING,
+					"Error loading services of type " + serviceType, e);
+			return services;
+		}
+	}
 }

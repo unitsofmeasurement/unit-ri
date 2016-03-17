@@ -43,17 +43,17 @@ import tec.units.ri.unit.Units;
  * @version 0.4, November 23, 2015
  */
 public class DefaultSystemOfUnitsService implements SystemOfUnitsService {
-	
+
 	final Map<String, SystemOfUnits> souMap = new HashMap<String, SystemOfUnits>();
 
 	public DefaultSystemOfUnitsService() {
 		souMap.put(Units.SYSTEM_NAME, Units.getInstance());
 	}
-	
+
 	public Collection<SystemOfUnits> getAvailableSystemsOfUnits() {
 		return souMap.values();
 	}
-	
+
 	public SystemOfUnits getSystemOfUnits() {
 		return getSystemOfUnits(Units.SYSTEM_NAME);
 	}

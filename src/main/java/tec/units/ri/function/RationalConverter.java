@@ -38,141 +38,156 @@ import tec.units.ri.AbstractConverter;
 import tec.uom.lib.common.function.ValueSupplier;
 
 /**
- * <p> This class represents a converter multiplying numeric values by an
- *     exact scaling factor (represented as the quotient of two
- *     <code>double</code> numbers).</p>
+ * <p>
+ * This class represents a converter multiplying numeric values by an exact
+ * scaling factor (represented as the quotient of two <code>double</code>
+ * numbers).
+ * </p>
  *
- * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
+ * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.7, December 28, 2015
  */
-public final class RationalConverter extends AbstractConverter 
-	implements ValueSupplier<Double> {
-
-    /**
-	 * 
-	 */
-//	private static final long serialVersionUID = 1L;
+public final class RationalConverter extends AbstractConverter implements
+		ValueSupplier<Double> {
 
 	/**
-     * Holds the converter dividend.
-     */
-    private final double dividend;
+	 * 
+	 */
+	// private static final long serialVersionUID = 1L;
 
-    /**
-     * Holds the converter divisor (always positive).
-     */
-    private final double divisor;
+	/**
+	 * Holds the converter dividend.
+	 */
+	private final double dividend;
 
-    /**
-     * Constructor
-     *
-     * @param dividend the dividend.
-     * @param divisor the positive divisor.
-     * @throws IllegalArgumentException if <code>divisor &lt;= 0</code>
-     * @throws IllegalArgumentException if <code>dividend == divisor</code>
-     */
-    public RationalConverter (double dividend, double divisor) {
-    	this.dividend = dividend;
-    	this.divisor = divisor;
-    }
+	/**
+	 * Holds the converter divisor (always positive).
+	 */
+	private final double divisor;
 
-    /**
-     * Convenience method equivalent to
-     * <code>new RationalConverter(dividend, divisor)</code>
-     *
-     * @param dividend the dividend.
-     * @param divisor the positive divisor.
-     * @throws IllegalArgumentException if <code>divisor &lt;= 0</code>
-     * @throws IllegalArgumentException if <code>dividend == divisor</code>
-     */
-    public static final RationalConverter of(long dividend, long divisor) {
-    	return new RationalConverter((double)dividend, (double)divisor);
-    }
-    
-    /**
-     * Convenience method equivalent to
-     * <code>new RationalConverter(dividend, divisor)</code>
-     *
-     * @param dividend the dividend.
-     * @param divisor the positive divisor.
-     * @throws IllegalArgumentException if <code>divisor &lt;= 0</code>
-     * @throws IllegalArgumentException if <code>dividend == divisor</code>
-     */
-    public static final RationalConverter of(double dividend, double divisor) {
-    	return new RationalConverter(dividend, divisor);
-    }
-    
-    /**
-     * Returns the integer dividend for this rational converter.
-     *
-     * @return this converter dividend.
-     */
-    public double getDividend() {
-        return dividend;
-    }
+	/**
+	 * Constructor
+	 *
+	 * @param dividend
+	 *            the dividend.
+	 * @param divisor
+	 *            the positive divisor.
+	 * @throws IllegalArgumentException
+	 *             if <code>divisor &lt;= 0</code>
+	 * @throws IllegalArgumentException
+	 *             if <code>dividend == divisor</code>
+	 */
+	public RationalConverter(double dividend, double divisor) {
+		this.dividend = dividend;
+		this.divisor = divisor;
+	}
 
-    /**
-     * Returns the integer (positive) divisor for this rational converter.
-     *
-     * @return this converter divisor.
-     */
-    public double getDivisor() {
-        return divisor;
-    }
+	/**
+	 * Convenience method equivalent to
+	 * <code>new RationalConverter(dividend, divisor)</code>
+	 *
+	 * @param dividend
+	 *            the dividend.
+	 * @param divisor
+	 *            the positive divisor.
+	 * @throws IllegalArgumentException
+	 *             if <code>divisor &lt;= 0</code>
+	 * @throws IllegalArgumentException
+	 *             if <code>dividend == divisor</code>
+	 */
+	public static final RationalConverter of(long dividend, long divisor) {
+		return new RationalConverter((double) dividend, (double) divisor);
+	}
 
-    @Override
-    public double convert(double value) {
-        return value * ((double) dividend / (double)divisor);
-    }
+	/**
+	 * Convenience method equivalent to
+	 * <code>new RationalConverter(dividend, divisor)</code>
+	 *
+	 * @param dividend
+	 *            the dividend.
+	 * @param divisor
+	 *            the positive divisor.
+	 * @throws IllegalArgumentException
+	 *             if <code>divisor &lt;= 0</code>
+	 * @throws IllegalArgumentException
+	 *             if <code>dividend == divisor</code>
+	 */
+	public static final RationalConverter of(double dividend, double divisor) {
+		return new RationalConverter(dividend, divisor);
+	}
 
-    @Override
-    public UnitConverter concatenate(UnitConverter converter) {
-        if (!(converter instanceof RationalConverter))
-            return super.concatenate(converter);
-        RationalConverter that = (RationalConverter) converter;
-        double newDividend = this.getDividend() * that.getDividend();
-        double newDivisor = this.getDivisor() * that.getDivisor();
-        double gcd = gcd(newDividend,newDivisor);
-        newDividend = newDividend / gcd; // TODO clarify if this works with long
-        newDivisor = newDivisor / gcd;
-        return (newDividend == 1 && newDivisor == 1)
-                ? IDENTITY : new RationalConverter(newDividend, newDivisor);
-    }
+	/**
+	 * Returns the integer dividend for this rational converter.
+	 *
+	 * @return this converter dividend.
+	 */
+	public double getDividend() {
+		return dividend;
+	}
 
-    @Override
-    public RationalConverter inverse() {
-        return Math.signum(dividend) == -1 ? new RationalConverter(negateExact(getDivisor()), negateExact(getDividend()))
-                : new RationalConverter(getDivisor(), getDividend());
-    }
+	/**
+	 * Returns the integer (positive) divisor for this rational converter.
+	 *
+	 * @return this converter divisor.
+	 */
+	public double getDivisor() {
+		return divisor;
+	}
 
-    @Override
-    public final String toString() {
-        return "RationalConverter(" + dividend + "," + divisor + ")";
-    }
+	@Override
+	public double convert(double value) {
+		return value * ((double) dividend / (double) divisor);
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof RationalConverter))
-            return false;
-        RationalConverter that = (RationalConverter) obj;
-        return (this.dividend == that.dividend
-                && this.divisor == that.divisor);
-    }
+	@Override
+	public UnitConverter concatenate(UnitConverter converter) {
+		if (!(converter instanceof RationalConverter))
+			return super.concatenate(converter);
+		RationalConverter that = (RationalConverter) converter;
+		double newDividend = this.getDividend() * that.getDividend();
+		double newDivisor = this.getDivisor() * that.getDivisor();
+		double gcd = gcd(newDividend, newDivisor);
+		newDividend = newDividend / gcd; // TODO clarify if this works with long
+		newDivisor = newDivisor / gcd;
+		return (newDividend == 1 && newDivisor == 1) ? IDENTITY
+				: new RationalConverter(newDividend, newDivisor);
+	}
 
-    @Override
-    public int hashCode() {
-        return Double.valueOf(dividend).hashCode() + Double.valueOf(dividend).hashCode();
-    }
+	@Override
+	public RationalConverter inverse() {
+		return Math.signum(dividend) == -1 ? new RationalConverter(
+				negateExact(getDivisor()), negateExact(getDividend()))
+				: new RationalConverter(getDivisor(), getDividend());
+	}
 
-    public boolean isLinear() {
-        return true;
-    }
-    
-    public double getAsDouble() {
-    	return (double)dividend / (double) divisor;
-    }
-    
+	@Override
+	public final String toString() {
+		return "RationalConverter(" + dividend + "," + divisor + ")";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof RationalConverter))
+			return false;
+		RationalConverter that = (RationalConverter) obj;
+		return (this.dividend == that.dividend && this.divisor == that.divisor);
+	}
+
+	@Override
+	public int hashCode() {
+		return Double.valueOf(dividend).hashCode()
+				+ Double.valueOf(dividend).hashCode();
+	}
+
+	public boolean isLinear() {
+		return true;
+	}
+
+	public double getAsDouble() {
+		return (double) dividend / (double) divisor;
+	}
+
 	public Double getValue() {
 		return Double.valueOf(getAsDouble());
 	}

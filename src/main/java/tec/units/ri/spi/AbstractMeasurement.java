@@ -88,12 +88,12 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 	public final long getTimestamp() {
 		return timestamp;
 	}
-	
+
 	@SuppressWarnings({ "unchecked" })
 	static final <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q) {
 		return new Default<Q>(q);
 	}
-	
+
 	@SuppressWarnings({ "unchecked" })
 	static final <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q, long t) {
 		return new Default<Q>(q, t);

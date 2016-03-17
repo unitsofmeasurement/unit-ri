@@ -41,11 +41,11 @@ import static org.junit.Assert.*;
  * @author Werner Keil
  */
 public class BaseUnitTest {
-	
+
 	private AbstractUnit<Length> sut = new BaseUnit<Length>("m");
 
-    @Test
-    public void testEquals() {
-    	assertTrue(sut.equals(new BaseUnit<Length>("m")));
-    }
+	@Test
+	public void testEquals() {
+		assertTrue(sut.equals(new BaseUnit<Length>("m")));
+	}
 }

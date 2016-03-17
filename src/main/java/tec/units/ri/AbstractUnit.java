@@ -53,8 +53,8 @@ import tec.units.ri.unit.Units;
 
 /**
  * <p>
- * The class represents units founded on the seven SI base units for seven
- * base quantities assumed to be mutually independent.
+ * The class represents units founded on the seven SI base units for seven base
+ * quantities assumed to be mutually independent.
  * </p>
  *
  * <p>
@@ -78,21 +78,20 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	// private static final long serialVersionUID = -4344589505537030204L;
 
 	/**
-     * Holds the dimensionless unit <code>ONE</code>.
-     */
-    public static final Unit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
+	 * Holds the dimensionless unit <code>ONE</code>.
+	 */
+	public static final Unit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
 
-	
 	/**
 	 * Holds the name.
 	 */
 	protected String name;
-	
+
 	/**
 	 * Holds the symbol.
 	 */
 	private String symbol;
-	
+
 	/**
 	 * Default constructor.
 	 */
@@ -132,8 +131,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	protected abstract AbstractUnit<Q> toSystemUnit();
 
 	/**
-	 * Returns the converter from this unit to its unscaled {@link #toSystemUnit standard}
-	 * unit.
+	 * Returns the converter from this unit to its unscaled
+	 * {@link #toSystemUnit standard} unit.
 	 *
 	 * @return <code>getConverterTo(this.toSystemUnit())</code>
 	 * @see #toSystemUnit
@@ -176,17 +175,18 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 *            the character sequence to parse.
 	 * @return <code>SimpleUnitFormat.getInstance().parse(csq)</code>
 	 * @throws ParserException
-	 *             if the specified character sequence cannot be parsed correctly.
+	 *             if the specified character sequence cannot be parsed
+	 *             correctly.
 	 */
 	public static Unit<?> parse(CharSequence charSequence) {
 		return SimpleUnitFormat.getInstance().parse(charSequence);
 	}
 
 	/**
-	 * Returns the standard {@link String} representation of this unit. The string produced for a given unit
-	 * is always the same; it is not affected by the locale. It can be used as a
-	 * canonical string representation for exchanging units, or as a key for a
-	 * Map, Hashtable, etc.
+	 * Returns the standard {@link String} representation of this unit. The
+	 * string produced for a given unit is always the same; it is not affected
+	 * by the locale. It can be used as a canonical string representation for
+	 * exchanging units, or as a key for a Map, Hashtable, etc.
 	 *
 	 * Locale-sensitive unit parsing should be handled using the OSGi
 	 * {@link tec.units.ri.SimpleUnitFormat.service.UnitFormat} service (or
@@ -198,15 +198,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	public String toString() {
 		return SimpleUnitFormat.getInstance().format(this);
 		/*
-		final Appendable tmp = new StringBuilder();
-		try {
-			return SimpleUnitFormat.getInstance().format(this, tmp).toString();
-		} catch (IOException ioException) {
-			throw new Error(ioException); // Should never happen.
-		} finally {
-			// if (tmp!=null) tmp.clear();
-		}
-		*/
+		 * final Appendable tmp = new StringBuilder(); try { return
+		 * SimpleUnitFormat.getInstance().format(this, tmp).toString(); } catch
+		 * (IOException ioException) { throw new Error(ioException); // Should
+		 * never happen. } finally { // if (tmp!=null) tmp.clear(); }
+		 */
 	}
 
 	// ///////////////////////////////////////////////////////
@@ -248,9 +244,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		if (thisDimension.equals(thatDimension))
 			return true;
 		DimensionalModel model = DimensionalModel.current(); // Use
-																	// dimensional
-																	// analysis
-																	// model.
+																// dimensional
+																// analysis
+																// model.
 		return model.getFundamentalDimension(thisDimension).equals(
 				model.getFundamentalDimension(thatDimension));
 	}
@@ -264,8 +260,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * @param type
 	 *            the quantity class identifying the nature of the unit.
 	 * @throws ClassCastException
-	 *             if the dimension of this unit is different from the
-	 *             SI dimension of the specified type.
+	 *             if the dimension of this unit is different from the SI
+	 *             dimension of the specified type.
 	 * @see Units#getUnit(Class)
 	 */
 	@SuppressWarnings("unchecked")
@@ -289,11 +285,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getSymbol() {
 		return symbol;
 	}
-	
+
 	protected void setSymbol(String s) {
 		this.symbol = s;
 	}

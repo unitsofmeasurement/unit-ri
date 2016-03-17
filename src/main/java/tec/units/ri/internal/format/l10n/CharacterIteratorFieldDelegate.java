@@ -70,9 +70,9 @@ class CharacterIteratorFieldDelegate implements Format.FieldDelegate {
 					int newIndex = index - as.length();
 					int aStart = Math.max(0, start - newIndex);
 
-					as.addAttribute(attr, value, aStart, Math.min(end - start,
-							as.length() - aStart)
-							+ aStart);
+					as.addAttribute(attr, value, aStart,
+							Math.min(end - start, as.length() - aStart)
+									+ aStart);
 					index = newIndex;
 				}
 			}

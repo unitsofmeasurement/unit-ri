@@ -38,12 +38,13 @@ import javax.measure.UnitConverter;
 
 import tec.units.ri.AbstractUnit;
 
-
 /**
- * <p> This class represents units used in expressions to distinguish
- *     between quantities of a different nature but of the same dimensions.</p>
+ * <p>
+ * This class represents units used in expressions to distinguish between
+ * quantities of a different nature but of the same dimensions.
+ * </p>
  *
- * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
+ * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.2, May 22, 2014
  */
@@ -52,114 +53,120 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
 	/**
 	 * 
 	 */
-//	private static final long serialVersionUID = 4696690756456282705L;
+	// private static final long serialVersionUID = 4696690756456282705L;
 
 	/**
-     * Holds the parent unit (a system unit).
-     */
-    private final AbstractUnit<?> parentUnit;
+	 * Holds the parent unit (a system unit).
+	 */
+	private final AbstractUnit<?> parentUnit;
 
-    /**
-     * Holds the symbol for this unit.
-     */
-    private final String symbol;
+	/**
+	 * Holds the symbol for this unit.
+	 */
+	private final String symbol;
 
-    /**
-     * Creates an alternate unit for the specified system unit identified by the
-     * specified name and symbol.
-     *
-     * @param parent the system unit from which this alternate unit is derived.
-     * @param symbol the symbol for this alternate unit.
-     * @throws IllegalArgumentException if the specified parent unit is not an
-     *         {@link AbstractUnit#isSystemUnit() system unit}
-     */
-    public AlternateUnit(AbstractUnit<?> parentUnit, String symbol) {
-        if (!parentUnit.isSystemUnit())
-            throw new IllegalArgumentException("The parent unit: " +  parentUnit
-                    + " is not an unscaled SI unit");
-        this.parentUnit = (parentUnit instanceof AlternateUnit) ?
-            ((AlternateUnit<?>)parentUnit).getParentUnit() : parentUnit;
-        this.symbol = symbol;
-        
-        // Checks if the symbol is associated to a different unit. TODO verify if we want these checks
- /*       synchronized (AbstractUnit.SYMBOL_TO_UNIT) {
-            AbstractUnit<?> unit = (AbstractUnit<?>) AbstractUnit.SYMBOL_TO_UNIT.get(symbol);
-            if (unit == null) {
-                AbstractUnit.SYMBOL_TO_UNIT.put(symbol, this);
-                return;
-            }
-            if (unit instanceof AlternateUnit<?>) {
-                AlternateUnit<?> existingUnit = (AlternateUnit<?>) unit;
-                if (symbol.equals(existingUnit.getSymbol()) && this.parentUnit.equals(existingUnit.parentUnit))
-                    return; // OK, same unit.
-            }
-            throw new IllegalArgumentException("Symbol " + symbol + " is associated to a different unit");
-        } */
-    }
-    
-    /**
-     * Creates an alternate unit for the specified system unit identified by the
-     * specified name and symbol.
-     *
-     * @param parent the system unit from which this alternate unit is derived.
-     * @param symbol the symbol for this alternate unit.
-     * @throws IllegalArgumentException if the specified parent unit is not an
-     *         {@link AbstractUnit#isSystemUnit() system unit}
-     * @throws ClassCastException if parentUnit is not a valid {@link Unit} implementation
-     */
-    public AlternateUnit(Unit<?> parentUnit, String symbol) {
-    	this((AbstractUnit<?>) parentUnit, symbol);
-    }
+	/**
+	 * Creates an alternate unit for the specified system unit identified by the
+	 * specified name and symbol.
+	 *
+	 * @param parent
+	 *            the system unit from which this alternate unit is derived.
+	 * @param symbol
+	 *            the symbol for this alternate unit.
+	 * @throws IllegalArgumentException
+	 *             if the specified parent unit is not an
+	 *             {@link AbstractUnit#isSystemUnit() system unit}
+	 */
+	public AlternateUnit(AbstractUnit<?> parentUnit, String symbol) {
+		if (!parentUnit.isSystemUnit())
+			throw new IllegalArgumentException("The parent unit: " + parentUnit
+					+ " is not an unscaled SI unit");
+		this.parentUnit = (parentUnit instanceof AlternateUnit) ? ((AlternateUnit<?>) parentUnit)
+				.getParentUnit() : parentUnit;
+		this.symbol = symbol;
 
-    /**
-     * Returns the parent unit of this alternate unit, always a system unit and
-     * never an alternate unit.
-     *
-     * @return the parent unit.
-     */
-    public AbstractUnit<?> getParentUnit() {
-        return parentUnit;
-    }
+		// Checks if the symbol is associated to a different unit. TODO verify
+		// if we want these checks
+		/*
+		 * synchronized (AbstractUnit.SYMBOL_TO_UNIT) { AbstractUnit<?> unit =
+		 * (AbstractUnit<?>) AbstractUnit.SYMBOL_TO_UNIT.get(symbol); if (unit
+		 * == null) { AbstractUnit.SYMBOL_TO_UNIT.put(symbol, this); return; }
+		 * if (unit instanceof AlternateUnit<?>) { AlternateUnit<?> existingUnit
+		 * = (AlternateUnit<?>) unit; if
+		 * (symbol.equals(existingUnit.getSymbol()) &&
+		 * this.parentUnit.equals(existingUnit.parentUnit)) return; // OK, same
+		 * unit. } throw new IllegalArgumentException("Symbol " + symbol +
+		 * " is associated to a different unit"); }
+		 */
+	}
 
-    @Override
-    public String getSymbol() {
-        return symbol;
-    }
+	/**
+	 * Creates an alternate unit for the specified system unit identified by the
+	 * specified name and symbol.
+	 *
+	 * @param parent
+	 *            the system unit from which this alternate unit is derived.
+	 * @param symbol
+	 *            the symbol for this alternate unit.
+	 * @throws IllegalArgumentException
+	 *             if the specified parent unit is not an
+	 *             {@link AbstractUnit#isSystemUnit() system unit}
+	 * @throws ClassCastException
+	 *             if parentUnit is not a valid {@link Unit} implementation
+	 */
+	public AlternateUnit(Unit<?> parentUnit, String symbol) {
+		this((AbstractUnit<?>) parentUnit, symbol);
+	}
 
-    @Override
-    public Dimension getDimension() {
-        return parentUnit.getDimension();
-    }
+	/**
+	 * Returns the parent unit of this alternate unit, always a system unit and
+	 * never an alternate unit.
+	 *
+	 * @return the parent unit.
+	 */
+	public AbstractUnit<?> getParentUnit() {
+		return parentUnit;
+	}
 
-    @Override
-    public UnitConverter getSystemConverter() {
-        return parentUnit.getSystemConverter();
-    }
+	@Override
+	public String getSymbol() {
+		return symbol;
+	}
 
-    @Override
-    public AbstractUnit<Q> toSystemUnit() {
-        return this; // Alternate units are SI units.
-    }
+	@Override
+	public Dimension getDimension() {
+		return parentUnit.getDimension();
+	}
 
-    @Override
-    public Map<? extends Unit<?>, Integer> getProductUnits() {
-        return parentUnit.getProductUnits();
-    }
+	@Override
+	public UnitConverter getSystemConverter() {
+		return parentUnit.getSystemConverter();
+	}
 
-    @Override
-    public int hashCode() {
-        return symbol.hashCode();
-    }
+	@Override
+	public AbstractUnit<Q> toSystemUnit() {
+		return this; // Alternate units are SI units.
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof AlternateUnit))
-            return false;
-        AlternateUnit<?> that = (AlternateUnit<?>) obj;
-        return this.parentUnit.equals(that.parentUnit) &&
-                this.symbol.equals(that.symbol);
-    }
+	@Override
+	public Map<? extends Unit<?>, Integer> getProductUnits() {
+		return parentUnit.getProductUnits();
+	}
+
+	@Override
+	public int hashCode() {
+		return symbol.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof AlternateUnit))
+			return false;
+		AlternateUnit<?> that = (AlternateUnit<?>) obj;
+		return this.parentUnit.equals(that.parentUnit)
+				&& this.symbol.equals(that.symbol);
+	}
 
 }

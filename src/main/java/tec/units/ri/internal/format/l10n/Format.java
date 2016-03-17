@@ -143,7 +143,7 @@ package tec.units.ri.internal.format.l10n;
  */
 public abstract class Format {
 
-//	private static final long serialVersionUID = -299282585814624189L;
+	// private static final long serialVersionUID = -299282585814624189L;
 
 	/**
 	 * Formats an object to produce a string. This is equivalent to <blockquote>

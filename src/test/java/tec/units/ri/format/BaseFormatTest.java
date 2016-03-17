@@ -59,7 +59,7 @@ public class BaseFormatTest {
 	public void init() {
 		fmt = SimpleUnitFormat.getInstance();
 	}
-	
+
 	@Test
 	@Ignore
 	public void testFormat2() {
@@ -67,42 +67,42 @@ public class BaseFormatTest {
 		String s = fmt.format(kph);
 		assertEquals("kph", s);
 	}
-	
+
 	@Test
 	public void testKilo() {
 		Unit<Mass> m = KILOGRAM;
 		String s = fmt.format(m);
 		assertEquals("kg", s);
 	}
-	
+
 	@Test
 	public void testKilo2() {
 		Unit<Mass> m = KILO(GRAM);
 		String s = fmt.format(m);
 		assertEquals("kg", s);
 	}
-	
+
 	@Test
 	public void testMilli() {
 		Unit<Mass> m = MILLI(GRAM);
 		String s = fmt.format(m);
 		assertEquals("mg", s);
 	}
-	
+
 	@Test
 	public void testNano() {
 		Unit<Mass> m = NANO(GRAM);
 		String s = fmt.format(m);
 		assertEquals("ng", s);
 	}
-	
+
 	@Test
 	public void testFormatHz2() {
 		Unit<Frequency> hz = MEGA(HERTZ);
 		String s = fmt.format(hz);
 		assertEquals("MHz", s);
 	}
-	
+
 	@Test
 	public void testFormatHz3() {
 		Unit<Frequency> hz = KILO(HERTZ);

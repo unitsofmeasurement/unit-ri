@@ -49,44 +49,48 @@ import tec.units.ri.format.QuantityFormat;
  */
 final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
-    final double value;
+	final double value;
 
-    public DoubleQuantity(double value, Unit<Q> unit) {
-    	super(unit);
-        this.value = value;
-    }
+	public DoubleQuantity(double value, Unit<Q> unit) {
+		super(unit);
+		this.value = value;
+	}
 
-    @Override
-    public Double getValue() {
-        return value;
-    }
+	@Override
+	public Double getValue() {
+		return value;
+	}
 
-    public double doubleValue(Unit<Q> unit) {
-        return (super.getUnit().equals(unit)) ? value : super.getUnit().getConverterTo(unit).convert(value);
-    }
+	public double doubleValue(Unit<Q> unit) {
+		return (super.getUnit().equals(unit)) ? value : super.getUnit()
+				.getConverterTo(unit).convert(value);
+	}
 
 	@Override
 	public long longValue(Unit<Q> unit) {
-        double result = doubleValue(unit);
-        if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
-            throw new ArithmeticException("Overflow (" + result + ")");
-        }
-        return (long) result;
+		double result = doubleValue(unit);
+		if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
+			throw new ArithmeticException("Overflow (" + result + ")");
+		}
+		return (long) result;
 	}
 
 	public Quantity<Q> add(Quantity<Q> that) {
 		final Quantity<Q> converted = that.to(getUnit());
-		return NumberQuantity.of(value + converted.getValue().doubleValue(), getUnit());
+		return NumberQuantity.of(value + converted.getValue().doubleValue(),
+				getUnit());
 	}
 
 	public Quantity<Q> subtract(Quantity<Q> that) {
 		final Quantity<Q> converted = that.to(getUnit());
-		return NumberQuantity.of(value - converted.getValue().doubleValue(), getUnit());
+		return NumberQuantity.of(value - converted.getValue().doubleValue(),
+				getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Quantity<?> multiply(Quantity<?> that) {
-		return new DoubleQuantity(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
+		return new DoubleQuantity(value * that.getValue().doubleValue(),
+				getUnit().multiply(that.getUnit()));
 	}
 
 	public Quantity<Q> multiply(Number that) {
@@ -95,18 +99,20 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Quantity<?> divide(Quantity<?> that) {
-		return new DoubleQuantity(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
+		return new DoubleQuantity(value / that.getValue().doubleValue(),
+				getUnit().divide(that.getUnit()));
 	}
-	
+
 	public Quantity<Q> divide(Number that) {
 		return NumberQuantity.of(value / that.doubleValue(), getUnit());
 	}
 
 	@SuppressWarnings("unchecked")
 	public AbstractQuantity<Q> inverse() {
-		return (AbstractQuantity<Q>) NumberQuantity.of(1d / value, getUnit().inverse());
+		return (AbstractQuantity<Q>) NumberQuantity.of(1d / value, getUnit()
+				.inverse());
 	}
-	
+
 	/**
 	 * Returns the <code>String</code> representation of this quantity. The
 	 * string produced for a given quantity is always the same; it is not
@@ -120,47 +126,47 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	@Override
 	public String toString() {
 		return QuantityFormat.getInstance().format(this);
-//		String numPart = NumberFormat.getInstance().format(value);
-//		return numPart + " " + String.valueOf(getUnit());
-//		return nosci(getValue()) + " " + String.valueOf(getUnit());
+		// String numPart = NumberFormat.getInstance().format(value);
+		// return numPart + " " + String.valueOf(getUnit());
+		// return nosci(getValue()) + " " + String.valueOf(getUnit());
 	}
-	
+
 	private static String nosci(double d) {
-	    if(d < 0){
-	        return "-" + nosci(-d);
-	    }
-	    String javaString = String.valueOf(d);
-	    int indexOfE =javaString.indexOf("E"); 
-	    if(indexOfE == -1){
-	        return javaString;
-	    }
-	    StringBuilder sb = new StringBuilder();
-	    if(d > 1){//big number
-	        int exp = Integer.parseInt(javaString.substring(indexOfE + 1));
-	        String sciDecimal = javaString.substring(2, indexOfE);
-	        int sciDecimalLength = sciDecimal.length();
-	        if(exp == sciDecimalLength){
-	            sb.append(javaString.charAt(0));
-	            sb.append(sciDecimal);              
-	        }else if(exp > sciDecimalLength){
-	            sb.append(javaString.charAt(0));
-	            sb.append(sciDecimal);
-	            for(int i = 0; i < exp - sciDecimalLength; i++){
-	                sb.append('0');
-	            }
-	        }else if(exp < sciDecimalLength){
-	            sb.append(javaString.charAt(0));
-	            sb.append(sciDecimal.substring(0, exp));
-	            sb.append('.');
-	            for(int i = exp; i < sciDecimalLength ; i++){
-	                sb.append(sciDecimal.charAt(i));
-	            }
-	        }
-	      return sb.toString();
-	    }else{
-	        //for little numbers use the default or you will
-	        //loose accuracy
-	        return javaString;
-	    }       
+		if (d < 0) {
+			return "-" + nosci(-d);
+		}
+		String javaString = String.valueOf(d);
+		int indexOfE = javaString.indexOf("E");
+		if (indexOfE == -1) {
+			return javaString;
+		}
+		StringBuilder sb = new StringBuilder();
+		if (d > 1) {// big number
+			int exp = Integer.parseInt(javaString.substring(indexOfE + 1));
+			String sciDecimal = javaString.substring(2, indexOfE);
+			int sciDecimalLength = sciDecimal.length();
+			if (exp == sciDecimalLength) {
+				sb.append(javaString.charAt(0));
+				sb.append(sciDecimal);
+			} else if (exp > sciDecimalLength) {
+				sb.append(javaString.charAt(0));
+				sb.append(sciDecimal);
+				for (int i = 0; i < exp - sciDecimalLength; i++) {
+					sb.append('0');
+				}
+			} else if (exp < sciDecimalLength) {
+				sb.append(javaString.charAt(0));
+				sb.append(sciDecimal.substring(0, exp));
+				sb.append('.');
+				for (int i = exp; i < sciDecimalLength; i++) {
+					sb.append(sciDecimal.charAt(i));
+				}
+			}
+			return sb.toString();
+		} else {
+			// for little numbers use the default or you will
+			// loose accuracy
+			return javaString;
+		}
 	}
 }

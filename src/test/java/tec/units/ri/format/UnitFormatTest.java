@@ -64,11 +64,11 @@ import tec.units.ri.unit.Units;
 public class UnitFormatTest {
 	private Quantity<Length> sut;
 	private UnitFormat format;
-			
+
 	@Before
 	public void init() {
-		sut = DefaultQuantityFactory.getInstance(Length.class).create(10,
-				METRE);
+		sut = DefaultQuantityFactory.getInstance(Length.class)
+				.create(10, METRE);
 		format = SimpleUnitFormat.getInstance();
 	}
 
@@ -77,37 +77,37 @@ public class UnitFormatTest {
 		Unit<Frequency> hz = HERTZ;
 		assertEquals("Hz", hz.toString());
 	}
-	
+
 	@Test
 	public void testFormatHz2() {
 		Unit<Frequency> mhz = MEGA(HERTZ);
 		assertEquals("MHz", mhz.toString());
 	}
-	
+
 	@Test
 	public void testFormatHz3() {
 		Unit<Frequency> khz = KILO(HERTZ);
 		assertEquals("kHz", khz.toString());
 	}
-	
+
 	@Test
 	public void testFormatHz4() {
 		Unit<Frequency> mhz = MICRO(HERTZ);
 		assertEquals("µHz", mhz.toString());
 	}
-	
+
 	@Test
 	public void testFormatHz5() {
 		Unit<Frequency> mhz = NANO(HERTZ);
 		assertEquals("nHz", mhz.toString());
 	}
-	
+
 	@Test
 	public void testFormatSr() {
 		Unit<SolidAngle> sr = STERADIAN;
 		assertEquals("sr", sr.toString());
 	}
-	
+
 	@Test
 	public void testFormatNewton() {
 		Unit<Force> n = NEWTON;
@@ -119,7 +119,7 @@ public class UnitFormatTest {
 		Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
 		assertEquals("km/h", kph.toString());
 	}
-	
+
 	@Test
 	public void testParseSimple() {
 		try {
@@ -131,7 +131,7 @@ public class UnitFormatTest {
 			fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testFormatFromQuantity() {
 		final Appendable a = new StringBuilder();
@@ -187,8 +187,8 @@ public class UnitFormatTest {
 			fail(e.getMessage());
 		}
 	}
-	
-	@Test(expected=ParserException.class)
+
+	@Test(expected = ParserException.class)
 	public void testParseIrregularString() {
 		Unit<?> u = format.parse("bl//^--1a");
 	}

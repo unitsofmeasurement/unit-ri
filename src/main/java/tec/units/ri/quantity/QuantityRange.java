@@ -52,8 +52,9 @@ import tec.units.ri.spi.Range;
  */
 public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
 	private Quantity<Q> res;
-	
-	protected QuantityRange(Quantity<Q> min, Quantity<Q> max, Quantity<Q> resolution) {
+
+	protected QuantityRange(Quantity<Q> min, Quantity<Q> max,
+			Quantity<Q> resolution) {
 		super(min, max);
 		this.res = resolution;
 	}
@@ -61,7 +62,7 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
 	protected QuantityRange(Quantity<Q> min, Quantity<Q> max) {
 		super(min, max);
 	}
-	
+
 	/**
 	 * Returns an {@code QuantityRange} with the specified values.
 	 *
@@ -74,7 +75,8 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
 	 * @return an {@code MeasurementRange} with the given values
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static QuantityRange of(Quantity minimum, Quantity maximum, Quantity resolution) {
+	public static QuantityRange of(Quantity minimum, Quantity maximum,
+			Quantity resolution) {
 		return new QuantityRange(minimum, maximum, resolution);
 	}
 
@@ -88,7 +90,7 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
 	public Quantity<Q> getResolution() {
 		return res;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -97,15 +99,18 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
 	@Override
 	public boolean contains(Quantity<Q> q) {
 		if (q != null && q.getValue() != null) {
-			// TODO use hasMinimum() and hasMaximum() to avoid null of the range, too 
-			if (q.getValue().doubleValue() >= getMinimum().getValue().doubleValue() &&
-			 q.getValue().doubleValue() <= getMaximum().getValue().doubleValue()) {
+			// TODO use hasMinimum() and hasMaximum() to avoid null of the
+			// range, too
+			if (q.getValue().doubleValue() >= getMinimum().getValue()
+					.doubleValue()
+					&& q.getValue().doubleValue() <= getMaximum().getValue()
+							.doubleValue()) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -119,13 +124,19 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
 		if (obj instanceof QuantityRange<?>) {
 			@SuppressWarnings("unchecked")
 			final QuantityRange<Q> other = (QuantityRange<Q>) obj;
-			return getMinimum() == other.getMinimum() || (getMinimum() != null && getMinimum().equals(other.getMinimum())) &&
-					getMaximum() == other.getMaximum() || (getMaximum() != null && getMaximum().equals(other.getMaximum())) &&
-					getResolution() == other.getResolution() || (getResolution() != null && getResolution().equals(other.getResolution()));
+			return getMinimum() == other.getMinimum()
+					|| (getMinimum() != null && getMinimum().equals(
+							other.getMinimum()))
+					&& getMaximum() == other.getMaximum()
+					|| (getMaximum() != null && getMaximum().equals(
+							other.getMaximum()))
+					&& getResolution() == other.getResolution()
+					|| (getResolution() != null && getResolution().equals(
+							other.getResolution()));
 		}
 		return false;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

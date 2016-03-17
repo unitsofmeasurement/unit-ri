@@ -135,29 +135,35 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
 	}
 
 	/**
-     * Returns the default instance for the specified quantity type.
-     *
-     * @param <Q> The type of the quantity
-     * @param type the quantity type
-     * @return the quantity factory for the specified type
-     */
-    @SuppressWarnings("unchecked")
-	public static <Q extends Quantity<Q>> QuantityFactory<Q> getInstance(final Class<Q> type) {
-         logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
-         QuantityFactory<Q> factory;
-         if (!type.isInterface()) {
-        	 factory = new DefaultQuantityFactory<Q>(type);
-        	 // TODO use instances?
-         } else {
-            factory = INSTANCES.get(type);
-            if (factory != null) return factory;
-            if (!Quantity.class.isAssignableFrom(type))
-                // This exception is not documented because it should never happen if the
-                // user don't try to trick the Java generic types system with unsafe cast.
-                throw new ClassCastException();
-            factory = new DefaultQuantityFactory<Q>(type);
-            INSTANCES.put(type, factory);
-         }
-        return factory;
-    }
+	 * Returns the default instance for the specified quantity type.
+	 *
+	 * @param <Q>
+	 *            The type of the quantity
+	 * @param type
+	 *            the quantity type
+	 * @return the quantity factory for the specified type
+	 */
+	@SuppressWarnings("unchecked")
+	public static <Q extends Quantity<Q>> QuantityFactory<Q> getInstance(
+			final Class<Q> type) {
+		logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
+		QuantityFactory<Q> factory;
+		if (!type.isInterface()) {
+			factory = new DefaultQuantityFactory<Q>(type);
+			// TODO use instances?
+		} else {
+			factory = INSTANCES.get(type);
+			if (factory != null)
+				return factory;
+			if (!Quantity.class.isAssignableFrom(type))
+				// This exception is not documented because it should never
+				// happen if the
+				// user don't try to trick the Java generic types system with
+				// unsafe cast.
+				throw new ClassCastException();
+			factory = new DefaultQuantityFactory<Q>(type);
+			INSTANCES.put(type, factory);
+		}
+		return factory;
+	}
 }

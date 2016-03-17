@@ -42,86 +42,91 @@ import javax.measure.Unit;
 import javax.measure.spi.SystemOfUnits;
 
 /**
- * <p>An abstract base class for unit systems.</p>
+ * <p>
+ * An abstract base class for unit systems.
+ * </p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.5, $Date: 2015-11-23 $
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
-	protected static final Logger logger = Logger.getLogger(AbstractSystemOfUnits.class
-			.getName());
-	
-    /**
-     * Holds the units.
-     */
-    protected final Set<Unit<?>> units = new HashSet<Unit<?>>();
+	protected static final Logger logger = Logger
+			.getLogger(AbstractSystemOfUnits.class.getName());
 
-    /**
-     * Holds the mapping quantity to unit.
-     */
-    @SuppressWarnings("rawtypes")
-	protected final Map<Class<? extends Quantity>, Unit>
-            quantityToUnit = new HashMap<Class<? extends Quantity>, Unit>();
+	/**
+	 * Holds the units.
+	 */
+	protected final Set<Unit<?>> units = new HashSet<Unit<?>>();
 
-    /**
-     * The natural logarithm.
-     **/
-    protected static final double E = 2.71828182845904523536028747135266;
+	/**
+	 * Holds the mapping quantity to unit.
+	 */
+	@SuppressWarnings("rawtypes")
+	protected final Map<Class<? extends Quantity>, Unit> quantityToUnit = new HashMap<Class<? extends Quantity>, Unit>();
+
+	/**
+	 * The natural logarithm.
+	 **/
+	protected static final double E = 2.71828182845904523536028747135266;
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see SystemOfUnits#getName()
 	 */
-    public abstract String getName();
-    
+	public abstract String getName();
+
 	// ///////////////////
 	// Collection View //
 	// ///////////////////
-    public Set<Unit<?>> getUnits() {
-    	if (logger.isLoggable(Level.FINEST)) {
-	    	for (Unit<?> u : units) {
-	    		logger.log(Level.FINEST, u + "; D: " + u.getDimension() + "; C: " + u.getClass());
-	    	}
-    	}
-        return units;
-    }
+	public Set<Unit<?>> getUnits() {
+		if (logger.isLoggable(Level.FINEST)) {
+			for (Unit<?> u : units) {
+				logger.log(Level.FINEST, u + "; D: " + u.getDimension()
+						+ "; C: " + u.getClass());
+			}
+		}
+		return units;
+	}
 
-    @Override
-    public Set<? extends Unit<?>> getUnits(Dimension dimension) {
-        final Set<Unit<?>> set = new HashSet<Unit<?>>();
-        for (Unit<?> unit : this.getUnits()) {
-            if (dimension.equals(unit.getDimension())) {
-                set.add(unit);
-            }
-        }
-        return set;
-    }
-    
-    @SuppressWarnings("unchecked")
-    public <Q extends Quantity<Q>> Unit<Q> getUnit(Class<Q> quantityType) {
-        return quantityToUnit.get(quantityType);
-    }
-	
-    /**
+	@Override
+	public Set<? extends Unit<?>> getUnits(Dimension dimension) {
+		final Set<Unit<?>> set = new HashSet<Unit<?>>();
+		for (Unit<?> unit : this.getUnits()) {
+			if (dimension.equals(unit.getDimension())) {
+				set.add(unit);
+			}
+		}
+		return set;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <Q extends Quantity<Q>> Unit<Q> getUnit(Class<Q> quantityType) {
+		return quantityToUnit.get(quantityType);
+	}
+
+	/**
 	 * Adds a new named unit to the collection.
 	 * 
-	 * @param unit the unit being added.
-	 * @param name the name of the unit.
-	 * @param name the symbol of the unit.
+	 * @param unit
+	 *            the unit being added.
+	 * @param name
+	 *            the name of the unit.
+	 * @param name
+	 *            the symbol of the unit.
 	 * @return <code>unit</code>.
 	 */
 	@SuppressWarnings("unchecked")
 	protected <U extends Unit<?>> U addUnit(U unit, String name, String symbol) {
-		if (name != null && symbol!= null && unit instanceof AbstractUnit) {
-			AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+		if (name != null && symbol != null && unit instanceof AbstractUnit) {
+			AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
 			aUnit.setName(name);
 			aUnit.setSymbol(symbol);
 			units.add(aUnit);
 			return (U) aUnit;
 		}
 		if (name != null && unit instanceof AbstractUnit) {
-			AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+			AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
 			aUnit.setName(name);
 			units.add(aUnit);
 			return (U) aUnit;
@@ -129,18 +134,20 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 		units.add(unit);
 		return unit;
 	}
-	
-    /**
+
+	/**
 	 * Adds a new named unit to the collection.
 	 * 
-	 * @param unit the unit being added.
-	 * @param name the name of the unit.
+	 * @param unit
+	 *            the unit being added.
+	 * @param name
+	 *            the name of the unit.
 	 * @return <code>unit</code>.
 	 */
 	@SuppressWarnings("unchecked")
 	protected <U extends Unit<?>> U addUnit(U unit, String name) {
 		if (name != null && unit instanceof AbstractUnit) {
-			AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+			AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
 			aUnit.setName(name);
 			units.add(aUnit);
 			return (U) aUnit;
@@ -148,12 +155,12 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 		units.add(unit);
 		return unit;
 	}
-	
+
 	protected static class Helper {
-		static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, 
+		static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units,
 				Dimension dimension) {
 			if (dimension != null) {
-				Set<Unit<?>>dimSet = new HashSet<Unit<?>>();
+				Set<Unit<?>> dimSet = new HashSet<Unit<?>>();
 				for (Unit<?> u : units) {
 					if (dimension.equals(u.getDimension())) {
 						dimSet.add(u);
@@ -163,18 +170,21 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 			}
 			return null;
 		}
-		
-	    /**
+
+		/**
 		 * Adds a new named unit to the collection.
 		 * 
-		 * @param unit the unit being added.
-		 * @param name the name of the unit.
+		 * @param unit
+		 *            the unit being added.
+		 * @param name
+		 *            the name of the unit.
 		 * @return <code>unit</code>.
 		 */
 		@SuppressWarnings("unchecked")
-		public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String name) {
+		public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit,
+				String name) {
 			if (name != null && unit instanceof AbstractUnit) {
-				AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+				AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
 				aUnit.setName(name);
 				units.add(aUnit);
 				return (U) aUnit;
@@ -182,26 +192,30 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 			units.add(unit);
 			return unit;
 		}
-		
-	    /**
+
+		/**
 		 * Adds a new named unit to the collection.
 		 * 
-		 * @param unit the unit being added.
-		 * @param name the name of the unit.
-		 * @param name the symbol of the unit.
+		 * @param unit
+		 *            the unit being added.
+		 * @param name
+		 *            the name of the unit.
+		 * @param name
+		 *            the symbol of the unit.
 		 * @return <code>unit</code>.
 		 */
 		@SuppressWarnings("unchecked")
-		public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String name, String symbol) {
-			if (name != null && symbol!= null && unit instanceof AbstractUnit) {
-				AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+		public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit,
+				String name, String symbol) {
+			if (name != null && symbol != null && unit instanceof AbstractUnit) {
+				AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
 				aUnit.setName(name);
 				aUnit.setSymbol(symbol);
 				units.add(aUnit);
 				return (U) aUnit;
 			}
 			if (name != null && unit instanceof AbstractUnit) {
-				AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+				AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
 				aUnit.setName(name);
 				units.add(aUnit);
 				return (U) aUnit;

@@ -49,16 +49,16 @@ public class RangeTest {
 	private Quantity<Mass> res;
 	@SuppressWarnings("rawtypes")
 	private Range range;
-	
+
 	@Before
 	public void init() {
 		min = NumberQuantity.of(1d, KILOGRAM);
 		max = NumberQuantity.of(10d, KILOGRAM);
 		res = NumberQuantity.of(2d, KILOGRAM);
-		
+
 		range = QuantityRange.of(min, max, res);
 	}
-	
+
 	@Test
 	public void testGetMinimum() {
 		assertEquals(min, range.getMinimum());

@@ -54,7 +54,7 @@ import tec.units.ri.AbstractUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.1 $Date: 2016-03-15 $
+ * @version 0.8.2 $Date: 2016-03-17 $
  * 
  */
 public abstract class AbstractUnitFormat implements UnitFormat {

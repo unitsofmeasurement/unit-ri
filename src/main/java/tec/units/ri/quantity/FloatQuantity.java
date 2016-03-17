@@ -50,58 +50,63 @@ final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	final float value;
 
-    public FloatQuantity(float value, Unit<Q> unit) {
-    	super(unit);
-        this.value = value;
-    }
+	public FloatQuantity(float value, Unit<Q> unit) {
+		super(unit);
+		this.value = value;
+	}
 
-    @Override
-    public Float getValue() {
-        return value;
-    }
+	@Override
+	public Float getValue() {
+		return value;
+	}
 
-    // Implements AbstractQuantity
-    public double doubleValue(Unit<Q> unit) {
-        return (super.getUnit().equals(unit)) ? value : super.getUnit().getConverterTo(unit).convert(value);
-    }
+	// Implements AbstractQuantity
+	public double doubleValue(Unit<Q> unit) {
+		return (super.getUnit().equals(unit)) ? value : super.getUnit()
+				.getConverterTo(unit).convert(value);
+	}
 
 	public long longValue(Unit<Q> unit) {
-        double result = doubleValue(unit);
-        if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
-            throw new ArithmeticException("Overflow (" + result + ")");
-        }
-        return (long) result;
+		double result = doubleValue(unit);
+		if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
+			throw new ArithmeticException("Overflow (" + result + ")");
+		}
+		return (long) result;
 	}
 
 	public Quantity<Q> add(Quantity<Q> that) {
 		final Quantity<Q> converted = that.to(getUnit());
-		return NumberQuantity.of(value + converted.getValue().floatValue(), getUnit());
+		return NumberQuantity.of(value + converted.getValue().floatValue(),
+				getUnit());
 	}
 
 	public Quantity<Q> subtract(Quantity<Q> that) {
 		final Quantity<Q> converted = that.to(getUnit());
-		return NumberQuantity.of(value - converted.getValue().floatValue(), getUnit());
+		return NumberQuantity.of(value - converted.getValue().floatValue(),
+				getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Quantity<?> multiply(Quantity<?> that) {
-		return new FloatQuantity(value * that.getValue().floatValue(), 
+		return new FloatQuantity(value * that.getValue().floatValue(),
 				getUnit().multiply(that.getUnit()));
 	}
 
 	public Quantity<Q> multiply(Number that) {
-		return NumberQuantity.of(value * that.floatValue(), 
+		return NumberQuantity.of(value * that.floatValue(),
 				getUnit().multiply(that.doubleValue()));
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Quantity<?> divide(Quantity<?> that) {
-		return new FloatQuantity(value / that.getValue().floatValue(), getUnit().divide(that.getUnit()));
+		return new FloatQuantity(value / that.getValue().floatValue(),
+				getUnit().divide(that.getUnit()));
 	}
 
 	@SuppressWarnings("unchecked")
 	public Quantity<Q> inverse() {
-		return (AbstractQuantity<Q>) NumberQuantity.of(1f / value, getUnit().inverse());
+		return (AbstractQuantity<Q>) NumberQuantity.of(1f / value, getUnit()
+				.inverse());
 	}
 
 	public Quantity<Q> divide(Number that) {

@@ -49,31 +49,32 @@ public class PrefixTest {
 		// TODO how to handle equals for units?
 		assertEquals(KILOGRAM.toString(), KILO(GRAM).toString());
 	}
-	
+
 	@Test
 	public void testMega() {
 		Unit<Mass> m1 = MEGA(GRAM);
 		assertEquals("Mg", m1.toString());
 	}
-	
+
 	@Test
 	public void testNano() {
 		Unit<Mass> m1 = NANO(GRAM);
 		assertEquals("ng", m1.toString());
 	}
-	
+
 	@Test
 	public void testPicoNano() {
 		Unit<Mass> m1 = PICO(KILOGRAM);
 		assertEquals("ng", m1.toString());
 	}
-	
+
 	@Test
 	public void testBetweenPrefixes() {
 		UnitConverter conv = YOTTA(METRE).getConverterTo(ZETTA(METRE));
-		assertEquals(new RationalConverter(4.7683715820312499E17, 4.76837158203125E14), conv); // TODO value?
+		assertEquals(new RationalConverter(4.7683715820312499E17,
+				4.76837158203125E14), conv); // TODO value?
 	}
-	
+
 	@Test
 	public void testBetweenPrefixes2() {
 		UnitConverter conv = KILO(METRE).getConverterTo(GIGA(METRE));

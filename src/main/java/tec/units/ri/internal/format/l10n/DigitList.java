@@ -51,7 +51,7 @@ package tec.units.ri.internal.format.l10n;
  * characters, which are the digits radix 10, from '0' to '9'. It also has a
  * radix 10 exponent associated with it.
  *
- * @see        NumberFormat
+ * @see NumberFormat
  */
 final class DigitList {
 	/**

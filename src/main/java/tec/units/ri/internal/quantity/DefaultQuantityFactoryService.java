@@ -28,6 +28,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package tec.units.ri.internal.quantity;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,28 +40,34 @@ import tec.units.ri.quantity.DefaultQuantityFactory;
 
 /**
  * Provider of Quantities
+ * 
  * @author Werner Keil
  * @version 0.4
  */
 @SuppressWarnings("rawtypes")
-public final class DefaultQuantityFactoryService implements QuantityFactoryService {
-    private final Map<Class, QuantityFactory> INSTANCE = new HashMap<Class, QuantityFactory>();
+public final class DefaultQuantityFactoryService implements
+		QuantityFactoryService {
+	private final Map<Class, QuantityFactory> INSTANCE = new HashMap<Class, QuantityFactory>();
 
-    /**
-     * Return a factory for this quantity
-     * @param quantity the quantity type
-     * @return the {@link QuantityFactory}
-     * @throws NullPointerException
-     */
-    @SuppressWarnings("unchecked")
-    public final <Q extends Quantity<Q>>  QuantityFactory<Q> getQuantityFactory(Class<Q> quantity){
-        if (quantity == null)
-            throw new NullPointerException();
-        if(!INSTANCE.containsKey(quantity)) {
-            synchronized (INSTANCE) {
-                INSTANCE.put(quantity, DefaultQuantityFactory.getInstance(quantity));
-            }
-        }
-        return INSTANCE.get(quantity);
-    }
+	/**
+	 * Return a factory for this quantity
+	 * 
+	 * @param quantity
+	 *            the quantity type
+	 * @return the {@link QuantityFactory}
+	 * @throws NullPointerException
+	 */
+	@SuppressWarnings("unchecked")
+	public final <Q extends Quantity<Q>> QuantityFactory<Q> getQuantityFactory(
+			Class<Q> quantity) {
+		if (quantity == null)
+			throw new NullPointerException();
+		if (!INSTANCE.containsKey(quantity)) {
+			synchronized (INSTANCE) {
+				INSTANCE.put(quantity,
+						DefaultQuantityFactory.getInstance(quantity));
+			}
+		}
+		return INSTANCE.get(quantity);
+	}
 }

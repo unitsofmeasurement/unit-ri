@@ -39,102 +39,111 @@ import javax.measure.UnitConverter;
 import tec.units.ri.AbstractUnit;
 
 /**
- * <p> This class represents an annotated unit.</p>
+ * <p>
+ * This class represents an annotated unit.
+ * </p>
  * 
- * <p> Instances of this class are created through the
- *     {@link AbstractUnit#annotate(String)} method.</p>
+ * <p>
+ * Instances of this class are created through the
+ * {@link AbstractUnit#annotate(String)} method.
+ * </p>
  *
- * @param <Q> The type of the quantity measured by this unit.
+ * @param <Q>
+ *            The type of the quantity measured by this unit.
  *
- * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
+ * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.4, January 18, 2015
  */
 public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
-    /**
-     * Holds the actual unit.
-     */
-    private final Unit<?> actualUnit;
+	/**
+	 * Holds the actual unit.
+	 */
+	private final Unit<?> actualUnit;
 
-    /**
-     * Holds the annotation.
-     */
-    private final String annotation;
+	/**
+	 * Holds the annotation.
+	 */
+	private final String annotation;
 
-    /**
-     * Creates an annotated unit equivalent to the specified unit.
-     *
-     * @param actualUnit the unit to be annotated.
-     * @param annotation the annotation.
-     * @return the annotated unit.
-     */
-    public AnnotatedUnit(Unit<?> actualUnit, String annotation) {
-        this.actualUnit = (actualUnit instanceof AnnotatedUnit) ?
-            ((AnnotatedUnit<Q>)actualUnit).actualUnit : actualUnit;
-        this.annotation = annotation;
-    }
+	/**
+	 * Creates an annotated unit equivalent to the specified unit.
+	 *
+	 * @param actualUnit
+	 *            the unit to be annotated.
+	 * @param annotation
+	 *            the annotation.
+	 * @return the annotated unit.
+	 */
+	public AnnotatedUnit(Unit<?> actualUnit, String annotation) {
+		this.actualUnit = (actualUnit instanceof AnnotatedUnit) ? ((AnnotatedUnit<Q>) actualUnit).actualUnit
+				: actualUnit;
+		this.annotation = annotation;
+	}
 
-    /**
-     * Returns the actual unit of this annotated unit (never an annotated unit
-     * itself).
-     *
-     * @return the actual unit.
-     */
-    public Unit<?> getActualUnit() {
-        return actualUnit;
-    }
+	/**
+	 * Returns the actual unit of this annotated unit (never an annotated unit
+	 * itself).
+	 *
+	 * @return the actual unit.
+	 */
+	public Unit<?> getActualUnit() {
+		return actualUnit;
+	}
 
-    /**
-     * Returns the annotation of this annotated unit.
-     *
-     * @return the annotation.
-     */
-     public String getAnnotation() {
-        return annotation;
-    }
+	/**
+	 * Returns the annotation of this annotated unit.
+	 *
+	 * @return the annotation.
+	 */
+	public String getAnnotation() {
+		return annotation;
+	}
 
-    @Override
-    public String getSymbol() {
-        return actualUnit.getSymbol();
-    }
+	@Override
+	public String getSymbol() {
+		return actualUnit.getSymbol();
+	}
 
-    @Override
-    public Map<? extends Unit<?>, Integer> getProductUnits() {
-        return actualUnit.getProductUnits();
-    }
+	@Override
+	public Map<? extends Unit<?>, Integer> getProductUnits() {
+		return actualUnit.getProductUnits();
+	}
 
-    @Override
-    public AbstractUnit<Q> toSystemUnit() {
-        return (AbstractUnit<Q>) actualUnit.getSystemUnit();
-    }
+	@Override
+	public AbstractUnit<Q> toSystemUnit() {
+		return (AbstractUnit<Q>) actualUnit.getSystemUnit();
+	}
 
-    @Override
-    public Dimension getDimension() {
-        return actualUnit.getDimension();
-    }
+	@Override
+	public Dimension getDimension() {
+		return actualUnit.getDimension();
+	}
 
-    @Override
-    public UnitConverter getSystemConverter() {
-    	if (actualUnit instanceof AbstractUnit) {
-    		return ((AbstractUnit<?>)actualUnit).getSystemConverter();
-    	} else {
-    		throw new ClassCastException("Unknown type " + actualUnit.getClass());
-    	}
-    }
+	@Override
+	public UnitConverter getSystemConverter() {
+		if (actualUnit instanceof AbstractUnit) {
+			return ((AbstractUnit<?>) actualUnit).getSystemConverter();
+		} else {
+			throw new ClassCastException("Unknown type "
+					+ actualUnit.getClass());
+		}
+	}
 
-    @Override
-    public int hashCode() {
-        return actualUnit.hashCode() + annotation.hashCode();
-    }
+	@Override
+	public int hashCode() {
+		return actualUnit.hashCode() + annotation.hashCode();
+	}
 
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) return true;
-        if (!(that instanceof AnnotatedUnit<?>))
-            return false;
-        AnnotatedUnit<?> thatUnit = (AnnotatedUnit<?>) that;
-        return this.actualUnit.equals(thatUnit.actualUnit) &&
-                this.annotation.equals(thatUnit.annotation);
-    }
+	@Override
+	public boolean equals(Object that) {
+		if (this == that)
+			return true;
+		if (!(that instanceof AnnotatedUnit<?>))
+			return false;
+		AnnotatedUnit<?> thatUnit = (AnnotatedUnit<?>) that;
+		return this.actualUnit.equals(thatUnit.actualUnit)
+				&& this.annotation.equals(thatUnit.annotation);
+	}
 }

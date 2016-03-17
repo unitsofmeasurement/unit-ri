@@ -365,7 +365,7 @@ public abstract class NumberFormat extends Format {
 	public static final NumberFormat getInstance() {
 		return getNumberInstance();
 	}
-	
+
 	/**
 	 * Returns a general-purpose number format for the current default locale.
 	 */
@@ -592,7 +592,7 @@ public abstract class NumberFormat extends Format {
 			format.setDecimalSeparatorAlwaysShown(false);
 			format.setParseIntegerOnly(true);
 		} else if (choice == CURRENCYSTYLE) {
-			//format.adjustForCurrencyDefaultFractionDigits();
+			// format.adjustForCurrencyDefaultFractionDigits();
 		}
 
 		return format;

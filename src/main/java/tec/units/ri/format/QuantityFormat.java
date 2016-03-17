@@ -46,8 +46,8 @@ import tec.uom.lib.common.function.Parser;
 
 /**
  * <p>
- * This class provides the interface for formatting and parsing
- * {@link Quantity quantities}.
+ * This class provides the interface for formatting and parsing {@link Quantity
+ * quantities}.
  * </p>
  * 
  * <p>
@@ -72,7 +72,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 	 */
 	private static final NumberSpaceUnit DEFAULT = new NumberSpaceUnit(
 			NumberFormat.getInstance(), SimpleUnitFormat.getInstance());
-	
+
 	/**
 	 * Holds the default format instance.
 	 */
@@ -249,29 +249,30 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 	}
 
 	static int getFractionDigitsCount(double d) {
-	    if (d >= 1) { //we only need the fraction digits
-	        d = d - (long) d;
-	    }
-	    if (d == 0) { //nothing to count
-	        return 0;
-	    }
-	    d *= 10; //shifts 1 digit to left
-	    int count = 1;
-	    while (d - (long) d != 0) { //keeps shifting until there are no more fractions
-	        d *= 10;
-	        count++;
-	    }
-	    return count;
+		if (d >= 1) { // we only need the fraction digits
+			d = d - (long) d;
+		}
+		if (d == 0) { // nothing to count
+			return 0;
+		}
+		d *= 10; // shifts 1 digit to left
+		int count = 1;
+		while (d - (long) d != 0) { // keeps shifting until there are no more
+									// fractions
+			d *= 10;
+			count++;
+		}
+		return count;
 	}
-	
+
 	// Holds default implementation.
 	private static final class NumberSpaceUnit extends QuantityFormat {
 		private final DecimalFormat decimalFormat = new DecimalFormat();
-		
+
 		private final UnitFormat unitFormat;
 
 		private NumberSpaceUnit(NumberFormat numberFormat, UnitFormat unitFormat) {
-			//			decimalFormat.applyPattern("#,#0.0000##");
+			// decimalFormat.applyPattern("#,#0.0000##");
 			this.unitFormat = unitFormat;
 		}
 
@@ -283,10 +284,11 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 			// return formatCompound(quantity.doubleValue(unit),
 			// (CompoundUnit) unit, dest);
 			// else {
-			//dest.append(numberFormat.format(quantity.getValue()));
+			// dest.append(numberFormat.format(quantity.getValue()));
 			int fract = 0;
 			if (quantity != null && quantity.getValue() != null) {
-				fract = getFractionDigitsCount(quantity.getValue().doubleValue());
+				fract = getFractionDigitsCount(quantity.getValue()
+						.doubleValue());
 			}
 			if (fract > 1) {
 				decimalFormat.setMaximumFractionDigits(fract + 1);
@@ -304,8 +306,9 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 		AbstractQuantity<?> parse(CharSequence csq, int index)
 				throws IllegalArgumentException, ParserException {
 			String str = csq.toString();
-//			Number number = parseFormat.parse(str); // TODO combine with NumberFormat
-			Number number = null; //FIXME
+			// Number number = parseFormat.parse(str); // TODO combine with
+			// NumberFormat
+			Number number = null; // FIXME
 			if (number == null)
 				throw new IllegalArgumentException("Number cannot be parsed");
 			Unit unit = unitFormat.parse(csq);
@@ -378,7 +381,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 			Double decimal = new Double(csq.subSequence(startDecimal,
 					endDecimal).toString());
 			// cursor.setIndex(endDecimal + 1);
-			//Unit unit = EBNFUnitFormat.getInstance().parse(csq, index);
+			// Unit unit = EBNFUnitFormat.getInstance().parse(csq, index);
 			Unit unit = SimpleUnitFormat.getInstance().parse(csq, index);
 			return NumberQuantity.of(decimal.doubleValue(), unit);
 		}

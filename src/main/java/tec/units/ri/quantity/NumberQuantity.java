@@ -141,27 +141,28 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	 */
 	protected final long longValue(Unit<Q> unit) {
 		// Extends AbstractQuantity
-//		Unit<Q> myUnit = getUnit();
+		// Unit<Q> myUnit = getUnit();
 		try {
-//			UnitConverter converter = unit.getConverterToAny(myUnit);
-//			if ((getValue() instanceof BigDecimal || getValue() instanceof BigInteger)
-//					&& converter instanceof AbstractConverter) {
-//				return (((AbstractConverter) converter).convert(
-//						BigDecimal.valueOf(getValue().longValue()),
-//						MathContext.DECIMAL128)).longValue();
-//			} else {
-				double result = doubleValue(unit);
-				if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
-					throw new ArithmeticException("Overflow (" + result + ")");
-				}
-				return (long) result;
-//			}
+			// UnitConverter converter = unit.getConverterToAny(myUnit);
+			// if ((getValue() instanceof BigDecimal || getValue() instanceof
+			// BigInteger)
+			// && converter instanceof AbstractConverter) {
+			// return (((AbstractConverter) converter).convert(
+			// BigDecimal.valueOf(getValue().longValue()),
+			// MathContext.DECIMAL128)).longValue();
+			// } else {
+			double result = doubleValue(unit);
+			if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
+				throw new ArithmeticException("Overflow (" + result + ")");
+			}
+			return (long) result;
+			// }
 		} catch (UnconvertibleException e) {
 			throw e;
-		} 
-//			catch (IncommensurableException e) {
-//			throw new IllegalArgumentException(e.getMessage());
-//		}
+		}
+		// catch (IncommensurableException e) {
+		// throw new IllegalArgumentException(e.getMessage());
+		// }
 	}
 
 	protected final int intValue(Unit<Q> unit) throws ArithmeticException {
@@ -172,7 +173,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 		}
 		return (int) longValue;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -209,8 +210,8 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Quantity<?> multiply(Quantity<?> that) {
 		final Unit<?> unit = getUnit().multiply(that.getUnit());
-		return new NumberQuantity((getValue().doubleValue() * that.getValue().doubleValue()),
-				unit);
+		return new NumberQuantity((getValue().doubleValue() * that.getValue()
+				.doubleValue()), unit);
 	}
 
 	public NumberQuantity<Q> multiply(Number that) {
@@ -226,7 +227,8 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	}
 
 	public Quantity<Q> divide(Number that) {
-		return NumberQuantity.of(getValue().doubleValue() / that.doubleValue(), getUnit());
+		return NumberQuantity.of(getValue().doubleValue() / that.doubleValue(),
+				getUnit());
 	}
 
 	public Quantity<Q> inverse() {
@@ -287,8 +289,8 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	}
 
 	/**
-	 * Returns the scalar quantity for the specified <code>float</code> stated in
-	 * the specified unit.
+	 * Returns the scalar quantity for the specified <code>float</code> stated
+	 * in the specified unit.
 	 *
 	 * @param floatValue
 	 *            the measurement value.
@@ -326,9 +328,9 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	 *
 	 * <p>
 	 * Note: This method handles only
-	 * {@link tec.units.ri.SimpleUnitFormat.UnitFormat#getStandard standard} unit format
-	 * (<a href="http://unitsofmeasure.org/">UCUM</a> based). Locale-sensitive
-	 * quantity formatting and parsing are handled by the
+	 * {@link tec.units.ri.SimpleUnitFormat.UnitFormat#getStandard standard}
+	 * unit format (<a href="http://unitsofmeasure.org/">UCUM</a> based).
+	 * Locale-sensitive quantity formatting and parsing are handled by the
 	 * {@link MeasurementFormat} class and its subclasses.
 	 * </p>
 	 *

@@ -33,8 +33,7 @@ import tec.uom.lib.common.function.MaximumSupplier;
 import tec.uom.lib.common.function.MinimumSupplier;
 
 /**
- * A Range is a pair of <code>T</code> items that represent a range
- * of values.
+ * A Range is a pair of <code>T</code> items that represent a range of values.
  * <p>
  * Subclasses of Range should be immutable.
  * 
@@ -44,7 +43,8 @@ import tec.uom.lib.common.function.MinimumSupplier;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.9, December 28, 2015
  */
-public abstract class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T> {
+public abstract class Range<T> implements MinimumSupplier<T>,
+		MaximumSupplier<T> {
 	// TODO do we keep null for min and max to represent infinity?
 	// Java 8 Optional was evaluated, but caused conflict with the type-safe
 	// Quantity feature of this API, plus it won't work in CLDC8
@@ -63,7 +63,6 @@ public abstract class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T>
 		this.min = min;
 		this.max = max;
 	}
-
 
 	/**
 	 * Returns the smallest value of the range. The value is the same as that
@@ -105,11 +104,12 @@ public abstract class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T>
 
 	/**
 	 * Checks whether the given <code>T</code> is within this range
+	 * 
 	 * @param t
 	 * @return true if the value is within the range
 	 */
 	public abstract boolean contains(T t);
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -123,7 +123,6 @@ public abstract class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T>
 		result = prime * result + ((min == null) ? 0 : min.hashCode());
 		return result;
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -152,7 +151,6 @@ public abstract class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T>
 			return false;
 		return true;
 	}
-
 
 	/*
 	 * (non-Javadoc)

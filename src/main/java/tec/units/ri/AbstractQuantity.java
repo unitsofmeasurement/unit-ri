@@ -104,7 +104,8 @@ import tec.uom.lib.common.function.ValueSupplier;
  * @version 0.8, $Date: 2015-12-28 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
-		Quantity<Q>, Comparable<Quantity<Q>>, UnitSupplier<Q>, ValueSupplier<Number> {
+		Quantity<Q>, Comparable<Quantity<Q>>, UnitSupplier<Q>,
+		ValueSupplier<Number> {
 
 	/**
 	 * 
@@ -116,12 +117,14 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	/**
 	 * Holds a dimensionless quantity of none (exact).
 	 */
-	public static final AbstractQuantity<Dimensionless> NONE = NumberQuantity.of(0, AbstractUnit.ONE);
+	public static final AbstractQuantity<Dimensionless> NONE = NumberQuantity
+			.of(0, AbstractUnit.ONE);
 
 	/**
 	 * Holds a dimensionless quantity of one (exact).
 	 */
-	public static final AbstractQuantity<Dimensionless> ONE = NumberQuantity.of(1, AbstractUnit.ONE);
+	public static final AbstractQuantity<Dimensionless> ONE = NumberQuantity
+			.of(1, AbstractUnit.ONE);
 
 	/**
 	 * constructor.
@@ -184,18 +187,18 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 
 	/**
 	 * Compares this measure to the specified Measurement quantity. The default
-	 * implementation compares the {@link AbstractQuantity#doubleValue(Unit)} of both
-	 * this measure and the specified Measurement stated in the same unit (this
-	 * measure's {@link #getUnit() unit}).
+	 * implementation compares the {@link AbstractQuantity#doubleValue(Unit)} of
+	 * both this measure and the specified Measurement stated in the same unit
+	 * (this measure's {@link #getUnit() unit}).
 	 *
 	 * @return a negative integer, zero, or a positive integer as this measure
 	 *         is less than, equal to, or greater than the specified Measurement
 	 *         quantity.
-     * @see {@link NaturalOrder}
-     */
+	 * @see {@link NaturalOrder}
+	 */
 	public int compareTo(Quantity<Q> that) {
-        final Comparator<Quantity<Q>> comparator = new NaturalOrder<Q>();
-        return comparator.compare(this, that);
+		final Comparator<Quantity<Q>> comparator = new NaturalOrder<Q>();
+		return comparator.compare(this, that);
 	}
 
 	/**
@@ -207,8 +210,8 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	 * 2.00 as different objects because of different internal scales,
 	 * measurements such as <code>Measure.valueOf(3.0, KILOGRAM)</code>
 	 * <code>Measure.valueOf(3, KILOGRAM)</code> and
-	 * <code>Quantities.getQuantity("3 kg")</code> might not be considered equals
-	 * because of possible differences in their implementations.
+	 * <code>Quantities.getQuantity("3 kg")</code> might not be considered
+	 * equals because of possible differences in their implementations.
 	 * </p>
 	 *
 	 * <p>
@@ -281,7 +284,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	public String toString() {
 		// return MeasureFormat.getStandard().format(this); TODO improve
 		// MeasureFormat
-//		return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
+		// return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
 		return QuantityFormat.getInstance().format(this);
 	}
 
@@ -300,8 +303,8 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	}
 
 	/**
-	 * Casts this quantity to a parameterized unit of specified nature or throw a
-	 * <code>ClassCastException</code> if the dimension of the specified
+	 * Casts this quantity to a parameterized unit of specified nature or throw
+	 * a <code>ClassCastException</code> if the dimension of the specified
 	 * quantity and this measure unit's dimension do not match. For example:<br/>
 	 * <code>
 	 *     Measure<Length> length = Quantities.getQuantity("2 km").asType(Length.class);
@@ -321,7 +324,8 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	@SuppressWarnings("unchecked")
 	public final <T extends Quantity<T>> AbstractQuantity<T> asType(
 			Class<T> type) throws ClassCastException {
-		this.getUnit().asType(type); // Raises ClassCastException is dimension mismatches.
+		this.getUnit().asType(type); // Raises ClassCastException is dimension
+										// mismatches.
 		return (AbstractQuantity<T>) this;
 	}
 }

@@ -45,7 +45,7 @@ import tec.units.ri.quantity.Quantities;
 public class UnitConverterTest {
 	private Unit<Length> sourceUnit = METRE;
 	private Unit<Length> targetUnit = CENTI(METRE);
-	
+
 	@Test
 	public void testDouble() {
 		UnitConverter converter = sourceUnit.getConverterTo(targetUnit);
@@ -57,10 +57,10 @@ public class UnitConverterTest {
 
 		assertEquals(400, result1, 0);
 		assertEquals(600, result2, 0);
-		assertEquals(400d, result3);  
-		assertEquals(400, result3.intValue(), 0);  
+		assertEquals(400d, result3);
+		assertEquals(400, result3.intValue(), 0);
 	}
-	
+
 	@Test
 	public void testQuantity() {
 		Quantity<Length> quantLength1 = Quantities.getQuantity(4.0, sourceUnit);

@@ -41,55 +41,71 @@ import javax.measure.spi.QuantityFactory;
 import tec.units.ri.AbstractQuantity;
 
 /**
- * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}).
+ * A factory producing simple quantities instances (tuples {@link Number}/
+ * {@link Unit}).
  *
- * For example:<br/><code>
+ * For example:<br/>
+ * <code>
  *      Mass m = DefaultQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
  *      Time m = DefaultQuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
  * </code>
- * @param <Q> The type of the quantity.
+ * 
+ * @param <Q>
+ *            The type of the quantity.
  *
- * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
- * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
+ * @author <a href="mailto:desruisseaux@users.sourceforge.net">Martin
+ *         Desruisseaux</a>
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @version 0.8, $Date: 2015-11-23 $
  */
-abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q>  {
+abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements
+		QuantityFactory<Q> {
 
-    /**
-     * Holds the current instances.
-     */
-    @SuppressWarnings("rawtypes")
-    static final Map<Class, QuantityFactory> INSTANCES = new HashMap<Class, QuantityFactory>();
+	/**
+	 * Holds the current instances.
+	 */
+	@SuppressWarnings("rawtypes")
+	static final Map<Class, QuantityFactory> INSTANCES = new HashMap<Class, QuantityFactory>();
 
-    static final Logger logger = Logger.getLogger(AbstractQuantityFactory.class.getName());
+	static final Logger logger = Logger.getLogger(AbstractQuantityFactory.class
+			.getName());
 
-    static final Level LOG_LEVEL = Level.FINE;
+	static final Level LOG_LEVEL = Level.FINE;
 
+	/**
+	 * Overrides the default implementation of the factory for the specified
+	 * quantity type.
+	 *
+	 * @param <Q>
+	 *            The type of the quantity
+	 * @param type
+	 *            the quantity type
+	 * @param factory
+	 *            the quantity factory
+	 */
+	protected static <Q extends Quantity<Q>> void setInstance(
+			final Class<Q> type, AbstractQuantityFactory<Q> factory) {
+		if (!AbstractQuantity.class.isAssignableFrom(type))
+			// This exception is not documented because it should never happen
+			// if the
+			// user don't try to trick the Java generic types system with unsafe
+			// cast.
+			throw new ClassCastException();
+		INSTANCES.put(type, factory);
+	}
 
-    /**
-     * Overrides the default implementation of the factory for the specified
-     * quantity type.
-     *
-     * @param <Q> The type of the quantity
-     * @param type the quantity type
-     * @param factory the quantity factory
-     */
-    protected static <Q extends Quantity<Q>>  void setInstance(final Class<Q> type, AbstractQuantityFactory<Q> factory) {
-        if (!AbstractQuantity.class.isAssignableFrom(type))
-            // This exception is not documented because it should never happen if the
-            // user don't try to trick the Java generic types system with unsafe cast.
-            throw new ClassCastException();
-        INSTANCES.put(type, factory);
-    }
-
-    /**
-     * Returns the quantity for the specified number stated in the specified unit.
-     *
-     * @param value the numeric value stated in the specified unit
-     * @param unit the unit
-     * @return the corresponding quantity
-     */
-    public abstract Quantity<Q> create(Number value, Unit<Q> unit);
-//    public abstract <N extends Number, U extends Unit<Q>> Q create(N number, U unit);
+	/**
+	 * Returns the quantity for the specified number stated in the specified
+	 * unit.
+	 *
+	 * @param value
+	 *            the numeric value stated in the specified unit
+	 * @param unit
+	 *            the unit
+	 * @return the corresponding quantity
+	 */
+	public abstract Quantity<Q> create(Number value, Unit<Q> unit);
+	// public abstract <N extends Number, U extends Unit<Q>> Q create(N number,
+	// U unit);
 }

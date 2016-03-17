@@ -35,23 +35,32 @@ import javax.measure.Quantity;
 
 /**
  * Comparator to sort by natural order, looking both the unit and the value.
- * @return
- * <b>Given:</b>
- * <p>Quantity<Time> day = Quantities.getQuantity(1, Units.DAY);</p>
- * <p>Quantity<Time> hours = Quantities.getQuantity(18, Units.HOUR);</p>
- * <p>Quantity<Time> minutes = Quantities.getQuantity(15, Units.HOUR);</p>
- * <p>Quantity<Time> seconds = Quantities.getQuantity(100, Units.HOUR);</p>
- * will return: seconds, minutes, hours, day
+ * 
+ * @return <b>Given:</b>
+ *         <p>
+ *         Quantity<Time> day = Quantities.getQuantity(1, Units.DAY);
+ *         </p>
+ *         <p>
+ *         Quantity<Time> hours = Quantities.getQuantity(18, Units.HOUR);
+ *         </p>
+ *         <p>
+ *         Quantity<Time> minutes = Quantities.getQuantity(15, Units.HOUR);
+ *         </p>
+ *         <p>
+ *         Quantity<Time> seconds = Quantities.getQuantity(100, Units.HOUR);
+ *         </p>
+ *         will return: seconds, minutes, hours, day
  */
-public class NaturalOrder<T extends Quantity<T>> implements Comparator <Quantity<T>> {
+public class NaturalOrder<T extends Quantity<T>> implements
+		Comparator<Quantity<T>> {
 
-    @Override
-    public int compare(Quantity<T> q1, Quantity<T> q2) {
-        if (q1.getUnit().equals(q2.getUnit())) {
-            return Double.compare(q1.getValue().doubleValue(), q2.getValue()
-                    .doubleValue());
-        }
-        return Double.compare(q1.getValue().doubleValue(), q2.to(q1.getUnit())
-                .getValue().doubleValue());
-    }
+	@Override
+	public int compare(Quantity<T> q1, Quantity<T> q2) {
+		if (q1.getUnit().equals(q2.getUnit())) {
+			return Double.compare(q1.getValue().doubleValue(), q2.getValue()
+					.doubleValue());
+		}
+		return Double.compare(q1.getValue().doubleValue(), q2.to(q1.getUnit())
+				.getValue().doubleValue());
+	}
 }
