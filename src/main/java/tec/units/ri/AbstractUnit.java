@@ -68,9 +68,10 @@ import tec.units.ri.unit.Units;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.9.4, Nov 23, 2015
+ * @version 0.9.5, March 19, 2016
  */
-public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
+public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
+		Comparable<Unit<Q>> {
 
 	/**
 	 * 
@@ -96,6 +97,34 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	 * Default constructor.
 	 */
 	protected AbstractUnit() {
+	}
+	
+	/**
+	 * Compares this unit to the specified unit. The default implementation
+	 * compares the name and symbol of both this unit and the specified unit.
+	 *
+	 * @return a negative integer, zero, or a positive integer as this unit is
+	 *         less than, equal to, or greater than the specified unit.
+	 */
+	public int compareTo(Unit<Q> that) {
+		if (name != null && getSymbol() != null) {
+			return name.compareTo(that.getName())
+					+ getSymbol().compareTo(that.getSymbol());
+		} else if (name == null) {
+			if (getSymbol() != null && that.getSymbol() != null) {
+				return getSymbol().compareTo(that.getSymbol());
+			} else {
+				return -1;
+			}
+		} else if (getSymbol() == null) {
+			if (name != null) {
+				return name.compareTo(that.getName());
+			} else {
+				return -1;
+			}
+		} else {
+			return -1;
+		}
 	}
 
 	/**
