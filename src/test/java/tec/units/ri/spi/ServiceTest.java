@@ -37,7 +37,6 @@ import java.util.Locale;
 import javax.measure.spi.Bootstrap;
 import javax.measure.spi.UnitFormatService;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -47,14 +46,11 @@ import org.junit.Test;
 public class ServiceTest {
 
 	@Test
-	@Ignore
 	public void testGetServices() throws Exception {
 		Collection<Object> services = Collection.class.cast(Bootstrap
 				.getServices(String.class));
 		assertNotNull(services);
-		assertFalse(services.isEmpty());
-		assertTrue(services.contains("service1"));
-		assertTrue(services.contains("service2"));
+		assertTrue(services.isEmpty());
 		services = Collection.class.cast(Bootstrap.getServices(Runtime.class));
 		assertNotNull(services);
 		assertTrue(services.isEmpty());
