@@ -33,15 +33,19 @@ import static org.junit.Assert.assertEquals;
 import static tec.units.ri.unit.MetricPrefix.*;
 import static tec.units.ri.unit.Units.GRAM;
 import static tec.units.ri.unit.Units.KILOGRAM;
+import static tec.units.ri.unit.Units.LITRE;
 import static tec.units.ri.unit.Units.METRE;
 
+import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import javax.measure.quantity.Mass;
+import javax.measure.quantity.Volume;
 
 import org.junit.Test;
 
 import tec.units.ri.function.RationalConverter;
+import tec.units.ri.quantity.Quantities;
 
 public class PrefixTest {
 	@Test
@@ -56,6 +60,30 @@ public class PrefixTest {
 		assertEquals("Mg", m1.toString());
 	}
 
+	public void testMilli() {
+		Quantity<Mass> m1 = Quantities.getQuantity(1.0, MILLI(Units.GRAM));
+		assertEquals(1d, m1.getValue());
+		assertEquals("mg", m1.getUnit().toString());
+	}
+	
+	@Test
+	public void testMilli2() {
+		Quantity<Volume> m1 = Quantities.getQuantity(10, MILLI(LITRE));
+		assertEquals(10, m1.getValue());
+		assertEquals("ml", m1.getUnit().toString());
+	}
+	
+	@Test
+	public void testMilli3() {
+		Quantity<Volume> m1 = Quantities.getQuantity(1.0, LITRE);
+		assertEquals(1d, m1.getValue());
+		assertEquals("l", m1.getUnit().toString());
+				
+		Quantity<Volume> m2 = m1.to(MILLI(LITRE));
+		assertEquals(1000.0d, m2.getValue());
+		assertEquals("ml", m2.getUnit().toString());
+	}
+	
 	@Test
 	public void testNano() {
 		Unit<Mass> m1 = NANO(GRAM);
