@@ -44,8 +44,9 @@ import javax.measure.Quantity;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.1, $Date: 2014-11-29 $
  */
-abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
-		Measurement<Q> {
+abstract class AbstractMeasurement<Q extends Quantity<Q>>
+		implements
+			Measurement<Q> {
 
 	/**
 	 * 
@@ -89,12 +90,12 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 		return timestamp;
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	static final <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q) {
 		return new Default<Q>(q);
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	static final <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q, long t) {
 		return new Default<Q>(q, t);
 	}
@@ -105,7 +106,7 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 	@SuppressWarnings("rawtypes")
 	private static final class Default<Q> extends AbstractMeasurement {
 
-		@SuppressWarnings({ "unchecked" })
+		@SuppressWarnings({"unchecked"})
 		protected <R extends Quantity<R>> Default(Quantity<R> q, long t) {
 			super(q, t);
 		}

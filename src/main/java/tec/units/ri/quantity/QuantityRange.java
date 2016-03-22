@@ -74,7 +74,7 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
 	 *            The resolution of the measurement range.
 	 * @return an {@code MeasurementRange} with the given values
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static QuantityRange of(Quantity minimum, Quantity maximum,
 			Quantity resolution) {
 		return new QuantityRange(minimum, maximum, resolution);

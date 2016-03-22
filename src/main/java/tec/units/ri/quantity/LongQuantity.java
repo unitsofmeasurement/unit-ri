@@ -85,7 +85,7 @@ final class LongQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 				getUnit());
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Quantity<?> multiply(Quantity<?> that) {
 		return new LongQuantity(value * that.getValue().longValue(), getUnit());
 	}

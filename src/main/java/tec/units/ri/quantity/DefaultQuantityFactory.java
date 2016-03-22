@@ -60,8 +60,9 @@ import tec.units.ri.AbstractQuantity;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @version 0.8, $Date: 2015-11-23 $
  */
-public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends
-		AbstractQuantityFactory<Q> {
+public final class DefaultQuantityFactory<Q extends Quantity<Q>>
+		extends
+			AbstractQuantityFactory<Q> {
 	/**
 	 * The type of the quantities created by this factory.
 	 */

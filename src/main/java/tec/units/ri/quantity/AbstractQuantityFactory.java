@@ -59,8 +59,9 @@ import tec.units.ri.AbstractQuantity;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @version 0.8, $Date: 2015-11-23 $
  */
-abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements
-		QuantityFactory<Q> {
+abstract class AbstractQuantityFactory<Q extends Quantity<Q>>
+		implements
+			QuantityFactory<Q> {
 
 	/**
 	 * Holds the current instances.

@@ -55,13 +55,13 @@ package tec.units.ri.internal;
  *      IEEE-754 routines.
  * @see http://real-java.sourceforge.net/Real.html Yet another take on the
  *      IEEE-754 routines.
- * @see http
+ * @see http 
  *      ://today.java.net/pub/a/today/2007/11/06/creating-java-me-math-pow-method
  *      .html For other approximations.
- * @see http
+ * @see http 
  *      ://martin.ankerl.com/2007/10/04/optimized-pow-approximation-for-java-
  *      and-c-c/ For fast but rough approximations.
- * @see http
+ * @see http 
  *      ://martin.ankerl.com/2007/02/11/optimized-exponential-functions-for-java
  *      / For more fast but rough approximations.
  */
@@ -221,17 +221,17 @@ public abstract class MathUtil {
 	u_threshold = -7.45133219101941108420e+02, /* 0xc0874910, 0xD52D3051 */
 	invln2 = 1.44269504088896338700e+00; /* 0x3ff71547, 0x652b82fe */
 
-	private static final double[] halF = new double[] { 0.5, -0.5 },
-			ln2HI = new double[] { 6.93147180369123816490e-01, /*
-																 * 0x3fe62e42,
-																 * 0xfee00000
-																 */
-			-6.93147180369123816490e-01 }, /* 0xbfe62e42, 0xfee00000 */
-			ln2LO = new double[] { 1.90821492927058770002e-10, /*
-																 * 0x3dea39ef,
-																 * 0x35793c76
-																 */
-			-1.90821492927058770002e-10 }; /* 0xbdea39ef, 0x35793c76 */
+	private static final double[] halF = new double[]{0.5, -0.5},
+			ln2HI = new double[]{6.93147180369123816490e-01, /*
+															 * 0x3fe62e42,
+															 * 0xfee00000
+															 */
+			-6.93147180369123816490e-01}, /* 0xbfe62e42, 0xfee00000 */
+			ln2LO = new double[]{1.90821492927058770002e-10, /*
+															 * 0x3dea39ef,
+															 * 0x35793c76
+															 */
+			-1.90821492927058770002e-10}; /* 0xbdea39ef, 0x35793c76 */
 
 	private static final double ieee754_exp(double x) {
 		double y, c, t;
@@ -449,9 +449,9 @@ public abstract class MathUtil {
 	 * the hexadecimal values shown.
 	 */
 
-	private static final double bp[] = { 1.0, 1.5, }, dp_h[] = { 0.0,
-			5.84962487220764160156e-01, }, /* 0x3FE2B803, 0x40000000 */
-	dp_l[] = { 0.0, 1.35003920212974897128e-08, }, /* 0x3E4CFDEB, 0x43CFD006 */
+	private static final double bp[] = {1.0, 1.5,}, dp_h[] = {0.0,
+			5.84962487220764160156e-01,}, /* 0x3FE2B803, 0x40000000 */
+	dp_l[] = {0.0, 1.35003920212974897128e-08,}, /* 0x3E4CFDEB, 0x43CFD006 */
 	/* poly coefs for (3/2)*(log(x)-2s-2/3*s**3 */
 	L1 = 5.99999999999994648725e-01, /* 0x3FE33333, 0x33333303 */
 	L2 = 4.28571428578550184252e-01, /* 0x3FDB6DB6, 0xDB6FABFF */
@@ -897,7 +897,7 @@ public abstract class MathUtil {
 	 * hexadecimal values shown.
 	 */
 
-	private static final double atanhi[] = { 4.63647609000806093515e-01, /*
+	private static final double atanhi[] = {4.63647609000806093515e-01, /*
 																		 * atan(0.5
 																		 * )hi
 																		 * 0x3FDDAC67
@@ -909,7 +909,7 @@ public abstract class MathUtil {
 	1.57079632679489655800e+00, /* atan(inf)hi 0x3FF921FB, 0x54442D18 */
 	};
 
-	private static final double atanlo[] = { 2.26987774529616870924e-17, /*
+	private static final double atanlo[] = {2.26987774529616870924e-17, /*
 																		 * atan(0.5
 																		 * )lo
 																		 * 0x3C7A2B7F
@@ -921,7 +921,7 @@ public abstract class MathUtil {
 	6.12323399573676603587e-17, /* atan(inf)lo 0x3C91A626, 0x33145C07 */
 	};
 
-	private static final double aT[] = { 3.33333333333329318027e-01, /*
+	private static final double aT[] = {3.33333333333329318027e-01, /*
 																	 * 0x3FD55555,
 																	 * 0x5555550D
 																	 */
@@ -1043,13 +1043,13 @@ public abstract class MathUtil {
 		/* when y = 0 */
 		if ((iy | ly) == 0) {
 			switch (m) {
-			case 0:
-			case 1:
-				return y; /* atan(+-0,+anything)=+-0 */
-			case 2:
-				return pi + tiny;/* atan(+0,-anything) = pi */
-			case 3:
-				return -pi - tiny;/* atan(-0,-anything) =-pi */
+				case 0 :
+				case 1 :
+					return y; /* atan(+-0,+anything)=+-0 */
+				case 2 :
+					return pi + tiny;/* atan(+0,-anything) = pi */
+				case 3 :
+					return -pi - tiny;/* atan(-0,-anything) =-pi */
 			}
 		}
 		/* when x = 0 */
@@ -1060,25 +1060,25 @@ public abstract class MathUtil {
 		if (ix == 0x7ff00000) {
 			if (iy == 0x7ff00000) {
 				switch (m) {
-				case 0:
-					return pi_o_4 + tiny;/* atan(+INF,+INF) */
-				case 1:
-					return -pi_o_4 - tiny;/* atan(-INF,+INF) */
-				case 2:
-					return 3.0 * pi_o_4 + tiny;/* atan(+INF,-INF) */
-				case 3:
-					return -3.0 * pi_o_4 - tiny;/* atan(-INF,-INF) */
+					case 0 :
+						return pi_o_4 + tiny;/* atan(+INF,+INF) */
+					case 1 :
+						return -pi_o_4 - tiny;/* atan(-INF,+INF) */
+					case 2 :
+						return 3.0 * pi_o_4 + tiny;/* atan(+INF,-INF) */
+					case 3 :
+						return -3.0 * pi_o_4 - tiny;/* atan(-INF,-INF) */
 				}
 			} else {
 				switch (m) {
-				case 0:
-					return zero; /* atan(+...,+INF) */
-				case 1:
-					return -zero; /* atan(-...,+INF) */
-				case 2:
-					return pi + tiny; /* atan(+...,-INF) */
-				case 3:
-					return -pi - tiny; /* atan(-...,-INF) */
+					case 0 :
+						return zero; /* atan(+...,+INF) */
+					case 1 :
+						return -zero; /* atan(-...,+INF) */
+					case 2 :
+						return pi + tiny; /* atan(+...,-INF) */
+					case 3 :
+						return -pi - tiny; /* atan(-...,-INF) */
 				}
 			}
 		}
@@ -1095,18 +1095,18 @@ public abstract class MathUtil {
 		else
 			z = ieee754_atan(Math.abs(y / x)); /* safe to do y/x */
 		switch (m) {
-		case 0:
-			return z; /* atan(+,+) */
-		case 1:
-			z = Double
-					.longBitsToDouble(Double.doubleToLongBits(z) ^ 0x80000000); // __HI(z)
-																				// ^=
-																				// 0x80000000;
-			return z; /* atan(-,+) */
-		case 2:
-			return pi - (z - pi_lo);/* atan(+,-) */
-		default: /* case 3 */
-			return (z - pi_lo) - pi;/* atan(-,-) */
+			case 0 :
+				return z; /* atan(+,+) */
+			case 1 :
+				z = Double
+						.longBitsToDouble(Double.doubleToLongBits(z) ^ 0x80000000); // __HI(z)
+																					// ^=
+																					// 0x80000000;
+				return z; /* atan(-,+) */
+			case 2 :
+				return pi - (z - pi_lo);/* atan(+,-) */
+			default : /* case 3 */
+				return (z - pi_lo) - pi;/* atan(-,-) */
 		}
 	}
 

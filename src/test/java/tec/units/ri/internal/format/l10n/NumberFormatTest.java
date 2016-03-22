@@ -36,8 +36,7 @@ import org.junit.Test;
 import tec.units.ri.internal.format.l10n.DecimalFormat;
 
 public class NumberFormatTest {
-	final String[] patterns = new String[] { "#,#00.00#", "0.0;(0.0)",
-			"0.###E0" };
+	final String[] patterns = new String[]{"#,#00.00#", "0.0;(0.0)", "0.###E0"};
 
 	@Test
 	public void testDecimalFormat() {
@@ -52,16 +51,16 @@ public class NumberFormatTest {
 			String text = "Pattern: " + pattern + " Sample: " + formated + "\n";
 			// System.out.println(text);
 			switch (i) {
-			case 0:
-				assertEquals("-12.321", formated);
-				break;
-			case 1:
-				assertEquals("(12.3)", formated);
-				break;
-			case 2:
-				assertEquals("-1.232E1", formated);
-				break;
-			default:
+				case 0 :
+					assertEquals("-12.321", formated);
+					break;
+				case 1 :
+					assertEquals("(12.3)", formated);
+					break;
+				case 2 :
+					assertEquals("-1.232E1", formated);
+					break;
+				default :
 			}
 		}
 	}

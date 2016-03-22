@@ -44,8 +44,9 @@ import tec.uom.lib.common.function.ValueSupplier;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.4, December 28, 2015
  */
-public final class MultiplyConverter extends AbstractConverter implements
-		ValueSupplier<Double> {
+public final class MultiplyConverter extends AbstractConverter
+		implements
+			ValueSupplier<Double> {
 
 	/**
 	 * 

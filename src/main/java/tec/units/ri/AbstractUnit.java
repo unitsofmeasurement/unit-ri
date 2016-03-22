@@ -70,8 +70,10 @@ import tec.units.ri.unit.Units;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.9.5, March 19, 2016
  */
-public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
-		Comparable<Unit<Q>> {
+public abstract class AbstractUnit<Q extends Quantity<Q>>
+		implements
+			Unit<Q>,
+			Comparable<Unit<Q>> {
 
 	/**
 	 * 
@@ -98,7 +100,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 */
 	protected AbstractUnit() {
 	}
-	
+
 	/**
 	 * Compares this unit to the specified unit. The default implementation
 	 * compares the name and symbol of both this unit and the specified unit.

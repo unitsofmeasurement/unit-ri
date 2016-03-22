@@ -48,8 +48,10 @@ import tec.uom.lib.common.function.QuantitySupplier;
  * @version 0.5
  * @param <Q>
  */
-public interface Measurement<Q extends Quantity<Q>> extends
-		QuantitySupplier<Q>, Comparable<Measurement<Q>> {
+public interface Measurement<Q extends Quantity<Q>>
+		extends
+			QuantitySupplier<Q>,
+			Comparable<Measurement<Q>> {
 
 	/**
 	 * Returns the timestamp of this {@link Measurement}.

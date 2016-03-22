@@ -87,7 +87,7 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 				getUnit());
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Quantity<?> multiply(Quantity<?> that) {
 		return new DoubleQuantity(value * that.getValue().doubleValue(),
 				getUnit().multiply(that.getUnit()));
@@ -97,7 +97,7 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 		return NumberQuantity.of(value * that.doubleValue(), getUnit());
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Quantity<?> divide(Quantity<?> that) {
 		return new DoubleQuantity(value / that.getValue().doubleValue(),
 				getUnit().divide(that.getUnit()));

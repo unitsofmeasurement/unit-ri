@@ -86,7 +86,7 @@ final class IntegerQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 				getUnit());
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Quantity<?> multiply(Quantity<?> that) {
 		return new IntegerQuantity(value * that.getValue().intValue(),
 				getUnit().multiply(that.getUnit()));

@@ -71,8 +71,9 @@ import tec.uom.lib.common.function.UnitConverterSupplier;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.7, December 28, 2015
  */
-public final class TransformedUnit<Q extends Quantity<Q>> extends
-		AbstractUnit<Q> implements UnitConverterSupplier {
+public final class TransformedUnit<Q extends Quantity<Q>>
+		extends
+			AbstractUnit<Q> implements UnitConverterSupplier {
 
 	/**
 	 * 

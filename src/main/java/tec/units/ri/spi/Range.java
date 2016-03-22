@@ -43,8 +43,10 @@ import tec.uom.lib.common.function.MinimumSupplier;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.9, December 28, 2015
  */
-public abstract class Range<T> implements MinimumSupplier<T>,
-		MaximumSupplier<T> {
+public abstract class Range<T>
+		implements
+			MinimumSupplier<T>,
+			MaximumSupplier<T> {
 	// TODO do we keep null for min and max to represent infinity?
 	// Java 8 Optional was evaluated, but caused conflict with the type-safe
 	// Quantity feature of this API, plus it won't work in CLDC8

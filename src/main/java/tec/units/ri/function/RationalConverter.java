@@ -48,8 +48,9 @@ import tec.uom.lib.common.function.ValueSupplier;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.7, December 28, 2015
  */
-public final class RationalConverter extends AbstractConverter implements
-		ValueSupplier<Double> {
+public final class RationalConverter extends AbstractConverter
+		implements
+			ValueSupplier<Double> {
 
 	/**
 	 * 
@@ -150,15 +151,17 @@ public final class RationalConverter extends AbstractConverter implements
 		double gcd = gcd(newDividend, newDivisor);
 		newDividend = newDividend / gcd; // TODO clarify if this works with long
 		newDivisor = newDivisor / gcd;
-		return (newDividend == 1 && newDivisor == 1) ? IDENTITY
+		return (newDividend == 1 && newDivisor == 1)
+				? IDENTITY
 				: new RationalConverter(newDividend, newDivisor);
 	}
 
 	@Override
 	public RationalConverter inverse() {
-		return Math.signum(dividend) == -1 ? new RationalConverter(
-				negateExact(getDivisor()), negateExact(getDividend()))
-				: new RationalConverter(getDivisor(), getDividend());
+		return Math.signum(dividend) == -1
+				? new RationalConverter(negateExact(getDivisor()),
+						negateExact(getDividend())) : new RationalConverter(
+						getDivisor(), getDividend());
 	}
 
 	@Override

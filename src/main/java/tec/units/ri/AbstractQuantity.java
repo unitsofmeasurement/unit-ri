@@ -103,9 +103,12 @@ import tec.uom.lib.common.function.ValueSupplier;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.8, $Date: 2015-12-28 $
  */
-public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
-		Quantity<Q>, Comparable<Quantity<Q>>, UnitSupplier<Q>,
-		ValueSupplier<Number> {
+public abstract class AbstractQuantity<Q extends Quantity<Q>>
+		implements
+			Quantity<Q>,
+			Comparable<Quantity<Q>>,
+			UnitSupplier<Q>,
+			ValueSupplier<Number> {
 
 	/**
 	 * 

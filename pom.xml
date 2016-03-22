@@ -256,6 +256,21 @@
 			</plugin>
 
 			<!-- ======================================================= -->
+			<!-- Maven Code Formatter -->
+			<!-- ======================================================= -->
+			<plugin>
+				<groupId>net.revelc.code</groupId>
+				<artifactId>formatter-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>format</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- ======================================================= -->
 			<!-- Maven web site -->
 			<!-- ======================================================= -->
 			<plugin>
@@ -396,6 +411,25 @@
 										<ignore></ignore>
 									</action>
 								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											net.revelc.code
+										</groupId>
+										<artifactId>
+											formatter-maven-plugin
+										</artifactId>
+										<versionRange>
+											[0.5.2,)
+										</versionRange>
+										<goals>
+											<goal>format</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
 					</configuration>
@@ -404,7 +438,7 @@
 				<plugin>
 					<groupId>net.revelc.code</groupId>
 					<artifactId>formatter-maven-plugin</artifactId>
-					<version>0.5.3-SNAPSHOT</version>
+					<version>0.5.2</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>

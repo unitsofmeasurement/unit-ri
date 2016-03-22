@@ -90,7 +90,7 @@ final class NumberFormatSymbols {
 	/**
 	 * supported currencies with codes. example: {"JPY", "Y"}
 	 */
-	String[][] currencies = new String[][] { {} };
+	String[][] currencies = new String[][]{{}};
 
 	/**
 	 * currency symbol.
@@ -155,22 +155,22 @@ final class NumberFormatSymbols {
 	/**
 	 * prefixes for positive numbers for all styles.
 	 */
-	public String[] positivePrefix = new String[] { "", "", "", "" };
+	public String[] positivePrefix = new String[]{"", "", "", ""};
 
 	/**
 	 * suffixes for positive numbers for all styles.
 	 */
-	public String[] positiveSuffix = new String[] { "", "", "", "" };
+	public String[] positiveSuffix = new String[]{"", "", "", ""};
 
 	/**
 	 * prefixes for negative numbers for all styles.
 	 */
-	public String[] negativePrefix = new String[] { "-", "-", "-", "-" };
+	public String[] negativePrefix = new String[]{"-", "-", "-", "-"};
 
 	/**
 	 * suffixes for negative numbers for all styles.
 	 */
-	public String[] negativeSuffix = new String[] { "", "", "", "" };
+	public String[] negativeSuffix = new String[]{"", "", "", ""};
 
 	/**
 	 * is grouping symbol used.
@@ -185,39 +185,39 @@ final class NumberFormatSymbols {
 	/**
 	 * prefix for all styles (always at least used for currency).
 	 */
-	public String[] prefixes = new String[] { "", "", "", "" };
+	public String[] prefixes = new String[]{"", "", "", ""};
 
 	/**
 	 * suffix for all styles (always used for percentage style).
 	 */
-	public String[] suffixes = new String[] { "", "", "%", "" };
+	public String[] suffixes = new String[]{"", "", "%", ""};
 
 	/**
 	 * maximum integer digits <code>-1</code> stands for not specified (use
 	 * maximum allowed).
 	 */
-	public int[] maximumIntegerDigits = new int[] { -1, -1, -1, -1 };
+	public int[] maximumIntegerDigits = new int[]{-1, -1, -1, -1};
 
 	/**
 	 * minimum integer digits at least 1.
 	 */
-	public int[] minimumIntegerDigits = new int[] { 1, 1, 1, 1 };
+	public int[] minimumIntegerDigits = new int[]{1, 1, 1, 1};
 
 	/**
 	 * maximum fraction digits <code>-1</code> stands for not specified (use
 	 * maximum allowed) integer has always 0 percentage has ussualy 0.
 	 */
-	public int[] maximumFractionDigits = new int[] { -1, -1, 0, 0 };
+	public int[] maximumFractionDigits = new int[]{-1, -1, 0, 0};
 
 	/**
 	 * minimum fraction digits.
 	 */
-	public int[] minimumFractionDigits = new int[] { 0, 0, 0, 0 };
+	public int[] minimumFractionDigits = new int[]{0, 0, 0, 0};
 
 	/**
 	 * multiplier is always 1 but for percentage style is 100.
 	 */
-	public int[] multiplier = new int[] { 1, 1, 100, 1 };
+	public int[] multiplier = new int[]{1, 1, 100, 1};
 
 	/**
 	 * locale of these symbols.

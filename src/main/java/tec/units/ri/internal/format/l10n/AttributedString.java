@@ -689,13 +689,15 @@ class AttributedString {
 			int textLength = length();
 			if (endIndex < textLength) {
 				int currIndex = runIndex;
-				int runLimit = (currIndex < runCount - 1) ? runStarts[currIndex + 1]
+				int runLimit = (currIndex < runCount - 1)
+						? runStarts[currIndex + 1]
 						: textLength;
 				while (runLimit <= endIndex
 						&& valuesMatch(value,
 								getAttribute(attribute, currIndex + 1))) {
 					currIndex++;
-					runLimit = (currIndex < runCount - 1) ? runStarts[currIndex + 1]
+					runLimit = (currIndex < runCount - 1)
+							? runStarts[currIndex + 1]
 							: textLength;
 				}
 				if (runLimit > endIndex) {
@@ -789,8 +791,9 @@ class AttributedString {
 
 	// the iterator class associated with this string class
 
-	final private class AttributedStringIterator implements
-			AttributedCharacterIterator {
+	final private class AttributedStringIterator
+			implements
+				AttributedCharacterIterator {
 
 		// note on synchronization:
 		// we don't synchronize on the iterator, assuming that an iterator is
@@ -979,7 +982,8 @@ class AttributedString {
 								AttributedString.this.getAttribute(attribute,
 										runIndex + 1))) {
 					runIndex++;
-					runLimit = runIndex < runCount - 1 ? runStarts[runIndex + 1]
+					runLimit = runIndex < runCount - 1
+							? runStarts[runIndex + 1]
 							: endIndex;
 				}
 				if (runLimit > endIndex) {
@@ -999,7 +1003,8 @@ class AttributedString {
 						&& AttributedString.this.attributeValuesMatch(
 								attributes, currentRunIndex, runIndex + 1)) {
 					runIndex++;
-					runLimit = runIndex < runCount - 1 ? runStarts[runIndex + 1]
+					runLimit = runIndex < runCount - 1
+							? runStarts[runIndex + 1]
 							: endIndex;
 				}
 				if (runLimit > endIndex) {

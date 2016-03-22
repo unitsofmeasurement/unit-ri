@@ -581,7 +581,7 @@ public abstract class NumberFormat extends Format {
 
 	private static NumberFormat getInstance(int choice) {
 		/* try the cache first */
-		String[] numberPatterns = new String[] { "", "", "", "", "" };
+		String[] numberPatterns = new String[]{"", "", "", "", ""};
 
 		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
 		int entry = (choice == INTEGERSTYLE) ? NUMBERSTYLE : choice;

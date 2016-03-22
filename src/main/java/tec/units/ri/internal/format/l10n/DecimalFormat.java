@@ -551,11 +551,9 @@ public class DecimalFormat extends NumberFormat {
 		// At this point we are guaranteed a nonnegative finite
 		// number.
 		synchronized (digitList) {
-			digitList.set(number,
-					useExponentialNotation ? getMaximumIntegerDigits()
-							+ getMaximumFractionDigits()
-							: getMaximumFractionDigits(),
-					!useExponentialNotation);
+			digitList.set(number, useExponentialNotation
+					? getMaximumIntegerDigits() + getMaximumFractionDigits()
+					: getMaximumFractionDigits(), !useExponentialNotation);
 
 			return subformat(result, delegate, isNegative, false);
 		}
@@ -626,9 +624,9 @@ public class DecimalFormat extends NumberFormat {
 
 		number *= multiplier;
 		synchronized (digitList) {
-			digitList.set(number,
-					useExponentialNotation ? getMaximumIntegerDigits()
-							+ getMaximumFractionDigits() : 0);
+			digitList.set(number, useExponentialNotation
+					? getMaximumIntegerDigits() + getMaximumFractionDigits()
+					: 0);
 
 			return subformat(result, delegate, isNegative, true);
 		}
@@ -696,7 +694,8 @@ public class DecimalFormat extends NumberFormat {
 		int zeroDelta = zero - '0'; // '0' is the DigitList representation of
 		// zero
 		char grouping = symbols.getGroupingSeparator();
-		char decimal = isCurrencyFormat ? symbols.getMonetaryDecimalSeparator()
+		char decimal = isCurrencyFormat
+				? symbols.getMonetaryDecimalSeparator()
 				: symbols.getDecimalSeparator();
 
 		/*
@@ -765,7 +764,8 @@ public class DecimalFormat extends NumberFormat {
 					+ getMinimumFractionDigits();
 			// The number of integer digits is handled specially if the number
 			// is zero, since then there may be no digits.
-			int integerDigits = digitList.isZero() ? minimumIntegerDigits
+			int integerDigits = digitList.isZero()
+					? minimumIntegerDigits
 					: digitList.decimalAt - exponent;
 			if (minimumDigits < integerDigits) {
 				minimumDigits = integerDigits;
@@ -787,7 +787,8 @@ public class DecimalFormat extends NumberFormat {
 					fFieldStart = result.length();
 
 				}
-				result.append((i < digitList.count) ? (char) (digitList.digits[i] + zeroDelta)
+				result.append((i < digitList.count)
+						? (char) (digitList.digits[i] + zeroDelta)
 						: zero);
 			}
 
@@ -840,7 +841,8 @@ public class DecimalFormat extends NumberFormat {
 			for (int i = digitList.decimalAt; i < minExponentDigits; ++i)
 				result.append(zero);
 			for (int i = 0; i < digitList.decimalAt; ++i) {
-				result.append((i < digitList.count) ? (char) (digitList.digits[i] + zeroDelta)
+				result.append((i < digitList.count)
+						? (char) (digitList.digits[i] + zeroDelta)
 						: zero);
 			}
 			delegate.formatted(Field.EXPONENT, Field.EXPONENT, eFieldStart,
@@ -1716,18 +1718,18 @@ public class DecimalFormat extends NumberFormat {
 			if (c == QUOTE) {
 				c = pattern.charAt(i++);
 				switch (c) {
-				case CURRENCY_SIGN:
-					buffer.append(symbols.getCurrencySymbol());
-					continue;
-				case PATTERN_PERCENT:
-					c = symbols.getPercent();
-					break;
-				case PATTERN_PER_MILLE:
-					c = symbols.getPerMill();
-					break;
-				case PATTERN_MINUS:
-					c = symbols.getMinusSign();
-					break;
+					case CURRENCY_SIGN :
+						buffer.append(symbols.getCurrencySymbol());
+						continue;
+					case PATTERN_PERCENT :
+						c = symbols.getPercent();
+						break;
+					case PATTERN_PER_MILLE :
+						c = symbols.getPerMill();
+						break;
+					case PATTERN_MINUS :
+						c = symbols.getMinusSign();
+						break;
 				}
 			}
 			buffer.append(c);
@@ -1760,34 +1762,34 @@ public class DecimalFormat extends NumberFormat {
 				Format.Field fieldID = null;
 				c = pattern.charAt(i++);
 				switch (c) {
-				case CURRENCY_SIGN:
-					String string = symbols.getCurrencySymbol();
-					if (string.length() > 0) {
-						if (positions == null) {
-							positions = new Vector(2);
+					case CURRENCY_SIGN :
+						String string = symbols.getCurrencySymbol();
+						if (string.length() > 0) {
+							if (positions == null) {
+								positions = new Vector(2);
+							}
+							FieldPosition fp = new FieldPosition(Field.CURRENCY);
+							fp.setBeginIndex(stringIndex);
+							fp.setEndIndex(stringIndex + string.length());
+							positions.addElement(fp);
+							stringIndex += string.length();
 						}
-						FieldPosition fp = new FieldPosition(Field.CURRENCY);
-						fp.setBeginIndex(stringIndex);
-						fp.setEndIndex(stringIndex + string.length());
-						positions.addElement(fp);
-						stringIndex += string.length();
-					}
-					continue;
-				case PATTERN_PERCENT:
-					c = symbols.getPercent();
-					field = -1;
-					fieldID = Field.PERCENT;
-					break;
-				case PATTERN_PER_MILLE:
-					c = symbols.getPerMill();
-					field = -1;
-					fieldID = Field.PERMILLE;
-					break;
-				case PATTERN_MINUS:
-					c = symbols.getMinusSign();
-					field = -1;
-					fieldID = Field.SIGN;
-					break;
+						continue;
+					case PATTERN_PERCENT :
+						c = symbols.getPercent();
+						field = -1;
+						fieldID = Field.PERCENT;
+						break;
+					case PATTERN_PER_MILLE :
+						c = symbols.getPerMill();
+						field = -1;
+						fieldID = Field.PERMILLE;
+						break;
+					case PATTERN_MINUS :
+						c = symbols.getMinusSign();
+						field = -1;
+						fieldID = Field.SIGN;
+						break;
 				}
 				if (fieldID != null) {
 					if (positions == null) {
@@ -1856,15 +1858,15 @@ public class DecimalFormat extends NumberFormat {
 					// Fall through and append another CURRENCY_SIGN below
 				} else if (localized) {
 					switch (c) {
-					case PATTERN_PERCENT:
-						c = symbols.getPercent();
-						break;
-					case PATTERN_PER_MILLE:
-						c = symbols.getPerMill();
-						break;
-					case PATTERN_MINUS:
-						c = symbols.getMinusSign();
-						break;
+						case PATTERN_PERCENT :
+							c = symbols.getPercent();
+							break;
+						case PATTERN_PER_MILLE :
+							c = symbols.getPerMill();
+							break;
+						case PATTERN_MINUS :
+							c = symbols.getMinusSign();
+							break;
 					}
 				}
 				buffer.append(c);
@@ -1928,35 +1930,44 @@ public class DecimalFormat extends NumberFormat {
 			else
 				appendAffix(result, negPrefixPattern, negativePrefix, localized);
 			int i;
-			int digitCount = useExponentialNotation ? getMaximumIntegerDigits()
+			int digitCount = useExponentialNotation
+					? getMaximumIntegerDigits()
 					: Math.max(groupingSize, getMinimumIntegerDigits()) + 1;
 			for (i = digitCount; i > 0; --i) {
 				if (i != digitCount && isGroupingUsed() && groupingSize != 0
 						&& i % groupingSize == 0) {
-					result.append(localized ? symbols.getGroupingSeparator()
+					result.append(localized
+							? symbols.getGroupingSeparator()
 							: PATTERN_GROUPING_SEPARATOR);
 				}
-				result.append(i <= getMinimumIntegerDigits() ? (localized ? symbols
-						.getZeroDigit() : PATTERN_ZERO_DIGIT)
-						: (localized ? symbols.getDigit() : PATTERN_DIGIT));
+				result.append(i <= getMinimumIntegerDigits() ? (localized
+						? symbols.getZeroDigit()
+						: PATTERN_ZERO_DIGIT) : (localized
+						? symbols.getDigit()
+						: PATTERN_DIGIT));
 			}
 			if (getMaximumFractionDigits() > 0 || decimalSeparatorAlwaysShown)
-				result.append(localized ? symbols.getDecimalSeparator()
+				result.append(localized
+						? symbols.getDecimalSeparator()
 						: PATTERN_DECIMAL_SEPARATOR);
 			for (i = 0; i < getMaximumFractionDigits(); ++i) {
 				if (i < getMinimumFractionDigits()) {
-					result.append(localized ? symbols.getZeroDigit()
+					result.append(localized
+							? symbols.getZeroDigit()
 							: PATTERN_ZERO_DIGIT);
 				} else {
-					result.append(localized ? symbols.getDigit()
+					result.append(localized
+							? symbols.getDigit()
 							: PATTERN_DIGIT);
 				}
 			}
 			if (useExponentialNotation) {
-				result.append(localized ? symbols.getExponentialSymbol()
+				result.append(localized
+						? symbols.getExponentialSymbol()
 						: PATTERN_EXPONENT);
 				for (i = 0; i < minExponentDigits; ++i)
-					result.append(localized ? symbols.getZeroDigit()
+					result.append(localized
+							? symbols.getZeroDigit()
 							: PATTERN_ZERO_DIGIT);
 			}
 			if (j == 1) {
@@ -1974,7 +1985,8 @@ public class DecimalFormat extends NumberFormat {
 									+ positivePrefix)))
 						break;
 				}
-				result.append(localized ? symbols.getPatternSeparator()
+				result.append(localized
+						? symbols.getPatternSeparator()
 						: PATTERN_SEPARATOR);
 			} else
 				appendAffix(result, negSuffixPattern, negativeSuffix, localized);
@@ -2106,209 +2118,228 @@ public class DecimalFormat extends NumberFormat {
 			for (int pos = start; pos < pattern.length(); ++pos) {
 				char ch = pattern.charAt(pos);
 				switch (phase) {
-				case 0:
-				case 2:
-					// Process the prefix / suffix characters
-					if (inQuote) {
-						// A quote within quotes indicates either the closing
-						// quote or two quotes, which is a quote literal. That
-						// is,
-						// we have the second quote in 'do' or 'don''t'.
-						if (ch == QUOTE) {
-							if ((pos + 1) < pattern.length()
-									&& pattern.charAt(pos + 1) == QUOTE) {
-								++pos;
-								affix.append("''"); // 'don''t'
-							} else {
-								inQuote = false; // 'do'
-							}
-							continue;
-						}
-					} else {
-						// Process unquoted characters seen in prefix or suffix
-						// phase.
-						if (ch == digit || ch == zeroDigit
-								|| ch == groupingSeparator
-								|| ch == decimalSeparator) {
-							// Any of these characters implicitly begins the
-							// next
-							// phase. If we are in phase 2, there is no next
-							// phase,
-							// so these characters are illegal.
-							/**
-							 * 1.2 Back-out comment : HShih Can't throw
-							 * exception here. if (phase == 2) throw new
-							 * IllegalArgumentException
-							 * ("Unquoted special character '" + ch +
-							 * "' in pattern \"" + pattern + '"');
-							 */
-							phase = 1;
-							if (j == 1)
-								phaseOneStart = pos;
-							--pos; // Reprocess this character
-							continue;
-						} else if (ch == CURRENCY_SIGN) {
-							// Use lookahead to determine if the currency sign
-							// is
-							// doubled or not.
-							boolean doubled = (pos + 1) < pattern.length()
-									&& pattern.charAt(pos + 1) == CURRENCY_SIGN;
-							if (doubled)
-								++pos; // Skip over the doubled character
-							isCurrencyFormat = true;
-							affix.append(doubled ? "'\u00A4\u00A4" : "'\u00A4");
-							continue;
-						} else if (ch == QUOTE) {
-							// A quote outside quotes indicates either the
-							// opening
+					case 0 :
+					case 2 :
+						// Process the prefix / suffix characters
+						if (inQuote) {
+							// A quote within quotes indicates either the
+							// closing
 							// quote or two quotes, which is a quote literal.
-							// That is,
-							// we have the first quote in 'do' or o''clock.
+							// That
+							// is,
+							// we have the second quote in 'do' or 'don''t'.
 							if (ch == QUOTE) {
 								if ((pos + 1) < pattern.length()
 										&& pattern.charAt(pos + 1) == QUOTE) {
 									++pos;
-									affix.append("''"); // o''clock
+									affix.append("''"); // 'don''t'
 								} else {
-									inQuote = true; // 'do'
+									inQuote = false; // 'do'
 								}
 								continue;
 							}
-						} else if (ch == separator) {
-							// Don't allow separators before we see digit
-							// characters of phase
-							// 1, and don't allow separators in the second
-							// pattern (j == 0).
-							if (phase == 0 || j == 0)
-								throw new IllegalArgumentException(
-										"Unquoted special character '" + ch
-												+ "' in pattern \"" + pattern
-												+ '"');
-							start = pos + 1;
-							pos = pattern.length();
+						} else {
+							// Process unquoted characters seen in prefix or
+							// suffix
+							// phase.
+							if (ch == digit || ch == zeroDigit
+									|| ch == groupingSeparator
+									|| ch == decimalSeparator) {
+								// Any of these characters implicitly begins the
+								// next
+								// phase. If we are in phase 2, there is no next
+								// phase,
+								// so these characters are illegal.
+								/**
+								 * 1.2 Back-out comment : HShih Can't throw
+								 * exception here. if (phase == 2) throw new
+								 * IllegalArgumentException
+								 * ("Unquoted special character '" + ch +
+								 * "' in pattern \"" + pattern + '"');
+								 */
+								phase = 1;
+								if (j == 1)
+									phaseOneStart = pos;
+								--pos; // Reprocess this character
+								continue;
+							} else if (ch == CURRENCY_SIGN) {
+								// Use lookahead to determine if the currency
+								// sign
+								// is
+								// doubled or not.
+								boolean doubled = (pos + 1) < pattern.length()
+										&& pattern.charAt(pos + 1) == CURRENCY_SIGN;
+								if (doubled)
+									++pos; // Skip over the doubled character
+								isCurrencyFormat = true;
+								affix.append(doubled
+										? "'\u00A4\u00A4"
+										: "'\u00A4");
+								continue;
+							} else if (ch == QUOTE) {
+								// A quote outside quotes indicates either the
+								// opening
+								// quote or two quotes, which is a quote
+								// literal.
+								// That is,
+								// we have the first quote in 'do' or o''clock.
+								if (ch == QUOTE) {
+									if ((pos + 1) < pattern.length()
+											&& pattern.charAt(pos + 1) == QUOTE) {
+										++pos;
+										affix.append("''"); // o''clock
+									} else {
+										inQuote = true; // 'do'
+									}
+									continue;
+								}
+							} else if (ch == separator) {
+								// Don't allow separators before we see digit
+								// characters of phase
+								// 1, and don't allow separators in the second
+								// pattern (j == 0).
+								if (phase == 0 || j == 0)
+									throw new IllegalArgumentException(
+											"Unquoted special character '" + ch
+													+ "' in pattern \""
+													+ pattern + '"');
+								start = pos + 1;
+								pos = pattern.length();
+								continue;
+							}
+
+							// Next handle characters which are appended
+							// directly.
+							else if (ch == percent) {
+								if (multiplier != 1)
+									throw new IllegalArgumentException(
+											"Too many percent/permille characters in pattern \""
+													+ pattern + '"');
+								multiplier = 100;
+								affix.append("'%");
+								continue;
+							} else if (ch == perMill) {
+								if (multiplier != 1)
+									throw new IllegalArgumentException(
+											"Too many percent/permille characters in pattern \""
+													+ pattern + '"');
+								multiplier = 1000;
+								affix.append("'\u2030");
+								continue;
+							} else if (ch == minus) {
+								affix.append("'-");
+								continue;
+							}
+						}
+						// Note that if we are within quotes, or if this is an
+						// unquoted,
+						// non-special character, then we usually fall through
+						// to
+						// here.
+						affix.append(ch);
+						break;
+					case 1 :
+						// Phase one must be identical in the two sub-patterns.
+						// We
+						// enforce this by doing a direct comparison. While
+						// processing the first sub-pattern, we just record its
+						// length. While processing the second, we compare
+						// characters.
+						if (j == 1)
+							++phaseOneLength;
+						else {
+							/**
+							 * 1.2 Back-out comment : HShih if (ch !=
+							 * pattern.charAt(phaseOneStart++)) throw new
+							 * IllegalArgumentException
+							 * ("Subpattern mismatch in \"" + pattern + '"');
+							 * phaseTwo = true;
+							 */
+							if (--phaseOneLength == 0) {
+								phase = 2;
+								affix = suffix;
+							}
 							continue;
 						}
 
-						// Next handle characters which are appended directly.
-						else if (ch == percent) {
-							if (multiplier != 1)
+						// Process the digits, decimal, and grouping characters.
+						// We
+						// record five pieces of information. We expect the
+						// digits
+						// to occur in the pattern ####0000.####, and we record
+						// the
+						// number of left digits, zero (central) digits, and
+						// right
+						// digits. The position of the last grouping character
+						// is
+						// recorded (should be somewhere within the first two
+						// blocks
+						// of characters), as is the position of the decimal
+						// point,
+						// if any (should be in the zero digits). If there is no
+						// decimal point, then there should be no right digits.
+						if (ch == digit) {
+							if (zeroDigitCount > 0)
+								++digitRightCount;
+							else
+								++digitLeftCount;
+							if (groupingCount >= 0 && decimalPos < 0)
+								++groupingCount;
+						} else if (ch == zeroDigit) {
+							if (digitRightCount > 0)
 								throw new IllegalArgumentException(
-										"Too many percent/permille characters in pattern \""
+										"Unexpected '0' in pattern \""
 												+ pattern + '"');
-							multiplier = 100;
-							affix.append("'%");
-							continue;
-						} else if (ch == perMill) {
-							if (multiplier != 1)
+							++zeroDigitCount;
+							if (groupingCount >= 0 && decimalPos < 0)
+								++groupingCount;
+						} else if (ch == groupingSeparator) {
+							groupingCount = 0;
+						} else if (ch == decimalSeparator) {
+							if (decimalPos >= 0)
 								throw new IllegalArgumentException(
-										"Too many percent/permille characters in pattern \""
+										"Multiple decimal separators in pattern \""
 												+ pattern + '"');
-							multiplier = 1000;
-							affix.append("'\u2030");
-							continue;
-						} else if (ch == minus) {
-							affix.append("'-");
-							continue;
-						}
-					}
-					// Note that if we are within quotes, or if this is an
-					// unquoted,
-					// non-special character, then we usually fall through to
-					// here.
-					affix.append(ch);
-					break;
-				case 1:
-					// Phase one must be identical in the two sub-patterns. We
-					// enforce this by doing a direct comparison. While
-					// processing the first sub-pattern, we just record its
-					// length. While processing the second, we compare
-					// characters.
-					if (j == 1)
-						++phaseOneLength;
-					else {
-						/**
-						 * 1.2 Back-out comment : HShih if (ch !=
-						 * pattern.charAt(phaseOneStart++)) throw new
-						 * IllegalArgumentException("Subpattern mismatch in \""
-						 * + pattern + '"'); phaseTwo = true;
-						 */
-						if (--phaseOneLength == 0) {
+							decimalPos = digitLeftCount + zeroDigitCount
+									+ digitRightCount;
+						} else if (ch == exponent) {
+							if (useExponentialNotation)
+								throw new IllegalArgumentException(
+										"Multiple exponential "
+												+ "symbols in pattern \""
+												+ pattern + '"');
+							useExponentialNotation = true;
+							minExponentDigits = 0;
+
+							// Use lookahead to parse out the exponential part
+							// of
+							// the
+							// pattern, then jump into phase 2.
+							while (++pos < pattern.length()
+									&& pattern.charAt(pos) == zeroDigit) {
+								++minExponentDigits;
+								++phaseOneLength;
+							}
+
+							if ((digitLeftCount + zeroDigitCount) < 1
+									|| minExponentDigits < 1)
+								throw new IllegalArgumentException(
+										"Malformed exponential " + "pattern \""
+												+ pattern + '"');
+
+							// Transition to phase 2
 							phase = 2;
 							affix = suffix;
+							--pos;
+							continue;
+						} else {
+							phase = 2;
+							affix = suffix;
+							--pos;
+							--phaseOneLength;
+							continue;
 						}
-						continue;
-					}
-
-					// Process the digits, decimal, and grouping characters. We
-					// record five pieces of information. We expect the digits
-					// to occur in the pattern ####0000.####, and we record the
-					// number of left digits, zero (central) digits, and right
-					// digits. The position of the last grouping character is
-					// recorded (should be somewhere within the first two blocks
-					// of characters), as is the position of the decimal point,
-					// if any (should be in the zero digits). If there is no
-					// decimal point, then there should be no right digits.
-					if (ch == digit) {
-						if (zeroDigitCount > 0)
-							++digitRightCount;
-						else
-							++digitLeftCount;
-						if (groupingCount >= 0 && decimalPos < 0)
-							++groupingCount;
-					} else if (ch == zeroDigit) {
-						if (digitRightCount > 0)
-							throw new IllegalArgumentException(
-									"Unexpected '0' in pattern \"" + pattern
-											+ '"');
-						++zeroDigitCount;
-						if (groupingCount >= 0 && decimalPos < 0)
-							++groupingCount;
-					} else if (ch == groupingSeparator) {
-						groupingCount = 0;
-					} else if (ch == decimalSeparator) {
-						if (decimalPos >= 0)
-							throw new IllegalArgumentException(
-									"Multiple decimal separators in pattern \""
-											+ pattern + '"');
-						decimalPos = digitLeftCount + zeroDigitCount
-								+ digitRightCount;
-					} else if (ch == exponent) {
-						if (useExponentialNotation)
-							throw new IllegalArgumentException(
-									"Multiple exponential "
-											+ "symbols in pattern \"" + pattern
-											+ '"');
-						useExponentialNotation = true;
-						minExponentDigits = 0;
-
-						// Use lookahead to parse out the exponential part of
-						// the
-						// pattern, then jump into phase 2.
-						while (++pos < pattern.length()
-								&& pattern.charAt(pos) == zeroDigit) {
-							++minExponentDigits;
-							++phaseOneLength;
-						}
-
-						if ((digitLeftCount + zeroDigitCount) < 1
-								|| minExponentDigits < 1)
-							throw new IllegalArgumentException(
-									"Malformed exponential " + "pattern \""
-											+ pattern + '"');
-
-						// Transition to phase 2
-						phase = 2;
-						affix = suffix;
-						--pos;
-						continue;
-					} else {
-						phase = 2;
-						affix = suffix;
-						--pos;
-						--phaseOneLength;
-						continue;
-					}
-					break;
+						break;
 				}
 			}
 			/**
@@ -2359,12 +2390,14 @@ public class DecimalFormat extends NumberFormat {
 				 * decimalPos<0, then digitTotalCount == digitLeftCount +
 				 * zeroDigitCount.
 				 */
-				int effectiveDecimalPos = decimalPos >= 0 ? decimalPos
+				int effectiveDecimalPos = decimalPos >= 0
+						? decimalPos
 						: digitTotalCount;
 				setMinimumIntegerDigits(effectiveDecimalPos - digitLeftCount);
 				setMaximumIntegerDigits(useExponentialNotation ? digitLeftCount
 						+ getMinimumIntegerDigits() : DOUBLE_INTEGER_DIGITS);
-				setMaximumFractionDigits(decimalPos >= 0 ? (digitTotalCount - decimalPos)
+				setMaximumFractionDigits(decimalPos >= 0
+						? (digitTotalCount - decimalPos)
 						: 0);
 				setMinimumFractionDigits(decimalPos >= 0 ? (digitLeftCount
 						+ zeroDigitCount - decimalPos) : 0);

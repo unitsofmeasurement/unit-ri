@@ -45,8 +45,9 @@ import tec.uom.lib.common.function.ValueSupplier;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.5, December 28, 2015
  */
-public final class LogConverter extends AbstractConverter implements
-		ValueSupplier<String> { // implements Immutable<String> {
+public final class LogConverter extends AbstractConverter
+		implements
+			ValueSupplier<String> { // implements Immutable<String> {
 
 	/**
 	 * 

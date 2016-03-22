@@ -42,8 +42,9 @@ import tec.uom.lib.common.function.ValueSupplier;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.4, December 28, 2015
  */
-public final class PiMultiplierConverter extends AbstractConverter implements
-		ValueSupplier<String> {
+public final class PiMultiplierConverter extends AbstractConverter
+		implements
+			ValueSupplier<String> {
 
 	/**
 	 * Creates a Pi multiplier converter.

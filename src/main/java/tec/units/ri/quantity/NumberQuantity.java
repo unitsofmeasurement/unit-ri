@@ -196,7 +196,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 		return isExact;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public NumberQuantity<Q> add(AbstractQuantity<Q> that) {
 		final AbstractQuantity<Q> thatToUnit = that.to(getUnit());
 		return new NumberQuantity(this.getValue().doubleValue()
@@ -207,7 +207,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 		return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Quantity<?> multiply(Quantity<?> that) {
 		final Unit<?> unit = getUnit().multiply(that.getUnit());
 		return new NumberQuantity((getValue().doubleValue() * that.getValue()
@@ -219,7 +219,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 				(getValue().doubleValue() * that.doubleValue()), getUnit());
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Quantity<Q> divide(Quantity<?> that) {
 		final Unit<?> unit = getUnit().divide(that.getUnit());
 		return new NumberQuantity((getValue().doubleValue() / that.getValue()
@@ -232,7 +232,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 	}
 
 	public Quantity<Q> inverse() {
-		@SuppressWarnings({ "rawtypes", "unchecked" })
+		@SuppressWarnings({"rawtypes", "unchecked"})
 		final Quantity<Q> m = new NumberQuantity(1d / getValue().doubleValue(),
 				getUnit().inverse());
 		return m;
@@ -244,14 +244,14 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 		return 0;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Quantity<Q> subtract(Quantity<Q> that) {
 		final Quantity<Q> thatToUnit = (Quantity<Q>) that.to(getUnit());
 		return new NumberQuantity(this.getValue().doubleValue()
 				- thatToUnit.getValue().doubleValue(), getUnit());
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Quantity<Q> add(Quantity<Q> that) {
 		final Quantity<Q> thatToUnit = (Quantity<Q>) that.to(getUnit());
 		return new NumberQuantity(this.getValue().doubleValue()

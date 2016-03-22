@@ -34,4 +34,3 @@
  * As well as functional interfaces used by these or other implementing classes.
  */
 package tec.units.ri.function;
-

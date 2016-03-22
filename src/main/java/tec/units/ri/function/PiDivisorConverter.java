@@ -46,8 +46,9 @@ import tec.uom.lib.common.function.ValueSupplier;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.4, December 28, 2015
  */
-final class PiDivisorConverter extends AbstractConverter implements
-		ValueSupplier<String> { // implements Immutable<String> {
+final class PiDivisorConverter extends AbstractConverter
+		implements
+			ValueSupplier<String> { // implements Immutable<String> {
 
 	/**
 	 * 

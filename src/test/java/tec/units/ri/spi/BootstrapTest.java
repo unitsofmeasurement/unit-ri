@@ -55,9 +55,9 @@ public class BootstrapTest {
 		int i = 0;
 		for (SystemOfUnitsService service : services) {
 			switch (i) {
-			case 0:
-				assertEquals("Units", service.getSystemOfUnits().getName());
-				break;
+				case 0 :
+					assertEquals("Units", service.getSystemOfUnits().getName());
+					break;
 			}
 			i++;
 		}

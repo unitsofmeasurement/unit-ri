@@ -65,26 +65,22 @@ import tec.uom.lib.common.function.UnitConverterSupplier;
  * @version 0.9.1, $Date: 2016-03-17 $
  */
 public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
-	YOTTA("Y", RationalConverter.of(1000000000000000000000000d, 1d)), 
-	ZETTA("Z", RationalConverter.of(1000000000000000000000d, 1d)), 
-	EXA("E", RationalConverter.of(pow(10, 18), 1d)), 
-	PETA("P", RationalConverter.of(pow(10, 15), 1d)), 
-	TERA("T", RationalConverter.of(pow(10, 12), 1d)), 
-	GIGA("G", RationalConverter.of(pow(10, 9), 1d)), 
-	MEGA("M", RationalConverter.of(pow(10, 6), 1d)), 
-	KILO("k", RationalConverter.of(pow(10, 3), 1d)), 
-	HECTO("h", RationalConverter.of(100d, 1d)), 
-	DEKA("da", RationalConverter.of(10d, 1d)), 
-	DECI("d", RationalConverter.of(1d, 10d)), 
-	CENTI("c", RationalConverter.of(1d, 100d)), 
-	MILLI("m", RationalConverter.of(1d, 1000d)), 
-	MICRO("µ", RationalConverter.of(1d, pow(10, 6))), 
-	NANO("n", RationalConverter.of(1d, pow(10, 9))), 
-	PICO("p", RationalConverter.of(1d, pow(10, 12))), 
-	FEMTO("f", RationalConverter.of(1d, pow(10, 15))), 
-	ATTO("a", RationalConverter.of(1d, pow(10, 18))), 
-	ZEPTO("z", RationalConverter.of(1d, pow(10, 21))), 
-	YOCTO("y", RationalConverter.of(1d, pow(10, 24)));
+	YOTTA("Y", RationalConverter.of(1000000000000000000000000d, 1d)), ZETTA(
+			"Z", RationalConverter.of(1000000000000000000000d, 1d)), EXA("E",
+			RationalConverter.of(pow(10, 18), 1d)), PETA("P", RationalConverter
+			.of(pow(10, 15), 1d)), TERA("T", RationalConverter.of(pow(10, 12),
+			1d)), GIGA("G", RationalConverter.of(pow(10, 9), 1d)), MEGA("M",
+			RationalConverter.of(pow(10, 6), 1d)), KILO("k", RationalConverter
+			.of(pow(10, 3), 1d)), HECTO("h", RationalConverter.of(100d, 1d)), DEKA(
+			"da", RationalConverter.of(10d, 1d)), DECI("d", RationalConverter
+			.of(1d, 10d)), CENTI("c", RationalConverter.of(1d, 100d)), MILLI(
+			"m", RationalConverter.of(1d, 1000d)), MICRO("µ", RationalConverter
+			.of(1d, pow(10, 6))), NANO("n", RationalConverter
+			.of(1d, pow(10, 9))), PICO("p", RationalConverter.of(1d,
+			pow(10, 12))), FEMTO("f", RationalConverter.of(1d, pow(10, 15))), ATTO(
+			"a", RationalConverter.of(1d, pow(10, 18))), ZEPTO("z",
+			RationalConverter.of(1d, pow(10, 21))), YOCTO("y",
+			RationalConverter.of(1d, pow(10, 24)));
 
 	/**
 	 * The symbol of this prefix, as returned by {@link #getSymbol}.

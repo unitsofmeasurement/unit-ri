@@ -44,8 +44,9 @@ import tec.uom.lib.common.function.ValueSupplier;
  * @author Werner Keil
  * @version 0.4, Dec 28, 2015
  */
-public final class AddConverter extends AbstractConverter implements
-		ValueSupplier<Double> {
+public final class AddConverter extends AbstractConverter
+		implements
+			ValueSupplier<Double> {
 
 	/**
 	 * 

@@ -132,12 +132,12 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 		if (left instanceof ProductUnit<?>)
 			leftElems = ((ProductUnit<?>) left).elements;
 		else
-			leftElems = new Element[] { new Element(left, 1, 1) };
+			leftElems = new Element[]{new Element(left, 1, 1)};
 		Element[] rightElems;
 		if (right instanceof ProductUnit<?>)
 			rightElems = ((ProductUnit<?>) right).elements;
 		else
-			rightElems = new Element[] { new Element(right, 1, 1) };
+			rightElems = new Element[]{new Element(right, 1, 1)};
 		return getInstance(leftElems, rightElems);
 	}
 
@@ -155,7 +155,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 		if (left instanceof ProductUnit<?>)
 			leftElems = ((ProductUnit<?>) left).elements;
 		else
-			leftElems = new Element[] { new Element(left, 1, 1) };
+			leftElems = new Element[]{new Element(left, 1, 1)};
 		Element[] rightElems;
 		if (right instanceof ProductUnit<?>) {
 			Element[] elems = ((ProductUnit<?>) right).elements;
@@ -165,7 +165,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 						elems[i].root);
 			}
 		} else
-			rightElems = new Element[] { new Element(right, -1, 1) };
+			rightElems = new Element[]{new Element(right, -1, 1)};
 		return getInstance(leftElems, rightElems);
 	}
 
@@ -192,7 +192,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 						elems[i].root * n / gcd);
 			}
 		} else
-			unitElems = new Element[] { new Element(unit, 1, n) };
+			unitElems = new Element[]{new Element(unit, 1, n)};
 		return getInstance(unitElems, new Element[0]);
 	}
 
@@ -217,7 +217,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 						/ gcd, elems[i].root / gcd);
 			}
 		} else
-			unitElems = new Element[] { new Element(unit, n, 1) };
+			unitElems = new Element[]{new Element(unit, n, 1)};
 		return getInstance(unitElems, new Element[0]);
 	}
 

@@ -65,25 +65,25 @@ public class PrefixTest {
 		assertEquals(1d, m1.getValue());
 		assertEquals("mg", m1.getUnit().toString());
 	}
-	
+
 	@Test
 	public void testMilli2() {
 		Quantity<Volume> m1 = Quantities.getQuantity(10, MILLI(LITRE));
 		assertEquals(10, m1.getValue());
 		assertEquals("ml", m1.getUnit().toString());
 	}
-	
+
 	@Test
 	public void testMilli3() {
 		Quantity<Volume> m1 = Quantities.getQuantity(1.0, LITRE);
 		assertEquals(1d, m1.getValue());
 		assertEquals("l", m1.getUnit().toString());
-				
+
 		Quantity<Volume> m2 = m1.to(MILLI(LITRE));
 		assertEquals(1000.0d, m2.getValue());
 		assertEquals("ml", m2.getUnit().toString());
 	}
-	
+
 	@Test
 	public void testNano() {
 		Unit<Mass> m1 = NANO(GRAM);

@@ -121,10 +121,10 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	 */
 	public static SimpleUnitFormat getInstance(Flavor flavor) {
 		switch (flavor) {
-		case ASCII:
-			return SimpleUnitFormat.ASCII;
-		default:
-			return DEFAULT;
+			case ASCII :
+				return SimpleUnitFormat.ASCII;
+			default :
+				return DEFAULT;
 		}
 	}
 
@@ -419,8 +419,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 					if (divisor != 1) {
 						result.append('/');
 						result.append(divisor);
-					}
-					;
+					};
 				} else if (cvtr instanceof MultiplyConverter) {
 					result.append('*');
 					result.append(((MultiplyConverter) cvtr).getFactor());
@@ -467,87 +466,89 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			Unit result = AbstractUnit.ONE;
 			int token = nextToken(csq, pos);
 			switch (token) {
-			case IDENTIFIER:
-				result = parseSingleUnit(csq, pos);
-				break;
-			case OPEN_PAREN:
-				pos.setIndex(pos.getIndex() + 1);
-				result = parseProductUnit(csq, pos);
-				token = nextToken(csq, pos);
-				check(token == CLOSE_PAREN, "')' expected", csq, pos.getIndex());
-				pos.setIndex(pos.getIndex() + 1);
-				break;
+				case IDENTIFIER :
+					result = parseSingleUnit(csq, pos);
+					break;
+				case OPEN_PAREN :
+					pos.setIndex(pos.getIndex() + 1);
+					result = parseProductUnit(csq, pos);
+					token = nextToken(csq, pos);
+					check(token == CLOSE_PAREN, "')' expected", csq,
+							pos.getIndex());
+					pos.setIndex(pos.getIndex() + 1);
+					break;
 			}
 			token = nextToken(csq, pos);
 			while (true) {
 				switch (token) {
-				case EXPONENT:
-					Exponent e = readExponent(csq, pos);
-					if (e.pow != 1) {
-						result = result.pow(e.pow);
-					}
-					if (e.root != 1) {
-						result = result.root(e.root);
-					}
-					break;
-				case MULTIPLY:
-					pos.setIndex(pos.getIndex() + 1);
-					token = nextToken(csq, pos);
-					if (token == INTEGER) {
-						long n = readLong(csq, pos);
-						if (n != 1) {
-							result = result.multiply(n);
+					case EXPONENT :
+						Exponent e = readExponent(csq, pos);
+						if (e.pow != 1) {
+							result = result.pow(e.pow);
 						}
-					} else if (token == FLOAT) {
-						double d = readDouble(csq, pos);
-						if (d != 1.0) {
-							result = result.multiply(d);
+						if (e.root != 1) {
+							result = result.root(e.root);
 						}
-					} else {
-						result = result.multiply(parseProductUnit(csq, pos));
-					}
-					break;
-				case DIVIDE:
-					pos.setIndex(pos.getIndex() + 1);
-					token = nextToken(csq, pos);
-					if (token == INTEGER) {
-						long n = readLong(csq, pos);
-						if (n != 1) {
-							result = result.divide(n);
+						break;
+					case MULTIPLY :
+						pos.setIndex(pos.getIndex() + 1);
+						token = nextToken(csq, pos);
+						if (token == INTEGER) {
+							long n = readLong(csq, pos);
+							if (n != 1) {
+								result = result.multiply(n);
+							}
+						} else if (token == FLOAT) {
+							double d = readDouble(csq, pos);
+							if (d != 1.0) {
+								result = result.multiply(d);
+							}
+						} else {
+							result = result
+									.multiply(parseProductUnit(csq, pos));
 						}
-					} else if (token == FLOAT) {
-						double d = readDouble(csq, pos);
-						if (d != 1.0) {
-							result = result.divide(d);
+						break;
+					case DIVIDE :
+						pos.setIndex(pos.getIndex() + 1);
+						token = nextToken(csq, pos);
+						if (token == INTEGER) {
+							long n = readLong(csq, pos);
+							if (n != 1) {
+								result = result.divide(n);
+							}
+						} else if (token == FLOAT) {
+							double d = readDouble(csq, pos);
+							if (d != 1.0) {
+								result = result.divide(d);
+							}
+						} else {
+							result = result.divide(parseProductUnit(csq, pos));
 						}
-					} else {
-						result = result.divide(parseProductUnit(csq, pos));
-					}
-					break;
-				case PLUS:
-					pos.setIndex(pos.getIndex() + 1);
-					token = nextToken(csq, pos);
-					if (token == INTEGER) {
-						long n = readLong(csq, pos);
-						if (n != 1) {
-							result = result.shift(n);
+						break;
+					case PLUS :
+						pos.setIndex(pos.getIndex() + 1);
+						token = nextToken(csq, pos);
+						if (token == INTEGER) {
+							long n = readLong(csq, pos);
+							if (n != 1) {
+								result = result.shift(n);
+							}
+						} else if (token == FLOAT) {
+							double d = readDouble(csq, pos);
+							if (d != 1.0) {
+								result = result.shift(d);
+							}
+						} else {
+							throw new ParserException("not a number",
+									pos.getIndex());
 						}
-					} else if (token == FLOAT) {
-						double d = readDouble(csq, pos);
-						if (d != 1.0) {
-							result = result.shift(d);
-						}
-					} else {
-						throw new ParserException("not a number",
+						break;
+					case EOF :
+					case CLOSE_PAREN :
+						return result;
+					default :
+						throw new ParserException("unexpected token " + token,
 								pos.getIndex());
-					}
-					break;
-				case EOF:
-				case CLOSE_PAREN:
-					return result;
-				default:
-					throw new ParserException("unexpected token " + token,
-							pos.getIndex());
 				}
 				token = nextToken(csq, pos);
 			}
@@ -670,8 +671,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 				pow = 1;
 			if (root == 0)
 				root = 1;
-			return new Exponent(isPowNegative ? -pow : pow,
-					isRootNegative ? -root : root);
+			return new Exponent(isPowNegative ? -pow : pow, isRootNegative
+					? -root
+					: root);
 		}
 
 		private long readLong(CharSequence csq, ParsePosition pos) {
@@ -917,33 +919,33 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	// //////////////////////////////////////////////////////////////////////////
 	// Initializes the standard unit database for SI units.
 
-	private static final Unit<?>[] SI_UNITS = { Units.AMPERE, Units.BECQUEREL,
+	private static final Unit<?>[] SI_UNITS = {Units.AMPERE, Units.BECQUEREL,
 			Units.CANDELA, Units.COULOMB, Units.FARAD, Units.GRAY, Units.HENRY,
 			Units.HERTZ, Units.JOULE, Units.KATAL, Units.KELVIN, Units.LUMEN,
 			Units.LUX, Units.METRE, Units.MOLE, Units.NEWTON, Units.OHM,
 			Units.PASCAL, Units.RADIAN, Units.SECOND, Units.SIEMENS,
 			Units.SIEVERT, Units.STERADIAN, Units.TESLA, Units.VOLT,
-			Units.WATT, Units.WEBER };
+			Units.WATT, Units.WEBER};
 
-	private static final String[] PREFIXES = { YOTTA.getSymbol(),
+	private static final String[] PREFIXES = {YOTTA.getSymbol(),
 			ZETTA.getSymbol(), EXA.getSymbol(), PETA.getSymbol(),
 			TERA.getSymbol(), GIGA.getSymbol(), MEGA.getSymbol(),
 			KILO.getSymbol(), HECTO.getSymbol(), DEKA.getSymbol(),
 			DECI.getSymbol(), CENTI.getSymbol(), MILLI.getSymbol(),
 			MICRO.getSymbol(), NANO.getSymbol(), PICO.getSymbol(),
 			FEMTO.getSymbol(), ATTO.getSymbol(), ZEPTO.getSymbol(),
-			YOCTO.getSymbol() };
+			YOCTO.getSymbol()};
 
 	// TODO we could try retrieving this dynamically in a static {} method from
 	// MetricPrefix if symbols above are also aligned
-	private static final UnitConverter[] CONVERTERS = { YOTTA.getConverter(),
+	private static final UnitConverter[] CONVERTERS = {YOTTA.getConverter(),
 			ZETTA.getConverter(), EXA.getConverter(), PETA.getConverter(),
 			TERA.getConverter(), GIGA.getConverter(), MEGA.getConverter(),
 			KILO.getConverter(), HECTO.getConverter(), DEKA.getConverter(),
 			DECI.getConverter(), CENTI.getConverter(), MILLI.getConverter(),
 			MICRO.getConverter(), NANO.getConverter(), PICO.getConverter(),
 			FEMTO.getConverter(), ATTO.getConverter(), ZEPTO.getConverter(),
-			YOCTO.getConverter() };
+			YOCTO.getConverter()};
 
 	private static String asciiPrefix(String prefix) {
 		return prefix == "µ" ? "micro" : prefix;

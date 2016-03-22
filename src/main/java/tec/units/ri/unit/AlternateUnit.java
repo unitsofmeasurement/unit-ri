@@ -81,8 +81,9 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
 		if (!parentUnit.isSystemUnit())
 			throw new IllegalArgumentException("The parent unit: " + parentUnit
 					+ " is not an unscaled SI unit");
-		this.parentUnit = (parentUnit instanceof AlternateUnit) ? ((AlternateUnit<?>) parentUnit)
-				.getParentUnit() : parentUnit;
+		this.parentUnit = (parentUnit instanceof AlternateUnit)
+				? ((AlternateUnit<?>) parentUnit).getParentUnit()
+				: parentUnit;
 		this.symbol = symbol;
 
 		// Checks if the symbol is associated to a different unit. TODO verify
