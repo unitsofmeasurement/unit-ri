@@ -44,36 +44,35 @@ import tec.units.ri.internal.format.DefaultUnitFormatService;
  *
  */
 public class UnitFormatServiceTest {
-	private UnitFormatService sut;
+  private UnitFormatService sut;
 
-	@Before
-	public void init() {
-		sut = Bootstrap.getService(UnitFormatService.class);
-	}
+  @Before
+  public void init() {
+    sut = Bootstrap.getService(UnitFormatService.class);
+  }
 
-	@Test
-	public void testGetFormat() {
-		assertNotNull(sut.getUnitFormat());
-		assertEquals("tec.units.ri.format.SimpleUnitFormat$DefaultFormat", sut
-				.getUnitFormat().getClass().getName());
-	}
+  @Test
+  public void testGetFormat() {
+    assertNotNull(sut.getUnitFormat());
+    assertEquals("tec.units.ri.format.SimpleUnitFormat$DefaultFormat", sut.getUnitFormat().getClass().getName());
+  }
 
-	@Test
-	public void TestGetFormatNames() {
-		DefaultUnitFormatService service = new DefaultUnitFormatService();
-		assertNotNull(service.getAvailableFormatNames());
-		assertEquals(2, service.getAvailableFormatNames().size());
-	}
+  @Test
+  public void TestGetFormatNames() {
+    DefaultUnitFormatService service = new DefaultUnitFormatService();
+    assertNotNull(service.getAvailableFormatNames());
+    assertEquals(2, service.getAvailableFormatNames().size());
+  }
 
-	@Test
-	public void testGetFormatFound() throws Exception {
-		assertNotNull(sut);
-		// assertNotNull(sut.getUnitFormat("EBNF"));
-	}
+  @Test
+  public void testGetFormatFound() throws Exception {
+    assertNotNull(sut);
+    // assertNotNull(sut.getUnitFormat("EBNF"));
+  }
 
-	@Test
-	public void testGetFormatNotFound() throws Exception {
-		assertNotNull(sut);
-		assertNull(sut.getUnitFormat("XYZ"));
-	}
+  @Test
+  public void testGetFormatNotFound() throws Exception {
+    assertNotNull(sut);
+    assertNull(sut.getUnitFormat("XYZ"));
+  }
 }

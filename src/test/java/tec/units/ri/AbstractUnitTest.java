@@ -40,15 +40,15 @@ import tec.units.ri.AbstractUnit;
 import tec.units.ri.unit.BaseUnit;
 
 public class AbstractUnitTest {
-	private static final AbstractUnit<Length> sut = new BaseUnit<Length>("m");
+  private static final AbstractUnit<Length> sut = new BaseUnit<Length>("m");
 
-	@BeforeClass
-	public static void init() {
-		sut.setName("Test");
-	}
+  @BeforeClass
+  public static void init() {
+    sut.setName("Test");
+  }
 
-	@Test
-	public void testName() {
-		assertEquals("Test", sut.getName());
-	}
+  @Test
+  public void testName() {
+    assertEquals("Test", sut.getName());
+  }
 }

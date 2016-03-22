@@ -47,44 +47,43 @@ import tec.units.ri.format.SimpleUnitFormat.Flavor;
  */
 public class DefaultUnitFormatService implements UnitFormatService {
 
-	private static final String DEFAULT_FORMAT = Flavor.Default.name();
+  private static final String DEFAULT_FORMAT = Flavor.Default.name();
 
-	private final Map<String, UnitFormat> formats = new HashMap<String, UnitFormat>();
+  private final Map<String, UnitFormat> formats = new HashMap<String, UnitFormat>();
 
-	public DefaultUnitFormatService() {
-		formats.put(DEFAULT_FORMAT, SimpleUnitFormat.getInstance());
-		formats.put(Flavor.ASCII.name(),
-				SimpleUnitFormat.getInstance(Flavor.ASCII));
-		// formats.put("EBNF", EBNFUnitFormat.getInstance());
-	}
+  public DefaultUnitFormatService() {
+    formats.put(DEFAULT_FORMAT, SimpleUnitFormat.getInstance());
+    formats.put(Flavor.ASCII.name(), SimpleUnitFormat.getInstance(Flavor.ASCII));
+    // formats.put("EBNF", EBNFUnitFormat.getInstance());
+  }
 
-	// @Override
-	// public String getProviderName() {
-	// return PROVIDER_NAME;
-	// }
+  // @Override
+  // public String getProviderName() {
+  // return PROVIDER_NAME;
+  // }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see UnitFormatService#getUnitFormat(String)
-	 */
-	public UnitFormat getUnitFormat(String formatName) {
-		if (formatName == null)
-			throw new NullPointerException("Format name required");
-		return formats.get(formatName);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see UnitFormatService#getUnitFormat(String)
+   */
+  public UnitFormat getUnitFormat(String formatName) {
+    if (formatName == null)
+      throw new NullPointerException("Format name required");
+    return formats.get(formatName);
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see UnitFormatService#getUnitFormat()
-	 */
-	public UnitFormat getUnitFormat() {
-		return getUnitFormat(DEFAULT_FORMAT);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see UnitFormatService#getUnitFormat()
+   */
+  public UnitFormat getUnitFormat() {
+    return getUnitFormat(DEFAULT_FORMAT);
+  }
 
-	public Set<String> getAvailableFormatNames() {
-		return formats.keySet();
-	}
+  public Set<String> getAvailableFormatNames() {
+    return formats.keySet();
+  }
 
 }

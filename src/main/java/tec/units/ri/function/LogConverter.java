@@ -35,101 +35,95 @@ import tec.uom.lib.common.function.ValueSupplier;
 
 /**
  * <p>
- * This class represents a logarithmic converter of limited precision. Such
- * converter is typically used to create logarithmic unit. For example:[code]
- * Unit<Dimensionless> BEL = Units.ONE.transform(new
- * LogConverter(10).inverse()); [/code]
+ * This class represents a logarithmic converter of limited precision. Such converter is typically used to create logarithmic unit. For example:[code]
+ * Unit<Dimensionless> BEL = Units.ONE.transform(new LogConverter(10).inverse()); [/code]
  * </p>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.5, December 28, 2015
  */
-public final class LogConverter extends AbstractConverter
-		implements
-			ValueSupplier<String> { // implements Immutable<String> {
+public final class LogConverter extends AbstractConverter implements ValueSupplier<String> { // implements Immutable<String> {
 
-	/**
+  /**
 	 * 
 	 */
-	// private static final long serialVersionUID = -7584688290961460870L;
+  // private static final long serialVersionUID = -7584688290961460870L;
 
-	/**
-	 * Holds the logarithmic base.
-	 */
-	private double base;
-	/**
-	 * Holds the natural logarithm of the base.
-	 */
-	private double logOfBase;
+  /**
+   * Holds the logarithmic base.
+   */
+  private double base;
+  /**
+   * Holds the natural logarithm of the base.
+   */
+  private double logOfBase;
 
-	/**
-	 * Returns a logarithmic converter having the specified base.
-	 *
-	 * @param base
-	 *            the logarithmic base (e.g. <code>Math.E</code> for the Natural
-	 *            Logarithm).
-	 */
-	public LogConverter(double base) {
-		this.base = base;
-		this.logOfBase = MathUtil.log(base);
-	}
+  /**
+   * Returns a logarithmic converter having the specified base.
+   *
+   * @param base
+   *          the logarithmic base (e.g. <code>Math.E</code> for the Natural Logarithm).
+   */
+  public LogConverter(double base) {
+    this.base = base;
+    this.logOfBase = MathUtil.log(base);
+  }
 
-	/**
-	 * Returns the logarithmic base of this converter.
-	 *
-	 * @return the logarithmic base (e.g. <code>Math.E</code> for the Natural
-	 *         Logarithm).
-	 */
-	public double getBase() {
-		return base;
-	}
+  /**
+   * Returns the logarithmic base of this converter.
+   *
+   * @return the logarithmic base (e.g. <code>Math.E</code> for the Natural Logarithm).
+   */
+  public double getBase() {
+    return base;
+  }
 
-	@Override
-	public AbstractConverter inverse() {
-		return new ExpConverter(base);
-	}
+  @Override
+  public AbstractConverter inverse() {
+    return new ExpConverter(base);
+  }
 
-	@Override
-	public final String toString() {
-		if (base == Math.E) {
-			return "ln";
-		} else {
-			return "Log(" + base + ")";
-		}
-	}
+  @Override
+  public final String toString() {
+    if (base == Math.E) {
+      return "ln";
+    } else {
+      return "Log(" + base + ")";
+    }
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof LogConverter))
-			return false;
-		LogConverter that = (LogConverter) obj;
-		return this.base == that.base;
-	}
+  @Override
+  public boolean equals(Object obj) {
+    if (!(obj instanceof LogConverter))
+      return false;
+    LogConverter that = (LogConverter) obj;
+    return this.base == that.base;
+  }
 
-	@Override
-	public int hashCode() {
-		long bits = Double.doubleToLongBits(base);
-		return (int) (bits ^ (bits >>> 32));
-	}
+  @Override
+  public int hashCode() {
+    long bits = Double.doubleToLongBits(base);
+    return (int) (bits ^ (bits >>> 32));
+  }
 
-	@Override
-	public double convert(double amount) {
-		return MathUtil.log(amount) / logOfBase;
-	}
+  @Override
+  public double convert(double amount) {
+    return MathUtil.log(amount) / logOfBase;
+  }
 
-	// @Override
-	// public BigDecimal convert(BigDecimal value, MathContext ctx) throws
-	// ArithmeticException {
-	// return BigDecimal.valueOf(convert(value.doubleValue())); // Reverts to
-	// double conversion.
-	// }
+  // @Override
+  // public BigDecimal convert(BigDecimal value, MathContext ctx) throws
+  // ArithmeticException {
+  // return BigDecimal.valueOf(convert(value.doubleValue())); // Reverts to
+  // double conversion.
+  // }
 
-	public boolean isLinear() {
-		return false;
-	}
+  public boolean isLinear() {
+    return false;
+  }
 
-	public String getValue() {
-		return toString();
-	}
+  public String getValue() {
+    return toString();
+  }
 }

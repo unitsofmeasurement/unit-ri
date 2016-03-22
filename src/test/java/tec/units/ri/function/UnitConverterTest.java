@@ -43,32 +43,32 @@ import org.junit.Test;
 import tec.units.ri.quantity.Quantities;
 
 public class UnitConverterTest {
-	private Unit<Length> sourceUnit = METRE;
-	private Unit<Length> targetUnit = CENTI(METRE);
+  private Unit<Length> sourceUnit = METRE;
+  private Unit<Length> targetUnit = CENTI(METRE);
 
-	@Test
-	public void testDouble() {
-		UnitConverter converter = sourceUnit.getConverterTo(targetUnit);
-		double length1 = 4.0;
-		double length2 = 6.0;
-		double result1 = converter.convert(length1);
-		double result2 = converter.convert(length2);
-		Number result3 = converter.convert(new Double(length1));
+  @Test
+  public void testDouble() {
+    UnitConverter converter = sourceUnit.getConverterTo(targetUnit);
+    double length1 = 4.0;
+    double length2 = 6.0;
+    double result1 = converter.convert(length1);
+    double result2 = converter.convert(length2);
+    Number result3 = converter.convert(new Double(length1));
 
-		assertEquals(400, result1, 0);
-		assertEquals(600, result2, 0);
-		assertEquals(400d, result3);
-		assertEquals(400, result3.intValue(), 0);
-	}
+    assertEquals(400, result1, 0);
+    assertEquals(600, result2, 0);
+    assertEquals(400d, result3);
+    assertEquals(400, result3.intValue(), 0);
+  }
 
-	@Test
-	public void testQuantity() {
-		Quantity<Length> quantLength1 = Quantities.getQuantity(4.0, sourceUnit);
-		Quantity<Length> quantLength2 = Quantities.getQuantity(6.0, targetUnit);
-		Quantity<Length> quantResult1 = quantLength1.to(targetUnit);
-		assertNotNull(quantResult1);
-		assertEquals((double) 400, quantResult1.getValue());
-		assertEquals(targetUnit, quantResult1.getUnit());
-	}
+  @Test
+  public void testQuantity() {
+    Quantity<Length> quantLength1 = Quantities.getQuantity(4.0, sourceUnit);
+    Quantity<Length> quantLength2 = Quantities.getQuantity(6.0, targetUnit);
+    Quantity<Length> quantResult1 = quantLength1.to(targetUnit);
+    assertNotNull(quantResult1);
+    assertEquals((double) 400, quantResult1.getValue());
+    assertEquals(targetUnit, quantResult1.getUnit());
+  }
 
 }

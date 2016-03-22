@@ -38,8 +38,7 @@ import tec.uom.lib.common.function.QuantitySupplier;
  * A Measurement contains a {@link Quantity} and a timestamp.
  * 
  * <p>
- * A {@code Measurement} object is used for maintaining the tuple of quantity
- * and timestamp. The value is represented as {@linkplain Quantity} and the
+ * A {@code Measurement} object is used for maintaining the tuple of quantity and timestamp. The value is represented as {@linkplain Quantity} and the
  * timestamp as <type>long</type>.
  * <p>
  * 
@@ -48,15 +47,12 @@ import tec.uom.lib.common.function.QuantitySupplier;
  * @version 0.5
  * @param <Q>
  */
-public interface Measurement<Q extends Quantity<Q>>
-		extends
-			QuantitySupplier<Q>,
-			Comparable<Measurement<Q>> {
+public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>, Comparable<Measurement<Q>> {
 
-	/**
-	 * Returns the timestamp of this {@link Measurement}.
-	 * 
-	 * @return a timestamp.
-	 */
-	long getTimestamp();
+  /**
+   * Returns the timestamp of this {@link Measurement}.
+   * 
+   * @return a timestamp.
+   */
+  long getTimestamp();
 }

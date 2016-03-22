@@ -35,81 +35,73 @@ import javax.measure.Unit;
 import tec.units.ri.AbstractQuantity;
 
 /**
- * An amount of quantity, consisting of a double and a Unit. IntegerQuantity
- * objects are immutable.
+ * An amount of quantity, consisting of a double and a Unit. IntegerQuantity objects are immutable.
  * 
  * @see AbstractQuantity
  * @see Quantity
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Otavio de Santana
  * @param <Q>
- *            The type of the quantity.
+ *          The type of the quantity.
  * @version 0.3, $Date: 2015-07-07 $
  */
 final class IntegerQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
-	final int value;
+  final int value;
 
-	public IntegerQuantity(int value, Unit<Q> unit) {
-		super(unit);
-		this.value = value;
-	}
+  public IntegerQuantity(int value, Unit<Q> unit) {
+    super(unit);
+    this.value = value;
+  }
 
-	@Override
-	public Integer getValue() {
-		return value;
-	}
+  @Override
+  public Integer getValue() {
+    return value;
+  }
 
-	public double doubleValue(Unit<Q> unit) {
-		return (super.getUnit().equals(unit)) ? value : super.getUnit()
-				.getConverterTo(unit).convert(value);
-	}
+  public double doubleValue(Unit<Q> unit) {
+    return (super.getUnit().equals(unit)) ? value : super.getUnit().getConverterTo(unit).convert(value);
+  }
 
-	@Override
-	public long longValue(Unit<Q> unit) {
-		double result = doubleValue(unit);
-		if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
-			throw new ArithmeticException("Overflow (" + result + ")");
-		}
-		return (long) result;
-	}
+  @Override
+  public long longValue(Unit<Q> unit) {
+    double result = doubleValue(unit);
+    if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
+      throw new ArithmeticException("Overflow (" + result + ")");
+    }
+    return (long) result;
+  }
 
-	public Quantity<Q> add(Quantity<Q> that) {
-		final Quantity<Q> converted = that.to(getUnit());
-		return NumberQuantity.of(value + converted.getValue().intValue(),
-				getUnit());
-	}
+  public Quantity<Q> add(Quantity<Q> that) {
+    final Quantity<Q> converted = that.to(getUnit());
+    return NumberQuantity.of(value + converted.getValue().intValue(), getUnit());
+  }
 
-	public Quantity<Q> subtract(Quantity<Q> that) {
-		final Quantity<Q> converted = that.to(getUnit());
-		return NumberQuantity.of(value - converted.getValue().intValue(),
-				getUnit());
-	}
+  public Quantity<Q> subtract(Quantity<Q> that) {
+    final Quantity<Q> converted = that.to(getUnit());
+    return NumberQuantity.of(value - converted.getValue().intValue(), getUnit());
+  }
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public Quantity<?> multiply(Quantity<?> that) {
-		return new IntegerQuantity(value * that.getValue().intValue(),
-				getUnit().multiply(that.getUnit()));
-	}
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  public Quantity<?> multiply(Quantity<?> that) {
+    return new IntegerQuantity(value * that.getValue().intValue(), getUnit().multiply(that.getUnit()));
+  }
 
-	public Quantity<Q> multiply(Number that) {
-		return NumberQuantity.of(value * that.intValue(), getUnit());
-	}
+  public Quantity<Q> multiply(Number that) {
+    return NumberQuantity.of(value * that.intValue(), getUnit());
+  }
 
-	public Quantity<?> divide(Quantity<?> that) {
-		return NumberQuantity.of(
-				(double) value / that.getValue().doubleValue(), getUnit()
-						.divide(that.getUnit()));
-	}
+  public Quantity<?> divide(Quantity<?> that) {
+    return NumberQuantity.of((double) value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
+  }
 
-	@SuppressWarnings("unchecked")
-	public AbstractQuantity<Q> inverse() {
-		return (AbstractQuantity<Q>) NumberQuantity.of(1 / value, getUnit()
-				.inverse());
-	}
+  @SuppressWarnings("unchecked")
+  public AbstractQuantity<Q> inverse() {
+    return (AbstractQuantity<Q>) NumberQuantity.of(1 / value, getUnit().inverse());
+  }
 
-	public Quantity<Q> divide(Number that) {
-		return NumberQuantity.of(value / that.doubleValue(), getUnit());
-	}
+  public Quantity<Q> divide(Number that) {
+    return NumberQuantity.of(value / that.doubleValue(), getUnit());
+  }
 
 }

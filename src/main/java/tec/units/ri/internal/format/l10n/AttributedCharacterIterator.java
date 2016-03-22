@@ -40,40 +40,32 @@ import java.util.Map;
 import java.util.Vector;
 
 /**
- * An AttributedCharacterIterator allows iteration through both text and related
- * attribute information.
+ * An AttributedCharacterIterator allows iteration through both text and related attribute information.
  * 
  * <p>
- * An attribute is a key/value pair, identified by the key. No two attributes on
- * a given character can have the same key.
+ * An attribute is a key/value pair, identified by the key. No two attributes on a given character can have the same key.
  * 
  * <p>
- * The values for an attribute are immutable, or must not be mutated by clients
- * or storage. They are always passed by reference, and not cloned.
+ * The values for an attribute are immutable, or must not be mutated by clients or storage. They are always passed by reference, and not cloned.
  * 
  * <p>
- * A <em>run with respect to an attribute</em> is a maximum text range for
- * which:
+ * A <em>run with respect to an attribute</em> is a maximum text range for which:
  * <ul>
  * <li>the attribute is undefined or null for the entire range, or
- * <li>the attribute value is defined and has the same non-null value for the
- * entire range.
+ * <li>the attribute value is defined and has the same non-null value for the entire range.
  * </ul>
  * 
  * <p>
- * A <em>run with respect to a set of attributes</em> is a maximum text range
- * for which this condition is met for each member attribute.
+ * A <em>run with respect to a set of attributes</em> is a maximum text range for which this condition is met for each member attribute.
  * 
  * <p>
  * The returned indexes are limited to the range of the iterator.
  * 
  * <p>
- * The returned attribute information is limited to runs that contain the
- * current character.
+ * The returned attribute information is limited to runs that contain the current character.
  * 
  * <p>
- * Attribute keys are instances of AttributedCharacterIterator.Attribute and its
- * subclasses.
+ * Attribute keys are instances of AttributedCharacterIterator.Attribute and its subclasses.
  * 
  * @see AttributedCharacterIterator.Attribute
  * @see AttributedString
@@ -82,59 +74,51 @@ import java.util.Vector;
 
 interface AttributedCharacterIterator extends CharacterIterator {
 
-	/**
-	 * Returns the index of the first character of the run with respect to all
-	 * attributes containing the current character.
-	 */
-	public int getRunStart();
+  /**
+   * Returns the index of the first character of the run with respect to all attributes containing the current character.
+   */
+  public int getRunStart();
 
-	/**
-	 * Returns the index of the first character of the run with respect to the
-	 * given attribute containing the current character.
-	 */
-	public int getRunStart(Attribute attribute);
+  /**
+   * Returns the index of the first character of the run with respect to the given attribute containing the current character.
+   */
+  public int getRunStart(Attribute attribute);
 
-	/**
-	 * Returns the index of the first character of the run with respect to the
-	 * given attributes containing the current character.
-	 */
-	public int getRunStart(Vector attributes);
+  /**
+   * Returns the index of the first character of the run with respect to the given attributes containing the current character.
+   */
+  public int getRunStart(Vector attributes);
 
-	/**
-	 * Returns the index of the first character following the run with respect
-	 * to all attributes containing the current character.
-	 */
-	public int getRunLimit();
+  /**
+   * Returns the index of the first character following the run with respect to all attributes containing the current character.
+   */
+  public int getRunLimit();
 
-	/**
-	 * Returns the index of the first character following the run with respect
-	 * to the given attribute containing the current character.
-	 */
-	public int getRunLimit(Attribute attribute);
+  /**
+   * Returns the index of the first character following the run with respect to the given attribute containing the current character.
+   */
+  public int getRunLimit(Attribute attribute);
 
-	/**
-	 * Returns the index of the first character following the run with respect
-	 * to the given attributes containing the current character.
-	 */
-	public int getRunLimit(Vector attributes);
+  /**
+   * Returns the index of the first character following the run with respect to the given attributes containing the current character.
+   */
+  public int getRunLimit(Vector attributes);
 
-	/**
-	 * Returns a map with the attributes defined on the current character.
-	 */
-	public Map getAttributes();
+  /**
+   * Returns a map with the attributes defined on the current character.
+   */
+  public Map getAttributes();
 
-	/**
-	 * Returns the value of the named attribute for the current character.
-	 * Returns null if the attribute is not defined.
-	 * 
-	 * @param attribute
-	 *            the key of the attribute whose value is requested.
-	 */
-	public Object getAttribute(Attribute attribute);
+  /**
+   * Returns the value of the named attribute for the current character. Returns null if the attribute is not defined.
+   * 
+   * @param attribute
+   *          the key of the attribute whose value is requested.
+   */
+  public Object getAttribute(Attribute attribute);
 
-	/**
-	 * Returns the keys of all attributes defined on the iterator's text range.
-	 * The set is empty if no attributes are defined.
-	 */
-	public Vector getAllAttributeKeys();
+  /**
+   * Returns the keys of all attributes defined on the iterator's text range. The set is empty if no attributes are defined.
+   */
+  public Vector getAllAttributeKeys();
 };

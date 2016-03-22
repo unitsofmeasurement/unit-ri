@@ -40,42 +40,39 @@ import org.junit.Test;
 
 public class ArithmeticTest {
 
-	private Quantity<Length> sut;
+  private Quantity<Length> sut;
 
-	@Before
-	public void init() {
-		sut = DefaultQuantityFactory.getInstance(Length.class)
-				.create(10, METRE);
-	}
+  @Before
+  public void init() {
+    sut = DefaultQuantityFactory.getInstance(Length.class).create(10, METRE);
+  }
 
-	@Test
-	public void testValue() {
-		assertEquals(10, sut.getValue());
-	}
+  @Test
+  public void testValue() {
+    assertEquals(10, sut.getValue());
+  }
 
-	@Test
-	public void testToString() {
-		assertEquals("10 m", sut.toString());
-	}
+  @Test
+  public void testToString() {
+    assertEquals("10 m", sut.toString());
+  }
 
-	@Test
-	public void testAdd() {
-		Quantity<Length> len = DefaultQuantityFactory.getInstance(Length.class)
-				.create(5, METRE);
-		Quantity<Length> result = sut.add(len);
-		assertNotNull(result);
-		assertEquals(METRE, result.getUnit());
-		assertEquals((double) 15, result.getValue());
-	}
+  @Test
+  public void testAdd() {
+    Quantity<Length> len = DefaultQuantityFactory.getInstance(Length.class).create(5, METRE);
+    Quantity<Length> result = sut.add(len);
+    assertNotNull(result);
+    assertEquals(METRE, result.getUnit());
+    assertEquals((double) 15, result.getValue());
+  }
 
-	@Test
-	public void testSubtract() {
-		Quantity<Length> len = DefaultQuantityFactory.getInstance(Length.class)
-				.create(5, METRE);
-		Quantity<Length> result = sut.subtract(len);
-		assertNotNull(result);
-		assertEquals(METRE, result.getUnit());
-		assertEquals((double) 5, result.getValue());
-	}
+  @Test
+  public void testSubtract() {
+    Quantity<Length> len = DefaultQuantityFactory.getInstance(Length.class).create(5, METRE);
+    Quantity<Length> result = sut.subtract(len);
+    assertNotNull(result);
+    assertEquals(METRE, result.getUnit());
+    assertEquals((double) 5, result.getValue());
+  }
 
 }

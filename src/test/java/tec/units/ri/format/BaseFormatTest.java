@@ -53,60 +53,60 @@ import tec.units.ri.unit.Units;
  */
 public class BaseFormatTest {
 
-	private SimpleUnitFormat fmt;
+  private SimpleUnitFormat fmt;
 
-	@Before
-	public void init() {
-		fmt = SimpleUnitFormat.getInstance();
-	}
+  @Before
+  public void init() {
+    fmt = SimpleUnitFormat.getInstance();
+  }
 
-	@Test
-	@Ignore
-	public void testFormat2() {
-		Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
-		String s = fmt.format(kph);
-		assertEquals("kph", s);
-	}
+  @Test
+  @Ignore
+  public void testFormat2() {
+    Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
+    String s = fmt.format(kph);
+    assertEquals("kph", s);
+  }
 
-	@Test
-	public void testKilo() {
-		Unit<Mass> m = KILOGRAM;
-		String s = fmt.format(m);
-		assertEquals("kg", s);
-	}
+  @Test
+  public void testKilo() {
+    Unit<Mass> m = KILOGRAM;
+    String s = fmt.format(m);
+    assertEquals("kg", s);
+  }
 
-	@Test
-	public void testKilo2() {
-		Unit<Mass> m = KILO(GRAM);
-		String s = fmt.format(m);
-		assertEquals("kg", s);
-	}
+  @Test
+  public void testKilo2() {
+    Unit<Mass> m = KILO(GRAM);
+    String s = fmt.format(m);
+    assertEquals("kg", s);
+  }
 
-	@Test
-	public void testMilli() {
-		Unit<Mass> m = MILLI(GRAM);
-		String s = fmt.format(m);
-		assertEquals("mg", s);
-	}
+  @Test
+  public void testMilli() {
+    Unit<Mass> m = MILLI(GRAM);
+    String s = fmt.format(m);
+    assertEquals("mg", s);
+  }
 
-	@Test
-	public void testNano() {
-		Unit<Mass> m = NANO(GRAM);
-		String s = fmt.format(m);
-		assertEquals("ng", s);
-	}
+  @Test
+  public void testNano() {
+    Unit<Mass> m = NANO(GRAM);
+    String s = fmt.format(m);
+    assertEquals("ng", s);
+  }
 
-	@Test
-	public void testFormatHz2() {
-		Unit<Frequency> hz = MEGA(HERTZ);
-		String s = fmt.format(hz);
-		assertEquals("MHz", s);
-	}
+  @Test
+  public void testFormatHz2() {
+    Unit<Frequency> hz = MEGA(HERTZ);
+    String s = fmt.format(hz);
+    assertEquals("MHz", s);
+  }
 
-	@Test
-	public void testFormatHz3() {
-		Unit<Frequency> hz = KILO(HERTZ);
-		String s = fmt.format(hz);
-		assertEquals("kHz", s);
-	}
+  @Test
+  public void testFormatHz3() {
+    Unit<Frequency> hz = KILO(HERTZ);
+    String s = fmt.format(hz);
+    assertEquals("kHz", s);
+  }
 }

@@ -35,78 +35,71 @@ import javax.measure.Unit;
 import tec.units.ri.AbstractQuantity;
 
 /**
- * An amount of quantity, consisting of a double and a Unit. LongQuantity
- * objects are immutable.
+ * An amount of quantity, consisting of a double and a Unit. LongQuantity objects are immutable.
  * 
  * @see AbstractQuantity
  * @see Quantity
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
- *            The type of the quantity.
+ *          The type of the quantity.
  * @version 0.2, $Date: 2015-07-07 $
  */
 final class LongQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
-	final long value;
+  final long value;
 
-	public LongQuantity(long value, Unit<Q> unit) {
-		super(unit);
-		this.value = value;
-	}
+  public LongQuantity(long value, Unit<Q> unit) {
+    super(unit);
+    this.value = value;
+  }
 
-	@Override
-	public Long getValue() {
-		return value;
-	}
+  @Override
+  public Long getValue() {
+    return value;
+  }
 
-	public double doubleValue(Unit<Q> unit) {
-		return (super.getUnit().equals(unit)) ? value : super.getUnit()
-				.getConverterTo(unit).convert(value);
-	}
+  public double doubleValue(Unit<Q> unit) {
+    return (super.getUnit().equals(unit)) ? value : super.getUnit().getConverterTo(unit).convert(value);
+  }
 
-	@Override
-	public long longValue(Unit<Q> unit) {
-		double result = doubleValue(unit);
-		if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
-			throw new ArithmeticException("Overflow (" + result + ")");
-		}
-		return (long) result;
-	}
+  @Override
+  public long longValue(Unit<Q> unit) {
+    double result = doubleValue(unit);
+    if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
+      throw new ArithmeticException("Overflow (" + result + ")");
+    }
+    return (long) result;
+  }
 
-	public Quantity<Q> add(Quantity<Q> that) {
-		final Quantity<Q> converted = that.to(getUnit());
-		return NumberQuantity.of(value + converted.getValue().longValue(),
-				getUnit());
-	}
+  public Quantity<Q> add(Quantity<Q> that) {
+    final Quantity<Q> converted = that.to(getUnit());
+    return NumberQuantity.of(value + converted.getValue().longValue(), getUnit());
+  }
 
-	public Quantity<Q> subtract(Quantity<Q> that) {
-		final Quantity<Q> converted = that.to(getUnit());
-		return NumberQuantity.of(value - converted.getValue().longValue(),
-				getUnit());
-	}
+  public Quantity<Q> subtract(Quantity<Q> that) {
+    final Quantity<Q> converted = that.to(getUnit());
+    return NumberQuantity.of(value - converted.getValue().longValue(), getUnit());
+  }
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public Quantity<?> multiply(Quantity<?> that) {
-		return new LongQuantity(value * that.getValue().longValue(), getUnit());
-	}
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  public Quantity<?> multiply(Quantity<?> that) {
+    return new LongQuantity(value * that.getValue().longValue(), getUnit());
+  }
 
-	public Quantity<Q> multiply(Number that) {
-		return NumberQuantity.of(value * that.intValue(), getUnit());
-	}
+  public Quantity<Q> multiply(Number that) {
+    return NumberQuantity.of(value * that.intValue(), getUnit());
+  }
 
-	public Quantity<?> divide(Quantity<?> that) {
-		return NumberQuantity.of(
-				(double) value / that.getValue().doubleValue(), getUnit()
-						.divide(that.getUnit()));
-	}
+  public Quantity<?> divide(Quantity<?> that) {
+    return NumberQuantity.of((double) value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
+  }
 
-	@SuppressWarnings("unchecked")
-	public AbstractQuantity<Q> inverse() {
-		return (AbstractQuantity<Q>) NumberQuantity.of(1 / value, getUnit()
-				.inverse());
-	}
+  @SuppressWarnings("unchecked")
+  public AbstractQuantity<Q> inverse() {
+    return (AbstractQuantity<Q>) NumberQuantity.of(1 / value, getUnit().inverse());
+  }
 
-	public Quantity<Q> divide(Number that) {
-		return NumberQuantity.of(value / that.doubleValue(), getUnit());
-	}
+  public Quantity<Q> divide(Number that) {
+    return NumberQuantity.of(value / that.doubleValue(), getUnit());
+  }
 }

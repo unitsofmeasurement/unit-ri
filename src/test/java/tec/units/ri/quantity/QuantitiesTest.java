@@ -48,126 +48,125 @@ import static tec.units.ri.unit.Units.PASCAL;
  */
 public class QuantitiesTest {
 
-	public QuantitiesTest() {
-	}
+  public QuantitiesTest() {
+  }
 
-	@BeforeClass
-	public static void setUpClass() throws Exception {
-	}
+  @BeforeClass
+  public static void setUpClass() throws Exception {
+  }
 
-	@AfterClass
-	public static void tearDownClass() throws Exception {
-	}
+  @AfterClass
+  public static void tearDownClass() throws Exception {
+  }
 
-	@Test
-	public void testOf() {
-		AbstractQuantity<Pressure> pressure = NumberQuantity.of((double) 1,
-				PASCAL);
-		assertEquals(PASCAL, pressure.getUnit()); // TODO: Problem with kg...
-	}
+  @Test
+  public void testOf() {
+    AbstractQuantity<Pressure> pressure = NumberQuantity.of((double) 1, PASCAL);
+    assertEquals(PASCAL, pressure.getUnit()); // TODO: Problem with kg...
+  }
 
-	@Test
-	public void testAnnotate() {
-	}
+  @Test
+  public void testAnnotate() {
+  }
 
-	@Test
-	public void testGetAnnotation() {
-	}
+  @Test
+  public void testGetAnnotation() {
+  }
 
-	@Test
-	public void testGetUnannotatedUnit() {
-	}
+  @Test
+  public void testGetUnannotatedUnit() {
+  }
 
-	@Test
-	public void testIsSystemUnit() {
-	}
+  @Test
+  public void testIsSystemUnit() {
+  }
 
-	@Test
-	public void testToString() {
-	}
+  @Test
+  public void testToString() {
+  }
 
-	@Test
-	public void testGetConverterToSystemUnit() {
-	}
+  @Test
+  public void testGetConverterToSystemUnit() {
+  }
 
-	@Test
-	public void testGetSymbol() {
-	}
+  @Test
+  public void testGetSymbol() {
+  }
 
-	@Test
-	public void testGetSystemUnit() {
-	}
+  @Test
+  public void testGetSystemUnit() {
+  }
 
-	@Test
-	public void testGetProductUnits() {
-	}
+  @Test
+  public void testGetProductUnits() {
+  }
 
-	@Test
-	public void testGetDimension() {
-	}
+  @Test
+  public void testGetDimension() {
+  }
 
-	@Test
-	public void testIsCompatible() {
-	}
+  @Test
+  public void testIsCompatible() {
+  }
 
-	@Test
-	public void testAsType() {
-	}
+  @Test
+  public void testAsType() {
+  }
 
-	@Test
-	public void testGetConverterTo() {
-	}
+  @Test
+  public void testGetConverterTo() {
+  }
 
-	@Test
-	public void testGetConverterToAny() {
-	}
+  @Test
+  public void testGetConverterToAny() {
+  }
 
-	@Test
-	public void testAlternate() {
-	}
+  @Test
+  public void testAlternate() {
+  }
 
-	@Test
-	public void testTransform() {
-	}
+  @Test
+  public void testTransform() {
+  }
 
-	@Test
-	public void testAdd() {
-	}
+  @Test
+  public void testAdd() {
+  }
 
-	@Test
-	public void testMultiply_double() {
-	}
+  @Test
+  public void testMultiply_double() {
+  }
 
-	@Test
-	public void testMultiply_ErrorType() {
-	}
+  @Test
+  public void testMultiply_ErrorType() {
+  }
 
-	@Test
-	public void testInverse() {
-	}
+  @Test
+  public void testInverse() {
+  }
 
-	@Test
-	public void testDivide_double() {
-	}
+  @Test
+  public void testDivide_double() {
+  }
 
-	@Test
-	public void testDivide_ErrorType() {
-	}
+  @Test
+  public void testDivide_ErrorType() {
+  }
 
-	@Test
-	public void testRoot() {
-	}
+  @Test
+  public void testRoot() {
+  }
 
-	@Test
-	public void testPow() {
-	}
+  @Test
+  public void testPow() {
+  }
 
-	@Test
-	public void testHashCode() {
-	}
+  @Test
+  public void testHashCode() {
+  }
 
-	@Test
-	public void testEquals() {
-	}
+  @Test
+  public void testEquals() {
+  }
 
 }

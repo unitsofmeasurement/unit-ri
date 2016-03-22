@@ -45,54 +45,50 @@ import org.junit.Test;
  */
 @SuppressWarnings("unchecked")
 public class BootstrapTest {
-	@Test
-	public void testGetServices() throws Exception {
-		Collection<SystemOfUnitsService> services = Bootstrap
-				.getServices(SystemOfUnitsService.class);
-		assertNotNull(services);
-		assertFalse(services.isEmpty());
-		assertEquals(1, services.size());
-		int i = 0;
-		for (SystemOfUnitsService service : services) {
-			switch (i) {
-				case 0 :
-					assertEquals("Units", service.getSystemOfUnits().getName());
-					break;
-			}
-			i++;
-		}
-	}
+  @Test
+  public void testGetServices() throws Exception {
+    Collection<SystemOfUnitsService> services = Bootstrap.getServices(SystemOfUnitsService.class);
+    assertNotNull(services);
+    assertFalse(services.isEmpty());
+    assertEquals(1, services.size());
+    int i = 0;
+    for (SystemOfUnitsService service : services) {
+      switch (i) {
+        case 0:
+          assertEquals("Units", service.getSystemOfUnits().getName());
+          break;
+      }
+      i++;
+    }
+  }
 
-	@Test
-	public void testGetServices_BadCase() throws Exception {
-		Collection<Object> services = Collection.class.cast(Bootstrap
-				.getServices(String.class));
-		assertNotNull(services);
-		assertTrue(services.isEmpty());
-		services = Collection.class.cast(Bootstrap.getServices(Runtime.class));
-		assertNotNull(services);
-		assertTrue(services.isEmpty());
-	}
+  @Test
+  public void testGetServices_BadCase() throws Exception {
+    Collection<Object> services = Collection.class.cast(Bootstrap.getServices(String.class));
+    assertNotNull(services);
+    assertTrue(services.isEmpty());
+    services = Collection.class.cast(Bootstrap.getServices(Runtime.class));
+    assertNotNull(services);
+    assertTrue(services.isEmpty());
+  }
 
-	@Test
-	public void testGetService() throws Exception {
-		SystemOfUnitsService souService = Bootstrap
-				.getService(SystemOfUnitsService.class);
-		assertNotNull(souService);
-		assertEquals("Units", souService.getSystemOfUnits().getName());
-	}
+  @Test
+  public void testGetService() throws Exception {
+    SystemOfUnitsService souService = Bootstrap.getService(SystemOfUnitsService.class);
+    assertNotNull(souService);
+    assertEquals("Units", souService.getSystemOfUnits().getName());
+  }
 
-	@Test
-	public void testGetAnotherService() throws Exception {
-		UnitFormatService ufs = Bootstrap.getService(UnitFormatService.class);
-		assertNotNull(ufs);
-		assertNotNull(ufs.getUnitFormat());
-		assertEquals("tec.units.ri.format.SimpleUnitFormat$DefaultFormat", ufs
-				.getUnitFormat().getClass().getName());
-	}
+  @Test
+  public void testGetAnotherService() throws Exception {
+    UnitFormatService ufs = Bootstrap.getService(UnitFormatService.class);
+    assertNotNull(ufs);
+    assertNotNull(ufs.getUnitFormat());
+    assertEquals("tec.units.ri.format.SimpleUnitFormat$DefaultFormat", ufs.getUnitFormat().getClass().getName());
+  }
 
-	@Test
-	public void testGetService_BadCase() throws Exception {
-		assertNull(Bootstrap.getService(Locale.class));
-	}
+  @Test
+  public void testGetService_BadCase() throws Exception {
+    assertNull(Bootstrap.getService(Locale.class));
+  }
 }

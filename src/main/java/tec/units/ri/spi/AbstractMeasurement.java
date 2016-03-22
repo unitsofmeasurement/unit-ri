@@ -33,8 +33,7 @@ import javax.measure.Quantity;
 
 /**
  * <p>
- * This class represents the immutable result of a measurement stated in a known
- * quantity.
+ * This class represents the immutable result of a measurement stated in a known quantity.
  * </p>
  * 
  * <p>
@@ -44,81 +43,79 @@ import javax.measure.Quantity;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.1, $Date: 2014-11-29 $
  */
-abstract class AbstractMeasurement<Q extends Quantity<Q>>
-		implements
-			Measurement<Q> {
+abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement<Q> {
 
-	/**
+  /**
 	 * 
 	 */
-	// private static final long serialVersionUID = 2417644773551236879L;
+  // private static final long serialVersionUID = 2417644773551236879L;
 
-	private final Quantity<Q> quantity;
+  private final Quantity<Q> quantity;
 
-	private final long timestamp;
+  private final long timestamp;
 
-	/**
-	 * constructor.
-	 */
-	protected AbstractMeasurement(Quantity<Q> q, long t) {
-		this.quantity = q;
-		this.timestamp = t;
-	}
+  /**
+   * constructor.
+   */
+  protected AbstractMeasurement(Quantity<Q> q, long t) {
+    this.quantity = q;
+    this.timestamp = t;
+  }
 
-	/**
-	 * constructor.
-	 */
-	protected AbstractMeasurement(Quantity<Q> q) {
-		this(q, System.currentTimeMillis());
-	}
+  /**
+   * constructor.
+   */
+  protected AbstractMeasurement(Quantity<Q> q) {
+    this(q, System.currentTimeMillis());
+  }
 
-	/**
-	 * Returns the measurement quantity.
-	 *
-	 * @return the quantity.
-	 */
-	public final Quantity<Q> getQuantity() {
-		return quantity;
-	}
+  /**
+   * Returns the measurement quantity.
+   *
+   * @return the quantity.
+   */
+  public final Quantity<Q> getQuantity() {
+    return quantity;
+  }
 
-	/**
-	 * Returns the measurement timestamp.
-	 *
-	 * @return the timestamp.
-	 */
-	public final long getTimestamp() {
-		return timestamp;
-	}
+  /**
+   * Returns the measurement timestamp.
+   *
+   * @return the timestamp.
+   */
+  public final long getTimestamp() {
+    return timestamp;
+  }
 
-	@SuppressWarnings({"unchecked"})
-	static final <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q) {
-		return new Default<Q>(q);
-	}
+  @SuppressWarnings({ "unchecked" })
+  static final <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q) {
+    return new Default<Q>(q);
+  }
 
-	@SuppressWarnings({"unchecked"})
-	static final <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q, long t) {
-		return new Default<Q>(q, t);
-	}
+  @SuppressWarnings({ "unchecked" })
+  static final <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q, long t) {
+    return new Default<Q>(q, t);
+  }
 
-	/**
-	 * This class represents the default measurement.
-	 */
-	@SuppressWarnings("rawtypes")
-	private static final class Default<Q> extends AbstractMeasurement {
+  /**
+   * This class represents the default measurement.
+   */
+  @SuppressWarnings("rawtypes")
+  private static final class Default<Q> extends AbstractMeasurement {
 
-		@SuppressWarnings({"unchecked"})
-		protected <R extends Quantity<R>> Default(Quantity<R> q, long t) {
-			super(q, t);
-		}
+    @SuppressWarnings({ "unchecked" })
+    protected <R extends Quantity<R>> Default(Quantity<R> q, long t) {
+      super(q, t);
+    }
 
-		@SuppressWarnings("unchecked")
-		protected <R extends Quantity<R>> Default(Quantity<R> q) {
-			super(q);
-		}
+    @SuppressWarnings("unchecked")
+    protected <R extends Quantity<R>> Default(Quantity<R> q) {
+      super(q);
+    }
 
-		public int compareTo(Object o) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-	}
+    public int compareTo(Object o) {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+  }
 }

@@ -42,13 +42,11 @@ import tec.units.ri.spi.Measurement;
 
 public class MeasurementTest {
 
-	@Test
-	public void testOf() {
-		long timestamp = System.currentTimeMillis();
-		Measurement<Mass> measurement = AbstractMeasurement.of(
-				Quantities.getQuantity(15, KILOGRAM), timestamp);
-		assertEquals(Quantities.getQuantity(15, KILOGRAM),
-				measurement.getQuantity());
-		assertEquals(timestamp, measurement.getTimestamp());
-	}
+  @Test
+  public void testOf() {
+    long timestamp = System.currentTimeMillis();
+    Measurement<Mass> measurement = AbstractMeasurement.of(Quantities.getQuantity(15, KILOGRAM), timestamp);
+    assertEquals(Quantities.getQuantity(15, KILOGRAM), measurement.getQuantity());
+    assertEquals(timestamp, measurement.getTimestamp());
+  }
 }

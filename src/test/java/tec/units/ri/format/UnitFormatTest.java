@@ -62,134 +62,133 @@ import tec.units.ri.unit.Units;
  *
  */
 public class UnitFormatTest {
-	private Quantity<Length> sut;
-	private UnitFormat format;
+  private Quantity<Length> sut;
+  private UnitFormat format;
 
-	@Before
-	public void init() {
-		sut = DefaultQuantityFactory.getInstance(Length.class)
-				.create(10, METRE);
-		format = SimpleUnitFormat.getInstance();
-	}
+  @Before
+  public void init() {
+    sut = DefaultQuantityFactory.getInstance(Length.class).create(10, METRE);
+    format = SimpleUnitFormat.getInstance();
+  }
 
-	@Test
-	public void testFormatHz() {
-		Unit<Frequency> hz = HERTZ;
-		assertEquals("Hz", hz.toString());
-	}
+  @Test
+  public void testFormatHz() {
+    Unit<Frequency> hz = HERTZ;
+    assertEquals("Hz", hz.toString());
+  }
 
-	@Test
-	public void testFormatHz2() {
-		Unit<Frequency> mhz = MEGA(HERTZ);
-		assertEquals("MHz", mhz.toString());
-	}
+  @Test
+  public void testFormatHz2() {
+    Unit<Frequency> mhz = MEGA(HERTZ);
+    assertEquals("MHz", mhz.toString());
+  }
 
-	@Test
-	public void testFormatHz3() {
-		Unit<Frequency> khz = KILO(HERTZ);
-		assertEquals("kHz", khz.toString());
-	}
+  @Test
+  public void testFormatHz3() {
+    Unit<Frequency> khz = KILO(HERTZ);
+    assertEquals("kHz", khz.toString());
+  }
 
-	@Test
-	public void testFormatHz4() {
-		Unit<Frequency> mhz = MICRO(HERTZ);
-		assertEquals("µHz", mhz.toString());
-	}
+  @Test
+  public void testFormatHz4() {
+    Unit<Frequency> mhz = MICRO(HERTZ);
+    assertEquals("µHz", mhz.toString());
+  }
 
-	@Test
-	public void testFormatHz5() {
-		Unit<Frequency> mhz = NANO(HERTZ);
-		assertEquals("nHz", mhz.toString());
-	}
+  @Test
+  public void testFormatHz5() {
+    Unit<Frequency> mhz = NANO(HERTZ);
+    assertEquals("nHz", mhz.toString());
+  }
 
-	@Test
-	public void testFormatSr() {
-		Unit<SolidAngle> sr = STERADIAN;
-		assertEquals("sr", sr.toString());
-	}
+  @Test
+  public void testFormatSr() {
+    Unit<SolidAngle> sr = STERADIAN;
+    assertEquals("sr", sr.toString());
+  }
 
-	@Test
-	public void testFormatNewton() {
-		Unit<Force> n = NEWTON;
-		assertEquals("N", n.toString());
-	}
+  @Test
+  public void testFormatNewton() {
+    Unit<Force> n = NEWTON;
+    assertEquals("N", n.toString());
+  }
 
-	@Test
-	public void testFormatKph() {
-		Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
-		assertEquals("km/h", kph.toString());
-	}
+  @Test
+  public void testFormatKph() {
+    Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
+    assertEquals("km/h", kph.toString());
+  }
 
-	@Test
-	public void testParseSimple() {
-		try {
-			Unit<?> u = format.parse("s");
-			assertNotNull(u);
-			assertEquals("s", u.getSymbol());
-			assertEquals(SECOND, u);
-		} catch (ParserException e) {
-			fail(e.getMessage());
-		}
-	}
+  @Test
+  public void testParseSimple() {
+    try {
+      Unit<?> u = format.parse("s");
+      assertNotNull(u);
+      assertEquals("s", u.getSymbol());
+      assertEquals(SECOND, u);
+    } catch (ParserException e) {
+      fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testFormatFromQuantity() {
-		final Appendable a = new StringBuilder();
-		try {
-			format.format(METRE, a);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals(METRE, sut.getUnit());
-		assertEquals("m", a.toString());
+  @Test
+  public void testFormatFromQuantity() {
+    final Appendable a = new StringBuilder();
+    try {
+      format.format(METRE, a);
+    } catch (IOException e) {
+      fail(e.getMessage());
+    }
+    assertEquals(METRE, sut.getUnit());
+    assertEquals("m", a.toString());
 
-		final Appendable a2 = new StringBuilder();
-		@SuppressWarnings("unchecked")
-		Unit<Speed> v = (Unit<Speed>) sut.getUnit().divide(SECOND);
-		try {
-			format.format(v, a2);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals("m/s", a2.toString());
-	}
+    final Appendable a2 = new StringBuilder();
+    @SuppressWarnings("unchecked")
+    Unit<Speed> v = (Unit<Speed>) sut.getUnit().divide(SECOND);
+    try {
+      format.format(v, a2);
+    } catch (IOException e) {
+      fail(e.getMessage());
+    }
+    assertEquals("m/s", a2.toString());
+  }
 
-	@Test
-	public void testParseSimple1() {
-		try {
-			Unit<?> u = format.parse("min");
-			// assertEquals("min", u.getSymbol());
-			assertEquals(MINUTE, u);
-		} catch (ParserException e) {
-			fail(e.getMessage());
-		}
-	}
+  @Test
+  public void testParseSimple1() {
+    try {
+      Unit<?> u = format.parse("min");
+      // assertEquals("min", u.getSymbol());
+      assertEquals(MINUTE, u);
+    } catch (ParserException e) {
+      fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testParseSimple2() {
-		try {
-			Unit<?> u = format.parse("m");
-			assertNotNull(u);
-			assertEquals("m", u.getSymbol());
-			assertEquals(METRE, u);
-		} catch (ParserException e) {
-			fail(e.getMessage());
-		}
-	}
+  @Test
+  public void testParseSimple2() {
+    try {
+      Unit<?> u = format.parse("m");
+      assertNotNull(u);
+      assertEquals("m", u.getSymbol());
+      assertEquals(METRE, u);
+    } catch (ParserException e) {
+      fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testParseSimple3() {
-		try {
-			Unit<?> u = format.parse("kg");
-			assertEquals("kg", u.getSymbol());
-			assertEquals(KILOGRAM, u);
-		} catch (ParserException e) {
-			fail(e.getMessage());
-		}
-	}
+  @Test
+  public void testParseSimple3() {
+    try {
+      Unit<?> u = format.parse("kg");
+      assertEquals("kg", u.getSymbol());
+      assertEquals(KILOGRAM, u);
+    } catch (ParserException e) {
+      fail(e.getMessage());
+    }
+  }
 
-	@Test(expected = ParserException.class)
-	public void testParseIrregularString() {
-		Unit<?> u = format.parse("bl//^--1a");
-	}
+  @Test(expected = ParserException.class)
+  public void testParseIrregularString() {
+    Unit<?> u = format.parse("bl//^--1a");
+  }
 }

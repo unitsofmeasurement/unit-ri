@@ -41,100 +41,94 @@ import java.util.logging.Logger;
 import javax.measure.spi.ServiceProvider;
 
 /**
- * This class implements the {@link ServiceProvider} interface and hereby uses
- * the JDK {@link java.util.ServiceLoader} to load the services required.
+ * This class implements the {@link ServiceProvider} interface and hereby uses the JDK {@link java.util.ServiceLoader} to load the services required.
  *
  * @author Werner Keil
  */
 public class RIServiceProvider implements ServiceProvider {
-	/** List of services loaded, per class. */
-	@SuppressWarnings("rawtypes")
-	private final Map<Class, List<Object>> servicesLoaded = new HashMap<Class, List<Object>>();
+  /** List of services loaded, per class. */
+  @SuppressWarnings("rawtypes")
+  private final Map<Class, List<Object>> servicesLoaded = new HashMap<Class, List<Object>>();
 
-	@Override
-	public int getPriority() {
-		return 10;
-	}
+  @Override
+  public int getPriority() {
+    return 10;
+  }
 
-	/**
-	 * Loads and registers services.
-	 *
-	 * @param serviceType
-	 *            The service type.
-	 * @param <T>
-	 *            the concrete type.
-	 * @return the items found, never {@code null}.
-	 */
-	public <T> List<T> getServices(final Class<T> serviceType) {
-		@SuppressWarnings("unchecked")
-		List<T> found = (List<T>) servicesLoaded.get(serviceType);
-		if (found != null) {
-			return found;
-		}
+  /**
+   * Loads and registers services.
+   *
+   * @param serviceType
+   *          The service type.
+   * @param <T>
+   *          the concrete type.
+   * @return the items found, never {@code null}.
+   */
+  public <T> List<T> getServices(final Class<T> serviceType) {
+    @SuppressWarnings("unchecked")
+    List<T> found = (List<T>) servicesLoaded.get(serviceType);
+    if (found != null) {
+      return found;
+    }
 
-		return loadServices(serviceType);
-	}
+    return loadServices(serviceType);
+  }
 
-	public <T> T getService(Class<T> serviceType) {
-		List<T> servicesFound = getServices(serviceType);
-		if (servicesFound.isEmpty()) {
-			return null;
-		}
-		return servicesFound.get(0);
-	}
+  public <T> T getService(Class<T> serviceType) {
+    List<T> servicesFound = getServices(serviceType);
+    if (servicesFound.isEmpty()) {
+      return null;
+    }
+    return servicesFound.get(0);
+  }
 
-	/**
-	 * Loads and registers services.
-	 *
-	 * @param serviceType
-	 *            The service type.
-	 * @param <T>
-	 *            the concrete type.
-	 *
-	 * @return the items found, never {@code null}.
-	 */
-	@SuppressWarnings("unchecked")
-	private <T> List<T> loadServices(final Class<T> serviceType) {
-		final List<T> services = new ArrayList<T>();
-		try {
-			for (T t : ServiceLoader.load(serviceType)) {
-				services.add(t);
-			}
-			if (!servicesLoaded.containsKey(serviceType)) {
-				final List<T> previousServices = (List<T>) servicesLoaded.put(
-						serviceType, (List<Object>) services);
-				return (previousServices != null ? previousServices : services);
-			}
-			return services;
-		} catch (Exception e) {
-			Logger.getLogger(RIServiceProvider.class.getName()).log(WARNING,
-					"Error loading services of type " + serviceType, e);
-			return services;
-		}
-	}
+  /**
+   * Loads and registers services.
+   *
+   * @param serviceType
+   *          The service type.
+   * @param <T>
+   *          the concrete type.
+   *
+   * @return the items found, never {@code null}.
+   */
+  @SuppressWarnings("unchecked")
+  private <T> List<T> loadServices(final Class<T> serviceType) {
+    final List<T> services = new ArrayList<T>();
+    try {
+      for (T t : ServiceLoader.load(serviceType)) {
+        services.add(t);
+      }
+      if (!servicesLoaded.containsKey(serviceType)) {
+        final List<T> previousServices = (List<T>) servicesLoaded.put(serviceType, (List<Object>) services);
+        return (previousServices != null ? previousServices : services);
+      }
+      return services;
+    } catch (Exception e) {
+      Logger.getLogger(RIServiceProvider.class.getName()).log(WARNING, "Error loading services of type " + serviceType, e);
+      return services;
+    }
+  }
 
-	@Override
-	public int compareTo(ServiceProvider o) {
-		return compare(getPriority(), o.getPriority());
-	}
+  @Override
+  public int compareTo(ServiceProvider o) {
+    return compare(getPriority(), o.getPriority());
+  }
 
-	/**
-	 * Compares two {@code int} values numerically. The value returned is
-	 * identical to what would be returned by:
-	 * 
-	 * <pre>
-	 * Integer.valueOf(x).compareTo(Integer.valueOf(y))
-	 * </pre>
-	 *
-	 * @param x
-	 *            the first {@code int} to compare
-	 * @param y
-	 *            the second {@code int} to compare
-	 * @return the value {@code 0} if {@code x == y}; a value less than
-	 *         {@code 0} if {@code x < y}; and a value greater than {@code 0} if
-	 *         {@code x > y}
-	 */
-	private static int compare(int x, int y) {
-		return (x < y) ? -1 : ((x == y) ? 0 : 1);
-	}
+  /**
+   * Compares two {@code int} values numerically. The value returned is identical to what would be returned by:
+   * 
+   * <pre>
+   * Integer.valueOf(x).compareTo(Integer.valueOf(y))
+   * </pre>
+   *
+   * @param x
+   *          the first {@code int} to compare
+   * @param y
+   *          the second {@code int} to compare
+   * @return the value {@code 0} if {@code x == y}; a value less than {@code 0} if {@code x < y}; and a value greater than {@code 0} if {@code x > y}
+   */
+  private static int compare(int x, int y) {
+    return (x < y) ? -1 : ((x == y) ? 0 : 1);
+  }
 }

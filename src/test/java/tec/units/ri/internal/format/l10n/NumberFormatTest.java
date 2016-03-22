@@ -36,42 +36,40 @@ import org.junit.Test;
 import tec.units.ri.internal.format.l10n.DecimalFormat;
 
 public class NumberFormatTest {
-	final String[] patterns = new String[]{"#,#00.00#", "0.0;(0.0)", "0.###E0"};
+  final String[] patterns = new String[] { "#,#00.00#", "0.0;(0.0)", "0.###E0" };
 
-	@Test
-	public void testDecimalFormat() {
-		DecimalFormat format = (DecimalFormat) DecimalFormat
-				.getNumberInstance();
+  @Test
+  public void testDecimalFormat() {
+    DecimalFormat format = (DecimalFormat) DecimalFormat.getNumberInstance();
 
-		double value = -12.321;
-		for (int i = 0; i < patterns.length; i++) {
-			String pattern = patterns[i];
-			format.applyPattern(pattern);
-			String formated = format.format(value);
-			String text = "Pattern: " + pattern + " Sample: " + formated + "\n";
-			// System.out.println(text);
-			switch (i) {
-				case 0 :
-					assertEquals("-12.321", formated);
-					break;
-				case 1 :
-					assertEquals("(12.3)", formated);
-					break;
-				case 2 :
-					assertEquals("-1.232E1", formated);
-					break;
-				default :
-			}
-		}
-	}
+    double value = -12.321;
+    for (int i = 0; i < patterns.length; i++) {
+      String pattern = patterns[i];
+      format.applyPattern(pattern);
+      String formated = format.format(value);
+      String text = "Pattern: " + pattern + " Sample: " + formated + "\n";
+      // System.out.println(text);
+      switch (i) {
+        case 0:
+          assertEquals("-12.321", formated);
+          break;
+        case 1:
+          assertEquals("(12.3)", formated);
+          break;
+        case 2:
+          assertEquals("-1.232E1", formated);
+          break;
+        default:
+      }
+    }
+  }
 
-	@Test
-	public void testSmallNumbers() {
-		DecimalFormat format = (DecimalFormat) DecimalFormat
-				.getNumberInstance();
-		format.applyPattern("#,#0.00#");
-		double value = 0.05d;
-		String formated = format.format(value);
-		assertEquals("0.05", formated);
-	}
+  @Test
+  public void testSmallNumbers() {
+    DecimalFormat format = (DecimalFormat) DecimalFormat.getNumberInstance();
+    format.applyPattern("#,#0.00#");
+    double value = 0.05d;
+    String formated = format.format(value);
+    assertEquals("0.05", formated);
+  }
 }

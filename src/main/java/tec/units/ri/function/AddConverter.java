@@ -36,102 +36,97 @@ import tec.uom.lib.common.function.ValueSupplier;
 
 /**
  * <p>
- * This class represents a converter adding a constant offset to numeric values
- * (<code>double</code> based).
+ * This class represents a converter adding a constant offset to numeric values (<code>double</code> based).
  * </p>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author Werner Keil
  * @version 0.4, Dec 28, 2015
  */
-public final class AddConverter extends AbstractConverter
-		implements
-			ValueSupplier<Double> {
+public final class AddConverter extends AbstractConverter implements ValueSupplier<Double> {
 
-	/**
+  /**
 	 * 
 	 */
-	// private static final long serialVersionUID = -2981335308595652284L;
-	/**
-	 * Holds the offset.
-	 */
-	private double offset;
+  // private static final long serialVersionUID = -2981335308595652284L;
+  /**
+   * Holds the offset.
+   */
+  private double offset;
 
-	/**
-	 * Creates an additive converter having the specified offset.
-	 *
-	 * @param offset
-	 *            the offset value.
-	 * @throws IllegalArgumentException
-	 *             if offset is <code>0.0</code> (would result in identity
-	 *             converter).
-	 */
-	public AddConverter(double offset) {
-		if (offset == 0.0)
-			throw new IllegalArgumentException(
-					"Would result in identity converter");
-		this.offset = offset;
-	}
+  /**
+   * Creates an additive converter having the specified offset.
+   *
+   * @param offset
+   *          the offset value.
+   * @throws IllegalArgumentException
+   *           if offset is <code>0.0</code> (would result in identity converter).
+   */
+  public AddConverter(double offset) {
+    if (offset == 0.0)
+      throw new IllegalArgumentException("Would result in identity converter");
+    this.offset = offset;
+  }
 
-	/**
-	 * Returns the offset value for this add converter.
-	 *
-	 * @return the offset value.
-	 */
-	public double getOffset() {
-		return offset;
-	}
+  /**
+   * Returns the offset value for this add converter.
+   *
+   * @return the offset value.
+   */
+  public double getOffset() {
+    return offset;
+  }
 
-	@Override
-	public UnitConverter concatenate(UnitConverter converter) {
-		if (!(converter instanceof AddConverter))
-			return super.concatenate(converter);
-		double newOffset = offset + ((AddConverter) converter).offset;
-		return newOffset == 0.0 ? IDENTITY : new AddConverter(newOffset);
-	}
+  @Override
+  public UnitConverter concatenate(UnitConverter converter) {
+    if (!(converter instanceof AddConverter))
+      return super.concatenate(converter);
+    double newOffset = offset + ((AddConverter) converter).offset;
+    return newOffset == 0.0 ? IDENTITY : new AddConverter(newOffset);
+  }
 
-	@Override
-	public AddConverter inverse() {
-		return new AddConverter(-offset);
-	}
+  @Override
+  public AddConverter inverse() {
+    return new AddConverter(-offset);
+  }
 
-	@Override
-	public double convert(double value) {
-		return value + offset;
-	}
+  @Override
+  public double convert(double value) {
+    return value + offset;
+  }
 
-	// @Override
-	// public BigDecimal convert(BigDecimal value, MathContext ctx) throws
-	// ArithmeticException {
-	// return value.add(BigDecimal.valueOf(offset), ctx);
-	// }
+  // @Override
+  // public BigDecimal convert(BigDecimal value, MathContext ctx) throws
+  // ArithmeticException {
+  // return value.add(BigDecimal.valueOf(offset), ctx);
+  // }
 
-	@Override
-	public final String toString() {
-		return "AddConverter(" + offset + ")";
-	}
+  @Override
+  public final String toString() {
+    return "AddConverter(" + offset + ")";
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof AddConverter)) {
-			return false;
-		}
-		AddConverter that = (AddConverter) obj;
-		return this.offset == that.offset;
-	}
+  @Override
+  public boolean equals(Object obj) {
+    if (!(obj instanceof AddConverter)) {
+      return false;
+    }
+    AddConverter that = (AddConverter) obj;
+    return this.offset == that.offset;
+  }
 
-	@Override
-	public int hashCode() {
-		long bits = Double.doubleToLongBits(offset);
-		return (int) (bits ^ (bits >>> 32));
-	}
+  @Override
+  public int hashCode() {
+    long bits = Double.doubleToLongBits(offset);
+    return (int) (bits ^ (bits >>> 32));
+  }
 
-	public boolean isLinear() {
-		return false;
-	}
+  public boolean isLinear() {
+    return false;
+  }
 
-	public Double getValue() {
-		return offset;
-	}
+  public Double getValue() {
+    return offset;
+  }
 
 }

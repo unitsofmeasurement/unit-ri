@@ -44,21 +44,21 @@ import tec.units.ri.unit.Units;
  */
 public class DefaultSystemOfUnitsService implements SystemOfUnitsService {
 
-	final Map<String, SystemOfUnits> souMap = new HashMap<String, SystemOfUnits>();
+  final Map<String, SystemOfUnits> souMap = new HashMap<String, SystemOfUnits>();
 
-	public DefaultSystemOfUnitsService() {
-		souMap.put(Units.SYSTEM_NAME, Units.getInstance());
-	}
+  public DefaultSystemOfUnitsService() {
+    souMap.put(Units.SYSTEM_NAME, Units.getInstance());
+  }
 
-	public Collection<SystemOfUnits> getAvailableSystemsOfUnits() {
-		return souMap.values();
-	}
+  public Collection<SystemOfUnits> getAvailableSystemsOfUnits() {
+    return souMap.values();
+  }
 
-	public SystemOfUnits getSystemOfUnits() {
-		return getSystemOfUnits(Units.SYSTEM_NAME);
-	}
+  public SystemOfUnits getSystemOfUnits() {
+    return getSystemOfUnits(Units.SYSTEM_NAME);
+  }
 
-	public SystemOfUnits getSystemOfUnits(String name) {
-		return souMap.get(name);
-	}
+  public SystemOfUnits getSystemOfUnits(String name) {
+    return souMap.get(name);
+  }
 }

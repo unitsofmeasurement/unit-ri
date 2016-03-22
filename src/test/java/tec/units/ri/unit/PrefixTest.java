@@ -48,64 +48,63 @@ import tec.units.ri.function.RationalConverter;
 import tec.units.ri.quantity.Quantities;
 
 public class PrefixTest {
-	@Test
-	public void testKilo() {
-		// TODO how to handle equals for units?
-		assertEquals(KILOGRAM.toString(), KILO(GRAM).toString());
-	}
+  @Test
+  public void testKilo() {
+    // TODO how to handle equals for units?
+    assertEquals(KILOGRAM.toString(), KILO(GRAM).toString());
+  }
 
-	@Test
-	public void testMega() {
-		Unit<Mass> m1 = MEGA(GRAM);
-		assertEquals("Mg", m1.toString());
-	}
+  @Test
+  public void testMega() {
+    Unit<Mass> m1 = MEGA(GRAM);
+    assertEquals("Mg", m1.toString());
+  }
 
-	public void testMilli() {
-		Quantity<Mass> m1 = Quantities.getQuantity(1.0, MILLI(Units.GRAM));
-		assertEquals(1d, m1.getValue());
-		assertEquals("mg", m1.getUnit().toString());
-	}
+  public void testMilli() {
+    Quantity<Mass> m1 = Quantities.getQuantity(1.0, MILLI(Units.GRAM));
+    assertEquals(1d, m1.getValue());
+    assertEquals("mg", m1.getUnit().toString());
+  }
 
-	@Test
-	public void testMilli2() {
-		Quantity<Volume> m1 = Quantities.getQuantity(10, MILLI(LITRE));
-		assertEquals(10, m1.getValue());
-		assertEquals("ml", m1.getUnit().toString());
-	}
+  @Test
+  public void testMilli2() {
+    Quantity<Volume> m1 = Quantities.getQuantity(10, MILLI(LITRE));
+    assertEquals(10, m1.getValue());
+    assertEquals("ml", m1.getUnit().toString());
+  }
 
-	@Test
-	public void testMilli3() {
-		Quantity<Volume> m1 = Quantities.getQuantity(1.0, LITRE);
-		assertEquals(1d, m1.getValue());
-		assertEquals("l", m1.getUnit().toString());
+  @Test
+  public void testMilli3() {
+    Quantity<Volume> m1 = Quantities.getQuantity(1.0, LITRE);
+    assertEquals(1d, m1.getValue());
+    assertEquals("l", m1.getUnit().toString());
 
-		Quantity<Volume> m2 = m1.to(MILLI(LITRE));
-		assertEquals(1000.0d, m2.getValue());
-		assertEquals("ml", m2.getUnit().toString());
-	}
+    Quantity<Volume> m2 = m1.to(MILLI(LITRE));
+    assertEquals(1000.0d, m2.getValue());
+    assertEquals("ml", m2.getUnit().toString());
+  }
 
-	@Test
-	public void testNano() {
-		Unit<Mass> m1 = NANO(GRAM);
-		assertEquals("ng", m1.toString());
-	}
+  @Test
+  public void testNano() {
+    Unit<Mass> m1 = NANO(GRAM);
+    assertEquals("ng", m1.toString());
+  }
 
-	@Test
-	public void testPicoNano() {
-		Unit<Mass> m1 = PICO(KILOGRAM);
-		assertEquals("ng", m1.toString());
-	}
+  @Test
+  public void testPicoNano() {
+    Unit<Mass> m1 = PICO(KILOGRAM);
+    assertEquals("ng", m1.toString());
+  }
 
-	@Test
-	public void testBetweenPrefixes() {
-		UnitConverter conv = YOTTA(METRE).getConverterTo(ZETTA(METRE));
-		assertEquals(new RationalConverter(4.7683715820312499E17,
-				4.76837158203125E14), conv); // TODO value?
-	}
+  @Test
+  public void testBetweenPrefixes() {
+    UnitConverter conv = YOTTA(METRE).getConverterTo(ZETTA(METRE));
+    assertEquals(new RationalConverter(4.7683715820312499E17, 4.76837158203125E14), conv); // TODO value?
+  }
 
-	@Test
-	public void testBetweenPrefixes2() {
-		UnitConverter conv = KILO(METRE).getConverterTo(GIGA(METRE));
-		assertEquals(RationalConverter.of(1d, 1000000d), conv);
-	}
+  @Test
+  public void testBetweenPrefixes2() {
+    UnitConverter conv = KILO(METRE).getConverterTo(GIGA(METRE));
+    assertEquals(RationalConverter.of(1d, 1000000d), conv);
+  }
 }
