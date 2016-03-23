@@ -437,12 +437,6 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
-
-				<plugin>
-					<groupId>net.revelc.code</groupId>
-					<artifactId>formatter-maven-plugin</artifactId>
-					<version>0.5.2</version>
-				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
