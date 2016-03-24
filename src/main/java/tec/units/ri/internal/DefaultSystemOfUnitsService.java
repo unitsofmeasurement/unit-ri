@@ -37,12 +37,15 @@ import javax.measure.spi.SystemOfUnits;
 import javax.measure.spi.SystemOfUnitsService;
 
 import tec.units.ri.unit.Units;
+import tec.uom.lib.common.function.IntPrioritySupplier;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, November 23, 2015
+ * @version 0.5, March 23, 2016
  */
-public class DefaultSystemOfUnitsService implements SystemOfUnitsService {
+public class DefaultSystemOfUnitsService implements SystemOfUnitsService, IntPrioritySupplier {
+
+  private static final int PRIO = 1000;
 
   final Map<String, SystemOfUnits> souMap = new HashMap<String, SystemOfUnits>();
 
@@ -60,5 +63,10 @@ public class DefaultSystemOfUnitsService implements SystemOfUnitsService {
 
   public SystemOfUnits getSystemOfUnits(String name) {
     return souMap.get(name);
+  }
+
+  @Override
+  public int getPriority() {
+    return PRIO;
   }
 }

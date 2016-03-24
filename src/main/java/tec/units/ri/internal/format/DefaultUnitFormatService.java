@@ -38,15 +38,17 @@ import javax.measure.spi.UnitFormatService;
 
 import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.format.SimpleUnitFormat.Flavor;
+import tec.uom.lib.common.function.IntPrioritySupplier;
 
 /**
  * Default format service.
  *
  * @author Werner Keil
- * @version 0.4, November 23, 2015
+ * @version 0.5, March 23, 2016
  */
-public class DefaultUnitFormatService implements UnitFormatService {
+public class DefaultUnitFormatService implements UnitFormatService, IntPrioritySupplier {
 
+  private static final int PRIO = 1000;
   private static final String DEFAULT_FORMAT = Flavor.Default.name();
 
   private final Map<String, UnitFormat> formats = new HashMap<String, UnitFormat>();
@@ -56,11 +58,6 @@ public class DefaultUnitFormatService implements UnitFormatService {
     formats.put(Flavor.ASCII.name(), SimpleUnitFormat.getInstance(Flavor.ASCII));
     // formats.put("EBNF", EBNFUnitFormat.getInstance());
   }
-
-  // @Override
-  // public String getProviderName() {
-  // return PROVIDER_NAME;
-  // }
 
   /*
    * (non-Javadoc)
@@ -86,4 +83,7 @@ public class DefaultUnitFormatService implements UnitFormatService {
     return formats.keySet();
   }
 
+  public int getPriority() {
+    return PRIO;
+  }
 }
