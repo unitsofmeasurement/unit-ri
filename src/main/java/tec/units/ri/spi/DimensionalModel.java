@@ -100,6 +100,7 @@ public abstract class DimensionalModel {
    *          the new current model.
    * @see #current
    */
+  // TODO should we rename to init() like in API Bootstrap?
   protected static void setCurrent(DimensionalModel model) {
     currentModel = model;
   }

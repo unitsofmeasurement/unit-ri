@@ -125,14 +125,7 @@ import tec.units.ri.spi.DimensionalModel;
  * This class represents the standard model.
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.6.1, December 20, 2014
+ * @version 0.7, March 28, 2016
  */
 class StandardModel extends DimensionalModel {
-
-  /**
-   * Default constructor.
-   */
-  public StandardModel() {
-  }
-
 }
