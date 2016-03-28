@@ -41,11 +41,11 @@ import tec.uom.lib.common.function.IntPrioritySupplier;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, March 23, 2016
+ * @version 0.6, March 29, 2016
  */
 public class DefaultSystemOfUnitsService implements SystemOfUnitsService, IntPrioritySupplier {
 
-  private static final int PRIO = 1000;
+  private static final int PRIO = 10;
 
   final Map<String, SystemOfUnits> souMap = new HashMap<String, SystemOfUnits>();
 
