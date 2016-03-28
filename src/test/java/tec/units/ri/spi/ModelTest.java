@@ -30,21 +30,13 @@
 package tec.units.ri.spi;
 
 import static org.junit.Assert.*;
-import static tec.units.ri.unit.Units.KILOGRAM;
-
-import javax.measure.quantity.Mass;
-
 import org.junit.Test;
-
-import tec.units.ri.quantity.Quantities;
-import tec.units.ri.spi.AbstractMeasurement;
-import tec.units.ri.spi.Measurement;
 
 public class ModelTest {
 
   @Test
   public void testOf() {
-      DimensionalModel m = StandardModel.current();
-      assertNotNull(m);
+    DimensionalModel m = StandardModel.current();
+    assertNotNull(m);
   }
 }
