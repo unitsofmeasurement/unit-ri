@@ -49,5 +49,13 @@ public class ServiceProviderTest {
 	ServiceProvider provider = ServiceProvider.getDefault();
 	assertNotNull(provider);
 	assertEquals("tec.units.ri.internal.RIServiceProvider", provider.getClass().getName());
+	
+	assertNotNull(provider.getQuantityFactoryService());
+	assertNotNull(provider.getUnitFormatService());
+	assertNotNull(provider.getUnitFormatService().getAvailableFormatNames());
+	assertEquals(2, provider.getUnitFormatService().getAvailableFormatNames().size());
+	assertNotNull(provider.getSystemOfUnitsService());
+	assertNotNull(provider.getSystemOfUnitsService().getAvailableSystemsOfUnits());
+	assertEquals(1, provider.getSystemOfUnitsService().getAvailableSystemsOfUnits().size());
     }
 }

@@ -47,8 +47,6 @@ import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.SystemOfUnitsService;
 import javax.measure.spi.UnitFormatService;
 
-import tec.units.ri.internal.format.DefaultUnitFormatService;
-import tec.units.ri.internal.quantity.DefaultQuantityFactoryService;
 import tec.uom.lib.common.function.IntPrioritySupplier;
 
 /**
@@ -203,16 +201,16 @@ public class RIServiceProvider extends ServiceProvider implements
 
     @Override
     public SystemOfUnitsService getSystemOfUnitsService() {
-	return new DefaultSystemOfUnitsService();
+	return getService(SystemOfUnitsService.class);
     }
 
     @Override
     public UnitFormatService getUnitFormatService() {
-	return new DefaultUnitFormatService();
+	return getService(UnitFormatService.class);
     }
 
     @Override
     public QuantityFactoryService getQuantityFactoryService() {
-	return new DefaultQuantityFactoryService();
+	return getService(QuantityFactoryService.class);
     }
 }
