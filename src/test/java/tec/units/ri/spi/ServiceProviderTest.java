@@ -30,13 +30,23 @@
 package tec.units.ri.spi;
 
 import static org.junit.Assert.*;
+
+import javax.measure.spi.ServiceProvider;
+
 import org.junit.Test;
 
-public class ModelTest {
+public class ServiceProviderTest {
 
-  @Test
-  public void testOf() {
-    DimensionalModel m = DimensionalModel.current();
-    assertNotNull(m);
-  }
+    @Test
+    public void testAvailables() {
+	ServiceProvider[] providers = ServiceProvider.getAvailables();
+	assertNotNull(providers);
+	assertTrue(providers.length > 0);
+    }
+    
+    @Test
+    public void testDefault() {
+	ServiceProvider provider = ServiceProvider.getDefault();
+	assertNotNull(provider);
+    }
 }

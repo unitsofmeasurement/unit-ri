@@ -32,7 +32,7 @@ package tec.units.ri.spi;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import javax.measure.spi.Bootstrap;
+import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.SystemOfUnits;
 import javax.measure.spi.SystemOfUnitsService;
 
@@ -45,7 +45,8 @@ public class SystemOfUnitsServiceTest {
 
   @BeforeClass
   public static void setUp() {
-    service = Bootstrap.getService(SystemOfUnitsService.class);
+//    service = Bootstrap.getService(SystemOfUnitsService.class);
+      service = ServiceProvider.getDefault().getSystemOfUnitsService();
   }
 
   @Test
