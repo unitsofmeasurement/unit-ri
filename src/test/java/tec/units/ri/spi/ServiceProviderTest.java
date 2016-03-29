@@ -48,5 +48,6 @@ public class ServiceProviderTest {
     public void testDefault() {
 	ServiceProvider provider = ServiceProvider.getDefault();
 	assertNotNull(provider);
+	assertEquals("tec.units.ri.internal.RIServiceProvider", provider.getClass().getName());
     }
 }
