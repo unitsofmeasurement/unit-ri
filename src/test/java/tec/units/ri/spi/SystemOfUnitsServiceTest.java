@@ -55,6 +55,7 @@ public class SystemOfUnitsServiceTest {
     SystemOfUnits system = service.getSystemOfUnits();
     assertNotNull(system);
     assertEquals("tec.units.ri.unit.Units", system.getClass().getName());
+    assertEquals("Units", system.getName());
     assertNotNull(system.getUnits());
     // for (Unit<?> u : system.getUnits()) {
     // System.out.println(u.toString());
