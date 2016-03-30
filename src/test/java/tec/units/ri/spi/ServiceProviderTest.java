@@ -41,14 +41,14 @@ public class ServiceProviderTest {
     public void testAvailables() {
 	ServiceProvider[] providers = ServiceProvider.getAvailables();
 	assertNotNull(providers);
-	assertTrue(providers.length > 0);
+	assertEquals(1, providers.length);
     }
     
     @Test
     public void testDefault() {
 	ServiceProvider provider = ServiceProvider.getDefault();
 	assertNotNull(provider);
-	assertEquals("tec.units.ri.internal.RIServiceProvider", provider.getClass().getName());
+	assertEquals("tec.units.ri.spi.RIServiceProvider", provider.getClass().getName());
 	
 	assertNotNull(provider.getQuantityFactoryService());
 	assertNotNull(provider.getUnitFormatService());

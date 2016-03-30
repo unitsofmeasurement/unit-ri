@@ -27,7 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.internal;
+package tec.units.ri.spi;
 
 import static java.util.logging.Level.*;
 
@@ -54,7 +54,7 @@ import tec.uom.lib.common.function.IntPrioritySupplier;
  * the JDK {@link java.util.ServiceLoader} to load the services required.
  *
  * @author Werner Keil
- * @version 0.4
+ * @version 0.5
  */
 public class RIServiceProvider extends ServiceProvider implements
 	IntPrioritySupplier {
@@ -106,7 +106,7 @@ public class RIServiceProvider extends ServiceProvider implements
      *            the concrete type.
      * @return the items found, never {@code null}.
      */
-    public <T> List<T> getServices(final Class<T> serviceType) {
+    protected <T> List<T> getServices(final Class<T> serviceType) {
 	@SuppressWarnings("unchecked")
 	List<T> found = (List<T>) servicesLoaded.get(serviceType);
 	if (found != null) {
@@ -116,7 +116,7 @@ public class RIServiceProvider extends ServiceProvider implements
 	return loadServices(serviceType);
     }
 
-    public <T> T getService(Class<T> serviceType) {
+    protected <T> T getService(Class<T> serviceType) {
 	List<T> servicesFound = getServices(serviceType);
 	if (servicesFound.isEmpty()) {
 	    return null;
@@ -154,7 +154,7 @@ public class RIServiceProvider extends ServiceProvider implements
 	}
     }
 
-    public int compareTo(ServiceProvider o) {
+    int compareTo(ServiceProvider o) {
 	return compare(getPriority(), o.getPriority());
     }
 
