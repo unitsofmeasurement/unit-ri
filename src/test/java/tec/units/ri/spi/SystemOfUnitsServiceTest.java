@@ -45,8 +45,8 @@ public class SystemOfUnitsServiceTest {
 
   @BeforeClass
   public static void setUp() {
-//    service = Bootstrap.getService(SystemOfUnitsService.class);
-      service = ServiceProvider.getDefault().getSystemOfUnitsService();
+    // service = Bootstrap.getService(SystemOfUnitsService.class);
+    service = ServiceProvider.getDefault().getSystemOfUnitsService();
   }
 
   @Test

@@ -55,8 +55,8 @@ public class QuantityFactoryServiceTest {
 
   @BeforeClass
   public static void init() {
-//    service = Bootstrap.getService(QuantityFactoryService.class);
-      service = ServiceProvider.getDefault().getQuantityFactoryService();
+    // service = Bootstrap.getService(QuantityFactoryService.class);
+    service = ServiceProvider.getDefault().getQuantityFactoryService();
   }
 
   @Test
