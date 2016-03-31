@@ -27,7 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.internal;
+package tec.units.ri.spi;
 
 import static java.util.logging.Level.*;
 
@@ -42,7 +42,10 @@ import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.logging.Logger;
 
+import javax.measure.spi.QuantityFactoryService;
 import javax.measure.spi.ServiceProvider;
+import javax.measure.spi.SystemOfUnitsService;
+import javax.measure.spi.UnitFormatService;
 
 import tec.uom.lib.common.function.IntPrioritySupplier;
 
@@ -50,9 +53,9 @@ import tec.uom.lib.common.function.IntPrioritySupplier;
  * This class implements the {@link ServiceProvider} interface and hereby uses the JDK {@link java.util.ServiceLoader} to load the services required.
  *
  * @author Werner Keil
- * @version 0.4
+ * @version 0.5
  */
-public class RIServiceProvider implements ServiceProvider, IntPrioritySupplier {
+public class RIServiceProvider extends ServiceProvider implements IntPrioritySupplier {
   /** List of services loaded, per class. */
   @SuppressWarnings("rawtypes")
   private final Map<Class, List<Object>> servicesLoaded = new HashMap<Class, List<Object>>();
@@ -76,7 +79,12 @@ public class RIServiceProvider implements ServiceProvider, IntPrioritySupplier {
       if (prio2 < prio1) {
         return -1;
       }
-      return o2.getClass().getName().compareTo(o1.getClass().getName()); // TODO maybe use something else here?
+      return o2.getClass().getName().compareTo(o1.getClass().getName()); // TODO
+      // maybe
+      // use
+      // something
+      // else
+      // here?
     }
   }
 
@@ -95,7 +103,7 @@ public class RIServiceProvider implements ServiceProvider, IntPrioritySupplier {
    *          the concrete type.
    * @return the items found, never {@code null}.
    */
-  public <T> List<T> getServices(final Class<T> serviceType) {
+  protected <T> List<T> getServices(final Class<T> serviceType) {
     @SuppressWarnings("unchecked")
     List<T> found = (List<T>) servicesLoaded.get(serviceType);
     if (found != null) {
@@ -105,7 +113,7 @@ public class RIServiceProvider implements ServiceProvider, IntPrioritySupplier {
     return loadServices(serviceType);
   }
 
-  public <T> T getService(Class<T> serviceType) {
+  protected <T> T getService(Class<T> serviceType) {
     List<T> servicesFound = getServices(serviceType);
     if (servicesFound.isEmpty()) {
       return null;
@@ -140,8 +148,7 @@ public class RIServiceProvider implements ServiceProvider, IntPrioritySupplier {
     }
   }
 
-  @Override
-  public int compareTo(ServiceProvider o) {
+  int compareTo(ServiceProvider o) {
     return compare(getPriority(), o.getPriority());
   }
 
@@ -178,5 +185,20 @@ public class RIServiceProvider implements ServiceProvider, IntPrioritySupplier {
     while (i.hasNext())
       l.add(i.next());
     return l;
+  }
+
+  @Override
+  public SystemOfUnitsService getSystemOfUnitsService() {
+    return getService(SystemOfUnitsService.class);
+  }
+
+  @Override
+  public UnitFormatService getUnitFormatService() {
+    return getService(UnitFormatService.class);
+  }
+
+  @Override
+  public QuantityFactoryService getQuantityFactoryService() {
+    return getService(QuantityFactoryService.class);
   }
 }

@@ -31,7 +31,7 @@ package tec.units.ri.internal.format;
 
 import static org.junit.Assert.*;
 
-import javax.measure.spi.Bootstrap;
+import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.UnitFormatService;
 
 import org.junit.Before;
@@ -48,7 +48,8 @@ public class UnitFormatServiceTest {
 
   @Before
   public void init() {
-    sut = Bootstrap.getService(UnitFormatService.class);
+    // sut = Bootstrap.getService(UnitFormatService.class);
+    sut = ServiceProvider.current().getUnitFormatService();
   }
 
   @Test
