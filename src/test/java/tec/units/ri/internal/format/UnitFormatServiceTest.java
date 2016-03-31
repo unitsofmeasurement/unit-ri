@@ -49,7 +49,7 @@ public class UnitFormatServiceTest {
   @Before
   public void init() {
     // sut = Bootstrap.getService(UnitFormatService.class);
-    sut = ServiceProvider.getDefault().getUnitFormatService();
+    sut = ServiceProvider.current().getUnitFormatService();
   }
 
   @Test
