@@ -50,12 +50,12 @@ import javax.measure.spi.UnitFormatService;
 import tec.uom.lib.common.function.IntPrioritySupplier;
 
 /**
- * This class implements the {@link ServiceProvider} interface and hereby uses the JDK {@link java.util.ServiceLoader} to load the services required.
+ * This class extends the {@link ServiceProvider} class and hereby uses the JDK {@link java.util.ServiceLoader} to load the services required.
  *
  * @author Werner Keil
- * @version 0.5
+ * @version 0.6
  */
-public class RIServiceProvider extends ServiceProvider implements IntPrioritySupplier {
+public class DefaultServiceProvider extends ServiceProvider {
   /** List of services loaded, per class. */
   @SuppressWarnings("rawtypes")
   private final Map<Class, List<Object>> servicesLoaded = new HashMap<Class, List<Object>>();
@@ -63,7 +63,7 @@ public class RIServiceProvider extends ServiceProvider implements IntPrioritySup
   static final class ServiceCompare implements Comparator<Object> {
     @Override
     public int compare(Object o1, Object o2) {
-      Logger.getLogger(RIServiceProvider.class.getName()).log(FINER, "Comparing " + o1 + " and " + o2);
+      Logger.getLogger(DefaultServiceProvider.class.getName()).log(FINER, "Comparing " + o1 + " and " + o2);
       int prio1 = 0;
       int prio2 = 0;
 
@@ -90,6 +90,7 @@ public class RIServiceProvider extends ServiceProvider implements IntPrioritySup
 
   private static final Comparator<Object> SERVICE_COMPARATOR = new ServiceCompare();
 
+  @Override
   public int getPriority() {
     return 10;
   }
@@ -142,7 +143,7 @@ public class RIServiceProvider extends ServiceProvider implements IntPrioritySup
       final List<T> previousServices = (List<T>) servicesLoaded.put(serviceType, (List<Object>) services);
       return list(previousServices != null ? previousServices.iterator() : services.iterator());
     } catch (Exception e) {
-      Logger.getLogger(RIServiceProvider.class.getName()).log(WARNING, "Error loading services of type " + serviceType, e);
+      Logger.getLogger(DefaultServiceProvider.class.getName()).log(WARNING, "Error loading services of type " + serviceType, e);
       Collections.sort(services, SERVICE_COMPARATOR);
       return services;
     }

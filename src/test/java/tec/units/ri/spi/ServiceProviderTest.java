@@ -48,7 +48,7 @@ public class ServiceProviderTest {
   public void testDefault() {
     ServiceProvider provider = ServiceProvider.current();
     assertNotNull(provider);
-    assertEquals("tec.units.ri.spi.RIServiceProvider", provider.getClass().getName());
+    assertEquals("tec.units.ri.spi.DefaultServiceProvider", provider.getClass().getName());
 
     assertNotNull(provider.getQuantityFactoryService());
     assertNotNull(provider.getUnitFormatService());
