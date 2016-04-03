@@ -110,7 +110,7 @@ public class UnitsTest {
   }
 
   /**
-   * Test method for {@link javax.measure.Unit#multiply(long)}.
+   * Test method for {@link javax.measure.Unit#multiply(double)} using a long.
    */
   @Test
   public void testMultiplyLong() {
@@ -169,7 +169,7 @@ public class UnitsTest {
   }
 
   /**
-   * Test method for {@link javax.measure.Unit#divide(long)}.
+   * Test method for {@link javax.measure.Unit#divide(double)} using a long.
    */
   @Test
   public void testDivideLong() {

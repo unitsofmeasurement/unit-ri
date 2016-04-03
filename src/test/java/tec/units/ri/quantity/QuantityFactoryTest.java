@@ -67,8 +67,8 @@ public class QuantityFactoryTest {
     Quantity<Time> t = DefaultQuantityFactory.getInstance(Time.class).create(40, MINUTE); // 40 min
     assertEquals(40, t.getValue());
     assertEquals(MINUTE, t.getUnit());
-    assertNull(t.getUnit().getSymbol());
-    // assertEquals("s", t.getUnit().getSymbol()); // FIXME this should be
+    // assertNull(t.getUnit().getSymbol());
+    assertEquals("min", t.getUnit().getSymbol()); // FIXME this should be
     // "min", tweak for TransformedUnit
     assertEquals("40 min", t.toString());
   }

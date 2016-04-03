@@ -95,9 +95,9 @@ public class QuantityFactoryServiceTest {
     Quantity<Time> t = service.getQuantityFactory(Time.class).create(40, MINUTE); // 40 min
     assertEquals(40, t.getValue());
     assertEquals(MINUTE, t.getUnit());
-    // assertEquals("min", t.getUnit().getSymbol()); TODO see
+    assertEquals("min", t.getUnit().getSymbol()); // TODO see
     // https://github.com/unitsofmeasurement/uom-se/issues/54
-    assertNull(t.getUnit().getSymbol());
+    // assertNull(t.getUnit().getSymbol());
     assertEquals("40 min", t.toString());
   }
 }
