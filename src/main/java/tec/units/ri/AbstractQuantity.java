@@ -98,7 +98,7 @@ import tec.uom.lib.common.function.ValueSupplier;
  * </p>
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8, $Date: 2015-12-28 $
+ * @version 0.8.1, $Date: 2016-04-03 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q>, Comparable<Quantity<Q>>, UnitSupplier<Q>, ValueSupplier<Number> {
 
@@ -228,7 +228,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
   }
 
   /**
-   * Returns the hash code for this measure.
+   * Returns the hash code for this quantity.
    *
    * @return the hash code value.
    */
