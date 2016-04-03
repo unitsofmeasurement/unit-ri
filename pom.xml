@@ -108,11 +108,11 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<configuration>
-					<excludes>
+					<!-- this does not work for packages <excludes>
 						<exclude>tec.units.ri.internal.*</exclude>
 						<exclude>tec.units.ri.internal.format.*</exclude>
 						<exclude>tec.units.ri.internal.quantity.*</exclude>
-					</excludes>
+					</excludes --> 
 				</configuration>
 				<executions>
 					<execution>
