@@ -136,16 +136,16 @@
 										<limit implementation="org.jacoco.report.check.Limit">
 											<counter>INSTRUCTION</counter>
 											<value>COVEREDRATIO</value>
-											<!-- FIXME FIXME Value much too low, should be 95% ideally -->
+											<!-- FIXME FIXME Value much too low, should be 75% ideally -->
 											<!-- Only set this low to allow build to pass -->
-											<minimum>0.2</minimum>
+											<minimum>0.4</minimum>
 										</limit>
 										<limit>
 											<counter>COMPLEXITY</counter>
 											<value>COVEREDRATIO</value>
 											<!-- Only set this low to allow build to pass -->
 											<!-- FIXME FIXME Value much too low, should be 75% at least -->
-											<minimum>0.15</minimum>
+											<minimum>0.25</minimum>
 										</limit>
 									</limits>
 								</rule>

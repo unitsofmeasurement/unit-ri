@@ -281,7 +281,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
     @SuppressWarnings("unchecked")
     @Override
     AbstractQuantity<?> parse(CharSequence csq, int index) throws IllegalArgumentException, ParserException {
-//      String str = csq.toString();
+      // String str = csq.toString();
       // Number number = parseFormat.parse(str); // TODO combine with
       // NumberFormat
       Number number = null; // FIXME
