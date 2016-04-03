@@ -41,7 +41,6 @@ import javax.measure.quantity.Mass;
 import javax.measure.quantity.Speed;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import tec.units.ri.format.SimpleUnitFormat;
@@ -51,7 +50,7 @@ import tec.units.ri.unit.Units;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  *
  */
-public class BaseFormatTest {
+public class SimpleFormatTest {
 
   private SimpleUnitFormat fmt;
 
@@ -61,11 +60,10 @@ public class BaseFormatTest {
   }
 
   @Test
-  @Ignore
   public void testFormat2() {
     Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
     String s = fmt.format(kph);
-    assertEquals("kph", s);
+    assertEquals("km/h", s);
   }
 
   @Test
