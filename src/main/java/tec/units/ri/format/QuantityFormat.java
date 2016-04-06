@@ -55,30 +55,20 @@ import tec.uom.lib.common.function.Parser;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8, $Date: 2015-12-30 $
+ * @version 0.8.1, $Date: 2016-04-06 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 
   /**
-	 * 
-	 */
+   * 
+   */
   // private static final long serialVersionUID = -4628006924354248662L;
 
   /**
    * Holds the default format instance.
    */
   private static final NumberSpaceUnit DEFAULT = new NumberSpaceUnit(NumberFormat.getInstance(), SimpleUnitFormat.getInstance());
-
-  /**
-   * Holds the default format instance.
-   */
-  private static final NumberSpaceUnit EBNF = new NumberSpaceUnit(NumberFormat.getInstance(), SimpleUnitFormat.getInstance());
-
-  /**
-   * Holds the standard format instance.
-   */
-  private static final Standard STANDARD = new Standard();
 
   /**
    * Returns the quantity format for the default locale. The default format assumes the quantity is composed of a decimal number and a {@link Unit}
@@ -116,81 +106,6 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
    *           if any problem occurs while parsing the specified character sequence (e.g. illegal syntax).
    */
   abstract AbstractQuantity<?> parse(CharSequence csq, int index) throws IllegalArgumentException, ParserException;
-
-  /**
-   * Parses a portion of the specified <code>CharSequence</code> from the specified position to produce an object. If parsing succeeds, then the index
-   * of the <code>cursor</code> argument is updated to the index after the last character used.
-   * 
-   * @param csq
-   *          the <code>CharSequence</code> to parse.
-   * @param cursor
-   *          the cursor holding the current parsing index.
-   * @return the object parsed from the specified character sub-sequence.
-   * @throws IllegalArgumentException
-   *           if any problem occurs while parsing the specified character sequence (e.g. illegal syntax).
-   */
-  /*
-   * public abstract AbstractQuantity<?> parse(CharSequence csq) throws
-   * IllegalArgumentException, ParserException;
-   */
-
-  /**
-   * Formats the specified value using {@link CompoundUnit} compound units}. The default implementation is locale sensitive and does not use space to
-   * separate units. For example:[code] Unit<Length> FOOT_INCH = FOOT.compound(INCH); Measure<Length> height = Measure.valueOf(1.81, METER);
-   * System.out.println(height.to(FOOT_INCH));
-   * 
-   * > 5ft11,26in // French Local
-   * 
-   * Unit<Angle> DMS = DEGREE_ANGLE.compound(MINUTE_ANGLE).compound(SECOND_ANGLE); Measure<Angle> rotation = Measure.valueOf(35.857497, DEGREE_ANGLE);
-   * System.out.println(rotation.to(DMS));
-   * 
-   * > 35°51'26,989" // French Local [/code]
-   * 
-   * @param value
-   *          the value to format using compound units.
-   * @param unit
-   *          the compound unit.
-   * @param dest
-   *          the appendable destination.
-   * @return the specified <code>Appendable</code>.
-   * @throws IOException
-   *           if an I/O exception occurs.
-   */
-  // @SuppressWarnings("unchecked")
-  // protected Appendable formatCompound(double value, CompoundUnit<?> unit,
-  // Appendable dest) throws IOException {
-  // Unit high = unit.getHigh();
-  // Unit low = unit.getLow(); // The unit in which the value is stated.
-  // long highValue = (long) low.getConverterTo(high).convert(value);
-  // double lowValue = value - high.getConverterTo(low).convert(highValue);
-  // if (high instanceof CompoundUnit)
-  // formatCompound(highValue, (CompoundUnit) high, dest);
-  // else {
-  // dest.append(DEFAULT._numberFormat.format(highValue));
-  // DEFAULT._unitFormat.format(high, dest);
-  // }
-  // dest.append(DEFAULT._numberFormat.format(lowValue));
-  // return DEFAULT._unitFormat.format(low, dest);
-  // }
-
-  /*
-   * public final StringBuffer format(Object obj, final StringBuffer
-   * toAppendTo, FieldPosition pos) { if (!(obj instanceof
-   * AbstractQuantity<?>)) throw new IllegalArgumentException(
-   * "obj: Not an instance of Measure"); if ((toAppendTo == null) || (pos ==
-   * null)) throw new NullPointerException(); try { return (StringBuffer)
-   * format((AbstractQuantity<?>) obj, (Appendable) toAppendTo); } catch
-   * (IOException ex) { throw new Error(ex); // Cannot happen. } }
-   */
-
-  /*
-   * final AbstractQuantity<?> parseObject(String source, ParsePosition pos) {
-   * try { return parse(source, pos); } catch (IllegalArgumentException |
-   * ParserException e) { return null; // Unfortunately the message why the
-   * parsing failed } // is lost; but we have to follow the Format spec.
-   * 
-   * }
-   */
 
   /**
    * Convenience method equivalent to {@link #format(AbstractQuantity, Appendable)} except it does not raise an IOException.
@@ -257,12 +172,6 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 
     @Override
     public Appendable format(Quantity<?> quantity, Appendable dest) throws IOException {
-      // Unit unit = quantity.getUnit();
-      // if (unit instanceof CompoundUnit)
-      // return formatCompound(quantity.doubleValue(unit),
-      // (CompoundUnit) unit, dest);
-      // else {
-      // dest.append(numberFormat.format(quantity.getValue()));
       int fract = 0;
       if (quantity != null && quantity.getValue() != null) {
         fract = getFractionDigitsCount(quantity.getValue().doubleValue());
@@ -310,8 +219,8 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
   private static final class Standard extends QuantityFormat {
 
     /**
-		 * 
-		 */
+     * 
+     */
     // private static final long serialVersionUID = 2758248665095734058L;
 
     @Override
