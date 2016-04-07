@@ -36,7 +36,6 @@ import javax.measure.Quantity;
 import javax.measure.quantity.Mass;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import tec.units.ri.quantity.Quantities;
@@ -44,42 +43,50 @@ import tec.units.ri.quantity.QuantityRange;
 import tec.units.ri.spi.Range;
 
 public class RangeTest {
-  private Quantity<Mass> min;
-  private Quantity<Mass> max;
-  private Quantity<Mass> res;
-  @SuppressWarnings("rawtypes")
-  private Range range;
+    private Quantity<Mass> min;
+    private Quantity<Mass> max;
+    private Quantity<Mass> res;
+    @SuppressWarnings("rawtypes")
+    private Range range;
 
-  @Before
-  public void init() {
-    min = Quantities.getQuantity(1d, KILOGRAM);
-    max = Quantities.getQuantity(10d, KILOGRAM);
-    res = Quantities.getQuantity(2d, KILOGRAM);
+    @Before
+    public void init() {
+	min = Quantities.getQuantity(1d, KILOGRAM);
+	max = Quantities.getQuantity(10d, KILOGRAM);
+	res = Quantities.getQuantity(2d, KILOGRAM);
 
-    range = QuantityRange.of(min, max, res);
-  }
+	range = QuantityRange.of(min, max, res);
+    }
 
-  @Test
-  public void testGetMinimum() {
-    assertEquals(min, range.getMinimum());
-  }
+    @Test
+    public void testGetMinimum() {
+	assertEquals(min, range.getMinimum());
+	assertTrue(range.hasMinimum());
+    }
 
-  @Test
-  public void testGetMaximum() {
-    assertEquals(max, range.getMaximum());
-  }
+    @Test
+    public void testGetMaximum() {
+	assertEquals(max, range.getMaximum());
+	assertTrue(range.hasMaximum());
+    }
 
-  @Test
-  public void testGetResolution() {
-    assertTrue(range.getClass().equals(QuantityRange.class));
-    @SuppressWarnings("unchecked")
-    QuantityRange<Mass> qr = (QuantityRange<Mass>) range;
-    assertEquals(res, qr.getResolution());
-  }
+    @Test
+    public void testGetResolution() {
+	assertTrue(range.getClass().equals(QuantityRange.class));
+	@SuppressWarnings("unchecked")
+	QuantityRange<Mass> qr = (QuantityRange<Mass>) range;
+	assertEquals(res, qr.getResolution());
+    }
 
-  @Test
-  @Ignore
-  public void testToString() {
-    assertEquals("min= 1.0 kg, max= 10.0 kg, res= 2.0 kg", range.toString());
-  }
+    @Test
+    public void testEquals() {
+	@SuppressWarnings("rawtypes")
+	Range r2 = QuantityRange.of(min, max, res);
+	assertEquals(r2, range);
+    }
+
+    @Test
+    public void testToString() {
+	assertEquals("min= 1.0 kg, max= 10.0 kg, res= 2.0 kg", range.toString());
+    }
 }
