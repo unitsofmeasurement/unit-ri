@@ -55,7 +55,7 @@ import tec.uom.lib.common.function.Parser;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.1, $Date: 2016-04-06 $
+ * @version 0.8.2, $Date: 2016-04-07 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
@@ -68,7 +68,14 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
   /**
    * Holds the default format instance.
    */
-  private static final NumberSpaceUnit DEFAULT = new NumberSpaceUnit(NumberFormat.getInstance(), SimpleUnitFormat.getInstance());
+  private static final QuantityFormat DEFAULT = new Standard();
+
+  /**
+   * Holds the Number-Space-Unit format instance.
+   */
+  private static final QuantityFormat NUM_SPACE = new NumberSpaceUnit(NumberFormat.getInstance(), SimpleUnitFormat.getInstance());
+
+  // TODO use it as an option (after fixing parse())
 
   /**
    * Returns the quantity format for the default locale. The default format assumes the quantity is composed of a decimal number and a {@link Unit}
@@ -196,6 +203,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
       Number number = null; // FIXME
       if (number == null)
         throw new IllegalArgumentException("Number cannot be parsed");
+      @SuppressWarnings("unused")
       Unit unit = unitFormat.parse(csq);
       if (number instanceof Long)
         return NumberQuantity.of(number.longValue(), unit);
@@ -239,7 +247,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
       Number number = q.getValue();
       dest.append(number.toString());
       // }
-      if (q.getUnit().equals(Units.ONE))
+      if (q.getUnit().equals(AbstractUnit.ONE))
         return dest;
       dest.append(' ');
       return SimpleUnitFormat.getInstance().format(unit, dest);
@@ -260,7 +268,8 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
       Double decimal = new Double(csq.subSequence(startDecimal, endDecimal).toString());
       // cursor.setIndex(endDecimal + 1);
       // Unit unit = EBNFUnitFormat.getInstance().parse(csq, index);
-      Unit unit = SimpleUnitFormat.getInstance().parse(csq, index);
+      int startUnit = endDecimal + 1;// csq.toString().indexOf(' ') + 1;
+      Unit unit = SimpleUnitFormat.getInstance().parse(csq, startUnit);
       return NumberQuantity.of(decimal.doubleValue(), unit);
     }
 
