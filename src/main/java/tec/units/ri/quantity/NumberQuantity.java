@@ -33,8 +33,6 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnconvertibleException;
 import javax.measure.UnitConverter;
-import javax.measure.format.ParserException;
-
 import tec.units.ri.AbstractQuantity;
 import tec.units.ri.format.QuantityFormat;
 
@@ -46,7 +44,7 @@ import tec.units.ri.format.QuantityFormat;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *          The type of the quantity.
- * @version 0.9.8, $Date: 2015-12-23 $
+ * @version 0.9.9, $Date: 2016-04-07 $
  */
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -316,9 +314,6 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
       return QuantityFormat.getInstance().parse(csq);
     } catch (IllegalArgumentException ie) {
       throw ie;
-    } catch (ParserException pe) {
-      throw new IllegalArgumentException(pe); // TODO could we handle this
-      // differently?
     }
   }
 }
