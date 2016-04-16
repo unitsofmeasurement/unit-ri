@@ -957,6 +957,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     ASCII.label(MetricPrefix.CENTI(LITRE), "cL");
     DEFAULT.label(MetricPrefix.CENTI(LITRE), "cl");
     ASCII.label(MetricPrefix.DECI(LITRE), "dL");
-    DEFAULT.label(MetricPrefix.DECI(LITRE), "dl");
+    DEFAULT.label(Units.NEWTON, "N");
+    ASCII.label(Units.NEWTON, "N");
   }
 }
