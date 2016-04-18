@@ -44,7 +44,7 @@ import tec.units.ri.format.QuantityFormat;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *          The type of the quantity.
- * @version 0.9.9, $Date: 2016-04-07 $
+ * @version 0.10, $Date: 2016-04-18 $
  */
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 

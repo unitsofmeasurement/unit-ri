@@ -40,7 +40,7 @@ import tec.units.ri.format.QuantityFormat;
  * 
  * @author werner
  * @author otaviojava
- * @version 0.5, October 30, 2015
+ * @version 0.6, April 18, 2016
  */
 public final class Quantities {
   /**
@@ -99,6 +99,8 @@ public final class Quantities {
       return new DoubleQuantity<Q>(value.doubleValue(), unit);
     } else if (Long.class.isInstance(value)) {
       return new LongQuantity<Q>(Long.class.cast(value), unit);
+    } else if (Short.class.isInstance(value)) {
+      return new ShortQuantity<Q>(Short.class.cast(value), unit);
     } else if (Integer.class.isInstance(value)) {
       return new IntegerQuantity<Q>(Integer.class.cast(value), unit);
     } else if (Float.class.isInstance(value)) {
