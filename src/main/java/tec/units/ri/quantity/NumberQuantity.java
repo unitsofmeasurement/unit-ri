@@ -222,12 +222,6 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
     return m;
   }
 
-  @Override
-  public int compareTo(Quantity<Q> o) {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public Quantity<Q> subtract(Quantity<Q> that) {
     final Quantity<Q> thatToUnit = (Quantity<Q>) that.to(getUnit());
@@ -264,6 +258,19 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
    */
   public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(int intValue, Unit<Q> unit) {
     return new IntegerQuantity<Q>(intValue, unit);
+  }
+
+  /**
+   * Returns the scalar quantity for the specified <code>short</code> stated in the specified unit.
+   *
+   * @param value
+   *          the quantity value.
+   * @param unit
+   *          the measurement unit.
+   * @return the corresponding <code>short</code> quantity.
+   */
+  public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(short value, Unit<Q> unit) {
+    return new ShortQuantity<Q>(value, unit);
   }
 
   /**

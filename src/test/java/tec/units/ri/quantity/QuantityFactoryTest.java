@@ -35,7 +35,6 @@ import static tec.units.ri.unit.Units.*;
 import javax.measure.Quantity;
 import javax.measure.quantity.*;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -53,7 +52,6 @@ public class QuantityFactoryTest {
   }
 
   @Test
-  @Ignore
   public void testMass() {
     Quantity<Mass> m = DefaultQuantityFactory.getInstance(Mass.class).create(10, KILOGRAM); // 10 kg
     assertEquals(10, m.getValue());
