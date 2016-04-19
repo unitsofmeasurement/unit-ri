@@ -31,15 +31,12 @@ package tec.units.ri.format;
 
 import java.io.IOException;
 
+import javax.measure.MeasurementException;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
-import javax.measure.format.UnitFormat;
-
 import tec.units.ri.AbstractQuantity;
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.internal.format.l10n.DecimalFormat;
-import tec.units.ri.internal.format.l10n.NumberFormat;
 import tec.units.ri.quantity.NumberQuantity;
 import tec.uom.lib.common.function.Parser;
 
@@ -54,7 +51,7 @@ import tec.uom.lib.common.function.Parser;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.3, $Date: 2016-04-20 $
+ * @version 0.8.4, $Date: 2016-04-20 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
@@ -126,7 +123,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
     try {
       return (StringBuilder) this.format(q, (Appendable) dest);
     } catch (IOException ex) {
-      throw new RuntimeException(ex); // Should not happen.
+      throw new MeasurementException(ex); // Should not happen.
     }
   }
 
@@ -165,63 +162,6 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
     return count;
   }
 
-  // Holds default implementation.
-  @SuppressWarnings("unused")
-  private static final class NumberSpaceUnit extends QuantityFormat {
-    private final DecimalFormat decimalFormat = new DecimalFormat();
-
-    private final UnitFormat unitFormat;
-
-    private NumberSpaceUnit(NumberFormat numberFormat, UnitFormat unitFormat) {
-      // decimalFormat.applyPattern("#,#0.0000##");
-      this.unitFormat = unitFormat;
-    }
-
-    @Override
-    public Appendable format(Quantity<?> quantity, Appendable dest) throws IOException {
-      int fract = 0;
-      if (quantity != null && quantity.getValue() != null) {
-        fract = getFractionDigitsCount(quantity.getValue().doubleValue());
-      }
-      if (fract > 1) {
-        decimalFormat.setMaximumFractionDigits(fract + 1);
-      }
-      dest.append(decimalFormat.format(quantity.getValue()));
-      if (quantity.getUnit().equals(AbstractUnit.ONE))
-        return dest;
-      dest.append(' ');
-      return unitFormat.format(quantity.getUnit(), dest);
-      // }
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    Quantity<?> parse(CharSequence csq, int index) throws IllegalArgumentException, ParserException {
-      // String str = csq.toString();
-      // Number number = parseFormat.parse(str); // TODO combine with
-      // NumberFormat
-      Number number = null; // FIXME
-      if (number == null)
-        throw new IllegalArgumentException("Number cannot be parsed");
-      Unit unit = unitFormat.parse(csq);
-      if (number instanceof Long)
-        return NumberQuantity.of(number.longValue(), unit);
-      else if (number instanceof Double)
-        return NumberQuantity.of(number.doubleValue(), unit);
-      else if (number instanceof Integer)
-        return NumberQuantity.of(number.intValue(), unit);
-      else
-        throw new UnsupportedOperationException("Number of type " + number.getClass() + " are not supported");
-    }
-
-    public Quantity<?> parse(CharSequence csq) throws IllegalArgumentException, ParserException {
-      return parse(csq, 0);
-    }
-
-    // private static final long serialVersionUID = 1L;
-
-  }
-
   // Holds standard implementation.
   private static final class Standard extends QuantityFormat {
 
@@ -238,11 +178,6 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
       // (CompoundUnit) unit, dest);
       // else {
 
-      // if (q.isBig()) { // TODO SE only
-      // BigDecimal decimal = q.decimalValue(unit,
-      // MathContext.UNLIMITED);
-      // dest.append(decimal.toString());
-      // } else {
       Number number = q.getValue();
       dest.append(number.toString());
       // }
@@ -266,7 +201,6 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
       }
       Double decimal = new Double(csq.subSequence(startDecimal, endDecimal).toString());
       // cursor.setIndex(endDecimal + 1);
-      // Unit unit = EBNFUnitFormat.getInstance().parse(csq, index);
       int startUnit = endDecimal + 1;// csq.toString().indexOf(' ') + 1;
       Unit unit = SimpleUnitFormat.getInstance().parse(csq, startUnit);
       return NumberQuantity.of(decimal.doubleValue(), unit);
