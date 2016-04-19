@@ -29,7 +29,8 @@
  */
 package tec.units.ri.quantity;
 
-import java.math.BigDecimal;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Length;
@@ -50,7 +51,7 @@ public class NumberQuantityTest {
     Assert.assertEquals(result.getUnit(), Units.METRE);
 
     Quantity<Time> day = Quantities.getQuantity(10, Units.DAY);
-    Quantity<Time> dayResult = day.divide(BigDecimal.valueOf(2.5D));
+    Quantity<Time> dayResult = day.divide(Double.valueOf(2.5D));
     Assert.assertTrue(dayResult.getValue().intValue() == 4);
     Assert.assertEquals(dayResult.getUnit(), Units.DAY);
   }
@@ -62,7 +63,8 @@ public class NumberQuantityTest {
     Quantity<Length> m3 = Quantities.getQuantity(2.5F, Units.METRE);
     Quantity<Length> m4 = Quantities.getQuantity(5L, Units.METRE);
     Quantity<Length> result = m.add(m2).add(m3).add(m4);
-    Assert.assertEquals(Integer.valueOf(29), result.getValue()); // TODO precision
+    Assert.assertEquals(Integer.valueOf(29), result.getValue()); // TODO
+    // precision
     Assert.assertEquals(Units.METRE, result.getUnit());
   }
 
@@ -101,34 +103,49 @@ public class NumberQuantityTest {
     Assert.assertEquals(result.getUnit(), Units.METRE);
     @SuppressWarnings("unchecked")
     Quantity<Length> result2 = (Quantity<Length>) metre.multiply(Quantities.getQuantity(10, Units.METRE));
-    Assert.assertTrue(result2.getValue().intValue() == 100);
+    assertEquals(100, result2.getValue().intValue());
   }
 
   @Test
   public void toTest() {
     Quantity<Time> day = Quantities.getQuantity(1, Units.DAY);
     Quantity<Time> hour = day.to(Units.HOUR);
-    Assert.assertEquals(hour.getValue().intValue(), 24);
-    Assert.assertEquals(hour.getUnit(), Units.HOUR);
+    assertEquals(hour.getValue().intValue(), 24);
+    assertEquals(hour.getUnit(), Units.HOUR);
 
     Quantity<Time> dayResult = hour.to(Units.DAY);
-    Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
-    Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
+    assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
+    assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
   }
 
   @Test
   public void inverseTestLength() {
     @SuppressWarnings("unchecked")
     Quantity<Length> metre = (Quantity<Length>) Quantities.getQuantity(10, Units.METRE).inverse();
-    Assert.assertEquals(Float.valueOf(0.0F), Float.valueOf(metre.getValue().floatValue()));
-    Assert.assertEquals("1/m", String.valueOf(metre.getUnit()));
+    assertEquals(Float.valueOf(0.0F), Float.valueOf(metre.getValue().floatValue()));
+    assertEquals("1/m", String.valueOf(metre.getUnit()));
   }
 
   @Test
   public void inverseTestTime() {
     Quantity<?> secInv = Quantities.getQuantity(2, Units.SECOND).inverse();
-    Assert.assertEquals(Float.valueOf(0.0F), Float.valueOf(secInv.getValue().floatValue())); // TODO precision
-    Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
+    assertEquals(Float.valueOf(0.0F), Float.valueOf(secInv.getValue().floatValue())); // TODO
+    // precision
+    assertEquals("1/s", String.valueOf(secInv.getUnit()));
+  }
+
+  @Test
+  public void testEquals() {
+    Quantity<Length> q1 = NumberQuantity.of(10, Units.METRE);
+    Quantity<Length> q2 = Quantities.getQuantity(10, Units.METRE);
+    assertEquals(q1, q2);
+  }
+
+  @Test
+  public void testIsExact() {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    NumberQuantity<Length> q1 = new NumberQuantity(10, Units.METRE);
+    assertFalse(q1.isExact());
   }
 
 }

@@ -33,9 +33,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tec.units.ri.AbstractQuantity;
 import tec.units.ri.quantity.NumberQuantity;
 
+import javax.measure.Quantity;
 import javax.measure.quantity.Pressure;
 
 import static org.junit.Assert.*;
@@ -44,7 +44,7 @@ import static tec.units.ri.unit.Units.PASCAL;
 /**
  *
  * @author Werner Keil
- * @version 0.1
+ * @version 0.2
  */
 public class QuantitiesTest {
 
@@ -61,7 +61,7 @@ public class QuantitiesTest {
 
   @Test
   public void testOf() {
-    AbstractQuantity<Pressure> pressure = NumberQuantity.of((double) 1, PASCAL);
+    Quantity<Pressure> pressure = NumberQuantity.of((double) 1, PASCAL);
     assertEquals(PASCAL, pressure.getUnit()); // TODO: Problem with kg...
   }
 

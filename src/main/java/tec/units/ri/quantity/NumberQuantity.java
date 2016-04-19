@@ -44,7 +44,7 @@ import tec.units.ri.format.QuantityFormat;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *          The type of the quantity.
- * @version 0.10, $Date: 2016-04-18 $
+ * @version 0.12, $Date: 2016-04-20 $
  */
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -177,8 +177,8 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
   }
 
   /**
-   * Indicates if this measured amount is exact. An exact amount is guarantee exact only when stated in this quantity's unit (e.g.
-   * <code>this.longValue()</code>); stating the amount in any other unit may introduce conversion errors.
+   * Indicates if this measured quantity is exact. An exact quantity is guarantee exact only when stated in this quantity's unit (e.g.
+   * <code>this.longValue()</code>); stating the quantity in any other unit may introduce conversion errors.
    * 
    * @return <code>true</code> if this quantity is exact; <code>false</code> otherwise.
    */
@@ -187,8 +187,8 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
   }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public NumberQuantity<Q> add(AbstractQuantity<Q> that) {
-    final AbstractQuantity<Q> thatToUnit = that.to(getUnit());
+  protected Quantity<Q> add(AbstractQuantity<Q> that) {
+    final Quantity<Q> thatToUnit = that.to(getUnit());
     return new NumberQuantity(this.getValue().doubleValue() + thatToUnit.getValue().doubleValue(), getUnit());
   }
 
@@ -202,7 +202,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
     return new NumberQuantity((getValue().doubleValue() * that.getValue().doubleValue()), unit);
   }
 
-  public NumberQuantity<Q> multiply(Number that) {
+  public Quantity<Q> multiply(Number that) {
     return (NumberQuantity<Q>) NumberQuantity.of((getValue().doubleValue() * that.doubleValue()), getUnit());
   }
 
@@ -317,10 +317,6 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
    * @return <code>QuantityFormat.getInstance().parse(csq)</code>
    */
   public static Quantity<?> parse(CharSequence csq) {
-    try {
-      return QuantityFormat.getInstance().parse(csq);
-    } catch (IllegalArgumentException ie) {
-      throw ie;
-    }
+    return QuantityFormat.getInstance().parse(csq);
   }
 }

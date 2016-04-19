@@ -89,7 +89,7 @@ import tec.uom.lib.common.function.ValueSupplier;
  * <br>
  * // Specializations of complex numbers measurements.<br>
  * public final class Current extends ComplexQuantity<ElectricCurrent> {...}<br>
- * public final class Tension extends ComplexQuantity<ElectricPotential> {...}<br>
+ * public final class Tension extends ComplexQuantity<ElectricPotential> {...} <br>
  * </code>
  * </p>
  * 
@@ -98,7 +98,7 @@ import tec.uom.lib.common.function.ValueSupplier;
  * </p>
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.1, $Date: 2016-04-03 $
+ * @version 0.8.2, $Date: 2016-04-20 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q>, Comparable<Quantity<Q>>, UnitSupplier<Q>, ValueSupplier<Number> {
 
@@ -112,12 +112,12 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
   /**
    * Holds a dimensionless quantity of none (exact).
    */
-  public static final AbstractQuantity<Dimensionless> NONE = NumberQuantity.of(0, AbstractUnit.ONE);
+  public static final Quantity<Dimensionless> NONE = NumberQuantity.of(0, AbstractUnit.ONE);
 
   /**
    * Holds a dimensionless quantity of one (exact).
    */
-  public static final AbstractQuantity<Dimensionless> ONE = NumberQuantity.of(1, AbstractUnit.ONE);
+  public static final Quantity<Dimensionless> ONE = NumberQuantity.of(1, AbstractUnit.ONE);
 
   /**
    * constructor.
@@ -149,7 +149,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
    * @throws ArithmeticException
    *           if the result is inexact and the quotient has a non-terminating decimal expansion.
    */
-  public AbstractQuantity<Q> toSI() {
+  public Quantity<Q> toSI() {
     return to(this.getUnit().getSystemUnit());
   }
 
@@ -163,7 +163,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
    * @throws ArithmeticException
    *           if the result is inexact and the quotient has a non-terminating decimal expansion.
    */
-  public AbstractQuantity<Q> to(Unit<Q> unit) {
+  public Quantity<Q> to(Unit<Q> unit) {
     if (unit.equals(this.getUnit())) {
       return this;
     }
@@ -272,7 +272,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 
   /**
    * Casts this quantity to a parameterized unit of specified nature or throw a <code>ClassCastException</code> if the dimension of the specified
-   * quantity and this measure unit's dimension do not match. For example:<br/>
+   * quantity and this measure unit's dimension do not match. For example: <br/>
    * <code>
    *     Measure<Length> length = Quantities.getQuantity("2 km").asType(Length.class);
    * </code>

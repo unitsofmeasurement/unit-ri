@@ -41,7 +41,6 @@ import tec.units.ri.AbstractUnit;
 import tec.units.ri.internal.format.l10n.DecimalFormat;
 import tec.units.ri.internal.format.l10n.NumberFormat;
 import tec.units.ri.quantity.NumberQuantity;
-import tec.units.ri.unit.Units;
 import tec.uom.lib.common.function.Parser;
 
 /**
@@ -55,7 +54,7 @@ import tec.uom.lib.common.function.Parser;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.2, $Date: 2016-04-07 $
+ * @version 0.8.3, $Date: 2016-04-20 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
@@ -73,7 +72,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
   /**
    * Holds the Number-Space-Unit format instance.
    */
-  private static final QuantityFormat NUM_SPACE = new NumberSpaceUnit(NumberFormat.getInstance(), SimpleUnitFormat.getInstance());
+  // private static final QuantityFormat NUM_SPACE = new NumberSpaceUnit(NumberFormat.getInstance(), SimpleUnitFormat.getInstance());
 
   // TODO use it as an option (after fixing parse())
 
@@ -112,7 +111,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
    * @throws IllegalArgumentException
    *           if any problem occurs while parsing the specified character sequence (e.g. illegal syntax).
    */
-  abstract AbstractQuantity<?> parse(CharSequence csq, int index) throws IllegalArgumentException, ParserException;
+  abstract Quantity<?> parse(CharSequence csq, int index) throws IllegalArgumentException, ParserException;
 
   /**
    * Convenience method equivalent to {@link #format(AbstractQuantity, Appendable)} except it does not raise an IOException.
@@ -167,6 +166,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
   }
 
   // Holds default implementation.
+  @SuppressWarnings("unused")
   private static final class NumberSpaceUnit extends QuantityFormat {
     private final DecimalFormat decimalFormat = new DecimalFormat();
 
@@ -196,14 +196,13 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 
     @SuppressWarnings("unchecked")
     @Override
-    AbstractQuantity<?> parse(CharSequence csq, int index) throws IllegalArgumentException, ParserException {
+    Quantity<?> parse(CharSequence csq, int index) throws IllegalArgumentException, ParserException {
       // String str = csq.toString();
       // Number number = parseFormat.parse(str); // TODO combine with
       // NumberFormat
       Number number = null; // FIXME
       if (number == null)
         throw new IllegalArgumentException("Number cannot be parsed");
-      @SuppressWarnings("unused")
       Unit unit = unitFormat.parse(csq);
       if (number instanceof Long)
         return NumberQuantity.of(number.longValue(), unit);
@@ -215,7 +214,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
         throw new UnsupportedOperationException("Number of type " + number.getClass() + " are not supported");
     }
 
-    public AbstractQuantity<?> parse(CharSequence csq) throws IllegalArgumentException, ParserException {
+    public Quantity<?> parse(CharSequence csq) throws IllegalArgumentException, ParserException {
       return parse(csq, 0);
     }
 
@@ -256,7 +255,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
 
     @SuppressWarnings("unchecked")
     @Override
-    AbstractQuantity<?> parse(CharSequence csq, int index) throws ParserException {
+    Quantity<?> parse(CharSequence csq, int index) throws ParserException {
       int startDecimal = index; // cursor.getIndex();
       while ((startDecimal < csq.length()) && Character.isWhitespace(csq.charAt(startDecimal))) {
         startDecimal++;
@@ -273,7 +272,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
       return NumberQuantity.of(decimal.doubleValue(), unit);
     }
 
-    public AbstractQuantity<?> parse(CharSequence csq) throws ParserException {
+    public Quantity<?> parse(CharSequence csq) throws ParserException {
       return parse(csq, 0);
     }
   }
