@@ -29,45 +29,19 @@
  */
 package tec.units.ri.spi;
 
-import static org.junit.Assert.*;
-
 import javax.measure.Dimension;
 import javax.measure.UnitConverter;
 
-import org.junit.Test;
+class TestModel extends DimensionalModel {
 
-import tec.units.ri.quantity.QuantityDimension;
-
-public class ModelTest {
-
-  @Test
-  public void testCurrent() {
-    DimensionalModel model = DimensionalModel.current();
-    assertNotNull(model);
+  @Override
+  public Dimension getFundamentalDimension(Dimension dimension) {
+    return super.getFundamentalDimension(dimension);
   }
 
-  @Test
-  public void testSetCurrent() {
-    DimensionalModel newModel = new TestModel();
-    DimensionalModel.setCurrent(newModel);
-    DimensionalModel model = DimensionalModel.current();
-    assertNotNull(model);
-    assertEquals(newModel, model);
+  @Override
+  public UnitConverter getDimensionalTransform(Dimension dimension) {
+    return super.getDimensionalTransform(dimension);
   }
 
-  @Test
-  public void testGetDimensionalTransform() {
-    DimensionalModel model = new TestModel();
-    Dimension dim = QuantityDimension.getInstance('a');
-    UnitConverter converter = model.getDimensionalTransform(dim);
-    assertNotNull(converter);
-  }
-
-  @Test
-  public void testGetFundamentalDimension() {
-    DimensionalModel model = new TestModel();
-    Dimension dim = QuantityDimension.getInstance('a');
-    Dimension fund = model.getFundamentalDimension(dim);
-    assertNotNull(fund);
-  }
 }
