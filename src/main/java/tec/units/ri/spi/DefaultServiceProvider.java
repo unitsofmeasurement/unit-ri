@@ -49,172 +49,185 @@ import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.SystemOfUnitsService;
 import javax.measure.spi.UnitFormatService;
 
+import tec.units.ri.quantity.DefaultQuantityFactory;
 import tec.uom.lib.common.function.IntPrioritySupplier;
 
 /**
- * This class extends the {@link ServiceProvider} class and hereby uses the JDK
- * {@link java.util.ServiceLoader} to load the services required.
+ * This class extends the {@link ServiceProvider} class and hereby uses the JDK {@link java.util.ServiceLoader} to load the services required.
  *
  * @author Werner Keil
- * @version 0.7
+ * @version 0.8
  */
 public class DefaultServiceProvider extends ServiceProvider {
-	/** List of services loaded, per class. */
-	@SuppressWarnings("rawtypes")
-	private final Map<Class, List<Object>> servicesLoaded = new HashMap<Class, List<Object>>();
+  /** List of services loaded, per class. */
+  @SuppressWarnings("rawtypes")
+  private final Map<Class, List<Object>> servicesLoaded = new HashMap<Class, List<Object>>();
 
-	static final class ServiceCompare implements Comparator<Object> {
-		@Override
-		public int compare(Object o1, Object o2) {
-			Logger.getLogger(DefaultServiceProvider.class.getName()).log(FINER, "Comparing " + o1 + " and " + o2);
-			int prio1 = 0;
-			int prio2 = 0;
+  @SuppressWarnings("rawtypes")
+  private final Map<Class, QuantityFactory> QUANTITY_FACTORIES = new HashMap<Class, QuantityFactory>();
 
-			if (o1 instanceof IntPrioritySupplier) {
-				prio1 = ((IntPrioritySupplier) o1).getPriority();
-			}
-			if (o2 instanceof IntPrioritySupplier) {
-				prio2 = ((IntPrioritySupplier) o2).getPriority();
-			}
-			if (prio1 < prio2) {
-				return 1;
-			}
-			if (prio2 < prio1) {
-				return -1;
-			}
-			return o2.getClass().getName().compareTo(o1.getClass().getName()); // TODO
-			// maybe
-			// use
-			// something
-			// else
-			// here?
-		}
-	}
+  static final class ServiceCompare implements Comparator<Object> {
+    @Override
+    public int compare(Object o1, Object o2) {
+      Logger.getLogger(DefaultServiceProvider.class.getName()).log(FINER, "Comparing " + o1 + " and " + o2);
+      int prio1 = 0;
+      int prio2 = 0;
 
-	private static final Comparator<Object> SERVICE_COMPARATOR = new ServiceCompare();
+      if (o1 instanceof IntPrioritySupplier) {
+        prio1 = ((IntPrioritySupplier) o1).getPriority();
+      }
+      if (o2 instanceof IntPrioritySupplier) {
+        prio2 = ((IntPrioritySupplier) o2).getPriority();
+      }
+      if (prio1 < prio2) {
+        return 1;
+      }
+      if (prio2 < prio1) {
+        return -1;
+      }
+      return o2.getClass().getName().compareTo(o1.getClass().getName()); // TODO
+      // maybe
+      // use
+      // something
+      // else
+      // here?
+    }
+  }
 
-	@Override
-	public int getPriority() {
-		return 10;
-	}
+  private static final Comparator<Object> SERVICE_COMPARATOR = new ServiceCompare();
 
-	/**
-	 * Loads and registers services.
-	 *
-	 * @param serviceType
-	 *            The service type.
-	 * @param <T>
-	 *            the concrete type.
-	 * @return the items found, never {@code null}.
-	 */
-	protected <T> List<T> getServices(final Class<T> serviceType) {
-		@SuppressWarnings("unchecked")
-		List<T> found = (List<T>) servicesLoaded.get(serviceType);
-		if (found != null) {
-			return found;
-		}
+  @Override
+  public int getPriority() {
+    return 10;
+  }
 
-		return loadServices(serviceType);
-	}
+  /**
+   * Loads and registers services.
+   *
+   * @param serviceType
+   *          The service type.
+   * @param <T>
+   *          the concrete type.
+   * @return the items found, never {@code null}.
+   */
+  protected <T> List<T> getServices(final Class<T> serviceType) {
+    @SuppressWarnings("unchecked")
+    List<T> found = (List<T>) servicesLoaded.get(serviceType);
+    if (found != null) {
+      return found;
+    }
 
-	protected <T> T getService(Class<T> serviceType) {
-		List<T> servicesFound = getServices(serviceType);
-		if (servicesFound.isEmpty()) {
-			return null;
-		}
-		return servicesFound.get(0);
-	}
+    return loadServices(serviceType);
+  }
 
-	/**
-	 * Loads and registers services.
-	 *
-	 * @param serviceType
-	 *            The service type.
-	 * @param <T>
-	 *            the concrete type.
-	 *
-	 * @return the items found, never {@code null}.
-	 */
-	@SuppressWarnings("unchecked")
-	private <T> List<T> loadServices(final Class<T> serviceType) {
-		final List<T> services = new ArrayList<T>();
-		try {
-			for (T t : ServiceLoader.load(serviceType)) {
-				services.add(t);
-			}
-			Collections.sort(services, SERVICE_COMPARATOR);
-			final List<T> previousServices = (List<T>) servicesLoaded.put(serviceType, (List<Object>) services);
-			return list(previousServices != null ? previousServices.iterator() : services.iterator());
-		} catch (Exception e) {
-			Logger.getLogger(DefaultServiceProvider.class.getName()).log(WARNING,
-					"Error loading services of type " + serviceType, e);
-			Collections.sort(services, SERVICE_COMPARATOR);
-			return services;
-		}
-	}
+  protected <T> T getService(Class<T> serviceType) {
+    List<T> servicesFound = getServices(serviceType);
+    if (servicesFound.isEmpty()) {
+      return null;
+    }
+    return servicesFound.get(0);
+  }
 
-	int compareTo(ServiceProvider o) {
-		return compare(getPriority(), o.getPriority());
-	}
+  /**
+   * Loads and registers services.
+   *
+   * @param serviceType
+   *          The service type.
+   * @param <T>
+   *          the concrete type.
+   *
+   * @return the items found, never {@code null}.
+   */
+  @SuppressWarnings("unchecked")
+  private <T> List<T> loadServices(final Class<T> serviceType) {
+    final List<T> services = new ArrayList<T>();
+    try {
+      for (T t : ServiceLoader.load(serviceType)) {
+        services.add(t);
+      }
+      Collections.sort(services, SERVICE_COMPARATOR);
+      final List<T> previousServices = (List<T>) servicesLoaded.put(serviceType, (List<Object>) services);
+      return list(previousServices != null ? previousServices.iterator() : services.iterator());
+    } catch (Exception e) {
+      Logger.getLogger(DefaultServiceProvider.class.getName()).log(WARNING, "Error loading services of type " + serviceType, e);
+      Collections.sort(services, SERVICE_COMPARATOR);
+      return services;
+    }
+  }
 
-	/**
-	 * Compares two {@code int} values numerically. The value returned is
-	 * identical to what would be returned by:
-	 * 
-	 * <pre>
-	 * Integer.valueOf(x).compareTo(Integer.valueOf(y))
-	 * </pre>
-	 *
-	 * @param x
-	 *            the first {@code int} to compare
-	 * @param y
-	 *            the second {@code int} to compare
-	 * @return the value {@code 0} if {@code x == y}; a value less than
-	 *         {@code 0} if {@code x < y}; and a value greater than {@code 0} if
-	 *         {@code x > y}
-	 */
-	private static int compare(int x, int y) {
-		return (x < y) ? -1 : ((x == y) ? 0 : 1);
-	}
+  int compareTo(ServiceProvider o) {
+    return compare(getPriority(), o.getPriority());
+  }
 
-	/**
-	 * Returns an array list containing the elements returned by the specified
-	 * iterator in the order they are returned by the enumeration. This method
-	 * provides interoperability between legacy APIs that return enumerations
-	 * and new APIs that require collections.
-	 *
-	 * @param e
-	 *            enumeration providing elements for the returned array list
-	 * @return an array list containing the elements returned by the specified
-	 *         enumeration.
-	 * @since 1.4
-	 * @see Enumeration
-	 * @see ArrayList
-	 */
-	private static <T> ArrayList<T> list(Iterator<T> i) {
-		ArrayList<T> l = new ArrayList<>();
-		while (i.hasNext())
-			l.add(i.next());
-		return l;
-	}
+  /**
+   * Compares two {@code int} values numerically. The value returned is identical to what would be returned by:
+   * 
+   * <pre>
+   * Integer.valueOf(x).compareTo(Integer.valueOf(y))
+   * </pre>
+   *
+   * @param x
+   *          the first {@code int} to compare
+   * @param y
+   *          the second {@code int} to compare
+   * @return the value {@code 0} if {@code x == y}; a value less than {@code 0} if {@code x < y}; and a value greater than {@code 0} if {@code x > y}
+   */
+  private static int compare(int x, int y) {
+    return (x < y) ? -1 : ((x == y) ? 0 : 1);
+  }
 
-	@Override
-	public SystemOfUnitsService getSystemOfUnitsService() {
-		return getService(SystemOfUnitsService.class);
-	}
+  /**
+   * Returns an array list containing the elements returned by the specified iterator in the order they are returned by the enumeration. This method
+   * provides interoperability between legacy APIs that return enumerations and new APIs that require collections.
+   *
+   * @param e
+   *          enumeration providing elements for the returned array list
+   * @return an array list containing the elements returned by the specified enumeration.
+   * @since 1.4
+   * @see Enumeration
+   * @see ArrayList
+   */
+  private static <T> ArrayList<T> list(Iterator<T> i) {
+    ArrayList<T> l = new ArrayList<>();
+    while (i.hasNext())
+      l.add(i.next());
+    return l;
+  }
 
-	@Override
-	public UnitFormatService getUnitFormatService() {
-		return getService(UnitFormatService.class);
-	}
+  @Override
+  public SystemOfUnitsService getSystemOfUnitsService() {
+    return getService(SystemOfUnitsService.class);
+  }
 
-	@Override
-	public QuantityFactoryService getQuantityFactoryService() {
-		return getService(QuantityFactoryService.class);
-	}
+  @Override
+  public UnitFormatService getUnitFormatService() {
+    return getService(UnitFormatService.class);
+  }
 
-	// @Override
-	public <Q extends Quantity<Q>> QuantityFactory<Q> getQuantityFactory(Class<Q> quantity) {
-		return getQuantityFactoryService().getQuantityFactory(quantity);
-	}
+  @Override
+  public QuantityFactoryService getQuantityFactoryService() {
+    return null;
+    // TODO will be removed
+  }
+
+  /**
+   * Return a factory for this quantity
+   * 
+   * @param quantity
+   *          the quantity type
+   * @return the {@link QuantityFactory}
+   * @throws NullPointerException
+   */
+  @Override
+  @SuppressWarnings("unchecked")
+  public final <Q extends Quantity<Q>> QuantityFactory<Q> getQuantityFactory(Class<Q> quantity) {
+    if (quantity == null)
+      throw new NullPointerException();
+    if (!QUANTITY_FACTORIES.containsKey(quantity)) {
+      synchronized (QUANTITY_FACTORIES) {
+        QUANTITY_FACTORIES.put(quantity, DefaultQuantityFactory.getInstance(quantity));
+      }
+    }
+    return QUANTITY_FACTORIES.get(quantity);
+  }
 }
