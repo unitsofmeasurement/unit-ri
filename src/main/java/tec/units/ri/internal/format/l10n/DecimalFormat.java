@@ -571,7 +571,7 @@ public class DecimalFormat extends NumberFormat {
    * @return AttributedCharacterIterator describing the formatted value.
    */
   AttributedCharacterIterator formatToCharacterIterator(Object obj) {
-    CharacterIteratorFieldDelegate delegate = new CharacterIteratorFieldDelegate();
+    AttributedCharacterFieldDelegate delegate = new AttributedCharacterFieldDelegate();
     StringBuffer sb = new StringBuffer();
 
     if (obj instanceof Long) {

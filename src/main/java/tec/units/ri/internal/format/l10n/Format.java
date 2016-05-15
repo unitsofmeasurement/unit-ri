@@ -313,7 +313,7 @@ public abstract class Format {
    * Delegates should NOT assume that the <code>Format</code> will notify the delegate of fields in any particular order.
    *
    * @see FieldPosition.Delegate
-   * @see CharacterIteratorFieldDelegate
+   * @see AttributedCharacterFieldDelegate
    */
   interface FieldDelegate {
     /**

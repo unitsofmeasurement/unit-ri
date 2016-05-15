@@ -32,23 +32,23 @@ package tec.units.ri.internal.format.l10n;
 import java.util.Vector;
 
 /**
- * CharacterIteratorFieldDelegate combines the notifications from a Format into a resulting <code>AttributedCharacterIterator</code>. The resulting
+ * AttributedCharacterFieldDelegate combines the notifications from a Format into a resulting <code>AttributedCharacterIterator</code>. The resulting
  * <code>AttributedCharacterIterator</code> can be retrieved by way of the <code>getIterator</code> method.
  * 
  */
-class CharacterIteratorFieldDelegate implements Format.FieldDelegate {
+class AttributedCharacterFieldDelegate implements Format.FieldDelegate {
   /**
    * Array of AttributeStrings. Whenever <code>formatted</code> is invoked for a region > size, a new instance of AttributedString is added to
    * attributedStrings. Subsequent invocations of <code>formatted</code> for existing regions result in invoking addAttribute on the existing
    * AttributedStrings.
    */
-  private Vector attributedStrings;
+  private final Vector attributedStrings;
   /**
    * Running count of the number of characters that have been encountered.
    */
   private int size;
 
-  CharacterIteratorFieldDelegate() {
+  AttributedCharacterFieldDelegate() {
     attributedStrings = new Vector();
   }
 
