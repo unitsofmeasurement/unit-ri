@@ -38,29 +38,29 @@ import org.junit.Test;
 
 import tec.units.ri.unit.Units;
 
-public class DoubleQuantityTest {
+public class ShortQuantityTest {
 
   @Test
   public void divideTest() {
-    Quantity<Length> metre = Quantities.getQuantity(10D, Units.METRE);
-    Quantity<Length> result = metre.divide(10D);
+    Quantity<Length> metre = Quantities.getQuantity(Double.valueOf(10D).shortValue(), Units.METRE);
+    Quantity<Length> result = metre.divide(Double.valueOf(10D).shortValue());
     Assert.assertTrue(result.getValue().intValue() == 1);
     Assert.assertEquals(result.getUnit(), Units.METRE);
 
-    Quantity<Time> day = Quantities.getQuantity(10D, Units.DAY);
-    Quantity<Time> dayResult = day.divide(Double.valueOf(2.5D));
-    Assert.assertEquals(4, dayResult.getValue().intValue());
+    Quantity<Time> day = Quantities.getQuantity(Double.valueOf(10D).shortValue(), Units.DAY);
+    Quantity<Time> dayResult = day.divide(Double.valueOf(2.5D).shortValue());
+    Assert.assertEquals(5, dayResult.getValue().shortValue());
     Assert.assertEquals(dayResult.getUnit(), Units.DAY);
   }
 
   @Test
   public void addTest() {
-    Quantity<Length> m = Quantities.getQuantity(10D, Units.METRE);
-    Quantity<Length> m2 = Quantities.getQuantity(Double.valueOf(12.5), Units.METRE);
+    Quantity<Length> m = Quantities.getQuantity(Double.valueOf(10D).shortValue(), Units.METRE);
+    Quantity<Length> m2 = Quantities.getQuantity(Double.valueOf(12.5D).shortValue(), Units.METRE);
     Quantity<Length> m3 = Quantities.getQuantity(2.5, Units.METRE);
     Quantity<Length> m4 = Quantities.getQuantity(5L, Units.METRE);
     Quantity<Length> result = m.add(m2).add(m3).add(m4);
-    Assert.assertEquals(30.0, result.getValue().doubleValue(), 0);
+    Assert.assertEquals(29, result.getValue().shortValue());
     Assert.assertEquals(result.getUnit(), Units.METRE);
   }
 
