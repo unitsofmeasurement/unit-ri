@@ -34,74 +34,23 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class AttributedStringTest {
+public class AnnotationTest {
 
-  static AttributedString sut;
+  static Annotation sut;
 
   @BeforeClass
   public static void init() {
-    sut = new AttributedString("test");
+    sut = new Annotation("test");
   }
 
   @Test
-  public void testGetIterator() {
-    assertNotNull(sut.getIterator());
+  public void testGetValue() {
+    assertNotNull(sut.getValue());
+    assertEquals("test", sut.getValue());
   }
 
   @Test
-  public void testText() {
-    assertEquals("test", sut.text);
+  public void testToString() {
+    assertEquals("tec.units.ri.internal.format.l10n.Annotation[value=test]", sut.toString());
   }
-
-  /*
-  	@Test
-  	public void testAttributedStringStringMap() {
-  		fail("Not yet implemented");
-  	}
-
-  	@Test
-  	public void testAttributedStringAttributedCharacterIterator() {
-  		fail("Not yet implemented");
-  	}
-
-  	@Test
-  	public void testAttributedStringAttributedCharacterIteratorIntInt() {
-  		fail("Not yet implemented");
-  	}
-
-  	@Test
-  	public void testAttributedStringAttributedCharacterIteratorIntIntAttributeArray() {
-  		fail("Not yet implemented");
-  	}
-
-  	@Test
-  	public void testAddAttributeAttributeObject() {
-  		fail("Not yet implemented");
-  	}
-
-  	@Test
-  	public void testAddAttributeAttributeObjectIntInt() {
-  		fail("Not yet implemented");
-  	}
-
-  	@Test
-  	public void testAddAttributes() {
-  		sut.a
-  	}
-
-  	@Test
-  	public void testGetIteratorAttributeArray() {
-  		fail("Not yet implemented");
-  	}
-
-  	@Test
-  	public void testGetIteratorAttributeArrayIntInt() {
-  		fail("Not yet implemented");
-  	}
-  */
-  @Test
-  public void testLength() {
-    assertEquals(4, sut.length());
-  }
-
 }
