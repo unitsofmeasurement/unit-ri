@@ -139,6 +139,7 @@ public class LongQuantityTest {
     LongQuantity quantity2 = new LongQuantity(2L, Units.OHM);
     Quantity<ElectricResistance> result = quantity1.add(quantity2);
     assertEquals(Long.valueOf(12), result.getValue());
+    result = quantity1.subtract(quantity2);
+    assertEquals(8L, result.getValue());
   }
-
 }

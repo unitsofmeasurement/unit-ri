@@ -139,5 +139,7 @@ public class DoubleQuantityTest {
     DoubleQuantity quantity2 = new DoubleQuantity(2d, Units.OHM);
     Quantity<ElectricResistance> result = quantity1.add(quantity2);
     assertEquals(Double.valueOf(12d), result.getValue());
+    result = quantity1.subtract(quantity2);
+    assertEquals(8d, result.getValue());
   }
 }

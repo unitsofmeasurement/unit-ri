@@ -139,5 +139,7 @@ public class ShortQuantityTest {
     ShortQuantity quantity2 = new ShortQuantity(Integer.valueOf(2).shortValue(), Units.OHM);
     Quantity<ElectricResistance> result = quantity1.add(quantity2);
     assertEquals(Short.valueOf("3").shortValue(), result.getValue().shortValue());
+    result = quantity2.subtract(quantity1);
+    assertEquals(Short.valueOf("1").shortValue(), result.getValue().shortValue());
   }
 }
