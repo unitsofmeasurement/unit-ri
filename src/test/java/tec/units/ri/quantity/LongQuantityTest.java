@@ -41,38 +41,38 @@ import org.junit.Test;
 
 import tec.units.ri.unit.Units;
 
-public class ShortQuantityTest {
+public class LongQuantityTest {
 
   @Test
   public void divideTest() {
-    Quantity<Length> metre = Quantities.getQuantity(Double.valueOf(10D).shortValue(), Units.METRE);
-    Quantity<Length> result = metre.divide(Double.valueOf(10D).shortValue());
-    Assert.assertTrue(result.getValue().intValue() == 1);
+    Quantity<Length> metre = Quantities.getQuantity(10L, Units.METRE);
+    Quantity<Length> result = metre.divide(10L);
+    Assert.assertTrue(result.getValue().longValue() == 1);
     Assert.assertEquals(result.getUnit(), Units.METRE);
 
-    Quantity<Time> day = Quantities.getQuantity(Double.valueOf(10D).shortValue(), Units.DAY);
-    Quantity<Time> dayResult = day.divide(Double.valueOf(2.5D).shortValue());
-    Assert.assertEquals(5, dayResult.getValue().shortValue());
+    Quantity<Time> day = Quantities.getQuantity(10L, Units.DAY);
+    Quantity<Time> dayResult = day.divide(2L);
+    Assert.assertEquals(5, dayResult.getValue().longValue());
     Assert.assertEquals(dayResult.getUnit(), Units.DAY);
   }
 
   @Test
   public void addTest() {
-    Quantity<Length> m = Quantities.getQuantity(Double.valueOf(10D).shortValue(), Units.METRE);
-    Quantity<Length> m2 = Quantities.getQuantity(Double.valueOf(12.5D).shortValue(), Units.METRE);
-    Quantity<Length> m3 = Quantities.getQuantity(2.5, Units.METRE);
+    Quantity<Length> m = Quantities.getQuantity(10L, Units.METRE);
+    Quantity<Length> m2 = Quantities.getQuantity(12L, Units.METRE);
+    Quantity<Length> m3 = Quantities.getQuantity(2L, Units.METRE);
     Quantity<Length> m4 = Quantities.getQuantity(5L, Units.METRE);
     Quantity<Length> result = m.add(m2).add(m3).add(m4);
-    Assert.assertEquals(29, result.getValue().shortValue());
+    Assert.assertEquals(29, result.getValue().longValue(), 0);
     Assert.assertEquals(result.getUnit(), Units.METRE);
   }
 
   @Test
   public void addQuantityTest() {
-    Quantity<Time> day = Quantities.getQuantity(1, Units.DAY);
-    Quantity<Time> hours = Quantities.getQuantity(12D, Units.HOUR);
+    Quantity<Time> day = Quantities.getQuantity(1L, Units.DAY);
+    Quantity<Time> hours = Quantities.getQuantity(12L, Units.HOUR);
     Quantity<Time> result = day.add(hours);
-    Assert.assertEquals(1, result.getValue()); // TODO loss of precision here, SE has 1.5?!
+    Assert.assertEquals(1L, result.getValue());
     Assert.assertEquals(result.getUnit(), Units.DAY);
   }
 
@@ -135,9 +135,10 @@ public class ShortQuantityTest {
 
   @Test
   public void directClassTest() {
-    ShortQuantity quantity1 = new ShortQuantity(Integer.valueOf(1).shortValue(), Units.OHM);
-    ShortQuantity quantity2 = new ShortQuantity(Integer.valueOf(2).shortValue(), Units.OHM);
+    LongQuantity quantity1 = new LongQuantity(10L, Units.OHM);
+    LongQuantity quantity2 = new LongQuantity(2L, Units.OHM);
     Quantity<ElectricResistance> result = quantity1.add(quantity2);
-    assertEquals(Short.valueOf("3").shortValue(), result.getValue().shortValue());
+    assertEquals(Long.valueOf(12), result.getValue());
   }
+
 }

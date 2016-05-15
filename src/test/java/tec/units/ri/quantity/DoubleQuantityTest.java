@@ -29,7 +29,10 @@
  */
 package tec.units.ri.quantity;
 
+import static org.junit.Assert.assertEquals;
+
 import javax.measure.Quantity;
+import javax.measure.quantity.ElectricResistance;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Time;
 
@@ -58,7 +61,7 @@ public class DoubleQuantityTest {
     Quantity<Length> m = Quantities.getQuantity(10D, Units.METRE);
     Quantity<Length> m2 = Quantities.getQuantity(Double.valueOf(12.5), Units.METRE);
     Quantity<Length> m3 = Quantities.getQuantity(2.5, Units.METRE);
-    Quantity<Length> m4 = Quantities.getQuantity(5L, Units.METRE);
+    Quantity<Length> m4 = Quantities.getQuantity(5D, Units.METRE);
     Quantity<Length> result = m.add(m2).add(m3).add(m4);
     Assert.assertEquals(30.0, result.getValue().doubleValue(), 0);
     Assert.assertEquals(result.getUnit(), Units.METRE);
@@ -66,10 +69,10 @@ public class DoubleQuantityTest {
 
   @Test
   public void addQuantityTest() {
-    Quantity<Time> day = Quantities.getQuantity(1, Units.DAY);
+    Quantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
     Quantity<Time> hours = Quantities.getQuantity(12D, Units.HOUR);
     Quantity<Time> result = day.add(hours);
-    Assert.assertEquals(1, result.getValue()); // TODO loss of precision here, SE has 1.5?!
+    Assert.assertEquals(1.5, result.getValue());
     Assert.assertEquals(result.getUnit(), Units.DAY);
   }
 
@@ -130,4 +133,11 @@ public class DoubleQuantityTest {
     Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
   }
 
+  @Test
+  public void directClassTest() {
+    DoubleQuantity quantity1 = new DoubleQuantity(10d, Units.OHM);
+    DoubleQuantity quantity2 = new DoubleQuantity(2d, Units.OHM);
+    Quantity<ElectricResistance> result = quantity1.add(quantity2);
+    assertEquals(Double.valueOf(12d), result.getValue());
+  }
 }
