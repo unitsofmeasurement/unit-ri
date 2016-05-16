@@ -30,80 +30,49 @@
 package tec.units.ri.quantity;
 
 import static org.junit.Assert.assertEquals;
-
 import javax.measure.Quantity;
 import javax.measure.quantity.ElectricResistance;
-import javax.measure.quantity.Length;
 import javax.measure.quantity.Time;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import tec.units.ri.quantity.Quantities;
 import tec.units.ri.unit.Units;
 
 public class LongQuantityTest {
 
   @Test
   public void divideTest() {
-    Quantity<Length> metre = Quantities.getQuantity(10L, Units.METRE);
-    Quantity<Length> result = metre.divide(10L);
-    Assert.assertTrue(result.getValue().longValue() == 1);
-    Assert.assertEquals(result.getUnit(), Units.METRE);
-
-    Quantity<Time> day = Quantities.getQuantity(10L, Units.DAY);
-    Quantity<Time> dayResult = day.divide(2L);
-    Assert.assertEquals(5, dayResult.getValue().longValue());
-    Assert.assertEquals(dayResult.getUnit(), Units.DAY);
+    LongQuantity<ElectricResistance> quantity1 = new LongQuantity<ElectricResistance>(Long.valueOf(3).longValue(), Units.OHM);
+    LongQuantity<ElectricResistance> quantity2 = new LongQuantity<ElectricResistance>(Long.valueOf(2).longValue(), Units.OHM);
+    Quantity<?> result = quantity1.divide(quantity2);
+    assertEquals(Double.valueOf(1.5d), result.getValue());
   }
 
   @Test
   public void addTest() {
-    Quantity<Length> m = Quantities.getQuantity(10L, Units.METRE);
-    Quantity<Length> m2 = Quantities.getQuantity(12L, Units.METRE);
-    Quantity<Length> m3 = Quantities.getQuantity(2L, Units.METRE);
-    Quantity<Length> m4 = Quantities.getQuantity(5L, Units.METRE);
-    Quantity<Length> result = m.add(m2).add(m3).add(m4);
-    Assert.assertEquals(29, result.getValue().longValue(), 0);
-    Assert.assertEquals(result.getUnit(), Units.METRE);
-  }
-
-  @Test
-  public void addQuantityTest() {
-    Quantity<Time> day = Quantities.getQuantity(1L, Units.DAY);
-    Quantity<Time> hours = Quantities.getQuantity(12L, Units.HOUR);
-    Quantity<Time> result = day.add(hours);
-    Assert.assertEquals(1L, result.getValue());
-    Assert.assertEquals(result.getUnit(), Units.DAY);
+    LongQuantity quantity1 = new LongQuantity(Long.valueOf(1).longValue(), Units.OHM);
+    LongQuantity quantity2 = new LongQuantity(Long.valueOf(2).longValue(), Units.OHM);
+    Quantity<ElectricResistance> result = quantity1.add(quantity2);
+    assertEquals(Short.valueOf("3").longValue(), result.getValue().longValue());
   }
 
   @Test
   public void subtractTest() {
-    Quantity<Length> m = Quantities.getQuantity(10D, Units.METRE);
-    Quantity<Length> m2 = Quantities.getQuantity(12.5, Units.METRE);
-    Quantity<Length> result = m.subtract(m2);
-    Assert.assertTrue(result.getValue().doubleValue() == -2.5);
-    Assert.assertEquals(result.getUnit(), Units.METRE);
+    LongQuantity<ElectricResistance> quantity1 = new LongQuantity<ElectricResistance>(Long.valueOf(1).longValue(), Units.OHM);
+    LongQuantity<ElectricResistance> quantity2 = new LongQuantity<ElectricResistance>(Long.valueOf(2).longValue(), Units.OHM);
+    Quantity<ElectricResistance> result = quantity2.subtract(quantity1);
+    assertEquals(Short.valueOf("1").longValue(), result.getValue().longValue());
+    assertEquals(Units.OHM, result.getUnit());
   }
 
   @Test
-  public void subtractQuantityTest() {
-    Quantity<Time> day = Quantities.getQuantity(1, Units.DAY);
-    Quantity<Time> hours = Quantities.getQuantity(12F, Units.HOUR);
-    Quantity<Time> result = day.subtract(hours);
-    Assert.assertEquals(1, result.getValue()); // TODO loss of precision here, SE has 0.5?!
-    Assert.assertEquals(result.getUnit(), Units.DAY);
-  }
-
-  @Test
-  public void multiplyTest() {
-    Quantity<Length> metre = Quantities.getQuantity(10D, Units.METRE);
-    Quantity<Length> result = metre.multiply(10D);
-    Assert.assertTrue(result.getValue().intValue() == 100);
-    Assert.assertEquals(result.getUnit(), Units.METRE);
-    @SuppressWarnings("unchecked")
-    Quantity<Length> result2 = (Quantity<Length>) metre.multiply(Quantities.getQuantity(10D, Units.HOUR));
-    Assert.assertTrue(result2.getValue().intValue() == 100);
-
+  public void multiplyQuantityTest() {
+    LongQuantity<ElectricResistance> quantity1 = new LongQuantity<ElectricResistance>(Long.valueOf(3).longValue(), Units.OHM);
+    LongQuantity<ElectricResistance> quantity2 = new LongQuantity<ElectricResistance>(Long.valueOf(2).longValue(), Units.OHM);
+    Quantity<?> result = quantity1.multiply(quantity2);
+    assertEquals(Long.valueOf(6L), result.getValue());
   }
 
   @Test
@@ -116,30 +85,5 @@ public class LongQuantityTest {
     Quantity<Time> dayResult = hour.to(Units.DAY);
     Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
     Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
-  }
-
-  @Test
-  public void inverseTestLength() {
-    @SuppressWarnings("unchecked")
-    Quantity<Length> metre = (Quantity<Length>) Quantities.getQuantity(10d, Units.METRE).inverse();
-    Assert.assertEquals(0.1d, metre.getValue());
-    Assert.assertEquals("1/m", String.valueOf(metre.getUnit()));
-  }
-
-  @Test
-  public void inverseTestTime() {
-    Quantity<?> secInv = Quantities.getQuantity(2d, Units.SECOND).inverse();
-    Assert.assertEquals(0.5d, secInv.getValue());
-    Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
-  }
-
-  @Test
-  public void directClassTest() {
-    LongQuantity quantity1 = new LongQuantity(10L, Units.OHM);
-    LongQuantity quantity2 = new LongQuantity(2L, Units.OHM);
-    Quantity<ElectricResistance> result = quantity1.add(quantity2);
-    assertEquals(Long.valueOf(12), result.getValue());
-    result = quantity1.subtract(quantity2);
-    assertEquals(8L, result.getValue());
   }
 }

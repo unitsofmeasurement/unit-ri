@@ -29,10 +29,7 @@
  */
 package tec.units.ri.quantity;
 
-import static org.junit.Assert.assertEquals;
-
 import javax.measure.Quantity;
-import javax.measure.quantity.ElectricResistance;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Time;
 
@@ -41,7 +38,7 @@ import org.junit.Test;
 
 import tec.units.ri.unit.Units;
 
-public class ShortQuantityTest {
+public class ShortQuantityBaseTest {
 
   @Test
   public void divideTest() {
@@ -119,12 +116,17 @@ public class ShortQuantityTest {
   }
 
   @Test
-  public void directClassTest() {
-    ShortQuantity quantity1 = new ShortQuantity(Integer.valueOf(1).shortValue(), Units.OHM);
-    ShortQuantity quantity2 = new ShortQuantity(Integer.valueOf(2).shortValue(), Units.OHM);
-    Quantity<ElectricResistance> result = quantity1.add(quantity2);
-    assertEquals(Short.valueOf("3").shortValue(), result.getValue().shortValue());
-    result = quantity2.subtract(quantity1);
-    assertEquals(Short.valueOf("1").shortValue(), result.getValue().shortValue());
+  public void inverseTestLength() {
+    @SuppressWarnings("unchecked")
+    Quantity<Length> metre = (Quantity<Length>) Quantities.getQuantity(10d, Units.METRE).inverse();
+    Assert.assertEquals(0.1d, metre.getValue());
+    Assert.assertEquals("1/m", String.valueOf(metre.getUnit()));
+  }
+
+  @Test
+  public void inverseTestTime() {
+    Quantity<?> secInv = Quantities.getQuantity(2d, Units.SECOND).inverse();
+    Assert.assertEquals(0.5d, secInv.getValue());
+    Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
   }
 }

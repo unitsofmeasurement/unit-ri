@@ -39,6 +39,7 @@ import javax.measure.quantity.Time;
 import org.junit.Assert;
 import org.junit.Test;
 
+import tec.units.ri.quantity.Quantities;
 import tec.units.ri.unit.Units;
 
 public class DoubleQuantityTest {
