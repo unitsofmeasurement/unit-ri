@@ -129,7 +129,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e24)</code>.
+   * @return <code>unit.multiply(1e24)</code>.
    */
   public static final <Q extends Quantity<Q>> Unit<Q> YOTTA(Unit<Q> unit) {
     return unit.transform(YOTTA.getConverter());
@@ -142,7 +142,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e21)</code>.
+   * @return <code>unit.multiply(1e21)</code>.
    */
   public static final <Q extends Quantity<Q>> Unit<Q> ZETTA(Unit<Q> unit) {
     return unit.transform(ZETTA.getConverter());
@@ -155,7 +155,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e18)</code>.
+   * @return <code>unit.multiply(1e18)</code>.
    */
   public static final <Q extends Quantity<Q>> Unit<Q> EXA(Unit<Q> unit) {
     return unit.transform(EXA.getConverter());
@@ -168,7 +168,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e15)</code>.
+   * @return <code>unit.multiply(1e15)</code>.
    */
   public static final <Q extends Quantity<Q>> Unit<Q> PETA(Unit<Q> unit) {
     return unit.transform(PETA.getConverter());
@@ -181,7 +181,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e12)</code>.
+   * @return <code>unit.multiply(1e12)</code>.
    */
   public static final <Q extends Quantity<Q>> Unit<Q> TERA(Unit<Q> unit) {
     return unit.transform(TERA.getConverter());
@@ -194,7 +194,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e9)</code>.
+   * @return <code>unit.multiply(1e9)</code>.
    */
   public static <Q extends Quantity<Q>> Unit<Q> GIGA(Unit<Q> unit) {
     return unit.transform(GIGA.getConverter());
@@ -259,7 +259,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e-1)</code>.
+   * @return <code>unit.multiply(1e-1)</code>.
    */
   public static final <Q extends Quantity<Q>> Unit<Q> DECI(Unit<Q> unit) {
     return unit.transform(DECI.getConverter());
@@ -285,7 +285,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e-3)</code>.
+   * @return <code>unit.multiply(1e-3)</code>.
    */
   public static final <Q extends Quantity<Q>> Unit<Q> MILLI(Unit<Q> unit) {
     return unit.transform(MILLI.getConverter());
@@ -298,7 +298,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e-6)</code>.
+   * @return <code>unit.multiply(1e-6)</code>.
    */
   public static final <Q extends Quantity<Q>> Unit<Q> MICRO(Unit<Q> unit) {
     return unit.transform(MICRO.getConverter());
@@ -311,7 +311,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e-9)</code>.
+   * @return <code>unit.multiply(1e-9)</code>.
    */
   public static final <Q extends Quantity<Q>> Unit<Q> NANO(Unit<Q> unit) {
     return unit.transform(NANO.getConverter());
@@ -324,7 +324,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e-12)</code>.
+   * @return <code>unit.multiply(1e-12)</code>.
    */
   public static final <Q extends Quantity<Q>> Unit<Q> PICO(Unit<Q> unit) {
     return unit.transform(PICO.getConverter());
@@ -337,7 +337,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e-15)</code>.
+   * @return <code>unit.multiply(1e-15)</code>.
    */
   public static final <Q extends Quantity<Q>> Unit<Q> FEMTO(Unit<Q> unit) {
     return unit.transform(FEMTO.getConverter());
@@ -350,7 +350,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e-18)</code>.
+   * @return <code>unit.multiply(1e-18)</code>.
    */
   public static final <Q extends Quantity<Q>> Unit<Q> ATTO(Unit<Q> unit) {
     return unit.transform(ATTO.getConverter());
@@ -363,7 +363,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e-21)</code>.
+   * @return <code>unit.multiply(1e-21)</code>.
    */
   public static final <Q extends Quantity<Q>> Unit<Q> ZEPTO(Unit<Q> unit) {
     return unit.transform(ZEPTO.getConverter());
@@ -376,7 +376,7 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
    *          The type of the quantity measured by the unit.
    * @param unit
    *          any unit.
-   * @return <code>unit.times(1e-24)</code>.
+   * @return <code>unit.multiply(1e-24)</code>.
    */
   public static final <Q extends Quantity<Q>> Unit<Q> YOCTO(Unit<Q> unit) {
     return unit.transform(YOCTO.getConverter());

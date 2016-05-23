@@ -79,7 +79,7 @@ public final class Quantities {
   }
 
   /**
-   * Returns the scalar measurement. in the specified unit.
+   * Returns the scalar measurement in the specified unit.
    * 
    * @param value
    *          the measurement value.

@@ -136,7 +136,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   /**
    * Returns the unscaled standard (SI) unit from which this unit is derived.
    * 
-   * They SI unit can be be used to identify a quantity given the unit. For example:<code> static boolean isAngularVelocity(AbstractUnit<?> unit) {
+   * The SI unit can be be used to identify a quantity given the unit. For example:<code> static boolean isAngularVelocity(AbstractUnit<?> unit) {
    * return unit.toSystemUnit().equals(RADIAN.divide(SECOND)); }
    * assert(REVOLUTION.divide(MINUTE).isAngularVelocity()); // Returns true.
    * </code>

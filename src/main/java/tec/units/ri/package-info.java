@@ -60,7 +60,7 @@
  *         System.out.println(REVOLUTION.divide(MINUTE).toSI());
  *
  *         // Dimension checking (allows/disallows conversions)
- *         System.out.println(ELECTRON_VOLT.isCompatible(WATT.times(HOUR)));
+ *         System.out.println(ELECTRON_VOLT.isCompatible(WATT.multiply(HOUR)));
  *
  *         // Retrieval of the unit dimension (depends upon the current model).
  *         System.out.println(ELECTRON_VOLT.getDimension());
@@ -78,8 +78,8 @@
  *
  *     Units are parameterized enforce compile-time checks of units/measures consistency, for example:[code]
  *
- *     AbstractUnit<Time> MINUTE = SECOND.times(60); // Ok.
- *     AbstractUnit<Time> MINUTE = METRE.times(60); // Compile error.
+ *     AbstractUnit<Time> MINUTE = SECOND.multiply(60); // Ok.
+ *     AbstractUnit<Time> MINUTE = METRE.multiply(60); // Compile error.
  *
  *     AbstractUnit<Pressure> HECTOPASCAL = HECTO(PASCAL); // Ok.
  *     AbstractUnit<Pressure> HECTOPASCAL = HECTO(NEWTON); // Compile error.
@@ -94,8 +94,8 @@
  *     Runtime checks of dimension consistency can be done for more complex cases.
  *
  *     [code]
- *     AbstractUnit<Area> SQUARE_FOOT = FOOT.times(FOOT).asType(Area.class); // Ok.
- *     AbstractUnit<Area> SQUARE_FOOT = FOOT.times(KELVIN).asType(Area.class); // Runtime error.
+ *     AbstractUnit<Area> SQUARE_FOOT = FOOT.multiply(FOOT).asType(Area.class); // Ok.
+ *     AbstractUnit<Area> SQUARE_FOOT = FOOT.multiply(KELVIN).asType(Area.class); // Runtime error.
  *
  *     AbstractUnit<Temperature> KELVIN = AbstractUnit.of("K").asType(Temperature.class); // Ok.
  *     AbstractUnit<Temperature> KELVIN = AbstractUnit.of("kg").asType(Temperature.class); // Runtime error.
