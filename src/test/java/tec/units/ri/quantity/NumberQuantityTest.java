@@ -30,10 +30,8 @@
 package tec.units.ri.quantity;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
 import javax.measure.Quantity;
-import javax.measure.quantity.Length;
+import javax.measure.quantity.ElectricResistance;
 import javax.measure.quantity.Time;
 
 import org.junit.Assert;
@@ -45,107 +43,53 @@ public class NumberQuantityTest {
 
   @Test
   public void divideTest() {
-    Quantity<Length> metre = Quantities.getQuantity(10, Units.METRE);
-    Quantity<Length> result = metre.divide(10D);
-    Assert.assertTrue(result.getValue().intValue() == 1);
-    Assert.assertEquals(result.getUnit(), Units.METRE);
-
-    Quantity<Time> day = Quantities.getQuantity(10, Units.DAY);
-    Quantity<Time> dayResult = day.divide(Double.valueOf(2.5D));
-    Assert.assertTrue(dayResult.getValue().intValue() == 4);
-    Assert.assertEquals(dayResult.getUnit(), Units.DAY);
+    NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(Double.valueOf(3).doubleValue(), Units.OHM);
+    NumberQuantity<ElectricResistance> quantity2 = new NumberQuantity<ElectricResistance>(Double.valueOf(2).doubleValue(), Units.OHM);
+    Quantity<?> result = quantity1.divide(quantity2);
+    assertEquals(Double.valueOf(1.5f), result.getValue());
   }
 
   @Test
   public void addTest() {
-    Quantity<Length> m = Quantities.getQuantity(10, Units.METRE);
-    Quantity<Length> m2 = Quantities.getQuantity(12.5F, Units.METRE);
-    Quantity<Length> m3 = Quantities.getQuantity(2.5F, Units.METRE);
-    Quantity<Length> m4 = Quantities.getQuantity(5L, Units.METRE);
-    Quantity<Length> result = m.add(m2).add(m3).add(m4);
-    Assert.assertEquals(Integer.valueOf(29), result.getValue()); // TODO
-    // precision
-    Assert.assertEquals(Units.METRE, result.getUnit());
-  }
-
-  @Test
-  public void addQuantityTest() {
-    Quantity<Time> day = Quantities.getQuantity(1, Units.DAY);
-    Quantity<Time> hours = Quantities.getQuantity(12, Units.HOUR);
-    Quantity<Time> result = day.add(hours);
-    Assert.assertEquals(1, result.getValue());
-    Assert.assertEquals(result.getUnit(), Units.DAY);
+    NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(Double.valueOf(1).doubleValue(), Units.OHM);
+    NumberQuantity<ElectricResistance> quantity2 = new NumberQuantity<ElectricResistance>(Double.valueOf(2).doubleValue(), Units.OHM);
+    Quantity<ElectricResistance> result = quantity1.add(quantity2);
+    assertEquals(Double.valueOf(3f), result.getValue());
   }
 
   @Test
   public void subtractTest() {
-    Quantity<Length> m = Quantities.getQuantity(10, Units.METRE);
-    Quantity<Length> m2 = Quantities.getQuantity(12.5, Units.METRE);
-    Quantity<Length> result = m.subtract(m2);
-    Assert.assertEquals(-2, result.getValue()); // TODDO precision
-    Assert.assertEquals(Units.METRE, result.getUnit());
+    NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(Double.valueOf(1).doubleValue(), Units.OHM);
+    NumberQuantity<ElectricResistance> quantity2 = new NumberQuantity<ElectricResistance>(Double.valueOf(2).doubleValue(), Units.OHM);
+    Quantity<ElectricResistance> result = quantity2.subtract(quantity1);
+    assertEquals(Double.valueOf(1), result.getValue());
+    assertEquals(Units.OHM, result.getUnit());
   }
 
   @Test
-  public void subtractQuantityTest() {
-    Quantity<Time> day = Quantities.getQuantity(1, Units.DAY);
-    Quantity<Time> hours = Quantities.getQuantity(12, Units.HOUR);
-    Quantity<Time> result = day.subtract(hours);
-    Assert.assertEquals(1, result.getValue()); // TODO precision
-    Assert.assertEquals(result.getUnit(), Units.DAY);
+  public void multiplyQuantityTest() {
+    NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(Double.valueOf(3).doubleValue(), Units.OHM);
+    NumberQuantity<ElectricResistance> quantity2 = new NumberQuantity<ElectricResistance>(Double.valueOf(2).doubleValue(), Units.OHM);
+    Quantity<?> result = quantity1.multiply(quantity2);
+    assertEquals(Double.valueOf(6L), result.getValue());
   }
 
   @Test
-  public void multiplyTest() {
-    Quantity<Length> metre = Quantities.getQuantity(10, Units.METRE);
-    Quantity<Length> result = metre.multiply(10D);
-    Assert.assertTrue(result.getValue().intValue() == 100);
-    Assert.assertEquals(result.getUnit(), Units.METRE);
-    @SuppressWarnings("unchecked")
-    Quantity<Length> result2 = (Quantity<Length>) metre.multiply(Quantities.getQuantity(10, Units.METRE));
-    assertEquals(100, result2.getValue().intValue());
+  public void doubleValueTest() {
+    NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(3), Units.DAY);
+    double hours = day.doubleValue(Units.HOUR);
+    assertEquals(72D, hours, 0);
   }
 
   @Test
   public void toTest() {
-    Quantity<Time> day = Quantities.getQuantity(1, Units.DAY);
+    Quantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
     Quantity<Time> hour = day.to(Units.HOUR);
-    assertEquals(hour.getValue().intValue(), 24);
-    assertEquals(hour.getUnit(), Units.HOUR);
+    Assert.assertEquals(Double.valueOf(24), hour.getValue());
+    Assert.assertEquals(hour.getUnit(), Units.HOUR);
 
     Quantity<Time> dayResult = hour.to(Units.DAY);
-    assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
-    assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
+    Assert.assertEquals(dayResult.getValue(), day.getValue());
+    Assert.assertEquals(dayResult.getUnit(), day.getUnit());
   }
-
-  @Test
-  public void inverseTestLength() {
-    @SuppressWarnings("unchecked")
-    Quantity<Length> metre = (Quantity<Length>) Quantities.getQuantity(10, Units.METRE).inverse();
-    assertEquals(Float.valueOf(0.0F), Float.valueOf(metre.getValue().floatValue()));
-    assertEquals("1/m", String.valueOf(metre.getUnit()));
-  }
-
-  @Test
-  public void inverseTestTime() {
-    Quantity<?> secInv = Quantities.getQuantity(2, Units.SECOND).inverse();
-    assertEquals(Float.valueOf(0.0F), Float.valueOf(secInv.getValue().floatValue())); // TODO
-    // precision
-    assertEquals("1/s", String.valueOf(secInv.getUnit()));
-  }
-
-  @Test
-  public void testEquals() {
-    Quantity<Length> q1 = NumberQuantity.of(10, Units.METRE);
-    Quantity<Length> q2 = Quantities.getQuantity(10, Units.METRE);
-    assertEquals(q1, q2);
-  }
-
-  @Test
-  public void testIsExact() {
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    NumberQuantity<Length> q1 = new NumberQuantity(10, Units.METRE);
-    assertFalse(q1.isExact());
-  }
-
 }

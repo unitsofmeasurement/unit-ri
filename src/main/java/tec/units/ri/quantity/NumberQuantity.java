@@ -119,44 +119,13 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
   public double doubleValue(Unit<Q> unit) {
     Unit<Q> myUnit = getUnit();
     try {
-      UnitConverter converter = unit.getConverterTo(myUnit);
+      UnitConverter converter = myUnit.getConverterTo(unit);
       return converter.convert(getValue().doubleValue());
     } catch (UnconvertibleException e) {
       throw e;
     } // catch (IncommensurableException e) {
       // throw new IllegalArgumentException(e.getMessage());
       // }
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see AbstractQuantity#longValue(javax.measure.Unit)
-   */
-  protected final long longValue(Unit<Q> unit) {
-    // Extends AbstractQuantity
-    // Unit<Q> myUnit = getUnit();
-    try {
-      // UnitConverter converter = unit.getConverterToAny(myUnit);
-      // if ((getValue() instanceof BigDecimal || getValue() instanceof
-      // BigInteger)
-      // && converter instanceof AbstractConverter) {
-      // return (((AbstractConverter) converter).convert(
-      // BigDecimal.valueOf(getValue().longValue()),
-      // MathContext.DECIMAL128)).longValue();
-      // } else {
-      double result = doubleValue(unit);
-      if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
-        throw new ArithmeticException("Overflow (" + result + ")");
-      }
-      return (long) result;
-      // }
-    } catch (UnconvertibleException e) {
-      throw e;
-    }
-    // catch (IncommensurableException e) {
-    // throw new IllegalArgumentException(e.getMessage());
-    // }
   }
 
   protected final int intValue(Unit<Q> unit) throws ArithmeticException {
