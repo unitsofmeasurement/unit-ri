@@ -76,6 +76,13 @@ public class LongQuantityTest {
   }
 
   @Test
+  public void longValueTest() {
+    LongQuantity<Time> day = new LongQuantity<Time>(Double.valueOf(3).longValue(), Units.DAY);
+    long hours = day.longValue(Units.HOUR);
+    assertEquals(72L, hours);
+  }
+
+  @Test
   public void toTest() {
     Quantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
     Quantity<Time> hour = day.to(Units.HOUR);

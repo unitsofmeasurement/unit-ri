@@ -29,10 +29,7 @@
  */
 package tec.units.ri.quantity;
 
-import static org.junit.Assert.assertEquals;
-
 import javax.measure.Quantity;
-import javax.measure.quantity.ElectricResistance;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Time;
 

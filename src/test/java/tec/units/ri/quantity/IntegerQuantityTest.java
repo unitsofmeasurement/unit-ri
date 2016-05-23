@@ -76,6 +76,20 @@ public class IntegerQuantityTest {
   }
 
   @Test
+  public void longValueTest() {
+    IntegerQuantity<Time> day = new IntegerQuantity<Time>(Integer.valueOf(3).intValue(), Units.DAY);
+    long hours = day.longValue(Units.HOUR);
+    assertEquals(72L, hours);
+  }
+
+  @Test
+  public void doubleValueTest() {
+    IntegerQuantity<Time> day = new IntegerQuantity<Time>(Integer.valueOf(3).intValue(), Units.DAY);
+    double hours = day.doubleValue(Units.HOUR);
+    assertEquals(72D, hours, 0);
+  }
+
+  @Test
   public void toTest() {
     Quantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
     Quantity<Time> hour = day.to(Units.HOUR);

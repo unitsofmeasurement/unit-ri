@@ -44,7 +44,7 @@ import tec.units.ri.format.QuantityFormat;
  * @author Otavio de Santana
  * @param <Q>
  *          The type of the quantity.
- * @version 0.4, $Date: 2015-07-07 $
+ * @version 0.5, $Date: 2016-05-23 $
  */
 final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -120,43 +120,43 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
     // return numPart + " " + String.valueOf(getUnit());
     // return nosci(getValue()) + " " + String.valueOf(getUnit());
   }
-
-  private static String nosci(double d) {
-    if (d < 0) {
-      return "-" + nosci(-d);
-    }
-    String javaString = String.valueOf(d);
-    int indexOfE = javaString.indexOf("E");
-    if (indexOfE == -1) {
-      return javaString;
-    }
-    StringBuilder sb = new StringBuilder();
-    if (d > 1) {// big number
-      int exp = Integer.parseInt(javaString.substring(indexOfE + 1));
-      String sciDecimal = javaString.substring(2, indexOfE);
-      int sciDecimalLength = sciDecimal.length();
-      if (exp == sciDecimalLength) {
-        sb.append(javaString.charAt(0));
-        sb.append(sciDecimal);
-      } else if (exp > sciDecimalLength) {
-        sb.append(javaString.charAt(0));
-        sb.append(sciDecimal);
-        for (int i = 0; i < exp - sciDecimalLength; i++) {
-          sb.append('0');
-        }
-      } else if (exp < sciDecimalLength) {
-        sb.append(javaString.charAt(0));
-        sb.append(sciDecimal.substring(0, exp));
-        sb.append('.');
-        for (int i = exp; i < sciDecimalLength; i++) {
-          sb.append(sciDecimal.charAt(i));
-        }
+  /*
+    private static String nosci(double d) {
+      if (d < 0) {
+        return "-" + nosci(-d);
       }
-      return sb.toString();
-    } else {
-      // for little numbers use the default or you will
-      // loose accuracy
-      return javaString;
-    }
-  }
+      String javaString = String.valueOf(d);
+      int indexOfE = javaString.indexOf("E");
+      if (indexOfE == -1) {
+        return javaString;
+      }
+      StringBuilder sb = new StringBuilder();
+      if (d > 1) {// big number
+        int exp = Integer.parseInt(javaString.substring(indexOfE + 1));
+        String sciDecimal = javaString.substring(2, indexOfE);
+        int sciDecimalLength = sciDecimal.length();
+        if (exp == sciDecimalLength) {
+          sb.append(javaString.charAt(0));
+          sb.append(sciDecimal);
+        } else if (exp > sciDecimalLength) {
+          sb.append(javaString.charAt(0));
+          sb.append(sciDecimal);
+          for (int i = 0; i < exp - sciDecimalLength; i++) {
+            sb.append('0');
+          }
+        } else if (exp < sciDecimalLength) {
+          sb.append(javaString.charAt(0));
+          sb.append(sciDecimal.substring(0, exp));
+          sb.append('.');
+          for (int i = exp; i < sciDecimalLength; i++) {
+            sb.append(sciDecimal.charAt(i));
+          }
+        }
+        return sb.toString();
+      } else {
+        // for little numbers use the default or you will
+        // loose accuracy
+        return javaString;
+      }
+    } */
 }
