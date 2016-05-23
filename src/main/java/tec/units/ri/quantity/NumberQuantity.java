@@ -177,7 +177,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
   }
 
   /**
-   * Indicates if this measured quantity is exact. An exact quantity is guarantee exact only when stated in this quantity's unit (e.g.
+   * Indicates if this measured quantity is exact. An exact quantity is guaranteed exact only when stated in this quantity's unit (e.g.
    * <code>this.longValue()</code>); stating the quantity in any other unit may introduce conversion errors.
    * 
    * @return <code>true</code> if this quantity is exact; <code>false</code> otherwise.

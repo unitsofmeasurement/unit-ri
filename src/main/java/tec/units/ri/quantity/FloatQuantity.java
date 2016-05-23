@@ -35,7 +35,7 @@ import javax.measure.Unit;
 import tec.units.ri.AbstractQuantity;
 
 /**
- * An amount of quantity, consisting of a double and a Unit. FloatQuantity objects are immutable.
+ * An amount of quantity, consisting of a float and a Unit. FloatQuantity objects are immutable.
  * 
  * @see AbstractQuantity
  * @see Quantity

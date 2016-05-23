@@ -35,7 +35,7 @@ import javax.measure.Unit;
 import tec.units.ri.AbstractQuantity;
 
 /**
- * An amount of quantity, consisting of a double and a Unit. LongQuantity objects are immutable.
+ * An amount of quantity, consisting of a long and a Unit. LongQuantity objects are immutable.
  * 
  * @see AbstractQuantity
  * @see Quantity

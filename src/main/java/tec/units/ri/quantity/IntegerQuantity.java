@@ -35,7 +35,7 @@ import javax.measure.Unit;
 import tec.units.ri.AbstractQuantity;
 
 /**
- * An amount of quantity, consisting of a double and a Unit. IntegerQuantity objects are immutable.
+ * An amount of quantity, consisting of an integer and a Unit. IntegerQuantity objects are immutable.
  * 
  * @see AbstractQuantity
  * @see Quantity
