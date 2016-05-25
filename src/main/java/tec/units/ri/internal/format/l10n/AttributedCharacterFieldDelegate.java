@@ -42,14 +42,14 @@ class AttributedCharacterFieldDelegate implements Format.FieldDelegate {
    * attributedStrings. Subsequent invocations of <code>formatted</code> for existing regions result in invoking addAttribute on the existing
    * AttributedStrings.
    */
-  private final Vector attributedStrings;
+  private final Vector<AttributedString> attributedStrings;
   /**
    * Running count of the number of characters that have been encountered.
    */
   private int size;
 
   AttributedCharacterFieldDelegate() {
-    attributedStrings = new Vector();
+    attributedStrings = new Vector<>();
   }
 
   public void formatted(Format.Field attr, Object value, int start, int end, StringBuffer buffer) {

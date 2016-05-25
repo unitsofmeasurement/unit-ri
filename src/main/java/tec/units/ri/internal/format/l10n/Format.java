@@ -244,11 +244,11 @@ public abstract class Format {
    *          AttributedCharacterIterators used to create resulting AttributedCharacterIterators
    * @return AttributedCharacterIterator wrapping passed in AttributedCharacterIterators
    */
-  AttributedCharacterIterator createAttributedCharacterIterator(AttributedCharacterIterator[] iterators) {
+  /*AttributedCharacterIterator createAttributedCharacterIterator(AttributedCharacterIterator[] iterators) {
     AttributedString as = new AttributedString(iterators);
 
     return as.getIterator();
-  }
+  }*/
 
   /**
    * Returns an AttributedCharacterIterator with the String <code>string</code> and additional key/value pair <code>key</code>, <code>value</code>.
@@ -280,12 +280,12 @@ public abstract class Format {
    *          Value associated with key in AttributedCharacterIterator
    * @return AttributedCharacterIterator wrapping args
    */
-  AttributedCharacterIterator createAttributedCharacterIterator(AttributedCharacterIterator iterator, Attribute key, Object value) {
+  /*AttributedCharacterIterator createAttributedCharacterIterator(AttributedCharacterIterator iterator, Attribute key, Object value) {
     AttributedString as = new AttributedString(iterator);
 
     as.addAttribute(key, value);
     return as.getIterator();
-  }
+  }*/
 
   /**
    * Defines constants that are used as attribute keys in the <code>AttributedCharacterIterator</code> returned from
