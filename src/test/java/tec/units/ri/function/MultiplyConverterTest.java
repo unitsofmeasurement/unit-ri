@@ -35,20 +35,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class PiDivisorConverterTest {
+public class MultiplyConverterTest {
 
-  private PiDivisorConverter converter;
+  private MultiplyConverter converter;
 
   @Before
   public void setUp() throws Exception {
-    converter = new PiDivisorConverter();
+    converter = new MultiplyConverter(2);
   }
 
   @Test
   public void testConvertMethod() {
-    Assert.assertEquals(1000, converter.convert(3141), 0.2);
+    Assert.assertEquals(200, converter.convert(100), 0.1);
     Assert.assertEquals(0, converter.convert(0), 0.0);
-    Assert.assertEquals(-1000, converter.convert(-3141), 0.2);
+    Assert.assertEquals(-200, converter.convert(-100), 0.1);
   }
 
   @Test
@@ -58,11 +58,16 @@ public class PiDivisorConverterTest {
 
   @Test
   public void testGetValuePiDivisorConverter() {
-    assertEquals("(1/π)", converter.getValue());
+    assertEquals(Double.valueOf(2d), converter.getValue());
   }
 
   @Test
   public void isLinearOfLogConverterTest() {
     assertTrue(converter.isLinear());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void identityTest() {
+    MultiplyConverter identConverter = new MultiplyConverter(1);
   }
 }

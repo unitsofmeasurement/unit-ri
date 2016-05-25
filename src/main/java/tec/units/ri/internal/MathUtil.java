@@ -59,10 +59,7 @@ public abstract class MathUtil {
   /* Common constants. */
 
   private static final double zero = 0.0, one = 1.0, two = 2.0, tiny = 1.0e-300, huge = 1.0e+300, two53 = 9007199254740992.0, /*
-                                                                                                                              * 0x43400000
-                                                                                                                              * ,
-                                                                                                                              * 0x00000000
-                                                                                                                              */
+                                                                                                                              * 0x43400000                                                                                                                              */
   two54 = 1.80143985094819840000e+16, /* 0x43500000, 0x00000000 */
   twom54 = 5.55111512312578270212e-17, /* 0x3C900000, 0x00000000 */
   P1 = 1.66666666666666019037e-01, /* 0x3FC55555, 0x5555553E */
@@ -71,23 +68,24 @@ public abstract class MathUtil {
   P4 = -1.65339022054652515390e-06, /* 0xBEBBBD41, 0xC5D26BF1 */
   P5 = 4.13813679705723846039e-08; /* 0x3E663769, 0x72BEA4D0 */
 
-  private static final double pio2_hi = 1.57079632679489655800e+00, /*
+  // private static final double pio2_hi = 1.57079632679489655800e+00;
+  /*
                                                                     * 0x3FF921FB,
                                                                     * 0x54442D18
                                                                     */
-  pio2_lo = 6.12323399573676603587e-17, /* 0x3C91A626, 0x33145C07 */
-  pio4_hi = 7.85398163397448278999e-01, /* 0x3FE921FB, 0x54442D18 */
+  // pio2_lo = 6.12323399573676603587e-17, /* 0x3C91A626, 0x33145C07 */
+  // pio4_hi = 7.85398163397448278999e-01, /* 0x3FE921FB, 0x54442D18 */
   /* coefficient for R(x^2) */
-  pS0 = 1.66666666666666657415e-01, /* 0x3FC55555, 0x55555555 */
-  pS1 = -3.25565818622400915405e-01, /* 0xBFD4D612, 0x03EB6F7D */
-  pS2 = 2.01212532134862925881e-01, /* 0x3FC9C155, 0x0E884455 */
-  pS3 = -4.00555345006794114027e-02, /* 0xBFA48228, 0xB5688F3B */
-  pS4 = 7.91534994289814532176e-04, /* 0x3F49EFE0, 0x7501B288 */
-  pS5 = 3.47933107596021167570e-05, /* 0x3F023DE1, 0x0DFDF709 */
-  qS1 = -2.40339491173441421878e+00, /* 0xC0033A27, 0x1C8A2D4B */
-  qS2 = 2.02094576023350569471e+00, /* 0x40002AE5, 0x9C598AC8 */
-  qS3 = -6.88283971605453293030e-01, /* 0xBFE6066C, 0x1B8D0159 */
-  qS4 = 7.70381505559019352791e-02; /* 0x3FB3B8C5, 0xB12E9282 */
+  // pS0 = 1.66666666666666657415e-01, /* 0x3FC55555, 0x55555555 */
+  // pS1 = -3.25565818622400915405e-01, /* 0xBFD4D612, 0x03EB6F7D */
+  // pS2 = 2.01212532134862925881e-01, /* 0x3FC9C155, 0x0E884455 */
+  // pS3 = -4.00555345006794114027e-02, /* 0xBFA48228, 0xB5688F3B */
+  // pS4 = 7.91534994289814532176e-04, /* 0x3F49EFE0, 0x7501B288 */
+  // pS5 = 3.47933107596021167570e-05, /* 0x3F023DE1, 0x0DFDF709 */
+  // qS1 = -2.40339491173441421878e+00, /* 0xC0033A27, 0x1C8A2D4B */
+  // qS2 = 2.02094576023350569471e+00, /* 0x40002AE5, 0x9C598AC8 */
+  // qS3 = -6.88283971605453293030e-01, /* 0xBFE6066C, 0x1B8D0159 */
+  // qS4 = 7.70381505559019352791e-02; /* 0x3FB3B8C5, 0xB12E9282 */
 
   private static final double pi_o_4 = 7.8539816339744827900E-01, /*
                                                                   * 0x3FE921FB,
@@ -126,16 +124,16 @@ public abstract class MathUtil {
   /**
    * Return the arcsine of a.
    */
-  public static final double asin(double a) {
-    return ieee754_asin(a);
-  }
-
+  /*  public static final double asin(double a) {
+      return ieee754_asin(a);
+    }
+  */
   /**
    * Return the arccosine of a.
    */
-  public static final double acos(double a) {
+  /*private static final double acos(double a) {
     return ieee754_acos(a);
-  }
+  }*/
 
   /**
    * Return the arctangent of a, call it b, where a = tan(b).
@@ -716,56 +714,56 @@ public abstract class MathUtil {
    * Function needed: sqrt
    */
 
-  private static final double ieee754_acos(double x) {
-    double z, p, q, r, w, s, c, df;
-    int hx, ix;
-    hx = (int) (Double.doubleToLongBits(x) >>> HI_SHIFT);
-    ix = hx & 0x7fffffff;
-    if (ix >= 0x3ff00000) { /* |x| >= 1 */
-      if (((ix - 0x3ff00000) | (int) (Double.doubleToLongBits(x) & LO_MASK)) == 0) { /*
-                                                                                     * |
-                                                                                     * x
-                                                                                     * |=
-                                                                                     * =
-                                                                                     * 1
-                                                                                     */
-        if (hx > 0)
-          return 0.0; /* acos(1) = 0 */
-        else
-          return pi + 2.0 * pio2_lo; /* acos(-1)= pi */
-      }
-      return (x - x) / (x - x); /* acos(|x|>1) is NaN */
-    }
-    if (ix < 0x3fe00000) { /* |x| < 0.5 */
-      if (ix <= 0x3c600000)
-        return pio2_hi + pio2_lo;/* if|x|<2**-57 */
-      z = x * x;
-      p = z * (pS0 + z * (pS1 + z * (pS2 + z * (pS3 + z * (pS4 + z * pS5)))));
-      q = one + z * (qS1 + z * (qS2 + z * (qS3 + z * qS4)));
-      r = p / q;
-      return pio2_hi - (x - (pio2_lo - x * r));
-    } else if (hx < 0) { /* x < -0.5 */
-      z = (one + x) * 0.5;
-      p = z * (pS0 + z * (pS1 + z * (pS2 + z * (pS3 + z * (pS4 + z * pS5)))));
-      q = one + z * (qS1 + z * (qS2 + z * (qS3 + z * qS4)));
-      s = Math.sqrt(z);
-      r = p / q;
-      w = r * s - pio2_lo;
-      return pi - 2.0 * (s + w);
-    } else { /* x > 0.5 */
-      z = (one - x) * 0.5;
-      s = Math.sqrt(z);
-      df = s;
-      // __LO(df) = 0; // keep high word
-      df = Double.longBitsToDouble(Double.doubleToLongBits(df) & HI_MASK);
-      c = (z - df * df) / (s + df);
-      p = z * (pS0 + z * (pS1 + z * (pS2 + z * (pS3 + z * (pS4 + z * pS5)))));
-      q = one + z * (qS1 + z * (qS2 + z * (qS3 + z * qS4)));
-      r = p / q;
-      w = r * s + c;
-      return 2.0 * (df + w);
-    }
-  }
+  // private static final double ieee754_acos(double x) {
+  // double z, p, q, r, w, s, c, df;
+  // int hx, ix;
+  // hx = (int) (Double.doubleToLongBits(x) >>> HI_SHIFT);
+  // ix = hx & 0x7fffffff;
+  // if (ix >= 0x3ff00000) { /* |x| >= 1 */
+  // if (((ix - 0x3ff00000) | (int) (Double.doubleToLongBits(x) & LO_MASK)) == 0) { /*
+  // * |
+  // * x
+  // * |=
+  // * =
+  // * 1
+  // */
+  // if (hx > 0)
+  // return 0.0; /* acos(1) = 0 */
+  // else
+  // return pi + 2.0 * pio2_lo; /* acos(-1)= pi */
+  // }
+  // return (x - x) / (x - x); /* acos(|x|>1) is NaN */
+  // }
+  // if (ix < 0x3fe00000) { /* |x| < 0.5 */
+  // if (ix <= 0x3c600000)
+  // return pio2_hi + pio2_lo;/* if|x|<2**-57 */
+  // z = x * x;
+  // p = z * (pS0 + z * (pS1 + z * (pS2 + z * (pS3 + z * (pS4 + z * pS5)))));
+  // q = one + z * (qS1 + z * (qS2 + z * (qS3 + z * qS4)));
+  // r = p / q;
+  // return pio2_hi - (x - (pio2_lo - x * r));
+  // } else if (hx < 0) { /* x < -0.5 */
+  // z = (one + x) * 0.5;
+  // p = z * (pS0 + z * (pS1 + z * (pS2 + z * (pS3 + z * (pS4 + z * pS5)))));
+  // q = one + z * (qS1 + z * (qS2 + z * (qS3 + z * qS4)));
+  // s = Math.sqrt(z);
+  // r = p / q;
+  // w = r * s - pio2_lo;
+  // return pi - 2.0 * (s + w);
+  // } else { /* x > 0.5 */
+  // z = (one - x) * 0.5;
+  // s = Math.sqrt(z);
+  // df = s;
+  // // __LO(df) = 0; // keep high word
+  // df = Double.longBitsToDouble(Double.doubleToLongBits(df) & HI_MASK);
+  // c = (z - df * df) / (s + df);
+  // p = z * (pS0 + z * (pS1 + z * (pS2 + z * (pS3 + z * (pS4 + z * pS5)))));
+  // q = one + z * (qS1 + z * (qS2 + z * (qS3 + z * qS4)));
+  // r = p / q;
+  // w = r * s + c;
+  // return 2.0 * (df + w);
+  // }
+  // }
 
   /*
    * __ieee754_asin(x) Method : Since asin(x) = x + x^3/6 + x^5*3/40 +
@@ -785,52 +783,52 @@ public abstract class MathUtil {
    * invalid signal.
    */
 
-  private static final double ieee754_asin(double x) {
-    double t, w, p, q, c, r, s;
-    int hx, ix;
-    hx = (int) (Double.doubleToLongBits(x) >>> HI_SHIFT);
-    ix = hx & 0x7fffffff;
-    if (ix >= 0x3ff00000) { /* |x|>= 1 */
-      if (((ix - 0x3ff00000) | (int) (Double.doubleToLongBits(x) & LO_MASK)) == 0)
-        /* asin(1)=+-pi/2 with inexact */
-        return x * pio2_hi + x * pio2_lo;
-      return (x - x) / (x - x); /* asin(|x|>1) is NaN */
-    } else if (ix < 0x3fe00000) { /* |x|<0.5 */
-      if (ix < 0x3e400000) { /* if |x| < 2**-27 */
-        if (huge + x > one)
-          return x;/* return x with inexact if x!=0 */
-      } else {
-        t = x * x;
-        p = t * (pS0 + t * (pS1 + t * (pS2 + t * (pS3 + t * (pS4 + t * pS5)))));
-        q = one + t * (qS1 + t * (qS2 + t * (qS3 + t * qS4)));
-        w = p / q;
-        return x + x * w;
-      }
-    }
-    /* 1> |x|>= 0.5 */
-    w = one - Math.abs(x);
-    t = w * 0.5;
-    p = t * (pS0 + t * (pS1 + t * (pS2 + t * (pS3 + t * (pS4 + t * pS5)))));
-    q = one + t * (qS1 + t * (qS2 + t * (qS3 + t * qS4)));
-    s = Math.sqrt(t);
-    if (ix >= 0x3FEF3333) { /* if |x| > 0.975 */
-      w = p / q;
-      t = pio2_hi - (2.0 * (s + s * w) - pio2_lo);
-    } else {
-      w = s;
-      // __LO(w) = 0; // keep the high word
-      w = Double.longBitsToDouble(Double.doubleToLongBits(w) & HI_MASK);
-      c = (t - w * w) / (s + w);
-      r = p / q;
-      p = 2.0 * s * r - (pio2_lo - 2.0 * c);
-      q = pio4_hi - 2.0 * w;
-      t = pio4_hi - (p - q);
-    }
-    if (hx > 0)
-      return t;
-    else
-      return -t;
-  }
+  // private static final double ieee754_asin(double x) {
+  // double t, w, p, q, c, r, s;
+  // int hx, ix;
+  // hx = (int) (Double.doubleToLongBits(x) >>> HI_SHIFT);
+  // ix = hx & 0x7fffffff;
+  // if (ix >= 0x3ff00000) { /* |x|>= 1 */
+  // if (((ix - 0x3ff00000) | (int) (Double.doubleToLongBits(x) & LO_MASK)) == 0)
+  // /* asin(1)=+-pi/2 with inexact */
+  // return x * pio2_hi + x * pio2_lo;
+  // return (x - x) / (x - x); /* asin(|x|>1) is NaN */
+  // } else if (ix < 0x3fe00000) { /* |x|<0.5 */
+  // if (ix < 0x3e400000) { /* if |x| < 2**-27 */
+  // if (huge + x > one)
+  // return x;/* return x with inexact if x!=0 */
+  // } else {
+  // t = x * x;
+  // p = t * (pS0 + t * (pS1 + t * (pS2 + t * (pS3 + t * (pS4 + t * pS5)))));
+  // q = one + t * (qS1 + t * (qS2 + t * (qS3 + t * qS4)));
+  // w = p / q;
+  // return x + x * w;
+  // }
+  // }
+  // /* 1> |x|>= 0.5 */
+  // w = one - Math.abs(x);
+  // t = w * 0.5;
+  // p = t * (pS0 + t * (pS1 + t * (pS2 + t * (pS3 + t * (pS4 + t * pS5)))));
+  // q = one + t * (qS1 + t * (qS2 + t * (qS3 + t * qS4)));
+  // s = Math.sqrt(t);
+  // if (ix >= 0x3FEF3333) { /* if |x| > 0.975 */
+  // w = p / q;
+  // t = pio2_hi - (2.0 * (s + s * w) - pio2_lo);
+  // } else {
+  // w = s;
+  // // __LO(w) = 0; // keep the high word
+  // w = Double.longBitsToDouble(Double.doubleToLongBits(w) & HI_MASK);
+  // c = (t - w * w) / (s + w);
+  // r = p / q;
+  // p = 2.0 * s * r - (pio2_lo - 2.0 * c);
+  // q = pio4_hi - 2.0 * w;
+  // t = pio4_hi - (p - q);
+  // }
+  // if (hx > 0)
+  // return t;
+  // else
+  // return -t;
+  // }
 
   /*
    * atan(x) Method 1. Reduce x to positive by atan(x) = -atan(-x). 2.
@@ -1135,29 +1133,30 @@ public abstract class MathUtil {
       return a;
     return gcd(b, a % b);
   }
+  /*
+    private static final double powSqrt(double x, double y) {
+      int den = 1024, num = (int) (y * den), iterations = 10;
+      double n = Double.MAX_VALUE;
 
-  private static final double powSqrt(double x, double y) {
-    int den = 1024, num = (int) (y * den), iterations = 10;
-    double n = Double.MAX_VALUE;
+      while (n >= Double.MAX_VALUE && iterations > 1) {
+        n = x;
 
-    while (n >= Double.MAX_VALUE && iterations > 1) {
-      n = x;
+        for (int i = 1; i < num; i++)
+          n *= x;
 
-      for (int i = 1; i < num; i++)
-        n *= x;
-
-      if (n >= Double.MAX_VALUE) {
-        iterations--;
-        den = (int) (den / 2);
-        num = (int) (y * den);
+        if (n >= Double.MAX_VALUE) {
+          iterations--;
+          den = (int) (den / 2);
+          num = (int) (y * den);
+        }
       }
+
+      for (int i = 0; i < iterations; i++)
+        n = Math.sqrt(n);
+
+      return n;
     }
-
-    for (int i = 0; i < iterations; i++)
-      n = Math.sqrt(n);
-
-    return n;
-  }
+  */
 
   /*
    * 
