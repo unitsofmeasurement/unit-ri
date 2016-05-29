@@ -325,7 +325,7 @@ import java.util.Vector;
  * @author Alan Liu
  * @author Werner Keil
  */
-public class DecimalFormat extends NumberFormat {
+class DecimalFormat extends NumberFormat {
 
   private String mPattern = "#,##0.###";
 
@@ -341,7 +341,7 @@ public class DecimalFormat extends NumberFormat {
    * @see NumberFormat#getCurrencyInstance
    * @see NumberFormat#getPercentInstance
    */
-  public DecimalFormat() {
+  DecimalFormat() {
     // Always applyPattern after the symbols are set
     this.symbols = new DecimalFormatSymbols();
     applyPattern(mPattern, false);
@@ -365,7 +365,7 @@ public class DecimalFormat extends NumberFormat {
    * @see NumberFormat#getCurrencyInstance
    * @see NumberFormat#getPercentInstance
    */
-  public DecimalFormat(String pattern) {
+  DecimalFormat(String pattern) {
     // Always applyPattern after the symbols are set
     this.symbols = new DecimalFormatSymbols();
     applyPattern(pattern, false);
@@ -2379,5 +2379,4 @@ public class DecimalFormat extends NumberFormat {
   // Upper limit on integer and fraction digits for a Java double
   static final int DOUBLE_INTEGER_DIGITS = 309;
   static final int DOUBLE_FRACTION_DIGITS = 340;
-
 }

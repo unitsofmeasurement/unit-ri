@@ -31,67 +31,22 @@ package tec.units.ri.internal.format.l10n;
 
 import static org.junit.Assert.*;
 
-import java.util.Map;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class AttributedStringTest {
+public class DecimalFormatSymbolsTest {
 
-	static AttributedString sut;
+  static DecimalFormatSymbols sut;
 
-	@BeforeClass
-	public static void init() {
-		sut = new AttributedString("test");
-	}
+  @BeforeClass
+  public static void init() {
+    sut = new DecimalFormatSymbols();
+  }
 
-	@Test
-	public void testGetIterator() {
-		assertNotNull(sut.getIterator());
-	}
-
-	@Test
-	public void testText() {
-		assertEquals("test", sut.text);
-	}
-
-	@Test(expected = NullPointerException.class)
-	public void testAttributedStringNull() {
-		final String ns = null;
-		AttributedString as = new AttributedString(ns);
-	}
-
-	/*
-	 * @Test public void testAttributedStringStringMap() { fail(
-	 * "Not yet implemented"); }
-	 * 
-	 * @Test public void testAttributedStringAttributedCharacterIterator() {
-	 * fail("Not yet implemented"); }
-	 * 
-	 * @Test public void testAttributedStringAttributedCharacterIteratorIntInt()
-	 * { fail("Not yet implemented"); }
-	 * 
-	 * @Test public void
-	 * testAttributedStringAttributedCharacterIteratorIntIntAttributeArray() {
-	 * fail("Not yet implemented"); }
-	 * 
-	 * @Test public void testAddAttributeAttributeObject() { fail(
-	 * "Not yet implemented"); }
-	 * 
-	 * @Test public void testAddAttributeAttributeObjectIntInt() { fail(
-	 * "Not yet implemented"); }
-	 * 
-	 * @Test public void testAddAttributes() { sut.a }
-	 * 
-	 * @Test public void testGetIteratorAttributeArray() { fail(
-	 * "Not yet implemented"); }
-	 * 
-	 * @Test public void testGetIteratorAttributeArrayIntInt() { fail(
-	 * "Not yet implemented"); }
-	 */
-	@Test
-	public void testLength() {
-		assertEquals(4, sut.length());
-	}
-
+  @Test
+  public void testSetDecimalSeparator() {
+	sut.setDecimalSeparator('a');
+    assertNotNull(sut.getDecimalSeparator());
+    assertEquals("a", String.valueOf(sut.getDecimalSeparator()));
+  }
 }

@@ -59,7 +59,7 @@ package tec.units.ri.internal.format.l10n;
 
 final class DecimalFormatSymbols {
 
-  public DecimalFormatSymbols() {
+  DecimalFormatSymbols() {
   }
 
   /**

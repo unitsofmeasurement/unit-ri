@@ -191,4 +191,9 @@ public class UnitFormatTest {
   public void testParseIrregularString() {
     Unit<?> u = format.parse("bl//^--1a");
   }
+  
+  @Test
+  public void testIsLocaleSensitive() {
+	  assertFalse(format.isLocaleSensitive());
+  }
 }

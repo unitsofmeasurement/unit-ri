@@ -64,7 +64,7 @@ public class AbsSystemOfUnitsTest {
     assertEquals("tec.units.ri.TestUnits", system.getClass().getName());
     assertEquals("Test units of measurement", system.getName());
     assertNotNull(system.getUnits());
-    assertEquals(3, system.getUnits().size());
+    assertEquals(4, system.getUnits().size());
   }
 
   @Test
