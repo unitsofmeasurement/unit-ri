@@ -1038,7 +1038,8 @@ class AttributedString {
   // the map class associated with this string class, giving access to the
   // attributes of one run
 
-  final private class AttributeMap extends HashMap {
+  @SuppressWarnings("serial")
+final private class AttributeMap extends HashMap {
     int runIndex;
     int beginIndex;
     int endIndex;
