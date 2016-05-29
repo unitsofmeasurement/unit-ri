@@ -42,11 +42,11 @@ import org.junit.Test;
 
 import tec.units.ri.quantity.QuantityDimension;
 
-public class AbstractSystemOfUnitsTest {
+public class AbsSystemOfUnitsTest {
 
   private static AbstractSystemOfUnits system;
   private static Logger logger = Logger.getLogger("tec.units.ri");
-  
+
   @BeforeClass
   public static void setUp() {
     // Get Logger for "tec.units.ri".

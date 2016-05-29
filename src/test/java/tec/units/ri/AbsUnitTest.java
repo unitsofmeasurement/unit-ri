@@ -39,7 +39,7 @@ import org.junit.Test;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.unit.BaseUnit;
 
-public class AbstractUnitTest {
+public class AbsUnitTest {
   private static final AbstractUnit<Length> sut = new BaseUnit<Length>("m");
 
   @BeforeClass
