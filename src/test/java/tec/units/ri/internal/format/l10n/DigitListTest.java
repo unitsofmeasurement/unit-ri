@@ -53,17 +53,17 @@ public class DigitListTest {
   public void testIsZero() {
     assertTrue(sut.isZero());
   }
-  
+
   @Test
   public void testToString() {
     assertEquals("0", sut.toString());
   }
-  
+
   @Test
   public void testSet() {
-	  DigitList list = new DigitList();
-	  list.set(1);
-	  assertEquals(1d, list.getDouble(), 0);
-	  assertEquals(1L, list.getLong(), 0);
+    DigitList list = new DigitList();
+    list.set(1);
+    assertEquals(1d, list.getDouble(), 0);
+    assertEquals(1L, list.getLong(), 0);
   }
 }

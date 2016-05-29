@@ -991,9 +991,9 @@ public class DecimalFormat extends NumberFormat {
   // return gotDouble ? (Number) new Double(doubleResult)
   // : (Number) new Long(longResult);
   // }
-//  private static final int STATUS_INFINITE = 0;
-//  private static final int STATUS_POSITIVE = 1;
-//  private static final int STATUS_LENGTH = 2;
+  // private static final int STATUS_INFINITE = 0;
+  // private static final int STATUS_POSITIVE = 1;
+  // private static final int STATUS_LENGTH = 2;
 
   /**
    * Parse the given text into a number. The text is parsed beginning at parsePosition, until an unparseable character is seen.
@@ -1009,204 +1009,204 @@ public class DecimalFormat extends NumberFormat {
    * @param status
    *          Upon return contains boolean status flags indicating whether the value was infinite and whether it was positive.
    */
-//  private final boolean subparse(String text, ParsePosition parsePosition, DigitList digits, boolean isExponent, boolean status[]) {
-//    int position = parsePosition.index;
-//    int oldStart = parsePosition.index;
-//    int backup;
-//
-//    // check for positivePrefix; take longest
-//    // TODO move to StrUtils
-//    String str1 = text.substring(position, position + positivePrefix.length());
-//    String str2 = positivePrefix.substring(0, 0 + positivePrefix.length());
-//    boolean gotPositive = str1.equalsIgnoreCase(str2);
-//
-//    str1 = text.substring(position, position + negativePrefix.length());
-//    str2 = positivePrefix.substring(0, 0 + negativePrefix.length());
-//    boolean gotNegative = str1.equalsIgnoreCase(str2);
-//
-//    if (gotPositive && gotNegative) {
-//      if (positivePrefix.length() > negativePrefix.length())
-//        gotNegative = false;
-//      else if (positivePrefix.length() < negativePrefix.length())
-//        gotPositive = false;
-//    }
-//    if (gotPositive) {
-//      position += positivePrefix.length();
-//    } else if (gotNegative) {
-//      position += negativePrefix.length();
-//    } else {
-//      parsePosition.errorIndex = position;
-//      return false;
-//    }
-//    // process digits or Inf, find decimal position
-//    status[STATUS_INFINITE] = false;
-//    str1 = text.substring(position, position + symbols.getInfinity().length());
-//    str2 = positivePrefix.substring(0, 0 + symbols.getInfinity().length());
-//    boolean gotInfinity = str1.equalsIgnoreCase(str2);
-//    if (!isExponent && gotInfinity) {
-//      position += symbols.getInfinity().length();
-//      status[STATUS_INFINITE] = true;
-//    } else {
-//      // We now have a string of digits, possibly with grouping symbols,
-//      // and decimal points. We want to process these into a DigitList.
-//      // We don't want to put a bunch of leading zeros into the DigitList
-//      // though, so we keep track of the location of the decimal point,
-//      // put only significant digits into the DigitList, and adjust the
-//      // exponent as needed.
-//
-//      digits.decimalAt = digits.count = 0;
-//      char zero = symbols.getZeroDigit();
-//      char decimal = isCurrencyFormat ? symbols.getMonetaryDecimalSeparator() : symbols.getDecimalSeparator();
-//      char grouping = symbols.getGroupingSeparator();
-//      char exponentChar = symbols.getExponentialSymbol();
-//      boolean sawDecimal = false;
-//      boolean sawExponent = false;
-//      boolean sawDigit = false;
-//      int exponent = 0; // Set to the exponent value, if any
-//
-//      // We have to track digitCount ourselves, because digits.count will
-//      // pin when the maximum allowable digits is reached.
-//      int digitCount = 0;
-//
-//      backup = -1;
-//      for (; position < text.length(); ++position) {
-//        char ch = text.charAt(position);
-//
-//        /*
-//         * We recognize all digit ranges, not only the Latin digit range
-//         * '0'..'9'. We do so by using the Character.digit() method,
-//         * which converts a valid Unicode digit to the range 0..9.
-//         * 
-//         * The character 'ch' may be a digit. If so, place its value
-//         * from 0 to 9 in 'digit'. First try using the locale digit,
-//         * which may or MAY NOT be a standard Unicode digit range. If
-//         * this fails, try using the standard Unicode digit ranges by
-//         * calling Character.digit(). If this also fails, digit will
-//         * have a value outside the range 0..9.
-//         */
-//        int digit = ch - zero;
-//        if (digit < 0 || digit > 9)
-//          digit = Character.digit(ch, 10);
-//
-//        if (digit == 0) {
-//          // Cancel out backup setting (see grouping handler below)
-//          backup = -1; // Do this BEFORE continue statement below!!!
-//          sawDigit = true;
-//
-//          // Handle leading zeros
-//          if (digits.count == 0) {
-//            // Ignore leading zeros in integer part of number.
-//            if (!sawDecimal)
-//              continue;
-//
-//            // If we have seen the decimal, but no significant
-//            // digits yet,
-//            // then we account for leading zeros by decrementing the
-//            // digits.decimalAt into negative values.
-//            --digits.decimalAt;
-//          } else {
-//            ++digitCount;
-//            digits.append((char) (digit + '0'));
-//          }
-//        } else if (digit > 0 && digit <= 9) // [sic] digit==0 handled
-//        // above
-//        {
-//          sawDigit = true;
-//          ++digitCount;
-//          digits.append((char) (digit + '0'));
-//
-//          // Cancel out backup setting (see grouping handler below)
-//          backup = -1;
-//        } else if (!isExponent && ch == decimal) {
-//          // If we're only parsing integers, or if we ALREADY saw the
-//          // decimal, then don't parse this one.
-//          if (isParseIntegerOnly() || sawDecimal)
-//            break;
-//          digits.decimalAt = digitCount; // Not digits.count!
-//          sawDecimal = true;
-//        } else if (!isExponent && ch == grouping && isGroupingUsed()) {
-//          if (sawDecimal) {
-//            break;
-//          }
-//          // Ignore grouping characters, if we are using them, but
-//          // require
-//          // that they be followed by a digit. Otherwise we backup and
-//          // reprocess them.
-//          backup = position;
-//        } else if (!isExponent && ch == exponentChar && !sawExponent) {
-//          // Process the exponent by recursively calling this method.
-//          ParsePosition pos = new ParsePosition(position + 1);
-//          boolean[] stat = new boolean[STATUS_LENGTH];
-//          DigitList exponentDigits = new DigitList();
-//
-//          if (subparse(text, pos, exponentDigits, true, stat) && exponentDigits.fitsIntoLong(stat[STATUS_POSITIVE], true)) {
-//            position = pos.index; // Advance past the exponent
-//            exponent = (int) exponentDigits.getLong();
-//            if (!stat[STATUS_POSITIVE])
-//              exponent = -exponent;
-//            sawExponent = true;
-//          }
-//          break; // Whether we fail or succeed, we exit this loop
-//        } else
-//          break;
-//      }
-//
-//      if (backup != -1)
-//        position = backup;
-//
-//      // If there was no decimal point we have an integer
-//      if (!sawDecimal)
-//        digits.decimalAt = digitCount; // Not digits.count!
-//
-//      // Adjust for exponent, if any
-//      digits.decimalAt += exponent;
-//
-//      // If none of the text string was recognized. For example, parse
-//      // "x" with pattern "#0.00" (return index and error index both 0)
-//      // parse "$" with pattern "$#0.00". (return index 0 and error index
-//      // 1).
-//      if (!sawDigit && digitCount == 0) {
-//        parsePosition.index = oldStart;
-//        parsePosition.errorIndex = oldStart;
-//        return false;
-//      }
-//    }
-//
-//    // check for positiveSuffix
-//    if (gotPositive) {
-//      str1 = text.substring(position, position + positivePrefix.length());
-//      str2 = positivePrefix.substring(0, 0 + positivePrefix.length());
-//      gotPositive = str1.equalsIgnoreCase(str2);
-//    }
-//    if (gotNegative) {
-//      str1 = text.substring(position, position + negativeSuffix.length());
-//      str2 = positivePrefix.substring(0, 0 + negativeSuffix.length());
-//      gotPositive = str1.equalsIgnoreCase(str2);
-//    }
-//
-//    // if both match, take longest
-//    if (gotPositive && gotNegative) {
-//      if (positiveSuffix.length() > negativeSuffix.length())
-//        gotNegative = false;
-//      else if (positiveSuffix.length() < negativeSuffix.length())
-//        gotPositive = false;
-//    }
-//
-//    // fail if neither or both
-//    if (gotPositive == gotNegative) {
-//      parsePosition.errorIndex = position;
-//      return false;
-//    }
-//
-//    parsePosition.index = position + (gotPositive ? positiveSuffix.length() : negativeSuffix.length()); // mark success!
-//
-//    status[STATUS_POSITIVE] = gotPositive;
-//    if (parsePosition.index == oldStart) {
-//      parsePosition.errorIndex = position;
-//      return false;
-//    }
-//    return true;
-//  }
+  // private final boolean subparse(String text, ParsePosition parsePosition, DigitList digits, boolean isExponent, boolean status[]) {
+  // int position = parsePosition.index;
+  // int oldStart = parsePosition.index;
+  // int backup;
+  //
+  // // check for positivePrefix; take longest
+  // // TODO move to StrUtils
+  // String str1 = text.substring(position, position + positivePrefix.length());
+  // String str2 = positivePrefix.substring(0, 0 + positivePrefix.length());
+  // boolean gotPositive = str1.equalsIgnoreCase(str2);
+  //
+  // str1 = text.substring(position, position + negativePrefix.length());
+  // str2 = positivePrefix.substring(0, 0 + negativePrefix.length());
+  // boolean gotNegative = str1.equalsIgnoreCase(str2);
+  //
+  // if (gotPositive && gotNegative) {
+  // if (positivePrefix.length() > negativePrefix.length())
+  // gotNegative = false;
+  // else if (positivePrefix.length() < negativePrefix.length())
+  // gotPositive = false;
+  // }
+  // if (gotPositive) {
+  // position += positivePrefix.length();
+  // } else if (gotNegative) {
+  // position += negativePrefix.length();
+  // } else {
+  // parsePosition.errorIndex = position;
+  // return false;
+  // }
+  // // process digits or Inf, find decimal position
+  // status[STATUS_INFINITE] = false;
+  // str1 = text.substring(position, position + symbols.getInfinity().length());
+  // str2 = positivePrefix.substring(0, 0 + symbols.getInfinity().length());
+  // boolean gotInfinity = str1.equalsIgnoreCase(str2);
+  // if (!isExponent && gotInfinity) {
+  // position += symbols.getInfinity().length();
+  // status[STATUS_INFINITE] = true;
+  // } else {
+  // // We now have a string of digits, possibly with grouping symbols,
+  // // and decimal points. We want to process these into a DigitList.
+  // // We don't want to put a bunch of leading zeros into the DigitList
+  // // though, so we keep track of the location of the decimal point,
+  // // put only significant digits into the DigitList, and adjust the
+  // // exponent as needed.
+  //
+  // digits.decimalAt = digits.count = 0;
+  // char zero = symbols.getZeroDigit();
+  // char decimal = isCurrencyFormat ? symbols.getMonetaryDecimalSeparator() : symbols.getDecimalSeparator();
+  // char grouping = symbols.getGroupingSeparator();
+  // char exponentChar = symbols.getExponentialSymbol();
+  // boolean sawDecimal = false;
+  // boolean sawExponent = false;
+  // boolean sawDigit = false;
+  // int exponent = 0; // Set to the exponent value, if any
+  //
+  // // We have to track digitCount ourselves, because digits.count will
+  // // pin when the maximum allowable digits is reached.
+  // int digitCount = 0;
+  //
+  // backup = -1;
+  // for (; position < text.length(); ++position) {
+  // char ch = text.charAt(position);
+  //
+  // /*
+  // * We recognize all digit ranges, not only the Latin digit range
+  // * '0'..'9'. We do so by using the Character.digit() method,
+  // * which converts a valid Unicode digit to the range 0..9.
+  // *
+  // * The character 'ch' may be a digit. If so, place its value
+  // * from 0 to 9 in 'digit'. First try using the locale digit,
+  // * which may or MAY NOT be a standard Unicode digit range. If
+  // * this fails, try using the standard Unicode digit ranges by
+  // * calling Character.digit(). If this also fails, digit will
+  // * have a value outside the range 0..9.
+  // */
+  // int digit = ch - zero;
+  // if (digit < 0 || digit > 9)
+  // digit = Character.digit(ch, 10);
+  //
+  // if (digit == 0) {
+  // // Cancel out backup setting (see grouping handler below)
+  // backup = -1; // Do this BEFORE continue statement below!!!
+  // sawDigit = true;
+  //
+  // // Handle leading zeros
+  // if (digits.count == 0) {
+  // // Ignore leading zeros in integer part of number.
+  // if (!sawDecimal)
+  // continue;
+  //
+  // // If we have seen the decimal, but no significant
+  // // digits yet,
+  // // then we account for leading zeros by decrementing the
+  // // digits.decimalAt into negative values.
+  // --digits.decimalAt;
+  // } else {
+  // ++digitCount;
+  // digits.append((char) (digit + '0'));
+  // }
+  // } else if (digit > 0 && digit <= 9) // [sic] digit==0 handled
+  // // above
+  // {
+  // sawDigit = true;
+  // ++digitCount;
+  // digits.append((char) (digit + '0'));
+  //
+  // // Cancel out backup setting (see grouping handler below)
+  // backup = -1;
+  // } else if (!isExponent && ch == decimal) {
+  // // If we're only parsing integers, or if we ALREADY saw the
+  // // decimal, then don't parse this one.
+  // if (isParseIntegerOnly() || sawDecimal)
+  // break;
+  // digits.decimalAt = digitCount; // Not digits.count!
+  // sawDecimal = true;
+  // } else if (!isExponent && ch == grouping && isGroupingUsed()) {
+  // if (sawDecimal) {
+  // break;
+  // }
+  // // Ignore grouping characters, if we are using them, but
+  // // require
+  // // that they be followed by a digit. Otherwise we backup and
+  // // reprocess them.
+  // backup = position;
+  // } else if (!isExponent && ch == exponentChar && !sawExponent) {
+  // // Process the exponent by recursively calling this method.
+  // ParsePosition pos = new ParsePosition(position + 1);
+  // boolean[] stat = new boolean[STATUS_LENGTH];
+  // DigitList exponentDigits = new DigitList();
+  //
+  // if (subparse(text, pos, exponentDigits, true, stat) && exponentDigits.fitsIntoLong(stat[STATUS_POSITIVE], true)) {
+  // position = pos.index; // Advance past the exponent
+  // exponent = (int) exponentDigits.getLong();
+  // if (!stat[STATUS_POSITIVE])
+  // exponent = -exponent;
+  // sawExponent = true;
+  // }
+  // break; // Whether we fail or succeed, we exit this loop
+  // } else
+  // break;
+  // }
+  //
+  // if (backup != -1)
+  // position = backup;
+  //
+  // // If there was no decimal point we have an integer
+  // if (!sawDecimal)
+  // digits.decimalAt = digitCount; // Not digits.count!
+  //
+  // // Adjust for exponent, if any
+  // digits.decimalAt += exponent;
+  //
+  // // If none of the text string was recognized. For example, parse
+  // // "x" with pattern "#0.00" (return index and error index both 0)
+  // // parse "$" with pattern "$#0.00". (return index 0 and error index
+  // // 1).
+  // if (!sawDigit && digitCount == 0) {
+  // parsePosition.index = oldStart;
+  // parsePosition.errorIndex = oldStart;
+  // return false;
+  // }
+  // }
+  //
+  // // check for positiveSuffix
+  // if (gotPositive) {
+  // str1 = text.substring(position, position + positivePrefix.length());
+  // str2 = positivePrefix.substring(0, 0 + positivePrefix.length());
+  // gotPositive = str1.equalsIgnoreCase(str2);
+  // }
+  // if (gotNegative) {
+  // str1 = text.substring(position, position + negativeSuffix.length());
+  // str2 = positivePrefix.substring(0, 0 + negativeSuffix.length());
+  // gotPositive = str1.equalsIgnoreCase(str2);
+  // }
+  //
+  // // if both match, take longest
+  // if (gotPositive && gotNegative) {
+  // if (positiveSuffix.length() > negativeSuffix.length())
+  // gotNegative = false;
+  // else if (positiveSuffix.length() < negativeSuffix.length())
+  // gotPositive = false;
+  // }
+  //
+  // // fail if neither or both
+  // if (gotPositive == gotNegative) {
+  // parsePosition.errorIndex = position;
+  // return false;
+  // }
+  //
+  // parsePosition.index = position + (gotPositive ? positiveSuffix.length() : negativeSuffix.length()); // mark success!
+  //
+  // status[STATUS_POSITIVE] = gotPositive;
+  // if (parsePosition.index == oldStart) {
+  // parsePosition.errorIndex = position;
+  // return false;
+  // }
+  // return true;
+  // }
 
   /**
    * Returns the decimal format symbols, which is generally not changed by the programmer or user.

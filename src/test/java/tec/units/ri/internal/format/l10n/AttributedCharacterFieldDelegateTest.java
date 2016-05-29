@@ -53,20 +53,20 @@ public class AttributedCharacterFieldDelegateTest {
     assertNotNull(sut.getIterator("test"));
   }
 
-  @Test(expected=StringIndexOutOfBoundsException.class)
+  @Test(expected = StringIndexOutOfBoundsException.class)
   public void testFormatted1() {
-	  Format.Field f = new Format.Field("");
-	  StringBuffer sb = new StringBuffer();
-	  Object o = "";
-	  sut.formatted(f, o, 1, 0, sb);
+    Format.Field f = new Format.Field("");
+    StringBuffer sb = new StringBuffer();
+    Object o = "";
+    sut.formatted(f, o, 1, 0, sb);
   }
-  
-  @Test(expected=StringIndexOutOfBoundsException.class)
+
+  @Test(expected = StringIndexOutOfBoundsException.class)
   public void testFormatted2() {
-	  Format.Field f = new Format.Field("");
-	  StringBuffer sb = new StringBuffer();
-	  Object o = "";
-	  sut.formatted(f, o, 0, 1, sb);
+    Format.Field f = new Format.Field("");
+    StringBuffer sb = new StringBuffer();
+    Object o = "";
+    sut.formatted(f, o, 0, 1, sb);
   }
-  
+
 }

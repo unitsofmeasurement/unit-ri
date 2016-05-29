@@ -31,13 +31,17 @@ package tec.units.ri;
 
 import static tec.units.ri.unit.Units.LITRE;
 import static tec.units.ri.unit.Units.METRE;
+import static tec.units.ri.unit.Units.KILOGRAM;
 
 import javax.measure.Unit;
 import javax.measure.quantity.Length;
+import javax.measure.quantity.Mass;
 import javax.measure.quantity.Volume;
 
 import tec.units.ri.AbstractSystemOfUnits;
 import tec.units.ri.format.SimpleUnitFormat;
+import tec.units.ri.function.RationalConverter;
+import tec.units.ri.unit.TransformedUnit;
 
 /**
  * <p>
@@ -49,9 +53,9 @@ import tec.units.ri.format.SimpleUnitFormat;
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.1, $Date: 2016-05-29 $
- * @see <a href="http://www.bier-entdecken.de/chubel/">Ich hätte gern ein Chübel</a>
- * @see <a href="https://en.wikipedia.org/wiki/Ma%C3%9F">Wikipedia:
- *      Maß</a>
+ * @see <a href="http://www.bier-entdecken.de/chubel/">Ich hätte gern ein
+ *      Chübel</a>
+ * @see <a href="https://en.wikipedia.org/wiki/Ma%C3%9F">Wikipedia: Maß</a>
  */
 final class TestUnits extends AbstractSystemOfUnits {
 	/**
@@ -71,23 +75,10 @@ final class TestUnits extends AbstractSystemOfUnits {
 	}
 
 	/**
-	 * Adds a new unit not mapped to any specified quantity type.
-	 *
-	 * @param unit
-	 *            the unit being added.
-	 * @return <code>unit</code>.
+	 * A unit of length equal to <code>0.3048 m</code> (standard name
+	 * <code>ft</code>).
 	 */
-	private static <U extends Unit<?>> U addUnit(U unit) {
-		INSTANCE.units.add(unit);
-		return unit;
-	}
-	
-    /**
-     * A unit of length equal to <code>0.3048 m</code> (standard name
-     * <code>ft</code>).
-     */
-    public static final Unit<Length> FOOT = addUnit(METRE.multiply(3048)
-	    .divide(10000));
+	public static final Unit<Length> FOOT = INSTANCE.addUnit(METRE.multiply(3048).divide(10000), "Foot");
 
 	/**
 	 * Ein Schoppen – zuerst ein niederdeutsches Wort, das ins Französische
@@ -98,9 +89,15 @@ final class TestUnits extends AbstractSystemOfUnits {
 	 * @see <a href="https://de.wikipedia.org/wiki/Schoppen">Wikipedia:
 	 *      Schoppen</a>
 	 */
-	public static final Unit<Volume> SCHOPPEN_BAYERN = addUnit(LITRE.multiply(0.50));
+	public static final Unit<Volume> SCHOPPEN_BAYERN = INSTANCE.addUnit(LITRE.multiply(0.50), "Schoppen Bayern", "sb");
 
-
+    /**
+     * A mass unit accepted for use with SI units (standard name <code>t</code>).
+     */
+    public static final Unit<Mass> TONNE
+        = AbstractSystemOfUnits.Helper.addUnit(INSTANCE.units, 
+        		new TransformedUnit<Mass>(KILOGRAM, new RationalConverter(1000, 1)),
+        				"Tonne", "t");
 	// //////////////////////////////////////////////////////////////////////////
 	// Label adjustments for Beer system
 	static {
