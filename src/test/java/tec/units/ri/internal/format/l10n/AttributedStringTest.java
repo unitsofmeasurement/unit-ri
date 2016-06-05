@@ -38,60 +38,81 @@ import org.junit.Test;
 
 public class AttributedStringTest {
 
-	static AttributedString sut;
-
-	@BeforeClass
-	public static void init() {
-		sut = new AttributedString("test");
+    private static final Attribute[] internalAttributes() {
+	Attribute[] atts = new Attribute[4];
+	for (int i = 0; i < 4; i++) {
+	    atts[i] = new Attribute(String.valueOf(i));
 	}
+	return atts;
+    }
 
-	@Test
-	public void testGetIterator() {
-		assertNotNull(sut.getIterator());
-	}
+    static AttributedString sut;
 
-	@Test
-	public void testText() {
-		assertEquals("test", sut.text);
-	}
+    @BeforeClass
+    public static void init() {
+	sut = new AttributedString("test");
+    }
 
-	@Test(expected = NullPointerException.class)
-	public void testAttributedStringNull() {
-		final String ns = null;
-		AttributedString as = new AttributedString(ns);
-	}
+    @Test
+    public void testGetIterator() {
+	assertNotNull(sut.getIterator());
+    }
 
-	/*
-	 * @Test public void testAttributedStringStringMap() { fail(
-	 * "Not yet implemented"); }
-	 * 
-	 * @Test public void testAttributedStringAttributedCharacterIterator() {
-	 * fail("Not yet implemented"); }
-	 * 
-	 * @Test public void testAttributedStringAttributedCharacterIteratorIntInt()
-	 * { fail("Not yet implemented"); }
-	 * 
-	 * @Test public void
-	 * testAttributedStringAttributedCharacterIteratorIntIntAttributeArray() {
-	 * fail("Not yet implemented"); }
-	 * 
-	 * @Test public void testAddAttributeAttributeObject() { fail(
-	 * "Not yet implemented"); }
-	 * 
-	 * @Test public void testAddAttributeAttributeObjectIntInt() { fail(
-	 * "Not yet implemented"); }
-	 * 
-	 * @Test public void testAddAttributes() { sut.a }
-	 * 
-	 * @Test public void testGetIteratorAttributeArray() { fail(
-	 * "Not yet implemented"); }
-	 * 
-	 * @Test public void testGetIteratorAttributeArrayIntInt() { fail(
-	 * "Not yet implemented"); }
-	 */
-	@Test
-	public void testLength() {
-		assertEquals(4, sut.length());
-	}
+    @Test
+    public void testText() {
+	assertEquals("test", sut.text);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testAttributedStringNull() {
+	final String ns = null;
+	AttributedString as = new AttributedString(ns);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testAttributedStringNullIteratorArr() {
+	final AttributedCharacterIterator[] ns = null;
+	AttributedString as = new AttributedString(ns);
+    }
+
+    @Test
+    public void testAttributedStringIterator() {
+	final AttributedCharacterIterator it = sut.getIterator(
+		internalAttributes(), 0, 4);
+	AttributedString as = new AttributedString(it, 0, 4);
+    }
+
+    /*
+     * @Test public void testAttributedStringStringMap() { fail(
+     * "Not yet implemented"); }
+     * 
+     * @Test public void testAttributedStringAttributedCharacterIterator() {
+     * fail("Not yet implemented"); }
+     * 
+     * @Test public void testAttributedStringAttributedCharacterIteratorIntInt()
+     * { fail("Not yet implemented"); }
+     * 
+     * @Test public void
+     * testAttributedStringAttributedCharacterIteratorIntIntAttributeArray() {
+     * fail("Not yet implemented"); }
+     * 
+     * @Test public void testAddAttributeAttributeObject() { fail(
+     * "Not yet implemented"); }
+     * 
+     * @Test public void testAddAttributeAttributeObjectIntInt() { fail(
+     * "Not yet implemented"); }
+     * 
+     * @Test public void testAddAttributes() { sut.a }
+     * 
+     * @Test public void testGetIteratorAttributeArray() { fail(
+     * "Not yet implemented"); }
+     * 
+     * @Test public void testGetIteratorAttributeArrayIntInt() { fail(
+     * "Not yet implemented"); }
+     */
+    @Test
+    public void testLength() {
+	assertEquals(4, sut.length());
+    }
 
 }

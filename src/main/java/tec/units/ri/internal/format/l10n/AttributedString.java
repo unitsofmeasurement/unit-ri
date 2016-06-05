@@ -121,7 +121,7 @@ class AttributedString {
    * @param text
    *          The text for this attributed string.
    */
-  public AttributedString(String text) {
+  AttributedString(String text) {
     if (text == null) {
       throw new NullPointerException();
     }
@@ -196,7 +196,7 @@ class AttributedString {
    *              if the subrange given by beginIndex and endIndex is out of the text range.
    * @see Annotation
    */
-  public AttributedString(AttributedCharacterIterator text, int beginIndex, int endIndex) {
+  AttributedString(AttributedCharacterIterator text, int beginIndex, int endIndex) {
     this(text, beginIndex, endIndex, null);
   }
 

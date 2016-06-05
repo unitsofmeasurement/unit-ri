@@ -27,52 +27,53 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.unit;
+package tec.units.ri.function;
 
 import static org.junit.Assert.*;
-
-import javax.measure.quantity.Length;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import tec.units.ri.AbstractConverter;
+import tec.units.ri.quantity.DoubleQuantityTest;
 
-public class AnnotatedUnitTest {
+public class AddConverterTest {
 
-  private AnnotatedUnit<Length> annotatedUnit;
-  private BaseUnit<Length> baseUnit;
+  private AddConverter converter;
 
   @Before
   public void setUp() throws Exception {
-    baseUnit = new BaseUnit<Length>("m");
-    annotatedUnit = new AnnotatedUnit<Length>(baseUnit, "Metre");
+    converter = new AddConverter(10);
   }
 
   @Test
-  public void testGetterUnmodified() {
-    assertEquals(annotatedUnit.getAnnotation(), "Metre");
-    assertEquals(annotatedUnit.getSymbol(), "m");
-    assertEquals(annotatedUnit.getSystemUnit(), baseUnit);
-    assertEquals(annotatedUnit.getActualUnit(), baseUnit);
-    assertNotNull(annotatedUnit.getDimension());
-    assertNull(annotatedUnit.getProductUnits());
-    assertNotNull(annotatedUnit.getSystemConverter());
-    assertEquals(AbstractConverter.IDENTITY, annotatedUnit.getSystemConverter());
+  public void testEqualityOfTwoConverter() {
+    AddConverter AddConverter = new AddConverter(10);
+    assertTrue(AddConverter.equals(converter));
+    assertTrue(!AddConverter.equals(null));
   }
 
   @Test
-  public void testEquality() {
-    assertFalse(annotatedUnit.equals(baseUnit));
-    assertFalse(baseUnit.equals(annotatedUnit));
-    AnnotatedUnit<Length> anotherUnit = new AnnotatedUnit<Length>(baseUnit, "Metre");
-    assertTrue(annotatedUnit.equals(anotherUnit));
-    assertTrue(anotherUnit.equals(annotatedUnit));
-    assertTrue(annotatedUnit.equals(annotatedUnit));
-    assertEquals(annotatedUnit.hashCode(), anotherUnit.hashCode());
-    assertEquals(anotherUnit.hashCode(), annotatedUnit.hashCode());
-    anotherUnit = new AnnotatedUnit<Length>(baseUnit, "KiloMetre");
-    assertFalse(annotatedUnit.equals(anotherUnit));
-    assertFalse(anotherUnit.equals(annotatedUnit));
+  public void inverseTest() {
+    assertEquals(new AddConverter(-10), converter.inverse());
+  }
+  
+  @Test
+  public void linearTest() {
+    assertFalse(converter.isLinear());
+  }
+  
+  @Test
+  public void offsetTest() {
+    assertEquals(10d, converter.getOffset(), 0);
+  }
+  
+  @Test
+  public void valueTest() {
+    assertEquals(Double.valueOf(10), converter.getValue());
+  }
+  
+  @Test
+  public void toStringTest() {
+    assertEquals("AddConverter(10.0)", converter.toString());
   }
 }
