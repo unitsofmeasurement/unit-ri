@@ -29,8 +29,8 @@
  */
 package tec.units.ri.function;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,7 +53,8 @@ public class MultiplyConverterTest {
 
   @Test
   public void testEqualityOfTwoLogConverter() {
-    assertTrue(!converter.equals(null));
+    assertFalse(converter.equals(null));
+    assertEquals(new MultiplyConverter(2), converter);
   }
 
   @Test
@@ -65,9 +66,26 @@ public class MultiplyConverterTest {
   public void isLinearOfLogConverterTest() {
     assertTrue(converter.isLinear());
   }
+  
+  @Test
+  public void inverseTest() {
+    assertNotNull(converter.inverse());
+    assertEquals(new MultiplyConverter(0.5), converter.inverse());
+  }
 
   @Test(expected = IllegalArgumentException.class)
   public void identityTest() {
+    @SuppressWarnings("unused")
     MultiplyConverter identConverter = new MultiplyConverter(1);
+  }
+  
+  @Test
+  public void valueTest() {
+    assertEquals(Double.valueOf(2), converter.getValue());
+  }
+  
+  @Test
+  public void toStringTest() {
+    assertEquals("MultiplyConverter(2.0)", converter.toString());
   }
 }
