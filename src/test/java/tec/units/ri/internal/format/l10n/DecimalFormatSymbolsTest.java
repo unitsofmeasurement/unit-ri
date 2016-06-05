@@ -31,22 +31,43 @@ package tec.units.ri.internal.format.l10n;
 
 import static org.junit.Assert.*;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class DecimalFormatSymbolsTest {
 
-  static DecimalFormatSymbols sut;
+  private DecimalFormatSymbols sut;
 
-  @BeforeClass
-  public static void init() {
+  @Before
+  public void init() {
     sut = new DecimalFormatSymbols();
   }
-
+  
   @Test
-  public void testSetDecimalSeparator() {
+  public void testCurrencySymbol() {
+	sut.setCurrencySymbol("$");
+    assertNotNull(sut.getCurrencySymbol());
+    assertEquals("$", sut.getCurrencySymbol());
+  }
+  
+  @Test
+  public void testDecimalSeparator() {
 	sut.setDecimalSeparator('a');
     assertNotNull(sut.getDecimalSeparator());
     assertEquals("a", String.valueOf(sut.getDecimalSeparator()));
+  }
+  
+  @Test
+  public void testDigit() {
+	sut.setDigit('1');
+    assertNotNull(sut.getDigit());
+    assertEquals("1", String.valueOf(sut.getDigit()));
+  }
+  
+  @Test
+  public void testPatternSeparator() {
+	sut.setPatternSeparator('x');
+    assertNotNull(sut.getPatternSeparator());
+    assertEquals("x", String.valueOf(sut.getPatternSeparator()));
   }
 }
