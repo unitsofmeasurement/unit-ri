@@ -74,6 +74,12 @@ public class AttributedStringTest {
 	final AttributedCharacterIterator[] ns = null;
 	AttributedString as = new AttributedString(ns);
     }
+    
+    @Test
+    public void testAttributedStringEmptyIteratorArr() {
+	final AttributedCharacterIterator[] es = new AttributedCharacterIterator[0];
+	AttributedString as = new AttributedString(es);
+    }
 
     @Test
     public void testAttributedStringIterator() {

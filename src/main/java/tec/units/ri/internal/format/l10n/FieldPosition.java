@@ -107,7 +107,7 @@ public class FieldPosition {
    *          Format.Field constant identifying a field
    * @since 1.4
    */
-  public FieldPosition(Format.Field attribute) {
+  FieldPosition(Format.Field attribute) {
     this(attribute, -1);
   }
 
