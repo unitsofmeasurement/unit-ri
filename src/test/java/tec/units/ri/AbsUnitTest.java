@@ -29,15 +29,17 @@
  */
 package tec.units.ri;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import javax.measure.quantity.Length;
+import javax.measure.quantity.Temperature;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.unit.BaseUnit;
+import tec.units.ri.unit.Units;
 
 public class AbsUnitTest {
   private static final AbstractUnit<Length> sut = new BaseUnit<Length>("m");
@@ -50,5 +52,38 @@ public class AbsUnitTest {
   @Test
   public void testName() {
     assertEquals("Test", sut.getName());
+  }
+  
+  @Test
+  public void testAlternate() {
+    assertEquals("n", sut.alternate("n").toString());
+  }
+  
+  @Test
+  public void testShift0() {
+      assertEquals(sut, sut.shift(0));
+  }
+  
+  @Test
+  public void testIsComp() {
+      assertTrue(sut.isCompatible(sut));
+      assertFalse(sut.isCompatible(DimensionlessUnit.ONE));
+  }
+  
+  @Test
+  public void testDivide1() {
+      assertEquals(sut, sut.divide(1));
+  }
+  
+  @Test
+  public void testMult1() {
+      assertEquals(sut, sut.multiply(1));
+  }
+  
+  
+  @Test
+  public void testCompareTo() {
+      final AbstractUnit<Temperature> cel = (AbstractUnit<Temperature>) Units.CELSIUS;
+      assertEquals(-1, cel.compareTo(Units.KELVIN));
   }
 }

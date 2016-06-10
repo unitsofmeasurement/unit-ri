@@ -31,8 +31,6 @@ package tec.units.ri.internal.format.l10n;
 
 import static org.junit.Assert.*;
 
-import java.util.Map;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -68,6 +66,12 @@ public class AttributedStringTest {
 	final String ns = null;
 	AttributedString as = new AttributedString(ns);
     }
+    
+    @Test(expected = NullPointerException.class)
+    public void testAttributedStringNull2() {
+	final AttributedCharacterIterator ns = null;
+	AttributedString as = new AttributedString(ns, 0, 1, internalAttributes());
+    }
 
     @Test(expected = NullPointerException.class)
     public void testAttributedStringNullIteratorArr() {
@@ -88,34 +92,23 @@ public class AttributedStringTest {
 	AttributedString as = new AttributedString(it, 0, 4);
     }
 
-    /*
-     * @Test public void testAttributedStringStringMap() { fail(
-     * "Not yet implemented"); }
-     * 
-     * @Test public void testAttributedStringAttributedCharacterIterator() {
-     * fail("Not yet implemented"); }
-     * 
-     * @Test public void testAttributedStringAttributedCharacterIteratorIntInt()
-     * { fail("Not yet implemented"); }
-     * 
-     * @Test public void
-     * testAttributedStringAttributedCharacterIteratorIntIntAttributeArray() {
-     * fail("Not yet implemented"); }
-     * 
-     * @Test public void testAddAttributeAttributeObject() { fail(
-     * "Not yet implemented"); }
-     * 
-     * @Test public void testAddAttributeAttributeObjectIntInt() { fail(
-     * "Not yet implemented"); }
-     * 
-     * @Test public void testAddAttributes() { sut.a }
-     * 
-     * @Test public void testGetIteratorAttributeArray() { fail(
-     * "Not yet implemented"); }
-     * 
-     * @Test public void testGetIteratorAttributeArrayIntInt() { fail(
-     * "Not yet implemented"); }
-     */
+    public void testAddAttribute() {
+	final Attribute a = new Attribute("x");
+	sut.addAttribute(a, "y");
+    }
+    
+    @Test(expected = NullPointerException.class)
+    public void testAddAttributeBothNull() {
+	final Attribute ns = null;
+	sut.addAttribute(ns, null);
+    }
+    
+    @Test(expected = NullPointerException.class)
+    public void testAddAttributeNull() {
+	final Attribute ns = null;
+	sut.addAttribute(ns, "x");
+    }
+    
     @Test
     public void testLength() {
 	assertEquals(4, sut.length());
