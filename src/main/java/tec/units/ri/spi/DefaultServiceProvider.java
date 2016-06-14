@@ -44,7 +44,6 @@ import java.util.logging.Logger;
 
 import javax.measure.Quantity;
 import javax.measure.spi.QuantityFactory;
-import javax.measure.spi.QuantityFactoryService;
 import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.SystemOfUnitsService;
 import javax.measure.spi.UnitFormatService;
@@ -56,7 +55,7 @@ import tec.uom.lib.common.function.IntPrioritySupplier;
  * This class extends the {@link ServiceProvider} class and hereby uses the JDK {@link java.util.ServiceLoader} to load the services required.
  *
  * @author Werner Keil
- * @version 0.8
+ * @version 0.9
  */
 public class DefaultServiceProvider extends ServiceProvider {
   /** List of services loaded, per class. */
@@ -202,12 +201,6 @@ public class DefaultServiceProvider extends ServiceProvider {
   @Override
   public UnitFormatService getUnitFormatService() {
     return getService(UnitFormatService.class);
-  }
-
-  @Override
-  public QuantityFactoryService getQuantityFactoryService() {
-    return null;
-    // TODO will be removed
   }
 
   /**
