@@ -66,7 +66,7 @@ public class MultiplyConverterTest {
   public void isLinearOfLogConverterTest() {
     assertTrue(converter.isLinear());
   }
-  
+
   @Test
   public void inverseTest() {
     assertNotNull(converter.inverse());
@@ -78,12 +78,12 @@ public class MultiplyConverterTest {
     @SuppressWarnings("unused")
     MultiplyConverter identConverter = new MultiplyConverter(1);
   }
-  
+
   @Test
   public void valueTest() {
     assertEquals(Double.valueOf(2), converter.getValue());
   }
-  
+
   @Test
   public void toStringTest() {
     assertEquals("MultiplyConverter(2.0)", converter.toString());

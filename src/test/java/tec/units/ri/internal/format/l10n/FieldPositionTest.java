@@ -51,7 +51,7 @@ public class FieldPositionTest {
     assertNotNull(f.getField());
     assertEquals(0, f.getField());
   }
-  
+
   @Test
   public void testGetField() {
     assertNotNull(sut.getField());
@@ -69,6 +69,8 @@ public class FieldPositionTest {
 
   @Test
   public void testToString() {
-    assertEquals("tec.units.ri.internal.format.l10n.FieldPosition[field=-1,attribute=tec.units.ri.internal.format.l10n.NumberFormat$Field(currency),beginIndex=0,endIndex=0]", sut.toString());
+    assertEquals(
+        "tec.units.ri.internal.format.l10n.FieldPosition[field=-1,attribute=tec.units.ri.internal.format.l10n.NumberFormat$Field(currency),beginIndex=0,endIndex=0]",
+        sut.toString());
   }
 }

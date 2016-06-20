@@ -53,37 +53,36 @@ public class AbsUnitTest {
   public void testName() {
     assertEquals("Test", sut.getName());
   }
-  
+
   @Test
   public void testAlternate() {
     assertEquals("n", sut.alternate("n").toString());
   }
-  
+
   @Test
   public void testShift0() {
-      assertEquals(sut, sut.shift(0));
+    assertEquals(sut, sut.shift(0));
   }
-  
+
   @Test
   public void testIsComp() {
-      assertTrue(sut.isCompatible(sut));
-      assertFalse(sut.isCompatible(DimensionlessUnit.ONE));
+    assertTrue(sut.isCompatible(sut));
+    assertFalse(sut.isCompatible(DimensionlessUnit.ONE));
   }
-  
+
   @Test
   public void testDivide1() {
-      assertEquals(sut, sut.divide(1));
+    assertEquals(sut, sut.divide(1));
   }
-  
+
   @Test
   public void testMult1() {
-      assertEquals(sut, sut.multiply(1));
+    assertEquals(sut, sut.multiply(1));
   }
-  
-  
+
   @Test
   public void testCompareTo() {
-      final AbstractUnit<Temperature> cel = (AbstractUnit<Temperature>) Units.CELSIUS;
-      assertEquals(-1, cel.compareTo(Units.KELVIN));
+    final AbstractUnit<Temperature> cel = (AbstractUnit<Temperature>) Units.CELSIUS;
+    assertEquals(-1, cel.compareTo(Units.KELVIN));
   }
 }

@@ -42,31 +42,31 @@ public class DecimalFormatSymbolsTest {
   public void init() {
     sut = new DecimalFormatSymbols();
   }
-  
+
   @Test
   public void testCurrencySymbol() {
-	sut.setCurrencySymbol("$");
+    sut.setCurrencySymbol("$");
     assertNotNull(sut.getCurrencySymbol());
     assertEquals("$", sut.getCurrencySymbol());
   }
-  
+
   @Test
   public void testDecimalSeparator() {
-	sut.setDecimalSeparator('a');
+    sut.setDecimalSeparator('a');
     assertNotNull(sut.getDecimalSeparator());
     assertEquals("a", String.valueOf(sut.getDecimalSeparator()));
   }
-  
+
   @Test
   public void testDigit() {
-	sut.setDigit('1');
+    sut.setDigit('1');
     assertNotNull(sut.getDigit());
     assertEquals("1", String.valueOf(sut.getDigit()));
   }
-  
+
   @Test
   public void testPatternSeparator() {
-	sut.setPatternSeparator('x');
+    sut.setPatternSeparator('x');
     assertNotNull(sut.getPatternSeparator());
     assertEquals("x", String.valueOf(sut.getPatternSeparator()));
   }

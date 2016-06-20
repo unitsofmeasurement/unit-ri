@@ -44,101 +44,88 @@ import tec.units.ri.unit.Units;
 
 public class NumberQuantityTest {
 
-    @Test
-    public void divideTest() {
-	NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(
-		Double.valueOf(3).doubleValue(), Units.OHM);
-	NumberQuantity<ElectricResistance> quantity2 = new NumberQuantity<ElectricResistance>(
-		Double.valueOf(2).doubleValue(), Units.OHM);
-	Quantity<?> result = quantity1.divide(quantity2);
-	assertEquals(Double.valueOf(1.5f), result.getValue());
-    }
+  @Test
+  public void divideTest() {
+    NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(Double.valueOf(3).doubleValue(), Units.OHM);
+    NumberQuantity<ElectricResistance> quantity2 = new NumberQuantity<ElectricResistance>(Double.valueOf(2).doubleValue(), Units.OHM);
+    Quantity<?> result = quantity1.divide(quantity2);
+    assertEquals(Double.valueOf(1.5f), result.getValue());
+  }
 
-    @Test
-    public void divideNumberTest() {
-	NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(
-		Double.valueOf(3).doubleValue(), Units.OHM);
-	Quantity<?> result = quantity1.divide(Double.valueOf(2));
-	assertEquals(Double.valueOf(1.5d), result.getValue());
-    }
+  @Test
+  public void divideNumberTest() {
+    NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(Double.valueOf(3).doubleValue(), Units.OHM);
+    Quantity<?> result = quantity1.divide(Double.valueOf(2));
+    assertEquals(Double.valueOf(1.5d), result.getValue());
+  }
 
-    @Test
-    public void addTest() {
-	NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(
-		Double.valueOf(1).doubleValue(), Units.OHM);
-	NumberQuantity<ElectricResistance> quantity2 = new NumberQuantity<ElectricResistance>(
-		Double.valueOf(2).doubleValue(), Units.OHM);
-	Quantity<ElectricResistance> result = quantity1.add(quantity2);
-	assertEquals(Double.valueOf(3f), result.getValue());
-    }
+  @Test
+  public void addTest() {
+    NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(Double.valueOf(1).doubleValue(), Units.OHM);
+    NumberQuantity<ElectricResistance> quantity2 = new NumberQuantity<ElectricResistance>(Double.valueOf(2).doubleValue(), Units.OHM);
+    Quantity<ElectricResistance> result = quantity1.add(quantity2);
+    assertEquals(Double.valueOf(3f), result.getValue());
+  }
 
-    @Test
-    public void subtractTest() {
-	NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(
-		Double.valueOf(1).doubleValue(), Units.OHM);
-	NumberQuantity<ElectricResistance> quantity2 = new NumberQuantity<ElectricResistance>(
-		Double.valueOf(2).doubleValue(), Units.OHM);
-	Quantity<ElectricResistance> result = quantity2.subtract(quantity1);
-	assertEquals(Double.valueOf(1), result.getValue());
-	assertEquals(Units.OHM, result.getUnit());
-    }
+  @Test
+  public void subtractTest() {
+    NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(Double.valueOf(1).doubleValue(), Units.OHM);
+    NumberQuantity<ElectricResistance> quantity2 = new NumberQuantity<ElectricResistance>(Double.valueOf(2).doubleValue(), Units.OHM);
+    Quantity<ElectricResistance> result = quantity2.subtract(quantity1);
+    assertEquals(Double.valueOf(1), result.getValue());
+    assertEquals(Units.OHM, result.getUnit());
+  }
 
-    @Test
-    public void multiplyQuantityTest() {
-	NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(
-		Double.valueOf(3).doubleValue(), Units.OHM);
-	NumberQuantity<ElectricResistance> quantity2 = new NumberQuantity<ElectricResistance>(
-		Double.valueOf(2).doubleValue(), Units.OHM);
-	Quantity<?> result = quantity1.multiply(quantity2);
-	assertEquals(Double.valueOf(6L), result.getValue());
-    }
+  @Test
+  public void multiplyQuantityTest() {
+    NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(Double.valueOf(3).doubleValue(), Units.OHM);
+    NumberQuantity<ElectricResistance> quantity2 = new NumberQuantity<ElectricResistance>(Double.valueOf(2).doubleValue(), Units.OHM);
+    Quantity<?> result = quantity1.multiply(quantity2);
+    assertEquals(Double.valueOf(6L), result.getValue());
+  }
 
-    @Test
-    public void doubleValueTest() {
-	NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(3),
-		Units.DAY);
-	double hours = day.doubleValue(Units.HOUR);
-	assertEquals(72D, hours, 0);
-    }
-    
-    @Test
-    public void intValueTest() {
-	NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(3),
-		Units.DAY);
-	int hours = day.intValue(Units.HOUR);
-	assertEquals(72, hours, 0);
-    }
+  @Test
+  public void doubleValueTest() {
+    NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(3), Units.DAY);
+    double hours = day.doubleValue(Units.HOUR);
+    assertEquals(0.125, hours, 0);
+  }
 
-    @Test
-    public void ofTest() {
-	AbstractQuantity<Length> l = NumberQuantity.of(Short.valueOf("10")
-		.shortValue(), Units.METRE);
-	assertEquals(Short.valueOf("10"), l.getValue());
-    }
+  @Test
+  public void intValueTest() {
+    NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(3), Units.DAY);
+    int hours = day.intValue(Units.HOUR);
+    assertEquals(0, hours, 0);
+  }
 
-    @Test
-    public void inverseTest() {
-	AbstractQuantity<Length> l = NumberQuantity.of(Double.valueOf(10d)
-		.doubleValue(), Units.METRE);
-	assertEquals(Double.valueOf(1 / 10d), l.inverse().getValue());
-    }
+  @Test
+  public void ofTest() {
+    AbstractQuantity<Length> l = NumberQuantity.of(Short.valueOf("10").shortValue(), Units.METRE);
+    assertEquals(Short.valueOf("10"), l.getValue());
+  }
 
-    @Test
-    public void toTest() {
-	Quantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
-	Quantity<Time> hour = day.to(Units.HOUR);
-	Assert.assertEquals(Double.valueOf(24), hour.getValue());
-	Assert.assertEquals(hour.getUnit(), Units.HOUR);
+  @Test
+  public void inverseTest() {
+    AbstractQuantity<Length> l = NumberQuantity.of(Double.valueOf(10d).doubleValue(), Units.METRE);
+    assertEquals(Double.valueOf(1 / 10d), l.inverse().getValue());
+  }
 
-	Quantity<Time> dayResult = hour.to(Units.DAY);
-	Assert.assertEquals(dayResult.getValue(), day.getValue());
-	Assert.assertEquals(dayResult.getUnit(), day.getUnit());
-    }
-    
-    @Test
-    public void parseTest() {
-	Quantity<?> l = NumberQuantity.parse("10 m");
-	assertEquals(Double.valueOf(10d), l.getValue());
-	assertEquals(Units.METRE, l.getUnit());
-    }
+  @Test
+  public void toTest() {
+    Quantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
+    Quantity<Time> hour = day.to(Units.HOUR);
+    Assert.assertEquals(Double.valueOf(24), hour.getValue());
+    Assert.assertEquals(hour.getUnit(), Units.HOUR);
+
+    Quantity<Time> dayResult = hour.to(Units.DAY);
+    Assert.assertEquals(dayResult.getValue(), day.getValue());
+    Assert.assertEquals(dayResult.getUnit(), day.getUnit());
+  }
+
+  @Test
+  public void parseTest() {
+    Quantity<?> l = NumberQuantity.parse("10 m");
+    assertEquals(Double.valueOf(10d), l.getValue());
+    assertEquals(Units.METRE, l.getUnit());
+  }
 }

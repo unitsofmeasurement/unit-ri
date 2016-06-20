@@ -35,18 +35,18 @@ import org.junit.Test;
 
 public class MathUtilTest {
 
-    @Test
-    public void testAtan() {
-	final double value = 12.3;
-	double result = MathUtil.atan(value);
-	assertEquals(1.4896739346939956, result, 0);
-    }
-    
-    @Test
-    public void testAtan2() {
-	final double value = 1;
-	final double value2 = 2;
-	double result = MathUtil.atan2(value, value2);
-	assertEquals(0.4636476090008061, result, 0);
-    }
+  @Test
+  public void testAtan() {
+    final double value = 12.3;
+    double result = MathUtil.atan(value);
+    assertEquals(1.4896739346939956, result, 0);
+  }
+
+  @Test
+  public void testAtan2() {
+    final double value = 1;
+    final double value2 = 2;
+    double result = MathUtil.atan2(value, value2);
+    assertEquals(0.4636476090008061, result, 0);
+  }
 }

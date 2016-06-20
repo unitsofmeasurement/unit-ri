@@ -63,19 +63,19 @@ public class FormatTest {
     String formated = format.format(value);
     assertEquals(".05", formated);
   }
-  
+
   @Test
   public void testFormatToChar() {
-      final Format format = DecimalFormat.getIntegerInstance();
-      assertNotNull(format.formatToCharacterIterator(Double.valueOf(1)));
+    final Format format = DecimalFormat.getIntegerInstance();
+    assertNotNull(format.formatToCharacterIterator(Double.valueOf(1)));
   }
-  
+
   @Test
   public void testAttributedChar() {
-      final Format format = DecimalFormat.getIntegerInstance();
-      AttributedCharacterIterator it = format.createAttributedCharacterIterator("a");
-      assertNotNull(it);
-      assertNotNull(it.getAttributes());
-      assertEquals(0, it.getAttributes().size());
+    final Format format = DecimalFormat.getIntegerInstance();
+    AttributedCharacterIterator it = format.createAttributedCharacterIterator("a");
+    assertNotNull(it);
+    assertNotNull(it.getAttributes());
+    assertEquals(0, it.getAttributes().size());
   }
 }

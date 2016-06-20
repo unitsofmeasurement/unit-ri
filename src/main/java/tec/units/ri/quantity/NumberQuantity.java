@@ -33,6 +33,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnconvertibleException;
 import javax.measure.UnitConverter;
+
 import tec.units.ri.AbstractQuantity;
 import tec.units.ri.format.QuantityFormat;
 
@@ -44,13 +45,13 @@ import tec.units.ri.format.QuantityFormat;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *          The type of the quantity.
- * @version 0.12, $Date: 2016-04-20 $
+ * @version 0.13, $Date: 2016-06-21 $
  */
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
   /**
-	 * 
-	 */
+   * 
+   */
   // private static final long serialVersionUID = 7312161895652321241L;
 
   private final Number value;
@@ -116,16 +117,15 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
    * 
    * @see AbstractQuantity#doubleValue(javax.measure.Unit)
    */
+  @Override
   public double doubleValue(Unit<Q> unit) {
     Unit<Q> myUnit = getUnit();
     try {
-      UnitConverter converter = myUnit.getConverterTo(unit);
+      UnitConverter converter = unit.getConverterTo(myUnit);
       return converter.convert(getValue().doubleValue());
     } catch (UnconvertibleException e) {
       throw e;
-    } // catch (IncommensurableException e) {
-      // throw new IllegalArgumentException(e.getMessage());
-      // }
+    }
   }
 
   protected final int intValue(Unit<Q> unit) throws ArithmeticException {

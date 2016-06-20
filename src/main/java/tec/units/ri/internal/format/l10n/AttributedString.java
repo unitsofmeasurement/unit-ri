@@ -138,48 +138,48 @@ class AttributedString {
    * @exception IllegalArgumentException
    *              if the text has length 0 and the attributes parameter is not an empty Map (attributes cannot be applied to a 0-length range).
    */
- /* AttributedString(String text, Map attributes) {
-    if (text == null || attributes == null) {
-      throw new NullPointerException();
-    }
-    this.text = text;
+  /* AttributedString(String text, Map attributes) {
+     if (text == null || attributes == null) {
+       throw new NullPointerException();
+     }
+     this.text = text;
 
-    if (text.length() == 0) {
-      if (attributes.isEmpty())
-        return;
-      throw new IllegalArgumentException("Can't add attribute to 0-length text");
-    }
+     if (text.length() == 0) {
+       if (attributes.isEmpty())
+         return;
+       throw new IllegalArgumentException("Can't add attribute to 0-length text");
+     }
 
-    int attributeCount = attributes.size();
-    if (attributeCount > 0) {
-      createRunAttributeDataVectors();
-      Vector newRunAttributes = new Vector(attributeCount);
-      Vector newRunAttributeValues = new Vector(attributeCount);
-      runAttributes[0] = newRunAttributes;
-      runAttributeValues[0] = newRunAttributeValues;
+     int attributeCount = attributes.size();
+     if (attributeCount > 0) {
+       createRunAttributeDataVectors();
+       Vector newRunAttributes = new Vector(attributeCount);
+       Vector newRunAttributeValues = new Vector(attributeCount);
+       runAttributes[0] = newRunAttributes;
+       runAttributeValues[0] = newRunAttributeValues;
 
-      Set iterator = attributes.keySet();
-      for (Object key : iterator) {
-        // Object key = iterator.nextElement();
-        Object value = attributes.get(key);
-        newRunAttributes.addElement(key);
-        newRunAttributeValues.addElement(value);
-      }
-    }
-  }
-*/
+       Set iterator = attributes.keySet();
+       for (Object key : iterator) {
+         // Object key = iterator.nextElement();
+         Object value = attributes.get(key);
+         newRunAttributes.addElement(key);
+         newRunAttributeValues.addElement(value);
+       }
+     }
+   }
+  */
   /**
    * Constructs an AttributedString instance with the given attributed text represented by AttributedCharacterIterator.
    * 
    * @param text
    *          The text for this attributed string.
    */
- /* public AttributedString(AttributedCharacterIterator text) {
-    // If performance is critical, this constructor should be
-    // implemented here rather than invoking the constructor for a
-    // subrange. We can avoid some range checking in the loops.
-    this(text, text.getBeginIndex(), text.getEndIndex(), null);
-  } */
+  /* public AttributedString(AttributedCharacterIterator text) {
+     // If performance is critical, this constructor should be
+     // implemented here rather than invoking the constructor for a
+     // subrange. We can avoid some range checking in the loops.
+     this(text, text.getBeginIndex(), text.getEndIndex(), null);
+   } */
 
   /**
    * Constructs an AttributedString instance with the subrange of the given attributed text represented by AttributedCharacterIterator. If the given
@@ -367,37 +367,37 @@ class AttributedString {
    *              if beginIndex is less then 0, endIndex is greater than the length of the string, or beginIndex and endIndex together don't define a
    *              non-empty subrange of the string and the attributes parameter is not an empty Map.
    */
- /* public void addAttributes(Map attributes, int beginIndex, int endIndex) {
-    if (attributes == null) {
-      throw new NullPointerException();
-    }
+  /* public void addAttributes(Map attributes, int beginIndex, int endIndex) {
+     if (attributes == null) {
+       throw new NullPointerException();
+     }
 
-    if (beginIndex < 0 || endIndex > length() || beginIndex > endIndex) {
-      throw new IllegalArgumentException("Invalid substring range");
-    }
-    if (beginIndex == endIndex) {
-      if (attributes.isEmpty())
-        return;
-      throw new IllegalArgumentException("Can't add attribute to 0-length text");
-    }
+     if (beginIndex < 0 || endIndex > length() || beginIndex > endIndex) {
+       throw new IllegalArgumentException("Invalid substring range");
+     }
+     if (beginIndex == endIndex) {
+       if (attributes.isEmpty())
+         return;
+       throw new IllegalArgumentException("Can't add attribute to 0-length text");
+     }
 
-    // make sure we have run attribute data vectors
-    if (runCount == 0) {
-      createRunAttributeDataVectors();
-    }
+     // make sure we have run attribute data vectors
+     if (runCount == 0) {
+       createRunAttributeDataVectors();
+     }
 
-    // break up runs if necessary
-    int beginRunIndex = ensureRunBreak(beginIndex);
-    int endRunIndex = ensureRunBreak(endIndex);
+     // break up runs if necessary
+     int beginRunIndex = ensureRunBreak(beginIndex);
+     int endRunIndex = ensureRunBreak(endIndex);
 
-    Set iterator = attributes.keySet();
-    for (Object key : iterator) {
-      // Object key = iterator.nextElement();
-      Object value = attributes.get(key);
-      addAttributeRunData((Attribute) key, value, beginRunIndex, endRunIndex);
-    }
-  }
-*/
+     Set iterator = attributes.keySet();
+     for (Object key : iterator) {
+       // Object key = iterator.nextElement();
+       Object value = attributes.get(key);
+       addAttributeRunData((Attribute) key, value, beginRunIndex, endRunIndex);
+     }
+   }
+  */
   private synchronized void addAttributeImpl(Attribute attribute, Object value, int beginIndex, int endIndex) {
 
     // make sure we have run attribute data vectors
@@ -566,9 +566,9 @@ class AttributedString {
    *          a list of attributes that the client is interested in
    * @return an iterator providing access to the text and its attributes
    */
- /* public AttributedCharacterIterator getIterator(Attribute[] attributes) {
-    return getIterator(attributes, 0, length());
-  } */
+  /* public AttributedCharacterIterator getIterator(Attribute[] attributes) {
+     return getIterator(attributes, 0, length());
+   } */
 
   /**
    * Creates an AttributedCharacterIterator instance that provides access to selected contents of this string. Information about attributes not listed

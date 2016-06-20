@@ -35,32 +35,30 @@ import org.junit.Test;
 
 public class ParsePositionTest {
 
-    @Test
-    public void testIndex() {
-	final ParsePosition pp = new ParsePosition(0);
-	assertEquals(0, pp.getIndex());
-    }
+  @Test
+  public void testIndex() {
+    final ParsePosition pp = new ParsePosition(0);
+    assertEquals(0, pp.getIndex());
+  }
 
-    @Test
-    public void testErrorIndex() {
-	final ParsePosition pp = new ParsePosition(0);
-	pp.setErrorIndex(1);
-	assertEquals(0, pp.getIndex());
-	assertEquals(1, pp.getErrorIndex());
-    }
+  @Test
+  public void testErrorIndex() {
+    final ParsePosition pp = new ParsePosition(0);
+    pp.setErrorIndex(1);
+    assertEquals(0, pp.getIndex());
+    assertEquals(1, pp.getErrorIndex());
+  }
 
-    @Test
-    public void testEquals() {
-	final ParsePosition pp = new ParsePosition(1);
-	final ParsePosition pp2 = new ParsePosition(1);
-	assertEquals(pp, pp2);
-    }
+  @Test
+  public void testEquals() {
+    final ParsePosition pp = new ParsePosition(1);
+    final ParsePosition pp2 = new ParsePosition(1);
+    assertEquals(pp, pp2);
+  }
 
-    @Test
-    public void testToString() {
-	final ParsePosition pp = new ParsePosition(0);
-	assertEquals(
-		"tec.units.ri.internal.format.l10n.ParsePosition[index=0,errorIndex=-1]",
-		pp.toString());
-    }
+  @Test
+  public void testToString() {
+    final ParsePosition pp = new ParsePosition(0);
+    assertEquals("tec.units.ri.internal.format.l10n.ParsePosition[index=0,errorIndex=-1]", pp.toString());
+  }
 }

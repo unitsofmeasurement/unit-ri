@@ -56,22 +56,22 @@ public class AddConverterTest {
   public void inverseTest() {
     assertEquals(new AddConverter(-10), converter.inverse());
   }
-  
+
   @Test
   public void linearTest() {
     assertFalse(converter.isLinear());
   }
-  
+
   @Test
   public void offsetTest() {
     assertEquals(10d, converter.getOffset(), 0);
   }
-  
+
   @Test
   public void valueTest() {
     assertEquals(Double.valueOf(10), converter.getValue());
   }
-  
+
   @Test
   public void toStringTest() {
     assertEquals("AddConverter(10.0)", converter.toString());
