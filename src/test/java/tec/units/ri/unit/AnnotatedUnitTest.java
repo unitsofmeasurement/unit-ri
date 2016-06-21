@@ -56,7 +56,7 @@ public class AnnotatedUnitTest {
     assertEquals(annotatedUnit.getSystemUnit(), baseUnit);
     assertEquals(annotatedUnit.getActualUnit(), baseUnit);
     assertNotNull(annotatedUnit.getDimension());
-    assertNull(annotatedUnit.getProductUnits());
+    assertNull(annotatedUnit.getBaseUnits());
     assertNotNull(annotatedUnit.getSystemConverter());
     assertEquals(AbstractConverter.IDENTITY, annotatedUnit.getSystemConverter());
   }

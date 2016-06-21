@@ -45,7 +45,7 @@ import tec.uom.lib.common.function.DoubleFactorSupplier;
 
 /**
  * @author Werner Keil
- * @version 1.0
+ * @version 1.1
  */
 enum DimensionlessUnit implements Unit<Dimensionless>, DoubleFactorSupplier {
   ONE("", 1.0); // reference Unit
@@ -70,7 +70,7 @@ enum DimensionlessUnit implements Unit<Dimensionless>, DoubleFactorSupplier {
     return ONE;
   }
 
-  public Map<? extends Unit<?>, Integer> getProductUnits() {
+  public Map<? extends Unit<?>, Integer> getBaseUnits() {
     Map<Unit<Dimensionless>, Integer> prodUnits = new HashMap<Unit<Dimensionless>, Integer>();
     prodUnits.put(ONE, Integer.valueOf(1));
     return prodUnits;
@@ -151,5 +151,9 @@ enum DimensionlessUnit implements Unit<Dimensionless>, DoubleFactorSupplier {
 
   public Unit<Dimensionless> shift(double v) {
     return this;
+  }
+  
+  public Map getProductUnits() {
+      throw new UnsupportedOperationException("Use getBaseUnits() instead");
   }
 }

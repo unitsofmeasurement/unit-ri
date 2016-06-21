@@ -64,13 +64,13 @@ import tec.units.ri.unit.Units;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.9.5, March 19, 2016
+ * @version 0.9.6, June 21, 2016
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Comparable<Unit<Q>> {
 
   /**
-	 * 
-	 */
+   * 
+   */
   // private static final long serialVersionUID = -4344589505537030204L;
 
   /**
@@ -269,7 +269,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
     return (Unit<T>) this;
   }
 
-  public abstract Map<? extends Unit<?>, Integer> getProductUnits();
+  public abstract Map<? extends Unit<?>, Integer> getBaseUnits();
 
   public abstract Dimension getDimension();
 
@@ -476,4 +476,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   @Override
   public abstract boolean equals(Object that);
 
+  public Map getProductUnits() {
+      throw new UnsupportedOperationException("Use getBaseUnits() instead");
+  }
 }

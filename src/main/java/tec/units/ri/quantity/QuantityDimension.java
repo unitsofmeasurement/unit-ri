@@ -61,7 +61,7 @@ import java.util.logging.Logger;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, $Date: 2015-10-29 $
+ * @version 0.7, $Date: 2016-06-21 $
  */
 public final class QuantityDimension implements Dimension {
   private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
@@ -243,7 +243,7 @@ public final class QuantityDimension implements Dimension {
    */
   @SuppressWarnings("rawtypes")
   public Map<? extends QuantityDimension, Integer> getProductDimensions() {
-    Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getProductUnits();
+    Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getBaseUnits();
     if (pseudoUnits == null)
       return null;
     Map<QuantityDimension, Integer> fundamentalDimensions = new HashMap<QuantityDimension, Integer>();

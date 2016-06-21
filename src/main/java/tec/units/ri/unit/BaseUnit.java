@@ -153,7 +153,7 @@ public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
   }
 
   @Override
-  public Map<? extends AbstractUnit<Q>, Integer> getProductUnits() {
+  public Map<? extends AbstractUnit<Q>, Integer> getBaseUnits() {
     return null;
   }
 }

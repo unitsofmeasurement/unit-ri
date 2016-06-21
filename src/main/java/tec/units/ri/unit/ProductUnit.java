@@ -262,7 +262,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
   }
 
   @Override
-  public Map<Unit<?>, Integer> getProductUnits() {
+  public Map<Unit<?>, Integer> getBaseUnits() {
     final Map<Unit<?>, Integer> units = new HashMap<Unit<?>, Integer>();
     for (int i = 0; i < getUnitCount(); i++) {
       units.put(getUnit(i), getUnitPow(i));
