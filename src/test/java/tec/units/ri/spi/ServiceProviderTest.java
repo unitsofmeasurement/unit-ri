@@ -40,14 +40,14 @@ import org.junit.Test;
 public class ServiceProviderTest {
 
   @Test
-  public void testAvailables() {
+  public void testAvailable() {
     List<ServiceProvider> providers = ServiceProvider.available();
     assertNotNull(providers);
     assertEquals(1, providers.size());
   }
 
   @Test
-  public void testDefault() {
+  public void testCurrent() {
     ServiceProvider provider = ServiceProvider.current();
     assertNotNull(provider);
     assertEquals("tec.units.ri.spi.DefaultServiceProvider", provider.getClass().getName());
