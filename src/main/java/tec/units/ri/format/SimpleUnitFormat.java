@@ -73,12 +73,12 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.7, Dec 30, 2015
+ * @version 0.8, June 24, 2016
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   /**
-	 * 
-	 */
+   * 
+   */
   // private static final long serialVersionUID = 4149424034841739785L;
 
   /**
@@ -154,6 +154,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
    * @throws IllegalArgumentException
    *           if the character sequence contains an illegal syntax.
    */
+  @SuppressWarnings("rawtypes")
   public abstract Unit<? extends Quantity> parseProductUnit(CharSequence csq, ParsePosition pos) throws ParserException;
 
   /**
@@ -167,6 +168,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
    * @throws IllegalArgumentException
    *           if the character sequence does not contain a valid unit identifier.
    */
+  @SuppressWarnings("rawtypes")
   public abstract Unit<? extends Quantity> parseSingleUnit(CharSequence csq, ParsePosition pos) throws ParserException;
 
   /**
@@ -343,8 +345,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
     static boolean isUnitIdentifierPart(char ch) {
       return isLetter(ch)
-          || (!Character.isWhitespace(ch) && !Character.isDigit(ch) && (ch != '·') && (ch != '*') && (ch != '/') && (ch != '(') && (ch != ')')
-              && (ch != '[') && (ch != ']') && (ch != '¹') && (ch != '²') && (ch != '³') && (ch != '^') && (ch != '+') && (ch != '-'));
+          || (!Character.isWhitespace(ch) && !Character.isDigit(ch) && (ch != '\u00b7') && (ch != '*') && (ch != '/') && (ch != '(') && (ch != ')')
+              && (ch != '[') && (ch != ']') && (ch != '\u00b9') && (ch != '\u00b2') && (ch != '\u00b3') && (ch != '^') && (ch != '+') && (ch != '-'));
     }
 
     // Returns the name for the specified unit or null if product unit.
@@ -363,7 +365,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
         UnitConverter cvtr = tfmUnit.getSystemConverter();
         StringBuffer result = new StringBuffer();
         String baseUnitName = baseUnits.toString();
-        if ((baseUnitName.indexOf('·') >= 0) || (baseUnitName.indexOf('*') >= 0) || (baseUnitName.indexOf('/') >= 0)) {
+        if ((baseUnitName.indexOf('\u00b7') >= 0) || (baseUnitName.indexOf('*') >= 0) || (baseUnitName.indexOf('/') >= 0)) {
           // We could use parentheses whenever baseUnits is an
           // instanceof ProductUnit, but most ProductUnits have
           // aliases,
@@ -418,19 +420,19 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     // //////////////////////////
     // Parsing.
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public Unit<? extends Quantity> parseSingleUnit(CharSequence csq, ParsePosition pos) throws ParserException {
       int startIndex = pos.getIndex();
       String name = readIdentifier(csq, pos);
-      Unit unit = unitFor(name);
+      Unit<?> unit = unitFor(name);
       check(unit != null, name + " not recognized", csq, startIndex);
       return unit;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     @Override
     public Unit<? extends Quantity> parseProductUnit(CharSequence csq, ParsePosition pos) throws ParserException {
-      Unit result = AbstractUnit.ONE;
+      Unit<?> result = AbstractUnit.ONE;
       int token = nextToken(csq, pos);
       switch (token) {
         case IDENTIFIER:
@@ -538,7 +540,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
           return OPEN_PAREN;
         } else if (c == ')') {
           return CLOSE_PAREN;
-        } else if ((c == '^') || (c == '¹') || (c == '²') || (c == '³')) {
+        } else if ((c == '^') || (c == '\u00b9') || (c == '\u00b2') || (c == '\u00b3')) {
           return EXPONENT;
         } else if (c == '*') {
           char c2 = csq.charAt(pos.getIndex() + 1);
@@ -547,7 +549,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
           } else {
             return MULTIPLY;
           }
-        } else if (c == '·') {
+        } else if (c == '\u00b7') {
           return MULTIPLY;
         } else if (c == '/') {
           return DIVIDE;
@@ -589,19 +591,19 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
       boolean isRoot = false;
       while (pos.getIndex() < length) {
         c = csq.charAt(pos.getIndex());
-        if (c == '¹') {
+        if (c == '\u00b9') {
           if (isRoot) {
             root = root * 10 + 1;
           } else {
             pow = pow * 10 + 1;
           }
-        } else if (c == '²') {
+        } else if (c == '\u00b2') {
           if (isRoot) {
             root = root * 10 + 2;
           } else {
             pow = pow * 10 + 2;
           }
-        } else if (c == '³') {
+        } else if (c == '\u00b3') {
           if (isRoot) {
             root = root * 10 + 3;
           } else {
@@ -697,7 +699,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
         int pow = productUnit.getUnitPow(i);
         if (pow >= 0) {
           if (!start) {
-            appendable.append('·'); // Separator.
+            appendable.append('\u00b7'); // Separator.
           }
           name = nameFor(productUnit.getUnit(i));
           int root = productUnit.getUnitRoot(i);
@@ -724,7 +726,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
             name = nameFor(productUnit.getUnit(i));
             int root = productUnit.getUnitRoot(i);
             if (!start) {
-              appendable.append('·'); // Separator.
+              appendable.append('\u00b7'); // Separator.
             }
             append(appendable, name, -pow, root);
             start = false;
@@ -742,9 +744,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
       if ((pow != 1) || (root != 1)) {
         // Write exponent.
         if ((pow == 2) && (root == 1)) {
-          appendable.append('²'); // Square
+          appendable.append('\u00b2'); // Square
         } else if ((pow == 3) && (root == 1)) {
-          appendable.append('³'); // Cubic
+          appendable.append('\u00b3'); // Cubic
         } else {
           // Use general exponent form.
           appendable.append('^');
@@ -839,12 +841,13 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
        */
     }
 
-    // return if the given character is within the ASCII charset
-    private static boolean isAsciiCharacter(char c) {
-      // return (c > 64 && c < 91) || (c > 96 && c < 123);
-      return (int) c < 128;
-    }
-
+    /*
+    	// return if the given character is within the ASCII charset
+    	private static boolean isAsciiCharacter(char c) {
+    	    // return (c > 64 && c < 91) || (c > 96 && c < 123);
+    	    return (int) c < 128;
+    	}
+    */
     // to check if a string only contains US-ASCII characters
     //
     private static boolean isAllASCII(String input) {

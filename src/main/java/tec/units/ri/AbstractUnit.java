@@ -477,6 +477,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   public abstract boolean equals(Object that);
 
   public Map getProductUnits() {
-      throw new UnsupportedOperationException("Use getBaseUnits() instead");
+    throw new UnsupportedOperationException("Use getBaseUnits() instead");
   }
 }

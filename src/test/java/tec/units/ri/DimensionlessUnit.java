@@ -152,8 +152,8 @@ enum DimensionlessUnit implements Unit<Dimensionless>, DoubleFactorSupplier {
   public Unit<Dimensionless> shift(double v) {
     return this;
   }
-  
+
   public Map getProductUnits() {
-      throw new UnsupportedOperationException("Use getBaseUnits() instead");
+    throw new UnsupportedOperationException("Use getBaseUnits() instead");
   }
 }
