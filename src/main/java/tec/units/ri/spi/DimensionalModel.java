@@ -121,7 +121,7 @@ public abstract class DimensionalModel {
    * @return <code>this</code> or a rational product of fundamental dimension.
    */
   public Dimension getFundamentalDimension(Dimension dimension) {
-    Map<? extends Dimension, Integer> dimensions = dimension.getProductDimensions();
+    Map<? extends Dimension, Integer> dimensions = dimension.getBaseDimensions();
     if (dimensions == null)
       return dimension; // Fundamental dimension.
     // Dimensional Product.
@@ -144,7 +144,7 @@ public abstract class DimensionalModel {
    *           if an unsupported transform is attemted.
    */
   public UnitConverter getDimensionalTransform(Dimension dimension) {
-    Map<? extends Dimension, Integer> dimensions = dimension.getProductDimensions();
+    Map<? extends Dimension, Integer> dimensions = dimension.getBaseDimensions();
     if (dimensions == null)
       return AbstractConverter.IDENTITY; // Fundamental dimension.
     // Dimensional Product.
