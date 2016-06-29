@@ -45,7 +45,7 @@ import tec.uom.lib.common.function.DoubleFactorSupplier;
 
 /**
  * @author Werner Keil
- * @version 1.1
+ * @version 1.2
  */
 enum DimensionlessUnit implements Unit<Dimensionless>, DoubleFactorSupplier {
   ONE("", 1.0); // reference Unit
@@ -151,9 +151,5 @@ enum DimensionlessUnit implements Unit<Dimensionless>, DoubleFactorSupplier {
 
   public Unit<Dimensionless> shift(double v) {
     return this;
-  }
-
-  public Map getProductUnits() {
-    throw new UnsupportedOperationException("Use getBaseUnits() instead");
   }
 }

@@ -64,7 +64,7 @@ import tec.units.ri.unit.Units;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.9.6, June 21, 2016
+ * @version 0.9.7, June 30, 2016
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Comparable<Unit<Q>> {
 
@@ -475,8 +475,4 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
 
   @Override
   public abstract boolean equals(Object that);
-
-  public Map getProductUnits() {
-    throw new UnsupportedOperationException("Use getBaseUnits() instead");
-  }
 }
