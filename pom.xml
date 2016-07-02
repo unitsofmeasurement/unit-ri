@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>0.9-SNAPSHOT</version>
+		<version>0.9</version>
 	</parent>
 	<licenses>
 		<license>
@@ -35,7 +35,7 @@
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
 	<properties>
-		<jsr.version>0.9-SNAPSHOT</jsr.version>
+		<jsr.version>0.9</jsr.version>
 		<lib.version>0.9-SNAPSHOT</lib.version>
 		<jdkVersion>1.7</jdkVersion>
 		<project.build.javaVersion>${jdkVersion}</project.build.javaVersion>
@@ -475,11 +475,6 @@
 			<id>bintray-snapshot</id>
 			<name>libs-snapshot</name>
 			<url>http://oss.jfrog.org/artifactory/libs-snapshot</url>
-		</repository>
-		<repository>
-			<id>geotoolkit</id>
-			<name>Geotoolkit.org project</name>
-			<url>http://maven.geotoolkit.org</url>
 		</repository>
 	</repositories>
 
