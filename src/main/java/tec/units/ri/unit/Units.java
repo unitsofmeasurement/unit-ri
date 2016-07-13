@@ -98,7 +98,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * 
    * @deprecated consider moving it to {@link AbstractUnit} again for static constant usage reasons.
    */
-  public static final Unit<Dimensionless> ONE = addUnit(new ProductUnit<Dimensionless>(), Dimensionless.class);
+  static final Unit<Dimensionless> ONE = addUnit(new ProductUnit<Dimensionless>(), Dimensionless.class);
 
   // //////////////
   // BASE UNITS //
@@ -170,19 +170,19 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * The SI unit for plane angle quantities (standard name <code>rad</code>). One radian is the angle between two radii of a circle such that the
    * length of the arc between them is equal to the radius.
    */
-  public static final Unit<Angle> RADIAN = addUnit(new AlternateUnit<Angle>(ONE, "rad"), Angle.class);
+  public static final Unit<Angle> RADIAN = addUnit(new AlternateUnit<Angle>(AbstractUnit.ONE, "rad"), Angle.class);
 
   /**
    * The SI unit for solid angle quantities (standard name <code>sr</code>). One steradian is the solid angle subtended at the center of a sphere by
    * an area on the surface of the sphere that is equal to the radius squared. The total solid angle of a sphere is 4*Pi steradians.
    */
-  public static final Unit<SolidAngle> STERADIAN = addUnit(new AlternateUnit<SolidAngle>(ONE, "sr"), SolidAngle.class);
+  public static final Unit<SolidAngle> STERADIAN = addUnit(new AlternateUnit<SolidAngle>(AbstractUnit.ONE, "sr"), SolidAngle.class);
 
   /**
    * The SI unit for frequency (standard name <code>Hz</code>). A unit of frequency equal to one cycle per second. After Heinrich Rudolf Hertz
    * (1857-1894), German physicist who was the first to produce radio waves artificially.
    */
-  public static final Unit<Frequency> HERTZ = addUnit(new AlternateUnit<Frequency>(ONE.divide(SECOND), "Hz"), Frequency.class);
+  public static final Unit<Frequency> HERTZ = addUnit(new AlternateUnit<Frequency>(AbstractUnit.ONE.divide(SECOND), "Hz"), Frequency.class);
 
   /**
    * The SI unit for force (standard name <code>N</code>). One newton is the force required to give a mass of 1 kilogram an Force of 1 metre per
@@ -276,7 +276,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * The SI unit for activity of a radionuclide (standard name <code>Bq</code> ). One becquerel is the radiation caused by one disintegration per
    * second. It is named after the French physicist, Antoine-Henri Becquerel (1852-1908).
    */
-  public static final Unit<Radioactivity> BECQUEREL = addUnit(new AlternateUnit<Radioactivity>(ONE.divide(SECOND), "Bq"), Radioactivity.class);
+  public static final Unit<Radioactivity> BECQUEREL = addUnit(new AlternateUnit<Radioactivity>(AbstractUnit.ONE.divide(SECOND), "Bq"), Radioactivity.class);
 
   /**
    * The SI unit for absorbed dose, specific energy (imparted), kerma (standard name <code>Gy</code>). One gray is equal to the dose of one joule of
@@ -346,7 +346,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   /**
    * A dimensionless unit accepted for use with SI units (standard name <code>%</code>).
    */
-  public static final Unit<Dimensionless> PERCENT = new TransformedUnit<Dimensionless>(ONE, new RationalConverter(1, 100));
+  public static final Unit<Dimensionless> PERCENT = new TransformedUnit<Dimensionless>(AbstractUnit.ONE, new RationalConverter(1, 100));
 
   /**
    * A volume unit accepted for use with SI units (standard name <code>l</code>).

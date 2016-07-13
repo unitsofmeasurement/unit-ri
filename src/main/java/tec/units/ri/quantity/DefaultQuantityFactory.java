@@ -40,6 +40,7 @@ import javax.measure.quantity.*;
 import javax.measure.spi.QuantityFactory;
 
 import tec.units.ri.AbstractQuantity;
+import tec.units.ri.AbstractUnit;
 
 /**
  * The default factory implementation. This factory provides a default implementation for every {@link AbstractQuantity} sub-type.
@@ -56,7 +57,7 @@ import tec.units.ri.AbstractQuantity;
  * @author <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.8, $Date: 2015-11-23 $
+ * @version 0.9, $Date: 2016-07-14 $
  */
 public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends AbstractQuantityFactory<Q> {
   /**
@@ -85,7 +86,7 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends Abstrac
   @SuppressWarnings("rawtypes")
   static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<Class, Unit>();
   static {
-    CLASS_TO_METRIC_UNIT.put(Dimensionless.class, ONE);
+    CLASS_TO_METRIC_UNIT.put(Dimensionless.class, AbstractUnit.ONE);
     CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
     CLASS_TO_METRIC_UNIT.put(LuminousIntensity.class, CANDELA);
     CLASS_TO_METRIC_UNIT.put(Temperature.class, KELVIN);

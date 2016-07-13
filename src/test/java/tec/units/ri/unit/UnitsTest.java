@@ -77,7 +77,7 @@ public class UnitsTest {
   @Before
   public void setUp() throws Exception {
     // super.setUp();
-    one = Units.ONE;
+    one = AbstractUnit.ONE;
   }
 
   /*
@@ -134,11 +134,11 @@ public class UnitsTest {
 
   @Test
   public void testOne() {
-    Unit<Dimensionless> one = Units.ONE;
-    assertTrue(one.isCompatible(Units.ONE));
+    Unit<Dimensionless> one = AbstractUnit.ONE;
+    assertTrue(one.isCompatible(AbstractUnit.ONE));
     Unit<Dimensionless> two = one.shift(1);
-    assertTrue(two.isCompatible(Units.ONE));
-    assertFalse(two.equals(Units.ONE));
+    assertTrue(two.isCompatible(AbstractUnit.ONE));
+    assertFalse(two.equals(AbstractUnit.ONE));
   }
 
   /**
