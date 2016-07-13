@@ -276,7 +276,8 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * The SI unit for activity of a radionuclide (standard name <code>Bq</code> ). One becquerel is the radiation caused by one disintegration per
    * second. It is named after the French physicist, Antoine-Henri Becquerel (1852-1908).
    */
-  public static final Unit<Radioactivity> BECQUEREL = addUnit(new AlternateUnit<Radioactivity>(AbstractUnit.ONE.divide(SECOND), "Bq"), Radioactivity.class);
+  public static final Unit<Radioactivity> BECQUEREL = addUnit(new AlternateUnit<Radioactivity>(AbstractUnit.ONE.divide(SECOND), "Bq"),
+      Radioactivity.class);
 
   /**
    * The SI unit for absorbed dose, specific energy (imparted), kerma (standard name <code>Gy</code>). One gray is equal to the dose of one joule of

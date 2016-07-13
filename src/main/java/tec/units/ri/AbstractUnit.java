@@ -75,7 +75,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
 
   /**
    * Holds the dimensionless unit <code>ONE</code>.
-   * @see <a href="https://en.wikipedia.org/wiki/Natural_units#Choosing_constants_to_normalize"> Wikipedia: Natural Units - Choosing constants to normalize</a>
+   * 
+   * @see <a href="https://en.wikipedia.org/wiki/Natural_units#Choosing_constants_to_normalize"> Wikipedia: Natural Units - Choosing constants to
+   *      normalize</a>
    */
   public static final Unit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
 
