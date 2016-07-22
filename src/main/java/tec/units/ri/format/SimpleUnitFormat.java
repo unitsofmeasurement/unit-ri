@@ -73,7 +73,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.8, June 24, 2016
+ * @version 0.9, July 23, 2016
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   /**
@@ -895,15 +895,19 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
   static {
     for (int i = 0; i < SI_UNITS.length; i++) {
-      for (int j = 0; j < PREFIXES.length; j++) {
-        Unit<?> si = SI_UNITS[i];
-        Unit<?> u = si.transform(CONVERTERS[j]);
-        String symbol = (si instanceof BaseUnit) ? ((BaseUnit<?>) si).getSymbol() : ((AlternateUnit<?>) si).getSymbol();
-        DEFAULT.label(u, PREFIXES[j] + symbol);
-        if (PREFIXES[j] == "µ") {
-          ASCII.label(u, "micro"); // + symbol);
-        }
-      }
+	Unit<?> si = SI_UNITS[i];
+	String symbol = (si instanceof BaseUnit) ? ((BaseUnit<?>) si).getSymbol() : ((AlternateUnit<?>) si).getSymbol();
+	DEFAULT.label(si, symbol);
+//	ASCII.label(si, symbol); // TODO substitute symbols like "Ohm"
+	for (int j = 0; j < PREFIXES.length; j++) {
+//	    Unit<?> si = SI_UNITS[i];
+	    Unit<?> u = si.transform(CONVERTERS[j]);
+	    String symbol2 = (si instanceof BaseUnit) ? ((BaseUnit<?>) si).getSymbol() : ((AlternateUnit<?>) si).getSymbol();
+	    DEFAULT.label(u, PREFIXES[j] + symbol2);
+	    if (PREFIXES[j] == "µ") {
+		ASCII.label(u, "micro"); // + symbol);
+	    }
+	}
     }
     // Special case for KILOGRAM.
     DEFAULT.label(Units.GRAM, "g");
@@ -962,5 +966,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     ASCII.label(MetricPrefix.DECI(LITRE), "dL");
     DEFAULT.label(Units.NEWTON, "N");
     ASCII.label(Units.NEWTON, "N");
+//    DEFAULT.label(Units.VOLT, "V");
+//    ASCII.label(Units.VOLT, "V");
   }
 }
