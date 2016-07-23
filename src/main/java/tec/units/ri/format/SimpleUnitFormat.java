@@ -959,12 +959,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		    .getSymbol() : ((AlternateUnit<?>) si).getSymbol();
 	    DEFAULT.label(si, symbol);
 	    if (isAllASCII(symbol)) ASCII.label(si, symbol);
-	    // ASCII.label(si, symbol); // TODO substitute symbols like "Ohm"
 	    for (int j = 0; j < PREFIXES.length; j++) {
-		// Unit<?> si = SI_UNITS[i];
 		Unit<?> u = si.transform(CONVERTERS[j]);
-		// String symbol2 = (si instanceof BaseUnit) ? ((BaseUnit<?>)
-		// si).getSymbol() : ((AlternateUnit<?>) si).getSymbol();
 		DEFAULT.label(u, PREFIXES[j] + symbol);
 		if (PREFIXES[j] == "µ") {
 		    ASCII.label(u, "micro"); // + symbol);
