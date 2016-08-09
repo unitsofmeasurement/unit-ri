@@ -47,7 +47,7 @@ import javax.measure.spi.SystemOfUnits;
  * </p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, $Date: 2015-11-23 $
+ * @version 1.0, August 9, 2016
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
   protected static final Logger logger = Logger.getLogger(AbstractSystemOfUnits.class.getName());
