@@ -36,6 +36,10 @@ import javax.measure.Quantity;
 /**
  * Comparator to sort by natural order, looking both the unit and the value.
  * 
+ * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
+ * @author <a href="mailto:otaviopolianasantana@gmail.com">Otavio Santana</a>
+ * @version 1.0
+ * 
  * @return <b>Given:</b>
  *         <p>
  *         Quantity<Time> day = Quantities.getQuantity(1, Units.DAY);
