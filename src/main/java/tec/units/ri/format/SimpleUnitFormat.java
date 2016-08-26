@@ -73,12 +73,12 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 1.0, August 9, 2016
+ * @version 1.0.1, August 26, 2016
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   /**
-     * 
-     */
+    * 
+    */
   // private static final long serialVersionUID = 4149424034841739785L;
 
   /**
@@ -102,10 +102,10 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   private static final ASCIIFormat ASCII = new ASCIIFormat();
 
   /**
-   * Returns the unit format for the default locale (format used by {@link AbstractUnit#parse(CharSequence) AbstractUnit.parse(CharSequence)} and
+   * Returns the default unit format (format used by {@link AbstractUnit#parse(CharSequence) AbstractUnit.parse(CharSequence)} and
    * {@link Unit#toString() Unit.toString()}).
    * 
-   * @return the default unit format (locale sensitive).
+   * @return the default unit format.
    */
   public static SimpleUnitFormat getInstance() {
     return getInstance(Flavor.Default);
