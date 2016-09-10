@@ -63,5 +63,5 @@ public enum UnitStyle {
    * @see Unit#getSymbol()
    * @see UnitFormat#label()
    */
-  LABEL_AND_SYMBOL
+  SYMBOL_AND_LABEL
 }

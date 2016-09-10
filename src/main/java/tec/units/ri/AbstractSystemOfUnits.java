@@ -43,6 +43,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.spi.SystemOfUnits;
 
+import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.format.UnitStyle;
 
 /**
@@ -167,7 +168,24 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
           return (U) aUnit;
         }
         break;
+      case SYMBOL_AND_LABEL:
+        if (text != null && unit instanceof AbstractUnit) {
+          AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
+          aUnit.setSymbol(text);
+          units.add(aUnit);
+          SimpleUnitFormat.getInstance().label(aUnit, text);
+          return (U) aUnit;
+        } else {
+          // label in any case, returning below
+          SimpleUnitFormat.getInstance().label(unit, text);
+        }
+        break;
+      case LABEL:
+        SimpleUnitFormat.getInstance().label(unit, text);
+        break;
       default:
+        logger.log(Level.FINEST, "Unknown style " + style + "; unit " + unit + " can't be rendered with '" + text + "'.");
+        break;
     }
     units.add(unit);
     return unit;
