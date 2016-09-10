@@ -29,6 +29,8 @@
  */
 package tec.units.ri;
 
+import static tec.units.ri.format.UnitStyle.NAME;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -41,13 +43,15 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.spi.SystemOfUnits;
 
+import tec.units.ri.format.UnitStyle;
+
 /**
  * <p>
  * An abstract base class for unit systems.
  * </p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, August 9, 2016
+ * @version 1.0.1, September 10, 2016
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
   protected static final Logger logger = Logger.getLogger(AbstractSystemOfUnits.class.getName());
@@ -134,6 +138,42 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
   }
 
   /**
+   * Adds a new unit to the collection with a text.
+   * 
+   * @param unit
+   *          the unit being added.
+   * @param text
+   *          the text for the unit.
+   * @param style
+   *          the UnitStyle to apply for the given text
+   * @return <code>unit</code>.
+   */
+  @SuppressWarnings("unchecked")
+  protected <U extends Unit<?>> U addUnit(U unit, String text, UnitStyle style) {
+    switch (style) {
+      case NAME:
+        if (text != null && unit instanceof AbstractUnit) {
+          AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
+          aUnit.setName(text);
+          units.add(aUnit);
+          return (U) aUnit;
+        }
+        break;
+      case SYMBOL:
+        if (text != null && unit instanceof AbstractUnit) {
+          AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
+          aUnit.setSymbol(text);
+          units.add(aUnit);
+          return (U) aUnit;
+        }
+        break;
+      default:
+    }
+    units.add(unit);
+    return unit;
+  }
+
+  /**
    * Adds a new named unit to the collection.
    * 
    * @param unit
@@ -142,16 +182,8 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
    *          the name of the unit.
    * @return <code>unit</code>.
    */
-  @SuppressWarnings("unchecked")
   protected <U extends Unit<?>> U addUnit(U unit, String name) {
-    if (name != null && unit instanceof AbstractUnit) {
-      AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
-      aUnit.setName(name);
-      units.add(aUnit);
-      return (U) aUnit;
-    }
-    units.add(unit);
-    return unit;
+    return addUnit(unit, name, NAME);
   }
 
   protected static class Helper {
