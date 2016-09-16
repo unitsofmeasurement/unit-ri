@@ -106,7 +106,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
    */
   // private double maximum;
 
-  public NumberQuantity(Number number, Unit<Q> unit) {
+  protected NumberQuantity(Number number, Unit<Q> unit) {
     super(unit);
     value = number;
     isExact = false;
