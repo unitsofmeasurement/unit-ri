@@ -88,14 +88,14 @@ public class NumberQuantityTest {
   public void doubleValueTest() {
     NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(3), Units.DAY);
     double hours = day.doubleValue(Units.HOUR);
-    assertEquals(0.125, hours, 0);
+    assertEquals(72, hours, 0);
   }
 
   @Test
   public void intValueTest() {
     NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(3), Units.DAY);
     int hours = day.intValue(Units.HOUR);
-    assertEquals(0, hours, 0);
+    assertEquals(72, hours, 0);
   }
 
   @Test

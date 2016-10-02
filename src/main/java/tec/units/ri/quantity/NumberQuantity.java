@@ -45,7 +45,7 @@ import tec.units.ri.format.QuantityFormat;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *          The type of the quantity.
- * @version 0.13, $Date: 2016-06-21 $
+ * @version 1.0, $Date: 2016-10-02 $
  */
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -121,7 +121,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
   public double doubleValue(Unit<Q> unit) {
     Unit<Q> myUnit = getUnit();
     try {
-      UnitConverter converter = unit.getConverterTo(myUnit);
+      UnitConverter converter = myUnit.getConverterTo(unit);
       return converter.convert(getValue().doubleValue());
     } catch (UnconvertibleException e) {
       throw e;

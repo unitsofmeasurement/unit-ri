@@ -30,12 +30,17 @@
 package tec.units.ri.quantity;
 
 import static org.junit.Assert.*;
+import static tec.units.ri.unit.MetricPrefix.CENTI;
 import static tec.units.ri.unit.Units.*;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.*;
+import javax.measure.spi.QuantityFactory;
+import javax.measure.spi.ServiceProvider;
 
 import org.junit.Test;
+
+import tec.units.ri.unit.Units;
 
 /**
  * @author Werner Keil
@@ -45,7 +50,8 @@ public class QuantityFactoryTest {
 
   @Test
   public void testLength() {
-    Quantity<Length> l = DefaultQuantityFactory.getInstance(Length.class).create(23.5, METRE); // 23.0 km
+    Quantity<Length> l = DefaultQuantityFactory.getInstance(Length.class).create(23.5, METRE); // 23.0
+    // km
     assertEquals(23.5d, l.getValue());
     assertEquals(METRE, l.getUnit());
     assertEquals("m", l.getUnit().getSymbol());
@@ -53,7 +59,8 @@ public class QuantityFactoryTest {
 
   @Test
   public void testMass() {
-    Quantity<Mass> m = DefaultQuantityFactory.getInstance(Mass.class).create(10, KILOGRAM); // 10 kg
+    Quantity<Mass> m = DefaultQuantityFactory.getInstance(Mass.class).create(10, KILOGRAM); // 10
+    // kg
     assertEquals(10, m.getValue());
     assertEquals(KILOGRAM, m.getUnit());
     assertEquals("kg", m.getUnit().getSymbol());
@@ -62,7 +69,8 @@ public class QuantityFactoryTest {
 
   @Test
   public void testTime() {
-    Quantity<Time> t = DefaultQuantityFactory.getInstance(Time.class).create(40, MINUTE); // 40 min
+    Quantity<Time> t = DefaultQuantityFactory.getInstance(Time.class).create(40, MINUTE); // 40
+    // min
     assertEquals(40, t.getValue());
     assertEquals(MINUTE, t.getUnit());
     // assertNull(t.getUnit().getSymbol());
@@ -71,4 +79,13 @@ public class QuantityFactoryTest {
     assertEquals("40 min", t.toString());
   }
 
+  @Test
+  public void testToCenti() {
+    ServiceProvider provider = ServiceProvider.current();
+    QuantityFactory<Length> lengthFactory = provider.getQuantityFactory(Length.class);
+
+    Quantity<Length> q = lengthFactory.create(3, Units.METRE);
+    // System.out.println("q = " + q + ", q.to(CENTI(METRE)) = " + q.to(CENTI(Units.METRE)));
+    assertEquals(Double.valueOf(300), q.to(CENTI(Units.METRE)).getValue());
+  }
 }
