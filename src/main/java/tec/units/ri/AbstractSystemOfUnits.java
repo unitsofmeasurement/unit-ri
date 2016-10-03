@@ -119,7 +119,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
    *          the symbol of the unit.
    * @return <code>unit</code>.
    */
-  @SuppressWarnings("unchecked")
+/*  @SuppressWarnings("unchecked")
   private <U extends Unit<?>> U addUnit(U unit, String name, String symbol, UnitStyle style) {
     switch (style) {
       case NAME:
@@ -154,7 +154,8 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
     units.add(unit);
     return unit;
   }
-
+*/
+  
   /**
    * Adds a new named unit to the collection.
    * 
@@ -166,9 +167,9 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
    *          the symbol of the unit.
    * @return <code>unit</code>.
    */
-  private <U extends Unit<?>> U addUnit(U unit, String name, String symbol) {
-    return addUnit(unit, name, symbol, SYMBOL);
-  }
+//  private <U extends Unit<?>> U addUnit(U unit, String name, String symbol) {
+//    return addUnit(unit, name, symbol, SYMBOL);
+//  }
 
   /**
    * Adds a new unit to the collection with a text.
@@ -181,7 +182,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
    *          the UnitStyle to apply for the given text
    * @return <code>unit</code>.
    */
-  @SuppressWarnings("unchecked")
+/*  @SuppressWarnings("unchecked") 
   private <U extends Unit<?>> U addUnit(U unit, String text, UnitStyle style) {
     switch (style) {
       case NAME:
@@ -222,7 +223,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
     units.add(unit);
     return unit;
   }
-
+*/
   /**
    * Adds a new named unit to the collection.
    * 
@@ -232,9 +233,9 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
    *          the name of the unit.
    * @return <code>unit</code>.
    */
-  private <U extends Unit<?>> U addUnit(U unit, String name) {
-    return addUnit(unit, name, NAME);
-  }
+//  private <U extends Unit<?>> U addUnit(U unit, String name) {
+//    return addUnit(unit, name, NAME);
+//  }
 
   protected static class Helper {
     static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, Dimension dimension) {
