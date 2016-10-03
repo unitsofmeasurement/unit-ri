@@ -470,7 +470,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    *          if the string should be used as a label or not
    * @return <code>unit</code>.
    */
-  private static <U extends Unit<?>> U addUnit(U unit, String text, boolean isLabel) {
-    return addUnit(unit, null, text, isLabel);
+  private static <U extends Unit<?>> U addUnit(U unit, String text) {
+    return addUnit(unit, null, text, true);
   }
 }
