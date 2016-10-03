@@ -57,7 +57,7 @@ import tec.units.ri.AbstractUnit;
  * @author <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.9, $Date: 2016-07-14 $
+ * @version 1.0, $Date: 2016-10-04 $
  */
 public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends AbstractQuantityFactory<Q> {
   /**
@@ -121,11 +121,8 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends Abstrac
     CLASS_TO_METRIC_UNIT.put(Volume.class, CUBIC_METRE);
   }
 
-  @SuppressWarnings("unchecked")
   public Quantity<Q> create(Number value, Unit<Q> unit) {
-    // public <N extends Number, U extends Unit<Q>> Q create(N value, U
-    // unit) {
-    return (Q) new NumberQuantity<Q>(value, unit);
+	 return Quantities.getQuantity(value, unit);
   }
 
   public Unit<Q> getSystemUnit() {

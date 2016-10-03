@@ -41,7 +41,7 @@ import javax.measure.spi.QuantityFactory;
 import tec.units.ri.AbstractQuantity;
 
 /**
- * A factory producing simple quantities instances (tuples {@link Number}/ {@link Unit}).
+ * An abstract factory producing simple quantities instances (tuples {@link Number}/ {@link Unit}).
  *
  * For example:<br/>
  * <code>
@@ -55,7 +55,7 @@ import tec.units.ri.AbstractQuantity;
  * @author <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.8, $Date: 2015-11-23 $
+ * @version 1.0, $Date: 2016-10-04 $
  */
 abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q> {
 
