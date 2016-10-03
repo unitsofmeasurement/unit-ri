@@ -29,8 +29,6 @@
  */
 package tec.units.ri;
 
-import static tec.units.ri.format.UnitStyle.*;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -43,16 +41,13 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.spi.SystemOfUnits;
 
-import tec.units.ri.format.SimpleUnitFormat;
-import tec.units.ri.format.UnitStyle;
-
 /**
  * <p>
  * An abstract base class for unit systems.
  * </p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.2, October 3, 2016
+ * @version 1.0.3, October 4, 2016
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
   protected static final Logger logger = Logger.getLogger(AbstractSystemOfUnits.class.getName());
