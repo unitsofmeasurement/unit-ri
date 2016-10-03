@@ -166,7 +166,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
    *          the symbol of the unit.
    * @return <code>unit</code>.
    */
-  protected <U extends Unit<?>> U addUnit(U unit, String name, String symbol) {
+  private <U extends Unit<?>> U addUnit(U unit, String name, String symbol) {
     return addUnit(unit, name, symbol, SYMBOL);
   }
 
@@ -232,7 +232,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
    *          the name of the unit.
    * @return <code>unit</code>.
    */
-  protected <U extends Unit<?>> U addUnit(U unit, String name) {
+  private <U extends Unit<?>> U addUnit(U unit, String name) {
     return addUnit(unit, name, NAME);
   }
 
