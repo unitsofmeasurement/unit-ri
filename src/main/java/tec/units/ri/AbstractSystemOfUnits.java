@@ -31,7 +31,6 @@ package tec.units.ri;
 
 import static tec.units.ri.format.UnitStyle.*;
 
-import java.awt.Label;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -53,7 +52,7 @@ import tec.units.ri.format.UnitStyle;
  * </p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.1, September 10, 2016
+ * @version 1.0.2, October 3, 2016
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
   protected static final Logger logger = Logger.getLogger(AbstractSystemOfUnits.class.getName());
@@ -121,7 +120,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
    * @return <code>unit</code>.
    */
   @SuppressWarnings("unchecked")
-  protected <U extends Unit<?>> U addUnit(U unit, String name, String symbol, UnitStyle style) {
+  private <U extends Unit<?>> U addUnit(U unit, String name, String symbol, UnitStyle style) {
     switch (style) {
       case NAME:
       case SYMBOL:
@@ -183,7 +182,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
    * @return <code>unit</code>.
    */
   @SuppressWarnings("unchecked")
-  protected <U extends Unit<?>> U addUnit(U unit, String text, UnitStyle style) {
+  private <U extends Unit<?>> U addUnit(U unit, String text, UnitStyle style) {
     switch (style) {
       case NAME:
         if (text != null && unit instanceof AbstractUnit) {
@@ -260,16 +259,8 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
      *          the name of the unit.
      * @return <code>unit</code>.
      */
-    @SuppressWarnings("unchecked")
     public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String name) {
-      if (name != null && unit instanceof AbstractUnit) {
-        AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
-        aUnit.setName(name);
-        units.add(aUnit);
-        return (U) aUnit;
-      }
-      units.add(unit);
-      return unit;
+      return addUnit(units, unit, name, null);
     }
 
     /**
@@ -284,7 +275,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
      * @return <code>unit</code>.
      */
     @SuppressWarnings("unchecked")
-    public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String name, String symbol) {
+    public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, final String name, final String symbol) {
       if (name != null && symbol != null && unit instanceof AbstractUnit) {
         AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
         aUnit.setName(name);
@@ -295,6 +286,12 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
       if (name != null && unit instanceof AbstractUnit) {
         AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
         aUnit.setName(name);
+        units.add(aUnit);
+        return (U) aUnit;
+      }
+      if (symbol != null && unit instanceof AbstractUnit) {
+        AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
+        aUnit.setSymbol(symbol);
         units.add(aUnit);
         return (U) aUnit;
       }
