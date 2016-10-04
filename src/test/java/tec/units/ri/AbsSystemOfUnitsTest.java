@@ -37,6 +37,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.measure.Unit;
+import javax.measure.quantity.Mass;
+import javax.measure.quantity.Volume;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -72,5 +75,19 @@ public class AbsSystemOfUnitsTest {
     Set<? extends Unit<?>> units = system.getUnits(QuantityDimension.LENGTH);
     assertNotNull(units);
     assertEquals(1, units.size());
+  }
+  
+  @Test public void testAddUnitBoth() {
+	  Unit<Mass> mass = TestUnits.TONNE;
+	  assertEquals("Tonne", mass.getName());
+	  assertEquals("t", mass.getSymbol());
+	  assertEquals("t", mass.toString());
+  }
+  
+  @Test public void testAddUnitBothSeparately() {
+	  Unit<Volume> v = TestUnits.SCHOPPEN_BAYERN;
+	  assertEquals("Schoppen Bayern", v.getName());
+	  assertEquals("sb", v.getSymbol());
+	  assertEquals("sch", v.toString());
   }
 }

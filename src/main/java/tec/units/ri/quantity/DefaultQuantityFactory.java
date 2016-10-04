@@ -122,7 +122,7 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends Abstrac
   }
 
   public Quantity<Q> create(Number value, Unit<Q> unit) {
-	 return Quantities.getQuantity(value, unit);
+    return Quantities.getQuantity(value, unit);
   }
 
   public Unit<Q> getSystemUnit() {

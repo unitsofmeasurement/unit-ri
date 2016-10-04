@@ -42,6 +42,7 @@ import javax.measure.quantity.Volume;
 
 import tec.units.ri.AbstractSystemOfUnits;
 import tec.units.ri.format.SimpleUnitFormat;
+import tec.units.ri.format.UnitStyle;
 import tec.units.ri.function.MultiplyConverter;
 import tec.units.ri.function.RationalConverter;
 import tec.units.ri.unit.TransformedUnit;
@@ -94,7 +95,7 @@ final class TestUnits extends AbstractSystemOfUnits {
    * A mass unit accepted for use with SI units (standard name <code>t</code> ).
    */
   public static final Unit<Mass> TONNE = AbstractSystemOfUnits.Helper.addUnit(INSTANCE.units, new TransformedUnit<Mass>(KILOGRAM,
-      new RationalConverter(1000, 1)), "Tonne", "t");
+      new RationalConverter(1000, 1)), "Tonne", "t", UnitStyle.SYMBOL_AND_LABEL);
 
   /**
    * An energy unit accepted for use with SI units. The electronvolt is the kinetic energy acquired by an electron passing through a potential

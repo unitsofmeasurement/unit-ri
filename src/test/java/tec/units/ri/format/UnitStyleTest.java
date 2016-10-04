@@ -41,8 +41,8 @@ public class UnitStyleTest {
 
   @Test
   public void testStyles() {
-	  for (UnitStyle style : UnitStyle.values()) {
-		  assertNotNull(style.name());
-	  }
+    for (UnitStyle style : UnitStyle.values()) {
+      assertNotNull(style.name());
+    }
   }
 }
