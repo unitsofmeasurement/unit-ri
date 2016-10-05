@@ -39,6 +39,7 @@ import javax.measure.quantity.Time;
 import org.junit.Assert;
 import org.junit.Test;
 
+import tec.units.ri.AbstractQuantity;
 import tec.units.ri.quantity.Quantities;
 import tec.units.ri.unit.Units;
 
@@ -101,5 +102,11 @@ public class FloatQuantityTest {
     Quantity<Time> dayResult = hour.to(Units.DAY);
     Assert.assertEquals(dayResult.getValue(), day.getValue());
     Assert.assertEquals(dayResult.getUnit(), day.getUnit());
+  }
+
+  @Test
+  public void inverseTest() {
+    AbstractQuantity<Length> l = NumberQuantity.of(Float.valueOf(10f).floatValue(), Units.METRE);
+    assertEquals(Float.valueOf(1f / 10f), l.inverse().getValue());
   }
 }

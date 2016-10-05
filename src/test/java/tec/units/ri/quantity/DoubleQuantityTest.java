@@ -33,11 +33,13 @@ import static org.junit.Assert.assertEquals;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.ElectricResistance;
+import javax.measure.quantity.Length;
 import javax.measure.quantity.Time;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import tec.units.ri.AbstractQuantity;
 import tec.units.ri.quantity.Quantities;
 import tec.units.ri.unit.Units;
 
@@ -100,5 +102,11 @@ public class DoubleQuantityTest {
     Quantity<Time> dayResult = hour.to(Units.DAY);
     Assert.assertEquals(dayResult.getValue(), day.getValue());
     Assert.assertEquals(dayResult.getUnit(), day.getUnit());
+  }
+
+  @Test
+  public void inverseTest() {
+    AbstractQuantity<Length> l = NumberQuantity.of(Double.valueOf(10d).doubleValue(), Units.METRE);
+    assertEquals(Double.valueOf(1 / 10d), l.inverse().getValue());
   }
 }

@@ -85,6 +85,13 @@ public class NumberQuantityTest {
   }
 
   @Test
+  public void multiplyQuantityByNumTest() {
+    NumberQuantity<ElectricResistance> quantity1 = new NumberQuantity<ElectricResistance>(Double.valueOf(3).doubleValue(), Units.OHM);
+    Quantity<?> result = quantity1.multiply(Double.valueOf(2));
+    assertEquals(Double.valueOf(6L), result.getValue());
+  }
+
+  @Test
   public void doubleValueTest() {
     NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(3), Units.DAY);
     double hours = day.doubleValue(Units.HOUR);
@@ -127,5 +134,18 @@ public class NumberQuantityTest {
     Quantity<?> l = NumberQuantity.parse("10 m");
     assertEquals(Double.valueOf(10d), l.getValue());
     assertEquals(Units.METRE, l.getUnit());
+  }
+
+  @Test
+  public void equalsTest() {
+    NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(3), Units.DAY);
+    NumberQuantity<Time> day2 = new NumberQuantity<Time>(Double.valueOf(3), Units.DAY);
+    assertEquals(day, day2);
+  }
+
+  @Test
+  public void inverseTestTime() {
+    NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(10), Units.DAY);
+    assertEquals(Double.valueOf(1 / 10d), day.inverse().getValue());
   }
 }

@@ -50,6 +50,7 @@ public class IntegerQuantityTest {
     assertEquals(Double.valueOf(1.5d), result.getValue());
   }
 
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   @Test
   public void addTest() {
     IntegerQuantity quantity1 = new IntegerQuantity(Long.valueOf(1).intValue(), Units.OHM);

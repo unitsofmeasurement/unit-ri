@@ -45,13 +45,13 @@ import tec.units.ri.format.QuantityFormat;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *          The type of the quantity.
- * @version 1.0, $Date: 2016-10-02 $
+ * @version 1.0.1, $Date: 2016-10-06 $
  */
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
   /**
-   * 
-   */
+	 * 
+	 */
   // private static final long serialVersionUID = 7312161895652321241L;
 
   private final Number value;
@@ -172,7 +172,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
   }
 
   public Quantity<Q> multiply(Number that) {
-    return (NumberQuantity<Q>) NumberQuantity.of((getValue().doubleValue() * that.doubleValue()), getUnit());
+    return (AbstractQuantity<Q>) NumberQuantity.of((getValue().doubleValue() * that.doubleValue()), getUnit());
   }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -185,11 +185,17 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
     return NumberQuantity.of(getValue().doubleValue() / that.doubleValue(), getUnit());
   }
 
+  @SuppressWarnings("unchecked")
   public Quantity<Q> inverse() {
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    final Quantity<Q> m = new NumberQuantity(1d / getValue().doubleValue(), getUnit().inverse());
-    return m;
+    return (AbstractQuantity<Q>) NumberQuantity.of(1d / value.doubleValue(), getUnit().inverse());
   }
+
+  // public Quantity<Q> inverse() {
+  // @SuppressWarnings({ "rawtypes", "unchecked" })
+  // final Quantity<Q> m = new NumberQuantity(1d / getValue().doubleValue(),
+  // getUnit().inverse());
+  // return m;
+  // }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public Quantity<Q> subtract(Quantity<Q> that) {
