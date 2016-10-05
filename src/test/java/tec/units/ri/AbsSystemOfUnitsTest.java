@@ -76,18 +76,20 @@ public class AbsSystemOfUnitsTest {
     assertNotNull(units);
     assertEquals(1, units.size());
   }
-  
-  @Test public void testAddUnitBoth() {
-	  Unit<Mass> mass = TestUnits.TONNE;
-	  assertEquals("Tonne", mass.getName());
-	  assertEquals("t", mass.getSymbol());
-	  assertEquals("t", mass.toString());
+
+  @Test
+  public void testAddUnitBoth() {
+    Unit<Mass> mass = TestUnits.TONNE;
+    assertEquals("Tonne", mass.getName());
+    assertEquals("t", mass.getSymbol());
+    assertEquals("t", mass.toString());
   }
-  
-  @Test public void testAddUnitBothSeparately() {
-	  Unit<Volume> v = TestUnits.SCHOPPEN_BAYERN;
-	  assertEquals("Schoppen Bayern", v.getName());
-	  assertEquals("sb", v.getSymbol());
-	  assertEquals("sch", v.toString());
+
+  @Test
+  public void testAddUnitBothSeparately() {
+    Unit<Volume> v = TestUnits.SCHOPPEN_BAYERN;
+    assertEquals("Schoppen Bayern", v.getName());
+    assertEquals("sb", v.getSymbol());
+    assertEquals("sch", v.toString());
   }
 }

@@ -29,11 +29,10 @@
  */
 package tec.units.ri.quantity;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tec.units.ri.quantity.NumberQuantity;
+import tec.units.ri.unit.Units;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Pressure;
@@ -44,129 +43,21 @@ import static tec.units.ri.unit.Units.PASCAL;
 /**
  *
  * @author Werner Keil
- * @version 0.2
+ * @version 0.3
  */
 public class QuantitiesTest {
-
-  public QuantitiesTest() {
-  }
-
-  @BeforeClass
-  public static void setUpClass() throws Exception {
-  }
-
-  @AfterClass
-  public static void tearDownClass() throws Exception {
-  }
 
   @Test
   public void testOf() {
     Quantity<Pressure> pressure = NumberQuantity.of((double) 1, PASCAL);
-    assertEquals(PASCAL, pressure.getUnit()); // TODO: Problem with kg...
+    assertEquals(PASCAL, pressure.getUnit());
   }
 
   @Test
-  public void testAnnotate() {
+  public void testParse() {
+    Quantity<?> result = Quantities.getQuantity("1 kg");
+    assertNotNull(result);
+    assertEquals(1.0, result.getValue());
+    assertEquals(Units.KILOGRAM, result.getUnit());
   }
-
-  @Test
-  public void testGetAnnotation() {
-  }
-
-  @Test
-  public void testGetUnannotatedUnit() {
-  }
-
-  @Test
-  public void testIsSystemUnit() {
-  }
-
-  @Test
-  public void testToString() {
-  }
-
-  @Test
-  public void testGetConverterToSystemUnit() {
-  }
-
-  @Test
-  public void testGetSymbol() {
-  }
-
-  @Test
-  public void testGetSystemUnit() {
-  }
-
-  @Test
-  public void testGetProductUnits() {
-  }
-
-  @Test
-  public void testGetDimension() {
-  }
-
-  @Test
-  public void testIsCompatible() {
-  }
-
-  @Test
-  public void testAsType() {
-  }
-
-  @Test
-  public void testGetConverterTo() {
-  }
-
-  @Test
-  public void testGetConverterToAny() {
-  }
-
-  @Test
-  public void testAlternate() {
-  }
-
-  @Test
-  public void testTransform() {
-  }
-
-  @Test
-  public void testAdd() {
-  }
-
-  @Test
-  public void testMultiply_double() {
-  }
-
-  @Test
-  public void testMultiply_ErrorType() {
-  }
-
-  @Test
-  public void testInverse() {
-  }
-
-  @Test
-  public void testDivide_double() {
-  }
-
-  @Test
-  public void testDivide_ErrorType() {
-  }
-
-  @Test
-  public void testRoot() {
-  }
-
-  @Test
-  public void testPow() {
-  }
-
-  @Test
-  public void testHashCode() {
-  }
-
-  @Test
-  public void testEquals() {
-  }
-
 }

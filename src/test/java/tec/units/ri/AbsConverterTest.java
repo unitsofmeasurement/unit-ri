@@ -27,57 +27,46 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.units.ri.function;
+package tec.units.ri;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class AddConverterTest {
+public class AbsConverterTest {
 
-  private AddConverter converter;
+  private AbstractConverter converter;
 
   @Before
   public void setUp() throws Exception {
-    converter = new AddConverter(10);
+    converter = AbstractConverter.IDENTITY;
   }
 
   @Test
   public void testEqualityOfTwoConverter() {
-    AddConverter addConverter = new AddConverter(10);
-    assertEquals(addConverter, converter);
-    assertNotNull(addConverter);
+    assertEquals(AbstractConverter.IDENTITY, converter);
+    assertNotNull(converter);
   }
 
   @Test
   public void inverseTest() {
-    assertEquals(new AddConverter(-10), converter.inverse());
+    assertEquals(AbstractConverter.IDENTITY.inverse(), converter.inverse());
   }
 
   @Test
   public void linearTest() {
-    assertFalse(converter.isLinear());
-  }
-
-  @Test
-  public void offsetTest() {
-    assertEquals(10d, converter.getOffset(), 0);
-  }
-
-  @Test
-  public void valueTest() {
-    assertEquals(Double.valueOf(10), converter.getValue());
+    assertTrue(converter.isLinear());
   }
 
   @Test
   public void toStringTest() {
-    assertEquals("AddConverter(10.0)", converter.toString());
+    assertEquals("tec.units.ri.AbstractConverter$Identity@0", converter.toString());
   }
 
   @Test
   public void identityTest() {
-    assertFalse(converter.isIdentity());
+    assertTrue(converter.isIdentity());
   }
 
   @Test

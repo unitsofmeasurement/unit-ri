@@ -41,13 +41,13 @@ import tec.uom.lib.common.function.ValueSupplier;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author Werner Keil
- * @version 0.4, Dec 28, 2015
+ * @version 1.0, Oct 5, 2016
  */
 public final class AddConverter extends AbstractConverter implements ValueSupplier<Double> {
 
   /**
-	 * 
-	 */
+   * 
+   */
   // private static final long serialVersionUID = -2981335308595652284L;
   /**
    * Holds the offset.
@@ -94,12 +94,6 @@ public final class AddConverter extends AbstractConverter implements ValueSuppli
   public double convert(double value) {
     return value + offset;
   }
-
-  // @Override
-  // public BigDecimal convert(BigDecimal value, MathContext ctx) throws
-  // ArithmeticException {
-  // return value.add(BigDecimal.valueOf(offset), ctx);
-  // }
 
   @Override
   public final String toString() {
