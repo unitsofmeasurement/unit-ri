@@ -143,7 +143,7 @@ import java.util.Hashtable;
  * Number formats are generally not synchronized. It is recommended to create separate format instances for each thread. If multiple threads access a
  * format concurrently, it must be synchronized externally.
  * 
- * @version $Revision: 0.4 $
+ * @version $Revision: 0.5 $
  * @see DecimalFormat
  * @author Mark Davis
  * @author Helena Shih
@@ -672,6 +672,7 @@ public abstract class NumberFormat extends Format {
    */
   public static class Field extends Format.Field {
     // table of all instances in this class, used by readResolve
+    @SuppressWarnings("rawtypes")
     private static final Hashtable instanceMap = new Hashtable(11);
 
     /**

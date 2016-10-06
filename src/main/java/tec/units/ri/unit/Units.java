@@ -79,7 +79,8 @@ import tec.uom.lib.common.function.Nameable;
  * This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, October 3, 2016
+ * @version 1.0.1, October 6, 2016
+ * @since 1.0
  */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
@@ -99,7 +100,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * 
    * @deprecated consider moving it to {@link AbstractUnit} again for static constant usage reasons.
    */
-  static final Unit<Dimensionless> ONE = addUnit(new ProductUnit<Dimensionless>(), Dimensionless.class);
+  // static final Unit<Dimensionless> ONE = addUnit(new ProductUnit<Dimensionless>(), Dimensionless.class);
 
   // //////////////
   // BASE UNITS //

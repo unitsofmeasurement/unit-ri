@@ -51,7 +51,8 @@ import tec.uom.lib.common.function.Parser;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.4, $Date: 2016-04-20 $
+ * @version 1.0, $Date: 2016-04-20 $
+ * @since 1.0
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {

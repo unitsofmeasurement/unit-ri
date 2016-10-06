@@ -44,7 +44,8 @@ import tec.uom.lib.common.function.QuantitySupplier;
  * 
  * @see {@link QuantitySupplier}
  * @author werner
- * @version 0.5
+ * @version 1.0
+ * @since 1.0
  * @param <Q>
  */
 public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>, Comparable<Measurement<Q>> {

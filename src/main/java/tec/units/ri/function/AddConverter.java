@@ -42,6 +42,7 @@ import tec.uom.lib.common.function.ValueSupplier;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author Werner Keil
  * @version 1.0, Oct 5, 2016
+ * @since 1.0
  */
 public final class AddConverter extends AbstractConverter implements ValueSupplier<Double> {
 

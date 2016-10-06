@@ -75,7 +75,7 @@ import tec.units.ri.quantity.QuantityDimension;
  * @see <a href="http://en.wikipedia.org/wiki/Dimensional_analysis">Wikipedia: Dimensional Analysis</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.7, $Date: 2015-12-28 $
+ * @version 1.0, $Date: 2016-10-06 $
  */
 public abstract class DimensionalModel {
 
@@ -100,7 +100,6 @@ public abstract class DimensionalModel {
    *          the new current model.
    * @see #current
    */
-  // TODO should we rename to init() like in API Bootstrap?
   protected static void setCurrent(DimensionalModel model) {
     currentModel = model;
   }

@@ -41,7 +41,8 @@ import tec.uom.lib.common.function.MinimumSupplier;
  *          The value of the range.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.9, December 28, 2015
+ * @version 1.0, October 6, 2016
+ * @since 1.0
  */
 public abstract class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T> {
   // TODO do we keep null for min and max to represent infinity?

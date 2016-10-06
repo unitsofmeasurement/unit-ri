@@ -43,7 +43,8 @@ import tec.units.ri.spi.Range;
  *          The value of the range.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, December 17, 2014
+ * @version 1.0, October 6, 2016
+ * @since 1.0
  * @see <a href="http://www.botts-inc.com/SensorML_1.0.1/schemaBrowser/SensorML_QuantityRange.html"> SensorML: QuantityRange</a>
  */
 public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {

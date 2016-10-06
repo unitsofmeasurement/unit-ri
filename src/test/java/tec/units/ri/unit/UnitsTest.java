@@ -215,10 +215,10 @@ public class UnitsTest {
 
   @Test
   public void testKiloIsAThousand() {
-    // FIXME: Need to find the org.hamcrest assertion libs
-    Quantity<Power> w2000 = Quantities.getQuantity(2000, WATT);
+    Quantity<Power> w2000 = Quantities.getQuantity(2000.0, WATT);
     Quantity<Power> kW2 = Quantities.getQuantity(2, MetricPrefix.KILO(WATT));
-    // assertThat(w2000, is(kW2));
+    // assertThat(w2000, is(kW2)); XXX: Need to find the org.hamcrest assertion libs
+    assertEquals(w2000, kW2.to(WATT));
   }
 
   @Test
@@ -228,8 +228,7 @@ public class UnitsTest {
 
   @Test
   public void testParse() {
-    assertEquals(KILO(GRAM), AbstractUnit.parse("kg")); // TODO: Problem
-    // with kg...?
+    assertEquals(KILO(GRAM), AbstractUnit.parse("kg"));
   }
 
   @Test

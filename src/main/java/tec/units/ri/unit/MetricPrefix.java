@@ -60,7 +60,8 @@ import tec.uom.lib.common.function.UnitConverterSupplier;
  * @see <a href="http://en.wikipedia.org/wiki/Metric_prefix">Wikipedia: Metric Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.9.1, $Date: 2016-03-17 $
+ * @version 1.0, $Date: 2016-10-06 $
+ * @since 1.0
  */
 public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
   YOTTA("Y", RationalConverter.of(1000000000000000000000000d, 1d)), ZETTA("Z", RationalConverter.of(1000000000000000000000d, 1d)), EXA("E",

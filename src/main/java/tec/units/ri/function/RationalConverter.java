@@ -45,7 +45,8 @@ import tec.uom.lib.common.function.ValueSupplier;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8, April 3, 2016
+ * @version 1.0, October 6, 2016
+ * @since 1.0
  */
 public final class RationalConverter extends AbstractConverter implements ValueSupplier<Double> {
 

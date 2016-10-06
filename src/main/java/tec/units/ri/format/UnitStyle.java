@@ -33,6 +33,7 @@ package tec.units.ri.format;
  * Defines the different variants of unit formatting.
  * 
  * @author Werner Keil
+ * @version 1.0
  * @since 1.0.1
  */
 public enum UnitStyle {

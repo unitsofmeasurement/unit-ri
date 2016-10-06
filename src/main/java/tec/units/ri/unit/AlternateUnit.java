@@ -45,7 +45,8 @@ import tec.units.ri.AbstractUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, May 22, 2014
+ * @version 1.0, October 6, 2016
+ * @since 1.0
  */
 public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 

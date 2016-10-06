@@ -135,24 +135,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
    *          the UnitStyle to apply for the given text
    * @return <code>unit</code>.
    */
-  /*
-   * @SuppressWarnings("unchecked") private <U extends Unit<?>> U addUnit(U
-   * unit, String text, UnitStyle style) { switch (style) { case NAME: if
-   * (text != null && unit instanceof AbstractUnit) { AbstractUnit<?> aUnit =
-   * (AbstractUnit<?>) unit; aUnit.setName(text); units.add(aUnit); return (U)
-   * aUnit; } break; case SYMBOL: if (text != null && unit instanceof
-   * AbstractUnit) { AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
-   * aUnit.setSymbol(text); units.add(aUnit); return (U) aUnit; } break; case
-   * SYMBOL_AND_LABEL: if (text != null && unit instanceof AbstractUnit) {
-   * AbstractUnit<?> aUnit = (AbstractUnit<?>) unit; aUnit.setSymbol(text);
-   * units.add(aUnit); SimpleUnitFormat.getInstance().label(aUnit, text);
-   * return (U) aUnit; } else { // label in any case, returning below
-   * SimpleUnitFormat.getInstance().label(unit, text); } break; case LABEL:
-   * SimpleUnitFormat.getInstance().label(unit, text); break; default:
-   * logger.log(Level.FINEST, "Unknown style " + style + "; unit " + unit +
-   * " can't be rendered with '" + text + "'."); break; } units.add(unit);
-   * return unit; }
-   */
+
   /**
    * Adds a new named unit to the collection.
    * 
@@ -190,7 +173,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
      * @return <code>unit</code>.
      */
     public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String name) {
-      return addUnit(units, unit, name, null);
+      return addUnit(units, unit, name, NAME);
     }
 
     /**
@@ -202,6 +185,8 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
      *          the name of the unit.
      * @param name
      *          the symbol of the unit.
+     * @param style
+     *          style of the unit.
      * @return <code>unit</code>.
      */
     @SuppressWarnings("unchecked")
@@ -237,6 +222,61 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
       }
       if (LABEL.equals(style) || SYMBOL_AND_LABEL.equals(style)) {
         SimpleUnitFormat.getInstance().label(unit, symbol);
+      }
+      units.add(unit);
+      return unit;
+    }
+
+    /**
+     * Adds a new labeled unit to the set.
+     * 
+     * @param units
+     *          the set to add to.
+     * 
+     * @param unit
+     *          the unit being added.
+     * @param text
+     *          the text for the unit.
+     * @param style
+     *          style of the unit.
+     * @return <code>unit</code>.
+     */
+    @SuppressWarnings("unchecked")
+    public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String text, UnitStyle style) {
+      switch (style) {
+        case NAME:
+          if (text != null && unit instanceof AbstractUnit) {
+            AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
+            aUnit.setName(text);
+            units.add(aUnit);
+            return (U) aUnit;
+          }
+          break;
+        case SYMBOL:
+          if (text != null && unit instanceof AbstractUnit) {
+            AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
+            aUnit.setSymbol(text);
+            units.add(aUnit);
+            return (U) aUnit;
+          }
+          break;
+        case SYMBOL_AND_LABEL:
+          if (text != null && unit instanceof AbstractUnit) {
+            AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
+            aUnit.setSymbol(text);
+            units.add(aUnit);
+            SimpleUnitFormat.getInstance().label(aUnit, text);
+            return (U) aUnit;
+          } else { // label in any case, returning below
+            SimpleUnitFormat.getInstance().label(unit, text);
+          }
+          break;
+        case LABEL:
+          SimpleUnitFormat.getInstance().label(unit, text);
+          break;
+        default:
+          logger.log(Level.FINEST, "Unknown style " + style + "; unit " + unit + " can't be rendered with '" + text + "'.");
+          break;
       }
       units.add(unit);
       return unit;

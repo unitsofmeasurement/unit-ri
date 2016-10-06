@@ -102,7 +102,7 @@ final class TestUnits extends AbstractSystemOfUnits {
    * difference of 1 V in vacuum. The value must be obtained by experiment, and is therefore not known exactly.
    */
   public static final Unit<Energy> ELECTRON_VOLT = AbstractSystemOfUnits.Helper.addUnit(INSTANCE.units, new TransformedUnit<Energy>(JOULE,
-      new MultiplyConverter(1.602176487E-19)), "Electron Volt", null);
+      new MultiplyConverter(1.602176487E-19)), "Electron Volt", null, UnitStyle.NAME);
   // CODATA 2006 - http://physics.nist.gov/cuu/Constants/codata.pdf
 
   // //////////////////////////////////////////////////////////////////////////

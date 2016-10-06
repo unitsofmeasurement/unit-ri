@@ -73,7 +73,8 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 1.0.1, August 26, 2016
+ * @version 1.0.2, October 6, 2016
+ * @since 1.0
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   /**

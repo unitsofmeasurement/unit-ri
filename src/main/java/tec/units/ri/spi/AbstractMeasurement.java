@@ -41,7 +41,8 @@ import javax.measure.Quantity;
  * </p>
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.1, $Date: 2014-11-29 $
+ * @version 1.0, $Date: 2016-10-06 $
+ * @since 1.0
  */
 abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement<Q> {
 

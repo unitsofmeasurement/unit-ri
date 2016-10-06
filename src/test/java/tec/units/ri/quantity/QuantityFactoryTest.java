@@ -49,7 +49,7 @@ import tec.units.ri.unit.Units;
 public class QuantityFactoryTest {
 
   @Test
-  public void testLength() {
+  public void testLengthCreation() {
     Quantity<Length> l = DefaultQuantityFactory.getInstance(Length.class).create(23.5, METRE); // 23.0
     // km
     assertEquals(23.5d, l.getValue());
@@ -74,18 +74,28 @@ public class QuantityFactoryTest {
     assertEquals(40, t.getValue());
     assertEquals(MINUTE, t.getUnit());
     // assertNull(t.getUnit().getSymbol());
-    assertEquals("min", t.getUnit().getSymbol()); // FIXME this should be
-    // "min", tweak for TransformedUnit
+    assertEquals("min", t.getUnit().getSymbol());
     assertEquals("40 min", t.toString());
   }
 
   @Test
-  public void testToCenti() {
+  public void testLengthToCenti() {
     ServiceProvider provider = ServiceProvider.current();
     QuantityFactory<Length> lengthFactory = provider.getQuantityFactory(Length.class);
 
     Quantity<Length> q = lengthFactory.create(3, Units.METRE);
-    // System.out.println("q = " + q + ", q.to(CENTI(METRE)) = " + q.to(CENTI(Units.METRE)));
+    // System.out.println("q = " + q + ", q.to(CENTI(METRE)) = " +
+    // q.to(CENTI(Units.METRE)));
     assertEquals(Double.valueOf(300), q.to(CENTI(Units.METRE)).getValue());
+  }
+
+  @Test
+  public void testLengthOperations() {
+    QuantityFactory<Length> quantFactory = ServiceProvider.current().getQuantityFactory(Length.class);
+    Quantity<Length> firstQuant = quantFactory.create(10.0, Units.METRE);
+    Quantity<Length> secondQuant = quantFactory.create(20.0, Units.METRE);
+    Quantity<Length> result = secondQuant.divide(10.0).add(firstQuant);
+    // System.out.println(result);
+    assertEquals(quantFactory.create(12.0, Units.METRE), result);
   }
 }

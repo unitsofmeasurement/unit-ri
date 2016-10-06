@@ -40,7 +40,8 @@ import javax.measure.UnitConverter;
  * </p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.1, $Date: 2016-01-17 $
+ * @version 1.0, $Date: 2016-10-06 $
+ * @since 1.0
  */
 public abstract class AbstractConverter implements UnitConverter {
 

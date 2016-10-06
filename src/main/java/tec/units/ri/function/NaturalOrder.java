@@ -38,7 +38,7 @@ import javax.measure.Quantity;
  * 
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @author <a href="mailto:otaviopolianasantana@gmail.com">Otavio Santana</a>
- * @version 1.0
+ * @version 1.0.1
  * 
  * @return <b>Given:</b>
  *         <p>
@@ -54,6 +54,7 @@ import javax.measure.Quantity;
  *         Quantity<Time> seconds = Quantities.getQuantity(100, Units.HOUR);
  *         </p>
  *         will return: seconds, minutes, hours, day
+ * @since 1.0
  */
 public class NaturalOrder<T extends Quantity<T>> implements Comparator<Quantity<T>> {
 

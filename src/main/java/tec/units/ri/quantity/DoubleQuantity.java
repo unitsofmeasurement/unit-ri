@@ -44,7 +44,8 @@ import tec.units.ri.format.QuantityFormat;
  * @author Otavio de Santana
  * @param <Q>
  *          The type of the quantity.
- * @version 0.5, $Date: 2016-05-23 $
+ * @version 1.0, $Date: 2016-10-06 $
+ * @since 1.0
  */
 final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 

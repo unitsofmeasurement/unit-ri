@@ -40,7 +40,8 @@ import tec.units.ri.format.QuantityFormat;
  * 
  * @author werner
  * @author otaviojava
- * @version 0.6, April 18, 2016
+ * @version 1.0, October 6, 2016
+ * @since 1.0
  */
 public final class Quantities {
   /**

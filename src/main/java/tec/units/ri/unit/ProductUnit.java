@@ -57,7 +57,7 @@ import tec.uom.lib.common.function.UnitSupplier;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.5, July 11, 2015
+ * @version 1.0, Oct 6, 2016
  */
 public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
@@ -110,9 +110,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
    */
   private ProductUnit(Element[] elements) {
     this.elements = elements;
-    this.symbol = elements[0].getUnit().getSymbol(); // FIXME this should
-    // contain ALL
-    // elements
+    this.symbol = elements[0].getUnit().getSymbol(); // TODO should contain ALL elements
   }
 
   /**
@@ -357,7 +355,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
         if (dimension != null) {
           dimension = dimension.multiply(d);
         } else {
-          dimension = d; // FIXME hackaround
+          dimension = d; // XXX hackaround
         }
       }
     }

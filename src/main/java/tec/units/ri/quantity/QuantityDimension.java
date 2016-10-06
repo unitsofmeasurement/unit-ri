@@ -61,7 +61,8 @@ import java.util.logging.Logger;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, $Date: 2016-06-21 $
+ * @version 1.0, $Date: 2016-10-06 $
+ * @since 1.0
  */
 public final class QuantityDimension implements Dimension {
   private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());

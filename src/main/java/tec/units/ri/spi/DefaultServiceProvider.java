@@ -55,7 +55,8 @@ import tec.uom.lib.common.function.IntPrioritySupplier;
  * This class extends the {@link ServiceProvider} class and hereby uses the JDK {@link java.util.ServiceLoader} to load the services required.
  *
  * @author Werner Keil
- * @version 0.9
+ * @version 1.0
+ * @since 1.0
  */
 public class DefaultServiceProvider extends ServiceProvider {
   /** List of services loaded, per class. */

@@ -40,7 +40,8 @@ import tec.uom.lib.common.function.ValueSupplier;
  * @see <a href="http://en.wikipedia.org/wiki/Pi"> Wikipedia: Pi</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, December 28, 2015
+ * @version 1.0, October 6, 2016
+ * @since 1.0
  */
 public final class PiMultiplierConverter extends AbstractConverter implements ValueSupplier<String> {
 

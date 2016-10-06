@@ -54,10 +54,11 @@ import tec.units.ri.AbstractUnit;
  * @param <Q>
  *          The type of the quantity.
  *
- * @author <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
+ * @author <a href="mailto:martin.desruisseaux@geomatys.com">Martin Desruisseaux</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @version 1.0, $Date: 2016-10-04 $
+ * @since 1.0
  */
 public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends AbstractQuantityFactory<Q> {
   /**
