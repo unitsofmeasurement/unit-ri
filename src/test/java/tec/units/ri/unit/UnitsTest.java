@@ -121,15 +121,10 @@ public class UnitsTest {
   /**
    * Test method for {@link javax.measure.Unit#asType(java.lang.Class)}.
    */
-  @Test
+  @Test(expected = ClassCastException.class)
   public void testAsType() {
     one.asType(Dimensionless.class);
-    try {
-      METRE.asType(Dimensionless.class);
-      fail("Should have raised ClassCastException");
-    } catch (ClassCastException e) {
-      assertTrue(true);
-    }
+    METRE.asType(Mass.class);
   }
 
   @Test
@@ -217,7 +212,8 @@ public class UnitsTest {
   public void testKiloIsAThousand() {
     Quantity<Power> w2000 = Quantities.getQuantity(2000.0, WATT);
     Quantity<Power> kW2 = Quantities.getQuantity(2, MetricPrefix.KILO(WATT));
-    // assertThat(w2000, is(kW2)); XXX: Need to find the org.hamcrest assertion libs
+    // assertThat(w2000, is(kW2)); XXX: Need to find the org.hamcrest
+    // assertion libs
     assertEquals(w2000, kW2.to(WATT));
   }
 

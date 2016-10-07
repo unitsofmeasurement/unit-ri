@@ -29,6 +29,8 @@
  */
 package tec.units.ri;
 
+import static tec.units.ri.format.UnitStyle.LABEL;
+import static tec.units.ri.format.UnitStyle.SYMBOL_AND_LABEL;
 import static tec.units.ri.unit.Units.JOULE;
 import static tec.units.ri.unit.Units.LITRE;
 import static tec.units.ri.unit.Units.METRE;
@@ -56,7 +58,7 @@ import tec.units.ri.unit.TransformedUnit;
  * @noextend This class is not intended to be extended by clients.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, $Date: 2016-05-29 $
+ * @version 0.3, $Date: 2016-10-07 $
  * @see <a href="http://www.bier-entdecken.de/chubel/">Ich hätte gern ein Chübel</a>
  * @see <a href="https://en.wikipedia.org/wiki/Ma%C3%9F">Wikipedia: Maß</a>
  */
@@ -80,7 +82,17 @@ final class TestUnits extends AbstractSystemOfUnits {
   /**
    * A unit of length equal to <code>0.3048 m</code> (standard name <code>ft</code>).
    */
-  public static final Unit<Length> FOOT = AbstractSystemOfUnits.Helper.addUnit(INSTANCE.units, METRE.multiply(3048).divide(10000), "Foot");
+  static final Unit<Length> FOOT = AbstractSystemOfUnits.Helper.addUnit(INSTANCE.units, METRE.multiply(3048).divide(10000), "Foot");
+
+  /**
+   * A unit of length equal to <code>0.9144 m</code> (standard name <code>yd</code>).
+   */
+  static final Unit<Length> YARD = AbstractSystemOfUnits.Helper.addUnit(INSTANCE.units, FOOT.multiply(3), "yd", LABEL);
+
+  /**
+   * A unit of length equal to <code>0.0254 m</code> (standard name <code>in</code>).
+   */
+  static final Unit<Length> INCH = AbstractSystemOfUnits.Helper.addUnit(INSTANCE.units, FOOT.divide(12), "Inch", "in", SYMBOL_AND_LABEL);
 
   /**
    * Ein Schoppen – zuerst ein niederdeutsches Wort, das ins Französische entlehnt und von dort ins Oberdeutsche rückentlehnt worden und verwandt mit

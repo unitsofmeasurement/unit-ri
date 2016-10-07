@@ -31,12 +31,14 @@ package tec.units.ri;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.measure.Unit;
+import javax.measure.quantity.Length;
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Volume;
 
@@ -48,15 +50,13 @@ import tec.units.ri.quantity.QuantityDimension;
 public class AbsSystemOfUnitsTest {
 
   private static AbstractSystemOfUnits system;
+  // Get Logger for "tec.units.ri".
   private static Logger logger = Logger.getLogger("tec.units.ri");
 
   @BeforeClass
   public static void setUp() {
-    // Get Logger for "tec.units.ri".
-
     // logger would log activities
     // with level FINEST and above.
-
     logger.setLevel(Level.FINEST);
     system = TestUnits.INSTANCE;
   }
@@ -67,14 +67,22 @@ public class AbsSystemOfUnitsTest {
     assertEquals("tec.units.ri.TestUnits", system.getClass().getName());
     assertEquals("Test units of measurement", system.getName());
     assertNotNull(system.getUnits());
-    assertEquals(4, system.getUnits().size());
+    assertEquals(6, system.getUnits().size());
   }
 
   @Test
   public void testGetUnitsForDimension() {
     Set<? extends Unit<?>> units = system.getUnits(QuantityDimension.LENGTH);
     assertNotNull(units);
-    assertEquals(1, units.size());
+    assertEquals(3, units.size());
+  }
+
+  @Test
+  public void testAddUnitLabel() {
+    Unit<Length> l = TestUnits.YARD;
+    assertNull(l.getName());
+    assertNull(l.getSymbol());
+    assertEquals("yd", l.toString());
   }
 
   @Test

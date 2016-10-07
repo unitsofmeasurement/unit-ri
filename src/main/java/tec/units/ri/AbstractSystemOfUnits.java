@@ -52,7 +52,7 @@ import tec.units.ri.format.UnitStyle;
  * </p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.3, October 4, 2016
+ * @version 1.0.4, October 7, 2016
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
   protected static final Logger logger = Logger.getLogger(AbstractSystemOfUnits.class.getName());
@@ -109,22 +109,6 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
   }
 
   /**
-   * Adds a new named unit to the collection.
-   * 
-   * @param unit
-   *          the unit being added.
-   * @param name
-   *          the name of the unit.
-   * @param name
-   *          the symbol of the unit.
-   * @return <code>unit</code>.
-   */
-  // private <U extends Unit<?>> U addUnit(U unit, String name, String symbol)
-  // {
-  // return addUnit(unit, name, symbol, SYMBOL);
-  // }
-
-  /**
    * Adds a new unit to the collection with a text.
    * 
    * @param unit
@@ -144,11 +128,8 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
    * @param name
    *          the name of the unit.
    * @return <code>unit</code>.
+   * @since 1.0
    */
-  // private <U extends Unit<?>> U addUnit(U unit, String name) {
-  // return addUnit(unit, name, NAME);
-  // }
-
   protected static final class Helper {
     static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, Dimension dimension) {
       if (dimension != null) {
@@ -171,6 +152,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
      * @param name
      *          the name of the unit.
      * @return <code>unit</code>.
+     * @since 1.0
      */
     public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String name) {
       return addUnit(units, unit, name, NAME);
@@ -188,6 +170,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
      * @param style
      *          style of the unit.
      * @return <code>unit</code>.
+     * @since 1.0.1
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, final String name, final String symbol, UnitStyle style) {
@@ -240,6 +223,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
      * @param style
      *          style of the unit.
      * @return <code>unit</code>.
+     * @since 1.0.1
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String text, UnitStyle style) {
@@ -292,6 +276,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
      * @param name
      *          the symbol of the unit.
      * @return <code>unit</code>.
+     * @since 1.0
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, final String name, final String symbol) {
