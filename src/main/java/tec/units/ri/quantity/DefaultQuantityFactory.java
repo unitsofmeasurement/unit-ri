@@ -157,7 +157,7 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends Abstrac
         // unsafe cast.
         throw new ClassCastException();
       factory = new DefaultQuantityFactory<Q>(type);
-      INSTANCES.put(type, factory);
+      setInstance(type, factory);
     }
     return factory;
   }

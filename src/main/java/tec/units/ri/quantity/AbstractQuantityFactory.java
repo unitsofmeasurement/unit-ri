@@ -38,8 +38,6 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.spi.QuantityFactory;
 
-import tec.units.ri.AbstractQuantity;
-
 /**
  * An abstract factory producing simple quantities instances (tuples {@link Number}/ {@link Unit}).
  *
@@ -55,7 +53,7 @@ import tec.units.ri.AbstractQuantity;
  * @author <a href="mailto:martin.desruisseaux@geomatys.com">Martin Desruisseaux</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 1.0.1, $Date: 2016-10-06 $
+ * @version 1.0.2, $Date: 2016-10-08 $
  * @since 1.0
  */
 abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q> {
@@ -80,8 +78,8 @@ abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements Quantit
    * @param factory
    *          the quantity factory
    */
-  protected static <Q extends Quantity<Q>> void setInstance(final Class<Q> type, AbstractQuantityFactory<Q> factory) {
-    if (!AbstractQuantity.class.isAssignableFrom(type))
+  protected static <Q extends Quantity<Q>> void setInstance(final Class<Q> type, QuantityFactory<Q> factory) {
+    if (!Quantity.class.isAssignableFrom(type))
       // This exception is not documented because it should never happen
       // if the
       // user don't try to trick the Java generic types system with unsafe
@@ -89,17 +87,4 @@ abstract class AbstractQuantityFactory<Q extends Quantity<Q>> implements Quantit
       throw new ClassCastException();
     INSTANCES.put(type, factory);
   }
-
-  /**
-   * Returns the quantity for the specified number stated in the specified unit.
-   *
-   * @param value
-   *          the numeric value stated in the specified unit
-   * @param unit
-   *          the unit
-   * @return the corresponding quantity
-   */
-  public abstract Quantity<Q> create(Number value, Unit<Q> unit);
-  // public abstract <N extends Number, U extends Unit<Q>> Q create(N number,
-  // U unit);
 }

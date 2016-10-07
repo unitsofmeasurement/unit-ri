@@ -68,7 +68,6 @@ import javax.measure.spi.SystemOfUnits;
 
 import tec.units.ri.AbstractSystemOfUnits;
 import tec.units.ri.AbstractUnit;
-import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.function.AddConverter;
 import tec.units.ri.function.RationalConverter;
 import tec.units.ri.quantity.QuantityDimension;
@@ -79,7 +78,7 @@ import tec.uom.lib.common.function.Nameable;
  * This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.1, October 6, 2016
+ * @version 1.0.2, October 8, 2016
  * @since 1.0
  */
 public class Units extends AbstractSystemOfUnits implements Nameable {
@@ -94,13 +93,6 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   }
 
   private static final Units INSTANCE = new Units();
-
-  /**
-   * Holds the dimensionless unit <code>ONE</code>.
-   * 
-   * @deprecated consider moving it to {@link AbstractUnit} again for static constant usage reasons.
-   */
-  // static final Unit<Dimensionless> ONE = addUnit(new ProductUnit<Dimensionless>(), Dimensionless.class);
 
   // //////////////
   // BASE UNITS //
@@ -448,6 +440,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    *          if the string should be used as a label or not
    * @return <code>unit</code>.
    */
+  /*
   private static <U extends Unit<?>> U addUnit(U unit, String name, String text, boolean isLabel) {
     if (isLabel) {
       SimpleUnitFormat.getInstance().label(unit, text);
@@ -459,7 +452,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
     }
     return unit;
   }
-
+  */
   /**
    * Adds a new unit not mapped to any specified quantity type and puts a text as symbol or label.
    *
@@ -471,7 +464,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    *          if the string should be used as a label or not
    * @return <code>unit</code>.
    */
-  private static <U extends Unit<?>> U addUnit(U unit, String text) {
-    return addUnit(unit, null, text, true);
-  }
+  // private static <U extends Unit<?>> U addUnit(U unit, String text) {
+  // return addUnit(unit, null, text, true);
+  // }
 }
