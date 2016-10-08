@@ -377,12 +377,12 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * A time unit accepted for use with SI units (standard name <code>y</code> ).
    */
   public static final Unit<Time> YEAR = addUnit(Units.DAY.multiply(365.2525));
-
   // using Gregorian year instead of Julian (365.25)
 
   static {
-    // We have to add the Dimensionless unit ONE here, too.
+    // have to add AbstractUnit.ONE as Dimensionless, too
     addUnit(AbstractUnit.ONE);
+    INSTANCE.quantityToUnit.put(Dimensionless.class, AbstractUnit.ONE);
   }
 
   // ///////////////////
