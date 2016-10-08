@@ -157,8 +157,6 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * The SI derived unit for mass quantities (standard name <code>g</code>). The base unit for mass quantity is {@link #KILOGRAM}.
    */
   public static final Unit<Mass> GRAM = addUnit(KILOGRAM.divide(1000));
-  // addUnit(new AlternateUnit<Mass>(
-  // KILOGRAM.divide(1000), "g"), Mass.class);
 
   /**
    * The SI unit for plane angle quantities (standard name <code>rad</code>). One radian is the angle between two radii of a circle such that the
@@ -381,6 +379,10 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   public static final Unit<Time> YEAR = addUnit(Units.DAY.multiply(365.2525));
 
   // using Gregorian year instead of Julian (365.25)
+
+  static {
+    addUnit(AbstractUnit.ONE);
+  }
 
   // ///////////////////
   // Collection View //

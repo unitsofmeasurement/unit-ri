@@ -39,13 +39,15 @@ import javax.measure.spi.SystemOfUnitsService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+/**
+ * @version 1.0
+ */
 public class SystemOfUnitsServiceTest {
 
   private static SystemOfUnitsService service;
 
   @BeforeClass
   public static void setUp() {
-    // service = Bootstrap.getService(SystemOfUnitsService.class);
     service = ServiceProvider.current().getSystemOfUnitsService();
   }
 
@@ -57,14 +59,6 @@ public class SystemOfUnitsServiceTest {
     assertEquals("tec.units.ri.unit.Units", system.getClass().getName());
     assertEquals("Units", system.getName());
     assertNotNull(system.getUnits());
-    // for (Unit<?> u : system.getUnits()) {
-    // System.out.println(u.toString());
-    // }
-    /*
-     * Set<? extends Unit<?>> units = system.getUnits(); List list =
-     * Arrays.asList((units.toArray())); Collections.sort(list); for (Object
-     * o : list) { System.out.println(o.toString()); }
-     */
-    assertEquals(38, system.getUnits().size());
+    assertEquals(39, system.getUnits().size());
   }
 }
