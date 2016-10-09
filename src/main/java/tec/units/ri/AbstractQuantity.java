@@ -288,9 +288,27 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
    * @see Unit#asType(Class)
    */
   @SuppressWarnings("unchecked")
-  public final <T extends Quantity<T>> AbstractQuantity<T> asType(Class<T> type) throws ClassCastException {
+  public final <T extends Quantity<T>> Quantity<T> asType(Class<T> type) throws ClassCastException {
     this.getUnit().asType(type); // Raises ClassCastException is dimension
     // mismatches.
-    return (AbstractQuantity<T>) this;
+    return (Quantity<T>) this;
+  }
+
+  /**
+   * Returns the quantity of unknown type corresponding to the specified representation. This method can be used to parse dimensionless quantities.<br/>
+   * <code>
+   *     Quantity<Dimensionless> proportion = AbstractQuantity.parse("0.234").asType(Dimensionless.class);
+   * </code>
+   *
+   * <p>
+   * Note: This method handles only {@link tec.units.ri.SimpleUnitFormat.UnitFormat#getStandard standard} unit format.
+   * </p>
+   *
+   * @param csq
+   *          the decimal value and its unit (if any) separated by space(s).
+   * @return <code>QuantityFormat.getInstance().parse(csq)</code>
+   */
+  public static Quantity<?> parse(CharSequence csq) {
+    return QuantityFormat.getInstance().parse(csq);
   }
 }

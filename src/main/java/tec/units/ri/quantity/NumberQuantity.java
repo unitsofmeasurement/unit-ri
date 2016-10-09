@@ -279,13 +279,11 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
    * Returns the decimal quantity of unknown type corresponding to the specified representation. This method can be used to parse dimensionless
    * quantities.<br/>
    * <code>
-   *     Quatity<Dimensionless> proportion = AbstractQuantity.of("0.234").asType(Dimensionless.class);
+   *     Quantity<Dimensionless> proportion = NumberQuantity.parse("0.234").asType(Dimensionless.class);
    * </code>
    *
    * <p>
-   * Note: This method handles only {@link tec.units.ri.SimpleUnitFormat.UnitFormat#getStandard standard} unit format (<a
-   * href="http://unitsofmeasure.org/">UCUM</a> based). Locale-sensitive quantity formatting and parsing are handled by the {@link MeasurementFormat}
-   * class and its subclasses.
+   * Note: This method handles only {@link tec.units.ri.SimpleUnitFormat.UnitFormat#getStandard standard} unit format.
    * </p>
    *
    * @param csq
