@@ -41,9 +41,9 @@ import javax.measure.spi.QuantityFactory;
 /**
  * An abstract factory producing simple quantities instances (tuples {@link Number}/ {@link Unit}).
  *
- * For example:<br/>
+ * For example:<br>
  * <code>
- *      Mass m = DefaultQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
+ *      Mass m = DefaultQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br>
  *      Time m = DefaultQuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
  * </code>
  * 

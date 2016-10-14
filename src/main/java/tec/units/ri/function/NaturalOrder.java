@@ -42,16 +42,16 @@ import javax.measure.Quantity;
  * 
  * @return <b>Given:</b>
  *         <p>
- *         Quantity<Time> day = Quantities.getQuantity(1, Units.DAY);
+ *         Quantity&lt;Time&gt; day = Quantities.getQuantity(1, Units.DAY);
  *         </p>
  *         <p>
- *         Quantity<Time> hours = Quantities.getQuantity(18, Units.HOUR);
+ *         Quantity&lt;Time&gt; hours = Quantities.getQuantity(18, Units.HOUR);
  *         </p>
  *         <p>
- *         Quantity<Time> minutes = Quantities.getQuantity(15, Units.HOUR);
+ *         Quantity&lt;Time&gt; minutes = Quantities.getQuantity(15, Units.HOUR);
  *         </p>
  *         <p>
- *         Quantity<Time> seconds = Quantities.getQuantity(100, Units.HOUR);
+ *         Quantity&lt;Time&gt; seconds = Quantities.getQuantity(100, Units.HOUR);
  *         </p>
  *         will return: seconds, minutes, hours, day
  * @since 1.0

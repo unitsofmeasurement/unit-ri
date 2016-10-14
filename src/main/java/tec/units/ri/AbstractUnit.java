@@ -140,7 +140,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   /**
    * Returns the unscaled standard (SI) unit from which this unit is derived.
    * 
-   * The SI unit can be be used to identify a quantity given the unit. For example:<code> static boolean isAngularVelocity(AbstractUnit<?> unit) {
+   * The SI unit can be be used to identify a quantity given the unit. For example:<code> static boolean isAngularVelocity(AbstractUnit&lt;?&gt; unit) {
    * return unit.toSystemUnit().equals(RADIAN.divide(SECOND)); }
    * assert(REVOLUTION.divide(MINUTE).isAngularVelocity()); // Returns true.
    * </code>
@@ -159,9 +159,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
 
   /**
    * Annotates the specified unit. Annotation does not change the unit semantic. Annotations are often written between curly braces behind units. For
-   * example: <code> Unit<Volume> PERCENT_VOL =
-   * Units.PERCENT.annotate("vol"); // "%{vol}" AbstractUnit<Mass> KG_TOTAL =
-   * Units.KILOGRAM.annotate("total"); // "kg{total}" AbstractUnit<Dimensionless>
+   * example: <code> Unit&lt;Volume&gt; PERCENT_VOL =
+   * Units.PERCENT.annotate("vol"); // "%{vol}" AbstractUnit&lt;Mass&gt; KG_TOTAL =
+   * Units.KILOGRAM.annotate("total"); // "kg{total}" AbstractUnit&lt;Dimensionless&gt;
    * RED_BLOOD_CELLS = ONE.annotate("RBC"); // "{RBC}" </code>
    *
    * Note: Annotations of system units are not considered themselves as system units.
@@ -181,7 +181,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
    * {@link SimpleUnitFormat}.
    *
    * <p>
-   * Note: The standard format supports dimensionless units.[code] AbstractUnit<Dimensionless> PERCENT =
+   * Note: The standard format supports dimensionless units.[code] AbstractUnit&lt;Dimensionless&gt; PERCENT =
    * AbstractUnit.parse("100").inverse().asType(Dimensionless.class); [/code]
    * </p>
    *
@@ -221,7 +221,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
 
   /**
    * Returns the system unit (unscaled SI unit) from which this unit is derived. They can be be used to identify a quantity given the unit. For
-   * example:[code] static boolean isAngularVelocity(AbstractUnit<?> unit) { return unit.getSystemUnit().equals(RADIAN.divide(SECOND)); }
+   * example:[code] static boolean isAngularVelocity(AbstractUnit&lt;?&gt; unit) { return unit.getSystemUnit().equals(RADIAN.divide(SECOND)); }
    * assert(REVOLUTION.divide(MINUTE).isAngularVelocity()); // Returns true. [/code]
    *
    * @return the unscaled metric unit from which this unit is derived.

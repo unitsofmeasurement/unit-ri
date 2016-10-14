@@ -277,9 +277,9 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
   /**
    * Returns the decimal quantity of unknown type corresponding to the specified representation. This method can be used to parse dimensionless
-   * quantities.<br/>
+   * quantities.<br>
    * <code>
-   *     Quantity<Dimensionless> proportion = NumberQuantity.parse("0.234").asType(Dimensionless.class);
+   *     Quantity&lt;Dimensionless&gt; proportion = NumberQuantity.parse("0.234").asType(Dimensionless.class);
    * </code>
    *
    * <p>

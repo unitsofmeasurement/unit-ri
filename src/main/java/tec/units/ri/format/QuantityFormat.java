@@ -114,7 +114,7 @@ public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
   /**
    * Convenience method equivalent to {@link #format(AbstractQuantity, Appendable)} except it does not raise an IOException.
    * 
-   * @param quantity
+   * @param q
    *          the quantity to format.
    * @param dest
    *          the appendable destination.
