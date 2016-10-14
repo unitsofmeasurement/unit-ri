@@ -45,10 +45,10 @@ import tec.units.ri.AbstractUnit;
 /**
  * The default factory implementation. This factory provides a default implementation for every {@link AbstractQuantity} sub-type.
  *
- * For example:<br/>
+ * For example:<br>
  * <code>
- *      Quantity<Mass> m = DefaultQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br>
- *      Quantity<Time> m = DefaultQuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
+ *      Quantity&lt;Mass&gt; m = DefaultQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br>
+ *      Quantity&lt;Time&gt; m = DefaultQuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
  * </code>
  * 
  * @param <Q>

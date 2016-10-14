@@ -52,9 +52,9 @@ public final class Quantities {
 
   /**
    * Returns the {@link #of(Number, javax.measure.Unit) numeric} quantity of unknown type corresponding to the specified representation. This method
-   * can be used to parse dimensionless quantities.<br/>
+   * can be used to parse dimensionless quantities.<br>
    * <code>
-   *     Quantity<Dimensionless> proportion = NumberQuantity.of("0.234").asType(Dimensionless.class);
+   *     Quantity&lt;Dimensionless&gt; proportion = NumberQuantity.of("0.234").asType(Dimensionless.class);
    * </code>
    *
    * <p>

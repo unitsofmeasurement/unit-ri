@@ -51,9 +51,9 @@ import java.util.logging.Logger;
  * <p>
  * The dimension associated to any given quantity are given by the published
  * {@link DimensionService} instances. For convenience, a static method
- * {@link QuantityDimension#getInstance(Class) aggregating the results of all
- * @link DimensionService} instances is provided.<br/>
- * <br/>
+ * {@link QuantityDimension#getInstance(Class)} aggregating the results of all
+ * {@link DimensionService} instances is provided.<br>
+ * <br>
  * <code>
  * QuantityDimension speedDimension = QuantityDimension.of(Speed.class);
  * </code>

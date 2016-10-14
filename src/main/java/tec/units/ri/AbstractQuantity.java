@@ -48,48 +48,47 @@ import tec.uom.lib.common.function.ValueSupplier;
  * 
  * <p>
  * <code>
- *         public static final Quantity<Velocity> C = NumberQuantity.parse("299792458 m/s").asType(Velocity.class);
+ *         public static final Quantity&lt;Velocity&gt; C = NumberQuantity.parse("299792458 m/s").asType(Velocity.class);
  *         // Speed of Light (exact).
  *    </code>
  * </p>
  * 
  * <p>
- * Quantities can be converted to different units.<br/>
+ * Quantities can be converted to different units.<br>
  * <code>
- *         Quantity<Velocity> milesPerHour = C.to(MILES_PER_HOUR); // Use double implementation (fast).
+ *         Quantity&lt;Velocity&gt; milesPerHour = C.to(MILES_PER_HOUR); // Use double implementation (fast).
  *         System.out.println(milesPerHour);
  * 
- *         > 670616629.3843951 m/h
+ *         &gt; 670616629.3843951 m/h
  *     </code>
  * </p>
  * 
  * <p>
- * Applications may sub-class {@link AbstractQuantity} for particular quantity types.<br/>
+ * Applications may sub-class {@link AbstractQuantity} for particular quantity types.<br>
  * <code>
- *         // Quantity of type Mass based on <code>double</code> primitive types.<br>
- * public class MassAmount extends AbstractQuantity<Mass> {<br>
+ *         // Quantity of type Mass based on double primitive types.<br>
+ * public class MassAmount extends AbstractQuantity&lt;Mass&gt; {<br>
  * private final double kilograms; // Internal SI representation.<br>
  * private Mass(double kg) { kilograms = kg; }<br>
- * public static Mass of(double value, Unit<Mass> unit) {<br>
+ * public static Mass of(double value, Unit&lt;Mass&gt; unit) {<br>
  * return new Mass(unit.getConverterTo(SI.KILOGRAM).convert(value));<br>
  * }<br>
- * public Unit<Mass> getUnit() { return SI.KILOGRAM; }<br>
- * public Double getValue() { return _kilograms; }<br>
+ * public Unit&lt;Mass&gt; getUnit() { return SI.KILOGRAM; }<br>
+ * public Double getValue() { return kilograms; }<br>
  * ...<br>
  * }<br>
- * </p>
  * <p>
  * // Complex numbers measurements.<br>
  * public class ComplexQuantity
- * <Q extends Quantity>extends AbstractQuantity
- * <Q>{<br>
+ * &lt;Q extends Quantity&gt;extends AbstractQuantity
+ * &lt;Q&gt;{<br>
  * public Complex getValue() { ... } // Assuming Complex is a Number.<br>
  * ...<br>
  * }<br>
  * <br>
  * // Specializations of complex numbers measurements.<br>
- * public final class Current extends ComplexQuantity<ElectricCurrent> {...}<br>
- * public final class Tension extends ComplexQuantity<ElectricPotential> {...} <br>
+ * public final class Current extends ComplexQuantity&lt;ElectricCurrent&gt; {...}<br>
+ * public final class Tension extends ComplexQuantity&lt;ElectricPotential&gt; {...} <br>
  * </code>
  * </p>
  * 
@@ -201,7 +200,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
    * @param obj
    *          the object to compare with.
    * @return <code>this.getUnit.equals(obj.getUnit())
-   *         && this.getValue().equals(obj.getValue())</code>
+   *         &amp;&amp; this.getValue().equals(obj.getValue())</code>
    */
   @Override
   public boolean equals(Object obj) {
@@ -273,9 +272,9 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 
   /**
    * Casts this quantity to a parameterized unit of specified nature or throw a <code>ClassCastException</code> if the dimension of the specified
-   * quantity and this measure unit's dimension do not match. For example: <br/>
+   * quantity and this measure unit's dimension do not match. For example: <br>
    * <code>
-   *     Measure<Length> length = Quantities.getQuantity("2 km").asType(Length.class);
+   *     Measure&lt;Length&gt; length = Quantities.getQuantity("2 km").asType(Length.class);
    * </code>
    *
    * @param type

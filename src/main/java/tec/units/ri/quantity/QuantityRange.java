@@ -36,7 +36,7 @@ import tec.units.ri.spi.Range;
 /**
  * A Quantity Range is a pair of {@link Quantity} items that represent a range of values.
  * <p>
- * Range limits MUST be presented in the same scale and have the same unit as measured data values.<br/>
+ * Range limits MUST be presented in the same scale and have the same unit as measured data values.<br>
  * Subclasses of Range should be immutable.
  * 
  * @param <T>

@@ -108,28 +108,6 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
     return quantityToUnit.get(quantityType);
   }
 
-  /**
-   * Adds a new unit to the collection with a text.
-   * 
-   * @param unit
-   *          the unit being added.
-   * @param text
-   *          the text for the unit.
-   * @param style
-   *          the UnitStyle to apply for the given text
-   * @return <code>unit</code>.
-   */
-
-  /**
-   * Adds a new named unit to the collection.
-   * 
-   * @param unit
-   *          the unit being added.
-   * @param name
-   *          the name of the unit.
-   * @return <code>unit</code>.
-   * @since 1.0
-   */
   protected static final class Helper {
     static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, Dimension dimension) {
       if (dimension != null) {
