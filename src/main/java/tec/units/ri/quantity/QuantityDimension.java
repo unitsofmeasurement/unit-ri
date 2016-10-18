@@ -276,7 +276,7 @@ public final class QuantityDimension implements Dimension {
    * @since 1.0
    */
   @SuppressWarnings("rawtypes")
-  public Map<? extends QuantityDimension, Integer> getBaseDimensions() {
+  public Map<? extends Dimension, Integer> getBaseDimensions() {
     Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getBaseUnits();
     if (pseudoUnits == null)
       return null;
