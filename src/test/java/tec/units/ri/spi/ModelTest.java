@@ -58,7 +58,7 @@ public class ModelTest {
   @Test
   public void testGetDimensionalTransform() {
     DimensionalModel model = new TestModel();
-    Dimension dim = QuantityDimension.getInstance('a');
+    Dimension dim = QuantityDimension.parse('a');
     UnitConverter converter = model.getDimensionalTransform(dim);
     assertNotNull(converter);
   }
@@ -66,7 +66,7 @@ public class ModelTest {
   @Test
   public void testGetFundamentalDimension() {
     DimensionalModel model = new TestModel();
-    Dimension dim = QuantityDimension.getInstance('a');
+    Dimension dim = QuantityDimension.parse('a');
     Dimension fund = model.getFundamentalDimension(dim);
     assertNotNull(fund);
   }

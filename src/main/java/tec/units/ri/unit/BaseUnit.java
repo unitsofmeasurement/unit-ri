@@ -50,7 +50,7 @@ import tec.units.ri.quantity.QuantityDimension;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, Mar 17, 2016
+ * @version 1.0, Oct 17, 2016
  */
 public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
@@ -58,6 +58,7 @@ public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 	 * 
 	 */
   // private static final long serialVersionUID = 1721629233768215930L;
+
   /**
    * Holds the symbol.
    */
@@ -76,7 +77,7 @@ public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
   public BaseUnit(String symbol, Dimension dimension) {
     this.symbol = symbol;
     if (dimension == null) {
-      dimension = QuantityDimension.getInstance(' '); // XXX try pass
+      dimension = QuantityDimension.parse(' '); // XXX try pass
       // char here
     }
     this.dimension = dimension;
@@ -111,9 +112,9 @@ public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     /*
      * synchronized (AbstractUnit.SYMBOL_TO_UNIT) { Unit<?> unit =
      * AbstractUnit.SYMBOL_TO_UNIT.get(symbol); if (unit == null) {
-     * AbstractUnit.SYMBOL_TO_UNIT.put(symbol, this); return; } if (!(unit instanceof
-     * BaseUnit<?>)) throw new IllegalArgumentException("Symbol " + symbol +
-     * " is associated to a different unit"); }
+     * AbstractUnit.SYMBOL_TO_UNIT.put(symbol, this); return; } if (!(unit
+     * instanceof BaseUnit<?>)) throw new IllegalArgumentException("Symbol "
+     * + symbol + " is associated to a different unit"); }
      */
   }
 

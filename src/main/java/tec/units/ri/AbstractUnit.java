@@ -64,7 +64,7 @@ import tec.units.ri.unit.Units;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.1, October 6, 2016
+ * @version 1.0.2, October 17, 2016
  * @since 1.0
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Comparable<Unit<Q>> {
@@ -140,7 +140,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   /**
    * Returns the unscaled standard (SI) unit from which this unit is derived.
    * 
-   * The SI unit can be be used to identify a quantity given the unit. For example:<code> static boolean isAngularVelocity(AbstractUnit&lt;?&gt; unit) {
+   * The SI unit can be be used to identify a quantity given the unit. For example:
+   * <code> static boolean isAngularVelocity(AbstractUnit&lt;?&gt; unit) {
    * return unit.toSystemUnit().equals(RADIAN.divide(SECOND)); }
    * assert(REVOLUTION.divide(MINUTE).isAngularVelocity()); // Returns true.
    * </code>
@@ -267,7 +268,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
    */
   @SuppressWarnings("unchecked")
   public final <T extends Quantity<T>> Unit<T> asType(Class<T> type) {
-    Dimension typeDimension = QuantityDimension.getInstance(type);
+    Dimension typeDimension = QuantityDimension.of(type);
     if ((typeDimension != null) && (!typeDimension.equals(this.getDimension())))
       throw new ClassCastException("The unit: " + this + " is not compatible with quantities of type " + type);
     return (Unit<T>) this;

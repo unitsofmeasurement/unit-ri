@@ -111,8 +111,6 @@
 				<configuration>
 					<!-- this does not work for packages <excludes>
 						<exclude>tec.units.ri.internal.*</exclude>
-						<exclude>tec.units.ri.internal.format.*</exclude>
-						<exclude>tec.units.ri.internal.quantity.*</exclude>
 					</excludes --> 
 				</configuration>
 				<executions>
@@ -182,13 +180,12 @@
 				</executions>
 				<configuration>
 					<detectLinks>true</detectLinks>
-					<!-- excludePackageNames>package1</excludePackageNames -->
 					<keywords>true</keywords>
 					<linksource>true</linksource>
 					<failOnError>false</failOnError>
 					<!-- overview>${basedir}/overview.html</overview -->
 					<source>${maven.compile.sourceLevel}</source>
-					<!-- stylesheetfile>${basedir}/src/site/css/money-jdoc.css</stylesheetfile -->
+					<!-- stylesheetfile>${basedir}/src/site/css/jdoc.css</stylesheetfile -->
 					<verbose>true</verbose>
 				</configuration>
 			</plugin>
