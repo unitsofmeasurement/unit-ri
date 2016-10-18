@@ -203,7 +203,7 @@ public final class QuantityDimension implements Dimension {
    * @since 1.0
    */
   public Dimension multiply(Dimension that) {
-    return (that instanceof QuantityDimension) ? this.multiply((QuantityDimension) that) : that.multiply(this);
+    return (that instanceof QuantityDimension) ? this.multiply((QuantityDimension) that) : this.multiply(that);
   }
 
   /**
