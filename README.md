@@ -14,13 +14,12 @@ The RI aims at **Java Embedded**, both *SE 6/7* or above and Java *ME 8 Embedded
 
 ## User Guide
 You can find the [RI User Guide](https://www.gitbook.com/book/unitsofmeasurement/unit-ri-userguide/) as GitBook.
-
+<!--
 Planning
 ------------
-
 [![Issue Stats](http://issuestats.com/github/unitsofmeasurement/unit-ri/badge/pr)](http://issuestats.com/github/unitsofmeasurement/unit-ri)
 [![Issue Stats](http://issuestats.com/github/unitsofmeasurement/unit-ri/badge/issue)](http://issuestats.com/github/unitsofmeasurement/unit-ri)
-
+-->
 ## Waffle.io
 [![Stories in Ready](https://badge.waffle.io/unitsofmeasurement/unit-ri.png?label=ready&title=Ready)](https://waffle.io/unitsofmeasurement/unit-ri)
 [![Stories in Progress](https://badge.waffle.io/unitsofmeasurement/unit-ri.png?label=in%20progress&title=In Progress)](https://waffle.io/unitsofmeasurement/unit-ri)
