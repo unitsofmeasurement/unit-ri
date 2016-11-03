@@ -30,10 +30,19 @@
 package tec.units.ri.function;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import java.math.BigDecimal;
+
+import javax.measure.Quantity;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import tec.units.ri.quantity.Quantities;
+import tec.units.ri.unit.Units;
 
 public class PiMultiplierConverterTest {
 
@@ -65,4 +74,10 @@ public class PiMultiplierConverterTest {
   public void isLinearOfLogConverterTest() {
     assertTrue(piMultiplierConverter.isLinear());
   }
+  
+//  @Test
+//  public void testAngleConverter() {
+//	Quantity sut = Quantities.getQuantity(BigDecimal.ONE, Units.DEGREE_ANGLE ).to( Units.RADIAN );
+//	assertNotNull(sut);
+//  }
 }
