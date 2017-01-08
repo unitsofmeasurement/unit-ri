@@ -74,10 +74,10 @@ public class PiMultiplierConverterTest {
   public void isLinearOfLogConverterTest() {
     assertTrue(piMultiplierConverter.isLinear());
   }
-  
-//  @Test
-//  public void testAngleConverter() {
-//	Quantity sut = Quantities.getQuantity(BigDecimal.ONE, Units.DEGREE_ANGLE ).to( Units.RADIAN );
-//	assertNotNull(sut);
-//  }
+
+  // @Test
+  // public void testAngleConverter() {
+  // Quantity sut = Quantities.getQuantity(BigDecimal.ONE, Units.DEGREE_ANGLE ).to( Units.RADIAN );
+  // assertNotNull(sut);
+  // }
 }
