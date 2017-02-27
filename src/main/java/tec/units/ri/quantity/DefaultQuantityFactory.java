@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Reference Implementation
- * Copyright (c) 2005-2016, Jean-Marie Dautelle, Werner Keil, V2COM.
+ * Copyright (c) 2005-2017, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -116,8 +116,8 @@ public final class DefaultQuantityFactory<Q extends Quantity<Q>> extends Abstrac
     CLASS_TO_METRIC_UNIT.put(RadiationDoseAbsorbed.class, GRAY);
     CLASS_TO_METRIC_UNIT.put(RadiationDoseEffective.class, SIEVERT);
     CLASS_TO_METRIC_UNIT.put(CatalyticActivity.class, KATAL);
-    CLASS_TO_METRIC_UNIT.put(Speed.class, METRES_PER_SECOND);
-    CLASS_TO_METRIC_UNIT.put(Acceleration.class, METRES_PER_SQUARE_SECOND);
+    CLASS_TO_METRIC_UNIT.put(Speed.class, METRE_PER_SECOND);
+    CLASS_TO_METRIC_UNIT.put(Acceleration.class, METRE_PER_SQUARE_SECOND);
     CLASS_TO_METRIC_UNIT.put(Area.class, SQUARE_METRE);
     CLASS_TO_METRIC_UNIT.put(Volume.class, CUBIC_METRE);
   }

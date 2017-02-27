@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>1.0.3-SNAPSHOT</version>
+		<version>1.0.3</version>
 	</parent>
 	<licenses>
 		<license>
@@ -237,7 +237,7 @@
 					<header>src/etc/header.txt</header>
 					<properties>
 						<owner>Jean-Marie Dautelle, Werner Keil, V2COM</owner>
-						<currentYear>2016</currentYear>
+						<currentYear>2017</currentYear>
 					</properties>
 					<excludes>
 						<exclude>**/pom.xml</exclude>

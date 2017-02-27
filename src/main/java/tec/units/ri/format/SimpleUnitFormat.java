@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Reference Implementation
- * Copyright (c) 2005-2016, Jean-Marie Dautelle, Werner Keil, V2COM.
+ * Copyright (c) 2005-2017, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -948,7 +948,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     DEFAULT.label(Units.DAY, "day");
     DEFAULT.label(Units.WEEK, "week");
     DEFAULT.label(Units.YEAR, "year");
-    DEFAULT.label(Units.KILOMETRES_PER_HOUR, "km/h");
+    DEFAULT.label(Units.KILOMETRE_PER_HOUR, "km/h");
     DEFAULT.label(Units.CUBIC_METRE, "\u33A5");
     ASCII.label(Units.CUBIC_METRE, "m3");
     ASCII.label(LITRE, "l");

@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Reference Implementation
- * Copyright (c) 2005-2016, Jean-Marie Dautelle, Werner Keil, V2COM.
+ * Copyright (c) 2005-2017, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -115,7 +115,7 @@ public class UnitFormatTest {
 
   @Test
   public void testFormatKph() {
-    Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
+    Unit<Speed> kph = Units.KILOMETRE_PER_HOUR;
     assertEquals("km/h", kph.toString());
   }
 

@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Reference Implementation
- * Copyright (c) 2005-2016, Jean-Marie Dautelle, Werner Keil, V2COM.
+ * Copyright (c) 2005-2017, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -78,7 +78,7 @@ import tec.uom.lib.common.function.Nameable;
  * This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.2, October 8, 2016
+ * @version 1.0.3, February 28, 2017
  * @since 1.0
  */
 public class Units extends AbstractSystemOfUnits implements Nameable {
@@ -298,12 +298,12 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   /**
    * The SI unit for speed quantities (standard name <code>m/s</code>).
    */
-  public static final Unit<Speed> METRES_PER_SECOND = addUnit(new ProductUnit<Speed>(METRE.divide(SECOND)), Speed.class);
+  public static final Unit<Speed> METRE_PER_SECOND = addUnit(new ProductUnit<Speed>(METRE.divide(SECOND)), Speed.class);
 
   /**
    * The SI unit for acceleration quantities (standard name <code>m/s2</code> ).
    */
-  public static final Unit<Acceleration> METRES_PER_SQUARE_SECOND = addUnit(new ProductUnit<Acceleration>(METRES_PER_SECOND.divide(SECOND)),
+  public static final Unit<Acceleration> METRE_PER_SQUARE_SECOND = addUnit(new ProductUnit<Acceleration>(METRE_PER_SECOND.divide(SECOND)),
       Acceleration.class);
 
   /**
@@ -317,9 +317,9 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   public static final Unit<Volume> CUBIC_METRE = addUnit(new ProductUnit<Volume>(SQUARE_METRE.multiply(METRE)), Volume.class);
 
   /**
-   * A unit of velocity expressing the number of international {@link #KILOMETRE kilometres} per {@link #HOUR hour} (abbreviation <code>kph</code>).
+   * A unit of velocity expressing the number of international {@link #KILOMETRE kilometres} per {@link #HOUR hour} (abbreviation <code>km/h</code>).
    */
-  public static final Unit<Speed> KILOMETRES_PER_HOUR = addUnit(METRES_PER_SECOND.multiply(0.277778d)).asType(Speed.class);
+  public static final Unit<Speed> KILOMETRE_PER_HOUR = addUnit(METRE_PER_SECOND.multiply(0.277778d)).asType(Speed.class);
 
   /**
    * The SI unit for luminous flux (standard name <code>lm</code>). One Lumen is equal to the amount of light given out through a solid angle by a
