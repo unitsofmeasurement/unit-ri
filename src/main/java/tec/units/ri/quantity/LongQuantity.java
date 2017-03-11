@@ -42,7 +42,7 @@ import tec.units.ri.AbstractQuantity;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *          The type of the quantity.
- * @version 0.2, $Date: 2015-07-07 $
+ * @version 0.2, $Date: 2017-03-11 $
  */
 final class LongQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -87,7 +87,7 @@ final class LongQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
   }
 
   public Quantity<Q> multiply(Number that) {
-    return NumberQuantity.of(value * that.intValue(), getUnit());
+    return NumberQuantity.of(value * that.longValue(), getUnit());
   }
 
   public Quantity<?> divide(Quantity<?> that) {
