@@ -64,7 +64,7 @@ import tec.units.ri.unit.Units;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.2, October 17, 2016
+ * @version 1.0.3, March 17, 2017
  * @since 1.0
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Comparable<Unit<Q>> {
@@ -182,8 +182,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
    * {@link SimpleUnitFormat}.
    *
    * <p>
-   * Note: The standard format supports dimensionless units.[code] AbstractUnit&lt;Dimensionless&gt; PERCENT =
-   * AbstractUnit.parse("100").inverse().asType(Dimensionless.class); [/code]
+   * Note: The standard format supports dimensionless units.<code> AbstractUnit&lt;Dimensionless&gt; PERCENT =
+   * AbstractUnit.parse("100").inverse().asType(Dimensionless.class); </code>
    * </p>
    *
    * @param charSequence
