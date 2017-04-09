@@ -86,6 +86,17 @@ public class PrefixTest {
   }
 
   @Test
+  public void testDeci() {
+    Quantity<Volume> m1 = Quantities.getQuantity(1.0, LITRE);
+    assertEquals(1d, m1.getValue());
+    assertEquals("l", m1.getUnit().toString());
+
+    Quantity<Volume> m2 = m1.to(DECI(LITRE));
+    assertEquals(10.0d, m2.getValue());
+    assertEquals("dl", m2.getUnit().toString());
+  }
+
+  @Test
   public void testNano() {
     Unit<Mass> m1 = NANO(GRAM);
     assertEquals("ng", m1.toString());
