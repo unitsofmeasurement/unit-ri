@@ -72,8 +72,8 @@ import tec.uom.lib.common.function.UnitConverterSupplier;
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements UnitConverterSupplier {
 
   /**
-	 * 
-	 */
+   * 
+   */
   // private static final long serialVersionUID = 1L;
 
   /**
@@ -205,6 +205,11 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     return parentUnit;
   }
 
+  /**
+   * Returns the converter to the parent unit.
+   *
+   * @return the converter to the parent unit.
+   */
   @Override
   public UnitConverter getConverter() {
     return converter;
