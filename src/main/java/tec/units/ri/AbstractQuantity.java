@@ -30,6 +30,7 @@
 package tec.units.ri;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
@@ -97,14 +98,14 @@ import tec.uom.lib.common.function.ValueSupplier;
  * </p>
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.1, October 6, 2016
+ * @version 1.0.2, May 28, 2017
  * @since 1.0
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q>, Comparable<Quantity<Q>>, UnitSupplier<Q>, ValueSupplier<Number> {
 
   /**
-	 * 
-	 */
+     * 
+     */
   // private static final long serialVersionUID = -4993173119977931016L;
 
   private final Unit<Q> unit;
@@ -309,5 +310,58 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
    */
   public static Quantity<?> parse(CharSequence csq) {
     return QuantityFormat.getInstance().parse(csq);
+  }
+
+  /**
+   * Utility class for number comparison and equality
+   */
+  protected static final class Equalizer {
+
+    /**
+     * Converts a number to {@link Double}
+     *
+     * @param value
+     *          the value to be converted
+     * @return the value converted
+     */
+    public static Double toDouble(Number value) {
+      if (Double.class.isInstance(value)) {
+        return Double.class.cast(value);
+      }
+      return value.doubleValue();
+    }
+
+    /**
+     * Check if the both value has equality number, in other words, 1 is equals to 1.0000 and 1.0.
+     * 
+     * If the first value is a <type>Number</type> of either <type>Double</type>, <type>Float</type>, <type>Integer</type>, <type>Long</type>,
+     * <type>Short</type> or <type>Byte</type> it is compared using the respective <code>*value()</code> method of <type>Number</type>. Otherwise it
+     * is checked, if {@link Double#compareTo(Object)} is equal to zero.
+     *
+     * @param valueA
+     *          the value a
+     * @param valueB
+     *          the value B
+     * @return {@link Double#compareTo(Object)} == zero
+     */
+    public static boolean hasEquality(Number valueA, Number valueB) {
+      Objects.requireNonNull(valueA);
+      Objects.requireNonNull(valueB);
+
+      if (valueA instanceof Double) {
+        return valueA.doubleValue() == valueB.doubleValue();
+      } else if (valueA instanceof Float) {
+        return valueA.floatValue() == valueB.floatValue();
+      } else if (valueA instanceof Integer) {
+        return valueA.intValue() == valueB.intValue();
+      } else if (valueA instanceof Long) {
+        return valueA.longValue() == valueB.longValue();
+      } else if (valueA instanceof Short) {
+        return valueA.shortValue() == valueB.shortValue();
+      } else if (valueA instanceof Byte) {
+        return valueA.byteValue() == valueB.byteValue();
+      }
+      return toDouble(valueA).compareTo(toDouble(valueB)) == 0;
+    }
   }
 }

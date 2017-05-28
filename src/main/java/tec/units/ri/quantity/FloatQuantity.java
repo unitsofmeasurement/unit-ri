@@ -29,6 +29,8 @@
  */
 package tec.units.ri.quantity;
 
+import java.util.Objects;
+
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
@@ -43,7 +45,8 @@ import tec.units.ri.AbstractQuantity;
  * @author Otavio de Santana
  * @param <Q>
  *          The type of the quantity.
- * @version 0.3, $Date: 2014-08-02 $
+ * @version 0.4, $Date: 2017-05-28 $
+ * @since 1.0
  */
 final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -104,4 +107,23 @@ final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
   public Quantity<Q> divide(Number that) {
     return NumberQuantity.of(value / that.floatValue(), getUnit());
   }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see AbstractQuantity#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null)
+      return false;
+    if (obj == this)
+      return true;
+    if (obj instanceof Quantity<?>) {
+      Quantity<?> that = (Quantity<?>) obj;
+      return Objects.equals(getUnit(), that.getUnit()) && Equalizer.hasEquality(value, that.getValue());
+    }
+    return false;
+  }
+
 }

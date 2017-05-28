@@ -109,4 +109,18 @@ public class DoubleQuantityTest {
     AbstractQuantity<Length> l = NumberQuantity.of(Double.valueOf(10d).doubleValue(), Units.METRE);
     assertEquals(Double.valueOf(1 / 10d), l.inverse().getValue());
   }
+
+  @Test
+  public void testEquality() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(10D, Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(10.00D, Units.METRE);
+    Assert.assertEquals(value, anotherValue);
+  }
+
+  @Test
+  public void testEqualityDifferentPrimitive() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(10, Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(10.00D, Units.METRE);
+    Assert.assertEquals(value, anotherValue);
+  }
 }

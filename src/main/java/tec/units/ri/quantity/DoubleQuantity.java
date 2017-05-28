@@ -29,6 +29,8 @@
  */
 package tec.units.ri.quantity;
 
+import java.util.Objects;
+
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
@@ -44,7 +46,7 @@ import tec.units.ri.format.QuantityFormat;
  * @author Otavio de Santana
  * @param <Q>
  *          The type of the quantity.
- * @version 1.0, $Date: 2016-10-06 $
+ * @version 1.0.1, $Date: 2017-05-28 $
  * @since 1.0
  */
 final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
@@ -117,47 +119,24 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
   @Override
   public String toString() {
     return QuantityFormat.getInstance().format(this);
-    // String numPart = NumberFormat.getInstance().format(value);
-    // return numPart + " " + String.valueOf(getUnit());
-    // return nosci(getValue()) + " " + String.valueOf(getUnit());
   }
+
   /*
-    private static String nosci(double d) {
-      if (d < 0) {
-        return "-" + nosci(-d);
-      }
-      String javaString = String.valueOf(d);
-      int indexOfE = javaString.indexOf("E");
-      if (indexOfE == -1) {
-        return javaString;
-      }
-      StringBuilder sb = new StringBuilder();
-      if (d > 1) {// big number
-        int exp = Integer.parseInt(javaString.substring(indexOfE + 1));
-        String sciDecimal = javaString.substring(2, indexOfE);
-        int sciDecimalLength = sciDecimal.length();
-        if (exp == sciDecimalLength) {
-          sb.append(javaString.charAt(0));
-          sb.append(sciDecimal);
-        } else if (exp > sciDecimalLength) {
-          sb.append(javaString.charAt(0));
-          sb.append(sciDecimal);
-          for (int i = 0; i < exp - sciDecimalLength; i++) {
-            sb.append('0');
-          }
-        } else if (exp < sciDecimalLength) {
-          sb.append(javaString.charAt(0));
-          sb.append(sciDecimal.substring(0, exp));
-          sb.append('.');
-          for (int i = exp; i < sciDecimalLength; i++) {
-            sb.append(sciDecimal.charAt(i));
-          }
-        }
-        return sb.toString();
-      } else {
-        // for little numbers use the default or you will
-        // loose accuracy
-        return javaString;
-      }
-    } */
+   * (non-Javadoc)
+   * 
+   * @see AbstractQuantity#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null)
+      return false;
+    if (obj == this)
+      return true;
+    if (obj instanceof Quantity<?>) {
+      Quantity<?> that = (Quantity<?>) obj;
+      return Objects.equals(getUnit(), that.getUnit()) && Equalizer.hasEquality(value, that.getValue());
+    }
+    return false;
+  }
+
 }

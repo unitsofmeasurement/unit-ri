@@ -29,6 +29,8 @@
  */
 package tec.units.ri.quantity;
 
+import java.util.Objects;
+
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnconvertibleException;
@@ -45,47 +47,17 @@ import tec.units.ri.format.QuantityFormat;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *          The type of the quantity.
- * @version 1.0.1, $Date: 2016-10-06 $
+ * @version 1.0.2, $Date: 2017-05-28 $
  * @since 1.0
  */
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
   /**
-	 * 
-	 */
+     * 
+     */
   // private static final long serialVersionUID = 7312161895652321241L;
 
   private final Number value;
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see AbstractQuantity#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(Object obj) {
-    if (obj == null)
-      return false;
-    if (obj == this)
-      return true;
-    if (this.getClass() == obj.getClass()) {
-      return super.equals(obj);
-    } else {
-      if (obj instanceof Quantity) {
-        @SuppressWarnings("rawtypes")
-        Quantity m = (Quantity) obj;
-        if (m.getValue().getClass() == this.getValue().getClass() && m.getUnit().getClass() == this.getUnit().getClass()) {
-          return super.equals(obj);
-        } else {
-          // if (this.getQuantityUnit() instanceof AbstractUnit<?>) {
-          // if
-          // }
-          return super.equals(obj);
-        }
-      }
-      return false;
-    }
-  }
 
   /**
    * Indicates if this quantity is exact.
@@ -111,6 +83,24 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
     super(unit);
     value = number;
     isExact = false;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see AbstractQuantity#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null)
+      return false;
+    if (obj == this)
+      return true;
+    if (obj instanceof Quantity<?>) {
+      Quantity<?> that = (Quantity<?>) obj;
+      return Objects.equals(getUnit(), that.getUnit()) && Equalizer.hasEquality(value, that.getValue());
+    }
+    return false;
   }
 
   /*

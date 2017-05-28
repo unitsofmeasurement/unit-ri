@@ -31,6 +31,9 @@ package tec.units.ri.quantity;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+
 import javax.measure.Quantity;
 import javax.measure.quantity.ElectricResistance;
 import javax.measure.quantity.Length;
@@ -147,5 +150,33 @@ public class NumberQuantityTest {
   public void inverseTestTime() {
     NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(10), Units.DAY);
     assertEquals(Double.valueOf(1 / 10d), day.inverse().getValue());
+  }
+
+  @Test
+  public void testEquality() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(new Double(10), Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(new Long(10), Units.METRE);
+    assertEquals(value, anotherValue);
+  }
+
+  @Test
+  public void testEqualityAtomic() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(new AtomicInteger(10), Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(new AtomicLong(10), Units.METRE);
+    assertEquals(value, anotherValue);
+  }
+
+  @Test
+  public void testEqualityFloat() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(Integer.valueOf(20), Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(Double.valueOf(20), Units.METRE);
+    assertEquals(value, anotherValue);
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void testEqualityWithNull() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(Integer.valueOf(20), Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(null, Units.METRE);
+    assertEquals(value, anotherValue);
   }
 }
