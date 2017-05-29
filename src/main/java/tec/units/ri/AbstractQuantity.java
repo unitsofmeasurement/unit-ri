@@ -350,15 +350,15 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 
       if (valueA instanceof Double) {
         return valueA.doubleValue() == valueB.doubleValue();
-      } else if (valueA instanceof Float) {
+      } else if (valueA instanceof Float && valueB instanceof Float) {
         return valueA.floatValue() == valueB.floatValue();
-      } else if (valueA instanceof Integer) {
+      } else if (valueA instanceof Integer && valueB instanceof Integer) {
         return valueA.intValue() == valueB.intValue();
-      } else if (valueA instanceof Long) {
+      } else if (valueA instanceof Long && valueB instanceof Long) {
         return valueA.longValue() == valueB.longValue();
-      } else if (valueA instanceof Short) {
+      } else if (valueA instanceof Short && valueB instanceof Short) {
         return valueA.shortValue() == valueB.shortValue();
-      } else if (valueA instanceof Byte) {
+      } else if (valueA instanceof Byte && valueB instanceof Byte) {
         return valueA.byteValue() == valueB.byteValue();
       }
       return toDouble(valueA).compareTo(toDouble(valueB)) == 0;
