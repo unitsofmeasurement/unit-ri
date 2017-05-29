@@ -348,7 +348,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
       Objects.requireNonNull(valueA);
       Objects.requireNonNull(valueB);
 
-      if (valueA instanceof Double) {
+      if (valueA instanceof Double && valueB instanceof Double) {
         return valueA.doubleValue() == valueB.doubleValue();
       } else if (valueA instanceof Float && valueB instanceof Float) {
         return valueA.floatValue() == valueB.floatValue();
