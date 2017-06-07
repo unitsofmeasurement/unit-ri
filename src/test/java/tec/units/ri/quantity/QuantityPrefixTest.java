@@ -47,8 +47,8 @@ public class QuantityPrefixTest {
   public void testMega() {
     Quantity<Mass> m1 = Quantities.getQuantity(1.0, MEGA(GRAM));
     assertEquals(1d, m1.getValue());
-    // assertEquals("Mg", m1.getUnit().toString());
-    assertEquals("t", m1.getUnit().toString());
+    assertEquals("Mg", m1.getUnit().toString());
+    // assertEquals("t", m1.getUnit().toString());
   }
 
   @Test

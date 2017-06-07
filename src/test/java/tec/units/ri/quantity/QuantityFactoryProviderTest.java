@@ -31,6 +31,7 @@ package tec.units.ri.quantity;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static tec.units.ri.unit.Units.KILOGRAM;
 import static tec.units.ri.unit.Units.METRE;
 import static tec.units.ri.unit.Units.MINUTE;
@@ -92,9 +93,8 @@ public class QuantityFactoryProviderTest {
     Quantity<Time> t = service.getQuantityFactory(Time.class).create(40, MINUTE); // 40 min
     assertEquals(40, t.getValue());
     assertEquals(MINUTE, t.getUnit());
-    assertEquals("min", t.getUnit().getSymbol()); // TODO see
     // https://github.com/unitsofmeasurement/uom-se/issues/54
-    // assertNull(t.getUnit().getSymbol());
+    assertNull(t.getUnit().getSymbol());
     assertEquals("40 min", t.toString());
   }
 }

@@ -64,7 +64,7 @@ import tec.units.ri.unit.Units;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.3, March 17, 2017
+ * @version 1.0.4, June 7, 2017
  * @since 1.0
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Comparable<Unit<Q>> {
@@ -333,12 +333,19 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   }
 
   @Override
-  public final AbstractUnit<Q> transform(UnitConverter operation) {
-    AbstractUnit<Q> systemUnit = this.getSystemUnit();
-    UnitConverter cvtr = this.getSystemConverter().concatenate(operation);
-    if (cvtr.equals(AbstractConverter.IDENTITY))
+  public final Unit<Q> transform(UnitConverter operation) {
+    Unit<Q> systemUnit = this.getSystemUnit();
+    UnitConverter cvtr;
+    if (this.isSystemUnit()) {
+      cvtr = this.getSystemConverter().concatenate(operation);
+    } else {
+      cvtr = operation;
+    }
+    if (cvtr.equals(AbstractConverter.IDENTITY)) {
       return systemUnit;
-    return new TransformedUnit<Q>(systemUnit, cvtr);
+    } else {
+      return new TransformedUnit<>(null, this, systemUnit, cvtr);
+    }
   }
 
   @Override
@@ -417,7 +424,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
    *          the divisor value.
    * @return this unit divided by the specified divisor.
    */
-  public final AbstractUnit<Q> divide(double divisor) {
+  public final Unit<Q> divide(double divisor) {
     if (divisor == 1)
       return this;
     if (isLongValue(divisor))

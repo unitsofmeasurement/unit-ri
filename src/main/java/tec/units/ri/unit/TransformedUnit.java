@@ -66,7 +66,7 @@ import tec.uom.lib.common.function.UnitConverterSupplier;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.1, April 24, 2017
+ * @version 1.0.2, June 7, 2017
  * @since 1.0
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements UnitConverterSupplier {
@@ -77,9 +77,14 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
   // private static final long serialVersionUID = 1L;
 
   /**
-   * Holds the parent unit (always a system unit).
+   * Holds the parent unit.
    */
   private final AbstractUnit<Q> parentUnit;
+
+  /**
+   * Holds the system unit.
+   */
+  private final Unit<Q> systemUnit;
 
   /**
    * Holds the converter to the parent unit.
@@ -92,47 +97,58 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
   private String symbol;
 
   /**
-   * Creates a transformed unit from the specified system unit.
-   *
+   * Creates a transformed unit from the specified parent and system unit. using the parent as symbol
+   * 
    * @param parentUnit
-   *          the system unit from which this unit is derived.
-   * @param unitConverter
+   *          the parent unit from which this unit is derived.
+   * @param sysUnit
+   *          the system unit which this unit is based on.
+   * @param converter
    *          the converter to the parent units.
-   * @throws IllegalArgumentException
-   *           if the specified parent unit is not an {@link AbstractUnit#isSystemUnit() system unit}
    */
-  public TransformedUnit(AbstractUnit<Q> parentUnit, UnitConverter unitConverter) {
-    if (!parentUnit.isSystemUnit())
-      throw new IllegalArgumentException("The parent unit: " + parentUnit + " is not a system unit");
-    this.parentUnit = parentUnit;
-    this.converter = unitConverter;
-    // this.symbol = parentUnit.getSymbol();
-  }
-
-  /**
-   * Creates a transformed unit from the specified system unit.
-   *
-   * @parem symbol the symbol to use with this transformed unit.
-   * @param parentUnit
-   *          the system unit from which this unit is derived.
-   * @param unitConverter
-   *          the converter to the parent units.
-   * @throws IllegalArgumentException
-   *           if the specified parent unit is not an {@link AbstractUnit#isSystemUnit() system unit}
-   */
-  public TransformedUnit(String symbol, Unit<Q> parentUnit, UnitConverter unitConverter) {
+  public TransformedUnit(String symbol, Unit<Q> parentUnit, Unit<Q> sysUnit, UnitConverter unitConverter) {
     if (parentUnit instanceof AbstractUnit) {
       final AbstractUnit<Q> abParent = (AbstractUnit<Q>) parentUnit;
-      if (!abParent.isSystemUnit()) {
-        throw new IllegalArgumentException("The parent unit: " + abParent + " is not a system unit");
-      }
+
+      this.systemUnit = sysUnit;
+      // if (!abParent.isSystemUnit()) {
+      // throw new IllegalArgumentException("The parent unit: " + abParent
+      // + " is not a system unit");
+      // }
       this.parentUnit = abParent;
       this.converter = unitConverter;
-      this.symbol = symbol; // TODO see
+      this.symbol = symbol;
+      // this.symbol = symbol; //TODO see
       // https://github.com/unitsofmeasurement/uom-se/issues/54
     } else {
       throw new IllegalArgumentException("The parent unit: " + parentUnit + " is not an abstract unit.");
     }
+  }
+
+  /**
+   * Creates a transformed unit from the specified parent unit.
+   *
+   * @param parentUnit
+   *          the system unit from which this unit is derived.
+   * @param unitConverter
+   *          the converter to the parent units.
+   */
+  public TransformedUnit(AbstractUnit<Q> parentUnit, UnitConverter unitConverter) {
+    this(null, parentUnit, unitConverter);
+  }
+
+  /**
+   * Creates a transformed unit from the specified parent unit.
+   *
+   * @param symbol
+   *          the symbol to use with this transformed unit.
+   * @param parentUnit
+   *          the parent unit from which this unit is derived.
+   * @param unitConverter
+   *          the converter to the parent units.
+   */
+  public TransformedUnit(String symbol, Unit<Q> parentUnit, UnitConverter unitConverter) {
+    this(null, parentUnit, parentUnit.getSystemUnit(), unitConverter);
   }
 
   /**
