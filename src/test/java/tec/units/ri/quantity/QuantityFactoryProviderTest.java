@@ -94,7 +94,7 @@ public class QuantityFactoryProviderTest {
     assertEquals(40, t.getValue());
     assertEquals(MINUTE, t.getUnit());
     // https://github.com/unitsofmeasurement/uom-se/issues/54
-    assertNull(t.getUnit().getSymbol());
+    assertEquals("min", t.getUnit().getSymbol());
     assertEquals("40 min", t.toString());
   }
 }

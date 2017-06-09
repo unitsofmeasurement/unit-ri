@@ -66,7 +66,7 @@ import tec.uom.lib.common.function.UnitConverterSupplier;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.2, June 7, 2017
+ * @version 1.0.3, June 9, 2017
  * @since 1.0
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements UnitConverterSupplier {
@@ -148,7 +148,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
    *          the converter to the parent units.
    */
   public TransformedUnit(String symbol, Unit<Q> parentUnit, UnitConverter unitConverter) {
-    this(null, parentUnit, parentUnit.getSystemUnit(), unitConverter);
+    this(symbol, parentUnit, parentUnit.getSystemUnit(), unitConverter);
   }
 
   /**

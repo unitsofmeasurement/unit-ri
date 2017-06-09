@@ -73,7 +73,7 @@ public class QuantityFactoryTest {
     // min
     assertEquals(40, t.getValue());
     assertEquals(MINUTE, t.getUnit());
-    assertNull(t.getUnit().getSymbol());
+    assertEquals("min", t.getUnit().getSymbol());
     assertEquals("40 min", t.toString());
   }
 
