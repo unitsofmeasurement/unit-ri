@@ -34,6 +34,7 @@ import javax.measure.Unit;
 import javax.measure.quantity.Dimensionless;
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Power;
+import javax.measure.quantity.Time;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -44,6 +45,7 @@ import org.junit.Test;
 import tec.units.ri.AbstractConverter;
 import tec.units.ri.AbstractUnit;
 import tec.units.ri.quantity.Quantities;
+
 import static org.junit.Assert.*;
 import static tec.units.ri.unit.MetricPrefix.KILO;
 import static tec.units.ri.unit.Units.GRAM;
@@ -254,5 +256,11 @@ public class UnitsTest {
     // assertEquals("kg", MetricPrefix.KILO(UCUM.GRAM).getSymbol());
     // assertEquals("kg", UCUM.GRAM.getSymbol()); //"g"
     // assertEquals("kg", US.POUND.getSymbol()); //"lb"
+  }
+  
+  @Test
+  public void testByClassTime() {
+      Unit result = Units.getInstance().getUnit(Time.class);
+      assertEquals("s", result.toString());
   }
 }
