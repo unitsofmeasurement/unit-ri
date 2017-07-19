@@ -257,10 +257,10 @@ public class UnitsTest {
     // assertEquals("kg", UCUM.GRAM.getSymbol()); //"g"
     // assertEquals("kg", US.POUND.getSymbol()); //"lb"
   }
-  
+
   @Test
   public void testByClassTime() {
-      Unit result = Units.getInstance().getUnit(Time.class);
-      assertEquals("s", result.toString());
+    Unit result = Units.getInstance().getUnit(Time.class);
+    assertEquals("s", result.toString());
   }
 }

@@ -52,11 +52,11 @@ import tec.uom.lib.common.function.Parser;
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
-// TODO JavaDoc for later see https://github.com/unitsofmeasurement/unit-ri/issues/65
-// <p>
-// Instances of this class should be able to format quantities stated in {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
-// </p>
-  
+  // TODO JavaDoc for later see https://github.com/unitsofmeasurement/unit-ri/issues/65
+  // <p>
+  // Instances of this class should be able to format quantities stated in {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
+  // </p>
+
   /**
    * 
    */
