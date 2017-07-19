@@ -45,18 +45,18 @@ import tec.uom.lib.common.function.Parser;
  * This class provides the interface for formatting and parsing {@link Quantity quantities}.
  * </p>
  * 
- * <p>
- * Instances of this class should be able to format quantities stated in {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
- * </p>
- * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, $Date: 2016-04-20 $
+ * @version 1.0.1, $Date: 2017-07-10 $
  * @since 1.0
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat implements Parser<CharSequence, Quantity> {
-
+// TODO JavaDoc for later see https://github.com/unitsofmeasurement/unit-ri/issues/65
+// <p>
+// Instances of this class should be able to format quantities stated in {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
+// </p>
+  
   /**
    * 
    */
