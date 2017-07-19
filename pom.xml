@@ -242,6 +242,7 @@
 					</properties>
 					<excludes>
 						<exclude>**/pom.xml</exclude>
+						<exclude>**/LICENSE.txt</exclude>
 						<exclude>**/README</exclude>
 						<exclude>**/settings.xml</exclude>
 						<exclude>src/test/resources/**</exclude>
