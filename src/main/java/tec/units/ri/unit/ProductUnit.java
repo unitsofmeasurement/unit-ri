@@ -57,7 +57,8 @@ import tec.uom.lib.common.function.UnitSupplier;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, Oct 6, 2016
+ * @version 1.0.1, August 20, 2017
+ * @since 1.0
  */
 public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
@@ -197,7 +198,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
    *          the exponent (nn &gt; 0).
    * @return <code>unit^n</code>
    */
-  static Unit<?> getPowInstance(AbstractUnit<?> unit, int n) {
+  public static Unit<?> getPowInstance(AbstractUnit<?> unit, int n) {
     Element[] unitElems;
     if (unit instanceof ProductUnit<?>) {
       Element[] elems = ((ProductUnit<?>) unit).elements;
