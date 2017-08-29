@@ -574,7 +574,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
     private void check(boolean expr, String message, CharSequence csq, int index) throws ParserException {
       if (!expr) {
-        throw new ParserException(message + " (in " + csq + " at index " + index + ")", index);
+        throw new ParserException(message + " (in " + csq + " at index " + index + ")", csq, index);
       }
     }
 
