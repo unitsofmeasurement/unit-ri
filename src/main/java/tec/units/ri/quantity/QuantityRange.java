@@ -43,7 +43,7 @@ import tec.units.ri.spi.Range;
  *          The value of the range.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, October 6, 2016
+ * @version 1.0.1, September 1, 2017
  * @since 1.0
  * @see <a href="http://www.botts-inc.com/SensorML_1.0.1/schemaBrowser/SensorML_QuantityRange.html"> SensorML: QuantityRange</a>
  */
@@ -73,6 +73,19 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public static QuantityRange of(Quantity minimum, Quantity maximum, Quantity resolution) {
     return new QuantityRange(minimum, maximum, resolution);
+  }
+
+  /**
+   * Returns an {@code QuantityRange} with the specified values.
+   *
+   * @param minimum
+   *          The minimum value for the measurement range.
+   * @param maximum
+   *          The maximum value for the measurement range.
+   */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  public static QuantityRange of(Quantity minimum, Quantity maximum) {
+    return new QuantityRange(minimum, maximum);
   }
 
   /**
