@@ -68,6 +68,6 @@ public class QuantitiesTest {
     Quantity<Time> minute = Quantities.getQuantity(1d, Units.YEAR);
     Quantity<Time> second = minute.to(Units.SECOND);
     Double value = (Double) second.getValue();
-    Assert.assertEquals(Double.valueOf(3.1557816E7d), value);
+    Assert.assertEquals(Double.valueOf(365.2425 * 24 * 3600), value);
   }
 }
