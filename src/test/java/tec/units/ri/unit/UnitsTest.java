@@ -31,7 +31,6 @@ package tec.units.ri.unit;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Power;
@@ -263,11 +262,5 @@ public class UnitsTest {
   public void testByClassTime() {
     Unit result = Units.getInstance().getUnit(Time.class);
     assertEquals("s", result.toString());
-  }
-
-  @Test
-  public void testMeanYearLength() {
-    UnitConverter converter = Units.YEAR.getConverterTo(Units.DAY);
-    assertEquals(365.2425, converter.convert(1), 0);
   }
 }
