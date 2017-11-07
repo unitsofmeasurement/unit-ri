@@ -57,7 +57,7 @@ import tec.uom.lib.common.function.UnitSupplier;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.1, August 20, 2017
+ * @version 1.0.2, November 7, 2017
  * @since 1.0
  */
 public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
@@ -111,7 +111,8 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
    */
   private ProductUnit(Element[] elements) {
     this.elements = elements;
-    this.symbol = elements[0].getUnit().getSymbol(); // TODO should contain ALL elements
+    // this.symbol = elements[0].getUnit().getSymbol(); // TODO should contain ALL elements
+    this.symbol = null;
   }
 
   /**
