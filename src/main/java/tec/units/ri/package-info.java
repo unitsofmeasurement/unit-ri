@@ -29,7 +29,7 @@
  */
 /**
  * This package provides support for physics units, in conformity with the
- * <a href="http://www.unitsofmeasurement.org/">Units of Measurement API</a>.
+ * <a href="http://unitsofmeasurement.github.io/">Units of Measurement API</a>.
  *
  *
  * <h3>Usage:</h3>
@@ -37,12 +37,12 @@
  *
  * import javax.measure.quantity.*; // Holds quantity types.
  * 
- * import org.unitsofmeasurement.ri.AbstractUnit;
- * import org.unitsofmeasurement.ri.function.AbstractConverter;
+ * import tec.units.ri.AbstractUnit;
+ * import tec.units.ri.function.AbstractConverter;
  * 
- * import static org.unitsofmeasurement.ri.util.SI.*; // Standard Units.
- * import static org.unitsofmeasurement.ri.util.SIPrefix.*;
- * import static org.unitsofmeasurement.ri.util.UCUM.*; // Standard & Non-Standard Units.
+ * import static tec.units.ri.util.SI.*; // Standard Units.
+ * import static tec.units.ri.util.SIPrefix.*;
+ * import static tec.units.ri.util.UCUM.*; // Standard & Non-Standard Units.
  *
  * public class Main {
  *     public void main(String[] args) {

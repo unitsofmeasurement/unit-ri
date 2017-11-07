@@ -64,7 +64,7 @@ import tec.units.ri.unit.Units;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.4, June 7, 2017
+ * @version 1.0.5, November 7, 2017
  * @since 1.0
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Comparable<Unit<Q>> {
@@ -218,7 +218,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   }
 
   // ///////////////////////////////////////////////////////
-  // Implements org.unitsofmeasurement.Unit<Q> interface //
+  // Implements javax.measure.Unit<Q> interface //
   // ///////////////////////////////////////////////////////
 
   /**

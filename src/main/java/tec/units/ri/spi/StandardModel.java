@@ -36,8 +36,8 @@ import tec.units.ri.spi.DimensionalModel;
  * 
  * <p>
  * The difference between dimensional models lies in the assumptions each makes and, in consequence,the operations each permits. For example, the
- * summation of a {@link org.unitsofmeasurement.quantity.Length length} and a {@link org.unitsofmeasurement.quantity.Duration duration} is not allowed
- * by the standard model, but is quite valid in a relativistic context.
+ * summation of a {@link javax.measure.quantity.Length length} and a {@link javax.measure.quantity.Time time} is not allowed by the standard model,
+ * but is quite valid in a relativistic context.
  * </p>
  * <!--
  * <p>
@@ -125,7 +125,7 @@ import tec.units.ri.spi.DimensionalModel;
  * This class represents the standard model.
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.7, March 28, 2016
+ * @version 0.7.1, November 7, 2017
  */
 class StandardModel extends DimensionalModel {
 }
