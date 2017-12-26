@@ -1,7 +1,7 @@
 unit-ri
 =======
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/tec.units/unit-ri/badge.svg)](https://maven-badges.herokuapp.com/maven-central/tec.units/unit-ri)
-[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/tec.units/unit-ri/badge.svg)](http://www.javadoc.io/doc/tec.units/unit-ri)
+[![javadoc.io](https://javadocio-badges.herokuapp.com/tec.units/unit-ri/badge.svg)](https://javadocio-badges.herokuapp.com/tec.units/unit-ri)
 [![Reference Status](https://www.versioneye.com/java/tec.units:unit-ri/reference_badge.svg?style=flat)](https://www.versioneye.com/java/tec.units:unit-ri/references)
 [![Circle CI](https://circleci.com/gh/unitsofmeasurement/unit-ri.svg?style=svg)](https://circleci.com/gh/unitsofmeasurement/unit-ri) 
 [![Coverage Status](https://coveralls.io/repos/github/unitsofmeasurement/unit-ri/badge.svg?branch=master)](https://coveralls.io/github/unitsofmeasurement/unit-ri?branch=master)
