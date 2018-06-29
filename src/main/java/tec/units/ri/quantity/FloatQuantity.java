@@ -45,7 +45,7 @@ import tec.units.ri.AbstractQuantity;
  * @author Otavio de Santana
  * @param <Q>
  *          The type of the quantity.
- * @version 0.4, $Date: 2017-05-28 $
+ * @version 0.5, $Date: 2018-06-29 $
  * @since 1.0
  */
 final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
@@ -91,7 +91,7 @@ final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
   }
 
   public Quantity<Q> multiply(Number that) {
-    return NumberQuantity.of(value * that.floatValue(), getUnit().multiply(that.doubleValue()));
+    return NumberQuantity.of(value * that.floatValue(), getUnit());
   }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
