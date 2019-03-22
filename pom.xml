@@ -357,7 +357,11 @@
 							<artifactId>maven-surefire-plugin</artifactId>
 							<configuration>
 								<testFailureIgnore>false</testFailureIgnore>
-							</configuration>
+				                <!-- CircleCI build workaround -->
+				                <argLine>${surefireArgLine} -Xms1024m -Xmx2048m</argLine>
+				                <reuseForks>true</reuseForks>
+				                <useSystemClassLoader>false</useSystemClassLoader>
+				            </configuration>
 						</plugin>
 
 						<!-- ======================================================= -->
