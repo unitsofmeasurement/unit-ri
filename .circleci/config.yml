@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/openjdk:8-jdk-stretch-node
+      - image: circleci/openjdk:8u181
 
     working_directory: ~/repo
 
@@ -19,13 +19,13 @@ jobs:
       - checkout
         
       # run tests!
-      - run: mvn --batch-mode test jacoco:report
+      - run: mvn --batch-mode clean test jacoco:report
       
       - run: bash <(curl -s https://codecov.io/bash)
   deployment:
     docker:
       # specify the version you desire here
-      - image: circleci/openjdk:8-jdk-stretch-node
+      - image: circleci/openjdk:8u181
 
     working_directory: ~/repo
 
