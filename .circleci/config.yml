@@ -7,12 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/openjdk:8u181-stretch
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
+      - image: circleci/openjdk:8-jdk-stretch-node
 
     working_directory: ~/repo
 
@@ -30,12 +25,7 @@ jobs:
   deployment:
     docker:
       # specify the version you desire here
-      - image: circleci/openjdk:8u181-stretch
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
+      - image: circleci/openjdk:8-jdk-stretch-node
 
     working_directory: ~/repo
 
