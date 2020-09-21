@@ -3,7 +3,7 @@ unit-ri
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/tec.units/unit-ri/badge.svg)](https://maven-badges.herokuapp.com/maven-central/tec.units/unit-ri)
 [![Circle CI](https://circleci.com/gh/unitsofmeasurement/unit-ri.svg?style=svg)](https://circleci.com/gh/unitsofmeasurement/unit-ri) 
 [![Coverage Status](https://coveralls.io/repos/github/unitsofmeasurement/unit-ri/badge.svg?branch=master)](https://coveralls.io/github/unitsofmeasurement/unit-ri?branch=master)
-[![Stability: Maintenance](https://masterminds.github.io/stability/maintenance.svg)](https://masterminds.github.io/stability/maintenance.html)
+![stability-frozen](https://img.shields.io/badge/stability-locked-blue.svg)
 [![License](http://img.shields.io/badge/license-BSD3-blue.svg?style=flat-square)](http://opensource.org/licenses/BSD-3-Clause)
 [![Join the chat at https://gitter.im/unitsofmeasurement/unit-ri](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/unitsofmeasurement/unit-ri?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![frozen](http://badges.github.io/stability-badges/dist/frozen.svg)](http://github.com/badges/stability-badges)
